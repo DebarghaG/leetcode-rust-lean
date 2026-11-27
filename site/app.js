@@ -102,6 +102,14 @@ function toast(msg) { let t = $('toast'); if (!t) { t = document.createElement('
   t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
 document.addEventListener('click', e => {
   const go = e.target.closest('[data-go]');
+  if (go && go.dataset.go.startsWith('proof')) {      // a lemma defined in the proof: its line in the proof
+    e.preventDefault(); const [tab, line] = go.dataset.go.split(':');
+    const det = document.querySelector(`#thm${tab.slice(5)} details.prooftext`); if (!det) return; det.open = true;
+    const el = det.querySelector(`.ln[data-l="${line}"]`), sd = $('side');
+    if (el) { sd.scrollTop = Math.max(0, el.getBoundingClientRect().top - sd.getBoundingClientRect().top + sd.scrollTop - 80);
+      el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600); }
+    return;
+  }
   if (go) {                                           // a name defined in this program: show its definition
     e.preventDefault(); const [tab, line] = go.dataset.go.split(':');
     renderProgram(tab, 0);
@@ -473,17 +481,47 @@ function renderProgram(tab, sel) {
     ${body}`;
   $('insp').querySelectorAll('.tabs a').forEach(a => a.onclick = e => { e.preventDefault(); renderProgram(a.dataset.tab, 0); });
   if (tab === 'structure') bindStructure();
+  $('insp').querySelectorAll('[data-pl]').forEach(a => a.onclick = e => { e.preventDefault();
+    const card = document.getElementById('thm' + a.dataset.t), det = card.querySelector('details.prooftext'); det.open = true;
+    const el = det.querySelector(`.ln[data-l="${a.dataset.pl}"]`), sd = $('side');
+    if (el) { sd.scrollTop = Math.max(0, el.getBoundingClientRect().top - sd.getBoundingClientRect().top + sd.scrollTop - 80);
+      el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600); } });
   $('insp').querySelectorAll('.usechip').forEach(a => a.onclick = e => { e.preventDefault(); stSel = +a.dataset.sd; renderProgram('structure', 0); });
   $('insp').querySelectorAll('.tfilter button').forEach(b => b.onclick = () => { tfilt = b.dataset.f; renderProgram('theorems', sel); });
   if (sel) { const el = document.getElementById('thm' + sel), sd = $('side');
     if (el) sd.scrollTop = Math.max(0, el.offsetTop - sd.clientHeight / 3); }
+}
+function proofCtx(t, ctx) {                           // names a proof defines link to their line in the proof
+  const local = new Map(ctx ? ctx.local : []);
+  t.proof.text.split('\n').forEach((l, i) => { const m = l.match(DECL_RE);
+    if (m) local.set(m[2].split('.').pop(), ['proof' + t.id, i + 1]); });
+  return {local};
+}
+function proofOutline(p, t) {                         // the lemmas a proof adds, and which of them each one uses
+  const known = new Set(structure(p).map(d => d.name));
+  const lines = t.proof.text.split('\n'), decls = [];
+  lines.forEach((l, i) => { const m = l.match(DECL_RE);
+    if (m && (l.length - l.trimStart().length) <= 2) { const name = m[2].replace(/^(Aegis|AegisSpec)\.[A-Za-z0-9_]+\./, '');
+      if (decls.length) decls[decls.length - 1].end = i;
+      decls.push({name, kind: m[1], line: i + 1, end: lines.length}); } });
+  const own = decls.filter(d => !known.has(d.name) && !/^spec_\d+(_neg)?$/.test(d.name) && d.name !== 'draft_placeholder');
+  if (own.length < 2) return '';
+  const names = new Map(own.map((d, i) => [d.name.split('.').pop(), i]));
+  own.forEach(d => { const body = lines.slice(d.line, d.end).join('\n');
+    d.uses = [...new Set((body.match(/[A-Za-z_][\w'.]*/g) || []).map(w => names.get(w.split('.').pop())))].filter(j => j !== undefined && own[j] !== d); });
+  const usedBy = own.map((_, j) => own.filter(d => d.uses.includes(j)).length);
+  return `<details><summary>Proof outline: ${own.length} lemmas and definitions</summary>
+    <p class="hint">In the order of the proof file; the theorem itself comes last. Click a name to see it in the proof.</p>
+    <div class="decls">${own.map((d, j) => `<a href="#" class="drow" data-pl="${d.line}" data-t="${t.id}"><span class="kdot k-${d.kind === 'def' || d.kind === 'abbrev' ? 'helper' : 'proved'}"></span>
+      <span class="nm">${esc(d.name)}</span><span class="wh">${d.end - d.line + 1} lines${d.uses.length ? ` · uses ${d.uses.length}` : ''}${usedBy[j] ? ` · used by ${usedBy[j]}` : ''}</span><span class="num">${d.line}</span></a>`).join('')}</div></details>`;
 }
 function thmCard(p, t, sel, ctx) {
   const task = p.task_id, f = `programs/${task}/Proofs/spec_${t.id}.lean`;
   const link = location.href.split('#')[0] + `#/p/${task}/${t.id}`;
   const cmds = `python3 tools/new_proof.py ${task} ${t.id}        # add --negation to refute it\n# prove spec_${t.id} in ${f}, then\npython3 tools/check.py proof ${f}`;
   const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)} · <a href="${REPO}/blob/main/${t.proof.file}">on GitHub</a></p>
-      <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, ctx)}</details>` :
+      ${proofOutline(p, t)}
+      <details class="prooftext"><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, proofCtx(t, ctx))}</details>` :
     `<details><summary>Work on this theorem</summary>${pre(cmds, null, false)}</details>`;
   const lean = (p.specs_file.match(new RegExp(`theorem spec_${t.id} [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
   const neg = (p.specs_file.match(new RegExp(`theorem spec_${t.id}_neg [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];

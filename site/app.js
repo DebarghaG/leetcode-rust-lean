@@ -161,7 +161,7 @@ function pins() {
     Mathlib <a href="https://github.com/leanprover-community/mathlib4/tree/${P.mathlib}"><code>${(P.mathlib || '').slice(0, 8)}</code></a> ·
     Aeneas <a href="https://github.com/AeneasVerif/aeneas/tree/${P.aeneas}"><code>${(P.aeneas || '').slice(0, 8)}</code></a> ·
     Charon <a href="https://github.com/AeneasVerif/charon/tree/${P.charon}"><code>${P.charon}</code></a> ·
-    checked with <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}"><code>lake comparator --paranoid</code></a>`;
+    checked with <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}"><code>lake comparator</code></a>, with Lean's kernel and nanoda`;
 }
 function recentGroups() {                             // consecutive proofs of one program, as one line
   const out = [];

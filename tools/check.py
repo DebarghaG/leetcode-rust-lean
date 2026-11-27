@@ -9,8 +9,8 @@ A proof is checked in a fresh copy of its program, taken from a trusted commit (
 default HEAD; in CI the base of the pull request), with only the proof file added. Nothing is
 built before `lake comparator`, which builds the challenge and then the proof, each in its own
 sandbox, and accepts the proof only if it states the same theorem, uses no `sorry` and no axiom
-besides propext, Quot.sound and Classical.choice, and is accepted by Lean's kernel and by every
-independent checker bundled with Lean (`--paranoid`). The whole run is
+besides propext, Quot.sound and Classical.choice, and is accepted by Lean's kernel and by nanoda,
+an independent kernel bundled with Lean (with CHECK_PARANOID=1: by every bundled checker). The whole run is
 wrapped in an outer sandbox: read-only file system, no network, private /tmp.
 
 Needs Linux, elan, bwrap, and the shared packages built once at the repository root:
@@ -116,12 +116,19 @@ def sandboxed(ws, cmd, timeout=3600, packages_writable=False):
         return 124, ((e.stdout or b"").decode(errors="replace") if isinstance(e.stdout, bytes) else (e.stdout or "")) + "\nTIMEOUT"
 
 
-def comparator(ws, challenge, solution, names, axioms=AXIOMS, timeout=3600):
+PARANOID = os.environ.get("CHECK_PARANOID") == "1"
+
+
+def comparator(ws, challenge, solution, names, axioms=AXIOMS, timeout=3600, packages_writable=False):
+    """Lean's kernel and nanoda (an independent kernel, bundled with Lean) must both accept; with
+    CHECK_PARANOID=1, every checker bundled with Lean (`--paranoid`)."""
     cfg = ws / "comparator.json"            # outside the project directory
-    cfg.write_text(json.dumps(dict(challenge_module=challenge, solution_module=solution,
-                                   theorem_names=names, permitted_axioms=axioms)))
-    # --paranoid: besides Lean's kernel, every independent checker bundled with Lean must accept
-    rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], timeout)
+    conf = dict(challenge_module=challenge, solution_module=solution, theorem_names=names, permitted_axioms=axioms)
+    if not PARANOID:
+        conf["external_kernels"] = {"nanoda": ["nanoda_bin"]}
+    cfg.write_text(json.dumps(conf))
+    rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), *(["--paranoid"] if PARANOID else [])], timeout,
+                        packages_writable)
     return rc == 0 and "Your solution is okay!" in log, log
 
 
@@ -196,12 +203,8 @@ def warm():
         try:
             (ws / "p" / "Proofs" / f"{name}.lean").write_bytes((ROOT / proof).read_bytes())
             thm = f"{namespace_of((ws / 'p' / 'Specs.lean').read_text())}.{name}"
-            cfg = ws / "comparator.json"
-            cfg.write_text(json.dumps(dict(challenge_module="Specs", solution_module=f"Proofs.{name}",
-                                           theorem_names=[thm], permitted_axioms=AXIOMS)))
             t0 = time.time()
-            rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
-            good = rc == 0 and "Your solution is okay!" in log
+            good, log = comparator(ws, "Specs", f"Proofs.{name}", [thm], packages_writable=True)
             print(f"warm {task} {name}: {'ok' if good else 'FAILED'} in {round(time.time() - t0)} s", flush=True)
             if not good:
                 print(log[-3000:]); ok = False

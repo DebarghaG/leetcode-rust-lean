@@ -25,7 +25,7 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean
   not.
 - The header's `Contributor:` line is how you are credited on the site.
 
-A proof is accepted when `lake comparator --paranoid` accepts it against the program's
+A proof is accepted when `lake comparator` (Lean's kernel and nanoda) accepts it against the program's
 `Specs.lean`. A pull request that adds proofs may only add files under `Proofs/`; changing or
 removing an existing proof needs a maintainer.
 

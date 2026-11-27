@@ -25,8 +25,8 @@ the standard axioms `propext`, `Quot.sound` and `Classical.choice`. This rules o
 `native_decide`, which adds an axiom of its own.
 
 The check is mechanical. Lean's built-in `lake comparator` compares the proof with the original
-statement, checks the axioms, and replays the proof in the Lean kernel and in every independent
-checker bundled with Lean (`--paranoid`). Nothing is graded by hand or by a model.
+statement, checks the axioms, and replays the proof in the Lean kernel and in nanoda, an independent
+kernel bundled with Lean. Nothing is graded by hand or by a model.
 
 ## Layout
 

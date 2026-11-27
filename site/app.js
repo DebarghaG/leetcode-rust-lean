@@ -23,29 +23,80 @@ const cats = p => (p.c.match(/../g) || []).map(c => CAT[c]);
 async function json(url) { const r = await fetch(url); if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); }
 async function theorems() { return THMS || (THMS = await json('data/theorems.json')); }
 
-/* ---------- code highlighting (enough for Lean and Rust) ---------- */
+/* ---------- code: highlighting, and names linked to their definitions ---------- */
 const KW = new Set(('def theorem lemma by have show from fun let in if then else match with do return open namespace end section ' +
   'noncomputable structure inductive instance where abbrev private protected import sorry exact intro intros apply simp omega ' +
   'cases induction rfl calc obtain refine constructor unfold rw decide exists use at pub fn mut while for loop break continue ' +
-  'struct enum impl true false Some None mod as Type Prop').split(' '));
+  'struct enum impl true false Some None mod as Type Prop public').split(' '));
 const TY = new Set('Result Std I64 I32 U8 U32 U64 Usize Isize Bool Nat Int List Slice Vec alloc Option ok fail i64 usize u8 bool ℕ ℤ'.split(' '));
-const pre = (code, plain) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code)}</pre></div>`;
+const AENEAS_SRC = () => `https://github.com/AeneasVerif/aeneas/blob/${D.pins.aeneas}/backends/lean/`;
+const DOCS = 'https://leanprover-community.github.io/mathlib4_docs/find/?pattern=';
+let LINKS = null;
+async function links() { return LINKS || (LINKS = await json('data/links.json').catch(() => ({}))); }
+
+function localDefs(p) {                                // name -> [tab, line] for this program's own Lean
+  const m = new Map();
+  const scan = (text, tab) => (text || '').split('\n').forEach((l, i) => {
+    const d = l.match(/^\s*(?:@\[[^\]]*\]\s*)?(?:(?:private|protected|noncomputable|partial|public)\s+)*(?:def|theorem|lemma|abbrev|structure|inductive|class)\s+([^\s:(\[{]+)/);
+    if (d) { const n = d[1].split('.').pop(); if (!m.has(n)) m.set(n, [tab, i + 1]); }
+  });
+  scan(p.lean_funs, 'lean'); scan(p.lean_types, 'lean'); scan(p.lean_funs_external, 'lean'); scan(p.specs_file, 'specs');
+  return m;
+}
+function ident(w, ctx) {
+  const base = w.split('.').pop();
+  const cls = KW.has(w) ? 'kw' : TY.has(base) || TY.has(w) ? 'ty' : '';
+  if (!ctx || KW.has(w)) return cls ? `<span class="${cls}">${w}</span>` : w;
+  const loc = ctx.local && (ctx.local.get(w) || (w.includes('.') && ctx.local.get(base)));
+  if (loc) return `<a class="lk loc${cls ? ' ' + cls : ''}" href="#" data-go="${loc[0]}:${loc[1]}" title="Definition in this program">${w}</a>`;
+  const aen = LINKS && LINKS[w];
+  if (aen) return `<a class="lk aen${cls ? ' ' + cls : ''}" href="${AENEAS_SRC()}${aen}" target="_blank" rel="noopener" title="Defined in Aeneas: ${aen.replace('#L', ', line ')}">${w}</a>`;
+  if (w.includes('.') && /^[A-Z]/.test(w) && !/^Aeneas\b|^Aegis\b|^AegisSpec\b/.test(w))
+    return `<a class="lk ml${cls ? ' ' + cls : ''}" href="${DOCS}${encodeURIComponent(w)}" target="_blank" rel="noopener" title="Look up in the Mathlib documentation">${w}</a>`;
+  return cls ? `<span class="${cls}">${w}</span>` : w;
+}
+function hl(src, ctx) {
+  let depth = 0;                                       // inside /- ... -/ (they nest in Lean)
+  return String(src ?? '').split('\n').map((line, i) => {
+    let out = '', k = 0;
+    while (k < line.length) {
+      if (depth) {
+        const o = line.indexOf('/-', k), c = line.indexOf('-/', k);
+        if (c < 0 && o < 0) { out += `<span class="cm">${esc(line.slice(k))}</span>`; k = line.length; break; }
+        if (o >= 0 && (c < 0 || o < c)) { out += `<span class="cm">${esc(line.slice(k, o + 2))}</span>`; depth++; k = o + 2; }
+        else { out += `<span class="cm">${esc(line.slice(k, c + 2))}</span>`; depth--; k = c + 2; }
+        continue;
+      }
+      const rest = line.slice(k);
+      let m;
+      if (rest.startsWith('/-')) { out += '<span class="cm">/-</span>'; depth = 1; k += 2; }
+      else if (rest.startsWith('--') || rest.startsWith('//')) { out += `<span class="cm">${esc(rest)}</span>`; k = line.length; }
+      else if ((m = rest.match(/^"(?:[^"\\]|\\.)*"?/))) { out += `<span class="sr">${esc(m[0])}</span>`; k += m[0].length; }
+      else if ((m = rest.match(/^[A-Za-z_Ͱ-Ͽἀ-῿][\w'Ͱ-Ͽ.₀-₉]*/))) { const w = m[0].replace(/\.$/, ''); const defining = /\b(def|theorem|lemma|abbrev|structure|inductive|class|instance|fn|struct|enum)\s+$/.test(line.slice(0, k));
+        out += defining ? `<span class="dn">${esc(w)}</span>` : ident(w, ctx); k += w.length; }
+      else { out += esc(rest[0]); k += 1; }
+    }
+    return `<span class="ln" data-l="${i + 1}">${out}</span>`;
+  }).join('\n');
+}
+const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code, ctx)}</pre></div>`;
 function toast(msg) { let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.append(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
 document.addEventListener('click', e => {
+  const go = e.target.closest('[data-go]');
+  if (go) {                                           // a name defined in this program: show its definition
+    e.preventDefault(); const [tab, line] = go.dataset.go.split(':');
+    renderProgram(tab, 0);
+    const el = $('insp').querySelector(`.prewrap pre .ln[data-l="${line}"]`);
+    if (el) { const sd = $('side'); sd.scrollTop = Math.max(0, el.getBoundingClientRect().top - sd.getBoundingClientRect().top + sd.scrollTop - 80);
+      el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600); }
+    return;
+  }
   const b = e.target.closest('[data-copy]'); if (!b) return;
   e.preventDefault(); e.stopPropagation();
   navigator.clipboard.writeText(b.dataset.copy).then(() => { if (b.classList.contains('cp')) { b.textContent = 'copied'; b.classList.add('done');
     setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1400); } else toast('Link copied'); });
 });
-function hl(src) {
-  return esc(src).replace(/(--[^\n]*|\/\/[^\n]*)|(\/-[\s\S]*?-\/)|(&quot;[^\n]*?&quot;)|([A-Za-z_][\w'.]*)/g, (m, c1, c2, s, w) => {
-    if (c1 || c2) return `<span class="cm">${m}</span>`;
-    if (s) return `<span class="sr">${m}</span>`;
-    const base = w.split('.').pop();
-    return KW.has(w) ? `<span class="kw">${w}</span>` : TY.has(base) || TY.has(w) ? `<span class="ty">${w}</span>` : w;
-  });
-}
 
 /* ---------- routing ---------- */
 function route() {
@@ -67,6 +118,14 @@ function nextUp() {                                    // one open theorem to su
   for (const p of D.programs) if (p.d === 'E') (p.c.match(/../g) || []).forEach((c, i) => {
     if (p.st[i] === 'o' && (c === 'no' || c === 'bo')) pool.push([p, i + 1, CAT[c]]); });
   return pool.length ? pool[(day * 2654435761 % 4294967296) % pool.length] : null;
+}
+function pins() {
+  const P = D.pins || {};
+  return `Lean <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}">${P.lean}</a> ·
+    Mathlib <a href="https://github.com/leanprover-community/mathlib4/tree/${P.mathlib}"><code>${(P.mathlib || '').slice(0, 8)}</code></a> ·
+    Aeneas <a href="https://github.com/AeneasVerif/aeneas/tree/${P.aeneas}"><code>${(P.aeneas || '').slice(0, 8)}</code></a> ·
+    Charon <a href="https://github.com/AeneasVerif/charon/tree/${P.charon}"><code>${P.charon}</code></a> ·
+    checked with <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}"><code>lake comparator --paranoid</code></a>`;
 }
 function recentGroups() {                             // consecutive proofs of one program, as one line
   const out = [];
@@ -137,7 +196,7 @@ function renderMap(q = new URLSearchParams()) {
   main theorem. Hover a block for its name and click it to open the program. <kbd>/</kbd> search · <kbd>m</kbd> map ·
   <kbd>t</kbd> theorems · <kbd>c</kbd> contribute · in a program, <kbd>j</kbd> <kbd>k</kbd> next and previous theorem,
   <kbd>[</kbd> <kbd>]</kbd> previous and next program · <kbd>Esc</kbd> close.</p>
-  <div class="foot">Built ${esc(D.built)} from commit <code>${esc(D.commit || '')}</code> ·
+  <div class="foot">${pins()}<br>Built ${esc(D.built)} from commit <code>${esc(D.commit || '')}</code> ·
     Data: <a href="${DATASET}">Hugging Face</a> · Paper: <a href="https://arxiv.org/abs/2610.38174">arXiv 2610.38174</a> (unofficial reproduction).</div>`;
   const setQ = () => { const n = new URLSearchParams(); if (mapState.tag) n.set('tag', mapState.tag); if (mapState.split) n.set('split', mapState.split);
     history.replaceState(null, '', '#/' + (String(n) ? '?' + n : '')); drawMaps(); };
@@ -186,13 +245,28 @@ function layout(m) {
     }
     if (cur && cur.task_id === r.p.t) { g.globalAlpha = 1; g.strokeStyle = css('--accent'); g.lineWidth = 2; g.strokeRect(r.x - 2, r.y - 2, r.bw + 3, r.bh + 3); }
   }
-  m.c.onmousemove = e => { const r = hit(m, e); const tip = $('tip');
-    if (!r) { tip.hidden = true; return; }
-    const n = r.p.st.length, dn = (r.p.st.match(/[pr]/g) || []).length;
-    tip.innerHTML = `<b>${esc(title(r.p.t))}</b><br><small>#${r.p.q} · ${dn} of ${n} resolved · main theorem ${STATUS[r.p.st[r.p.m - 1]]}</small>`;
+  m.c.onmousemove = e => { const r = hit(m, e); const tip = $('tip'), hb = hoverBox(m);
+    if (!r) { tip.hidden = true; hb.hidden = true; m.c.style.cursor = 'default'; return; }
+    m.c.style.cursor = 'pointer';
+    hb.hidden = false; hb.style.left = (r.x - 2) + 'px'; hb.style.top = (m.c.offsetTop + r.y - 2) + 'px';
+    hb.style.width = (r.bw + 3) + 'px'; hb.style.height = (r.bh + 3) + 'px';
+    const n = r.p.st.length, dn = resolvedOf(r.p), i = cellAt(m, r, e);
+    const cell = i >= 0 ? `<br>spec_${i + 1} · ${CAT[r.p.c.substr(2 * i, 2)]}${i === r.p.m - 1 ? ' · main' : ''} · ${STATUS[r.p.st[i]]}` : '';
+    tip.innerHTML = `<b>${esc(title(r.p.t))}</b><br><small>#${r.p.q} · ${dn} of ${n} resolved${cell}</small>`;
     tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - 370) + 'px'; tip.style.top = e.clientY + 14 + 'px'; };
-  m.c.onmouseleave = () => { $('tip').hidden = true; };
-  m.c.onclick = e => { const r = hit(m, e); if (r) location.hash = '#/p/' + r.p.t; };
+  m.c.onmouseleave = () => { $('tip').hidden = true; hoverBox(m).hidden = true; };
+  m.c.onclick = e => { const r = hit(m, e); if (!r) return; const i = cellAt(m, r, e); location.hash = '#/p/' + r.p.t + (i >= 0 ? '/' + (i + 1) : ''); };
+}
+const CELL = 7;                                        // square plus gap, as in layout()
+function cellAt(m, r, e) {
+  const b = m.c.getBoundingClientRect(), x = e.clientX - b.left - r.x, y = e.clientY - b.top - r.y;
+  if (x < 0 || y < 0) return -1;
+  const i = Math.floor(y / CELL) * r.w + Math.floor(x / CELL);
+  return Math.floor(x / CELL) < r.w && i < r.p.st.length ? i : -1;
+}
+function hoverBox(m) {
+  if (!m.hb) { m.hb = document.createElement('div'); m.hb.className = 'hoverbox'; m.hb.hidden = true; m.c.parentElement.append(m.hb); }
+  return m.hb;
 }
 function hit(m, e) {
   const b = m.c.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
@@ -206,7 +280,7 @@ async function openProgram(task, n) {
   if (!cur || cur.task_id !== task) {
     if (!BY[task]) { cur = null; $('insp').innerHTML = `<h1>No such program</h1><p class="sub"><code>${esc(task)}</code> is not one of the programs. Try the search box.</p>`; return; }
     $('insp').innerHTML = '<p class="sub">Loading…</p>'; side.dataset.tab = 'theorems'; tfilt = 'all';
-    cur = await json(`data/p/${encodeURIComponent(task)}.json`); side.scrollTop = 0; }
+    [cur] = await Promise.all([json(`data/p/${encodeURIComponent(task)}.json`), links()]); side.scrollTop = 0; }
   document.title = `${title(task)} · LeetCode Rust-to-Lean`;
   maps.forEach(layout);
   const tab = n ? 'theorems' : (side.dataset.tab || 'theorems');
@@ -224,19 +298,21 @@ function renderProgram(tab, sel) {
   const tabs = [['theorems', `Theorems (${p.theorems.length})`], ['problem', 'Problem'], ['rust', 'Rust'], ['lean', 'Lean'], ['specs', 'Specs.lean']];
   const [prv, nxt] = neighbours(p.task_id);
   let body = '';
+  const ctx = {local: localDefs(p)};
   if (tab === 'theorems') {
     const shown = p.theorems.filter(t => tfilt === 'all' || (tfilt === 'open' ? t.status === 'open' : t.status !== 'open'));
     body = !p.theorems.length ? '<p class="sub">This program has no theorems yet.</p>' :
       `<div class="tfilter">${[['all', 'All', p.theorems.length], ['open', 'Open', p.theorems.length - done], ['done', 'Resolved', done]]
         .map(([k, l, n]) => `<button data-f="${k}" class="${k === tfilt ? 'on' : ''}">${l} ${n}</button>`).join('')}</div>` +
-      (shown.map(t => thmCard(p, t, t.id === sel)).join('') || '<p class="sub">None.</p>');
+      (shown.map(t => thmCard(p, t, t.id === sel, ctx)).join('') || '<p class="sub">None.</p>');
   }
   if (tab === 'problem') body = `<div class="desc">${esc(p.description)}</div><p class="sub">Signature: <code>${esc(p.rust_signature)}</code> · ${p.num_test_cases} test cases</p>`;
   if (tab === 'rust') body = pre(p.rust);
-  if (tab === 'lean') body = `<p class="sub">The Aeneas translation (<code>Funs.lean</code>).</p>${pre(p.lean_funs)}
-    <details><summary>Types.lean</summary>${pre(p.lean_types)}</details>` +
-    (p.lean_funs_external ? `<details><summary>FunsExternal.lean (trusted models of Rust library functions)</summary>${pre(p.lean_funs_external)}</details>` : '');
-  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>.</p>${pre(p.specs_file)}`;
+  if (tab === 'lean') body = `<p class="sub">The Aeneas translation (<code>Funs.lean</code>). Names link to their definitions:
+      <span class="lk loc">in this program</span>, <span class="lk aen">in Aeneas</span>, <span class="lk ml">in Mathlib and Lean</span>.</p>${pre(p.lean_funs, null, ctx)}
+    <details open><summary>Types.lean</summary>${pre(p.lean_types, null, ctx)}</details>` +
+    (p.lean_funs_external ? `<details open><summary>FunsExternal.lean (trusted models of Rust library functions)</summary>${pre(p.lean_funs_external, null, ctx)}</details>` : '');
+  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>.</p>${pre(p.specs_file, null, ctx)}`;
   $('insp').innerHTML = `
     <div class="pnav"><a href="#/p/${prv}" title="Previous program ( [ )">‹ previous</a><a href="#/p/${nxt}" title="Next program ( ] )">next ›</a></div>
     <h1>${esc(title(p.task_id))}</h1>
@@ -250,12 +326,12 @@ function renderProgram(tab, sel) {
   if (sel) { const el = document.getElementById('thm' + sel), sd = $('side');
     if (el) sd.scrollTop = Math.max(0, el.offsetTop - sd.clientHeight / 3); }
 }
-function thmCard(p, t, sel) {
+function thmCard(p, t, sel, ctx) {
   const task = p.task_id, f = `programs/${task}/Proofs/spec_${t.id}.lean`;
   const link = location.href.split('#')[0] + `#/p/${task}/${t.id}`;
   const cmds = `python3 tools/new_proof.py ${task} ${t.id}        # add --negation to refute it\n# prove spec_${t.id} in ${f}, then\npython3 tools/check.py proof ${f}`;
   const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)}.</p>
-      <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text)}</details>` :
+      <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, ctx)}</details>` :
     `<details><summary>Work on this theorem</summary>${pre(cmds)}</details>`;
   const lean = (p.specs_file.match(new RegExp(`theorem spec_${t.id} [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
   const neg = (p.specs_file.match(new RegExp(`theorem spec_${t.id}_neg [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
@@ -263,8 +339,8 @@ function thmCard(p, t, sel) {
     <div class="hd"><b>spec_${t.id}</b><span>${t.category}</span>${t.main ? '<span class="chip">main</span>' : ''}
       <button class="lnk" data-copy="${esc(link)}" title="Copy a link to this theorem">#</button><span class="st ${t.status}">${t.status}</span></div>
     <p>${esc(t.statement)}</p>${t.preconditions ? `<p class="pre">Preconditions: ${esc(t.preconditions)}</p>` : ''}
-    <details${sel ? ' open' : ''}><summary>Lean statement</summary>${pre(lean)}</details>
-    <details><summary>Negation</summary>${pre(neg)}</details>
+    <details${sel ? ' open' : ''}><summary>Lean statement</summary>${pre(lean, null, ctx)}</details>
+    <details><summary>Negation</summary>${pre(neg, null, ctx)}</details>
     ${proof}</div>`;
 }
 $('close').onclick = () => closeSide();

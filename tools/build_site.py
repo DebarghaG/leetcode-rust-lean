@@ -14,6 +14,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import check
+import source_index
+
+PINS = dict(lean="v4.36.0", mathlib="fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+            aeneas="0c19cd5bff9298565362c6ca9c4f48a29033a0e9", charon="5a2a17bd")
+OPENS = ("", "Aeneas.", "Aeneas.Std.", "Aeneas.Std.Result.")       # namespaces the Lean files open
 OUT = ROOT / "site" / "data"
 
 
@@ -79,6 +84,20 @@ def main():
     commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
     data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200], first=first,
                 programs=index, contributors=sorted(contributors.values(), key=lambda c: -(c["proved"] + c["refuted"])))
+    # links from names in the Lean code to their definitions in the Aeneas library
+    aen_root = check.PACKAGES / "aeneas" / "backends" / "lean"
+    links = {}
+    if aen_root.exists():
+        ix = source_index.index_aeneas(aen_root)
+        toks = set()
+        for f in (OUT / "p").glob("*.json"):
+            toks |= set(re.findall(r"[A-Za-z_][\w'.]*[\w']", f.read_text()))
+        for t in toks:
+            for o in OPENS:
+                if o + t in ix:
+                    links[t] = ix[o + t]; break
+    (OUT / "links.json").write_text(json.dumps(links, separators=(",", ":")))
+    data["pins"] = PINS
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))
     print(f"{len(index)} programs, {totals['theorems']} theorems, {totals['proved']} proved, {totals['refuted']} refuted")

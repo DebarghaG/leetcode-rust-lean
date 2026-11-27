@@ -182,6 +182,9 @@ function renderMap(q = new URLSearchParams()) {
       `<a class="row" href="#/p/${g.t}/${g.ids[0]}"><span class="nm">${esc(title(g.t))}</span><span class="num">${g.ids.length === 1 ? 'spec_' + g.ids[0] : g.ids.length + ' theorems'} · ${esc(g.by)}</span></a>`).join('') || '<p class="sub">No proofs yet.</p>'}
       <a class="more" href="#/theorems?status=proved">All resolved theorems →</a></div>
   </div>
+  ${(D.mains || []).length ? `<h2>Main theorems resolved <span class="h2n">the full correctness statement of a program, with a checked proof</span></h2>
+  <div class="mains">${D.mains.map(m => `<div class="mainc"><div class="hd"><a href="#/p/${m.t}/${m.id}"><b>${esc(title(m.t))}</b></a>
+    <span>${m.status} by ${esc(m.by)} · proof of ${fmt(m.lines)} lines</span></div><pre>${hl(m.stmt, {})}</pre></div>`).join('')}</div>` : ''}
   <div class="mapctl">
     <span class="legend" style="margin:0"><span><i style="background:var(--open)"></i>open</span><span><i style="background:var(--open-main)"></i>open main theorem</span>
       <span><i style="background:var(--proved)"></i>proved</span><span><i style="background:var(--refuted)"></i>refuted</span></span>
@@ -274,12 +277,97 @@ function hit(m, e) {
 }
 window.addEventListener('resize', () => maps.forEach(layout));
 
+/* ---------- program structure: declarations and how they depend on each other ---------- */
+const DECL_RE = /^\s*(?:@\[[^\]]*\]\s*)?(?:(?:private|protected|noncomputable|partial|public)\s+)*(def|theorem|lemma|abbrev|structure|inductive|class|instance)\s+([^\s:(\[{]+)/;
+function structure(p) {                              // declarations of the program's Lean, with references
+  if (p._st) return p._st;
+  const decls = [];
+  const scan = (text, file, tab) => {
+    const lines = (text || '').split('\n'); let open = null;
+    lines.forEach((l, i) => {
+      const m = l.match(DECL_RE);
+      if (m && /^\s*(?:@|private|protected|noncomputable|partial|public|def|theorem|lemma|abbrev|structure|inductive|class|instance)/.test(l) && (l.length - l.trimStart().length) <= 2) {
+        if (open) open.end = i;
+        const name = m[2].replace(/^(Aegis|AegisSpec)\.[A-Za-z0-9_]+\./, '');
+        if (/_neg$/.test(name)) { open = null; return; }
+        open = {name, full: m[2], kind: m[1], file, tab, line: i + 1, end: lines.length};
+        decls.push(open);
+      } else if (open && /^\s*(?:namespace|end|section|open|set_option|\/-!)\b/.test(l) && !/^\s{4}/.test(l)) { open.end = i; open = null; }
+    });
+    decls.filter(d => d.file === file).forEach(d => {   // without the next declaration's docstring or attributes
+      d.text = lines.slice(d.line - 1, d.end).join('\n').replace(/(\n\s*(\/--(?:(?!-\/)[\s\S])*-\/|@\[[^\]]*\]|--[^\n]*)?)+\s*$/, ''); });
+  };
+  scan(p.lean_types, 'Types.lean', 'lean'); scan(p.lean_funs, 'Funs.lean', 'lean');
+  scan(p.lean_funs_external, 'FunsExternal.lean', 'lean'); scan(p.specs_file, 'Specs.lean', 'specs');
+  const byName = new Map(), last = {};
+  decls.forEach((d, i) => { byName.set(d.name, i); byName.set(d.full, i); const l = d.name.split('.').pop(); last[l] = last[l] === undefined ? i : -1; });
+  Object.entries(last).forEach(([l, i]) => { if (i >= 0 && !byName.has(l)) byName.set(l, i); });
+  const find = w => { const parts = w.split('.'); for (let k = 0; k < parts.length; k++) { const j = byName.get(parts.slice(k).join('.')); if (j !== undefined) return j; } };
+  decls.forEach((d, i) => {
+    d.role = d.file === 'Specs.lean' ? (/^spec_\d+$/.test(d.name) ? 'theorem' : 'helper') : d.file === 'FunsExternal.lean' ? 'external' : 'program';
+    if (d.role === 'theorem') d.thm = p.theorems.find(t => `spec_${t.id}` === d.name);
+    const body = d.text.replace(/--[^\n]*|\/-[\s\S]*?-\//g, '');
+    d.uses = [...new Set((body.match(/[A-Za-z_][\w'.]*[\w']/g) || []).map(find).filter(j => j !== undefined && j !== i))];
+  });
+  decls.forEach((d, i) => d.usedBy = decls.map((e, j) => e.uses.includes(i) ? j : -1).filter(j => j >= 0));
+  return (p._st = decls);
+}
+function closure(decls, i, key) {                    // everything reachable along `uses` or `usedBy`
+  const seen = new Set(), stack = [...decls[i][key]];
+  while (stack.length) { const j = stack.pop(); if (!seen.has(j) && j !== i) { seen.add(j); stack.push(...decls[j][key]); } }
+  return seen;
+}
+let stSel = -1, stTrans = true;
+const ROLE = {program: 'program code', external: 'library model', helper: 'helper definition', theorem: 'theorem'};
+function renderStructure(p) {
+  const ds = structure(p);
+  const lines = t => (t || '').split('\n').length;
+  const nTh = ds.filter(d => d.role === 'theorem').length, nHelp = ds.filter(d => d.role === 'helper').length;
+  const nFun = ds.filter(d => d.role === 'program' && d.file === 'Funs.lean').length;
+  const sel = stSel >= 0 && stSel < ds.length ? stSel : -1;
+  const dep1 = new Set(sel >= 0 ? ds[sel].uses : []), use1 = new Set(sel >= 0 ? ds[sel].usedBy : []);
+  const depT = sel >= 0 && stTrans ? closure(ds, sel, 'uses') : new Set(), useT = sel >= 0 && stTrans ? closure(ds, sel, 'usedBy') : new Set();
+  const rel = j => j === sel ? 'r-sel' : dep1.has(j) ? 'r-dep' : use1.has(j) ? 'r-use' : depT.has(j) ? 'r-dep2' : useT.has(j) ? 'r-use2' : '';
+  const dot = d => d.role === 'theorem' ? `k-${d.thm ? d.thm.status : 'open'}` : `k-${d.role}`;
+  let h = `<div class="stats">${[[lines(p.rust), 'lines of Rust'], [lines(p.lean_funs), 'lines of Lean'], [nFun, 'functions'],
+    [nHelp, 'helper definitions'], [nTh, 'theorems'], [p.num_test_cases, 'test cases']].map(([n, l]) => `<div><b>${fmt(n)}</b><span>${l}</span></div>`).join('')}</div>
+    <div class="slegend"><span><i class="k-program"></i>program code</span><span><i class="k-helper"></i>helper definition</span>
+      <span><i class="k-open"></i>theorem</span><span><i class="k-proved"></i>proved</span>${sel >= 0 ? `<span class="sep"></span>
+      <span><i class="r-dep"></i>it depends on</span><span><i class="r-dep2"></i>… indirectly</span><span><i class="r-use"></i>depends on it</span><span><i class="r-use2"></i>… indirectly</span>` : ''}
+      <label class="tr" title="Also shade what is reached through other declarations"><input type="checkbox" id="stTrans"${stTrans ? ' checked' : ''}> transitive</label></div>`;
+  if (sel >= 0) {
+    const d = ds[sel];
+    h += `<div class="ssel"><div class="hd"><span class="kdot ${dot(d)}"></span><b>${esc(d.full)}</b><span>${d.file}:${d.line} · ${ROLE[d.role]}${d.thm ? ' · ' + d.thm.status : ''}</span></div>
+      <div class="sub">depends on ${fmt(dep1.size)}${stTrans ? ` (${fmt(depT.size)} in all)` : ''} · used by ${fmt(use1.size)}${stTrans ? ` (${fmt(useT.size)} in all)` : ''}
+        ${d.thm ? ` · <a href="#/p/${p.task_id}/${d.thm.id}">open the theorem</a>` : ''}</div>
+      ${pre(d.text, null, {local: localDefs(p)})}</div>`;
+  } else h += `<p class="hint">Select a declaration to see what it depends on and what depends on it. A theorem depends on the functions
+    and definitions its statement mentions; a function on the functions it calls.</p>`;
+  let file = '';
+  h += '<div class="decls">';
+  ds.forEach((d, j) => {
+    if (d.file !== file) { file = d.file; h += `<div class="fhd">${file}</div>`; }
+    h += `<a href="#" class="drow ${rel(j)}" data-d="${j}"><span class="kdot ${dot(d)}"></span><span class="nm">${esc(d.name)}</span>
+      <span class="wh">${d.role === 'theorem' && d.thm ? esc(d.thm.category) + (d.thm.main ? ' · main' : '') : d.kind}</span><span class="num">${d.line}</span></a>`;
+  });
+  return h + '</div>';
+}
+function bindStructure() {
+  $('insp').querySelectorAll('.drow').forEach(a => a.onclick = e => { e.preventDefault(); const j = +a.dataset.d; stSel = stSel === j ? -1 : j; renderProgram('structure', 0); });
+  const t = $('stTrans'); if (t) t.onchange = () => { stTrans = t.checked; renderProgram('structure', 0); };
+}
+function usesLine(p, t) {                            // the declarations a theorem's statement mentions
+  const ds = structure(p), i = ds.findIndex(d => d.name === `spec_${t.id}`);
+  if (i < 0 || !ds[i].uses.length) return '';
+  return `<p class="uses">Uses ${ds[i].uses.map(j => `<a href="#" class="usechip" data-sd="${j}"><span class="kdot k-${ds[j].role}"></span>${esc(ds[j].name)}</a>`).join(' ')}</p>`;
+}
+
 /* ---------- program inspector ---------- */
 async function openProgram(task, n) {
   const side = $('side'); side.hidden = false; $('main').classList.add('split');
   if (!cur || cur.task_id !== task) {
     if (!BY[task]) { cur = null; $('insp').innerHTML = `<h1>No such program</h1><p class="sub"><code>${esc(task)}</code> is not one of the programs. Try the search box.</p>`; return; }
-    $('insp').innerHTML = '<p class="sub">Loading…</p>'; side.dataset.tab = 'theorems'; tfilt = 'all';
+    $('insp').innerHTML = '<p class="sub">Loading…</p>'; side.dataset.tab = 'theorems'; tfilt = 'all'; stSel = -1;
     [cur] = await Promise.all([json(`data/p/${encodeURIComponent(task)}.json`), links()]); side.scrollTop = 0; }
   document.title = `${title(task)} · LeetCode Rust-to-Lean`;
   maps.forEach(layout);
@@ -295,7 +383,7 @@ function neighbours(task) {
 function renderProgram(tab, sel) {
   const p = cur, side = $('side'); side.dataset.tab = tab; side.dataset.sel = sel || '';
   const done = p.theorems.filter(t => t.status === 'proved' || t.status === 'refuted').length;
-  const tabs = [['theorems', `Theorems (${p.theorems.length})`], ['problem', 'Problem'], ['rust', 'Rust'], ['lean', 'Lean'], ['specs', 'Specs.lean']];
+  const tabs = [['theorems', `Theorems (${p.theorems.length})`], ['structure', 'Structure'], ['problem', 'Problem'], ['rust', 'Rust'], ['lean', 'Lean'], ['specs', 'Specs.lean']];
   const [prv, nxt] = neighbours(p.task_id);
   let body = '';
   const ctx = {local: localDefs(p)};
@@ -306,6 +394,7 @@ function renderProgram(tab, sel) {
         .map(([k, l, n]) => `<button data-f="${k}" class="${k === tfilt ? 'on' : ''}">${l} ${n}</button>`).join('')}</div>` +
       (shown.map(t => thmCard(p, t, t.id === sel, ctx)).join('') || '<p class="sub">None.</p>');
   }
+  if (tab === 'structure') body = renderStructure(p);
   if (tab === 'problem') body = `<div class="desc">${esc(p.description)}</div><p class="sub">Signature: <code>${esc(p.rust_signature)}</code> · ${p.num_test_cases} test cases</p>`;
   if (tab === 'rust') body = pre(p.rust);
   if (tab === 'lean') body = `<p class="sub">The Aeneas translation (<code>Funs.lean</code>). Names link to their definitions:
@@ -322,6 +411,8 @@ function renderProgram(tab, sel) {
     <div class="tabs">${tabs.map(([k, l]) => `<a href="#" data-tab="${k}" class="${k === tab ? 'on' : ''}">${l}</a>`).join('')}</div>
     ${body}`;
   $('insp').querySelectorAll('.tabs a').forEach(a => a.onclick = e => { e.preventDefault(); renderProgram(a.dataset.tab, 0); });
+  if (tab === 'structure') bindStructure();
+  $('insp').querySelectorAll('.usechip').forEach(a => a.onclick = e => { e.preventDefault(); stSel = +a.dataset.sd; renderProgram('structure', 0); });
   $('insp').querySelectorAll('.tfilter button').forEach(b => b.onclick = () => { tfilt = b.dataset.f; renderProgram('theorems', sel); });
   if (sel) { const el = document.getElementById('thm' + sel), sd = $('side');
     if (el) sd.scrollTop = Math.max(0, el.offsetTop - sd.clientHeight / 3); }
@@ -339,6 +430,7 @@ function thmCard(p, t, sel, ctx) {
     <div class="hd"><b>spec_${t.id}</b><span>${t.category}</span>${t.main ? '<span class="chip">main</span>' : ''}
       <button class="lnk" data-copy="${esc(link)}" title="Copy a link to this theorem">#</button><span class="st ${t.status}">${t.status}</span></div>
     <p>${esc(t.statement)}</p>${t.preconditions ? `<p class="pre">Preconditions: ${esc(t.preconditions)}</p>` : ''}
+    ${usesLine(p, t)}
     <details${sel ? ' open' : ''}><summary>Lean statement</summary>${pre(lean, null, ctx)}</details>
     <details><summary>Negation</summary>${pre(neg, null, ctx)}</details>
     ${proof}</div>`;
@@ -454,7 +546,7 @@ $('theme').onclick = () => {
 };
 
 (async () => {
-  try { D = await json('data/index.json'); } catch (e) { $('view').innerHTML = `<p>Could not load the data: ${esc(e.message)}</p>`; return; }
+  try { D = await json('data/index.json'); await links(); } catch (e) { $('view').innerHTML = `<p>Could not load the data: ${esc(e.message)}</p>`; return; }
   D.programs.forEach(p => BY[p.t] = p);
   setupSearch(); window.addEventListener('hashchange', route); route();
 })();

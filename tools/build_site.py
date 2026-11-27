@@ -40,7 +40,7 @@ def contributor(path):
 def main():
     verified = json.loads((ROOT / "status" / "verified.json").read_text()) if (ROOT / "status" / "verified.json").exists() else {}
     (OUT / "p").mkdir(parents=True, exist_ok=True)
-    index, contributors, totals, flat, recent = [], {}, dict(theorems=0, proved=0, refuted=0), [], []
+    index, contributors, totals, flat, recent, mains = [], {}, dict(theorems=0, proved=0, refuted=0), [], [], []
     for prog in sorted((ROOT / "programs").iterdir()):
         meta = json.loads((prog / "program.json").read_text())
         specs = json.loads((prog / "specs.json").read_text()) if (prog / "specs.json").exists() else []
@@ -60,6 +60,12 @@ def main():
                     recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=v.get("first_verified") or v.get("checked") or "",
                                        lines=proof["text"].count("\n"), main=s["main"], cat=s["category"]))
             thms.append(dict(s, status=st, proof=proof))
+            if s["main"] and st in ("proved", "refuted"):
+                txt = (prog / "Specs.lean").read_text()
+                m = re.search(rf"^[ \t]*theorem spec_{s['id']}\b.*?(?=:=\s*by\s*\n\s*sorry)", txt, re.M | re.S)
+                stmt = "\n".join(l[2:] if l.startswith("  ") else l for l in m.group(0).splitlines()) if m else ""
+                mains.append(dict(t=prog.name, id=s["id"], status=st, by=proof["by"], stmt=stmt.rstrip(),
+                                  lines=proof["text"].count("\n")))
             flat.append([prog.name, s["id"], s["category"][:2], int(s["main"]), st[0], s["statement"][:400],
                          proof["by"] if proof else ""])
             totals["theorems"] += st != "superseded"
@@ -82,7 +88,7 @@ def main():
     first = sorted(first, key=lambda r: hashlib.sha256(f"{r[0]}{r[1]}".encode()).hexdigest())[:12]
     recent.sort(key=lambda r: (r["checked"], r["t"], r["id"]), reverse=True)
     commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
-    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200], first=first,
+    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200], first=first, mains=mains,
                 programs=index, contributors=sorted(contributors.values(), key=lambda c: -(c["proved"] + c["refuted"])))
     # links from names in the Lean code to their definitions in the Aeneas library
     aen_root = check.PACKAGES / "aeneas" / "backends" / "lean"

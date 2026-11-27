@@ -96,6 +96,8 @@ def sandboxed(ws, cmd, timeout=3600, packages_writable=False):
             "--bind" if packages_writable else "--ro-bind", str(PACKAGES), str(ws / "p" / ".lake" / "packages"),
             "--unshare-net", "--setenv", "HOME", str(ws / "home"), "--setenv", "PATH", f"{tc}:/usr/local/bin:/usr/bin:/bin",
             "--unsetenv", "ELAN_HOME", "--unsetenv", "ELAN_TOOLCHAIN",
+            # no hidden Lake artifact cache: every build output lives in the packages themselves
+            "--setenv", "LAKE_CACHE_DIR", "",
             "--chdir", str(ws / "p"), "--", *cmd]
     try:
         p = subprocess.run(full, capture_output=True, text=True, timeout=timeout)

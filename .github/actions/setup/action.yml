@@ -23,11 +23,14 @@ runs:
       uses: actions/cache/restore@v4
       with:
         path: .lake
-        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v3
+        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v4
     - name: Fetch Mathlib and build Aeneas
       if: steps.restore.outputs.cache-hit != 'true'
       shell: bash
       run: |
+        # Lake's system artifact cache off: every build output goes into .lake/packages, which is
+        # what gets cached and mounted into the checks
+        export LAKE_CACHE_DIR=
         lake exe cache get
         rm -rf ~/.cache/mathlib
         lake build Aeneas
@@ -42,4 +45,4 @@ runs:
       uses: actions/cache/save@v4
       with:
         path: .lake
-        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v3
+        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v4

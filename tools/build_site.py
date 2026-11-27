@@ -33,7 +33,7 @@ def contributor(path):
 def main():
     verified = json.loads((ROOT / "status" / "verified.json").read_text()) if (ROOT / "status" / "verified.json").exists() else {}
     (OUT / "p").mkdir(parents=True, exist_ok=True)
-    index, contributors, totals, flat = [], {}, dict(theorems=0, proved=0, refuted=0), []
+    index, contributors, totals, flat, recent = [], {}, dict(theorems=0, proved=0, refuted=0), [], []
     for prog in sorted((ROOT / "programs").iterdir()):
         meta = json.loads((prog / "program.json").read_text())
         specs = json.loads((prog / "specs.json").read_text()) if (prog / "specs.json").exists() else []
@@ -51,6 +51,8 @@ def main():
                     proof = dict(file=rel, by=who, checked=v.get("checked"), text=f.read_text())
                     c = contributors.setdefault(who, dict(name=who, proved=0, refuted=0))
                     c[kind] += 1
+                    recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=v.get("checked") or "",
+                                       lines=proof["text"].count("\n"), main=s["main"], cat=s["category"]))
             thms.append(dict(s, status=st, proof=proof))
             flat.append([prog.name, s["id"], s["category"][:2], int(s["main"]), st[0], s["statement"][:400],
                          proof["by"] if proof else ""])
@@ -69,7 +71,9 @@ def main():
                           g=meta["tags"], m=next((x["id"] for x in specs if x["main"]), 0),
                           c="".join(x["category"][:2] for x in specs),
                           st="".join({"open": "o", "proved": "p", "refuted": "r", "conflict": "x"}[x["status"]] for x in thms)))
-    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), totals=totals,
+    recent.sort(key=lambda r: (r["checked"], r["t"], r["id"]), reverse=True)
+    commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200],
                 programs=index, contributors=sorted(contributors.values(), key=lambda c: -(c["proved"] + c["refuted"])))
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))

@@ -132,6 +132,7 @@ def check_proof(path, trusted=None, record=False, proof_bytes=None):
         if not ok:
             errs = [l for l in log.splitlines() if re.search(r"error|Illegal|mismatch|differ", l, re.I)]
             res["error"] = "\n".join(errs[-10:]) or log[-2000:]
+            res["log"] = log[-6000:]                     # the full tail, for diagnosing the environment
     finally:
         shutil.rmtree(ws, ignore_errors=True)
     if record:
@@ -156,14 +157,21 @@ def current(rec, proof_file):
     return (rec and rec.get("proof_sha") == sha(ROOT / proof_file) and rec.get("tree_sha") == tree_sha(task))
 
 
-def warm(task="calculate-delayed-arrival-time"):
-    """Build one program against the shared packages while they are still writable, so that Lake
-    writes whatever it wants to write there once (CI runs this before saving its package cache).
-    Later checks mount the packages read-only."""
+def warm(proof="programs/calculate-delayed-arrival-time/Proofs/spec_2.lean"):
+    """Run one full `lake comparator --paranoid` check of a known proof while the shared packages
+    are writable, so that Lake and Comparator write whatever they want there once (CI does this
+    before it saves or uses its package cache). Every later check mounts the packages read-only."""
+    task = PROOF_RE.fullmatch(proof).group(1)
     ws = workspace(task)
     try:
-        rc, log = sandboxed(ws, ["lake", "build", "Specs"], packages_writable=True)
-        print(log[-1500:]); return rc == 0
+        specs = (ws / "p" / "Specs.lean").read_text()
+        (ws / "p" / "Proofs" / Path(proof).name).write_bytes((ROOT / proof).read_bytes())
+        thm = f"{namespace_of(specs)}.{Path(proof).stem}"
+        cfg = ws / "comparator.json"
+        cfg.write_text(json.dumps(dict(challenge_module="Specs", solution_module=f"Proofs.{Path(proof).stem}",
+                                       theorem_names=[thm], permitted_axioms=AXIOMS)))
+        rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
+        print(log[-2000:]); return rc == 0 and "Your solution is okay!" in log
     finally:
         shutil.rmtree(ws, ignore_errors=True)
 
@@ -276,7 +284,10 @@ def main():
         r = check_specs(a.path, a.base); print(json.dumps(r, indent=1)); sys.exit(0 if r["ok"] else 1)
     ok, results, problems = changed(a.base or "origin/main", a.allow_other)
     for kind, r in results:
+        log = r.pop("log", None)
         print(f"[{kind}] {json.dumps(r)}")
+        if log:
+            print(f"----- comparator output for {r.get('file')} -----\n{log}\n-----")
     for p in problems:
         print("PROBLEM:", p)
     if not results and not problems:

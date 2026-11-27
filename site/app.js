@@ -6,6 +6,7 @@
 const $ = id => document.getElementById(id);
 const DATASET = 'https://huggingface.co/datasets/Debargha/leetcode-rust-lean';
 const DISCUSS = DATASET + '/discussions';
+const REPO = 'https://github.com/DebarghaG/leetcode-rust-lean';
 const CAT = {re: 'relational', ed: 'edge', bo: 'bounds', in: 'invariance', fu: 'functional',
              wi: 'witness', no: 'no_failure', sh: 'shape', mo: 'monotonicity'};
 const DIFF = {E: 'Easy', M: 'Medium', H: 'Hard'};
@@ -14,6 +15,23 @@ let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', 
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const fmt = n => n.toLocaleString('en-US');
+const PAPER = 'https://arxiv.org/abs/2610.38174';
+const BIBTEX = `@misc{ganguly2026scalingleantheoremproving,
+      title={Scaling Lean Theorem Proving for Real-World Code Verification},
+      author={Debargha Ganguly and Divya Raghunathan and Dejan Jovanović and Vikash Singh and Soonho Kong and Aaron Tomb and Aman Goel and Ferhat Erata and Sam Bayless},
+      year={2026},
+      eprint={2610.38174},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.38174},
+}`;
+function citeHtml() {
+  return `<h2 id="cite">Citation</h2>
+  <p class="hint">This is an unofficial reproduction of the methodology of
+  <a href="${PAPER}"><i>Scaling Lean Theorem Proving for Real-World Code Verification</i></a>, made by the paper's first
+  author. It is not an official release of the paper. If you use the dataset or the proofs, please cite the paper:</p>
+  <div style="max-width:90ch">${pre(BIBTEX, BIBTEX, false)}</div>`;
+}
 const SMALL = new Set('a an and as at by for from in into of on or the to with'.split(' '));
 const ROMAN = /^(i|ii|iii|iv|v|vi|vii|viii|ix|x)$/;
 const title = t => t.split('-').map((w, i) => !w ? w : ROMAN.test(w) && i ? w.toUpperCase() : i && SMALL.has(w) ? w : w[0].toUpperCase() + w.slice(1)).join(' ');
@@ -79,7 +97,7 @@ function hl(src, ctx) {
     return `<span class="ln" data-l="${i + 1}">${out}</span>`;
   }).join('\n');
 }
-const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code, ctx)}</pre></div>`;
+const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${ctx === false ? esc(code) : hl(code, ctx)}</pre></div>`;
 function toast(msg) { let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.append(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
 document.addEventListener('click', e => {
@@ -169,6 +187,8 @@ function renderMap(q = new URLSearchParams()) {
   const byT = by(p => p.g.map(g => [g, resolvedOf(p), p.st.length]));
   const nu = nextUp();
   v.innerHTML = `
+  <div class="paperline">Unofficial reproduction of the methodology of <a href="${PAPER}"><i>Scaling Lean Theorem Proving for Real-World
+    Code Verification</i></a> (<a href="${PAPER}">arXiv 2610.38174</a>), made by the paper's first author. <a href="#/" data-cite>How to cite</a></div>
   <div class="hero">
     <div>
       <div class="big">${fmt(done)} <small>of ${fmt(T.theorems)} theorems resolved</small></div>
@@ -214,8 +234,9 @@ function renderMap(q = new URLSearchParams()) {
     <span>Split <select id="mSplit"><option value="">all</option><option value="te"${mapState.split === 'te' ? ' selected' : ''}>test</option><option value="tr"${mapState.split === 'tr' ? ' selected' : ''}>train</option></select></span>
   </div>
   <div id="maps"></div>
-  <h2>Topics</h2>
+  <h2>LeetCode tags <span class="h2n">a program has several; click one to show its programs on the map</span></h2>
   <div class="topics">${rows([...byT].sort((a, b) => b[1][1] - a[1][1]).map(([g, [d, n]]) => [g, d, n, `#/?tag=${encodeURIComponent(g)}`]))}</div>
+  ${citeHtml()}
   <h2>Reading the map</h2>
   <p class="hint">One square per theorem, one block per program. Programs are grouped by topic, each in the first topic (in the order
   shown) that one of its LeetCode tags belongs to, and within a topic ordered from Easy to Hard; the darker square of a
@@ -231,6 +252,7 @@ function renderMap(q = new URLSearchParams()) {
   $('mSplit').onchange = e => { mapState.split = e.target.value; setQ(); };
   $('mBy').onchange = e => { mapState.by = e.target.value; setQ(); };
   drawMaps();
+  v.querySelector('[data-cite]').onclick = e => { e.preventDefault(); $('cite').scrollIntoView({behavior: 'smooth', block: 'start'}); };
   if (mapState.tag) $('maps').scrollIntoView({block: 'start'});
 }
 
@@ -432,13 +454,13 @@ function renderProgram(tab, sel) {
       <span class="lk loc">in this program</span>, <span class="lk aen">in Aeneas</span>, <span class="lk ml">in Mathlib and Lean</span>.</p>${pre(p.lean_funs, null, ctx)}
     <details open><summary>Types.lean</summary>${pre(p.lean_types, null, ctx)}</details>` +
     (p.lean_funs_external ? `<details open><summary>FunsExternal.lean (trusted models of Rust library functions)</summary>${pre(p.lean_funs_external, null, ctx)}</details>` : '');
-  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>.</p>${pre(p.specs_file, null, ctx)}`;
+  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>. <a href="${REPO}/blob/main/programs/${p.task_id}/Specs.lean">On GitHub</a>.</p>${pre(p.specs_file, null, ctx)}`;
   $('insp').innerHTML = `
     <div class="pnav"><a href="#/p/${prv}" title="Previous program ( [ )">‹ previous</a><a href="#/p/${nxt}" title="Next program ( ] )">next ›</a></div>
     <h1>${esc(title(p.task_id))}</h1>
     <div class="sub"><a class="chip topic" href="#/theorems?topic=${encodeURIComponent(topicOf(BY[p.task_id]))}">${esc(topicOf(BY[p.task_id]))}</a><span class="chip ${p.difficulty[0]}">${p.difficulty}</span><span class="chip">#${p.question_id}</span><span class="chip">${p.split}</span>
       ${p.tags.map(t => `<a class="chip" href="#/?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}
-      <br>${done} of ${p.theorems.length} theorems resolved · <a href="https://leetcode.com/problems/${p.task_id}/">LeetCode</a> · <code>programs/${esc(p.task_id)}</code></div>
+      <br>${done} of ${p.theorems.length} theorems resolved · <a href="https://leetcode.com/problems/${p.task_id}/">LeetCode</a> · <a href="${REPO}/tree/main/programs/${p.task_id}"><code>programs/${esc(p.task_id)}</code></a></div>
     <div class="tabs">${tabs.map(([k, l]) => `<a href="#" data-tab="${k}" class="${k === tab ? 'on' : ''}">${l}</a>`).join('')}</div>
     ${body}`;
   $('insp').querySelectorAll('.tabs a').forEach(a => a.onclick = e => { e.preventDefault(); renderProgram(a.dataset.tab, 0); });
@@ -452,7 +474,7 @@ function thmCard(p, t, sel, ctx) {
   const task = p.task_id, f = `programs/${task}/Proofs/spec_${t.id}.lean`;
   const link = location.href.split('#')[0] + `#/p/${task}/${t.id}`;
   const cmds = `python3 tools/new_proof.py ${task} ${t.id}        # add --negation to refute it\n# prove spec_${t.id} in ${f}, then\npython3 tools/check.py proof ${f}`;
-  const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)}.</p>
+  const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)} · <a href="${REPO}/blob/main/${t.proof.file}">on GitHub</a></p>
       <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, ctx)}</details>` :
     `<details><summary>Work on this theorem</summary>${pre(cmds)}</details>`;
   const lean = (p.specs_file.match(new RegExp(`theorem spec_${t.id} [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
@@ -523,8 +545,9 @@ async function renderContribute() {
   const first = D.first || [];
   v.innerHTML = `<div class="prose">
     <h1>Contribute</h1>
-    <p>The repository is private for now. To contribute, ask for access on the <a href="${DISCUSS}">Hugging Face discussion page</a>.
-    Every contribution comes in as a pull request and is checked by the same script that runs in CI, <code>tools/check.py</code>.</p>
+    <p>Fork <a href="${REPO}">the repository</a> and open a pull request. Every contribution is checked by the same script that runs in CI,
+    <code>tools/check.py</code>; a pull request that only adds proofs is merged once CI accepts them. Questions and ideas are welcome on the
+    <a href="${REPO}/issues">issue tracker</a>.</p>
     <div class="tracks">
       <div class="track"><b>Proofs</b><p>Prove a theorem or its negation. A proof is accepted when <code>lake comparator</code> accepts it: the statement is unchanged, there is no <code>sorry</code>, and only the axioms <code>propext</code>, <code>Quot.sound</code> and <code>Classical.choice</code> are used.</p></div>
       <div class="track"><b>Specifications</b><p>Add a theorem to a program, in natural language and in Lean, or a better version of an existing one. Released statements are frozen: an improvement is added as a new theorem.</p></div>

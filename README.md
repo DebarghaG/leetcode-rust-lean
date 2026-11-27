@@ -12,7 +12,9 @@ the program itself, with machine integers, overflow checks, loops and panics, no
 mathematical model of it. Each theorem states one property of one program, in natural language
 and in Lean 4.
 
-Progress is shown on the [project site](https://debarghag.github.io/leetcode-rust-lean/).
+Progress is shown on the [project site](https://debarghag.github.io/leetcode-rust-lean/), with a
+[leaderboard](https://debarghag.github.io/leetcode-rust-lean/#/leaderboard) of teams, contributors and
+proving systems: every accepted proof earns points for whoever is named in its header.
 
 ## The task
 

@@ -23,7 +23,13 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean
 - Do not change the statement, the program, or the definitions the statement uses.
 - Only the axioms `propext`, `Quot.sound` and `Classical.choice` are allowed. `native_decide` is
   not.
-- The header's `Contributor:` line is how you are credited on the site.
+- The header credits the proof on the site and the leaderboard: `Contributor:` (you), and
+  optionally `Organization:` (your company or lab) and `System:` (the prover or model that found
+  the proof). `new_proof.py --name --org --system` writes them. Machine-found proofs are welcome;
+  name the system that found them.
+- Points: 1, 2 or 3 for a theorem of an Easy, Medium or Hard program, three times that for a
+  program's main theorem. A proof and a refutation count the same. Each theorem is credited once,
+  to its first accepted proof.
 
 A proof is accepted when `lake comparator` (Lean's kernel and nanoda) accepts it against the program's
 `Specs.lean`. A pull request that adds proofs may only add files under `Proofs/`; changing or

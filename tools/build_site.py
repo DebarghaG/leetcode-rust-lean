@@ -26,10 +26,23 @@ def sha(p):
     return hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
 
 
+def header(path, field):
+    """A `Field: value` line of the proof file's header comment, or None."""
+    m = re.search(rf"^{field}:[ \t]*(.+?)[ \t]*$", path.read_text()[:3000], re.M)
+    return m.group(1).strip() if m and m.group(1).strip() else None
+
+
+POINTS = {"Easy": 1, "Medium": 2, "Hard": 3}     # a main theorem counts three times
+
+
+def points(difficulty, main):
+    return POINTS[difficulty] * (3 if main else 1)
+
+
 def contributor(path):
-    m = re.search(r"^Contributor:\s*(.+)$", path.read_text(), re.M)
+    m = header(path, "Contributor")
     if m:
-        return m.group(1).strip()
+        return m
     try:
         return subprocess.run(["git", "log", "--diff-filter=A", "--format=%an", "--", str(path)], cwd=ROOT,
                               capture_output=True, text=True).stdout.split("\n")[-2].strip() or "unknown"
@@ -40,7 +53,7 @@ def contributor(path):
 def main():
     verified = json.loads((ROOT / "status" / "verified.json").read_text()) if (ROOT / "status" / "verified.json").exists() else {}
     (OUT / "p").mkdir(parents=True, exist_ok=True)
-    index, contributors, totals, flat, recent, mains = [], {}, dict(theorems=0, proved=0, refuted=0), [], [], []
+    index, contributors, totals, flat, recent, mains, credits = [], {}, dict(theorems=0, proved=0, refuted=0), [], [], [], []
     for prog in sorted((ROOT / "programs").iterdir()):
         meta = json.loads((prog / "program.json").read_text())
         specs = json.loads((prog / "specs.json").read_text()) if (prog / "specs.json").exists() else []
@@ -53,11 +66,16 @@ def main():
                 v = verified.get(rel)
                 if f.exists() and v and v.get("ok") and check.current(v, rel):
                     who = contributor(f)
+                    org, system = header(f, "Organization"), header(f, "System")
                     st = "conflict" if st in ("proved", "refuted") else kind
-                    proof = dict(file=rel, by=who, checked=v.get("first_verified") or v.get("checked"), text=f.read_text())
+                    when = v.get("first_verified") or v.get("checked") or ""
+                    proof = dict(file=rel, by=who, org=org, system=system, checked=when, text=f.read_text())
+                    pts = points(meta["difficulty"], s["main"])
                     c = contributors.setdefault(who, dict(name=who, proved=0, refuted=0))
                     c[kind] += 1
-                    recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=v.get("first_verified") or v.get("checked") or "",
+                    credits.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, org=org, system=system,
+                                        date=when, points=pts, main=bool(s["main"]), d=meta["difficulty"][0]))
+                    recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=when,
                                        lines=proof["text"].count("\n"), main=s["main"], cat=s["category"]))
             thms.append(dict(s, status=st, proof=proof))
             if s["main"] and st in ("proved", "refuted"):
@@ -104,6 +122,7 @@ def main():
                     links[t] = ix[o + t]; break
     (OUT / "links.json").write_text(json.dumps(links, separators=(",", ":")))
     data["pins"] = PINS
+    data["credits"] = sorted(credits, key=lambda c: (c["date"], c["t"], c["id"]))     # one per resolved theorem
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))
     print(f"{len(index)} programs, {totals['theorems']} theorems, {totals['proved']} proved, {totals['refuted']} refuted")

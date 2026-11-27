@@ -3,6 +3,7 @@
 
     python3 tools/new_proof.py <task> <n>               # to prove spec_<n>
     python3 tools/new_proof.py <task> <n> --negation    # to refute it: prove spec_<n>_neg
+    options: --name "Your Name"  --org "Your Lab"  --system "YourProver v2"  (credited on the leaderboard)
 
 Then replace that theorem's `sorry` with a proof (add any lemmas you need before it) and run
     python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean
@@ -19,6 +20,8 @@ def main():
     ap.add_argument("task"); ap.add_argument("n", type=int)
     ap.add_argument("--negation", action="store_true")
     ap.add_argument("--name", help="how you want to be credited (default: your git user.name)")
+    ap.add_argument("--org", help="your organization, for the leaderboard (optional)")
+    ap.add_argument("--system", help="the prover or model that found the proof, if any (optional)")
     a = ap.parse_args()
     prog = ROOT / "programs" / a.task
     if not (prog / "specs.json").exists():
@@ -39,7 +42,8 @@ def main():
     link = prog / ".lake" / "packages"
     if not link.exists() and not link.is_symlink():
         link.parent.mkdir(exist_ok=True); link.symlink_to(os.path.relpath(ROOT / ".lake" / "packages", link.parent))
-    dst.write_text(f"{imports}\n/-\nProof of `{name}` ({a.task}).\nContributor: {who}\n-/\n\n{body}")
+    credit = f"Contributor: {who}\n" + (f"Organization: {a.org}\n" if a.org else "") + (f"System: {a.system}\n" if a.system else "")
+    dst.write_text(f"{imports}\n/-\nProof of `{name}` ({a.task}).\n{credit}-/\n\n{body}")
     rel = dst.relative_to(ROOT)
     print(f"wrote {rel}\nprove `{name}` there, then run:\n  python3 tools/check.py proof {rel}")
 

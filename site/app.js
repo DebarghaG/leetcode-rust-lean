@@ -121,12 +121,13 @@ function route() {
   const h = location.hash.replace(/^#\/?/, '');
   const [path, qs] = h.split('?'); const parts = path.split('/').filter(Boolean);
   const q = new URLSearchParams(qs || '');
-  const view = parts[0] === 'theorems' ? 'theorems' : parts[0] === 'contribute' ? 'contribute' : 'map';
+  const view = ['theorems', 'contribute', 'leaderboard'].includes(parts[0]) ? parts[0] : 'map';
   document.querySelectorAll('nav a').forEach(a => a.classList.toggle('on', a.dataset.v === view));
   if (parts[0] === 'p') { if (!$('view').dataset.v) renderMap(); openProgram(decodeURIComponent(parts[1]), +parts[2] || 0); return; }
   closeSide(false);
-  document.title = {theorems: 'Theorems', contribute: 'Contribute', map: 'Proof progress'}[view] + ' · LeetCode Rust-to-Lean';
-  if (view === 'theorems') renderTheorems(q); else if (view === 'contribute') renderContribute(); else renderMap(q);
+  document.title = {theorems: 'Theorems', contribute: 'Contribute', leaderboard: 'Leaderboard', map: 'Proof progress'}[view] + ' · LeetCode Rust-to-Lean';
+  if (view === 'theorems') renderTheorems(q); else if (view === 'contribute') renderContribute();
+  else if (view === 'leaderboard') renderLeaderboard(q); else renderMap(q);
 }
 
 /* ---------- topics: one per program, the first group (in this order) that one of its tags belongs to ---------- */
@@ -199,7 +200,7 @@ function renderMap(q = new URLSearchParams()) {
         <a class="fig" href="#/theorems?status=open"><b>${fmt(T.theorems - done)}</b><span>open</span></a>
         <a class="fig" href="#/theorems?status=proved&main=1"><b>${fmt(mainsDone)}</b><span>main theorems resolved</span></a>
         <div class="fig"><b>${fmt(full)}</b><span>programs fully resolved</span></div>
-        <a class="fig" href="#/contribute"><b>${fmt(D.contributors.length)}</b><span>contributors</span></a>
+        <a class="fig" href="#/leaderboard"><b>${fmt(standings('team').length)}</b><span>teams on the leaderboard</span></a>
       </div>
     </div>
     <div class="lede">
@@ -211,16 +212,23 @@ function renderMap(q = new URLSearchParams()) {
     </div>
   </div>
   <div class="cards">
+    <div class="card"><span class="kicker">Leaderboard</span>${standings('team').slice(0, 5).map((r, i) =>
+      `<a class="row" href="#/leaderboard"><span class="nm">${i + 1}. ${esc(r.name)}</span><span class="num">${fmt(r.points)} points · ${fmt(r.proved + r.refuted)} theorems</span></a>`).join('') || '<p class="sub">No proofs yet.</p>'}
+      <p class="sub" style="margin:10px 0 0">Companies, labs and individuals: every proof you contribute puts your name on this board,
+      ranked by points, with main theorems of Hard programs worth the most.</p>
+      <a class="more" href="#/leaderboard">Full leaderboard and how points work →</a></div>
     ${nu ? `<a class="card next" href="#/p/${nu[0].t}/${nu[1]}"><span class="kicker">Next up</span>
       <b>${esc(title(nu[0].t))}, spec_${nu[1]}</b>
       <span>A ${nu[2] === 'no_failure' ? 'no-failure' : 'bounds'} theorem about an Easy program, with no proof yet: a good first proof.</span>
       <span class="go">Open it →</span></a>` : ''}
-    <div class="card"><span class="kicker">By topic</span>${rows(TOPICS.map(([t]) => [t, ...(byTp.get(t) || [0, 0]), `#/theorems?topic=${encodeURIComponent(t)}`]))}
-      <span class="kicker" style="margin-top:10px">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
-    <div class="card"><span class="kicker">By category</span>${rows([...byC].sort((a, b) => b[1][1] - a[1][1]).map(([c, [d, n]]) => [CAT[c], d, n, `#/theorems?category=${CAT[c]}`]))}</div>
     <div class="card"><span class="kicker">Recently proved</span>${recentGroups().slice(0, 7).map(g =>
       `<a class="row" href="#/p/${g.t}/${g.ids[0]}"><span class="nm">${esc(title(g.t))}</span><span class="num">${g.ids.length === 1 ? 'spec_' + g.ids[0] : g.ids.length + ' theorems'} · ${esc(g.by)}</span></a>`).join('') || '<p class="sub">No proofs yet.</p>'}
       <a class="more" href="#/theorems?status=proved">All resolved theorems →</a></div>
+  </div>
+  <div class="cards two">
+    <div class="card"><span class="kicker">By topic</span>${rows(TOPICS.map(([t]) => [t, ...(byTp.get(t) || [0, 0]), `#/theorems?topic=${encodeURIComponent(t)}`]))}
+      <span class="kicker" style="margin-top:10px">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
+    <div class="card"><span class="kicker">By category</span>${rows([...byC].sort((a, b) => b[1][1] - a[1][1]).map(([c, [d, n]]) => [CAT[c], d, n, `#/theorems?category=${CAT[c]}`]))}</div>
   </div>
   ${(D.mains || []).length ? `<h2>Main theorems resolved <span class="h2n">the full correctness statement of a program, with a checked proof</span></h2>
   <div class="mains">${D.mains.map(m => `<div class="mainc"><div class="hd"><a href="#/p/${m.t}/${m.id}"><b>${esc(title(m.t))}</b></a>
@@ -476,7 +484,7 @@ function thmCard(p, t, sel, ctx) {
   const cmds = `python3 tools/new_proof.py ${task} ${t.id}        # add --negation to refute it\n# prove spec_${t.id} in ${f}, then\npython3 tools/check.py proof ${f}`;
   const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)} · <a href="${REPO}/blob/main/${t.proof.file}">on GitHub</a></p>
       <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, ctx)}</details>` :
-    `<details><summary>Work on this theorem</summary>${pre(cmds)}</details>`;
+    `<details><summary>Work on this theorem</summary>${pre(cmds, null, false)}</details>`;
   const lean = (p.specs_file.match(new RegExp(`theorem spec_${t.id} [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
   const neg = (p.specs_file.match(new RegExp(`theorem spec_${t.id}_neg [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
   return `<div class="thm${sel ? ' sel' : ''}" id="thm${t.id}" data-n="${t.id}">
@@ -497,6 +505,7 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'm') location.hash = '#/';
   else if (e.key === 't') location.hash = '#/theorems';
   else if (e.key === 'c') location.hash = '#/contribute';
+  else if (e.key === 'l') location.hash = '#/leaderboard';
   else if (open && (e.key === '[' || e.key === ']')) { const [a, b] = neighbours(cur.task_id); location.hash = '#/p/' + (e.key === '[' ? a : b); }
   else if (open && (e.key === 'j' || e.key === 'k')) {
     const ids = [...$('insp').querySelectorAll('.thm')].map(x => +x.dataset.n); if (!ids.length) return;
@@ -539,6 +548,64 @@ async function renderTheorems(q) {
   v.querySelectorAll('tbody tr').forEach(tr => tr.onclick = () => { location.hash = `#/p/${tr.dataset.t}/${tr.dataset.n}`; });
 }
 
+/* ---------- leaderboard ---------- */
+const BOARDS = {team: ['Teams', c => c.org || c.by, 'An organization, or the contributor when a proof names none'],
+                contributor: ['Contributors', c => c.by, 'The person or account credited in the proof'],
+                system: ['Systems', c => c.system || null, 'The prover or model that found the proof, when the proof names one']};
+function standings(key) {
+  const m = new Map();
+  for (const c of D.credits || []) {
+    const k = BOARDS[key][1](c); if (!k) continue;
+    const r = m.get(k) || {name: k, points: 0, proved: 0, refuted: 0, main: 0, E: 0, M: 0, H: 0, first: c.date, last: c.date, orgs: new Set()};
+    r.points += c.points; r[c.kind] += 1; r.main += c.main ? 1 : 0; r[c.d] += 1;
+    if (c.date < r.first) r.first = c.date; if (c.date > r.last) r.last = c.date;
+    if (c.org) r.orgs.add(c.org);
+    m.set(k, r);
+  }
+  return [...m.values()].sort((a, b) => b.points - a.points || b.main - a.main || (a.first < b.first ? -1 : 1));
+}
+function lbChart(rows, key) {                         // cumulative points over time for the leaders
+  const top = rows.slice(0, 6).map(r => r.name), dates = [...new Set((D.credits || []).map(c => c.date))].sort();
+  if (dates.length < 2 || !top.length) return '';
+  const W = 860, H = 220, P = 34, R = 150, xs = d => P + (W - P - R) * dates.indexOf(d) / (dates.length - 1);
+  const series = top.map(n => { let acc = 0; return dates.map(d => (acc += (D.credits || []).filter(c => c.date === d && BOARDS[key][1](c) === n).reduce((a, c) => a + c.points, 0))); });
+  const max = Math.max(1, ...series.flat()), ys = v => H - P - (H - 2 * P) * v / max;
+  const COL = ['#2f6fd8', '#2e9e5b', '#d99a2b', '#d23c3c', '#7b5cd6', '#2a9db0'];
+  return `<svg class="lbchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Points over time for the leaders">
+    <line x1="${P}" y1="${H - P}" x2="${W - R}" y2="${H - P}" class="ax"/><text x="${P}" y="${H - 10}" class="tk">${dates[0]}</text>
+    <text x="${W - R}" y="${H - 10}" class="tk" text-anchor="end">${dates[dates.length - 1]}</text><text x="${P - 6}" y="${P}" class="tk" text-anchor="end">${fmt(max)}</text>
+    ${series.map((v, i) => `<polyline fill="none" stroke="${COL[i]}" stroke-width="2" points="${v.map((y, j) => `${xs(dates[j])},${ys(y)}`).join(' ')}"/>
+      <text x="${W - R + 6}" y="${ys(v[v.length - 1]) + 4}" class="tk" fill="${COL[i]}">${esc(top[i].length > 22 ? top[i].slice(0, 21) + '…' : top[i])}</text>`).join('')}</svg>`;
+}
+function renderLeaderboard(q) {
+  const v = $('view'); v.dataset.v = 'leaderboard';
+  const key = BOARDS[q.get('by')] ? q.get('by') : 'team', rows = standings(key);
+  const total = rows.reduce((a, r) => a + r.points, 0) || 1;
+  v.innerHTML = `<div class="prose wide">
+    <h1>Leaderboard</h1>
+    <p>Every theorem resolved here was accepted by <code>lake comparator</code>: same statement, no <code>sorry</code>, standard axioms only,
+    checked by Lean's kernel and nanoda. Each theorem is credited once, to the first proof of it, and the credit stays.</p>
+    <div class="tabs">${Object.entries(BOARDS).map(([k, [l]]) => `<a href="#/leaderboard?by=${k}" class="${k === key ? 'on' : ''}">${l}</a>`).join('')}</div>
+    <p class="hint">${BOARDS[key][2]}.</p>
+    ${rows.length ? `<div class="tw"><table class="list lb"><thead><tr><th>#</th><th>${BOARDS[key][0].replace(/s$/, '')}</th><th>Points</th><th>Resolved</th>
+      <th>Main theorems</th><th>Easy · Medium · Hard</th><th>First · latest</th><th style="width:22%">Share of points</th></tr></thead><tbody>
+      ${rows.map((r, i) => `<tr class="${i < 3 ? 'podium p' + (i + 1) : ''}"><td class="rk">${i + 1}</td><td><b>${esc(r.name)}</b>${i === 0 ? ' <span class="star" title="First place">★</span>' : ''}${key !== 'team' && r.orgs.size ? `<br><small class="muted">${esc([...r.orgs].join(', '))}</small>` : ''}</td>
+        <td class="n"><b>${fmt(r.points)}</b></td><td class="n">${fmt(r.proved + r.refuted)}${r.refuted ? ` <small class="muted">(${r.refuted} refuted)</small>` : ''}</td>
+        <td class="n">${fmt(r.main)}</td><td class="n">${r.E} · ${r.M} · ${r.H}</td><td class="n"><small>${esc(r.first)} · ${esc(r.last)}</small></td>
+        <td><span class="rbar"><i style="width:${100 * r.points / total}%"></i></span></td></tr>`).join('')}
+      </tbody></table></div>${lbChart(rows, key)}` : `<p class="sub">No proofs name a ${key} yet.</p>`}
+    <h3>How points work</h3>
+    <p>A resolved theorem is worth 1, 2 or 3 points for an Easy, Medium or Hard program, and three times as much if it is the program's
+    main theorem, the full correctness statement. Proving a theorem and proving its negation count the same. Ties go to more main theorems,
+    then to whoever got there first.</p>
+    <h3>Get on the leaderboard</h3>
+    ${pre(`python3 tools/new_proof.py <task> <n> --name "Your Name" --org "Your Lab" --system "YourProver v2"`, null, false)}
+    <p>The header of the proof file carries the credit (<code>Contributor:</code>, and optionally <code>Organization:</code> and
+    <code>System:</code>). Open a pull request; once CI accepts the proof it is merged and counted here. Machine-found proofs are welcome:
+    name the system that found them. See the <a href="#/contribute">Contribute</a> page to start.</p>
+    <div class="foot">${pins()}</div></div>`;
+}
+
 /* ---------- contribute ---------- */
 async function renderContribute() {
   const v = $('view'); v.dataset.v = 'contribute';
@@ -555,10 +622,10 @@ async function renderContribute() {
       <div class="track"><b>Programs</b><p>Add a program for a LeetCode problem that is not covered yet, or fix a translation. A program passes every test case and its Lean code is the output of the pinned Charon and Aeneas.</p></div>
     </div>
     <h3>Proving a theorem</h3>
-    ${pre(`lake update && lake exe cache get        # once, at the repository root
-python3 tools/new_proof.py <task> <n>       # copies Specs.lean to programs/<task>/Proofs/spec_<n>.lean
+    ${pre(`lake exe cache get && lake build Aeneas   # once, at the repository root (Linux)
+python3 tools/new_proof.py <task> <n> --name "Your Name" --org "Your Lab"   # copies Specs.lean to Proofs/spec_<n>.lean
 # replace the sorry of spec_<n> with a proof; add lemmas before it if you need them
-python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`)}
+python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`, null, false)}
     <p>To refute a theorem, use <code>--negation</code> and prove <code>spec_&lt;n&gt;_neg</code> instead. Then open a pull request; CI runs the same check.</p>
     <h3>How a proof is checked</h3>
     <p>A proof may add any definitions and lemmas it needs, and imports from the same Lean, Mathlib and Aeneas versions. It may not change

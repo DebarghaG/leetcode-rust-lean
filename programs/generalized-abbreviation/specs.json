@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_1",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let n = len(word). Then r is a duplicate-free list whose entries are exactly all valid generalized abbreviations of word, in any order. Formally: (1) for every byte vector s, there exists j with 0 <= j < len(r) and r[j] = s if and only if there exists a Boolean mask m on the indices 0,...,n-1 such that s is obtained by scanning i = 0,...,n-1, writing word[i] when m(i) is false, and writing the ASCII decimal representation of the length of each maximal consecutive run of true indices once at the start of that run; (2) for all j,k with 0 <= j < len(r) and 0 <= k < len(r), if r[j] = r[k] then j = k.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_2",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input word satisfying the preconditions, the function returns a result r; it does not panic, overflow, access out of bounds, or otherwise fail.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_3",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, let n = len(word). Then len(r) = 2^n.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_4",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every j with 0 <= j < len(r), the byte vector r[j] is a valid generalized abbreviation of word. Here this means there exists a Boolean mask m on the indices 0,...,n-1 such that r[j] is obtained by scanning i = 0,...,n-1, writing word[i] when m(i) is false, and writing the ASCII decimal representation of the length of each maximal consecutive run of true indices once at the start of that run.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_5",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every byte vector s, if there exists a Boolean mask m on the indices 0,...,n-1 such that s is obtained by scanning i = 0,...,n-1, writing word[i] when m(i) is false, and writing the ASCII decimal representation of the length of each maximal consecutive run of true indices once at the start of that run, then there exists j with 0 <= j < len(r) such that r[j] = s.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_6",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for all j,k with 0 <= j < len(r) and 0 <= k < len(r), if r[j] = r[k] then j = k. Equivalently, the list r contains no repeated byte vector.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_7",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), the byte length of r[j] satisfies 1 <= len(r[j]) <= len(word).",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_8",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r) and every k with 0 <= k < len(r[j]), the byte r[j][k] is either an ASCII lowercase English letter (97 <= r[j][k] <= 122) or an ASCII digit (48 <= r[j][k] <= 57).",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_9",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every j with 0 <= j < len(r), each maximal contiguous run of ASCII digit bytes in r[j] is the standard decimal representation, without leading zeros, of an integer L with 1 <= L <= n.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_10",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let n = len(word). The byte vector word itself occurs in r: there exists j with 0 <= j < len(r) such that len(r[j]) = n and r[j][i] = word[i] for every i with 0 <= i < n.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_11",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every pair of integers a,b with 0 <= a < b <= n, let s be the concatenation of the bytes word[0],...,word[a-1] (empty if a = 0), followed by the standard decimal representation of b-a without leading zeros, followed by the bytes word[b],...,word[n-1] (empty if b = n). Then s occurs in r: there exists j with 0 <= j < len(r) such that r[j] = s.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_12",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every j with 0 <= j < len(r), parse s = r[j] into its maximal contiguous runs of ASCII digit bytes and its remaining bytes. Let C be the number of bytes of s that are ASCII lowercase English letters, and let L_1,...,L_k be the integer values represented by the digit runs. Then C + L_1 + ... + L_k = n, with the sum over an empty list of digit runs equal to 0.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_13",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every j with 0 <= j < len(r), let t be the byte vector obtained from r[j] by deleting all ASCII digit bytes. Then t is a subsequence of word: there exist indices 0 <= i_1 < i_2 < ... < i_m < n with m = len(t) such that t[q] = word[i_{q+1}] for every q with 0 <= q < m. If m = 0, t is allowed to be the empty subsequence.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GenerateAbbreviations.spec_14",
+    "negation": "AegisSpec.GenerateAbbreviations.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let n = len(word). For every j with 0 <= j < len(r), the number k of maximal contiguous runs of ASCII digit bytes in r[j] satisfies k <= ceil(n/2), where ceil(x) is the least integer greater than or equal to x.",
+    "preconditions": "word is a byte array with 1 <= len(word) <= 15, and for every i with 0 <= i < len(word), word[i] is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  }
+]

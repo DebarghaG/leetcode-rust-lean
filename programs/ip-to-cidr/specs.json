@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IpToCidr.spec_1",
+    "negation": "AegisSpec.IpToCidr.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let R = {x : I <= x < I+n}. The function returns a result r = [s_0,...,s_{m-1}] (m = len(r)) such that: (1) each s_j encodes exactly one CIDR block (b_j,k_j); (2) the union of C(b_j,k_j) over j with 0 <= j < m equals R; (3) m is minimal: for every finite list t of byte strings each encoding a CIDR block, if the union of the covered sets of the blocks encoded by t equals R, then m <= len(t). The order of the s_j is irrelevant.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division; k=0 gives all 32-bit x, k=32 gives {b}). A byte string encodes (b,k) iff it is the ASCII concatenation of the canonical dotted-decimal encoding of b, the byte '/', and the canonical decimal encoding of k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IpToCidr.spec_2",
+    "negation": "AegisSpec.IpToCidr.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IpToCidr.spec_3",
+    "negation": "AegisSpec.IpToCidr.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), the byte vector r[j] is the ASCII concatenation of the canonical dotted-decimal encoding of some integer b_j with 0 <= b_j < 2^32, the byte '/', and the canonical decimal encoding of some integer k_j with 0 <= k_j <= 32. Canonical decimal means no leading zeros except for the single digit 0.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IpToCidr.spec_4",
+    "negation": "AegisSpec.IpToCidr.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), if r[j] encodes the CIDR block (b_j,k_j), then C(b_j,k_j) is a subset of R = {x : I <= x < I+n}. Thus no returned block covers an IP address outside the required range.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IpToCidr.spec_5",
+    "negation": "AegisSpec.IpToCidr.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every address x with I <= x < I+n, there exists j with 0 <= j < len(r) such that x is in C(b_j,k_j), where r[j] encodes (b_j,k_j). Thus every required address is covered.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IpToCidr.spec_6",
+    "negation": "AegisSpec.IpToCidr.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every address x with I <= x < I+n, there is exactly one j with 0 <= j < len(r) such that x is in C(b_j,k_j), where r[j] encodes (b_j,k_j).",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IpToCidr.spec_7",
+    "negation": "AegisSpec.IpToCidr.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, with r[j] encoding (b_j,k_j) for each j, the sum over j = 0 to len(r)-1 of 2^(32-k_j) equals n.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IpToCidr.spec_8",
+    "negation": "AegisSpec.IpToCidr.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every finite list t of byte strings each encoding a CIDR block, if the union of the covered sets of the blocks encoded by t equals R = {x : I <= x < I+n}, then len(r) <= len(t). Equivalently, len(r) is the minimum possible number of CIDR blocks whose covered sets have union R.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IpToCidr.spec_9",
+    "negation": "AegisSpec.IpToCidr.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), removing the block r[j] leaves at least one address of R uncovered: the union of C(b_i,k_i) over all i with 0 <= i < len(r) and i != j is not equal to R = {x : I <= x < I+n}.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IpToCidr.spec_10",
+    "negation": "AegisSpec.IpToCidr.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), if r[j] encodes (b_j,k_j), then I <= b_j < I+n.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IpToCidr.spec_11",
+    "negation": "AegisSpec.IpToCidr.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), if r[j] encodes (b_j,k_j), then 2^(32-k_j) <= n. Equivalently, the number of addresses covered by any single returned block is at most the total number n of addresses that must be covered.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IpToCidr.spec_12",
+    "negation": "AegisSpec.IpToCidr.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) <= 64.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IpToCidr.spec_13",
+    "negation": "AegisSpec.IpToCidr.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these extra preconditions, whenever the function returns a result r, len(r) = 1. The unique block r[0] encodes some (b_0,k_0) with k_0 = 32-m and C(b_0,k_0) = R = {x : I <= x < I+n}. The base b_0 may be any address in R, not necessarily I.",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. Additionally, n = 2^m for some integer m with 0 <= m <= 32, and I is a multiple of n. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IpToCidr.spec_14",
+    "negation": "AegisSpec.IpToCidr.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = 1, say r[0] encodes (b_0,k_0), then n is a power of two, n = 2^(32-k_0), and I is a multiple of n; equivalently, the required range R = {x : I <= x < I+n} is exactly one CIDR block C(b_0,k_0).",
+    "preconditions": "Let I be the 32-bit integer represented by ip: ip is a valid IPv4 ASCII byte slice of the form a.b.c.d with 0 <= a,b,c,d <= 255 and I = 256^3*a + 256^2*b + 256*c + d. Preconditions: 7 <= len(ip) <= 15; ip is a valid IPv4 address in this sense; 1 <= n <= 1000; I + n - 1 <= 2^32 - 1. For a CIDR block (b,k) with 0 <= b < 2^32 and 0 <= k <= 32, let C(b,k) = {x : 0 <= x < 2^32 and x / 2^(32-k) = b / 2^(32-k)} (integer division). A byte string encodes (b,k) iff it is the canonical dotted-decimal encoding of b followed by '/' and the canonical decimal encoding of k."
+  }
+]

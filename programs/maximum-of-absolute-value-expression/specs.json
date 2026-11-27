@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_1",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every arr1 and arr2 satisfying the preconditions, max_abs_val_expr arr1 arr2 returns a result r (it does not fail), and r is the maximum of the set of all values |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + |i - j| with 0 <= i < n and 0 <= j < n. Equivalently, every such expression is at most r, and some such expression is exactly r.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_2",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r, we have r >= n - 1.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_3",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r, we have r >= max(max1 - min1, max2 - min2), where max1 = max { arr1[i] | 0 <= i < n }, min1 = min { arr1[i] | 0 <= i < n }, max2 = max { arr2[i] | 0 <= i < n }, and min2 = min { arr2[i] | 0 <= i < n }.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_4",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r, we have r <= (max1 - min1) + (max2 - min2) + (n - 1), where max1 = max { arr1[i] | 0 <= i < n }, min1 = min { arr1[i] | 0 <= i < n }, max2 = max { arr2[i] | 0 <= i < n }, and min2 = min { arr2[i] | 0 <= i < n }.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_5",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r, there exist integers i and j with 0 <= i < j < n such that |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + (j - i) = r.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_6",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r and max_abs_val_expr arr2 arr1 returns a result s, we have r = s.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_7",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of integers c and d such that -1000000 <= arr1[i] + c <= 1000000 and -1000000 <= arr2[i] + d <= 1000000 for all i with 0 <= i < n, define arr1'[i] = arr1[i] + c and arr2'[i] = arr2[i] + d. Whenever max_abs_val_expr arr1 arr2 returns r and max_abs_val_expr arr1' arr2' returns r', we have r = r'.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_8",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define arr1'[i] = -arr1[i] and arr2'[i] = -arr2[i] for every i with 0 <= i < n. Whenever max_abs_val_expr arr1 arr2 returns r and max_abs_val_expr arr1' arr2' returns r', we have r = r'.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_9",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define arr1'[i] = arr1[n - 1 - i] and arr2'[i] = arr2[n - 1 - i] for every i with 0 <= i < n. Whenever max_abs_val_expr arr1 arr2 returns r and max_abs_val_expr arr1' arr2' returns r', we have r = r'.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_10",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_abs_val_expr arr1 arr2 returns a result r, r is the maximum of the set of all values |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + (j - i) with 0 <= i < j < n.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxAbsValExpr.spec_11",
+    "negation": "AegisSpec.MaxAbsValExpr.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every arr1 and arr2 satisfying the preconditions, max_abs_val_expr arr1 arr2 returns a result r (it does not fail), and r = max over s in {1,-1} and t in {1,-1} of (max_{0 <= i < n} (s*arr1[i] + t*arr2[i] + i) - min_{0 <= i < n} (s*arr1[i] + t*arr2[i] + i)), with all arithmetic in mathematical integers. Equivalently, r is the maximum over the four sign choices of the range of the sequence s*arr1[i] + t*arr2[i] + i.",
+    "preconditions": "Let n = len(arr1). The preconditions are: len(arr2) = n; 2 <= n <= 40000; for every i with 0 <= i < n, -1000000 <= arr1[i] <= 1000000 and -1000000 <= arr2[i] <= 1000000."
+  }
+]

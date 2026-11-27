@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinMaxGame.spec_1",
+    "negation": "AegisSpec.MinMaxGame.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = R(nums), where R is defined for any nonempty slice A whose length m is a power of 2 by: if m = 1 then R(A) = A[0]; if m > 1 then let B be the slice of length m/2 such that B[j] = min(A[2*j], A[2*j+1]) for every even j with 0 <= j < m/2, and B[j] = max(A[2*j], A[2*j+1]) for every odd j with 0 <= j < m/2; then R(A) = R(B).",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; there is an integer k >= 0 with n = 2^k; and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinMaxGame.spec_2",
+    "negation": "AegisSpec.MinMaxGame.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns Ok r; in particular, it never fails with an i64 overflow, an out-of-bounds access, or a panic.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; n is a power of 2; and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinMaxGame.spec_3",
+    "negation": "AegisSpec.MinMaxGame.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index j with 0 <= j < len(nums) such that r = nums[j].",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; n is a power of 2; and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinMaxGame.spec_4",
+    "negation": "AegisSpec.MinMaxGame.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, min_{0 <= i < len(nums)} nums[i] <= r <= max_{0 <= i < len(nums)} nums[i]. Consequently, since all entries satisfy 1 <= nums[i] <= 1000000000, also 1 <= r <= 1000000000.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; n is a power of 2; and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinMaxGame.spec_5",
+    "negation": "AegisSpec.MinMaxGame.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= min(nums[0], nums[1]).",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; n is a power of 2; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; and n >= 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinMaxGame.spec_6",
+    "negation": "AegisSpec.MinMaxGame.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns v.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Preconditions: 1 <= n <= 1024; n is a power of 2; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; and there exists an integer v such that nums[i] = v for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinMaxGame.spec_7",
+    "negation": "AegisSpec.MinMaxGame.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result returned by min_max_game(nums) and let r2 be the result returned by min_max_game(other). Both calls return results, and r1 <= r2.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. Both nums and other are slices of length n. Preconditions for each: 1 <= n <= 1024; n is a power of 2; all entries of both slices lie in [1, 1000000000]. Additionally, for every i with 0 <= i < n, nums[i] <= other[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinMaxGame.spec_8",
+    "negation": "AegisSpec.MinMaxGame.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by min_max_game(nums) and let r' be the result returned by min_max_game(shifted). Both calls return results, and r' = r + c.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. The slice nums satisfies 1 <= n <= 1024, n is a power of 2, and 1 <= nums[i] <= 1000000000 for all i. Let c be an integer and let shifted be a slice of length n such that shifted[i] = nums[i] + c for every i with 0 <= i < n, and shifted also satisfies 1 <= n <= 1024, n is a power of 2, and 1 <= shifted[i] <= 1000000000 for all i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinMaxGame.spec_9",
+    "negation": "AegisSpec.MinMaxGame.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by min_max_game(nums) and let r' be the result returned by min_max_game(swapped). Both calls return results, and r' = r.",
+    "preconditions": "Let n = len(nums). All slice indices are 0-based. The slice nums satisfies 1 <= n <= 1024, n is a power of 2, and 1 <= nums[i] <= 1000000000 for all i. Let j be an integer with 0 <= j < n/2, and let swapped be the slice of length n defined by swapped[2*j] = nums[2*j+1], swapped[2*j+1] = nums[2*j], and swapped[i] = nums[i] for all other indices i."
+  }
+]

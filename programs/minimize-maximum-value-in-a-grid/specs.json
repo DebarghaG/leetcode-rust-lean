@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinScore.spec_1",
+    "negation": "AegisSpec.MinScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "`min_score grid` returns a result `res`. Call an m-by-n matrix B of positive integers valid if for every row r and columns c1,c2, grid[r][c1] > grid[r][c2] implies B[r][c1] > B[r][c2], and for every column c and rows r1,r2, grid[r1][c] > grid[r2][c] implies B[r1][c] > B[r2][c]. Let K be the least positive integer such that some valid B satisfies B[r][c] <= K for every cell. Then res is valid, so it has shape m-by-n and positive entries, and max over all cells of res equals K.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct: for any two distinct cells (r,c) and (r',c'), grid[r][c] != grid[r'][c']."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinScore.spec_2",
+    "negation": "AegisSpec.MinScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "`min_score grid` returns a result `res`; in particular it does not fail, panic, or overflow.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinScore.spec_3",
+    "negation": "AegisSpec.MinScore.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever `min_score grid` returns a result `res`, len(res) = m and for every r with 0 <= r < m, len(res[r]) = n.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinScore.spec_4",
+    "negation": "AegisSpec.MinScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `min_score grid` returns a result `res`, for every r,c with 0 <= r < m and 0 <= c < n, res[r][c] > 0.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinScore.spec_5",
+    "negation": "AegisSpec.MinScore.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever `min_score grid` returns a result `res`, for every row r and columns c1,c2 with 0 <= r < m, 0 <= c1 < n, and 0 <= c2 < n, if grid[r][c1] > grid[r][c2] then res[r][c1] > res[r][c2].",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinScore.spec_6",
+    "negation": "AegisSpec.MinScore.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever `min_score grid` returns a result `res`, for every column c and rows r1,r2 with 0 <= c < n, 0 <= r1 < m, and 0 <= r2 < m, if grid[r1][c] > grid[r2][c] then res[r1][c] > res[r2][c].",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinScore.spec_7",
+    "negation": "AegisSpec.MinScore.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `min_score grid` returns a result `res`, for every m-by-n matrix B of positive integers that preserves the strict relative order of every two cells lying in the same row or the same column of grid, max over all cells of res is <= max over all cells of B.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinScore.spec_8",
+    "negation": "AegisSpec.MinScore.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `min_score grid` returns a result `res`, max over all cells of res is <= m*n.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinScore.spec_9",
+    "negation": "AegisSpec.MinScore.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `min_score grid` returns a result `res`, max over all cells of res is >= max(m,n).",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinScore.spec_10",
+    "negation": "AegisSpec.MinScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "A same-row-or-column increasing chain is a nonempty finite sequence of cells (r_0,c_0),...,(r_{k-1},c_{k-1}) in the grid such that for each i with 0 <= i < k-1, either r_i = r_{i+1} or c_i = c_{i+1}, and grid[r_i][c_i] < grid[r_{i+1}][c_{i+1}]. Let L be the maximum length k of such a chain. Whenever `min_score grid` returns a result `res`, max over all cells of res equals L.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinScore.spec_11",
+    "negation": "AegisSpec.MinScore.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For a cell (r,c), let L_end(r,c) be the maximum length of a same-row-or-column increasing chain ending at (r,c), where a chain is a sequence of cells (r_0,c_0),...,(r_{k-1},c_{k-1}) such that (r_{k-1},c_{k-1}) = (r,c), for each i with 0 <= i < k-1 either r_i = r_{i+1} or c_i = c_{i+1}, and grid[r_i][c_i] < grid[r_{i+1}][c_{i+1}]. Whenever `min_score grid` returns a result `res`, for every cell (r,c), res[r][c] >= L_end(r,c).",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinScore.spec_12",
+    "negation": "AegisSpec.MinScore.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For a cell (r,c), let U_start(r,c) be the maximum length of a same-row-or-column increasing chain starting at (r,c), where a chain is a sequence of cells (r_0,c_0),...,(r_{k-1},c_{k-1}) such that (r_0,c_0) = (r,c), for each i with 0 <= i < k-1 either r_i = r_{i+1} or c_i = c_{i+1}, and grid[r_i][c_i] < grid[r_{i+1}][c_{i+1}]. Whenever `min_score grid` returns a result `res`, for every cell (r,c), res[r][c] + U_start(r,c) - 1 <= max over all cells of res.",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinScore.spec_13",
+    "negation": "AegisSpec.MinScore.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `min_score grid` returns a result `res`, len(res) = 1, len(res[0]) = n, and for every c with 0 <= c < n, res[0][c] = 1 + the number of columns c' with 0 <= c' < n and grid[0][c'] < grid[0][c].",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct. In addition, m = 1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinScore.spec_14",
+    "negation": "AegisSpec.MinScore.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `min_score grid` returns a result `res`, len(res) = m, for every r with 0 <= r < m len(res[r]) = 1, and for every r with 0 <= r < m, res[r][0] = 1 + the number of rows r' with 0 <= r' < m and grid[r'][0] < grid[r][0].",
+    "preconditions": "Let m = len(grid). The slice grid is nonempty, so m >= 1. Let n = len(grid[0]). Every row grid[r] with 0 <= r < m has length n, with 1 <= m <= 1000, 1 <= n <= 1000, and m*n <= 100000. For every r,c with 0 <= r < m and 0 <= c < n, 1 <= grid[r][c] <= 1000000000. All entries of grid are pairwise distinct. In addition, n = 1."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_1",
+    "negation": "AegisSpec.SumRootToLeaf.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a leaf L of root, let P(L) be the integer whose binary digits are the sequence of node values on the path from the root to L, with the root value as the most significant bit; leading zeros are allowed and do not change the integer. Whenever sum_root_to_leaf(root) returns a result r, r equals the sum of P(L) over all leaves L of root, where a leaf is a node whose left and right children are both Null.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical sum defined in the statement is between 0 and 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_2",
+    "negation": "AegisSpec.SumRootToLeaf.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "sum_root_to_leaf(root) returns a result r; it does not fail.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical sum of the root-to-leaf binary numbers of root is between 0 and 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_3",
+    "negation": "AegisSpec.SumRootToLeaf.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, 0 <= r.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_4",
+    "negation": "AegisSpec.SumRootToLeaf.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n be the number of nodes of root. Whenever sum_root_to_leaf(root) returns a result r, r <= n * (2^n - 1).",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_5",
+    "negation": "AegisSpec.SumRootToLeaf.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = v.",
+    "preconditions": "root = Node(v, Null, Null) for some v with v = 0 or v = 1; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_6",
+    "negation": "AegisSpec.SumRootToLeaf.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = 0.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_7",
+    "negation": "AegisSpec.SumRootToLeaf.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = m * (2^d - 1).",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 1; there is an integer d >= 1 such that every leaf of root has exactly d nodes on its path from the root; let m be the number of leaves; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_8",
+    "negation": "AegisSpec.SumRootToLeaf.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = sum_{i=0}^{d-1} v_i * 2^{d-1-i}.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; root has exactly one leaf L. Let v_0, ..., v_{d-1} be the sequence of node values on the unique path from the root to L, where v_0 is the root, v_{d-1} is L, and d >= 1 is the number of nodes on the path; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_9",
+    "negation": "AegisSpec.SumRootToLeaf.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define ans(Null) = 0, and for any non-empty subtree S let ans(S) be the sum over leaves M of S of the integer represented by the bits on the path from the root of S to M. Whenever sum_root_to_leaf(root) returns a result r, r = ans(L) + ans(R).",
+    "preconditions": "root = Node(0, L, R), where L and R are Trees, possibly Null; root has between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer for root fits in a 32-bit signed integer."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_10",
+    "negation": "AegisSpec.SumRootToLeaf.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define ans(Null) = 0 and W(Null) = 0. For any non-empty subtree S, let ans(S) be the sum over leaves M of S of the integer represented by the bits on the path from the root of S to M, and let W(S) be the sum over leaves M of S of 2^{dist(S,M)}, where dist(S,M) is the number of edges from the root of S to M. Whenever sum_root_to_leaf(root) returns a result r, r = ans(L) + ans(R) + 2 * W(L) + 2 * W(R).",
+    "preconditions": "root = Node(1, L, R), where L and R are Trees, possibly Null, and at least one of L, R is non-Null (so the root is not a leaf); root has between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer for root fits in a 32-bit signed integer."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_11",
+    "negation": "AegisSpec.SumRootToLeaf.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = sum over every node u of root of value(u) * (sum over leaves L in the subtree rooted at u of 2^{dist(u,L)}), where value(u) is the 0 or 1 stored at u and dist(u,L) is the number of edges from u to L. If u is itself a leaf, the inner sum is 1 because the empty path contributes 2^0.",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer fits in a 32-bit signed integer."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_12",
+    "negation": "AegisSpec.SumRootToLeaf.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = 22.",
+    "preconditions": "root = Node(1, Node(0, Node(0, Null, Null), Node(1, Null, Null)), Node(1, Node(0, Null, Null), Node(1, Null, Null)))."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_13",
+    "negation": "AegisSpec.SumRootToLeaf.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r = 6.",
+    "preconditions": "root = Node(1, Node(1, Null, Null), Node(1, Null, Null))."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_14",
+    "negation": "AegisSpec.SumRootToLeaf.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define ans(Null) = 0 and W(Null) = 0; for a non-empty subtree S, ans(S) is the sum over leaves M of S of the integer represented by the bits on the path from the root of S to M, and W(S) is the sum over leaves M of S of 2^{dist(S,M)} with dist counted in edges. If L and R are both Null (root is a leaf), then whenever sum_root_to_leaf(root) returns a result r, r = v. If at least one of L, R is non-Null, then whenever sum_root_to_leaf(root) returns a result r, r = ans(L) + ans(R) + 2*v*(W(L) + W(R)).",
+    "preconditions": "root = Node(v, L, R) where v = 0 or v = 1 and L, R are Trees, possibly Null; root has between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer for root fits in a 32-bit signed integer."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.SumRootToLeaf.spec_15",
+    "negation": "AegisSpec.SumRootToLeaf.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_root_to_leaf(root) returns a result r, r <= 2^31 - 1, i.e. the returned value stays within the range the problem guarantees (and hence within i64).",
+    "preconditions": "root is a non-empty finite Tree with between 1 and 1000 nodes; every node value is 0 or 1; the mathematical answer fits in a 32-bit signed integer."
+  }
+]

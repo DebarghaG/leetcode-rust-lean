@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestConsecutive.spec_1",
+    "negation": "AegisSpec.LongestConsecutive.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r is exactly the following maximum. Consider every finite sequence (v0, ..., v_{k-1}) with k >= 1 of distinct nodes of root such that (a) for each i with 0 <= i < k-1, either v_i is the parent of v_{i+1} or v_{i+1} is the parent of v_i; and (b) there exists s in {1, -1} such that for every i with 0 <= i < k-1, value(v_{i+1}) = value(v_i) + s. For such a sequence let its length be k. Then r is the maximum length among all such sequences in root.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestConsecutive.spec_2",
+    "negation": "AegisSpec.LongestConsecutive.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, longest_consecutive(root) returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestConsecutive.spec_3",
+    "negation": "AegisSpec.LongestConsecutive.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever longest_consecutive(root) returns a result r, 1 <= r <= n, where n is the number of nodes of root.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestConsecutive.spec_4",
+    "negation": "AegisSpec.LongestConsecutive.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever longest_consecutive(root) returns a result r, there exists a consecutive path in root, meaning a sequence of distinct nodes along parent-child edges in which all consecutive value differences equal the same sign 1 or -1, having exactly r nodes.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestConsecutive.spec_5",
+    "negation": "AegisSpec.LongestConsecutive.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever longest_consecutive(root) returns a result r, every consecutive path in root, meaning every sequence of distinct nodes along parent-child edges in which all consecutive value differences equal the same sign 1 or -1, has at most r nodes.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestConsecutive.spec_6",
+    "negation": "AegisSpec.LongestConsecutive.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r = 1.",
+    "preconditions": "root = Node(v, Null, Null) for some integer v with -30000 <= v <= 30000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestConsecutive.spec_7",
+    "negation": "AegisSpec.LongestConsecutive.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r = 2.",
+    "preconditions": "root has exactly two nodes; thus it is either Node(v, Node(w, Null, Null), Null) or Node(v, Null, Node(w, Null, Null)) for integers v and w, with -30000 <= v <= 30000, -30000 <= w <= 30000, and |v - w| = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestConsecutive.spec_8",
+    "negation": "AegisSpec.LongestConsecutive.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r = 3.",
+    "preconditions": "root has exactly three nodes and consists of a root node with value v and two leaf children whose values are v - 1 and v + 1, one on the left and one on the right in either order, with -30000 <= v - 1 < v + 1 <= 30000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestConsecutive.spec_9",
+    "negation": "AegisSpec.LongestConsecutive.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r >= 2.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, every node value v satisfies -30000 <= v <= 30000, and there exists a node u of root with a child c such that |value(u) - value(c)| = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestConsecutive.spec_10",
+    "negation": "AegisSpec.LongestConsecutive.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every node u of root, let T_u be the subtree of root consisting of u and all descendants of u, with the same left/right child structure and node values. Whenever longest_consecutive(root) returns a result r and longest_consecutive(T_u) returns a result r_u, we have r_u <= r.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestConsecutive.spec_11",
+    "negation": "AegisSpec.LongestConsecutive.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(root) be the tree obtained from root by recursively swapping the left and right child of every node. Whenever longest_consecutive(root) returns a result r, longest_consecutive(mirror(root)) also returns the same result r; conversely, whenever longest_consecutive(mirror(root)) returns r, longest_consecutive(root) returns r.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestConsecutive.spec_12",
+    "negation": "AegisSpec.LongestConsecutive.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that -30000 <= value(u) + c <= 30000 for every node u of root, let root+c be the tree obtained by adding c to every node value. Whenever longest_consecutive(root) returns a result r, longest_consecutive(root+c) also returns the same result r; conversely, whenever longest_consecutive(root+c) returns r, longest_consecutive(root) returns r.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, and every node value v satisfies -30000 <= v <= 30000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestConsecutive.spec_13",
+    "negation": "AegisSpec.LongestConsecutive.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let p0, p1, ..., p_{n-1} be the nodes obtained starting at the root and repeatedly taking the unique child until no child remains, and let a_i = value(p_i). Whenever longest_consecutive(root) returns a result r, r is the maximum of j - i + 1 over all pairs of indices 0 <= i <= j < n such that there exists s in {1, -1} with a_{k+1} = a_k + s for every k with i <= k < j.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, every node value v satisfies -30000 <= v <= 30000, and every node of root has at most one child."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestConsecutive.spec_14",
+    "negation": "AegisSpec.LongestConsecutive.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever longest_consecutive(root) returns a result r, r >= 3.",
+    "preconditions": "root is a Tree with at least one node and at most 30000 nodes, every node value v satisfies -30000 <= v <= 30000, and there exists a node u of root with value x having two children c1 and c2 with value(c1) = x - 1 and value(c2) = x + 1, in either order."
+  }
+]

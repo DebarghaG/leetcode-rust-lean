@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxKelements.spec_1",
+    "negation": "AegisSpec.MaxKelements.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the maximum possible total score over all sequences (i_0, ..., i_{k-1}) of indices with 0 <= i_t < len(nums) for every t. For such a sequence define current values c[0][j] = nums[j]; for t = 0, ..., k-1, the t-th operation gains c[t][i_t] and sets c[t+1][i_t] = ceil(c[t][i_t]/3), while c[t+1][j] = c[t][j] for j != i_t. The total score of the sequence is sum_{t=0}^{k-1} c[t][i_t], where ceil(x/3) is the least integer >= x/3. Indices may repeat.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxKelements.spec_2",
+    "negation": "AegisSpec.MaxKelements.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on these inputs.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxKelements.spec_3",
+    "negation": "AegisSpec.MaxKelements.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= k * M, where M = max_{0 <= i < len(nums)} nums[i].",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxKelements.spec_4",
+    "negation": "AegisSpec.MaxKelements.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= M + k - 1, where M = max_{0 <= i < len(nums)} nums[i].",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxKelements.spec_5",
+    "negation": "AegisSpec.MaxKelements.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = k * M.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000. Let M = max_{0 <= i < len(nums)} nums[i], and assume the number of indices i with nums[i] = M is at least k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxKelements.spec_6",
+    "negation": "AegisSpec.MaxKelements.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{t=0}^{k-1} q_t, where q_0 = nums[0] and q_{t+1} = ceil(q_t/3) for every t >= 0.",
+    "preconditions": "nums is a slice of 64-bit integers with len(nums) = 1, 1 <= nums[0] <= 1000000000; k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxKelements.spec_7",
+    "negation": "AegisSpec.MaxKelements.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = k.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and nums[i] = 1 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxKelements.spec_8",
+    "negation": "AegisSpec.MaxKelements.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If r = max_kelements(nums,k) and r' = max_kelements(nums',k) are returned results, then r = r'.",
+    "preconditions": "nums and nums' are slices of 64-bit integers with 1 <= len(nums) = len(nums') <= 100000, 1 <= nums[i] <= 1000000000 and 1 <= nums'[i] <= 1000000000 for all valid i, and the multiset of entries of nums' is the same as the multiset of entries of nums; k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxKelements.spec_9",
+    "negation": "AegisSpec.MaxKelements.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r1 = max_kelements(nums,k1) and r2 = max_kelements(nums,k2) are returned results, then r2 >= r1 + (k2 - k1).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k1 and k2 are 64-bit integers with 1 <= k1 <= k2 <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxKelements.spec_10",
+    "negation": "AegisSpec.MaxKelements.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r = max_kelements(nums,k) and r' = max_kelements(nums',k) are returned results, then r' >= r.",
+    "preconditions": "nums and nums' are slices of 64-bit integers with 1 <= len(nums) = len(nums') <= 100000, 1 <= nums[i] <= nums'[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxKelements.spec_11",
+    "negation": "AegisSpec.MaxKelements.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a sequence (i_0, ..., i_{k-1}) of indices with 0 <= i_t < len(nums) for every t such that the total score of this sequence equals r. The total score is computed by starting with current values nums, for each t = 0, ..., k-1 gaining the current value at index i_t, then replacing that current value by ceil(current/3).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxKelements.spec_12",
+    "negation": "AegisSpec.MaxKelements.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every sequence (i_0, ..., i_{k-1}) of indices with 0 <= i_t < len(nums) for every t, the total score obtained by applying these k operations is at most r. The total score is the sum of the k gained current values, where an operation gains the current value at the chosen index and then replaces it by ceil(current/3).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxKelements.spec_13",
+    "negation": "AegisSpec.MaxKelements.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the sum of the k largest elements, with multiplicity, of the multiset Q = { q_{i,t} | 0 <= i < len(nums) and 0 <= t < k }, where q_{i,0} = nums[i] and q_{i,t+1} = ceil(q_{i,t}/3).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and 1 <= nums[i] <= 1000000000 for every 0 <= i < len(nums); k is a 64-bit integer with 1 <= k <= 100000."
+  }
+]

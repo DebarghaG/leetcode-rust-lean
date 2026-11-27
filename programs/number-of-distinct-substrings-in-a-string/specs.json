@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountDistinct.spec_1",
+    "negation": "AegisSpec.CountDistinct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_distinct(s) returns a result r, r equals the cardinality of the set D(s) of all finite non-empty byte sequences t for which there exist integers i and L with 0 <= i, L >= 1, i + L <= n, len(t) = L, and t[k] = s[i+k] for every k with 0 <= k < L. Equivalently, r is the number of distinct non-empty contiguous substrings of s, each distinct substring counted once regardless of how many positions at which it occurs.",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountDistinct.spec_2",
+    "negation": "AegisSpec.CountDistinct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, count_distinct(s) returns a result r; that is, it does not fail, overflow, or panic.",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountDistinct.spec_3",
+    "negation": "AegisSpec.CountDistinct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_distinct(s) returns a result r, r >= n, where n = len(s).",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountDistinct.spec_4",
+    "negation": "AegisSpec.CountDistinct.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_distinct(s) returns a result r, r <= n*(n+1)/2, where n = len(s).",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountDistinct.spec_5",
+    "negation": "AegisSpec.CountDistinct.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the number of distinct byte values among s[0],...,s[n-1]. Whenever count_distinct(s) returns a result r, r <= sum_{L=1}^{n} min(n - L + 1, k^L).",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountDistinct.spec_6",
+    "negation": "AegisSpec.CountDistinct.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte slice of length n with t[i] = s[n-1-i] for every 0 <= i < n. Whenever count_distinct(s) returns r_s and count_distinct(t) returns r_t, r_s = r_t.",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountDistinct.spec_7",
+    "negation": "AegisSpec.CountDistinct.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let f be any injective function from the set {97,...,122} of lowercase ASCII codes to itself, and let t be the byte slice of length n with t[i] = f(s[i]) for every 0 <= i < n. Whenever count_distinct(s) returns r_s and count_distinct(t) returns r_t, r_s = r_t.",
+    "preconditions": "s is a byte slice, n = len(s), 1 <= n <= 500, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountDistinct.spec_8",
+    "negation": "AegisSpec.CountDistinct.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If s occurs as a contiguous substring of t, meaning there exists an integer p with 0 <= p and p + len(s) <= len(t) such that for every i with 0 <= i < len(s), s[i] = t[p+i], then whenever count_distinct(s) returns r_s and count_distinct(t) returns r_t, r_s <= r_t.",
+    "preconditions": "s and t are byte slices, each with length between 1 and 500 inclusive, and every byte of each slice is in the range 97 through 122 inclusive."
+  }
+]

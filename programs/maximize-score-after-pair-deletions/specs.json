@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = total - m, where total = sum_{i=0}^{n-1} nums[i], n = len(nums), and m = min_{0 <= i < n} nums[i] if n is odd, and m = min_{0 <= i < n-1} (nums[i] + nums[i+1]) if n is even. Equivalently, r is the maximum total sum of removed elements over all sequences of allowed operations (removing the first two elements, the last two elements, or the first and last element) performed until the array has at most two elements.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned result r satisfies -1000000000 <= r <= 1000000000.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns total - min_{0 <= i < n} nums[i], where n = len(nums) and total = sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "len(nums) is odd, 1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns total - min_{0 <= i < n-1} (nums[i] + nums[i+1]), where n = len(nums) and total = sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "len(nums) is even, 2 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists an index i with 0 <= i < n (if n is odd) or 0 <= i < n-1 (if n is even) and a sequence of allowed operations such that the final remaining elements are exactly nums[i..i+k-1] (where k=1 if n is odd and k=2 if n is even) and the total sum of removed elements is r, where n = len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index i with 0 <= i < n (if n is odd) or 0 <= i < n-1 (if n is even) and every sequence of allowed operations that leaves exactly nums[i..i+k-1] (where k=1 if n is odd and k=2 if n is even), the total sum of removed elements is at most r, where n = len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array defined by nums'[i] = nums[n-1-i] for 0 <= i < n, where n = len(nums). Then the result of max_score on nums equals the result of max_score on nums'.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let d be an integer such that -10000 <= nums[i] + d <= 10000 for all 0 <= i < n, and let nums' be the array defined by nums'[i] = nums[i] + d. Then max_score(nums') = max_score(nums) + (n - k) * d, where n = len(nums), k = 1 if n is odd and k = 2 if n is even.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned result r satisfies r >= total - max_{0 <= i < n} nums[i] if n is odd, and r >= total - max_{0 <= i < n-1} (nums[i] + nums[i+1]) if n is even, where n = len(nums) and total = sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000."
+  }
+]

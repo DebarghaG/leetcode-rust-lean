@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DivisibilityArray.spec_1",
+    "negation": "AegisSpec.DivisibilityArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = n and for every i with 0 <= i < n, if D_i = sum_{j=0}^{i} digit(word[j]) * 10^(i-j) is the mathematical numeric value of the decimal prefix word[0..i], then r[i] = 1 exactly when m divides D_i (equivalently D_i mod m = 0), and r[i] = 0 otherwise.",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, word[j] is an ASCII digit (48 <= word[j] <= 57). Write digit(word[j]) = word[j] - 48."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DivisibilityArray.spec_2",
+    "negation": "AegisSpec.DivisibilityArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail by arithmetic overflow, panic, division by zero, or out-of-bounds access.",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DivisibilityArray.spec_3",
+    "negation": "AegisSpec.DivisibilityArray.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(word).",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DivisibilityArray.spec_4",
+    "negation": "AegisSpec.DivisibilityArray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), r[i] is either 0 or 1 as an i64.",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DivisibilityArray.spec_5",
+    "negation": "AegisSpec.DivisibilityArray.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If word1[j] = word2[j] for every j with 0 <= j < k, then whenever the function returns r1 on (word1, m) and r2 on (word2, m), it holds that r1[i] = r2[i] for every i with 0 <= i < k.",
+    "preconditions": "Let n1 = len(word1) and n2 = len(word2). Assume 1 <= n1 <= 100000, 1 <= n2 <= 100000, 1 <= m <= 1000000000, every byte of word1 and word2 is an ASCII digit (48 to 57), and k is an integer with 0 <= k <= n1 and 0 <= k <= n2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DivisibilityArray.spec_6",
+    "negation": "AegisSpec.DivisibilityArray.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 on (word, m1) and r2 on (word, m2), then for every i with 0 <= i < n, r2[i] = 1 implies r1[i] = 1. Equivalently, r1[i] >= r2[i] for every i.",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, every byte of word is an ASCII digit (48 to 57), and m1, m2 are positive integers with 1 <= m1 <= 1000000000, 1 <= m2 <= 1000000000, and m1 divides m2 (there exists a positive integer q with m2 = q * m1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DivisibilityArray.spec_7",
+    "negation": "AegisSpec.DivisibilityArray.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let R_0 = digit(word[0]) mod m and, for 1 <= i < n, let R_i = (10 * R_{i-1} + digit(word[i])) mod m. Then for every i with 0 <= i < n, r[i] = 1 exactly when R_i = 0.",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57. Write digit(word[j]) = word[j] - 48."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DivisibilityArray.spec_8",
+    "negation": "AegisSpec.DivisibilityArray.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if r[i] = 1 then there exists a nonnegative integer q such that D_i = q * m, where D_i = sum_{j=0}^{i} digit(word[j]) * 10^(i-j).",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57. Write digit(word[j]) = word[j] - 48."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DivisibilityArray.spec_9",
+    "negation": "AegisSpec.DivisibilityArray.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if r[i] = 0 then there exist integers q and a with q >= 0 and 1 <= a < m such that D_i = q * m + a, where D_i = sum_{j=0}^{i} digit(word[j]) * 10^(i-j).",
+    "preconditions": "Let n = len(word). Assume 1 <= n <= 100000, 1 <= m <= 1000000000, and for every j with 0 <= j < n, 48 <= word[j] <= 57. Write digit(word[j]) = word[j] - 48."
+  }
+]

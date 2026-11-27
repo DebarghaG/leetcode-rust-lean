@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_1",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r equals the number of indices i with 0 <= i < n such that colors[i] != colors[(i + n - 1) mod n] and colors[i] != colors[(i + 1) mod n]. Equivalently, r counts the alternating groups, taking the tile with index i as the middle tile of the three contiguous circular tiles (i-1, i, i+1).",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_2",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (it does not fail or panic) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_3",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(colors).",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_4",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0.",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, every colors[i] is either 0 or 1, and there is a value c in {0,1} such that colors[i] = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_5",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1.",
+    "preconditions": "Let n = len(colors) = 3, every colors[i] is either 0 or 1, and the colors are not all equal, i.e. there exist indices i and j with colors[i] != colors[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_6",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(colors).",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, n is even, every colors[i] is either 0 or 1, and for every i with 0 <= i < n, colors[i] != colors[(i + 1) mod n]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_7",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r = len(colors), then len(colors) is even and for every i with 0 <= i < len(colors), colors[i] != colors[(i + 1) mod len(colors)].",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_8",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever number_of_alternating_groups colors returns r and number_of_alternating_groups colors2 returns r2, r = r2.",
+    "preconditions": "Let n = len(colors). Both colors and colors2 have length n, 3 <= n <= 100, every entry of both is either 0 or 1, and for every i with 0 <= i < n, colors2[i] = 1 - colors[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_9",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r equals the number of circular runs of colors whose length is exactly 1. Here a circular run is a maximal set of consecutive indices modulo n on which colors is constant; if all tiles have the same color, the whole circle is one circular run of length n.",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_10",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if every circular run of colors has length at least 2.",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, every colors[i] is either 0 or 1, and not all colors are equal."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfAlternatingGroups.spec_11",
+    "negation": "AegisSpec.NumberOfAlternatingGroups.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exists an index i with 0 <= i < n such that colors[i] != colors[(i + n - 1) mod n] and colors[i] != colors[(i + 1) mod n].",
+    "preconditions": "Let n = len(colors). 3 <= n <= 100, and for every i with 0 <= i < n, colors[i] is either 0 or 1."
+  }
+]

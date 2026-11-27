@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_1",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r (Result.ok r), r is the maximum, over all integers s, of C(s), where C(s) is the number of integers x such that both (i) there exists an index i with 0 <= i < len(tiles) and tiles[i][0] <= x <= tiles[i][1], and (ii) s <= x <= s + carpetLen - 1. In words, r is the largest possible number of white tiles covered by placing a carpet of length carpetLen on the consecutive integer positions s, s+1, ..., s+carpetLen-1, for any integer start s.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_2",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (Result.ok r); it does not fail, panic, return Result.err, or overflow 64-bit arithmetic.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_3",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= min(carpetLen, T), where T is the total number of white tiles: T = |{x in Z : there exists i with 0 <= i < len(tiles) and tiles[i][0] <= x <= tiles[i][1]}| = sum_{i=0}^{len(tiles)-1} (tiles[i][1] - tiles[i][0] + 1) (the sum formula uses pairwise non-overlap).",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_4",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= min(carpetLen, M), where M = max_{0 <= i < len(tiles)} (tiles[i][1] - tiles[i][0] + 1) is the length of the longest white interval.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_5",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let minL = min_{0 <= i < len(tiles)} tiles[i][0], maxR = max_{0 <= i < len(tiles)} tiles[i][1], and T = sum_{i=0}^{len(tiles)-1} (tiles[i][1] - tiles[i][0] + 1). Whenever the function returns a result r, r = T if and only if carpetLen >= maxR - minL + 1.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_6",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let C(s) be defined as in spec_1: the number of white integers x with s <= x <= s + carpetLen - 1. Whenever the function returns a result r, there exists an index i with 0 <= i < len(tiles) such that C(tiles[i][0]) = r.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_7",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be any permutation of {0,1,...,len(tiles)-1}, and let tiles' be the slice of length len(tiles) with tiles'[i] = tiles[pi(i)] for every 0 <= i < len(tiles). Whenever both calls maximum_white_tiles(tiles, carpetLen) and maximum_white_tiles(tiles', carpetLen) return results r and r' respectively, r = r'.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; and the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_8",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both calls maximum_white_tiles(tiles, carpetLen) and maximum_white_tiles(tiles', carpetLen) return results r and r' respectively, r = r'.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]; let d be an integer such that 1 <= tiles[i][0] + d and tiles[i][1] + d <= 1000000000 for every 0 <= i < len(tiles), and define tiles'[i] = [tiles[i][0] + d, tiles[i][1] + d]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_9",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_white_tiles(tiles, L1) returns r1 and maximum_white_tiles(tiles, L2) returns r2, we have r1 <= r2.",
+    "preconditions": "1 <= len(tiles) <= 50000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]; let L1 and L2 be integers with 1 <= L1 <= L2 <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_10",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_white_tiles(tiles, carpetLen) returns r and maximum_white_tiles(tiles', carpetLen) returns r', we have r <= r'.",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]; len(tiles) <= 49999; let [l,r] be an integer interval with 1 <= l <= r <= 1000000000 such that for every i with 0 <= i < len(tiles), [l,r] and [tiles[i][0], tiles[i][1]] have no integer in common; let tiles' be any slice obtained by appending [l,r] to tiles (so len(tiles') = len(tiles)+1 and the first len(tiles) entries are those of tiles)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_11",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = max_{0 <= i < len(tiles)} min(carpetLen, tiles[i][1] - tiles[i][0] + 1).",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]; additionally, for every i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, and tiles[i][0] < tiles[j][0], we have tiles[j][0] - tiles[i][1] >= carpetLen."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumWhiteTiles.spec_12",
+    "negation": "AegisSpec.MaximumWhiteTiles.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(carpetLen, B - A + 1), where A = min_{0 <= i < len(tiles)} tiles[i][0] and B = max_{0 <= i < len(tiles)} tiles[i][1].",
+    "preconditions": "1 <= len(tiles) <= 50000; 1 <= carpetLen <= 1000000000; for every i with 0 <= i < len(tiles), len(tiles[i]) = 2 and 1 <= tiles[i][0] <= tiles[i][1] <= 1000000000; the intervals are pairwise non-overlapping: for all i,j with 0 <= i < len(tiles), 0 <= j < len(tiles), i != j, there is no integer x with tiles[i][0] <= x <= tiles[i][1] and tiles[j][0] <= x <= tiles[j][1]; and the union W = {x in Z : there exists i with 0 <= i < len(tiles) and tiles[i][0] <= x <= tiles[i][1]} is contiguous, i.e. there exist integers A <= B with W = {x in Z : A <= x <= B}."
+  }
+]

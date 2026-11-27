@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_1",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the length of the longest common subsequence of text1 and text2. Formally, define LCS(X,Y) for sequences X and Y as the maximum k such that there exist strictly increasing indices 0 <= i_0 < i_1 < ... < i_{k-1} < len(X) and 0 <= j_0 < j_1 < ... < j_{k-1} < len(Y) with X[i_t] = Y[j_t] for every t with 0 <= t < k. The case k = 0 is allowed with empty index sequences, so LCS(X,Y) >= 0. Then r = LCS(text1, text2).",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_2",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever text1 and text2 satisfy the preconditions, the function returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_3",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, 0 <= r <= min(len(text1), len(text2)).",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_4",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, there exist strictly increasing indices 0 <= i_0 < ... < i_{r-1} < len(text1) and 0 <= j_0 < ... < j_{r-1} < len(text2) such that text1[i_t] = text2[j_t] for every t with 0 <= t < r. (If r = 0, both index sequences are empty.)",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_5",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, for every k >= 0 and every pair of strictly increasing index sequences 0 <= i_0 < ... < i_{k-1} < len(text1) and 0 <= j_0 < ... < j_{k-1} < len(text2) satisfying text1[i_t] = text2[j_t] for all 0 <= t < k, we have k <= r.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_6",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = 0 if and only if there is no pair of indices (i,j) with 0 <= i < len(text1) and 0 <= j < len(text2) such that text1[i] = text2[j].",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_7",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r and the set C = { b | b occurs in text1 and b occurs in text2 } has exactly one element c, then r = min( #{ i | 0 <= i < len(text1) and text1[i] = c }, #{ j | 0 <= j < len(text2) and text2[j] = c } ), where #{ ... } denotes the number of indices satisfying the condition.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_8",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r = min(len(text1), len(text2)) if and only if the following holds: if len(text1) <= len(text2) then text1 is a subsequence of text2 (there exist 0 <= j_0 < ... < j_{len(text1)-1} < len(text2) with text2[j_t] = text1[t] for all 0 <= t < len(text1)); otherwise text2 is a subsequence of text1 (there exist 0 <= i_0 < ... < i_{len(text2)-1} < len(text1) with text1[i_t] = text2[t] for all 0 <= t < len(text2)).",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_9",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r also equals the length of the longest common subsequence of text2 and text1, where the roles of the two sequences are exchanged: the maximal k such that there exist strictly increasing indices 0 <= j_0 < ... < j_{k-1} < len(text2) and 0 <= i_0 < ... < i_{k-1} < len(text1) with text2[j_t] = text1[i_t] for every 0 <= t < k.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_10",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every index p with 0 <= p < len(text1), let u be the sequence of length len(text1)-1 defined by u[t] = text1[t] for 0 <= t < p and u[t] = text1[t+1] for p <= t < len(text1)-1. Then the longest common subsequence of u and text2 has length r' with r - 1 <= r' <= r.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_11",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every byte b with 0 <= b <= 255, let v be the sequence of length len(text1)+1 defined by v[t] = text1[t] for 0 <= t < len(text1) and v[len(text1)] = b. Then the longest common subsequence of v and text2 has length r'' with r <= r'' <= r + 1.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_12",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, let rev(text1) be the sequence of length len(text1) with rev(text1)[i] = text1[len(text1)-1-i] for 0 <= i < len(text1), and define rev(text2) analogously. Then r equals the length of the longest common subsequence of rev(text1) and rev(text2).",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_13",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, if there exists an index p with 0 <= p < len(text1) such that text1[p] does not occur in text2 (i.e., text2[j] != text1[p] for all 0 <= j < len(text2)), then let u be the sequence of length len(text1)-1 obtained from text1 by deleting position p (u[t] = text1[t] for 0 <= t < p, and u[t] = text1[t+1] for p <= t < len(text1)-1). Then the longest common subsequence of u and text2 also has length r.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestCommonSubsequence.spec_14",
+    "negation": "AegisSpec.LongestCommonSubsequence.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, for every k with 0 <= k <= r there exist strictly increasing indices 0 <= i_0 < ... < i_{k-1} < len(text1) and 0 <= j_0 < ... < j_{k-1} < len(text2) such that text1[i_t] = text2[j_t] for every t with 0 <= t < k.",
+    "preconditions": "len(text1) >= 1, len(text2) >= 1, len(text1) <= 1000, len(text2) <= 1000, and every element of text1 and text2 is in the range 97..122 inclusive (ASCII 'a'..'z')."
+  }
+]

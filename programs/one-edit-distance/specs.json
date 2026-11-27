@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_1",
+    "negation": "AegisSpec.IsOneEditDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r on (s,t), r is true if and only if at least one of the following three conditions holds: (A) len(t) = len(s) + 1 and there exists an index i with 0 <= i < len(t) such that, for every j with 0 <= j < i, t[j] = s[j], and for every j with i <= j < len(s), t[j+1] = s[j] (so deleting t[i] from t yields s, equivalently t is obtained by inserting exactly one byte into s); (B) len(s) = len(t) + 1 and there exists an index i with 0 <= i < len(s) such that, for every j with 0 <= j < i, s[j] = t[j], and for every j with i <= j < len(t), s[j+1] = t[j] (so deleting s[i] from s yields t); or (C) len(s) = len(t) and there exists an index i with 0 <= i < len(s) such that s[i] != t[i] and, for every j with 0 <= j < len(s) and j != i, s[j] = t[j] (so replacing the single character s[i] by t[i] yields t). Consequently r is false exactly when none of (A), (B), (C) holds.",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, and every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_2",
+    "negation": "AegisSpec.IsOneEditDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and t satisfying the preconditions, the function returns a result r; it does not fail (in particular, it does not overflow, access out of bounds, or panic).",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, and every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_3",
+    "negation": "AegisSpec.IsOneEditDistance.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s and t satisfying the preconditions, whenever the function returns r on (s,t) and returns r' on (t,s), we have r = r'. Equivalently, the function's answer is symmetric in its two arguments.",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, and every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_4",
+    "negation": "AegisSpec.IsOneEditDistance.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the value returned by the function on (s,t), and let r' be the value returned by the function on the pair of suffix slices s[k..] and t[k..] (the suffixes starting at index k). Whenever both calls return results, r = r'.",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit, 0 <= k <= min(len(s), len(t)), and for every j with 0 <= j < k, s[j] = t[j]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_5",
+    "negation": "AegisSpec.IsOneEditDistance.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the value returned by the function on (s,t). Let s' be the prefix of s of length len(s)-k (the first len(s)-k bytes of s), and let t' be the prefix of t of length len(t)-k. Let r' be the value returned by the function on (s',t'). Whenever both calls return results, r = r'.",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit, 0 <= k <= min(len(s), len(t)), and for every j with 0 <= j < k, s[len(s)-k+j] = t[len(t)-k+j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsOneEditDistance.spec_6",
+    "negation": "AegisSpec.IsOneEditDistance.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s and t satisfying the preconditions, let rs be the byte slice of length len(s) with rs[i] = s[len(s)-1-i] for every 0 <= i < len(s), and let rt be the byte slice of length len(t) with rt[i] = t[len(t)-1-i] for every 0 <= i < len(t). Whenever the function returns r on (s,t) and r' on (rs,rt), we have r = r'.",
+    "preconditions": "len(s) <= 10000 and len(t) <= 10000, and every byte of s and t is an ASCII code for a lowercase letter, an uppercase letter, or a digit."
+  }
+]

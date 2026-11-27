@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_1",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = sum_{c=0}^{g-1} ( min over integers y of sum over all i with 0 <= i < n and i mod g = c of abs(y - arr[i]) ), where abs is absolute value. Equivalently, the minimum total number of unit increments/decrements needed so that all circular contiguous subarrays of length k have the same sum is obtained by, for each residue class c modulo g, replacing all entries arr[i] with i mod g = c by one common integer y_c, independently minimizing the sum of absolute changes in that class.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n. Here k is treated as the positive integer represented by the I64 parameter. Let g = gcd(n, k)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_2",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r: it does not fail, panic, overflow, or index out of bounds.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_3",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_4",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer c with 1 <= c <= 1000000000, r <= sum_{i=0}^{n-1} abs(arr[i] - c).",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_5",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i and j with 0 <= i < n, 0 <= j < n, and i mod g = j mod g, arr[i] = arr[j].",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n. Let g = gcd(n, k)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_6",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer array b of length n such that: (1) 1 <= b[i] <= 1000000000 for every i with 0 <= i < n; (2) sum_{i=0}^{n-1} abs(b[i] - arr[i]) = r; and (3) for every start s with 0 <= s < n, the sum sum_{j=0}^{k-1} b[(s+j) mod n] is independent of s.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_7",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer array b of length n for which the sums sum_{j=0}^{k-1} b[(s+j) mod n] are the same for all s with 0 <= s < n, one has sum_{i=0}^{n-1} abs(b[i] - arr[i]) >= r.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_8",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input (arr, k) and returns r' on input (arr', k), r = r'.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n. Let t be an integer with 0 <= t < n, and define arr'[i] = arr[(i+t) mod n] for 0 <= i < n; then arr' also satisfies the same constraints."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_9",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on input (arr, k) and returns r' on input (arr', k), r' = c * r.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n. Let c be a positive integer such that 1 <= c*arr[i] <= 1000000000 for every i with 0 <= i < n, and define arr'[i] = c*arr[i]; then arr' also satisfies the same constraints."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MakeSubKSumEqual.spec_10",
+    "negation": "AegisSpec.MakeSubKSumEqual.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input (arr, k) and returns r' on input (arr, k'), r = r'.",
+    "preconditions": "Let n = len(arr). The input satisfies 1 <= k <= n, n <= 100000, and 1 <= arr[i] <= 1000000000 for every i with 0 <= i < n. Let k' be an integer with 1 <= k' <= n and gcd(n,k') = gcd(n,k)."
+  }
+]

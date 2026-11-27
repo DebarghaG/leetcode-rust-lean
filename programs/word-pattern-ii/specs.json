@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WordPatternMatch.spec_1",
+    "negation": "AegisSpec.WordPatternMatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if there exist natural numbers i_0, i_1, ..., i_{len(pattern)} with 0 = i_0 < i_1 < ... < i_{len(pattern)} = len(s) such that, for every 0 <= a < len(pattern) and 0 <= b < len(pattern), pattern[a] = pattern[b] if and only if the contiguous byte slices s[i_a .. i_{a+1}) and s[i_b .. i_{b+1}) are equal. Here s[x..y) denotes the bytes s[x], s[x+1], ..., s[y-1].",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, and every byte of pattern and s is an ASCII lowercase letter (97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WordPatternMatch.spec_2",
+    "negation": "AegisSpec.WordPatternMatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail: for every such pattern and s there exists a boolean r such that word_pattern_match pattern s = Result.ok r.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, and every byte of pattern and s is an ASCII lowercase letter (97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WordPatternMatch.spec_3",
+    "negation": "AegisSpec.WordPatternMatch.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = false.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and len(s) < len(pattern)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WordPatternMatch.spec_4",
+    "negation": "AegisSpec.WordPatternMatch.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and len(pattern) = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WordPatternMatch.spec_5",
+    "negation": "AegisSpec.WordPatternMatch.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if len(pattern) = 1.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and len(s) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WordPatternMatch.spec_6",
+    "negation": "AegisSpec.WordPatternMatch.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if for every 0 <= i < len(pattern) and 0 <= j < len(pattern), pattern[i] = pattern[j] if and only if s[i] = s[j].",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and len(pattern) = len(s)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WordPatternMatch.spec_7",
+    "negation": "AegisSpec.WordPatternMatch.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if there exists an integer L with 1 <= L <= len(s) such that len(s) = len(pattern) * L and for every 0 <= i < len(pattern) and 0 <= j < L, s[i*L + j] = s[j].",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and all bytes of pattern are equal: for every 0 <= i < len(pattern) and 0 <= j < len(pattern), pattern[i] = pattern[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WordPatternMatch.spec_8",
+    "negation": "AegisSpec.WordPatternMatch.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if there exist natural numbers i_0, i_1, ..., i_{len(pattern)} with 0 = i_0 < i_1 < ... < i_{len(pattern)} = len(s) such that the len(pattern) non-empty byte slices s[i_a .. i_{a+1}) for 0 <= a < len(pattern) are pairwise distinct: for all 0 <= a < b < len(pattern), s[i_a .. i_{a+1}) != s[i_b .. i_{b+1}).",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and all pattern characters are pairwise distinct: for every 0 <= i < j < len(pattern), pattern[i] != pattern[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WordPatternMatch.spec_9",
+    "negation": "AegisSpec.WordPatternMatch.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok true, there exists a function f from the set of bytes occurring in pattern to non-empty byte strings such that f is injective on that set and the concatenation f(pattern[0]) f(pattern[1]) ... f(pattern[len(pattern)-1]) is exactly the byte string s.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, and every byte of pattern and s is an ASCII lowercase letter (97..122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WordPatternMatch.spec_10",
+    "negation": "AegisSpec.WordPatternMatch.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok false, there does not exist a function f from the set of bytes occurring in pattern to non-empty byte strings such that f is injective on that set and the concatenation f(pattern[0]) f(pattern[1]) ... f(pattern[len(pattern)-1]) is exactly s.",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, and every byte of pattern and s is an ASCII lowercase letter (97..122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.WordPatternMatch.spec_11",
+    "negation": "AegisSpec.WordPatternMatch.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever word_pattern_match pattern1 s returns Result.ok r1 and word_pattern_match pattern2 s returns Result.ok r2, we have r1 = r2.",
+    "preconditions": "Let pattern1 and pattern2 be byte slices satisfying the same input constraints as the problem, with len(pattern1) = len(pattern2); let s satisfy 1 <= len(s) <= 20 and all bytes are ASCII lowercase. Assume the equality relations of pattern1 and pattern2 agree: for every 0 <= i < len(pattern1) and 0 <= j < len(pattern1), pattern1[i] = pattern1[j] if and only if pattern2[i] = pattern2[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.WordPatternMatch.spec_12",
+    "negation": "AegisSpec.WordPatternMatch.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever word_pattern_match pattern s returns Result.ok r, r = true if and only if there exists a function L from the set of bytes occurring in pattern to positive integers such that L is injective on that set and sum_{i=0}^{len(pattern)-1} L(pattern[i]) = len(s).",
+    "preconditions": "1 <= len(pattern) <= 20, 1 <= len(s) <= 20, every byte is an ASCII lowercase letter, and all bytes of s are equal: there exists a byte b such that for every 0 <= i < len(s), s[i] = b."
+  }
+]

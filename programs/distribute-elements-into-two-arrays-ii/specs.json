@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ResultArray.spec_1",
+    "negation": "AegisSpec.ResultArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = A_n ++ B_n, where the sequences A_i and B_i for 2 <= i <= n are defined as follows. Start with A_2 = [nums[0]] and B_2 = [nums[1]]. For each i with 2 <= i < n, let c1 be the number of indices j with 0 <= j < len(A_i) and A_i[j] > nums[i], and let c2 be the number of indices j with 0 <= j < len(B_i) and B_i[j] > nums[i]. If c1 > c2, or if c1 = c2 and len(A_i) <= len(B_i), then set A_{i+1} = A_i ++ [nums[i]] and B_{i+1} = B_i; otherwise set A_{i+1} = A_i and B_{i+1} = B_i ++ [nums[i]]. Here A_n is the final arr1, B_n is the final arr2, and r is their concatenation.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9. This specification uses 0-based indices for the Lean slice nums; the problem statement's 1-based nums[k] is nums[k-1] here."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ResultArray.spec_2",
+    "negation": "AegisSpec.ResultArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail with integer overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ResultArray.spec_3",
+    "negation": "AegisSpec.ResultArray.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(nums).",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ResultArray.spec_4",
+    "negation": "AegisSpec.ResultArray.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every integer v, the number of indices j with 0 <= j < len(r) and r[j] = v equals the number of indices i with 0 <= i < len(nums) and nums[i] = v.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ResultArray.spec_5",
+    "negation": "AegisSpec.ResultArray.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) >= 1 and r[0] = nums[0].",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ResultArray.spec_6",
+    "negation": "AegisSpec.ResultArray.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let A and B be the final arr1 and arr2 produced by the deterministic operation described in spec_1. Whenever the function returns r, there exists an integer p with 1 <= p <= len(nums)-1 such that r[0..p) = A and r[p..len(r)) = B.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ResultArray.spec_7",
+    "negation": "AegisSpec.ResultArray.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, for every j with 0 <= j < len(r), 1 <= r[j] <= 10^9.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ResultArray.spec_8",
+    "negation": "AegisSpec.ResultArray.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r and len(nums) = 3, let a = nums[0], b = nums[1], c = nums[2]. If a <= c < b, then r = [a, b, c]; otherwise r = [a, c, b].",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 10^5 and, for every i with 0 <= i < n, 1 <= nums[i] <= 10^9."
+  }
+]

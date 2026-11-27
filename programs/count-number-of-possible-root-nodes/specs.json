@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RootCount.spec_1",
+    "negation": "AegisSpec.RootCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = |{ root in {0, 1, ..., n-1} : true_guesses(root) >= k }|, where for each root in {0, 1, ..., n-1}, orient the tree away from root and define true_guesses(root) as the number of indices j with 0 <= j < len(guesses) such that, writing guesses[j] = [u, v], u is the parent of v in this rooted tree; equivalently, u is the unique neighbor of v on the path from root to v, or dist(root, u) + 1 = dist(root, v) where dist is the number of edges on the unique path in the tree. (n = len(edges) + 1.)",
+    "preconditions": "Let n = len(edges) + 1. Then 2 <= n <= 100000. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). Let m = len(guesses). Then 1 <= m <= 100000. Each element of guesses is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= m."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RootCount.spec_2",
+    "negation": "AegisSpec.RootCount.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(edges) + 1.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RootCount.spec_3",
+    "negation": "AegisSpec.RootCount.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r equals the number of nodes in the connected component containing u after removing the edge {u, v} from the tree (i.e., the component of u when the tree is split by deleting the edge between u and v).",
+    "preconditions": "Let n = len(edges) + 1. Then 2 <= n <= 100000. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). Let m = len(guesses). Then 1 <= m <= 100000. Each element of guesses is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= m. Additionally, m = 1, k = 1, and guesses[0] = [u, v]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RootCount.spec_4",
+    "negation": "AegisSpec.RootCount.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every root in {0, 1, ..., n-1}, the number of true guesses for that root is strictly less than k.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RootCount.spec_5",
+    "negation": "AegisSpec.RootCount.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns result r on (edges, guesses, k) and result r' on (edges', guesses', k), then r = r'.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2. Let edges' be any list that is a permutation of edges (same length and same multiset of elements), and let guesses' be any list that is a permutation of guesses."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RootCount.spec_6",
+    "negation": "AegisSpec.RootCount.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns result r on (edges, guesses, k) and result r' on (edges', guesses, k), then r = r'.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2. Let edges' be obtained from edges by replacing one edge [a, b] with [b, a] (swapping the two entries of one edge)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RootCount.spec_7",
+    "negation": "AegisSpec.RootCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns results r1 on (edges, guesses, k1) and r2 on (edges, guesses, k2), we have r2 <= r1.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2. Let k1 and k2 be integers with 0 <= k1 <= k2 <= len(guesses)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RootCount.spec_8",
+    "negation": "AegisSpec.RootCount.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns results r_k on (edges, guesses, k) and r_{k+1} on (edges, guesses, k+1), the difference r_k - r_{k+1} equals the number of roots root in {0, 1, ..., n-1} for which the number of true guesses for root is exactly k.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2. Let k be an integer with 0 <= k < len(guesses)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RootCount.spec_9",
+    "negation": "AegisSpec.RootCount.spec_9_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, panic, or overflow).",
+    "preconditions": "Let n = len(edges) + 1. Then 2 <= n <= 100000. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). Let m = len(guesses). Then 1 <= m <= 100000. Each element of guesses is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= m."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RootCount.spec_10",
+    "negation": "AegisSpec.RootCount.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The sum_{k=0}^{m} r_k equals the sum over all roots root in {0, 1, ..., n-1} of (true_guesses(root) + 1), where true_guesses(root) is the number of guesses [u, v] in guesses such that u is the parent of v in the tree rooted at root.",
+    "preconditions": "Let n = len(edges) + 1. The list edges has length n - 1, and each element is a list of length 2 [a, b] with 0 <= a < n, 0 <= b < n, and a != b. The undirected graph on vertices {0, 1, ..., n-1} whose edges are the unordered pairs {a, b} for each [a, b] in edges is a tree (connected and acyclic). The list guesses has length at least 1, and each element is a list of length 2 [u, v] with 0 <= u < n, 0 <= v < n, and u != v. For every guess [u, v] in guesses, {u, v} is an edge of the tree. The guesses are pairwise distinct as ordered pairs. The integer k satisfies 0 <= k <= len(guesses). Also n >= 2. Let m = len(guesses). For each k in {0, 1, ..., m}, let r_k be the result of the function on (edges, guesses, k), whenever all these calls return results."
+  }
+]

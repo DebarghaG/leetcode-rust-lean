@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDistance.spec_1",
+    "negation": "AegisSpec.MinDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (an I64) and r equals the minimum total number of single-character deletions, taken from word1 and word2, that make the two byte sequences equal. Equivalently, let L be the largest natural number for which there exists a byte sequence s of length L that is a subsequence of both word1 and word2, where a sequence is a subsequence if it can be obtained by deleting zero or more bytes, so the empty sequence is allowed; then r = len(word1) + len(word2) - 2*L.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDistance.spec_2",
+    "negation": "AegisSpec.MinDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word1 and word2 satisfying the preconditions, the function returns a result r; it does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDistance.spec_3",
+    "negation": "AegisSpec.MinDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on word1 and word2, 0 <= r.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDistance.spec_4",
+    "negation": "AegisSpec.MinDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on word1 and word2, r <= len(word1) + len(word2).",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDistance.spec_5",
+    "negation": "AegisSpec.MinDistance.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on word1 and word2, r >= |len(word1) - len(word2)|, where |x| denotes absolute value.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDistance.spec_6",
+    "negation": "AegisSpec.MinDistance.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on word1 and word2, r and len(word1) + len(word2) have the same parity; equivalently, len(word1) + len(word2) - r is an even integer.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDistance.spec_7",
+    "negation": "AegisSpec.MinDistance.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on word1 and word2, r = 0 if and only if word1 and word2 are equal byte-for-byte, that is, len(word1) = len(word2) and for every 0 <= i < len(word1), word1[i] = word2[i].",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDistance.spec_8",
+    "negation": "AegisSpec.MinDistance.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on word1 and word2, if no byte value occurs in both word1 and word2, meaning for every 0 <= i < len(word1) and every 0 <= j < len(word2), word1[i] != word2[j], then r = len(word1) + len(word2).",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDistance.spec_9",
+    "negation": "AegisSpec.MinDistance.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on word1 and word2, if word1 is a subsequence of word2, that is, word1 can be obtained by deleting zero or more bytes from word2 (which implies len(word1) <= len(word2)), then r = len(word2) - len(word1).",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDistance.spec_10",
+    "negation": "AegisSpec.MinDistance.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r on word1 and word2, there exists a byte sequence t that is a subsequence of both word1 and word2 such that r = len(word1) + len(word2) - 2*len(t).",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDistance.spec_11",
+    "negation": "AegisSpec.MinDistance.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every word1 and word2 satisfying the preconditions, if min_distance(word1, word2) returns r1 and min_distance(word2, word1) returns r2, then r1 = r2.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDistance.spec_12",
+    "negation": "AegisSpec.MinDistance.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(u) be the byte sequence obtained by reversing u. For every word1 and word2 satisfying the preconditions, if min_distance(word1, word2) returns r1 and min_distance(rev(word1), rev(word2)) returns r2, then r1 = r2.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinDistance.spec_13",
+    "negation": "AegisSpec.MinDistance.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If len(word1) >= 2, len(word2) >= 2, and word1[0] = word2[0], then whenever min_distance(word1, word2) returns r1 and min_distance(word1[1:], word2[1:]) returns r2, we have r1 = r2, where u[1:] is the suffix obtained by deleting the first byte of u.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinDistance.spec_14",
+    "negation": "AegisSpec.MinDistance.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If len(word1) >= 2, len(word2) >= 2, and word1[len(word1)-1] = word2[len(word2)-1], then whenever min_distance(word1, word2) returns r1 and min_distance(word1[0:len(word1)-1], word2[0:len(word2)-1]) returns r2, we have r1 = r2.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinDistance.spec_15",
+    "negation": "AegisSpec.MinDistance.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on word1 and word2, r = len(word1) + len(word2) if and only if no byte value occurs in both word1 and word2, i.e. for every 0 <= i < len(word1) and every 0 <= j < len(word2), word1[i] != word2[j].",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinDistance.spec_16",
+    "negation": "AegisSpec.MinDistance.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on word1 and word2, r = |len(word1) - len(word2)| if and only if the shorter string is a subsequence of the longer one: if len(word1) <= len(word2), word1 is a subsequence of word2; otherwise, word2 is a subsequence of word1.",
+    "preconditions": "len(word1) >= 1, len(word2) >= 1, len(word1) <= 500, len(word2) <= 500, and every byte of word1 and word2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinLargest.spec_1",
+    "negation": "AegisSpec.MinLargest.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n1 = len(nums1) and n2 = len(nums2). A valid assignment consists of two strictly increasing sequences A = (a_0, ..., a_{n1-1}) and B = (b_0, ..., b_{n2-1}) of positive integers satisfying: (1) for each i with 0 <= i < n1, a_i is even if nums1[i] = 0 and odd if nums1[i] = 1; (2) for each j with 0 <= j < n2, b_j is even if nums2[j] = 0 and odd if nums2[j] = 1; (3) all a_i and b_j are pairwise distinct. The maximum assigned integer for such an assignment is max({a_i} ∪ {b_j}) if the union is non-empty, and 0 otherwise. The function returns an integer r that is the minimum possible value of this maximum over all valid assignments.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinLargest.spec_2",
+    "negation": "AegisSpec.MinLargest.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (i.e., it does not panic or fail) for every input satisfying the preconditions.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinLargest.spec_3",
+    "negation": "AegisSpec.MinLargest.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If N > 0, then 1 <= r <= 2*N. If N = 0, then r = 0.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000. Let N = len(nums1) + len(nums2)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinLargest.spec_4",
+    "negation": "AegisSpec.MinLargest.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "r >= N.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000. Let N = len(nums1) + len(nums2)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinLargest.spec_5",
+    "negation": "AegisSpec.MinLargest.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "min_largest(nums1, nums2) = min_largest(nums2, nums1).",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinLargest.spec_6",
+    "negation": "AegisSpec.MinLargest.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a valid assignment (as defined in spec_1) whose maximum assigned integer is exactly r.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinLargest.spec_7",
+    "negation": "AegisSpec.MinLargest.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid assignment (as defined in spec_1), its maximum assigned integer is at least r.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinLargest.spec_8",
+    "negation": "AegisSpec.MinLargest.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let N = len(nums1) + len(nums2). If N > 0, then r = 2*N. If N = 0, then r = 0.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0. len(nums1) <= 1000 and len(nums2) <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinLargest.spec_9",
+    "negation": "AegisSpec.MinLargest.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let N = len(nums1) + len(nums2). If N > 0, then r = 2*N - 1. If N = 0, then r = 0.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 1. len(nums1) <= 1000 and len(nums2) <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinLargest.spec_10",
+    "negation": "AegisSpec.MinLargest.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If x = 0 and y = 0, then r = 4. If x = 1 and y = 1, then r = 3. If x != y, then r = 2.",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) = 1, len(nums2) = 1, and x = nums1[0], y = nums2[0]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinLargest.spec_11",
+    "negation": "AegisSpec.MinLargest.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A = (a_0, ..., a_{k-1}) be the unique sequence of positive integers such that for each i, a_i is even if nums2[i] = 0 and odd if nums2[i] = 1, a_0 is the smallest positive integer with that parity, and for i > 0, a_i is the smallest integer greater than a_{i-1} with the parity of nums2[i]. Then r = a_{k-1}.",
+    "preconditions": "nums1 is empty; nums2 is a sequence of 0s and 1s with len(nums2) = k and 1 <= k <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinLargest.spec_12",
+    "negation": "AegisSpec.MinLargest.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "min_largest(nums1, nums2) <= min_largest(nums1', nums2').",
+    "preconditions": "nums1, nums2, nums1', nums2' are sequences of 0s and 1s with len(nums1) <= len(nums1') <= 1000 and len(nums2) <= len(nums2') <= 1000, and for all i < len(nums1), nums1[i] = nums1'[i], and for all j < len(nums2), nums2[j] = nums2'[j]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinLargest.spec_13",
+    "negation": "AegisSpec.MinLargest.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let g(seq) be defined for any sequence seq of 0s and 1s as follows: g(empty) = 0; otherwise, let (a_0, ..., a_{m-1}) be the unique sequence of positive integers such that a_i is even if seq[i] = 0 and odd if seq[i] = 1, a_0 is the smallest positive integer with that parity, and for i > 0, a_i is the smallest integer greater than a_{i-1} with the parity of seq[i]; then g(seq) = a_{m-1}. Then r >= max(g(nums1), g(nums2)).",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000, len(nums2) <= 1000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinLargest.spec_14",
+    "negation": "AegisSpec.MinLargest.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "r >= max(2*z, 2*o - 1, 0).",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000 and len(nums2) <= 1000. Let z be the total number of zeros in nums1 and nums2, and let o be the total number of ones in nums1 and nums2."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinLargest.spec_15",
+    "negation": "AegisSpec.MinLargest.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r = min_largest(nums1, nums2) and r' = min_largest(nums1', nums2'), then r <= r' <= r + 2.",
+    "preconditions": "nums1, nums2, nums1', nums2' are sequences of 0s and 1s, each of length at most 1000. Either (nums1' is nums1 with one element b appended and nums2' = nums2) or (nums1' = nums1 and nums2' is nums2 with one element b appended), for some b in {0,1}."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinLargest.spec_16",
+    "negation": "AegisSpec.MinLargest.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "r <= g(nums1 ++ nums2) and r <= g(nums2 ++ nums1).",
+    "preconditions": "nums1 and nums2 are sequences of integers, each element is 0 or 1. len(nums1) <= 1000 and len(nums2) <= 1000. Let g be the function defined in spec_13."
+  }
+]

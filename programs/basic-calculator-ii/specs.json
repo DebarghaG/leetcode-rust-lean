@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Calculate.spec_1",
+    "negation": "AegisSpec.Calculate.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let `eval(s)` be the integer value of the token sequence of `s` under the usual precedence: `*` and `/` bind tighter than `+` and `-`; operators of equal precedence associate left to right; each `/` truncates toward zero; there is no unary operator. The function returns a result `r` and `r = eval(s)`.",
+    "preconditions": "`s` is a byte slice with 1 <= len(s) <= 300000. Tokenize `s` as follows: each maximal nonempty contiguous run of ASCII digits '0'..'9' is an integer literal; each byte '+', '-', '*', '/' is an operator; each space byte (ASCII 32) is a separator producing no token; no other byte occurs. The resulting token sequence has the form `n0 op1 n1 ... opk nk` for some k >= 0, alternating literals and operators, beginning and ending with a literal. Each literal's decimal value is in [0, 2^31-1]. The expression is valid: every division in its standard operator-precedence evaluation has a nonzero divisor, and every intermediate value (including the final value) lies in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Calculate.spec_2",
+    "negation": "AegisSpec.Calculate.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let `T(s)` be the token sequence obtained from `s` by the tokenization in the precondition. Let `value(T(s))` be the integer value of that operator sequence under the same standard precedence and truncating division as in spec_1. The function returns a result `r` and `r = value(T(s))`. Thus parentheses are treated as ignorable whitespace, not as grouping constructs.",
+    "preconditions": "`s` is a byte slice with 1 <= len(s) <= 300000. Tokenize `s` as follows: each maximal nonempty contiguous run of ASCII digits '0'..'9' is an integer literal; each byte '+', '-', '*', '/' is an operator; each space byte (ASCII 32), '(' byte, or ')' byte is a separator producing no token; no other byte occurs. The resulting token sequence has the form `n0 op1 n1 ... opk nk` for some k >= 0, alternating literals and operators, beginning and ending with a literal. Each literal's decimal value is in [0, 2^31-1]. The expression is valid: every division in its standard operator-precedence evaluation has a nonzero divisor, and every intermediate value (including the final value) lies in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Calculate.spec_3",
+    "negation": "AegisSpec.Calculate.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns some result `r`; it does not fail (no overflow, out-of-bounds access, division by zero, or panic).",
+    "preconditions": "Same as spec_2: `s` is a byte slice of length 1..300000 containing only ASCII digits, spaces, '+', '-', '*', '/', '(' and ')'; after tokenization with spaces and parentheses as separators, the token sequence is a valid alternating expression with all literals in [0, 2^31-1], all divisors nonzero, and all intermediate values in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Calculate.spec_4",
+    "negation": "AegisSpec.Calculate.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result `r` and `-2^31 <= r <= 2^31-1`.",
+    "preconditions": "Same as spec_1: `s` satisfies the original Basic Calculator II constraints, with no parentheses allowed."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Calculate.spec_5",
+    "negation": "AegisSpec.Calculate.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns `r` on `s` and `r'` on `t`, and `r = r'`.",
+    "preconditions": "`s` and `t` are byte slices that both satisfy the precondition of spec_2. Deleting all space bytes (ASCII 32) from `s` and from `t` yields the same byte string, so the two expressions differ only in their spaces; any parentheses present are in the same positions and will be ignored."
+  }
+]

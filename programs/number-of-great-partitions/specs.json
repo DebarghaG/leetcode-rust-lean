@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPartitions.spec_1",
+    "negation": "AegisSpec.CountPartitions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer such that 0 <= r < 1000000007 and r is congruent modulo 1000000007 to G, where G is the ordinary number of subsets S of {0,...,n-1} satisfying (sum_{i in S} nums[i]) >= k and (T - sum_{i in S} nums[i]) >= k. Equivalently, identifying S with the first group and its complement with the second group, G is the number of ordered two-group partitions of the indices in which each group has sum at least k.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPartitions.spec_2",
+    "negation": "AegisSpec.CountPartitions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail because of arithmetic overflow, an out-of-bounds access, or a panic.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPartitions.spec_3",
+    "negation": "AegisSpec.CountPartitions.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0. Indeed, if both group sums were at least k, the total sum T would be at least 2*k, so no great partition exists.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also T < 2*k."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPartitions.spec_4",
+    "negation": "AegisSpec.CountPartitions.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is the residue modulo 1000000007 of H, where H is the number of subsets S of {0,...,n-1} with sum_{i in S} nums[i] = k. Under T = 2*k, a partition is great exactly when the first group has sum k.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also T = 2*k."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPartitions.spec_5",
+    "negation": "AegisSpec.CountPartitions.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 1000000007 to 2^n - 2. Equivalently, the great partitions are exactly the ordered assignments in which both groups are nonempty.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also nums[i] >= k for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPartitions.spec_6",
+    "negation": "AegisSpec.CountPartitions.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0. The only element cannot be placed in both groups, so one of the two groups is empty and has sum 0 < k.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also n = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPartitions.spec_7",
+    "negation": "AegisSpec.CountPartitions.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = 2 if nums[0] >= k and nums[1] >= k, and r = 0 otherwise. For two elements, the only possible great partitions are the two assignments placing one element in each group, and these are great exactly when both singleton sums are at least k.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also n = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPartitions.spec_8",
+    "negation": "AegisSpec.CountPartitions.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 1000000007 to 2*G0, where G0 is the number of subsets S of {0,...,n-1} such that 0 is in S, sum_{i in S} nums[i] >= k, and T - sum_{i in S} nums[i] >= k. The great partitions are paired by complementation, and exactly one partition in each pair puts index 0 in the first group.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPartitions.spec_9",
+    "negation": "AegisSpec.CountPartitions.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 1000000007 to 2^n - 2*B, where B is the number of subsets S of {0,...,n-1} with sum_{i in S} nums[i] < k. The subsets failing the first-group condition and those failing the second-group condition are disjoint and are exchanged by complementation, each family having size B.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume also T >= 2*k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPartitions.spec_10",
+    "negation": "AegisSpec.CountPartitions.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_partitions(nums, k) returns r and count_partitions(nums', k) returns r', we have r = r'. The number of great partitions depends only on the multiset of values, not on their order.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Let nums' be any slice of length n that is a permutation of nums, i.e. there is a bijection p on {0,...,n-1} with nums'[i] = nums[p(i)] for every i, and assume also 1 <= nums'[i] <= 1000000000 for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPartitions.spec_11",
+    "negation": "AegisSpec.CountPartitions.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_partitions(nums, k) returns r and count_partitions(nums', k') returns r', we have r = r'. Multiplying every value and the threshold by the same positive integer preserves all subset-sum inequalities against k.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Let c be a positive integer, let nums' be a slice with nums'[i] = c * nums[i] for every i, and let k' = c * k. Assume 1 <= nums'[i] <= 1000000000 for every i and 1 <= k' <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPartitions.spec_12",
+    "negation": "AegisSpec.CountPartitions.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 1000000007 to G, where G is the number of subsets S of {0,...,n-1} satisfying (sum_{j in S} nums[j]) >= k and (T - sum_{j in S} nums[j]) >= k, and moreover G >= 2. In particular, the partition with first group {i} and the partition with first group the complement of {i} are two distinct great partitions.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i with 0 <= i < n. Assume there exists an index i with 0 <= i < n such that nums[i] >= k and T - nums[i] >= k."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountPartitions.spec_13",
+    "negation": "AegisSpec.CountPartitions.spec_13_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever count_partitions(nums, k1) returns r1 and count_partitions(nums, k2) returns r2, we have r1 congruent to G_1 modulo 1000000007, r2 congruent to G_2 modulo 1000000007, and G_1 >= G_2. Indeed, every subset satisfying both inequalities for k2 also satisfies both inequalities for k1.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k1 <= k2 <= 1000, and 1 <= nums[i] <= 1000000000 for every i. For j in {1,2}, let G_j be the ordinary number of subsets S of {0,...,n-1} such that sum_{i in S} nums[i] >= k_j and T - sum_{i in S} nums[i] >= k_j."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountPartitions.spec_14",
+    "negation": "AegisSpec.CountPartitions.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever count_partitions(nums, k) returns r and count_partitions(nums', k) returns r', we have r congruent to G modulo 1000000007, r' congruent to G' modulo 1000000007, and G' >= G. For every subset S, sum_{i in S} nums'[i] >= sum_{i in S} nums[i] and T' - sum_{i in S} nums'[i] >= T - sum_{i in S} nums[i], so any great partition remains great after increasing values.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 1 <= n <= 1000, 1 <= k <= 1000, and 1 <= nums[i] <= 1000000000 for every i. Let nums' be a slice of length n with 1 <= nums[i] <= nums'[i] <= 1000000000 for every i, and let T' = sum_{i=0}^{n-1} nums'[i]. Let G be the ordinary number of great subsets for nums and k, and G' the ordinary number of great subsets for nums' and k."
+  }
+]

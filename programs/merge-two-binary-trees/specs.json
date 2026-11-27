@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MergeTrees.spec_1",
+    "negation": "AegisSpec.MergeTrees.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "merge_trees returns Result.ok r for some tree r, where r is the unique tree T such that Merge(T, root1, root2). The relation Merge is defined by: (a) for every tree A, Merge(T, A, Null) holds iff T = A; (b) for every tree B, Merge(T, Null, B) holds iff T = B; (c) for A = Node(v1, Al, Ar) and B = Node(v2, Bl, Br), Merge(T, A, B) holds iff T = Node(v1+v2, Cl, Cr) for some trees Cl, Cr with Merge(Cl, Al, Bl) and Merge(Cr, Ar, Br). Clauses (a) and (b) fix the result to the non-null input when the other input is Null; clause (c) sums the values of the two overlapping roots and recurses on the corresponding left and right subtrees.",
+    "preconditions": "root1 and root2 are finite trees of type Tree. size(root1) ≤ 2000 and size(root2) ≤ 2000, where size(Null)=0 and size(Node(v,l,r))=1+size(l)+size(r). Every node value occurring in root1 or in root2 lies in the closed interval [-10000, 10000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MergeTrees.spec_2",
+    "negation": "AegisSpec.MergeTrees.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "merge_trees does not fail: for every root1 and root2 satisfying the preconditions, it terminates and returns Result.ok r for some Tree r. In particular there is no panic, no out-of-bounds access, no i64 overflow, and no divergence.",
+    "preconditions": "Same as spec_1: both trees have size ≤ 2000, and all node values lie in [-10000, 10000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MergeTrees.spec_3",
+    "negation": "AegisSpec.MergeTrees.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If root2 = Null, then merge_trees returns Result.ok r where r is structurally equal to root1 (same shape and same node values at every position).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MergeTrees.spec_4",
+    "negation": "AegisSpec.MergeTrees.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If root1 = Null, then merge_trees returns Result.ok r where r is structurally equal to root2 (same shape and same node values at every position).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MergeTrees.spec_5",
+    "negation": "AegisSpec.MergeTrees.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever merge_trees(root1, root2) returns Result.ok r and merge_trees(root2, root1) returns Result.ok r', the trees r and r' are structurally equal (identical shape and identical values at every position).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MergeTrees.spec_6",
+    "negation": "AegisSpec.MergeTrees.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever merge_trees returns Result.ok r, for every path p (a finite sequence of steps, each L or R) the tree r has a node at p if and only if root1 has a node at p or root2 has a node at p. A tree has a node at the empty path iff it is not Null; T has a node at L::p iff T = Node(v,l,rr) and l has a node at p; T has a node at R::p iff T = Node(v,l,rr) and rr has a node at p.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MergeTrees.spec_7",
+    "negation": "AegisSpec.MergeTrees.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever merge_trees returns Result.ok r, for every path p at which both root1 and root2 have a node, r has a node at p whose value is valueAt(root1,p) + valueAt(root2,p). Here valueAt(T,p) denotes the value of the node of T at path p: valueAt(Node(v,_,_), []) = v; valueAt(Node(_,l,_), L::p) = valueAt(l,p); valueAt(Node(_,_,rr), R::p) = valueAt(rr,p).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MergeTrees.spec_8",
+    "negation": "AegisSpec.MergeTrees.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever merge_trees returns Result.ok r, for every path p at which exactly one of root1 and root2 has a node, r has a node at p, and its value equals that of the one input that has a node there: valueAt(r,p) = valueAt(root1,p) if root1 has a node at p and root2 does not, and valueAt(r,p) = valueAt(root2,p) if root2 has a node at p and root1 does not. (valueAt is the path-indexed node value defined in spec_7.)",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MergeTrees.spec_9",
+    "negation": "AegisSpec.MergeTrees.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever merge_trees returns Result.ok r, every node value of r lies in the closed interval [-20000, 20000]; formally, for every path p at which r has a node, -20000 ≤ valueAt(r,p) ≤ 20000. (valueAt is defined in spec_7.)",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MergeTrees.spec_10",
+    "negation": "AegisSpec.MergeTrees.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever merge_trees returns Result.ok r, size(r) ≤ size(root1) + size(root2), where size(Null)=0 and size(Node(v,l,rr))=1+size(l)+size(rr).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MergeTrees.spec_11",
+    "negation": "AegisSpec.MergeTrees.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever merge_trees returns Result.ok r, size(r) ≥ size(root1) and size(r) ≥ size(root2); equivalently size(r) ≥ max(size(root1), size(root2)). (size is defined in spec_10.)",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MergeTrees.spec_12",
+    "negation": "AegisSpec.MergeTrees.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever merge_trees returns Result.ok r, depth(r) = max(depth(root1), depth(root2)), where depth(Null)=0 and depth(Node(v,l,rr))=1+max(depth(l),depth(rr)).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MergeTrees.spec_13",
+    "negation": "AegisSpec.MergeTrees.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever merge_trees returns Result.ok r, size(r) = size(root1) + size(root2) - overlap(root1, root2), where overlap(T1,T2) is the number of paths p at which both T1 and T2 have a node. Equivalently, the merged tree has exactly one node for each position occupied in at least one input.",
+    "preconditions": "Same as spec_1: root1 and root2 are finite trees of type Tree with size(root1) ≤ 2000 and size(root2) ≤ 2000, where size(Null)=0 and size(Node(v,l,r))=1+size(l)+size(r); every node value in root1 or root2 lies in [-10000,10000]."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReverseDegree.spec_1",
+    "negation": "AegisSpec.ReverseDegree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = sum_{i=0}^{len(s)-1} ((i+1) * (123 - s[i])). Here s[i] is the byte value at 0-based index i, and 123 - s[i] is its 1-based position in the reversed alphabet ('a' -> 26, ..., 'z' -> 1).",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so every byte is a lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReverseDegree.spec_2",
+    "negation": "AegisSpec.ReverseDegree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; in particular, it does not panic, overflow, read out of bounds, or otherwise fail.",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReverseDegree.spec_3",
+    "negation": "AegisSpec.ReverseDegree.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= len(s) * (len(s) + 1) / 2.",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReverseDegree.spec_4",
+    "negation": "AegisSpec.ReverseDegree.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 26 * len(s) * (len(s) + 1) / 2.",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReverseDegree.spec_5",
+    "negation": "AegisSpec.ReverseDegree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s) * (len(s) + 1) / 2.",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), s[i] = 122 ('z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReverseDegree.spec_6",
+    "negation": "AegisSpec.ReverseDegree.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 26 * len(s) * (len(s) + 1) / 2.",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, and for every i with 0 <= i < len(s), s[i] = 97 ('a')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReverseDegree.spec_7",
+    "negation": "AegisSpec.ReverseDegree.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 123 - s[0].",
+    "preconditions": "len(s) is between 1 and 1000 inclusive, every byte is in 97..122, and len(s) = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReverseDegree.spec_8",
+    "negation": "AegisSpec.ReverseDegree.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever reverse_degree(s) returns r_s and reverse_degree(t) returns r_t, r_t = r_s + (len(s) + 1) * (123 - c).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 999 and every s[i] for 0 <= i < len(s) satisfies 97 <= s[i] <= 122; c is a byte with 97 <= c <= 122; t is the byte slice of length len(s)+1 such that t[i] = s[i] for 0 <= i < len(s) and t[len(s)] = c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReverseDegree.spec_9",
+    "negation": "AegisSpec.ReverseDegree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever reverse_degree(s) returns r_s and reverse_degree(t) returns r_t, r_t - r_s = sum_{j=len(s)}^{len(t)-1} ((j+1) * (123 - t[j])). The sum is 0 when len(s) = len(t).",
+    "preconditions": "s and t are byte slices with 1 <= len(s) <= len(t) <= 1000, every byte of both is in 97..122, and s[i] = t[i] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReverseDegree.spec_10",
+    "negation": "AegisSpec.ReverseDegree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever reverse_degree(s) returns r_s and reverse_degree(t) returns r_t, r_s + r_t = 27 * (len(s) * (len(s) + 1) / 2).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 1000 and every s[i] is in 97..122; t is the byte slice of the same length defined by t[i] = 219 - s[i] for every i with 0 <= i < len(s), which maps 'a'<->'z', 'b'<->'y', etc., so t is also lowercase."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ReverseDegree.spec_11",
+    "negation": "AegisSpec.ReverseDegree.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever reverse_degree(s) returns r_s and reverse_degree(t) returns r_t, r_s >= r_t; moreover, if s[i] < t[i] for at least one i, then r_s > r_t.",
+    "preconditions": "s and t are byte slices with 1 <= len(s) = len(t) <= 1000, every byte of both is in 97..122, and s[i] <= t[i] for every i with 0 <= i < len(s)."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumScore.spec_1",
+    "negation": "AegisSpec.MaximumScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every h = (h_0,...,h_{n-1}) in {-1,0,...,n-1}^n, let B_h(i,j) mean 0 <= i <= h_j, so h_j = -1 means column j has no black cells and h_j >= 0 means rows 0 through h_j of column j are black. Let W_h(i,j) mean not B_h(i,j). Define S(grid,h) = sum_{i=0}^{n-1} sum_{j=0}^{n-1} [ W_h(i,j) and ((j > 0 and B_h(i,j-1)) or (j < n-1 and B_h(i,j+1))) ] * grid[i][j], where [condition] is 1 if the condition holds and 0 otherwise. The function returns a result r, does not fail, and r = max { S(grid,h) : h in {-1,0,...,n-1}^n }.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix: 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumScore.spec_2",
+    "negation": "AegisSpec.MaximumScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r on every such input; it does not panic, go out of bounds, or overflow 64-bit signed arithmetic.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix: 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumScore.spec_3",
+    "negation": "AegisSpec.MaximumScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= (sum_{i=0}^{n-1} sum_{j=0}^{n-1} grid[i][j]) - min{ grid[i][j] : 0 <= i < n and 0 <= j < n }.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix: 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumScore.spec_4",
+    "negation": "AegisSpec.MaximumScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= max{ sum_{i=0}^{n-1} grid[i][j] : 0 <= j < n }.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix with n >= 2, 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumScore.spec_5",
+    "negation": "AegisSpec.MaximumScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions, the function returns 0 if and only if grid[i][j] = 0 for every 0 <= i < n and every 0 <= j < n.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix with n >= 2, 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumScore.spec_6",
+    "negation": "AegisSpec.MaximumScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists a column index j0 with 0 <= j0 < n such that grid[i][j] = 0 for every 0 <= i < n and every j != j0, then the function returns sum_{i=0}^{n-1} grid[i][j0].",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix with n >= 2, 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumScore.spec_7",
+    "negation": "AegisSpec.MaximumScore.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r_A is the result returned on A and r_B is the result returned on B, then r_A <= r_B.",
+    "preconditions": "Let A and B be two valid n by n grids for the same n, with 1 <= n <= 100, all row lengths equal to n, and 0 <= A[i][j] <= B[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumScore.spec_8",
+    "negation": "AegisSpec.MaximumScore.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If r_A is the result returned on A and r_B is the result returned on B, then r_B = c * r_A.",
+    "preconditions": "Let A be a valid n by n grid, 1 <= n <= 100, with 0 <= A[i][j] <= 10^9. Let c be an integer with c >= 0, and let B be the n by n grid B[i][j] = c * A[i][j], assuming 0 <= B[i][j] <= 10^9 for every i,j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumScore.spec_9",
+    "negation": "AegisSpec.MaximumScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r_A, r_B, and r_C are the results returned on A, B, and C respectively, then r_C <= r_A + r_B.",
+    "preconditions": "Let A and B be valid n by n grids for the same n, 1 <= n <= 100, with 0 <= A[i][j] <= 10^9 and 0 <= B[i][j] <= 10^9. Let C be defined by C[i][j] = A[i][j] + B[i][j], and assume 0 <= C[i][j] <= 10^9 for every i,j."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumScore.spec_10",
+    "negation": "AegisSpec.MaximumScore.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists h = (h_0,...,h_{n-1}) in {-1,0,...,n-1}^n such that the operation plan which, for each column j with h_j >= 0, colors rows 0 through h_j of column j black, and does nothing in columns with h_j = -1, has score exactly r. In particular, r is attainable using at most one operation per column, hence at most n operations.",
+    "preconditions": "Let n = len(grid). The grid is an n by n matrix: 1 <= n <= 100, every row grid[i] has length n, and for every 0 <= i < n and 0 <= j < n, grid[i][j] is an integer with 0 <= grid[i][j] <= 10^9."
+  }
+]

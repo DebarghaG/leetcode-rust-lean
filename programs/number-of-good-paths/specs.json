@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_1",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the number of unordered pairs {u,v} of nodes, allowing u = v, such that vals[u] = vals[v] and every node w on P(u,v) satisfies vals[w] <= vals[u]. This is exactly the number of distinct good paths: a path and its reverse are the same path, and every singleton [u] is included.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and for every j with 0 <= j < len(edges), len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1]. Assume 0 <= vals[i] <= 100000 for every i with 0 <= i < n. The unordered pairs {edges[j][0], edges[j][1]} are pairwise distinct and form a simple undirected tree T on vertex set {0,...,n-1} (connected and acyclic). For nodes u,v, let P(u,v) be the unique simple path from u to v in T, including both endpoints, with P(u,u) = [u]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_2",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and for every j with 0 <= j < len(edges), len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1]. Assume 0 <= vals[i] <= 100000 for every i with 0 <= i < n. The unordered pairs {edges[j][0], edges[j][1]} are pairwise distinct and form a simple undirected tree T on vertex set {0,...,n-1}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_3",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= n.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_4",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= n + sum over all integers x of c_x*(c_x-1)/2.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i. For each integer x, let c_x = #{i | 0 <= i < n and vals[i] = x}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_5",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= n + c*(c-1)/2.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i. Let M = max_{0 <= i < n} vals[i] and c = #{i | 0 <= i < n and vals[i] = M}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_6",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is an integer c such that vals[i] = c for every i with 0 <= i < n, then the function returns r = n*(n+1)/2.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_7",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If vals[i] != vals[j] for all 0 <= i < j < n, then the function returns r = n.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_8",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and every unordered pair counted by K gives a distinct good path; in particular r >= n + K.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i. For nodes u,v, P(u,v) is the unique simple path in T. Let K be the number of unordered pairs {u,v} with 0 <= u < v < n such that vals[u] = vals[v] and every node w on P(u,v) satisfies vals[w] <= vals[u]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_9",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input (vals, edges), then it returns the same r on input (vals, edges').",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i. Let edges' be another list satisfying the same length, endpoint, and tree conditions and encoding exactly the same undirected edge set as edges, i.e. the set of unordered pairs {edges'[j][0], edges'[j][1]} equals the set of unordered pairs {edges[j][0], edges[j][1]}."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_10",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input (vals, edges), then on input ([f(vals[0]), f(vals[1]), ..., f(vals[n-1])], edges) it returns the same r.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and the edge list defines a simple tree T on {0,...,n-1} with the endpoint bounds from the problem constraints. Assume 0 <= vals[i] <= 100000 for all i. Let f be any strictly increasing function from integers to integers such that 0 <= f(vals[i]) <= 100000 for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_11",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = n + sum over integers x of sum over C in Comp(T_x) of k_{x,C}*(k_{x,C}-1)/2, where k_{x,C} = #{w in C | vals[w] = x}. This counts the n singleton paths plus, for each value x, the unordered pairs of distinct vertices with value x that lie in the same component of T_x.",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and for every j with 0 <= j < len(edges), len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1]. Assume 0 <= vals[i] <= 100000 for every i with 0 <= i < n. The unordered pairs {edges[j][0], edges[j][1]} are pairwise distinct and form a simple undirected tree T on vertex set {0,...,n-1}. For each integer x, let T_x be the subgraph of T induced by vertices w with vals[w] <= x, and let Comp(T_x) be the set of connected components of T_x."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfGoodPaths.spec_12",
+    "negation": "AegisSpec.NumberOfGoodPaths.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input (vals, edges), then it returns the same r on input (vals', edges').",
+    "preconditions": "Let n = len(vals). Assume 1 <= n <= 30000, len(edges) = n - 1, and for every j with 0 <= j < len(edges), len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1]. Assume 0 <= vals[i] <= 100000 for every i with 0 <= i < n. The unordered pairs {edges[j][0], edges[j][1]} are pairwise distinct and form a simple undirected tree T on vertex set {0,...,n-1}. Let pi be a permutation of {0,...,n-1}; define vals' by vals'[pi(i)] = vals[i] for all i, and let edges' be any list of length n-1 obtained from edges by replacing each endpoint e with pi(e) and possibly reordering edges or endpoints, such that edges' satisfies the same length, endpoint, and tree conditions and represents the image tree pi(T)."
+  }
+]

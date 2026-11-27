@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AssignTasks.spec_1",
+    "negation": "AegisSpec.AssignTasks.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that len(r)=m and r is exactly the answer array of the task-queue process, characterized as follows. Let n=len(servers) and m=len(tasks). For each server index s with 0<=s<n set F_0[s]=0. For j=0,1,...,m-1 recursively define A_j = max(j, min{F_j[s] | 0<=s<n}). Let r[j] be the unique server index s with 0<=s<n such that F_j[s]<=A_j and, for every server index t with 0<=t<n and F_j[t]<=A_j, either servers[s]<servers[t], or servers[s]=servers[t] and s<=t. Then define F_{j+1}[s] = A_j + tasks[j] if s=r[j], and F_{j+1}[s] = F_j[s] otherwise. The returned vector r is the sequence r[0],r[1],...,r[m-1] obtained by these recursive choices. Here F_j[s] is the time when server s is free after tasks 0 through j-1 have been assigned, and A_j is the time at which task j is assigned.",
+    "preconditions": "len(servers)=n, len(tasks)=m, 1<=n,m<=200000, for every i with 0<=i<n, 1<=servers[i]<=200000, and for every j with 0<=j<m, 1<=tasks[j]<=200000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AssignTasks.spec_2",
+    "negation": "AegisSpec.AssignTasks.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "len(servers)=n, len(tasks)=m, 1<=n,m<=200000, for every i with 0<=i<n, 1<=servers[i]<=200000, and for every j with 0<=j<m, 1<=tasks[j]<=200000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AssignTasks.spec_3",
+    "negation": "AegisSpec.AssignTasks.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r)=m, so the answer contains exactly one entry for each task.",
+    "preconditions": "len(servers)=n, len(tasks)=m, 1<=n,m<=200000, for every i with 0<=i<n, 1<=servers[i]<=200000, and for every j with 0<=j<m, 1<=tasks[j]<=200000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AssignTasks.spec_4",
+    "negation": "AegisSpec.AssignTasks.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0<=j<m, r[j] is an integer satisfying 0<=r[j]<n. Thus every answer is a valid 0-based index into servers.",
+    "preconditions": "len(servers)=n, len(tasks)=m, 1<=n,m<=200000, for every i with 0<=i<n, 1<=servers[i]<=200000, and for every j with 0<=j<m, 1<=tasks[j]<=200000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AssignTasks.spec_5",
+    "negation": "AegisSpec.AssignTasks.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever assign_tasks(servers,tasks) returns r and assign_tasks(servers2,tasks) returns r2, we have len(r)=len(r2)=m and r[j]=r2[j] for every j with 0<=j<m.",
+    "preconditions": "len(servers)=len(servers2)=n, len(tasks)=m, 1<=n,m<=200000, all entries of servers and servers2 are in the range 1..200000, all entries of tasks are in the range 1..200000, and for all i,k with 0<=i,k<n, servers[i]<servers[k] if and only if servers2[i]<servers2[k], and servers[i]=servers[k] if and only if servers2[i]=servers2[k]."
+  }
+]

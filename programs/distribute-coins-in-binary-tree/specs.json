@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DistributeCoins.spec_1",
+    "negation": "AegisSpec.DistributeCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the sum, over every node v other than the root, of |coins(v) - size(v)|, where size(v) is the number of nodes in the subtree rooted at v and coins(v) is the sum of the node values in that same subtree. For a node v, its subtree consists of v and all of its descendants. The root itself is excluded from the sum.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DistributeCoins.spec_2",
+    "negation": "AegisSpec.DistributeCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r of type Std.I64; it does not fail, panic, or overflow. In particular, r is a well-defined 64-bit integer within the representable range.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DistributeCoins.spec_3",
+    "negation": "AegisSpec.DistributeCoins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DistributeCoins.spec_4",
+    "negation": "AegisSpec.DistributeCoins.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (n-1)*(n-1).",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DistributeCoins.spec_5",
+    "negation": "AegisSpec.DistributeCoins.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if every node of root has value exactly 1.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DistributeCoins.spec_6",
+    "negation": "AegisSpec.DistributeCoins.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = |root_value - 1|, where root_value is the value at the root node. Equivalently, r = |child_value - 1| for the unique child's value.",
+    "preconditions": "The input satisfies the problem constraints, and root has exactly two nodes: the root Node and one child, either left or right, with no grandchildren. Thus n=2 and the sum of the two node values is 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DistributeCoins.spec_7",
+    "negation": "AegisSpec.DistributeCoins.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the sum of dist(p,v) over all nodes v of root with v != p, where dist(p,v) is the number of edges on the unique path from p to v in the tree.",
+    "preconditions": "The input satisfies the problem constraints. There is a node p in root with value n, and every node other than p has value 0, where n is the total number of nodes in root."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DistributeCoins.spec_8",
+    "negation": "AegisSpec.DistributeCoins.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on root and r' on root', we have r = r'.",
+    "preconditions": "Let root satisfy the problem constraints. Let root' be any tree obtained from root by independently swapping the left and right child subtrees at zero or more nodes, without changing any node values. Then root' has the same number n of nodes and the same node values as root, only with left/right order changed, so it also satisfies the constraints."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DistributeCoins.spec_9",
+    "negation": "AegisSpec.DistributeCoins.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Suppose root is a Node with value a, left subtree L, and right subtree R. For any possibly-Null tree C, let N(C) be its number of nodes and Csum(C) be the sum of its node values, with N(Null)=0 and Csum(Null)=0. Let inner(C) be the sum, over every node v of C other than the top node of C if C is non-Null, of |coins_C(v) - size_C(v)|, where size_C and coins_C are computed inside C; set inner(Null)=0. Whenever the function returns r on root, r = inner(L) + inner(R) + |Csum(L)-N(L)| + |Csum(R)-N(R)|.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DistributeCoins.spec_10",
+    "negation": "AegisSpec.DistributeCoins.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every node v other than the root, r >= |coins(v) - size(v)|, where size(v) is the number of nodes in the subtree rooted at v and coins(v) is the sum of values in that subtree.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DistributeCoins.spec_11",
+    "negation": "AegisSpec.DistributeCoins.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a finite sequence of exactly r moves, each move taking one coin between two adjacent nodes, such that after all moves every node has exactly one coin.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DistributeCoins.spec_12",
+    "negation": "AegisSpec.DistributeCoins.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there is no finite sequence of fewer than r moves, each move taking one coin between two adjacent nodes, such that after all moves every node has exactly one coin.",
+    "preconditions": "Let n be the number of Node constructors reachable in root. The input satisfies the problem constraints: root is not Null, 1 <= n <= 100, every node value is an integer with 0 <= value <= n, and the sum of all node values is n."
+  }
+]

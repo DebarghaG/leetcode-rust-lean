@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumRabbits.spec_1",
+    "negation": "AegisSpec.NumRabbits.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = sum over all integers v with 0 <= v < 1000 and count(v) > 0 of ceil(count(v)/(v+1)) * (v+1), where count(v) is the number of indices i with 0 <= i < len(answers) and answers[i] = v. This r is the minimum possible total number of rabbits in the forest.",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumRabbits.spec_2",
+    "negation": "AegisSpec.NumRabbits.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every answers satisfying the preconditions, num_rabbits(answers) returns some result r; in particular it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumRabbits.spec_3",
+    "negation": "AegisSpec.NumRabbits.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_rabbits(answers) returns a result r, r >= len(answers).",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumRabbits.spec_4",
+    "negation": "AegisSpec.NumRabbits.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_rabbits(answers) returns a result r, r >= M + 1, where M = max{answers[i] | 0 <= i < len(answers)}.",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumRabbits.spec_5",
+    "negation": "AegisSpec.NumRabbits.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_rabbits(answers) returns a result r, r <= sum from i=0 to len(answers)-1 of (answers[i] + 1).",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumRabbits.spec_6",
+    "negation": "AegisSpec.NumRabbits.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(answers).",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), answers[i] = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumRabbits.spec_7",
+    "negation": "AegisSpec.NumRabbits.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = ceil(len(answers)/(v+1)) * (v+1).",
+    "preconditions": "1 <= len(answers) <= 1000; there exists an integer v with 1 <= v < 1000 such that answers[i] = v for every i with 0 <= i < len(answers)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumRabbits.spec_8",
+    "negation": "AegisSpec.NumRabbits.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If num_rabbits(answers) returns r and num_rabbits(other) returns s, then r = s.",
+    "preconditions": "answers and other are both valid inputs: 1 <= len(answers) <= 1000, 1 <= len(other) <= 1000, all entries are in [0,999], and other is a permutation of answers, meaning len(other)=len(answers) and there is a bijection between indices preserving the entry values."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumRabbits.spec_9",
+    "negation": "AegisSpec.NumRabbits.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever num_rabbits(answers) returns a result r, there exists a finite set of r rabbits partitioned into nonempty color classes and an injective assignment of each index i with 0 <= i < len(answers) to a distinct rabbit such that the color class containing the rabbit assigned to i has exactly answers[i] + 1 rabbits.",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumRabbits.spec_10",
+    "negation": "AegisSpec.NumRabbits.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever num_rabbits(answers) returns a result r, there exists a valid forest of r rabbits as in spec_9 with the following additional property. For every v with count(v) > 0, let T_v = ceil(count(v)/(v+1)) * (v+1). Then exactly T_v rabbits lie in color classes that contain at least one asked rabbit answering v; these T_v rabbits are partitioned into T_v/(v+1) color classes, each of size v+1 and each containing at least one asked rabbit answering v. Color classes associated with different v are disjoint, and every color class contains at least one asked rabbit.",
+    "preconditions": "1 <= len(answers) <= 1000; for every i with 0 <= i < len(answers), 0 <= answers[i] < 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumRabbits.spec_11",
+    "negation": "AegisSpec.NumRabbits.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let answers' be the list of length len(answers)+1 obtained by appending v to answers, and let k = count(v) in answers. If num_rabbits(answers) returns r and num_rabbits(answers') returns r', then: if k mod (v+1) = 0 then r' = r + (v+1); otherwise r' = r.",
+    "preconditions": "answers satisfies 1 <= len(answers) <= 1000 and all entries are in [0,999]; additionally len(answers) < 1000 and v is an integer with 0 <= v < 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumRabbits.spec_12",
+    "negation": "AegisSpec.NumRabbits.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_rabbits(answers) returns a result r, r = (v+1) + sum over all u with count(u) > 0 and u != v of ceil(count(u)/(u+1)) * (u+1).",
+    "preconditions": "1 <= len(answers) <= 1000; all entries are in [0,999]; v is an integer with 0 <= v < 1000 and 1 <= count(v) <= v+1, where count(v) is the number of indices i with answers[i] = v."
+  }
+]

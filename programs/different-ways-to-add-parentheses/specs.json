@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_1",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let N_0,...,N_n be the number tokens (the maximal digit runs) in order and O_1,...,O_n the operator tokens in order, so n is the number of operators. A full parenthesization is any binary tree with leaves N_0,...,N_n in this left-to-right order and internal nodes O_1,...,O_n in this left-to-right order; equivalently, any insertion of n pairs of parentheses that fully parenthesizes the original expression without changing the order of numbers or operators. Let V be the multiset of values of all full parenthesizations, where value(T) is computed recursively by applying the operator at each internal node to the values of its left and right subtrees using ordinary integer +, -, *; V has one entry per full parenthesization, so equal values from different parenthesizations are separate entries. The function returns a result r and the multiset of entries of r is exactly V: for every integer v, the number of indices i with 0 <= i < len(r) and r[i] = v equals the number of full parenthesizations T with value(T) = v. The order of the entries of r is arbitrary.",
+    "preconditions": "Let expression be a byte slice satisfying the problem constraints: 1 <= len(expression) <= 20; every byte is an ASCII digit ('0'..'9') or one of '+', '-', '*'; reading left to right, expression is a nonempty alternating sequence of maximal nonempty digit runs and single operator bytes, beginning and ending with a digit run; each digit run's decimal value (leading zeros allowed) is in [0,99]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_2",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n be the number of operator tokens. The function returns r and len(r) = C_n, where C_0 = 1 and C_n = sum_{j=0}^{n-1} C_j * C_{n-1-j} for n >= 1. Equivalently, len(r) equals the number of full parenthesizations of expression.",
+    "preconditions": "Let expression be a valid expression under the problem constraints (length 1..20, alternating maximal digit runs of value 0..99 and single '+','-','*' bytes, starting and ending with a digit run)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_3",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let expression be a valid expression under the problem constraints (length 1..20, alternating maximal digit runs of value 0..99 and single '+','-','*' bytes, starting and ending with a digit run)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_4",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and len(r) = 1 and r[0] equals the decimal value of that single digit run (which is in [0,99]).",
+    "preconditions": "Let expression be a valid expression under the problem constraints and suppose it has no operator token, so expression is a single nonempty digit run."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_5",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and len(r) = 1 and r[0] = a + b if op is '+', r[0] = a - b if op is '-', and r[0] = a * b if op is '*'.",
+    "preconditions": "Let expression be a valid expression under the problem constraints with exactly one operator token. Let a be the decimal value of the digit run before it, op be the operator byte ('+', '-', or '*'), and b be the decimal value of the digit run after it."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_6",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and len(r) = 2; the multiset of the two entries of r is exactly { (a op1 b) op2 c, a op1 (b op2 c) }, where each op is ordinary integer +, -, or *. If the two values are equal, both occurrences are present.",
+    "preconditions": "Let expression be a valid expression under the problem constraints with exactly two operator tokens. Let the three digit-run values be a, b, c and the two operator bytes be op1 then op2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_7",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and for every i with 0 <= i < len(r), r[i] >= 0.",
+    "preconditions": "Let expression be a valid expression under the problem constraints and suppose no operator token is '-'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_8",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r and for every i with 0 <= i < len(r), r[i] = v_0 * v_1 * ... * v_n. Also len(r) = C_n, the n-th Catalan number with C_0 = 1.",
+    "preconditions": "Let expression be a valid expression under the problem constraints and suppose every operator token is '*'. Let the digit-run values be v_0,...,v_n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_9",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r and for every i with 0 <= i < len(r), r[i] = v_0 + v_1 + ... + v_n. Also len(r) = C_n, the n-th Catalan number with C_0 = 1.",
+    "preconditions": "Let expression be a valid expression under the problem constraints and suppose every operator token is '+'. Let the digit-run values be v_0,...,v_n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_10",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r and there exists an index i with 0 <= i < len(r) such that r[i] equals the value of the fully left-associative parenthesization (((...((v_0 op_1 v_1) op_2 v_2) ... ) op_n v_n), computed by applying op_1 first, then op_2, and so on; for n = 0 this value is v_0.",
+    "preconditions": "Let expression be a valid expression under the problem constraints with digit-run values v_0,...,v_n and operator bytes op_1,...,op_n in order, where n >= 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_11",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r and for every j with 1 <= j <= n, the multiset { value(T_L) op_j value(T_R) | T_L in Full(L_j), T_R in Full(R_j) } is a sub-multiset of the multiset of entries of r. Equivalently, for every such pair of subexpression parenthesizations, the combined value occurs in r at least as many times as the number of pairs producing that value.",
+    "preconditions": "Let expression be a valid expression under the problem constraints with digit-run values v_0,...,v_n and operator bytes op_1,...,op_n in order. For each j from 1 to n, let L_j be the prefix expression consisting of v_0,...,v_{j-1} and op_1,...,op_{j-1} (L_1 is just v_0), and let R_j be the suffix expression consisting of v_j,...,v_n and op_{j+1},...,op_n (R_n is just v_n). Let Full(L_j) and Full(R_j) be the sets of all full parenthesizations of these subexpressions."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_12",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and len(r) = 0.",
+    "preconditions": "Let expression be a byte slice with 1 <= len(expression) <= 20. Suppose every maximal nonempty run of ASCII digit bytes in expression has decimal value in [0,99], and suppose there exists an index i with 0 <= i < len(expression) such that expression[i] is not an ASCII digit and is not equal to '+', '-', or '*'."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_13",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and for every i with 0 <= i < len(r), -2^31 <= r[i] <= 2^31-1.",
+    "preconditions": "Let expression be a valid expression under the problem constraints. Assume the problem's test-generation guarantee that every value produced by any full parenthesization of expression lies in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_14",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r and len(r) <= 4862.",
+    "preconditions": "Let expression be a valid expression under the problem constraints with len(expression) <= 20."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_15",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_15_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r and for every integer v, the number of indices i with 0 <= i < len(r) and r[i] = v is at least the number of full parenthesizations T of expression with value(T) = v.",
+    "preconditions": "Let expression be a valid expression under the problem constraints."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.DiffWaysToCompute.spec_16",
+    "negation": "AegisSpec.DiffWaysToCompute.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and for every index i with 0 <= i < len(r), there exists a full parenthesization T of expression such that value(T) = r[i].",
+    "preconditions": "Let expression be a valid expression under the problem constraints."
+  }
+]

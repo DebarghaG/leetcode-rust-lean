@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxJump.spec_1",
+    "negation": "AegisSpec.MaxJump.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the minimum cost over all finite index sequences p_0,...,p_m such that: m >= 2; p_0 = 0 and p_m = 0; the indices p_1,...,p_m are pairwise distinct (so each stone is the target of at most one jump); and there exists t with 1 <= t < m and p_t = n-1. The cost of such a sequence is max_{0 <= j < m} |stones[p_{j+1}] - stones[p_j]|. The set of such sequences is nonempty (for example 0, n-1, 0), so the minimum is well-defined.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxJump.spec_2",
+    "negation": "AegisSpec.MaxJump.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = (if n = 2 then stones[1] - stones[0] else max_{0 <= i <= n-3} (stones[i+2] - stones[i])).",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxJump.spec_3",
+    "negation": "AegisSpec.MaxJump.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, overflow, or go out of bounds) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxJump.spec_4",
+    "negation": "AegisSpec.MaxJump.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i <= n-3 we have r >= stones[i+2] - stones[i].",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxJump.spec_5",
+    "negation": "AegisSpec.MaxJump.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (if n = 2 then stones[1] - stones[0] else max_{0 <= i <= n-3} (stones[i+2] - stones[i])).",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxJump.spec_6",
+    "negation": "AegisSpec.MaxJump.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a finite index sequence p_0,...,p_m satisfying the round-trip conditions from spec_1 whose cost max_{0 <= j < m} |stones[p_{j+1}] - stones[p_j]| is exactly r.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 10^9; for every i with 0 <= i < n-1, stones[i] < stones[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxJump.spec_7",
+    "negation": "AegisSpec.MaxJump.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_jump(A) returns r_A and max_jump(B) returns r_B, then r_B <= r_A.",
+    "preconditions": "A and B are two arrays each satisfying the common preconditions: len(A) >= 2, len(B) >= 2, A[0] = B[0] = 0, all entries are in [0,10^9], and both are strictly increasing. Additionally every entry of A occurs in B and A[len(A)-1] = B[len(B)-1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxJump.spec_8",
+    "negation": "AegisSpec.MaxJump.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_jump(B) returns r_B and max_jump(A) returns r_A, then r_A = c * r_B.",
+    "preconditions": "B is valid: len(B) >= 2, B[0] = 0, 0 <= B[i] <= 10^9 for every i, and B is strictly increasing. Let c be an integer with c >= 1, and let A be the array defined by A[i] = c * B[i] for all i; assume A also satisfies 0 <= A[i] <= 10^9 (hence A is strictly increasing) and A[0] = 0."
+  }
+]

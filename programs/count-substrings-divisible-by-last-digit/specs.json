@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubstrings.spec_1",
+    "negation": "AegisSpec.CountSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_substrings s returns a result r, r equals the number of pairs (i,j) with 0 <= i <= j < len(s) for which the following holds. Let digit(k) = s[k] - 48 for 0 <= k < len(s), and let value(i,j) = sum_{k=i}^{j} digit(k) * 10^(j-k). Then digit(j) != 0 and value(i,j) is divisible by digit(j), i.e. value(i,j) mod digit(j) = 0. Equivalently, r is exactly the number of nonempty contiguous substrings of s, with leading zeros allowed, whose last digit is nonzero and whose base-10 integer value is divisible by that last digit.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubstrings.spec_2",
+    "negation": "AegisSpec.CountSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such s, count_substrings s returns a result: there exists an I64 value r such that count_substrings s = Result.ok r. In particular, for every permitted s the function does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubstrings.spec_3",
+    "negation": "AegisSpec.CountSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_substrings s returns a result r, 0 <= r <= len(s) * (len(s) + 1) / 2. The upper bound is exactly the total number of nonempty contiguous substrings of s.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubstrings.spec_4",
+    "negation": "AegisSpec.CountSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_substrings s returns a result r, r <= sum over j with 0 <= j < len(s) and s[j] != 48 of (j + 1). This sum is exactly the number of all nonempty substrings whose last digit is nonzero, since a substring ending at position j has j+1 possible starting positions.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubstrings.spec_5",
+    "negation": "AegisSpec.CountSubstrings.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_substrings s returns a result r, r >= the number of indices i with 0 <= i < len(s) and s[i] != 48. Indeed, for each such i the one-character substring s[i..i] has last digit s[i] - 48 != 0 and value equal to that digit, so that substring is counted.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubstrings.spec_6",
+    "negation": "AegisSpec.CountSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings s returns a result r, r = 0 if and only if every byte of s is 48, i.e. every digit of s is '0'.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubstrings.spec_7",
+    "negation": "AegisSpec.CountSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings s returns a result r, if len(s) = 1, then r = 1 when s[0] != 48, and r = 0 when s[0] = 48.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubstrings.spec_8",
+    "negation": "AegisSpec.CountSubstrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings s returns a result r, if for every i with 0 <= i < len(s) the digit s[i] - 48 is in {1,2,5}, then r = len(s) * (len(s) + 1) / 2. Every substring ends in 1, 2, or 5, and every integer ending in 1, 2, or 5 is divisible by that last digit.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubstrings.spec_9",
+    "negation": "AegisSpec.CountSubstrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings s returns a result r, if for every i with 0 <= i < len(s), s[i] - 48 is either 0 or 1, then r = sum over j with 0 <= j < len(s) and s[j] = 49 of (j + 1). Substrings ending in '0' are excluded, and every substring ending in '1' is divisible by 1.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubstrings.spec_10",
+    "negation": "AegisSpec.CountSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings s returns a result r, if for every i with 0 <= i < len(s), s[i] - 48 is either 0 or 5, then r = sum over j with 0 <= j < len(s) and s[j] = 53 of (j + 1). Substrings ending in '0' are excluded, and every substring ending in '5' is divisible by 5.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubstrings.spec_11",
+    "negation": "AegisSpec.CountSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_substrings s returns a result r, if len(s) >= 2 and s[len(s)-1] = 48, then r equals the number of pairs (i,j) with 0 <= i <= j < len(s)-1 such that, with digit(k) = s[k] - 48 and value(i,j) = sum_{k=i}^{j} digit(k) * 10^(j-k), one has digit(j) != 0 and value(i,j) mod digit(j) = 0. Equivalently, deleting a trailing '0' does not change the answer.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountSubstrings.spec_12",
+    "negation": "AegisSpec.CountSubstrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings s returns a result r, if len(s) >= 2, then r is greater than or equal to the number of valid pairs (i,j) with 0 <= i <= j < len(s)-1, using digit(k) = s[k] - 48, value(i,j) = sum_{k=i}^{j} digit(k) * 10^(j-k), and the condition digit(j) != 0 and value(i,j) mod digit(j) = 0. In words, appending one more digit to a string cannot decrease the answer.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountSubstrings.spec_13",
+    "negation": "AegisSpec.CountSubstrings.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings s returns a result r, r >= sum over j with 0 <= j < len(s) and (s[j] - 48) in {1,2,5} of (j + 1). For each such j, every substring ending at j has last digit 1, 2, or 5 and hence is divisible by its last digit, so all j+1 starting positions are counted.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  }
+]

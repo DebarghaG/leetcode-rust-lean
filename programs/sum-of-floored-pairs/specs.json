@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_1",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever sum_of_floored_pairs(nums) returns a result r, there exists an integer q with q >= 0 such that S(nums) = q * M + r and 0 <= r < M. Equivalently, r is the unique canonical residue S(nums) mod M, namely the remainder of the total sum over all ordered pairs (i,j), including i=j, after division by M.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007. Define S(nums) = sum over all ordered index pairs (i,j) with 0 <= i < n and 0 <= j < n of floor(nums[i] / nums[j]), where floor is ordinary integer division of positive integers; the diagonal pairs i=j are included."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_2",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, sum_of_floored_pairs(nums) returns some result r. It does not fail by arithmetic overflow, division by zero, out-of-bounds indexing, or panic.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_3",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_of_floored_pairs(nums) returns r, r is a nonnegative integer strictly less than M, and moreover r <= S(nums). Thus the returned value is never negative, never reaches M, and never exceeds the true unmodded sum.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007 and let S(nums) be the unmodded ordered-pair total defined in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_4",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be any slice that is a permutation of nums: len(nums') = n and there is a bijection pi on the indices {0,...,n-1} such that nums'[i] = nums[pi(i)] for every i. If sum_of_floored_pairs(nums) returns r and sum_of_floored_pairs(nums') returns r', then r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_5",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k >= 1 be an integer and let nums' be a slice with len(nums') = n such that nums'[i] = k * nums[i] for every i and 1 <= nums'[i] <= 100000 for every i. If sum_of_floored_pairs(nums) returns r and sum_of_floored_pairs(nums') returns r', then r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_6",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If S(nums) < M, then whenever sum_of_floored_pairs(nums) returns r, r = S(nums). In particular, under this condition r >= n.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007 and let S(nums) be the unmodded ordered-pair total defined in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_7",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If S(nums) >= M, then whenever sum_of_floored_pairs(nums) returns r, there is an integer q with q >= 1 such that S(nums) = q * M + r and 0 <= r < M. Equivalently, r is the remainder after subtracting floor(S(nums) / M) copies of M from S(nums).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007 and let S(nums) be the unmodded ordered-pair total defined in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_8",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_of_floored_pairs(nums) returns r, r is congruent modulo M to n + T(nums), where T(nums) = sum over ordered pairs (i,j) with 0 <= i,j < n and i != j of floor(nums[i] / nums[j]). That is, r is congruent modulo M to the diagonal contribution n plus the off-diagonal ordered-pair total.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_9",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_of_floored_pairs(nums) returns r, r is congruent modulo M to n + sum over ordered pairs (i,j) with 0 <= i,j < n, i != j, and nums[i] >= nums[j] of floor(nums[i] / nums[j]).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumOfFlooredPairs.spec_10",
+    "negation": "AegisSpec.SumOfFlooredPairs.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let V be the set of distinct values appearing in nums, and for each v in V let c(v) be the number of indices i with 0 <= i < n and nums[i] = v. Whenever sum_of_floored_pairs(nums) returns r, r is congruent modulo M to the sum over all u in V and all v in V of c(u) * c(v) * floor(u / v).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = 1000000007."
+  }
+]

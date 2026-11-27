@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_1",
+    "negation": "AegisSpec.DietPlanPerformance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = Σ_{i=0}^{W-1} f(S(i)), where W = len(calories) - k + 1, S(i) = Σ_{j=0}^{k-1} calories[i+j] for 0 <= i < W, and f(T) = -1 if T < lower, f(T) = +1 if T > upper, and f(T) = 0 otherwise.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_2",
+    "negation": "AegisSpec.DietPlanPerformance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (i.e., it does not fail or panic).",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_3",
+    "negation": "AegisSpec.DietPlanPerformance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(calories) - k + 1. (Let W = len(calories) - k + 1; each of the W windows contributes at most +1.)",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_4",
+    "negation": "AegisSpec.DietPlanPerformance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= -(len(calories) - k + 1). (Each of the W windows contributes at least -1.)",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_5",
+    "negation": "AegisSpec.DietPlanPerformance.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < W, lower <= S(i) <= upper, where W = len(calories) - k + 1 and S(i) = Σ_{j=0}^{k-1} calories[i+j], then whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_6",
+    "negation": "AegisSpec.DietPlanPerformance.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < W, S(i) < lower, where W = len(calories) - k + 1 and S(i) = Σ_{j=0}^{k-1} calories[i+j], then whenever the function returns a result r, r = -(len(calories) - k + 1).",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_7",
+    "negation": "AegisSpec.DietPlanPerformance.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < W, S(i) > upper, where W = len(calories) - k + 1 and S(i) = Σ_{j=0}^{k-1} calories[i+j], then whenever the function returns a result r, r = len(calories) - k + 1.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_8",
+    "negation": "AegisSpec.DietPlanPerformance.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r > 0 then there exists an index i with 0 <= i < W, where W = len(calories) - k + 1, such that S(i) > upper, where S(i) = Σ_{j=0}^{k-1} calories[i+j].",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_9",
+    "negation": "AegisSpec.DietPlanPerformance.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r < 0 then there exists an index i with 0 <= i < W, where W = len(calories) - k + 1, such that S(i) < lower, where S(i) = Σ_{j=0}^{k-1} calories[i+j].",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_10",
+    "negation": "AegisSpec.DietPlanPerformance.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever diet_plan_performance(calories, k, lower, upper) returns r and diet_plan_performance(calories_shifted, k, lower_shifted, upper_shifted) returns r', where calories_shifted[i] = calories[i] + c for all 0 <= i < n, lower_shifted = lower + k*c, and upper_shifted = upper + k*c, we have r = r'.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. Let c be an integer such that for every i, 0 <= calories[i] + c <= 20000, and 0 <= lower + k*c <= upper + k*c, and all shifted values are within the i64 range."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_11",
+    "negation": "AegisSpec.DietPlanPerformance.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever diet_plan_performance(calories, k, lower, upper1) returns r1 and diet_plan_performance(calories, k, lower, upper2) returns r2, we have r1 >= r2.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. Let upper1 and upper2 be integers with 0 <= lower <= upper1 <= upper2, and all values within the i64 range."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_12",
+    "negation": "AegisSpec.DietPlanPerformance.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever diet_plan_performance(calories, k, lower1, upper) returns r1 and diet_plan_performance(calories, k, lower2, upper) returns r2, we have r1 >= r2.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. Let lower1 and lower2 be integers with 0 <= lower1 <= lower2 <= upper, and all values within the i64 range."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_13",
+    "negation": "AegisSpec.DietPlanPerformance.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let W = len(calories) - k + 1 and for 0 <= i < W let S(i) = Σ_{j=0}^{k-1} calories[i+j]. If there exists an integer T such that S(i) = T for every i with 0 <= i < W, then whenever the function returns a result r, r = W * f(T), where f(T) = -1 if T < lower, f(T) = +1 if T > upper, and f(T) = 0 otherwise.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.DietPlanPerformance.spec_14",
+    "negation": "AegisSpec.DietPlanPerformance.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(calories) and define calories_rev[i] = calories[n-1-i] for 0 <= i < n. Whenever diet_plan_performance(calories, k, lower, upper) returns r and diet_plan_performance(calories_rev, k, lower, upper) returns r_rev, we have r = r_rev.",
+    "preconditions": "Let n = len(calories). 1 <= k <= n <= 10^5. For every i with 0 <= i < n, 0 <= calories[i] <= 20000. 0 <= lower <= upper. All parameters are within the i64 range."
+  }
+]

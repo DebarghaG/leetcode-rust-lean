@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AppendCharacters.spec_1",
+    "negation": "AegisSpec.AppendCharacters.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns an I64 result r (it does not fail) and r = len(t) - k, where k is the largest integer with 0 <= k <= len(t) such that the prefix of t of length k is a subsequence of s. Here the prefix of t of length k is the sequence t[0],...,t[k-1] (empty when k=0), and it is a subsequence of s when there exist indices 0 <= i_0 < i_1 < ... < i_{k-1} < len(s) with s[i_j] = t[j] for every 0 <= j < k. Thus r is the minimum number of characters that must be appended to the end of s so that t becomes a subsequence of the extended string.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AppendCharacters.spec_2",
+    "negation": "AegisSpec.AppendCharacters.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the call append_characters s t returns some I64 result r and does not fail, in particular without overflow, out-of-bounds access, or panic.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AppendCharacters.spec_3",
+    "negation": "AegisSpec.AppendCharacters.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer r satisfies 0 <= r.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AppendCharacters.spec_4",
+    "negation": "AegisSpec.AppendCharacters.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer r satisfies r <= len(t), interpreting len(t) as an integer.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AppendCharacters.spec_5",
+    "negation": "AegisSpec.AppendCharacters.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer r satisfies r >= max(0, len(t) - len(s)).",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AppendCharacters.spec_6",
+    "negation": "AegisSpec.AppendCharacters.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if t is a subsequence of s, that is, if and only if there exist indices 0 <= i_0 < i_1 < ... < i_{len(t)-1} < len(s) with s[i_j] = t[j] for every 0 <= j < len(t).",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AppendCharacters.spec_7",
+    "negation": "AegisSpec.AppendCharacters.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, define k = len(t) - r as an integer. Then 0 <= k <= len(t), and the sequence t[0],...,t[k-1] (empty when k=0) is a subsequence of s, meaning there exist indices 0 <= i_0 < i_1 < ... < i_{k-1} < len(s) with s[i_j] = t[j] for every 0 <= j < k.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AppendCharacters.spec_8",
+    "negation": "AegisSpec.AppendCharacters.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, define k = len(t) - r. Then 0 <= k <= len(t), and t is a subsequence of the concatenation of s with the suffix t[k], t[k+1], ..., t[len(t)-1]; that is, appending that suffix of length r to s makes t a subsequence.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AppendCharacters.spec_9",
+    "negation": "AegisSpec.AppendCharacters.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every byte array u with len(u) < r, t is not a subsequence of the concatenation of s followed by u; equivalently, there do not exist indices 0 <= i_0 < ... < i_{len(t)-1} < len(s)+len(u) selecting t[0],...,t[len(t)-1] in order from s followed by u.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AppendCharacters.spec_10",
+    "negation": "AegisSpec.AppendCharacters.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k with 0 <= k <= len(t), if the sequence t[0],...,t[k-1] (empty for k=0) is a subsequence of s, then r <= len(t) - k.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AppendCharacters.spec_11",
+    "negation": "AegisSpec.AppendCharacters.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k with 0 <= k <= len(t), if the sequence t[0],...,t[k-1] (empty for k=0) is not a subsequence of s, then r > len(t) - k.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AppendCharacters.spec_12",
+    "negation": "AegisSpec.AppendCharacters.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every byte slice v satisfying 1 <= len(v) <= 100000, every byte of v in 97..122, and such that s is a prefix of v (len(v) >= len(s) and v[i] = s[i] for every 0 <= i < len(s)), if append_characters s t returns r_s and append_characters v t returns r_v, then r_v <= r_s.",
+    "preconditions": "s and t are byte slices representing nonempty strings of lowercase English letters: 1 <= len(s) <= 100000, 1 <= len(t) <= 100000, every byte of s and t is in the range 97..122."
+  }
+]

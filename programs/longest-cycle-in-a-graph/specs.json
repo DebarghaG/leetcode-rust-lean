@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestCycle.spec_1",
+    "negation": "AegisSpec.LongestCycle.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "longest_cycle(edges) returns r, where r is characterized as follows. For k >= 1, call a k-cycle a tuple (v_0, ..., v_{k-1}) of pairwise distinct integers such that 0 <= v_j < n for every j and edges[v_j] equals the integer v_{(j+1) mod k} for every j (indices are 0-based; for k = 1 this requires edges[v_0] = v_0). If the graph has no k-cycle for any k >= 1, then r = -1. Otherwise r is the maximum of the set { k | k >= 1 and the graph has a k-cycle }.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestCycle.spec_2",
+    "negation": "AegisSpec.LongestCycle.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "longest_cycle(edges) returns a result; in particular it does not fail by out-of-bounds access, arithmetic overflow, panic, or any other failure.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestCycle.spec_3",
+    "negation": "AegisSpec.LongestCycle.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever longest_cycle(edges) returns r, either r = -1 or 2 <= r <= n.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestCycle.spec_4",
+    "negation": "AegisSpec.LongestCycle.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever longest_cycle(edges) returns r, r = -1 if and only if there is no k-cycle for any k >= 1, where a k-cycle is a tuple (v_0, ..., v_{k-1}) of pairwise distinct integers with 0 <= v_j < n and edges[v_j] = v_{(j+1) mod k} for all j.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestCycle.spec_5",
+    "negation": "AegisSpec.LongestCycle.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever longest_cycle(edges) returns r with r >= 1, there exist pairwise distinct nodes v_0, ..., v_{r-1} in [0, n) such that edges[v_j] equals the integer v_{(j+1) mod r} for every j in [0, r).",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestCycle.spec_6",
+    "negation": "AegisSpec.LongestCycle.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever longest_cycle(edges) returns r with r >= 1, every k-cycle has k <= r. Here a k-cycle is a tuple (v_0, ..., v_{k-1}) of pairwise distinct integers with 0 <= v_j < n and edges[v_j] = v_{(j+1) mod k} for all j.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestCycle.spec_7",
+    "negation": "AegisSpec.LongestCycle.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever longest_cycle(edges) returns r, r = n if and only if there exists an n-cycle, i.e. a tuple (v_0, ..., v_{n-1}) containing every integer 0, ..., n-1 exactly once such that edges[v_j] equals the integer v_{(j+1) mod n} for all j.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestCycle.spec_8",
+    "negation": "AegisSpec.LongestCycle.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever longest_cycle(edges) returns r and every node has an outgoing edge (edges[i] != -1 for every i with 0 <= i < n), then r >= 1.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestCycle.spec_9",
+    "negation": "AegisSpec.LongestCycle.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let edges' be the slice of length n + 1 with edges'[i] = edges[i] for 0 <= i < n and edges'[n] = -1. Whenever longest_cycle(edges) returns r and longest_cycle(edges') returns r', we have r = r'.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 99999. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and edges[i] != i. Let edges' be the slice of length n + 1 with edges'[i] = edges[i] for 0 <= i < n and edges'[n] = -1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestCycle.spec_10",
+    "negation": "AegisSpec.LongestCycle.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever longest_cycle(edges) returns r and longest_cycle(edges') returns r', we have r' >= r.",
+    "preconditions": "Let n = len(edges) = len(edges') with 2 <= n <= 100000. For every i with 0 <= i < n, each of edges[i] and edges'[i] is either -1 or in [0, n); moreover edges[i] != i and edges'[i] != i. For every i with 0 <= i < n, if edges[i] != -1 then edges'[i] = edges[i]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestCycle.spec_11",
+    "negation": "AegisSpec.LongestCycle.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever longest_cycle(edges) returns r and the graph contains at least one directed cycle, r >= 2, where a directed cycle of length k >= 1 is a tuple (v_0, ..., v_{k-1}) of pairwise distinct integers with 0 <= v_j < n and edges[v_j] = v_{(j+1) mod k} for all j.",
+    "preconditions": "Let n = len(edges). 2 <= n <= 100000. For every i with 0 <= i < n, either edges[i] = -1 or 0 <= edges[i] < n, and additionally edges[i] != i for every i."
+  }
+]

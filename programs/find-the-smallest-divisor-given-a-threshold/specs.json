@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SmallestDivisor.spec_1",
+    "negation": "AegisSpec.SmallestDivisor.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is a positive integer that is the smallest positive integer d such that S(d) <= threshold, where S(d) = sum_{i=0}^{len(nums)-1} ceil(nums[i] / d) and ceil(x / d) denotes the smallest integer greater than or equal to the real quotient x / d.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SmallestDivisor.spec_2",
+    "negation": "AegisSpec.SmallestDivisor.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (a 64-bit integer) and does not fail; in particular it does not overflow, panic, or go out of bounds.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SmallestDivisor.spec_3",
+    "negation": "AegisSpec.SmallestDivisor.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The returned r is a witness that a feasible divisor exists: S(r) <= threshold, where S(d) = sum_{i=0}^{len(nums)-1} ceil(nums[i] / d) with ceiling division.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SmallestDivisor.spec_4",
+    "negation": "AegisSpec.SmallestDivisor.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer d with 1 <= d < r, S(d) > threshold, where S(d) = sum_{i=0}^{len(nums)-1} ceil(nums[i] / d) with ceiling division.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SmallestDivisor.spec_5",
+    "negation": "AegisSpec.SmallestDivisor.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer d with r <= d and 1 <= d, S(d) <= threshold, where S(d) = sum_{i=0}^{len(nums)-1} ceil(nums[i] / d) with ceiling division.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SmallestDivisor.spec_6",
+    "negation": "AegisSpec.SmallestDivisor.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned r satisfies r >= ceil((sum_{i=0}^{len(nums)-1} nums[i]) / threshold), where the outer ceil is the ceiling of the real quotient.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SmallestDivisor.spec_7",
+    "negation": "AegisSpec.SmallestDivisor.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned r satisfies r <= max_{0 <= i < len(nums)} nums[i].",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SmallestDivisor.spec_8",
+    "negation": "AegisSpec.SmallestDivisor.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned r equals 1 if and only if sum_{i=0}^{len(nums)-1} nums[i] <= threshold.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SmallestDivisor.spec_9",
+    "negation": "AegisSpec.SmallestDivisor.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer threshold' with threshold <= threshold' <= 1,000,000, if r' is the value returned by the function on nums and threshold', then r' <= r.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SmallestDivisor.spec_10",
+    "negation": "AegisSpec.SmallestDivisor.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice nums' of 64-bit integers with len(nums') = len(nums) and with the same multiset of entries as nums, if r' is the value returned by the function on nums' and threshold, then r' = r.",
+    "preconditions": "nums is a slice of 64-bit integers and threshold is a 64-bit integer such that 1 <= len(nums) <= 50,000, 1 <= nums[i] <= 1,000,000 for every i with 0 <= i < len(nums), and len(nums) <= threshold <= 1,000,000."
+  }
+]

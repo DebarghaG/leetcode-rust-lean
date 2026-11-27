@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestCombination.spec_1",
+    "negation": "AegisSpec.LargestCombination.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever largest_combination(candidates) returns a result r, r is the maximum size of a non-empty set S of indices with 0 <= i < len(candidates) such that the bitwise AND of the values {candidates[i] | i in S} is greater than 0. Equivalently, both: (1) there is a non-empty index set S with |S| = r and the bitwise AND of {candidates[i] | i in S} > 0; and (2) for every non-empty index set T with 0 <= i < len(candidates) for all i in T, if the bitwise AND of {candidates[i] | i in T} > 0 then |T| <= r. An index set uses each index at most once; its indices need not be contiguous; equal values at different indices are distinct elements.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestCombination.spec_2",
+    "negation": "AegisSpec.LargestCombination.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "largest_combination(candidates) returns a result r; it does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestCombination.spec_3",
+    "negation": "AegisSpec.LargestCombination.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_combination(candidates) returns a result r, 1 <= r <= len(candidates).",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestCombination.spec_4",
+    "negation": "AegisSpec.LargestCombination.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_combination(candidates) returns a result r, there exists a non-empty set S of indices with 0 <= i < len(candidates) such that |S| = r and the bitwise AND of {candidates[i] | i in S} is greater than 0.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestCombination.spec_5",
+    "negation": "AegisSpec.LargestCombination.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_combination(candidates) returns a result r, for every non-empty set S of indices with 0 <= i < len(candidates), if the bitwise AND of {candidates[i] | i in S} is greater than 0, then |S| <= r.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestCombination.spec_6",
+    "negation": "AegisSpec.LargestCombination.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever largest_combination(candidates) returns a result r, r = max { c_b | 0 <= b < 63 }, where c_b is the number of indices i with 0 <= i < len(candidates) whose b-th bit (the bit of weight 2^b) is 1 in candidates[i].",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestCombination.spec_7",
+    "negation": "AegisSpec.LargestCombination.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_combination(candidates) returns a result r, r = len(candidates) if and only if the bitwise AND of all elements of candidates is greater than 0.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestCombination.spec_8",
+    "negation": "AegisSpec.LargestCombination.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_combination(candidates) returns a result r and largest_combination(d) returns a result r', we have r = r'.",
+    "preconditions": "candidates and d are slices of 64-bit integers, each with 1 <= length <= 100000 and all elements between 1 and 2147483647; d is a permutation of candidates (same length, and for every integer v the number of occurrences of v in d equals the number of occurrences of v in candidates)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestCombination.spec_9",
+    "negation": "AegisSpec.LargestCombination.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_combination(candidates) returns a result r and largest_combination(d) returns a result r', we have r' <= r.",
+    "preconditions": "candidates and d are slices of 64-bit integers, each with 1 <= length <= 100000 and all elements between 1 and 2147483647; d is obtained from candidates by deleting zero or more elements (so d is a subsequence of candidates, preserving order)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestCombination.spec_10",
+    "negation": "AegisSpec.LargestCombination.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever largest_combination(candidates) returns a result r, r = 1 if and only if for every pair of distinct indices i and j with 0 <= i < j < len(candidates), the bitwise AND of candidates[i] and candidates[j] is equal to 0.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestCombination.spec_11",
+    "negation": "AegisSpec.LargestCombination.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_combination(candidates) returns a result r, for every bit position b with 0 <= b < 63, the number of indices i with 0 <= i < len(candidates) whose b-th bit is 1 in candidates[i] is at most r.",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LargestCombination.spec_12",
+    "negation": "AegisSpec.LargestCombination.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_combination(candidates) returns a result r, there exists a bit position b with 0 <= b < 63 such that exactly r indices i with 0 <= i < len(candidates) have the b-th bit set to 1 in candidates[i].",
+    "preconditions": "candidates is a slice of 64-bit integers with 1 <= len(candidates) <= 100000 and, for every i with 0 <= i < len(candidates), 1 <= candidates[i] <= 2147483647."
+  }
+]

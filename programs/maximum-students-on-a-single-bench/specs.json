@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_1",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. For each integer b with 1 <= b <= 100, let D(b) be the number of distinct integers x such that some row i with 0 <= i < len(students) has students[i][0] = x and students[i][1] = b. Then r = max over 1 <= b <= 100 of D(b). Equivalently, r is the maximum number of distinct student ids sitting on any single bench, with r = 0 when students is empty.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_2",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access a row out of bounds.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_3",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= len(students).",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_4",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 1 <= r.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100; and len(students) > 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_5",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if len(students) = 0.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_6",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, for every integer b with 1 <= b <= 100, let D(b) be the number of distinct integers x such that some row i has students[i][0] = x and students[i][1] = b; then D(b) <= r.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_7",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists an integer b with 1 <= b <= 100 such that some input row has bench_id b and D(b) = r, where D(b) is the number of distinct integers x such that some row i has students[i][0] = x and students[i][1] = b.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100; and len(students) > 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_8",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r on students and r' on students', and r = r'.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100. students' is any slice or vector whose rows are a permutation of the rows of students."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_9",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r on students and r' on students', and r' >= r.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100; len(students) < 100; and (s,b) is any pair with 1 <= s <= 100 and 1 <= b <= 100. Let students' be students with the row [s,b] appended."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_10",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if and only if len(students) > 0 and for every integer b with 1 <= b <= 100, D(b) <= 1, where D(b) is the number of distinct integers x such that some row i has students[i][0] = x and students[i][1] = b.",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_11",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r = len(students) if and only if all rows have the same bench_id and no two distinct indices i and j with 0 <= i < len(students), 0 <= j < len(students), and i != j satisfy students[i][0] = students[j][0].",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxStudentsOnBench.spec_12",
+    "negation": "AegisSpec.MaxStudentsOnBench.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r on students and r' on students', and r' = max(r, D(b) + 1).",
+    "preconditions": "students has length at most 100; for every i with 0 <= i < len(students), students[i] has length exactly 2, with 1 <= students[i][0] <= 100 and 1 <= students[i][1] <= 100; len(students) < 100; and (s,b) is a pair with 1 <= s <= 100 and 1 <= b <= 100 such that no row i satisfies students[i][0] = s and students[i][1] = b. Let students' be students with the row [s,b] appended, and let D(b) be the number of distinct integers x such that some row i has students[i][0] = x and students[i][1] = b."
+  }
+]

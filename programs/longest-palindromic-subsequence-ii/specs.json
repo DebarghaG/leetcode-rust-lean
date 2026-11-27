@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_1",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a good palindromic subsequence of s of length L be an increasing list of indices i_0 < ... < i_{L-1} with 0 <= i_j < len(s) (the empty list when L=0) such that, writing c_j = s[i_j], L is even, c_j = c_{L-1-j} for every j with 0 <= j < L/2, and c_j != c_{j+1} for every j with 0 <= j < L-1 and j != L/2 - 1. The function returns a result r such that r is the maximum length L for which such a good palindromic subsequence of s exists. In particular, r is even, 0 <= r <= len(s), a good palindromic subsequence of s of length r exists, and every good palindromic subsequence of s has length at most r.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_2",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r on every valid input s; it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_3",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_4",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r is even; that is, r = 2*k for some integer k >= 0.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_5",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i,j with 0 <= i < j < len(s), s[i] != s[j].",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_6",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an increasing list of indices i_0 < ... < i_{r-1} in [0, len(s)) (empty if r=0) such that, with c_j = s[i_j], r is even, c_j = c_{r-1-j} for every j with 0 <= j < r/2, and c_j != c_{j+1} for every j with 0 <= j < r-1 and j != r/2 - 1.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_7",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every even L >= 0 and every increasing list of indices i_0 < ... < i_{L-1} in [0, len(s)) whose characters c_j = s[i_j] satisfy c_j = c_{L-1-j} for all 0 <= j < L/2 and c_j != c_{j+1} for all 0 <= j < L-1 with j != L/2 - 1, we have L <= r.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_8",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on input s and r_t on input t, we have r_t <= r.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, every byte s[i] is a lowercase English letter, t is a nonempty byte slice with 1 <= len(t) <= 250, every byte t[k] is a lowercase English letter, and t is a subsequence of s (there exist indices j_0 < ... < j_{len(t)-1} with s[j_k] = t[k] for every k)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_9",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input s and r_rev on input rev(s), r_rev = r.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter. Let rev(s) be the slice of the same length with rev(s)[i] = s[len(s)-1-i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_10",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "s is a byte slice with len(s) = 1, and s[0] is a lowercase English letter."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_11",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2.",
+    "preconditions": "s is a byte slice with 2 <= len(s) <= 250, every byte s[i] is a lowercase English letter, and all bytes of s are equal: s[i] = s[0] for every 0 <= i < len(s)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_12",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2 if s[0] = s[1], and r = 0 otherwise.",
+    "preconditions": "s is a byte slice with len(s) = 2, and both bytes are lowercase English letters."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_13",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, every byte s[i] is a lowercase English letter, len(s) is even, s[i] = s[len(s)-1-i] for every 0 <= i < len(s)/2, and s[j] != s[j+1] for every 0 <= j < len(s)-1 with j != len(s)/2 - 1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestPalindromeSubseq.spec_14",
+    "negation": "AegisSpec.LongestPalindromeSubseq.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r = len(s), then len(s) is even, s[i] = s[len(s)-1-i] for every 0 <= i < len(s)/2, and s[j] != s[j+1] for every 0 <= j < len(s)-1 with j != len(s)/2 - 1.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 250, and every byte s[i] is a lowercase English letter."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_1",
+    "negation": "AegisSpec.TotalHammingDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every nums satisfying the preconditions, total_hamming_distance(nums) returns a result r and r = sum over all pairs 0 <= i < j < len(nums) of HD(nums[i], nums[j]), where HD(a,b) is the number of bit positions k with 0 <= k < 64 such that floor(a/2^k) mod 2 is different from floor(b/2^k) mod 2. The sum over an empty set of pairs, when len(nums) <= 1, is 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical sum described in the statement fits in a 32-bit signed integer."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_2",
+    "negation": "AegisSpec.TotalHammingDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, the call total_hamming_distance(nums) does not fail: it returns a result r, i.e. Ok r, rather than an overflow, out-of-bounds, or panic result.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical total-Hamming sum fits in a 32-bit signed integer."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_3",
+    "negation": "AegisSpec.TotalHammingDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever total_hamming_distance(nums) returns a result r for nums satisfying the preconditions, r >= 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical total-Hamming sum fits in a 32-bit signed integer."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_4",
+    "negation": "AegisSpec.TotalHammingDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever total_hamming_distance(nums) returns a result r for nums satisfying the preconditions, r <= 30 * (len(nums) * (len(nums) - 1) / 2).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical total-Hamming sum fits in a 32-bit signed integer."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_5",
+    "negation": "AegisSpec.TotalHammingDistance.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever total_hamming_distance(nums) returns a result r for nums satisfying the preconditions, r = sum from k=0 to 63 of c0(k) * c1(k), where c1(k) is the number of indices i with 0 <= i < len(nums) and floor(nums[i]/2^k) mod 2 = 1, and c0(k) = len(nums) - c1(k).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical total-Hamming sum fits in a 32-bit signed integer."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_6",
+    "negation": "AegisSpec.TotalHammingDistance.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever total_hamming_distance(nums) returns a result r for nums satisfying the preconditions, 2 * r = sum over 0 <= i < len(nums) and 0 <= j < len(nums) of HD(nums[i], nums[j]), where HD(a,b) is the number of k with 0 <= k < 64 such that floor(a/2^k) mod 2 is different from floor(b/2^k) mod 2.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; and the mathematical total-Hamming sum fits in a 32-bit signed integer."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_7",
+    "negation": "AegisSpec.TotalHammingDistance.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever total_hamming_distance(nums) returns r and total_hamming_distance(nums') returns r', we have r = r'.",
+    "preconditions": "nums and nums' are slices of 64-bit integers, both satisfy the problem constraints: 1 <= len(nums) = len(nums') <= 10000, every entry is between 0 and 1000000000, and the mathematical total-Hamming sums fit in a 32-bit signed integer; moreover nums' is a permutation of nums, meaning there is a bijection pi from {0,...,n-1} to itself such that nums'[j] = nums[pi(j)] for every j with 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_8",
+    "negation": "AegisSpec.TotalHammingDistance.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever total_hamming_distance(nums) returns a result r under these preconditions, r > 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; the mathematical total-Hamming sum fits in a 32-bit signed integer; and there exist indices i,j with 0 <= i < j < len(nums) and nums[i] != nums[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_9",
+    "negation": "AegisSpec.TotalHammingDistance.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever total_hamming_distance(A) returns rA, total_hamming_distance(B) returns rB, and total_hamming_distance(A ++ B) returns rAB, where A ++ B is the concatenation of A followed by B, we have rAB = rA + rB + sum over 0 <= i < len(A) and 0 <= j < len(B) of HD(A[i], B[j]), where HD(a,b) is the number of k with 0 <= k < 64 such that floor(a/2^k) mod 2 is different from floor(b/2^k) mod 2.",
+    "preconditions": "A and B are slices of 64-bit integers with 1 <= len(A), 1 <= len(B), len(A)+len(B) <= 10000; every entry of A and B is between 0 and 1000000000; and the mathematical total-Hamming sums for A, B, and A++B fit in a 32-bit signed integer."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TotalHammingDistance.spec_10",
+    "negation": "AegisSpec.TotalHammingDistance.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of distinct integers a and b with 0 <= a,b <= 1000000000 such that every entry of nums is equal to a or equal to b, if total_hamming_distance(nums) returns Ok r, then r = c_a * c_b * HD(a,b), where c_a is the number of indices i with nums[i] = a, c_b is the number of indices i with nums[i] = b, and HD(a,b) is the number of bit positions k with 0 <= k < 64 such that floor(a/2^k) mod 2 is different from floor(b/2^k) mod 2.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 10000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; the mathematical total-Hamming sum for nums fits in a 32-bit signed integer; and there exist distinct integers a and b with 0 <= a,b <= 1000000000 such that every entry of nums is equal to a or equal to b."
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_1",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let n = len(prices). For every i with 0 <= i < len(queries), let k = queries[i][0] and m = queries[i][1]. For any set S of indices with S subset of {0,...,n-1} and |S| = m, define L_i(S) = sum over j in S of (prices[j] if prices[j] <= k else 2*k - prices[j]). Then len(r) = len(queries) and r[i] = min { L_i(S) : S subset of {0,...,n-1}, |S| = m }.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_2",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e. it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: 1 <= n <= 100000; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; 1 <= len(queries) <= 100000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_3",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the calls on (prices, queries) and (prices, queries') return results r and r', respectively, we have len(r') = q and for every i with 0 <= i < q, r'[i] = r[i].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n. Let q be an integer with 1 <= q <= len(queries), and let queries' be the slice consisting of the first q entries of queries, so len(queries') = q and queries'[i] = queries[i] for 0 <= i < q."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_4",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), let m = queries[i][1] and let L be the sum of the m largest elements of the multiset {prices[0],...,prices[n-1]}, counting multiplicities. Then r[i] >= -L.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_5",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), r[i] <= queries[i][1] * queries[i][0].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_6",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), let m = queries[i][1] and let U be the sum of the m smallest elements of the multiset {prices[0],...,prices[n-1]}, counting multiplicities. Then r[i] <= U.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_7",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) and queries[i][1] = n, let k = queries[i][0]; then r[i] = sum over j from 0 to n-1 of (prices[j] if prices[j] <= k else 2*k - prices[j]).",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_8",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) such that queries[i][0] >= max_{0 <= j < n} prices[j], let m = queries[i][1] and let U be the sum of the m smallest elements of the multiset {prices[0],...,prices[n-1]}, counting multiplicities; then r[i] = U.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_9",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) such that queries[i][0] <= min_{0 <= j < n} prices[j], let k = queries[i][0], m = queries[i][1], and let L be the sum of the m largest elements of the multiset {prices[0],...,prices[n-1]}, counting multiplicities; then r[i] = 2*m*k - L.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_10",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) and queries[i][1] = 1, let k = queries[i][0]; then r[i] = min_{0 <= j < n} (prices[j] if prices[j] <= k else 2*k - prices[j]).",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_11",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for any two query indices i and j with 0 <= i < len(queries) and 0 <= j < len(queries), if queries[i][1] = queries[j][1] and queries[i][0] <= queries[j][0], then r[i] <= r[j].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_12",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the calls on (prices, queries) and (prices', queries) return results r and r', respectively, len(r') = len(r) and for every i with 0 <= i < len(queries), r'[i] = r[i].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n. Additionally, prices' is a slice of length n with 1 <= prices'[j] <= 1000000000 for every j, and there is a bijection pi from {0,...,n-1} to itself such that prices'[j] = prices[pi(j)] for every j. The same queries slice is used for both calls."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_13",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the calls on (prices, queries) and (prices', queries') return results r and r', respectively, for every i with 0 <= i < len(queries), r'[i] = r[i] + queries[i][1] * c.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n. Additionally, c is an integer, prices' is a slice of length n with prices'[j] = prices[j] + c for every j, and queries' is a slice of the same length as queries with len(queries'[i]) = 2, queries'[i][0] = queries[i][0] + c, and queries'[i][1] = queries[i][1] for every i. Suppose (prices', queries') also satisfies the problem constraints."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_14",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), there exists a set S_i subset of {0,...,n-1} with |S_i| = queries[i][1] such that sum over j in S_i of (prices[j] if prices[j] <= queries[i][0] else 2*queries[i][0] - prices[j]) = r[i].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_15",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) and every set S subset of {0,...,n-1} with |S| = queries[i][1], sum over j in S of (prices[j] if prices[j] <= queries[i][0] else 2*queries[i][0] - prices[j]) >= r[i].",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_16",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there is an integer p such that prices[j] = p for every j with 0 <= j < n, then for every i with 0 <= i < len(queries), let k = queries[i][0] and m = queries[i][1]; r[i] = m * (p if p <= k else 2*k - p).",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: n >= 1; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MinimumRelativeLosses.spec_17",
+    "negation": "AegisSpec.MinimumRelativeLosses.spec_17_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), let k = queries[i][0], m = queries[i][1], and for each j with 0 <= j < n let v_j = prices[j] if prices[j] <= k else 2*k - prices[j]. Then r[i] is the sum of the m smallest elements of the multiset {v_0,...,v_{n-1}}, counting multiplicities.",
+    "preconditions": "Let n = len(prices). The inputs satisfy the problem constraints: 1 <= n <= 100000; for every j with 0 <= j < n, 1 <= prices[j] <= 1000000000; 1 <= len(queries) <= 100000; for every i with 0 <= i < len(queries), len(queries[i]) = 2, 1 <= queries[i][0] <= 1000000000, and 1 <= queries[i][1] <= n."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidSquare.spec_1",
+    "negation": "AegisSpec.ValidSquare.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Write D_ij = (p_i[0]-p_j[0])^2 + (p_i[1]-p_j[1])^2 for 1<=i<j<=4. Whenever the function returns Result.ok r, r is true if and only if there exists a positive integer s such that the multiset {D_12,D_13,D_14,D_23,D_24,D_34} has exactly four occurrences of s and exactly two occurrences of 2*s.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidSquare.spec_2",
+    "negation": "AegisSpec.ValidSquare.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions the function returns Result.ok r for some Boolean r; it does not fail (no panic, arithmetic overflow, or out-of-bounds access).",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidSquare.spec_3",
+    "negation": "AegisSpec.ValidSquare.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let perm be any permutation of {1,2,3,4}, and set q_1=p_{perm(1)}, q_2=p_{perm(2)}, q_3=p_{perm(3)}, q_4=p_{perm(4)}. Whenever valid_square(p1,p2,p3,p4) returns Result.ok r and valid_square(q_1,q_2,q_3,q_4) returns Result.ok r', we have r=r'.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidSquare.spec_4",
+    "negation": "AegisSpec.ValidSquare.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Result.ok r, if there are i<j in {1,2,3,4} with p_i[0]=p_j[0] and p_i[1]=p_j[1], then r=false.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidSquare.spec_5",
+    "negation": "AegisSpec.ValidSquare.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Result.ok r, if all four points are collinear (there exist integers A,B,C with (A,B) != (0,0) and A*p_i[0]+B*p_i[1]+C=0 for i=1,2,3,4), then r=false.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidSquare.spec_6",
+    "negation": "AegisSpec.ValidSquare.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns Result.ok r, if r=true then no three of the four points are collinear: for every choice of three distinct indices i,j,k, (p_j[0]-p_i[0])*(p_k[1]-p_i[1]) != (p_j[1]-p_i[1])*(p_k[0]-p_i[0]).",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidSquare.spec_7",
+    "negation": "AegisSpec.ValidSquare.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With D_ij as in spec_1, whenever the function returns Result.ok r, if r=true then for each i in {1,2,3,4} there exists a positive integer s_i such that among the three values D_ij with j != i, exactly two equal s_i and the remaining one equals 2*s_i.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidSquare.spec_8",
+    "negation": "AegisSpec.ValidSquare.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "With D_ij as in spec_1, whenever the function returns Result.ok r, if r=true then min{D_ij : 1<=i<j<=4} > 0 and max{D_ij : 1<=i<j<=4} = 2 * min{D_ij : 1<=i<j<=4}.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidSquare.spec_9",
+    "negation": "AegisSpec.ValidSquare.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns Result.ok r, if r=true then each of p1,p2,p3,p4 is a vertex of the convex hull of the set {p1,p2,p3,p4}; equivalently, no one of the four points lies in the convex hull of the other three.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidSquare.spec_10",
+    "negation": "AegisSpec.ValidSquare.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q_i be the point [p_i[0]+tx, p_i[1]+ty]. Whenever valid_square(p1,p2,p3,p4) returns Result.ok r and valid_square(q_1,q_2,q_3,q_4) returns Result.ok r', we have r=r'.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000; and tx,ty are integers such that for each i, -10000 <= p_i[0]+tx <= 10000 and -10000 <= p_i[1]+ty <= 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ValidSquare.spec_11",
+    "negation": "AegisSpec.ValidSquare.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q_i=[c*p_i[0], c*p_i[1]]. Whenever valid_square(p1,p2,p3,p4) returns Result.ok r and valid_square(q_1,q_2,q_3,q_4) returns Result.ok r', we have r=r'.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000; and c is a positive integer such that for each i, -10000 <= c*p_i[0] <= 10000 and -10000 <= c*p_i[1] <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ValidSquare.spec_12",
+    "negation": "AegisSpec.ValidSquare.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q_i=[p_i[1], p_i[0]] (reflection in the line y=x). Whenever valid_square(p1,p2,p3,p4) returns Result.ok r and valid_square(q_1,q_2,q_3,q_4) returns Result.ok r', we have r=r'.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ValidSquare.spec_13",
+    "negation": "AegisSpec.ValidSquare.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Write D_ij as in spec_1. Whenever the function returns Result.ok r, if r=true then there is a pairing of {1,2,3,4} into two disjoint unordered pairs {a,c} and {b,d} whose union is {1,2,3,4} such that p_a[0]+p_c[0]=p_b[0]+p_d[0], p_a[1]+p_c[1]=p_b[1]+p_d[1], D_ac=D_bd=L for some L>0, and (p_c[0]-p_a[0])*(p_d[0]-p_b[0])+(p_c[1]-p_a[1])*(p_d[1]-p_b[1])=0.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ValidSquare.spec_14",
+    "negation": "AegisSpec.ValidSquare.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With D_ij as in spec_1, let s = min{D_ij : 1<=i<j<=4}. Whenever the function returns Result.ok r, if r=true then the ordinary Euclidean area of the convex hull of {p1,p2,p3,p4} equals s.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.ValidSquare.spec_15",
+    "negation": "AegisSpec.ValidSquare.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "With D_ij as in spec_1, let s = min{D_ij : 1<=i<j<=4}. Whenever the function returns Result.ok r, if r=true then 1 <= s <= 400000000.",
+    "preconditions": "len(p1)=len(p2)=len(p3)=len(p4)=2; write p_1=p1, p_2=p2, p_3=p3, p_4=p4; for each i in {1,2,3,4}, -10000 <= p_i[0] <= 10000 and -10000 <= p_i[1] <= 10000."
+  }
+]

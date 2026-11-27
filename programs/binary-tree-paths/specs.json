@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_1",
+    "negation": "AegisSpec.BinaryTreePaths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever binary_tree_paths(root) returns Ok r, r is a vector of byte vectors that is a permutation, with multiplicity, of the list of encodings enc(P) over all root-to-leaf paths P of root. Equivalently, there is a bijection from the index set {0,...,len(r)-1} to the leaves of root (or to root-to-leaf paths) such that for every index i, r[i] = enc(P_i), where P_i is the path from the root to the associated leaf. The order of entries in r is arbitrary; if two distinct leaves give the same encoding, that byte string must occur once for each such leaf. Definitions: a leaf is a Node with both children Null; a root-to-leaf path is the sequence of node values v0,...,vk obtained by starting at the root and repeatedly moving to a child, ending at a leaf; dec(z) for an integer z in [-100,100] is the ASCII byte vector of the usual decimal representation of z, with a leading '-' (byte 45) if and only if z < 0, no leading zeros, and a single '0' byte for zero; arrow is the two-byte vector [45,62] representing '->'; and enc(v0,...,vk) = dec(v0) ++ arrow ++ dec(v1) ++ ... ++ arrow ++ dec(vk), where ++ is byte-vector concatenation.",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_2",
+    "negation": "AegisSpec.BinaryTreePaths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, binary_tree_paths(root) returns Ok r for some r; in particular it does not overflow, access out of bounds, or panic.",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_3",
+    "negation": "AegisSpec.BinaryTreePaths.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, len(r) is exactly the number of leaves of root, where a leaf is a node whose left and right children are both Null. Distinct leaves are counted separately even if they have the same value or the same encoded path.",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_4",
+    "negation": "AegisSpec.BinaryTreePaths.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r), the byte vector r[i] can be written uniquely as dec(a0) ++ arrow ++ dec(a1) ++ ... ++ arrow ++ dec(ak) for some k >= 0 and integers a0,...,ak in [-100,100], where arrow is the two-byte vector [45,62] and dec(z) is the ASCII decimal representation of z with no leading zeros (except the single byte [48] for 0). In particular, r[i] has no leading or trailing arrow, no empty integer component, and every occurrence of the two-byte sequence [45,62] is a separator between consecutive integer components.",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_5",
+    "negation": "AegisSpec.BinaryTreePaths.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r), r[i] begins with dec(root.val), where root = Node(root.val, _, _) and dec(z) is the ASCII decimal representation of z with no leading zeros (except [48] for 0).",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_6",
+    "negation": "AegisSpec.BinaryTreePaths.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r), there exists a root-to-leaf path P of root such that r[i] = enc(P). Here a root-to-leaf path is a sequence of node values v0,...,vk from the root to a leaf (a node with both children Null); enc(v0,...,vk) is dec(v0) ++ arrow ++ ... ++ arrow ++ dec(vk), with arrow = [45,62] and dec(z) the ASCII decimal representation of z with no leading zeros (except [48] for 0).",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_7",
+    "negation": "AegisSpec.BinaryTreePaths.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every leaf L of root, there exists an index i with 0 <= i < len(r) such that r[i] = enc(P_L), where P_L is the sequence of node values on the path from the root to L, and enc is defined by dec(z) (ASCII decimal, no leading zeros, [48] for 0) and arrow = [45,62].",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_8",
+    "negation": "AegisSpec.BinaryTreePaths.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every byte string s that is the encoding of at least one root-to-leaf path of root, the number of indices i with 0 <= i < len(r) and r[i] = s is exactly the number of leaves L whose root-to-leaf path encodes to s. Encodings are defined as dec(v0) ++ arrow ++ ... ++ arrow ++ dec(vk), with arrow = [45,62] and dec(z) the ASCII decimal representation of z with no leading zeros (except [48] for 0).",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_9",
+    "negation": "AegisSpec.BinaryTreePaths.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, every byte b in every r[i] is one of: an ASCII decimal digit (48 <= b <= 57), a hyphen-minus '-' (b = 45), or a greater-than sign '>' (b = 62). Moreover every '>' byte (62) is immediately preceded by a '-' byte (45) and is immediately followed by either a decimal digit (48..57) or a '-' byte (45); no '>' occurs at the last byte of r[i].",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_10",
+    "negation": "AegisSpec.BinaryTreePaths.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r), split r[i] at every occurrence of the two-byte separator [45,62]; each resulting non-empty byte segment, interpreted as a decimal integer, lies in the interval [-100,100].",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_11",
+    "negation": "AegisSpec.BinaryTreePaths.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r), len(r[i]) <= 4*N + 2*(N-1), where N is the number of nodes of root. (Every integer component has at most 4 ASCII bytes because values are in [-100,100], and a path of at most N nodes contains at most N-1 separators.)",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BinaryTreePaths.spec_12",
+    "negation": "AegisSpec.BinaryTreePaths.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever binary_tree_paths(root) returns a result r, for every i with 0 <= i < len(r) and every integer component of r[i] obtained by splitting on the separator [45,62], if the component represents the integer 0 then it is exactly the single byte [48]; otherwise its first byte is not '0' (48).",
+    "preconditions": "root is a finite binary tree (Tree) with N nodes, where 1 <= N <= 100, and every node value v satisfies -100 <= v <= 100."
+  }
+]

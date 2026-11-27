@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NonSpecialCount.spec_1",
+    "negation": "AegisSpec.NonSpecialCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result res, and the integer value resv of res equals (rv - lv + 1) - |{ p : p is prime and lv <= p*p <= rv }|. Equivalently, resv is the number of integers x with lv <= x <= rv that are not special, i.e. for which there is no prime p with x = p*p.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000. Here a prime is a positive integer greater than 1 with exactly two positive divisors (1 and itself), and a positive integer x is special if it has exactly two positive proper divisors, i.e. exactly two positive divisors other than x; equivalently, x = p*p for some prime p."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NonSpecialCount.spec_2",
+    "negation": "AegisSpec.NonSpecialCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every l and r satisfying the preconditions, the function returns a result res; it does not fail, panic, or overflow.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NonSpecialCount.spec_3",
+    "negation": "AegisSpec.NonSpecialCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res whose integer value resv satisfies 0 <= resv <= rv - lv + 1.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NonSpecialCount.spec_4",
+    "negation": "AegisSpec.NonSpecialCount.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result res, and for its integer value resv we have resv < rv - lv + 1 if and only if there exists a prime p such that lv <= p*p <= rv.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000. Here x is special if it has exactly two positive proper divisors; for positive x this is equivalent to x = p*p for some prime p."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NonSpecialCount.spec_5",
+    "negation": "AegisSpec.NonSpecialCount.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If rv <= 3, then the function returns a result res whose integer value is resv = rv - lv + 1.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NonSpecialCount.spec_6",
+    "negation": "AegisSpec.NonSpecialCount.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If lv = rv, then the function returns a result res whose integer value is 0 when lv is special and 1 otherwise.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000. Here x is special if x = p*p for some prime p."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NonSpecialCount.spec_7",
+    "negation": "AegisSpec.NonSpecialCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer m with lv <= m < rv, let res, res1, and res2 be the integer values returned by non_special_count on (lv, rv), (lv, m), and (m+1, rv) respectively. Then res = res1 + res2.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NonSpecialCount.spec_8",
+    "negation": "AegisSpec.NonSpecialCount.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If lv > 1, let res, resR, and resL be the integer values returned by non_special_count on (lv, rv), (1, rv), and (1, lv-1) respectively. Then res = resR - resL.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NonSpecialCount.spec_9",
+    "negation": "AegisSpec.NonSpecialCount.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If lv < rv, let res and resPrev be the integer values returned by non_special_count on (lv, rv) and (lv, rv-1) respectively. If rv is special, then res = resPrev; otherwise res = resPrev + 1.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000. Here x is special if x = p*p for some prime p."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NonSpecialCount.spec_10",
+    "negation": "AegisSpec.NonSpecialCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer r2 with rv <= r2 <= 1000000000, let res and res2 be the integer values returned by non_special_count on (lv, rv) and (lv, r2) respectively. Then res <= res2.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NonSpecialCount.spec_11",
+    "negation": "AegisSpec.NonSpecialCount.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer l2 with lv <= l2 <= rv, let res and res2 be the integer values returned by non_special_count on (lv, rv) and (l2, rv) respectively. Then res2 <= res.",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NonSpecialCount.spec_12",
+    "negation": "AegisSpec.NonSpecialCount.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res whose integer value resv satisfies resv >= (rv - lv + 1) - (s - 1).",
+    "preconditions": "Let lv and rv be the integer values of l and r. Assume 1 <= lv <= rv <= 1000000000. Let s be the largest integer with s*s <= rv."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDistance.spec_1",
+    "negation": "AegisSpec.MinimumDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Call an edge entry [u,v,w] a directed edge from u to v of weight w. Define a path from a node x to a node y to be a finite sequence of edge entries e_1, ..., e_k (k >= 0) such that: if k = 0 then x = y; if k > 0 then source(e_1) = x, target(e_j) = source(e_{j+1}) for 1 <= j < k, and target(e_k) = y. The weight of this path is the sum of the weights of e_1, ..., e_k (the empty path has weight 0). Let D be the minimum of weight(P) over all marked nodes m (i.e. m = marked[j] for some j with 0 <= j < len(marked)) and all paths P from s to m; if no such path exists, let D = -1. Whenever minimum_distance returns a result r, r = D.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDistance.spec_2",
+    "negation": "AegisSpec.MinimumDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "minimum_distance returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDistance.spec_3",
+    "negation": "AegisSpec.MinimumDistance.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_distance returns a result r, r = -1 if and only if there is no path from s to any node in marked (paths as defined in spec_1).",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDistance.spec_4",
+    "negation": "AegisSpec.MinimumDistance.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_distance returns a result r with r != -1, there exists a marked node m and a simple path P from s to m (a path with no repeated node) such that weight(P) = r.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDistance.spec_5",
+    "negation": "AegisSpec.MinimumDistance.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_distance returns a result r with r != -1, for every marked node m and every path P from s to m, weight(P) >= r.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDistance.spec_6",
+    "negation": "AegisSpec.MinimumDistance.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_distance returns a result r with r != -1, r <= (n - 1) * Wmax, where Wmax is the maximum of edges[i][2] over all i with 0 <= i < len(edges).",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDistance.spec_7",
+    "negation": "AegisSpec.MinimumDistance.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_distance returns a result r with r != -1, r >= Wmin, where Wmin is the minimum of edges[i][2] over all i with 0 <= i < len(edges).",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDistance.spec_8",
+    "negation": "AegisSpec.MinimumDistance.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of minimum_distance(n, edges, s, marked1) and r2 be the result of minimum_distance(n, edges, s, marked2). Whenever both results are returned, if r1 != -1 then r2 != -1 and r2 <= r1.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 0 <= s < n. For A in {marked1, marked2}: 1 <= len(A) <= n - 1; every A[j] satisfies 0 <= A[j] < n; entries of A are pairwise distinct; and s != A[j] for every j. The set of entries of marked1 is a subset of the set of entries of marked2. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDistance.spec_9",
+    "negation": "AegisSpec.MinimumDistance.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result for edges and r' be the result for edges'. Whenever both results are returned, r = r'.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. The list edges' is a permutation (same multiset of entries) of edges, and the same constraints hold with edges replaced by edges'. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDistance.spec_10",
+    "negation": "AegisSpec.MinimumDistance.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_distance returns a result r, if there exists a marked node m and a path P from s to m of weight L, then r != -1 and r <= L.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumDistance.spec_11",
+    "negation": "AegisSpec.MinimumDistance.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result for edges and r' be the result for edges'. Whenever both results are returned, if r = -1 then r' = -1, and if r != -1 then r' = c * r.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. c is a positive integer; edges' is obtained from edges by replacing each [u,v,w] with [u,v,c*w]; every new weight is at most 10^6; and edges' satisfies the same constraints. All numeric values are within the signed 64-bit range."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumDistance.spec_12",
+    "negation": "AegisSpec.MinimumDistance.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result for edges and r' be the result for edges'. Whenever both results are returned, if r != -1 then r' != -1 and r' <= r.",
+    "preconditions": "2 <= n <= 500; 1 <= len(edges) <= 10^4; for every i with 0 <= i < len(edges), edges[i] has length 3, and if edges[i] = [u, v, w] then 0 <= u < n, 0 <= v < n, u != v, and 1 <= w <= 10^6; 1 <= len(marked) <= n - 1; 0 <= s < n; for every j with 0 <= j < len(marked), 0 <= marked[j] < n; marked entries are pairwise distinct; and s != marked[j] for every j. Every edge triple that occurs in edges also occurs in edges', and edges' satisfies the same constraints. All numeric values are within the signed 64-bit range."
+  }
+]

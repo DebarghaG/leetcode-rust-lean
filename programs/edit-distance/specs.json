@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDistance.spec_1",
+    "negation": "AegisSpec.MinDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (an i64) such that r equals the edit distance d(word1, word2). The edit distance d(a, b) between two byte sequences a and b is defined as the minimum total cost over all edit alignments between a and b. An edit alignment is a sequence of steps that consumes all characters of a and b in order; each step is one of: (match) consume a character a[i] and a character b[j] with a[i] = b[j], cost 0; (substitute) consume a character a[i] and a character b[j] with a[i] ≠ b[j], cost 1; (delete) consume a character a[i], cost 1; (insert) consume a character b[j], cost 1. The indices of consumed characters in a are strictly increasing, as are the indices in b. The cost of an alignment is the sum of its step costs. Then d(a, b) is the minimum cost over all such alignments. Equivalently, d(a, b) is the minimum number of single-character insertions, deletions, and replacements required to transform a into b.",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDistance.spec_2",
+    "negation": "AegisSpec.MinDistance.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r ≥ |len(word1) - len(word2)|, where len(x) denotes the number of bytes in x.",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDistance.spec_3",
+    "negation": "AegisSpec.MinDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r ≤ max(len(word1), len(word2)).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDistance.spec_4",
+    "negation": "AegisSpec.MinDistance.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(word1) = 0 then r = len(word2).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDistance.spec_5",
+    "negation": "AegisSpec.MinDistance.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(word2) = 0 then r = len(word1).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDistance.spec_6",
+    "negation": "AegisSpec.MinDistance.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if word1 and word2 are byte-wise equal (len(word1) = len(word2) and word1[i] = word2[i] for all 0 ≤ i < len(word1)).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDistance.spec_7",
+    "negation": "AegisSpec.MinDistance.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for (word1, word2), r is also the edit distance from word2 to word1, i.e., the minimum number of single-character insertions, deletions, and replacements required to transform word2 into word1.",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDistance.spec_8",
+    "negation": "AegisSpec.MinDistance.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for (word1, word2), for every byte sequence x, the edit distance d(x concatenated with word1, x concatenated with word2) equals r (where d is the edit distance defined in the main specification).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDistance.spec_9",
+    "negation": "AegisSpec.MinDistance.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for (word1, word2), for every byte sequence x, the edit distance d(word1 concatenated with x, word2 concatenated with x) equals r (where d is the edit distance defined in the main specification).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDistance.spec_10",
+    "negation": "AegisSpec.MinDistance.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for (word1, word2), for every byte sequence w, r ≤ d(word1, w) + d(w, word2), where d is the edit distance. In other words, the edit distance satisfies the triangle inequality: d(word1, word2) ≤ d(word1, w) + d(w, word2).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDistance.spec_11",
+    "negation": "AegisSpec.MinDistance.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if len(word1) = len(word2) = n, then r ≤ H, where H is the number of indices i with 0 ≤ i < n and word1[i] ≠ word2[i].",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDistance.spec_12",
+    "negation": "AegisSpec.MinDistance.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let L be the length of a longest common subsequence of word1 and word2 (i.e., the maximum length of a byte sequence that is a subsequence of both word1 and word2). Then max(len(word1), len(word2)) - L ≤ r ≤ len(word1) + len(word2) - 2L.",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinDistance.spec_13",
+    "negation": "AegisSpec.MinDistance.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if word1 is a prefix of word2 (i.e., there exists a byte sequence x such that word2 = word1 concatenated with x), then r = len(word2) - len(word1).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinDistance.spec_14",
+    "negation": "AegisSpec.MinDistance.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if word1 is a suffix of word2 (i.e., there exists a byte sequence x such that word2 = x concatenated with word1), then r = len(word2) - len(word1).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinDistance.spec_15",
+    "negation": "AegisSpec.MinDistance.spec_15_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word1 and word2 satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinDistance.spec_16",
+    "negation": "AegisSpec.MinDistance.spec_16_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if word1 ≠ word2 and at least one of the following holds: (i) there exist byte sequences x, y and a byte c such that word1 = x concatenated with y and word2 = x concatenated with c concatenated with y (i.e., word2 is obtained by inserting one byte into word1); (ii) there exist byte sequences x, y and a byte c such that word1 = x concatenated with c concatenated with y and word2 = x concatenated with y (i.e., word2 is obtained by deleting one byte from word1); (iii) there exist byte sequences x, y and bytes c ≠ d such that word1 = x concatenated with c concatenated with y and word2 = x concatenated with d concatenated with y (i.e., word2 is obtained by replacing one byte of word1 with a different byte).",
+    "preconditions": "0 ≤ len(word1) ≤ 500, 0 ≤ len(word2) ≤ 500, and every byte of word1 and word2 is a lowercase English letter (97 ≤ byte ≤ 122)."
+  }
+]

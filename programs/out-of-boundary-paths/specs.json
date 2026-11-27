@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindPaths.spec_1",
+    "negation": "AegisSpec.FindPaths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For an integer k with 1 <= k <= maxMove, consider a sequence of k moves, each one of (-1,0), (1,0), (0,-1), (0,1), starting from p_0 = (startRow, startColumn) and setting p_t = p_{t-1} + move_t for 1 <= t <= k. Call this sequence an escaping path if every p_t with 0 <= t < k has row in [0, m-1] and column in [0, n-1], while p_k has row outside [0, m-1] or column outside [0, n-1]. Let N be the number of escaping paths over all k with 1 <= k <= maxMove. The function returns a result r such that 0 <= r < M and r is congruent to N modulo M; equivalently, r is the least nonnegative residue of N modulo M.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindPaths.spec_2",
+    "negation": "AegisSpec.FindPaths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call find_paths(m, n, maxMove, startRow, startColumn) returns a result r; it does not fail, panic, go out of bounds, or overflow the i64 range.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindPaths.spec_3",
+    "negation": "AegisSpec.FindPaths.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with 0 <= r <= 1000000006.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindPaths.spec_4",
+    "negation": "AegisSpec.FindPaths.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, maxMove = 0, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindPaths.spec_5",
+    "negation": "AegisSpec.FindPaths.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r with r = (1 if startRow = 0 else 0) + (1 if startRow = m-1 else 0) + (1 if startColumn = 0 else 0) + (1 if startColumn = n-1 else 0).",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, maxMove = 1, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindPaths.spec_6",
+    "negation": "AegisSpec.FindPaths.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = 4.",
+    "preconditions": "The I64 parameters satisfy m = 1, n = 1, 1 <= maxMove <= 50, startRow = 0, and startColumn = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindPaths.spec_7",
+    "negation": "AegisSpec.FindPaths.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_paths(m, n, maxMove, startRow, startColumn) returns r and find_paths(n, m, maxMove, startColumn, startRow) returns r', we have r = r'.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindPaths.spec_8",
+    "negation": "AegisSpec.FindPaths.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_paths(m, n, maxMove, startRow, startColumn) returns r and find_paths(m, n, maxMove, startRow, n-1-startColumn) returns r', we have r = r'.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindPaths.spec_9",
+    "negation": "AegisSpec.FindPaths.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_paths(m, n, maxMove, startRow, startColumn) returns r and find_paths(m, n, maxMove, m-1-startRow, startColumn) returns r', we have r = r'.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindPaths.spec_10",
+    "negation": "AegisSpec.FindPaths.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_paths(m, n, maxMove, startRow, startColumn) returns r and find_paths(m, n, maxMove, m-1-startRow, n-1-startColumn) returns r', we have r = r'.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindPaths.spec_11",
+    "negation": "AegisSpec.FindPaths.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever find_paths(m, n, maxMove, startRow, startColumn) returns r with r != 0, there exists an integer k with 1 <= k <= maxMove and a sequence of k moves, each one of (-1,0), (1,0), (0,-1), (0,1), such that starting from (startRow, startColumn), the starting position and all positions after the first k-1 moves are inside the grid (row in [0, m-1] and column in [0, n-1]), and the position after the kth move is outside the grid.",
+    "preconditions": "The I64 parameters satisfy 1 <= m <= 50, 1 <= n <= 50, 0 <= maxMove <= 50, 0 <= startRow < m, and 0 <= startColumn < n."
+  }
+]

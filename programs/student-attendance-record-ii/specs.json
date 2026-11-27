@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckRecord.spec_1",
+    "negation": "AegisSpec.CheckRecord.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Let S(n) be the set of all strings s of length n over the alphabet {'A','L','P'} such that (i) the number of indices i with 0 <= i < n and s[i] = 'A' is at most 1, and (ii) there is no index j with 0 <= j <= n-3 such that s[j] = s[j+1] = s[j+2] = 'L'. Let C(n) = |S(n)| be the number of such strings. Whenever check_record(n) returns a result r, r is the least nonnegative integer congruent to C(n) modulo M; equivalently, 0 <= r < M and r = C(n) mod M.",
+    "preconditions": "n is an integer with 1 <= n <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckRecord.spec_2",
+    "negation": "AegisSpec.CheckRecord.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call check_record(n) returns a result (an Ok value). It does not fail, overflow, panic, or go out of bounds.",
+    "preconditions": "n is an integer with 1 <= n <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckRecord.spec_3",
+    "negation": "AegisSpec.CheckRecord.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each integer k >= 0, let a(k) be the number of strings of length k over {'L','P'} with no index j such that 0 <= j <= k-3 and all three of positions j, j+1, j+2 are 'L'; thus a(0)=1 and the condition is vacuous for k<3. Whenever check_record(n) returns a result r, r is the least nonnegative residue modulo M = 1000000007 of a(n) + sum_{p=0}^{n-1} a(p) * a(n-1-p).",
+    "preconditions": "n is an integer with 1 <= n <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckRecord.spec_4",
+    "negation": "AegisSpec.CheckRecord.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let B(n) be the number of strings of length n over {'A','L','P'} that either contain at least two 'A' characters or contain three consecutive 'L' characters, or both. Whenever check_record(n) returns a result r, r is congruent modulo M = 1000000007 to 3^n - B(n).",
+    "preconditions": "n is an integer with 1 <= n <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckRecord.spec_5",
+    "negation": "AegisSpec.CheckRecord.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let E0(n) be the number of length-n strings over {'A','L','P'} containing no 'A' and no three consecutive 'L'; let E1(n) be the number of length-n strings over {'A','L','P'} containing exactly one 'A' and no three consecutive 'L'. Whenever check_record(n) returns a result r, r is congruent modulo M = 1000000007 to E0(n) + E1(n).",
+    "preconditions": "n is an integer with 1 <= n <= 100000."
+  }
+]

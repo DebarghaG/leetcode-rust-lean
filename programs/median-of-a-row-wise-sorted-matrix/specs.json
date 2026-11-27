@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MatrixMedian.spec_1",
+    "negation": "AegisSpec.MatrixMedian.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let total = m*n, k = (total - 1)/2, and let flat be the list of length total obtained by sorting, in non-decreasing order, all entries grid[i][j] (0 <= i < m, 0 <= j < n) counted with multiplicity. The function returns a result r and r = flat[k] (0-indexed), i.e. r is the k-th smallest matrix entry counted with multiplicity. Equivalently, at most k entries are strictly less than r and at most k entries are strictly greater than r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MatrixMedian.spec_2",
+    "negation": "AegisSpec.MatrixMedian.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r; it does not fail (no panic, arithmetic overflow, or out-of-bounds access).",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MatrixMedian.spec_3",
+    "negation": "AegisSpec.MatrixMedian.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices i and j with 0 <= i < m and 0 <= j < n such that grid[i][j] = r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MatrixMedian.spec_4",
+    "negation": "AegisSpec.MatrixMedian.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, lo <= r <= hi, where lo = min{grid[i][j] : 0 <= i < m, 0 <= j < n} and hi = max{grid[i][j] : 0 <= i < m, 0 <= j < n}.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MatrixMedian.spec_5",
+    "negation": "AegisSpec.MatrixMedian.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each i with 0 <= i < m let a_i = grid[i][(n-1)/2], the middle entry of the sorted row i (n is odd, so this index is valid). Whenever the function returns a result r, min{a_i : 0 <= i < m} <= r <= max{a_i : 0 <= i < m}.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MatrixMedian.spec_6",
+    "negation": "AegisSpec.MatrixMedian.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] <= r is at least (m*n + 1)/2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MatrixMedian.spec_7",
+    "negation": "AegisSpec.MatrixMedian.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] < r is at most (m*n - 1)/2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MatrixMedian.spec_8",
+    "negation": "AegisSpec.MatrixMedian.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] > r is at most (m*n - 1)/2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MatrixMedian.spec_9",
+    "negation": "AegisSpec.MatrixMedian.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is the smallest integer v such that the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] <= v is at least (m*n + 1)/2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MatrixMedian.spec_10",
+    "negation": "AegisSpec.MatrixMedian.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let π be any permutation of {0, 1, ..., m-1}, and let grid' be the length-m slice defined by grid'[i] = grid[π(i)] for 0 <= i < m. Then grid' satisfies the preconditions, and whenever the function returns r on grid and r' on grid', one has r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MatrixMedian.spec_11",
+    "negation": "AegisSpec.MatrixMedian.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is the largest integer v such that the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] >= v is at least (m*n + 1)/2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[i]) for each i (all rows of grid have common length n). Assume 1 <= m <= 500, 1 <= n <= 500, m is odd, n is odd, each row grid[i] is sorted in non-decreasing order (grid[i][j] <= grid[i][j+1] for all 0 <= j < n-1), and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MatrixMedian.spec_12",
+    "negation": "AegisSpec.MatrixMedian.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns r on grid and r' on grid', we have r <= r'.",
+    "preconditions": "Let grid and grid' both satisfy the common preconditions: same odd dimensions 1 <= m,n <= 500, all rows have length n and are non-decreasing, and all entries lie in [1,1000000]. Assume grid[i][j] <= grid'[i][j] for all 0 <= i < m and 0 <= j < n."
+  }
+]

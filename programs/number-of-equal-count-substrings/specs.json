@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_1",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Under these preconditions the function returns a result r (it does not fail), and r is exactly the number of pairs of indices (i,j) with 0 <= i <= j < len(s) for which the substring s[i..j] is equal-count. A non-empty substring s[i..j] is equal-count when, for every byte c with 97 <= c <= 122, if c occurs among s[i],...,s[j] (i.e. there exists k with i <= k <= j and s[k]=c), then the number of k with i <= k <= j and s[k]=c is exactly count. Equivalently, every distinct letter present in the substring appears exactly count times in it.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122 (s is a lowercase ASCII byte string)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_2",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, the function returns an ok result (Result.ok) for every input satisfying the preconditions; it does not fail, panic, overflow, or return an error.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_3",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r under these preconditions, 0 <= r <= len(s) * (len(s) + 1) / 2. The upper bound is the total number of non-empty contiguous substrings of s.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_4",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Under these preconditions, the function returns a result r, and r = 0 if and only if there is no pair of indices (i,j) with 0 <= i <= j < len(s) such that s[i..j] is equal-count. Here equal-count means that every distinct byte occurring in s[i..j] occurs in it exactly count times.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_5",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r under these preconditions and r > 0, there exist indices i,j with 0 <= i <= j < len(s) such that s[i..j] is equal-count, meaning that every distinct byte occurring in s[i..j] occurs in it exactly count times.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_6",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions, the function returns a result r and r = 0.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122; for every byte c with 97 <= c <= 122, the number of indices k with 0 <= k < len(s) and s[k] = c is less than count."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_7",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r under these preconditions, r equals the number of pairs (i,j) with 0 <= i <= j < len(s) such that no byte value occurs more than once in s[i..j]; explicitly, for every byte c, the number of k with i <= k <= j and s[k] = c is at most 1.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122; count = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_8",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions, the function returns a result r equal to max(0, len(s) - count + 1). Equivalently, r = len(s) - count + 1 when count <= len(s), and r = 0 when count > len(s).",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122; there exists a byte c with 97 <= c <= 122 such that s[k] = c for every k with 0 <= k < len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_9",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r under these preconditions, r equals the number of indices i with 0 <= i and i + count <= len(s) such that all bytes s[i], s[i+1], ..., s[i+count-1] are equal to one another (there is a byte c with s[i+t] = c for every t with 0 <= t < count).",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122; 2 * count > len(s)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_10",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of the set of byte values {97,98,...,122}, let t be the byte slice with len(t)=len(s) and t[k]=pi(s[k]) for every k with 0 <= k < len(s). If the function returns r on (s,count) and r' on (t,count), then r = r'.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_11",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte slice with len(t)=len(s) and t[k]=s[len(s)-1-k] for every k with 0 <= k < len(s). If the function returns r on (s,count) and r' on (t,count), then r = r'.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_12",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r under these preconditions, r >= 1.",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122; for every byte c with 97 <= c <= 122, if c occurs in s (there exists k with 0 <= k < len(s) and s[k]=c), then the number of k with 0 <= k < len(s) and s[k]=c is exactly count."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.EqualCountSubstrings.spec_13",
+    "negation": "AegisSpec.EqualCountSubstrings.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r under these preconditions, r <= M, where M is the number of pairs (i,j) with 0 <= i <= j < len(s) such that j - i + 1 is a positive multiple of count (i.e. j - i + 1 = count * m for some integer m with m >= 1).",
+    "preconditions": "1 <= len(s) <= 30000; 1 <= count <= 30000; for every k with 0 <= k < len(s), 97 <= s[k] <= 122."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPrintable.spec_1",
+    "negation": "AegisSpec.IsPrintable.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (not a failure), and r = true if and only if there exists a finite list c_1, ..., c_k containing exactly the distinct color values that occur in targetGrid, each once, such that: for every p with 1 <= p <= k, and every cell (i,j) in the bounding box of c_p (that is, minRow(c_p) <= i <= maxRow(c_p) and minCol(c_p) <= j <= maxCol(c_p), where minRow(c), maxRow(c), minCol(c), maxCol(c) are the minimum and maximum row and column indices of cells of color c in targetGrid), if targetGrid[i][j] != c_p then the color targetGrid[i][j] occurs later in the list, i.e. there is q with p < q <= k and c_q = targetGrid[i][j].",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPrintable.spec_2",
+    "negation": "AegisSpec.IsPrintable.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There is a Boolean r such that is_printable(targetGrid) returns r; equivalently, the call does not fail (no panic, overflow, or out-of-bounds).",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPrintable.spec_3",
+    "negation": "AegisSpec.IsPrintable.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n. Also, there exists a color c such that targetGrid[i][j] = c for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPrintable.spec_4",
+    "negation": "AegisSpec.IsPrintable.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r = true, there exists a color c occurring in targetGrid such that every cell in the bounding box of c has color c: for every i,j with minRow(c) <= i <= maxRow(c) and minCol(c) <= j <= maxCol(c), targetGrid[i][j] = c, where minRow(c), maxRow(c), minCol(c), maxCol(c) are the minimum and maximum row and column indices of cells of color c in targetGrid.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPrintable.spec_5",
+    "negation": "AegisSpec.IsPrintable.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r = true, there exists a color c occurring in targetGrid such that no other occurring color d != c has a cell of color c inside the bounding box of d. Explicitly, for every occurring color d != c and every position (i,j) with targetGrid[i][j] = c, it is not the case that minRow(d) <= i <= maxRow(d) and minCol(d) <= j <= maxCol(d), where minRow(x), maxRow(x), minCol(x), maxCol(x) are the minimum and maximum row and column indices of cells of color x.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPrintable.spec_6",
+    "negation": "AegisSpec.IsPrintable.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n. Also, there exist distinct colors a and b occurring in targetGrid such that the bounding box of a contains at least one cell whose target color is b, and the bounding box of b contains at least one cell whose target color is a."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPrintable.spec_7",
+    "negation": "AegisSpec.IsPrintable.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r = false, there exist an integer k >= 2 and distinct colors c_1, ..., c_k occurring in targetGrid such that, setting c_{k+1} = c_1, for every p with 1 <= p <= k the bounding box of c_p contains at least one cell whose targetGrid color is c_{p+1}. Here the bounding box of a color x is the smallest rectangle of positions containing every occurrence of x.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsPrintable.spec_8",
+    "negation": "AegisSpec.IsPrintable.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every injective function f from the set of color values occurring in targetGrid into {1,2,...,60}, let targetGrid' be the same-shaped grid with targetGrid'[i][j] = f(targetGrid[i][j]) for all i,j. Whenever is_printable(targetGrid) returns r and is_printable(targetGrid') returns r', we have r = r'.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsPrintable.spec_9",
+    "negation": "AegisSpec.IsPrintable.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let T be the n by m grid defined by T[j][i] = targetGrid[i][j] for 0 <= i < m and 0 <= j < n. Whenever is_printable(targetGrid) returns r and is_printable(T) returns r', we have r = r'.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsPrintable.spec_10",
+    "negation": "AegisSpec.IsPrintable.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let R be the m by n grid defined by R[i][j] = targetGrid[m-1-i][n-1-j] for 0 <= i < m and 0 <= j < n. Whenever is_printable(targetGrid) returns r and is_printable(R) returns r', we have r = r'.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsPrintable.spec_11",
+    "negation": "AegisSpec.IsPrintable.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let H be the m by n grid defined by H[i][j] = targetGrid[i][n-1-j] for 0 <= i < m and 0 <= j < n. Whenever is_printable(targetGrid) returns r and is_printable(H) returns r', we have r = r'.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsPrintable.spec_12",
+    "negation": "AegisSpec.IsPrintable.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = false. This is the converse of spec_7 and generalizes S7: any directed cycle of bounding-box containments is an obstruction to printability.",
+    "preconditions": "targetGrid is a valid grid: writing m = len(targetGrid) and n = len(targetGrid[0]), 1 <= m <= 60, 1 <= n <= 60, every row of targetGrid has length n, and 1 <= targetGrid[i][j] <= 60 for every 0 <= i < m and 0 <= j < n. Also, there exist an integer k >= 2 and distinct colors c_1, ..., c_k occurring in targetGrid such that, setting c_{k+1} = c_1, for every p with 1 <= p <= k the bounding box of c_p contains at least one cell whose targetGrid color is c_{p+1}."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_1",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is exactly the number of pairs of indices (i,j) such that 0 <= i <= j < len(word), every byte word[k] with i <= k <= j is one of the five vowel bytes 'a','e','i','o','u', and for each v in {'a','e','i','o','u'} there exists k with i <= k <= j and word[k] = v. Each index pair (i,j) is counted once, even if a different index pair gives the same substring text.",
+    "preconditions": "1 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_2",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_3",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= ((len(word)-4)*(len(word)-3))/2.",
+    "preconditions": "5 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_4",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "1 <= len(word) <= 4, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_5",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if the whole word consists of the five vowel bytes 'a','e','i','o','u' in some order (equivalently, every byte is a vowel and each of the five vowels occurs), and r = 0 otherwise.",
+    "preconditions": "len(word) = 5 and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_6",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = sum over all maximal contiguous vowel blocks [l,r] of the number of pairs (i,j) with l <= i <= j <= r such that the set {word[k] | i <= k <= j} contains all five vowels 'a','e','i','o','u'. A maximal contiguous vowel block is an interval [l,r] with 0 <= l <= r < len(word) such that every byte in it is a vowel, either l=0 or word[l-1] is not a vowel, and either r=len(word)-1 or word[r+1] is not a vowel.",
+    "preconditions": "1 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_7",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there is no maximal contiguous vowel block whose bytes include all five vowels 'a','e','i','o','u'. Here a maximal contiguous vowel block is an interval all of whose bytes are vowels and which is bordered by non-vowels or the ends of word.",
+    "preconditions": "1 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_8",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "1 <= len(word) <= 100, every byte of word is one of the five vowels 'a','e','i','o','u', and each of the five vowels occurs at least once in word."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_9",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r equals the number of pairs (i,j) with 0 <= i <= j < len(word)-1 such that every byte word[k] for i <= k <= j is a vowel and the set {word[k] | i <= k <= j} contains all five vowels 'a','e','i','o','u'. In other words, appending this final consonant does not change the count for the prefix word[0..len(word)-2].",
+    "preconditions": "1 <= len(word) <= 100, every byte of word is a lowercase English letter (ASCII 'a' through 'z'), and word[len(word)-1] is a consonant (a lowercase non-vowel letter)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_10",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r equals the number of pairs (i,j) with 1 <= i <= j < len(word) such that every byte word[k] for i <= k <= j is a vowel and the set {word[k] | i <= k <= j} contains all five vowels 'a','e','i','o','u'. In other words, prepending this first consonant does not change the count for the suffix word[1..len(word)-1], with indices shifted by one.",
+    "preconditions": "1 <= len(word) <= 100, every byte of word is a lowercase English letter (ASCII 'a' through 'z'), and word[0] is a consonant (a lowercase non-vowel letter)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_11",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, if rev is the byte slice of length len(word) defined by rev[i] = word[len(word)-1-i] for every 0 <= i < len(word), then r equals the number of pairs (i,j) with 0 <= i <= j < len(word) such that every byte rev[k] for i <= k <= j is a vowel and the set {rev[k] | i <= k <= j} contains all five vowels 'a','e','i','o','u'.",
+    "preconditions": "1 <= len(word) <= 100, and every byte of word is a lowercase English letter (ASCII 'a' through 'z')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountVowelSubstrings.spec_12",
+    "negation": "AegisSpec.CountVowelSubstrings.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for word, the number of pairs (i,j) with 0 <= i <= j < len(word) such that every byte word2[k] for i <= k <= j is a vowel and the set {word2[k] | i <= k <= j} contains all five vowels 'a','e','i','o','u' is also r.",
+    "preconditions": "1 <= len(word) <= 100 and every byte of word is a lowercase English letter. Let word2 be any byte slice with len(word2)=len(word) such that for every i, if word[i] is a vowel ('a','e','i','o','u') then word2[i]=word[i], and if word[i] is not a vowel then word2[i] is a lowercase non-vowel English letter."
+  }
+]

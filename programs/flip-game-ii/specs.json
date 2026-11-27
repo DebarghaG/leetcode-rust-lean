@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanWin.spec_1",
+    "negation": "AegisSpec.CanWin.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a position be any byte slice of length between 1 and 60 whose bytes are all 43 or 45. Define the predicate Win(p) on positions by well-founded recursion on the number of '+' bytes in p: Win(p) is true if and only if there exists an index i with 0 <= i < len(p)-1 such that p[i] = p[i+1] = 43, and letting p' be the position obtained from p by replacing p[i] and p[i+1] with 45, we have Win(p') = false. (If no such i exists, Win(p) is false.) Whenever can_win(currentState) returns a result r, r is true if and only if Win(currentState) is true.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanWin.spec_2",
+    "negation": "AegisSpec.CanWin.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function can_win returns a result (it does not panic, overflow, or go out of bounds).",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanWin.spec_3",
+    "negation": "AegisSpec.CanWin.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If there is no index i with 0 <= i < len(currentState)-1 such that currentState[i] = currentState[i+1] = 43, then whenever can_win(currentState) returns a result r, r = false.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanWin.spec_4",
+    "negation": "AegisSpec.CanWin.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_win(currentState) returns true, there exists an index i with 0 <= i < len(currentState)-1 such that currentState[i] = currentState[i+1] = 43, and if p' is the slice obtained from currentState by replacing positions i and i+1 with 45, then can_win(p') returns false.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanWin.spec_5",
+    "negation": "AegisSpec.CanWin.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_win(currentState) returns false, for every index i with 0 <= i < len(currentState)-1 such that currentState[i] = currentState[i+1] = 43, if p' is the slice obtained from currentState by replacing positions i and i+1 with 45, then can_win(p') returns true.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanWin.spec_6",
+    "negation": "AegisSpec.CanWin.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists an index i with 0 <= i < len(currentState)-1 such that currentState[i] = currentState[i+1] = 43, and if p' is the slice obtained from currentState by replacing positions i and i+1 with 45, and can_win(p') returns false, then can_win(currentState) returns true.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanWin.spec_7",
+    "negation": "AegisSpec.CanWin.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If for every index i with 0 <= i < len(currentState)-1 such that currentState[i] = currentState[i+1] = 43, letting p' be the slice obtained from currentState by replacing positions i and i+1 with 45, we have that can_win(p') returns true, then can_win(currentState) returns false.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanWin.spec_8",
+    "negation": "AegisSpec.CanWin.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both can_win(s) and can_win(s') return results, those results are equal.",
+    "preconditions": "Let s be any byte slice of length between 1 and 59 inclusive, with every byte being 43 or 45. Let s' be the slice of length len(s)+1 obtained by prepending the byte 45 to s."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanWin.spec_9",
+    "negation": "AegisSpec.CanWin.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s_rev be the slice of the same length as currentState such that s_rev[i] = currentState[len(currentState)-1-i] for all i. Whenever can_win(currentState) and can_win(s_rev) return results, those results are equal.",
+    "preconditions": "The slice currentState has length between 1 and 60 inclusive. Every byte is either 43 (the ASCII code for '+') or 45 (the ASCII code for '-')."
+  }
+]

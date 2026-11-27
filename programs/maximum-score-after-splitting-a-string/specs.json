@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For each integer k with 1 <= k <= n-1, define score(k) = (the number of indices j with 0 <= j < k and s[j] = 48) + (the number of indices j with k <= j < n and s[j] = 49). Let M = max { score(k) | 1 <= k <= n-1 }. Then max_score(s) returns a result r (i.e. it does not fail), and when r is interpreted as an integer in [-2^63, 2^63-1], its value equals M.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, max_score(s) returns a result (some 64-bit integer r) and does not fail.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_score(s) returns a result r, the integer value of r is at least 0.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_score(s) returns a result r, the integer value of r is at most len(s).",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_score(s) returns a result r, there exists an integer k with 1 <= k <= len(s)-1 such that r = score(k), where score(k) = (the number of indices j with 0 <= j < k and s[j] = 48) + (the number of indices j with k <= j < len(s) and s[j] = 49).",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_score(s) returns a result r, for every integer k with 1 <= k <= len(s)-1, score(k) <= r, where score(k) = (the number of indices j with 0 <= j < k and s[j] = 48) + (the number of indices j with k <= j < len(s) and s[j] = 49).",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_score(s) returns a result r, the integer value of r equals len(s) - 1.",
+    "preconditions": "2 <= len(s) <= 500, and every byte s[j] with 0 <= j < len(s) is the ASCII code of '1' (49)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_score(s) returns a result r, the integer value of r equals (1 if s[0] = 48 else 0) + (1 if s[1] = 49 else 0).",
+    "preconditions": "len(s) = 2, and each byte s[0], s[1] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s), let total_ones = the number of indices j with 0 <= j < n and s[j] = 49, and for 1 <= k <= n-1 let balance(k) = (the number of indices j with 0 <= j < k and s[j] = 48) - (the number of indices j with 0 <= j < k and s[j] = 49). Then whenever max_score(s) returns a result r, the integer value of r equals total_ones + max { balance(k) | 1 <= k <= n-1 }.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(s), and let t be the byte string of length n defined by: for each i with 0 <= i < n, t[i] = 49 if s[n-1-i] = 48, and t[i] = 48 if s[n-1-i] = 49. Then whenever max_score(s) returns a result r and max_score(t) returns a result r_t, the integer value of r equals the integer value of r_t.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScore.spec_11",
+    "negation": "AegisSpec.MaxScore.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let total_ones = the number of indices j with 0 <= j < len(s) and s[j] = 49, and total_zeros = the number of indices j with 0 <= j < len(s) and s[j] = 48. Whenever max_score(s) returns a result r, the integer value of r is at least max(total_ones, total_zeros) - 1.",
+    "preconditions": "2 <= len(s) <= 500, and for every index j with 0 <= j < len(s), the byte s[j] is either the ASCII code of '0' (48) or the ASCII code of '1' (49)."
+  }
+]

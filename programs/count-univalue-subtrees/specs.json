@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_1",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of Node occurrences n in root for which every node in the subtree rooted at n has the same value as n. If root is Null then r = 0.",
+    "preconditions": "root has at most 1000 Node occurrences, and every Node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_2",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail (no overflow, panic, or out-of-bounds access).",
+    "preconditions": "root has at most 1000 Node occurrences; node values may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_3",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= N, where N is the number of Node occurrences in root.",
+    "preconditions": "root has at most 1000 Node occurrences; node values may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_4",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = N, where N is the number of Node occurrences in root.",
+    "preconditions": "root has between 2 and 1000 Node occurrences, every Node value lies in [-1000, 1000], and any two Node occurrences in root have equal values."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_5",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r >= L, where L is the number of leaves in root, i.e. Node occurrences whose left and right children are both Null.",
+    "preconditions": "root has at most 1000 Node occurrences and every Node value lies in [-1000, 1000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_6",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r_out. Let r_l be the result of count_unival_subtrees(l) and let r_r be the result of count_unival_subtrees(r); then r_out = r_l + r_r.",
+    "preconditions": "root = Node(v, l, r) with at least one of l, r not Null; root has at most 1000 Node occurrences; every Node value lies in [-1000, 1000]; and every Node occurrence in l or r has a value different from v."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_7",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(root) be the tree obtained recursively by replacing each Node(v, l, r) with Node(v, mirror(r), mirror(l)) and leaving Null as Null. If the function returns r on root and r_m on mirror(root), then r = r_m.",
+    "preconditions": "root has at most 1000 Node occurrences; node values may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_8",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on root and r_f on T_f, then r = r_f.",
+    "preconditions": "root has at most 1000 Node occurrences; f is an injective function from the set of node values occurring in root into the set of 64-bit integers. Let T_f be obtained by replacing each Node value v with f(v)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_9",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = L, where L is the number of leaves in root (Node occurrences whose left and right children are both Null).",
+    "preconditions": "root has at least 2 and at most 1000 Node occurrences, every Node value lies in [-1000, 1000], and for every Node occurrence n with a non-Null child c, the value of n differs from the value of c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_10",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r_out. Let r_r be the result of count_unival_subtrees(r). Then r_out = r_r + 1 if every Node occurrence in r has value v, and r_out = r_r otherwise.",
+    "preconditions": "root = Node(v, Null, r) with r not Null; root has at most 1000 Node occurrences; every Node value lies in [-1000, 1000]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountUnivalSubtrees.spec_11",
+    "negation": "AegisSpec.CountUnivalSubtrees.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r_out. Let r_l be the result of count_unival_subtrees(l) and let r_r be the result of count_unival_subtrees(r). Let AllEq_v(l) mean every Node occurrence in l has value v, with AllEq_v(Null) true, and define AllEq_v(r) similarly. Then r_out = r_l + r_r + 1 if AllEq_v(l) and AllEq_v(r), and r_out = r_l + r_r otherwise.",
+    "preconditions": "root = Node(v, l, r); root has at most 1000 Node occurrences; every Node value lies in [-1000, 1000]."
+  }
+]

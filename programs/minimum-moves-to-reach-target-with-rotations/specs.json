@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumMoves.spec_1",
+    "negation": "AegisSpec.MinimumMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Define a configuration as a triple (r, c, o) with o in {H, V}: H(r,c) means the snake occupies cells (r,c) and (r,c+1); V(r,c) means it occupies (r,c) and (r+1,c). A configuration is valid if both cells are inside the n*n grid and have grid value 0. A valid move leads from valid C to valid C' if: (1) right: H(r,c)->H(r,c+1) when c+2<n, or V(r,c)->V(r,c+1) when c+1<n; (2) down: H(r,c)->H(r+1,c) when r+1<n, or V(r,c)->V(r+1,c) when r+2<n; (3) clockwise rotation: H(r,c)->V(r,c) when r+1<n; (4) counterclockwise rotation: V(r,c)->H(r,c) when c+1<n; in every case every cell of C' must be empty (grid value 0); additionally, clockwise rotation requires (r+1,c+1) to be empty, and counterclockwise rotation requires (r+1,c+1) to be empty. The start configuration is H(0,0) and the target configuration is H(n-1,n-2). If there exists a finite sequence of valid moves from start to target, then r is the minimum length of such a sequence. Otherwise, r = -1.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumMoves.spec_2",
+    "negation": "AegisSpec.MinimumMoves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, no overflow, no out-of-bounds indexing).",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumMoves.spec_3",
+    "negation": "AegisSpec.MinimumMoves.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns a result r with r != -1, then 2*n - 3 <= r <= 2*n*(n-1) - 1.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumMoves.spec_4",
+    "negation": "AegisSpec.MinimumMoves.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns a result r with r >= 0, then r is odd.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumMoves.spec_5",
+    "negation": "AegisSpec.MinimumMoves.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If grid[n-1][n-2] = 1 or grid[n-1][n-1] = 1, then the function returns -1.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumMoves.spec_6",
+    "negation": "AegisSpec.MinimumMoves.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If grid[i][j] = 0 for every i, j with 0 <= i < n and 0 <= j < n, then the function returns 2*n - 3.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumMoves.spec_7",
+    "negation": "AegisSpec.MinimumMoves.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 2, then the function returns 1 when grid[1][0] = 0 and grid[1][1] = 0, and returns -1 otherwise.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumMoves.spec_8",
+    "negation": "AegisSpec.MinimumMoves.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If the function returns a result r, then r != 0.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumMoves.spec_9",
+    "negation": "AegisSpec.MinimumMoves.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = minimum_moves(grid) and r' = minimum_moves(grid'). If r' != -1, then r != -1 and r <= r'. If r = -1, then r' = -1.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0. Let grid' be another n×n grid satisfying the same constraints (entries 0 or 1, grid'[0][0]=0, grid'[0][1]=0) such that for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] <= grid'[i][j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumMoves.spec_10",
+    "negation": "AegisSpec.MinimumMoves.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists a sequence of valid moves from H(0,0) to H(n-1,n-2) that uses only right moves and down moves (no rotations), then the function returns 2*n - 3.",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumMoves.spec_11",
+    "negation": "AegisSpec.MinimumMoves.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns a result r with r = 2*n - 3, then there exists a sequence of valid moves from H(0,0) to H(n-1,n-2) that uses only right moves and down moves (no rotations).",
+    "preconditions": "Let n = len(grid). 2 <= n <= 100. For every i with 0 <= i < n, len(grid[i]) = n. For every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] is 0 or 1. grid[0][0] = 0 and grid[0][1] = 0."
+  }
+]

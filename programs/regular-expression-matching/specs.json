@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsMatch.spec_1",
+    "negation": "AegisSpec.IsMatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is true exactly when the whole string s is matched by the pattern p. Formally, let matches be the predicate on byte slices defined by: (a) matches(p,s) holds if len(p)=0 and len(s)=0, and for len(p)=0 and len(s)>0 it does not hold; (b) if len(p) >= 2 and p[1]='*', then with a=p[0] and q=p[2..], matches(p,s) holds iff either matches(q,s) holds, or (len(s)>0 and (a='.' or s[0]=a) and matches(p,s[1..]) holds); (c) if len(p)>0 and (len(p)=1 or p[1]!='*'), then with a=p[0], matches(p,s) holds iff len(s)>0 and (a='.' or s[0]=a) and matches(p[1..],s[1..]) holds. Then r=true iff matches(p,s) holds, and r=false iff matches(p,s) does not hold.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; and for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'. In particular p[0] != '*' and no two '*' are adjacent."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsMatch.spec_2",
+    "negation": "AegisSpec.IsMatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and p satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access an index outside s or p.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; and for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'. In particular p[0] != '*' and no two '*' are adjacent."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsMatch.spec_3",
+    "negation": "AegisSpec.IsMatch.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r=true iff len(s)=len(p) and for every i with 0 <= i < len(p), p[i]='.' or p[i]=s[i]; otherwise r=false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; and p contains no byte '*'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsMatch.spec_4",
+    "negation": "AegisSpec.IsMatch.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r=true iff for every i with 0 <= i < len(s), p[0]='.' or s[i]=p[0]; otherwise r=false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; len(p)=2; and p[1]='*'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsMatch.spec_5",
+    "negation": "AegisSpec.IsMatch.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let min_tokens(p) be the number of indices i with 0 <= i < len(p) such that p[i]!='*' and (i+1=len(p) or p[i+1]!='*'). Whenever the function returns a result r, r=true iff len(s) >= min_tokens(p); otherwise r=false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is '.'; and p contains at least one '*'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsMatch.spec_6",
+    "negation": "AegisSpec.IsMatch.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let min_tokens(p) be the number of indices i with 0 <= i < len(p) such that p[i]!='*' and (i+1=len(p) or p[i+1]!='*'). Whenever the function returns true for (s,p), len(s) >= min_tokens(p).",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; and for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'. In particular p[0] != '*' and no two '*' are adjacent."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsMatch.spec_7",
+    "negation": "AegisSpec.IsMatch.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for (s,p) and r' for (s,p'), if r=true then r'=true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; i is an index with 0 <= i < len(p) and p[i]!='*'; and p' is the slice with p'[i]='.' and p'[j]=p[j] for all j != i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsMatch.spec_8",
+    "negation": "AegisSpec.IsMatch.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for (s,p) and rq for (s,q), if r=true then rq=true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; k is an integer with 0 <= k <= len(p) such that the prefix p[0..k) is a concatenation of whole tokens of p, where a token is either a single lowercase letter or '.', or a two-byte block a* with a a lowercase letter or '.'; c is a lowercase letter or '.'; q = p[0..k) ++ [c,'*'] ++ p[k..]; and len(q) <= 20 (equivalently len(p) <= 18)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsMatch.spec_9",
+    "negation": "AegisSpec.IsMatch.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every two strings s and s' satisfying the string constraints with len(s)=len(s') and s[j]=s'[j] for every j with 0 <= j < len(s) and j != i, the boolean returned for (s,p) equals the boolean returned for (s',p).",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; p contains no '*'; and i is an index with 0 <= i < len(p) and p[i]='.'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsMatch.spec_10",
+    "negation": "AegisSpec.IsMatch.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true for (s,p), there exist an integer m >= 0, the unique left-to-right tokenization t_0,...,t_{m-1} of p (each t_j is either a single lowercase letter or '.', or a pair a* with a a lowercase letter or '.'), and indices 0 = i_0 <= i_1 <= ... <= i_m = len(s) such that for each j with 0 <= j < m: if t_j=a is a single token, then i_{j+1}=i_j+1 and (a='.' or s[i_j]=a); if t_j=a* is a star token, then for every k with i_j <= k < i_{j+1}, (a='.' or s[k]=a).",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; and for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'. In particular p[0] != '*' and no two '*' are adjacent."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsMatch.spec_11",
+    "negation": "AegisSpec.IsMatch.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns true for (s,p), for every i with 0 <= i < len(s) there exists j with 0 <= j < len(p) such that p[j]=s[i].",
+    "preconditions": "len(s) >= 1 and len(s) <= 20; len(p) >= 1 and len(p) <= 20; for every i with 0 <= i < len(s), s[i] is a lowercase English letter; for every i with 0 <= i < len(p), p[i] is a lowercase English letter, '.' or '*'; for every i with 0 <= i < len(p), if p[i] = '*' then i > 0 and p[i-1] is a lowercase English letter or '.'; and p contains no '.'."
+  }
+]

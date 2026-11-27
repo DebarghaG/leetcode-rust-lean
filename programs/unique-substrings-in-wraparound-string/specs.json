@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_1",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let U(s) be the set of all non-empty byte sequences t such that (1) t is base-valid: for every k with 0 <= k < len(t)-1, t[k+1] is the cyclic successor of t[k], meaning t[k+1] = 97 if t[k] = 122, and t[k+1] = t[k] + 1 otherwise; and (2) t occurs as a contiguous substring of s: there exist i and j with 0 <= i < j <= n, len(t) = j - i, and t[k] = s[i+k] for every 0 <= k < j - i. The function returns an I64 result r and r = |U(s)|, the number of distinct non-empty substrings of s that are present in the infinite wraparound string base. Distinctness is equality of byte sequences, so repeated occurrences of the same bytes are counted once.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_2",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns some I64 value r; it does not fail (no panic, no out-of-bounds access, and no integer overflow).",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_3",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with 1 <= r <= 26 * n.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_4",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r <= n * (n + 1) / 2.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_5",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r >= d, where d is the number of distinct byte values c in the range 97 <= c <= 122 that occur in s, i.e. for which there exists i with 0 <= i < n and s[i] = c.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_6",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let Lmax be the maximum length L such that 1 <= L <= n and there exists an index i with 0 <= i, i + L <= n, and the substring s[i..i+L] is base-valid, where base-valid means every adjacent pair advances by one letter cyclically from a to z and from z to a. The function returns a result r with r >= Lmax.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_7",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For each byte c with 97 <= c <= 122, let M(c) be 0 if c does not occur in s; otherwise let M(c) be the maximum L >= 1 such that for some index i, 0 <= i, i + L <= n, s[i] = c, and s[i..i+L] is base-valid. Let N(c) be the number of distinct counted substrings (the elements of U(s) from the main specification) whose first byte is c. Then for every c, N(c) = M(c), and the function returns r = sum over c from 97 to 122 of M(c).",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_8",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = d, where d is the number of distinct byte values occurring in s.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; for every i with 0 <= i < n, 97 <= s[i] <= 122; and for every i with 0 <= i < n-1, s[i+1] is not the cyclic successor of s[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_9",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For each byte c with 97 <= c <= 122 that occurs in s, let firstpos(c) be the minimum i such that 0 <= i < n and s[i] = c. The function returns a result r with r = sum over such c of (n - firstpos(c)).",
+    "preconditions": "n = len(s); 1 <= n <= 100000; for every i with 0 <= i < n, 97 <= s[i] <= 122; and for every i with 0 <= i < n-1, s[i+1] is the cyclic successor of s[i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_10",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r equals the number of pairs (i,j) with 0 <= i < j <= n such that s[i..j] is base-valid.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; for every i with 0 <= i < n, 97 <= s[i] <= 122; and the bytes s[0],...,s[n-1] are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_11",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For each byte c with 97 <= c <= 122, let M(c) be 0 if c does not occur in s; otherwise let M(c) be the maximum L >= 1 such that for some index i, 0 <= i, i + L <= n, s[i] = c, and s[i..i+L] is base-valid. Then for every integer L with 1 <= L <= M(c), there exists an index i with 0 <= i, i + L <= n, s[i] = c, and s[i..i+L] base-valid; consequently the length-L byte sequence starting with c and following cyclic successors is one of the distinct substrings counted in r.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_12",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and the set of first bytes of the r distinct counted substrings is exactly the set of byte values c with 97 <= c <= 122 that occur in s.",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindSubstringInWraproundString.spec_13",
+    "negation": "AegisSpec.FindSubstringInWraproundString.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and the set U(s) of the r distinct counted substrings is closed under taking non-empty contiguous substrings: if t belongs to U(s) and 0 <= a < b <= len(t), then the byte sequence t[a..b] also belongs to U(s).",
+    "preconditions": "n = len(s); 1 <= n <= 100000; and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_1",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer satisfying 0 <= r < M and r ≡ C(s) (mod M), where M = 1000000007 and C(s) is the cardinality of the set P(s) of all non-empty byte strings w such that: (i) w is a subsequence of s, meaning there are indices 0 <= i1 < ... < ik < len(s) with w[j] = s[i_j] for each j; (ii) w equals its reverse; and (iii) different index choices giving the same byte sequence are not distinguished, so each distinct palindromic byte sequence contributes exactly once.",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_2",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not fail by arithmetic overflow, out-of-bounds slice access, or any other panic.",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_3",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_4",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if C(s) < 1000000007 then r = C(s), where C(s) is the true count of distinct non-empty palindromic subsequences of s as defined in spec_1.",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_5",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = len(s).",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100; there is a byte c such that s[i] = c for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_6",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function on s returns a result r, r ≡ C(reverse(s)) (mod 1000000007), where reverse(s) is the byte string of length len(s) with reverse(s)[i] = s[len(s)-1-i], and C is the count of distinct non-empty palindromic subsequences defined in spec_1.",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_7",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r ≡ C(t) + 1 + D (mod 1000000007), where C(t) is the number of distinct non-empty palindromic subsequences of t and C(empty)=0; D is the cardinality of the set of non-empty byte strings u such that u is a subsequence of L and reverse(u) is a subsequence of R, with reverse(u)[j] = u[len(u)-1-j].",
+    "preconditions": "len(s) >= 1; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100; there is a byte c and an index k with 0 <= k < len(s) such that s[k]=c and s[i]!=c for every i != k; let t be the byte string obtained from s by deleting position k; let L = s[0..k] and R = s[k+1..len(s)] (empty when k=0 or k=len(s)-1 respectively)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPalindromicSubsequences.spec_8",
+    "negation": "AegisSpec.CountPalindromicSubsequences.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r ≡ 2*C(t) + 2 (mod 1000000007), where C(t) is the number of distinct non-empty palindromic subsequences of t, and C(empty) = 0.",
+    "preconditions": "len(s) >= 2; len(s) <= 1000; for every i with 0 <= i < len(s), s[i] is one of the byte values 97, 98, 99, 100 (the ASCII codes of 'a','b','c','d'); let c = s[0] = s[len(s)-1]; c does not occur among s[1], ..., s[len(s)-2]; let t be the middle byte string s[1..len(s)-2], which is empty when len(s) = 2."
+  }
+]

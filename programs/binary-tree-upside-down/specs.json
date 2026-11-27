@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_1",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "If root = Null, the function returns Result.ok Null. Otherwise let v_0,...,v_k (k >= 0) be the left spine of root: v_0 is root, for 0 <= i < k the left child of v_i is v_{i+1}, and the left child of v_k is Null. For 0 <= i < k let R_i be the right child of v_i (possibly Null); the guarantee implies each non-null R_i is a leaf and R_k is Null. The function returns Result.ok r, where r is the tree consisting exactly of nodes w_0,...,w_k plus, for each i with 0 <= i < k and R_i non-null, one copy u_i of R_i, with these parent-child relations: w_k is the root of r; for every i with 1 <= i <= k, the left child of w_i is u_{i-1} if R_{i-1} is non-null and Null otherwise, and the right child of w_i is w_{i-1}; w_0 has both children Null; every u_i has the same value and children as R_i (hence is a leaf under the guarantee); and there are no other nodes or edges in r. Each w_i has the same value as v_i.",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every node that is a right child has a left sibling (a left child of the same parent) and has no children."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_2",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result Result.ok r for some Tree r; it never fails, overflows, or panics.",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_3",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let r be the tree returned by the function. Then r = Null if and only if root = Null.",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_4",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the returned tree. Define len_nodes(Null)=0 and len_nodes(Node(_,l,u))=1+len_nodes(l)+len_nodes(u). Then len_nodes(r)=len_nodes(root).",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_5",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the returned tree. For every integer a, the number of nodes in r whose value is a equals the number of nodes in root whose value is a.",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_6",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The value at the root of the returned tree r is the value of v_k, the last node on the left spine of root.",
+    "preconditions": "root is a non-null valid problem input, with left spine v_0,...,v_k: v_0=root, v_{i+1} is the left child of v_i for 0 <= i < k, and v_k has no left child."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_7",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let w_i be the node in the returned tree r corresponding to v_i. If k=0 then the root of r has no right child. If k>=1 then each w_i with 1 <= i <= k has right child w_{i-1}, and w_0 has no right child. Hence the right spine of r is exactly w_k,w_{k-1},...,w_0.",
+    "preconditions": "root is a non-null valid problem input, with left spine v_0,...,v_k (v_0=root, v_{i+1} is the left child of v_i for 0 <= i < k, and v_k has no left child)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_8",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let w_i be the node in the returned tree r corresponding to v_i. If k=0 then the root of r has no left child. If k>=1 then the left child of the root of r is a copy of R_{k-1}, the right child of v_{k-1}, or Null if v_{k-1} has no right child. More generally, for every i with 1 <= i <= k, the left child of w_i is a copy of R_{i-1}.",
+    "preconditions": "root is a non-null valid problem input, with left spine v_0,...,v_k and right children R_i of v_i for 0 <= i < k (possibly Null)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_9",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "In the returned tree r, the node w_0 corresponding to the original root v_0 is a leaf: both of its children are Null. In particular, if k=0 then r is a single leaf with the same value as root.",
+    "preconditions": "root is a non-null valid problem input, with left spine v_0,...,v_k (v_0=root, v_{i+1} is the left child of v_i for 0 <= i < k, and v_k has no left child)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_10",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define height(Null)=0 and height(Node(_,l,u))=1+max(height(l),height(u)). Let r be the returned tree. Then height(r)=height(root).",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_11",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Call a node a leaf if it is non-null and both of its children are Null. Let leaves(t) be the number of leaves in a tree t. If r is the returned tree, then leaves(r)=leaves(root).",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.UpsideDownBinaryTree.spec_12",
+    "negation": "AegisSpec.UpsideDownBinaryTree.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "In the returned tree r, every non-null left child is a leaf (both of its children are Null).",
+    "preconditions": "root is a valid problem input: its number of nodes is between 0 and 10, every node value is in [1,10], and every right child has a left sibling and no children."
+  }
+]

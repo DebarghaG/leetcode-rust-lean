@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveBoxes.spec_1",
+    "negation": "AegisSpec.RemoveBoxes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. A complete valid removal of boxes is a finite ordered list G_0, ..., G_{m-1} (with m >= 1) of nonempty sets of indices such that: (1) the sets G_0, ..., G_{m-1} partition {0, ..., len(boxes)-1}; (2) for every t and for all i, j in G_t, boxes[i] = boxes[j]; (3) for every t, G_t is contiguous in the set of indices not in G_0 union ... union G_{t-1}, meaning that if i < j are in G_t and i < k < j with k not in G_0 union ... union G_{t-1}, then k is in G_t. Let score(G) = sum over t from 0 to m-1 of |G_t|^2. Then r = max { score(G) : G is a complete valid removal of boxes }.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveBoxes.spec_2",
+    "negation": "AegisSpec.RemoveBoxes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular it does not fail, overflow, panic, or access out of bounds.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveBoxes.spec_3",
+    "negation": "AegisSpec.RemoveBoxes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(boxes) <= r <= len(boxes)^2.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveBoxes.spec_4",
+    "negation": "AegisSpec.RemoveBoxes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let [l_1,u_1], ..., [l_s,u_s] be the maximal contiguous constant runs of boxes, listed from left to right (so l_1 = 0, u_s = len(boxes)-1, l_{j+1} = u_j+1, boxes is constant on each interval, and adjacent intervals have different values). Then r >= sum from j=1 to s of (u_j - l_j + 1)^2.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveBoxes.spec_5",
+    "negation": "AegisSpec.RemoveBoxes.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum over distinct values c occurring in boxes of m_c^2, where m_c is the number of indices i with 0 <= i < len(boxes) and boxes[i] = c.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveBoxes.spec_6",
+    "negation": "AegisSpec.RemoveBoxes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(boxes)^2.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, for every i with 0 <= i < len(boxes) 1 <= boxes[i] <= 100, and for every i and j with 0 <= i < len(boxes) and 0 <= j < len(boxes), boxes[i] = boxes[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveBoxes.spec_7",
+    "negation": "AegisSpec.RemoveBoxes.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(boxes) if and only if for every i and j with 0 <= i < j < len(boxes), boxes[i] != boxes[j].",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveBoxes.spec_8",
+    "negation": "AegisSpec.RemoveBoxes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r mod 2 = len(boxes) mod 2 (that is, r and len(boxes) have the same parity).",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveBoxes.spec_9",
+    "negation": "AegisSpec.RemoveBoxes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever remove_boxes(boxes) returns r and remove_boxes(boxes') returns r', we have r = r'.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, for every i with 0 <= i < len(boxes) 1 <= boxes[i] <= 100, len(boxes') = len(boxes), for every i with 0 <= i < len(boxes') 1 <= boxes'[i] <= 100, and for every i with 0 <= i < len(boxes), boxes'[i] = boxes[len(boxes)-1-i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveBoxes.spec_10",
+    "negation": "AegisSpec.RemoveBoxes.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever remove_boxes(boxes) returns r and remove_boxes(boxes') returns r', we have r' = r + 1.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 99, for every i with 0 <= i < len(boxes) 1 <= boxes[i] <= 100, c is an integer with 1 <= c <= 100 and c != boxes[i] for every i with 0 <= i < len(boxes), boxes' has length len(boxes)+1, for every i with 0 <= i < len(boxes) boxes'[i] = boxes[i], and boxes'[len(boxes)] = c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveBoxes.spec_11",
+    "negation": "AegisSpec.RemoveBoxes.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 4 if boxes[0] = boxes[1], and r = 2 otherwise.",
+    "preconditions": "len(boxes) = 2, and for every i with 0 <= i < 2, 1 <= boxes[i] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RemoveBoxes.spec_12",
+    "negation": "AegisSpec.RemoveBoxes.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (len(boxes)-1)^2 + 1.",
+    "preconditions": "len(boxes) >= 2 and len(boxes) <= 100, for every i with 0 <= i < len(boxes) 1 <= boxes[i] <= 100, and there exists a value c such that c occurs exactly once in boxes and every index i with boxes[i] != c has the same value d (with d != c); equivalently, exactly two distinct colors occur and one of them occurs exactly once."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RemoveBoxes.spec_13",
+    "negation": "AegisSpec.RemoveBoxes.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer c with 1 <= c <= 100, if m is the number of indices i with 0 <= i < len(boxes) and boxes[i] = c, and m >= 1, then r >= len(boxes) - m + m^2.",
+    "preconditions": "len(boxes) >= 1 and len(boxes) <= 100, and for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 100."
+  }
+]

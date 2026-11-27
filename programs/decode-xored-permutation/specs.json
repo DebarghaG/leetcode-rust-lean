@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Decode.spec_1",
+    "negation": "AegisSpec.Decode.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (a vector of i64) such that: (1) len(r) = n, where n = len(encoded) + 1; (2) r is a permutation of the integers 1, 2, ..., n, meaning each integer from 1 to n appears exactly once in r; (3) for every i with 0 <= i < len(encoded), encoded[i] = r[i] XOR r[i+1].",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, len(encoded) < 10^5 - 1, and there exists a unique permutation p of {1,2,...,n} such that for every i with 0 <= i < len(encoded), encoded[i] = p[i] XOR p[i+1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Decode.spec_2",
+    "negation": "AegisSpec.Decode.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r with len(r) = len(encoded) + 1.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Decode.spec_3",
+    "negation": "AegisSpec.Decode.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every index i with 0 <= i < len(r), 1 <= r[i] <= n, where n = len(encoded) + 1.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Decode.spec_4",
+    "negation": "AegisSpec.Decode.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of indices i and j with 0 <= i < j < len(r), r[i] != r[j].",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Decode.spec_5",
+    "negation": "AegisSpec.Decode.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer v with 1 <= v <= n, there exists an index i with 0 <= i < len(r) such that r[i] = v.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Decode.spec_6",
+    "negation": "AegisSpec.Decode.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i < len(encoded), encoded[i] = r[i] XOR r[i+1].",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Decode.spec_7",
+    "negation": "AegisSpec.Decode.spec_7_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, panic, or overflow) and r is a vector of i64.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Decode.spec_8",
+    "negation": "AegisSpec.Decode.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The sum of all elements of r equals n*(n+1)/2, where n = len(encoded) + 1.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Decode.spec_9",
+    "negation": "AegisSpec.Decode.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The bitwise XOR of all elements of r, i.e., r[0] XOR r[1] XOR ... XOR r[n-1], equals the bitwise XOR of the integers 1, 2, ..., n.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Decode.spec_10",
+    "negation": "AegisSpec.Decode.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The bitwise XOR of all elements of encoded, i.e., encoded[0] XOR encoded[1] XOR ... XOR encoded[n-2], equals r[0] XOR r[n-1].",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Decode.spec_11",
+    "negation": "AegisSpec.Decode.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "r[0] = (1 XOR 2 XOR ... XOR n) XOR (encoded[1] XOR encoded[3] XOR ... XOR encoded[n-2]), where the second XOR is over all odd indices of encoded.",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Decode.spec_12",
+    "negation": "AegisSpec.Decode.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "r[n-1] = r[0] XOR (encoded[0] XOR encoded[1] XOR ... XOR encoded[n-2]).",
+    "preconditions": "Let n = len(encoded) + 1. Assume len(encoded) >= 2, len(encoded) is even, and the input is a valid encoding as described in spec_1."
+  }
+]

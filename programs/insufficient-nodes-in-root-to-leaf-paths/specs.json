@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SufficientSubset.spec_1",
+    "negation": "AegisSpec.SufficientSubset.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Define a node occurrence n of root to be good if there exists a root-to-leaf path P of root (a sequence from the root to a node whose left and right children are both Null, following left/right child edges) such that n lies on P and the sum of the values of all nodes on P is at least limit. Then r is exactly the tree obtained from root by keeping every good node occurrence, deleting every non-good node occurrence, and preserving the original parent-child edges and left/right order among kept nodes; deleted nodes are replaced by Null. Equivalently, for every sequence d of left/right moves, d is a valid path to a node in r if and only if d is a valid path to a good node in root, and in that case the value at d in r equals the value at d in root; no other nodes occur in r. In particular, if root has no good node, equivalently every root-to-leaf path of root has sum strictly less than limit, then r = Null.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000, where size(T) is the number of Node constructors in T; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000, where limit is the integer represented by the Std.I64 argument."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SufficientSubset.spec_2",
+    "negation": "AegisSpec.SufficientSubset.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail by integer overflow, out-of-bounds access, or panic for every root and limit satisfying the preconditions.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SufficientSubset.spec_3",
+    "negation": "AegisSpec.SufficientSubset.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = Null if and only if every root-to-leaf path of root has sum strictly less than limit, equivalently if and only if no root-to-leaf path of root has sum at least limit.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SufficientSubset.spec_4",
+    "negation": "AegisSpec.SufficientSubset.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every node occurrence n in root, if n appears in r at the same position (the same sequence of left/right moves from the root), then there exists a root-to-leaf path P in root containing n whose node-value sum is at least limit.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SufficientSubset.spec_5",
+    "negation": "AegisSpec.SufficientSubset.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every node occurrence n in root, if n does not appear in r at its original position, then every root-to-leaf path P in root containing n has node-value sum strictly less than limit.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SufficientSubset.spec_6",
+    "negation": "AegisSpec.SufficientSubset.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every node occurrence n in root that appears in r, every ancestor of n in root (every node on the unique path from the root of root to n, including the root if it is not n) also appears in r at its original position. Equivalently, if n appears in r and n is not the root of root, then the parent of n in root appears in r.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SufficientSubset.spec_7",
+    "negation": "AegisSpec.SufficientSubset.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every node occurrence n in root that appears in r, and for each side (left or right), let c be the child of n on that side in root, possibly Null. Then the child of n on that side in r is c if c is a good node (that is, some root-to-leaf path of root through c has sum at least limit), and is Null otherwise. If c = Null, the corresponding child in r is Null.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SufficientSubset.spec_8",
+    "negation": "AegisSpec.SufficientSubset.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every root-to-leaf path Q of r, read as the same sequence of left/right moves from the root, is also a root-to-leaf path of root (it ends at a leaf of root and has the same node values), and the sum of the values along Q is at least limit.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SufficientSubset.spec_9",
+    "negation": "AegisSpec.SufficientSubset.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every root-to-leaf path P of root whose node-value sum is at least limit, all nodes of P appear in r at their original positions, so following the same sequence of left/right moves from the root of r reaches the same leaf with the same values; hence P is also a root-to-leaf path of r.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SufficientSubset.spec_10",
+    "negation": "AegisSpec.SufficientSubset.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every leaf occurrence l of root, l appears in r, necessarily as a leaf, if and only if the sum of the values on the unique path from the root of root to l is at least limit.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SufficientSubset.spec_11",
+    "negation": "AegisSpec.SufficientSubset.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, size(r) <= size(root), where size(T) is the number of Node constructors in T. In particular, if r != Null then 1 <= size(r) <= 5000.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SufficientSubset.spec_12",
+    "negation": "AegisSpec.SufficientSubset.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every sequence d of left/right moves that is valid in r (following d from the root of r does not hit Null before the end), the same sequence d is valid in root and the node reached in r has the same value as the node reached in root. Consequently r has no node occurrence that is not also a node occurrence of root at the same position.",
+    "preconditions": "root is a finite binary tree with 1 <= size(root) <= 5000; every Node value v in root satisfies -100000 <= v <= 100000; and -1000000000 <= limit <= 1000000000."
+  }
+]

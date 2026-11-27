@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_1",
+    "negation": "AegisSpec.ValidateStackSequences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if there exists a finite sequence of operations starting from an empty stack such that: (1) the push operations push pushed[0], pushed[1], ..., pushed[n-1] exactly once each and in that order; (2) every operation is either the next push in that order or a pop of the current top of the stack, and a pop is performed only when the stack is nonempty; (3) the values removed by the successive pop operations are exactly popped[0], popped[1], ..., popped[n-1]; and (4) after all n pushes and all n pops the stack is empty. Equivalently, r is true exactly when popped is a valid stack permutation of pushed, and r is false otherwise.",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed (each value occurring in pushed occurs exactly once in popped and vice versa)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_2",
+    "negation": "AegisSpec.ValidateStackSequences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail on these inputs: for every pushed and popped satisfying the preconditions, it returns some Boolean result r, with no panic, arithmetic overflow, out-of-bounds slice access, or other failure.",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_3",
+    "negation": "AegisSpec.ValidateStackSequences.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns false, there exist indices i, j, k with 0 <= i < j < k < n such that pos(popped[j]) < pos(popped[k]) < pos(popped[i]).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. For a value v occurring in pushed, pos(v) denotes the unique index i with pushed[i] = v."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_4",
+    "negation": "AegisSpec.ValidateStackSequences.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, there do not exist indices i, j, k with 0 <= i < j < k < n such that pos(popped[j]) < pos(popped[k]) < pos(popped[i]).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. For a value v occurring in pushed, pos(v) denotes the unique index i with pushed[i] = v."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_5",
+    "negation": "AegisSpec.ValidateStackSequences.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns true on (pushed', popped') if and only if it returns true on (pushed, popped).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. Fix an integer x with 0 <= x <= 1000 such that x is not among the values in pushed, and n + 1 <= 1000. Let pushed' = pushed with x appended, and popped' = popped with x appended; these also satisfy the problem constraints."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_6",
+    "negation": "AegisSpec.ValidateStackSequences.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns true on (f(pushed), f(popped)) if and only if it returns true on (pushed, popped).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. Let f be a function on integers that is injective on the set of values occurring in pushed and maps each of those values to an integer in [0,1000]. Let f(pushed) and f(popped) be the arrays obtained by applying f elementwise; these also satisfy the problem constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_7",
+    "negation": "AegisSpec.ValidateStackSequences.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns true on (pushed, popped), then it returns true on (pushed', popped').",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. Let S be any set of values contained in pushed such that at least one value remains, i.e., n - |S| >= 1. Let pushed' be pushed with all values in S deleted, and popped' be popped with all values in S deleted; these also satisfy the problem constraints."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_8",
+    "negation": "AegisSpec.ValidateStackSequences.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, for every i with 0 <= i < j, the value pushed[i] occurs in popped at some index k with 1 <= k < n (that is, after popped[0]).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. Let j be the unique index with pushed[j] = popped[0]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidateStackSequences.spec_9",
+    "negation": "AegisSpec.ValidateStackSequences.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, for every i with j < i < n, the value pushed[i] occurs in popped at some index k with 0 <= k < n-1 (that is, before popped[n-1]).",
+    "preconditions": "Let n = len(pushed). The inputs satisfy the problem constraints: len(popped) = n, 1 <= n <= 1000; every value pushed[i] is an integer in [0,1000]; the values in pushed are pairwise distinct; and popped is a permutation of pushed. Let j be the unique index with pushed[j] = popped[n-1]."
+  }
+]

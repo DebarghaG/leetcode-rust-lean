@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_1",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max { G(t,k) : t is a lowercase byte string with len(t)=len(s) and Hamming distance at most 1 from s }; here G(t,q) is the number of partitions produced by repeatedly deleting from t the longest nonempty prefix containing at most q distinct bytes, with G(empty,q)=0.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_2",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_3",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(s).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_4",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= G(s,k), where G(t,q) is the number of partitions produced by repeatedly deleting from t the longest nonempty prefix containing at most q distinct bytes, with G(empty,q)=0.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_5",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, R <= r <= R + 2, where R is the number of maximal contiguous blocks of equal bytes in s (equivalently, R = 1 + the number of indices i with 1 <= i < len(s) and s[i] != s[i-1]).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); k = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_6",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); k = 1; for every i with 1 <= i < len(s), s[i] != s[i-1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_7",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(len(s), 3), that is, r is the smaller of len(s) and 3.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); k = 1; for every i with 0 <= i < len(s), s[i] = s[0]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_8",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26; k >= len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_9",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned for (s,k). For every integer k' with k <= k' <= 26, if r' is the result returned for (s,k'), then r >= r'.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_10",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation f of the set of 26 lowercase ASCII byte values, if s_f is the byte string with s_f[i] = f(s[i]) for every 0 <= i < len(s), then whenever the function returns a result r on (s,k), the function returns the same result r on (s_f,k).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_11",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a lowercase byte string t with len(t)=len(s) and Hamming distance at most 1 from s such that G(t,k)=r, where G(t,q) is the number of partitions produced by repeatedly deleting from t the longest nonempty prefix containing at most q distinct bytes, with G(empty,q)=0.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_12",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r > G(s,k), then there exists an index i with 0 <= i < len(s) and a lowercase byte c with c != s[i] such that G(t,k)=r, where t is s with position i replaced by c and G is the greedy partition count defined by repeatedly deleting the longest nonempty prefix containing at most k distinct bytes.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_13",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let d be the number of distinct byte values occurring in s. Whenever the function returns a result r, r = 1 if and only if d <= k.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); 1 <= k <= 26."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxPartitionsAfterOperations.spec_14",
+    "negation": "AegisSpec.MaxPartitionsAfterOperations.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let R be the number of maximal contiguous blocks of equal bytes in s, and let L be the maximum length of such a block. Whenever the function returns a result r, r = R + 2 if L >= 3, r = R + 1 if L = 2, and r = R if L = 1.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive; every byte of s is an ASCII lowercase letter (97 <= s[i] <= 122 for every 0 <= i < len(s)); k = 1."
+  }
+]

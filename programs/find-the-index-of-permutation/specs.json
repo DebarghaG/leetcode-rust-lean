@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_1",
+    "negation": "AegisSpec.GetPermutationIndex.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer with 0 <= r < M such that r is congruent modulo M to N(perm), where N(perm) is the number of permutations q of {1,2,...,n} that are lexicographically strictly less than perm. Equivalently, r is the 0-based index of perm in the lexicographically sorted list of all permutations of {1,2,...,n}, reduced modulo M. Lexicographic comparison means comparing entries from left to right and, at the first position where two permutations differ, the one with the smaller entry comes first.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. The slice has 0-based indices. Assume 1 <= n <= 10^5 and perm is a permutation of {1,2,...,n}: for every i with 0 <= i < n, 1 <= perm[i] <= n, and for every i,j with 0 <= i < j < n, perm[i] != perm[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_2",
+    "negation": "AegisSpec.GetPermutationIndex.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every perm satisfying the preconditions, the function returns a result r; it does not fail, panic, or report arithmetic overflow.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5 and perm is a permutation of {1,2,...,n}: for every i with 0 <= i < n, 1 <= perm[i] <= n, and for every i,j with 0 <= i < j < n, perm[i] != perm[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_3",
+    "negation": "AegisSpec.GetPermutationIndex.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5, perm is a permutation of {1,2,...,n}, and for every i with 0 <= i < n, perm[i] = i + 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_4",
+    "negation": "AegisSpec.GetPermutationIndex.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (n! - 1) mod M, where n! = 1 * 2 * ... * n is the number of permutations of {1,2,...,n}.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5, perm is a permutation of {1,2,...,n}, and for every i with 0 <= i < n, perm[i] = n - i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_5",
+    "negation": "AegisSpec.GetPermutationIndex.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = N exactly, so the modular reduction does not change the value; in particular 0 <= r < n!.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5, perm is a permutation of {1,2,...,n}, and n! <= M. Let N be the number of permutations q of {1,2,...,n} that are lexicographically strictly less than perm."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_6",
+    "negation": "AegisSpec.GetPermutationIndex.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_permutation_index(p) returns a result r_p and get_permutation_index(q) returns a result r_q, we have r_p < r_q.",
+    "preconditions": "Let n and M = 10^9 + 7 be such that 2 <= n and n! <= M. Let p and q be two permutations of {1,2,...,n}, represented as slices. Suppose p is lexicographically strictly less than q."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_7",
+    "negation": "AegisSpec.GetPermutationIndex.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_permutation_index(p) returns a result r_p and get_permutation_index(q) returns a result r_q, r_q = (r_p + 1) mod M.",
+    "preconditions": "Let n and M = 10^9 + 7 be such that 2 <= n <= 10^5. Let p and q be two permutations of {1,2,...,n}, represented as slices, such that q is the immediate lexicographic successor of p among all permutations of {1,2,...,n}: p is lexicographically less than q, and there is no permutation s of {1,2,...,n} with p lexicographically less than s and s lexicographically less than q."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_8",
+    "negation": "AegisSpec.GetPermutationIndex.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_permutation_index(perm) returns a result r and get_permutation_index(comp) returns a result r_c, we have (r + r_c) mod M = (n! - 1) mod M; equivalently r_c = (n! - 1 - r) mod M.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5 and perm is a permutation of {1,2,...,n}. Define comp to be the slice of length n with comp[i] = n + 1 - perm[i] for every i with 0 <= i < n; comp is also a permutation of {1,2,...,n}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_9",
+    "negation": "AegisSpec.GetPermutationIndex.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = (sum for i = 0 to n-1 of c_i * (n - 1 - i)!) mod M.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5 and perm is a permutation of {1,2,...,n}. For each i with 0 <= i < n, let c_i be the number of indices j with i < j < n and perm[j] < perm[i]. Use 0! = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_10",
+    "negation": "AegisSpec.GetPermutationIndex.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, (k - 1) * (n - 1)! <= r <= k * (n - 1)! - 1.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5, perm is a permutation of {1,2,...,n}, and n! <= M. Let k = perm[0]. Use 0! = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetPermutationIndex.spec_11",
+    "negation": "AegisSpec.GetPermutationIndex.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if perm[i] = i + 1 for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(perm) and M = 10^9 + 7. Assume 1 <= n <= 10^5, perm is a permutation of {1,2,...,n}, and n! <= M."
+  }
+]

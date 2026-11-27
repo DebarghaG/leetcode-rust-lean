@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_1",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define vals(T) as the set of node values of T. Define pre(T) as the preorder traversal of T: pre(Null) = [], and pre(Node(v,L,R)) = [v] followed by pre(L) followed by pre(R). For S subseteq vals(root), define flip(T,S) as the tree obtained from T by swapping the left and right children at exactly those nodes whose values belong to S. A swap at a node with fewer than two children does not change the preorder traversal. Whenever the function returns Ok r: (1) if there exists S subseteq vals(root) with pre(flip(root,S)) = voyage, let m = min { |S| : S subseteq vals(root) and pre(flip(root,S)) = voyage }; then r is a list whose entries are exactly the elements of some S_min subseteq vals(root) for which pre(flip(root,S_min)) = voyage and |S_min| = m, in any order, with no repeated entries; (2) if no such S exists, then r = [-1].",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_2",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_3",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let pre(T) be the preorder traversal of T, and for a set S of node values let flip(root,S) be root after swapping left and right children at exactly the nodes whose values are in S. Whenever the function returns a result r, r = [-1] if and only if there is no set S of node values of root such that pre(flip(root,S)) = voyage.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_4",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let pre(T) be the preorder traversal of T, and for a set S of node values let flip(root,S) be root after swapping left and right children at exactly the nodes whose values are in S. Whenever the function returns a result r with r != [-1], every entry of r is the value of a node of root, and if S_r is the set of values occurring in r, then pre(flip(root,S_r)) = voyage.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_5",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let pre(T) be the preorder traversal of T, and for a set S of node values let flip(root,S) be root after swapping left and right children at exactly the nodes whose values are in S. Suppose there exists a set S of node values of root with pre(flip(root,S)) = voyage. Whenever the function returns a result r with r != [-1], len(r) = min { |S| : S is a set of node values of root and pre(flip(root,S)) = voyage }.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_6",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let pre(T) be the preorder traversal of T. Whenever the function returns a result r, r = [] if and only if pre(root) = voyage.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_7",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If root = Node(v,L,R) and the function returns a result r with r != [-1], then voyage[0] = v.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_8",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pre(T) be the preorder traversal of T, and for a set S of node values let flip(root,S) be root after swapping left and right children at exactly the nodes whose values are in S. Whenever the function returns a result r with r != [-1], let S_r be the set of values occurring in r. For every x in S_r, pre(flip(root, S_r without x)) != voyage.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FlipMatchVoyage.spec_9",
+    "negation": "AegisSpec.FlipMatchVoyage.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r != [-1], for every value x occurring in r, the node of root whose value is x has two nonempty children.",
+    "preconditions": "Let n = len(voyage). root has exactly n nodes, n >= 1 and n <= 100; every node value and every voyage entry lies in {1,...,n}; all node values are distinct; all voyage entries are distinct (hence voyage is a permutation of the node values)."
+  }
+]

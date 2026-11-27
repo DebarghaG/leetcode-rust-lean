@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PalindromePartition.spec_1",
+    "negation": "AegisSpec.PalindromePartition.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the minimum over all k-partitions of s of the sum of the minimum changes needed to make each part a palindrome. Formally, let n = len(s). For 0 <= l < r <= n define mis(l,r) as the number of indices t with 0 <= t < floor((r-l)/2) and s[l+t] != s[r-1-t]; this is exactly the minimum number of character changes that makes s[l..r) a palindrome. A k-partition is a sequence c_0,...,c_k with 0 = c_0 < c_1 < ... < c_k = n. Then r = min { sum_{j=1..k} mis(c_{j-1}, c_j) : c_0,...,c_k is a k-partition }.",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PalindromePartition.spec_2",
+    "negation": "AegisSpec.PalindromePartition.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (in particular, no arithmetic overflow, no out-of-bounds slice access, and no panic).",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PalindromePartition.spec_3",
+    "negation": "AegisSpec.PalindromePartition.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= floor(n/2).",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PalindromePartition.spec_4",
+    "negation": "AegisSpec.PalindromePartition.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= n - k.",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PalindromePartition.spec_5",
+    "negation": "AegisSpec.PalindromePartition.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on input (s,k) and a result r' on input (rev,k), r = r'.",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122. Let rev be the byte sequence of length n with rev[i] = s[n-1-i]; it satisfies the same constraints."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PalindromePartition.spec_6",
+    "negation": "AegisSpec.PalindromePartition.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on input (s,k) and a result r' on input (t,k), r = r'.",
+    "preconditions": "Let n = len(s). The input satisfies 1 <= k <= n <= 100 and every byte of s is in 97..122. Let t be another byte sequence of length n containing only bytes in 97..122 such that for all i,j with 0 <= i < n and 0 <= j < n, s[i] = s[j] if and only if t[i] = t[j]."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxPower.spec_1",
+    "negation": "AegisSpec.MaxPower.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_power(stations, r, k) returns a result ans, ans is the least integer u such that for every allocation a = (a_0,...,a_{n-1}) of nonnegative integers with sum_{i=0}^{n-1} a_i = k, the minimum post-allocation city power is at most u. The post-allocation power of city j under allocation a is P(a,j) = sum over i with 0 <= i < n and |i-j| <= r of (stations[i] + a_i), and the minimum is taken over all j with 0 <= j < n. Equivalently, ans is the maximum over all such allocations a of min_{0<=j<n} P(a,j).",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxPower.spec_2",
+    "negation": "AegisSpec.MaxPower.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "max_power(stations, r, k) returns a result; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxPower.spec_3",
+    "negation": "AegisSpec.MaxPower.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_power(stations, r, k) returns ans, ans >= Bmin, where Bmin = min_{0<=j<n} B(j) and B(j) = sum over i with 0 <= i < n and |i-j| <= r of stations[i].",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxPower.spec_4",
+    "negation": "AegisSpec.MaxPower.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_power(stations, r, k) returns ans, ans <= Bmin + k, where Bmin = min_{0<=j<n} B(j) and B(j) = sum over i with 0 <= i < n and |i-j| <= r of stations[i].",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxPower.spec_5",
+    "negation": "AegisSpec.MaxPower.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_power(stations, r, 0) returns ans, ans = Bmin, where Bmin = min_{0<=j<n} B(j) and B(j) = sum over i with 0 <= i < n and |i-j| <= r of stations[i].",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and k = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxPower.spec_6",
+    "negation": "AegisSpec.MaxPower.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_power(stations, 0, k) returns ans, ans is the greatest integer t such that sum_{i=0}^{n-1} max(0, t - stations[i]) <= k. Equivalently, ans = max over allocations a=(a_0,...,a_{n-1}) with a_i >= 0 and sum_{i=0}^{n-1} a_i = k of min_{0<=i<n} (stations[i]+a_i).",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, r = 0, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxPower.spec_7",
+    "negation": "AegisSpec.MaxPower.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_power(stations, n-1, k) returns ans, ans = (sum_{i=0}^{n-1} stations[i]) + k.",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, r = n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxPower.spec_8",
+    "negation": "AegisSpec.MaxPower.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_power(stations, r, k1) returns ans1 and max_power(stations, r, k2) returns ans2, then ans1 <= ans2.",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k1 <= k2 <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxPower.spec_9",
+    "negation": "AegisSpec.MaxPower.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_power(stations, r1, k) returns ans1 and max_power(stations, r2, k) returns ans2, then ans1 <= ans2.",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r1 <= r2 <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxPower.spec_10",
+    "negation": "AegisSpec.MaxPower.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_power(stations1, r, k) returns ans1 and max_power(stations2, r, k) returns ans2, then ans1 <= ans2.",
+    "preconditions": "len(stations1) = len(stations2) = n, 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations1[i] <= stations2[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxPower.spec_11",
+    "negation": "AegisSpec.MaxPower.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_power(stations, r, k) returns ans and max_power(rev, r, k) returns ans_rev, then ans = ans_rev.",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000. Let rev be the slice of length n defined by rev[i] = stations[n-1-i] for every 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxPower.spec_12",
+    "negation": "AegisSpec.MaxPower.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_power(stations, r, k) returns ans, there exists an allocation a = (a_0,...,a_{n-1}) of nonnegative integers with sum_{i=0}^{n-1} a_i = k such that min_{0<=j<n} P(a,j) = ans, where P(a,j) = sum over i with 0 <= i < n and |i-j| <= r of (stations[i] + a_i).",
+    "preconditions": "n = len(stations), 1 <= n <= 100000, for every i with 0 <= i < n, 0 <= stations[i] <= 100000, 0 <= r <= n-1, and 0 <= k <= 1000000000."
+  }
+]

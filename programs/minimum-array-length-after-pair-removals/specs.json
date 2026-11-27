@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_1",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums) and let M be the maximum multiplicity in nums, i.e. M = max{ cnt(v) | v occurs in nums }, where cnt(v) = |{ i | 0 <= i < n and nums[i] = v }|. The call returns a result r and r = 2*M - n if 2*M > n, while r = n mod 2 if 2*M <= n. Here n mod 2 is 0 when n is even and 1 when n is odd.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_2",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, the call does not fail: there exists an integer r such that min_length_after_removals(nums) = Result.ok r. In particular, no overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_3",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the call returns a result r, 0 <= r <= len(nums).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_4",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the call returns a result r, r mod 2 = len(nums) mod 2. Equivalently, r is congruent to len(nums) modulo 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_5",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums) and let M be the maximum multiplicity in nums. Whenever the call returns a result r, r >= 2*M - n. Equivalently, at least the surplus of the most frequent value over all other values combined cannot be removed.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_6",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums) and let P be the maximum size of a set of pairwise disjoint unordered pairs {i,j} such that 0 <= i < j < n and nums[i] < nums[j]. Whenever the call returns a result r, r = n - 2*P.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_7",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call returns a result r, for every integer k >= 0 and every sequence of k valid removal operations applied to nums, the length after those operations, len(nums) - 2*k, is at least r.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_8",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the call returns a result r, len(nums) - r is even, and there exists a sequence of exactly (len(nums) - r)/2 valid removal operations applied to nums that leaves exactly r elements.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_9",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the call returns a result r, r = len(nums) if and only if every element of nums is equal.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_10",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the call returns a result r, if the entries of nums are pairwise distinct (nums[i] != nums[j] for every 0 <= i < j < len(nums)), then r = len(nums) mod 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_11",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(nums) and let M be the maximum multiplicity in nums. Whenever the call returns a result r, r = 0 if and only if n is even and 2*M <= n.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_12",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(nums), n2 = len(nums2), and let M(nums) be the maximum multiplicity in nums (similarly for nums2). If n = n2 and M(nums) = M(nums2), then min_length_after_removals(nums) = min_length_after_removals(nums2). Under the preconditions both calls return results.",
+    "preconditions": "Both nums and nums2 satisfy: len >= 1; len <= 100000; all entries in [1,1000000000]; and non-decreasing order (for every i,j with 0 <= i < j < len, value at i <= value at j)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinLengthAfterRemovals.spec_13",
+    "negation": "AegisSpec.MinLengthAfterRemovals.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(nums) and let M be the maximum multiplicity in nums. Whenever the call returns a result r with r >= 2, the strict-majority condition 2*M > n holds, and every valid sequence of exactly (n - r)/2 removal operations that leaves r elements leaves all remaining elements equal to the unique value v that occurs M times in nums.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  }
+]

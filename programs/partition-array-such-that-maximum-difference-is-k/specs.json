@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PartitionArray.spec_1",
+    "negation": "AegisSpec.PartitionArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a valid m-partition of nums (for an integer m >= 1) as a collection S_1,...,S_m of nonempty subsets of the index set {0,...,len(nums)-1} that are pairwise disjoint and whose union is the whole index set, such that for every j with 1 <= j <= m, max_{i in S_j} nums[i] - min_{i in S_j} nums[i] <= k. (Each S_j, read in increasing index order, is a subsequence.) Let M be the least integer m >= 1 for which nums has a valid m-partition. The function returns a result r and r = M.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PartitionArray.spec_2",
+    "negation": "AegisSpec.PartitionArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, panic, or access an index out of bounds) for every input satisfying the preconditions.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PartitionArray.spec_3",
+    "negation": "AegisSpec.PartitionArray.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PartitionArray.spec_4",
+    "negation": "AegisSpec.PartitionArray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PartitionArray.spec_5",
+    "negation": "AegisSpec.PartitionArray.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= D, where D is the number of distinct values occurring in nums, i.e. the cardinality of the set {v | there exists i with 0 <= i < len(nums) and nums[i] = v}.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PartitionArray.spec_6",
+    "negation": "AegisSpec.PartitionArray.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let lo = min_{0 <= i < len(nums)} nums[i] and hi = max_{0 <= i < len(nums)} nums[i]. Whenever the function returns a result r, r = 1 if and only if hi - lo <= k.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PartitionArray.spec_7",
+    "negation": "AegisSpec.PartitionArray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = D, where D is the number of distinct values occurring in nums.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; k = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PartitionArray.spec_8",
+    "negation": "AegisSpec.PartitionArray.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, nums has a valid r-partition: there are r nonempty pairwise disjoint index sets S_1,...,S_r whose union is {0,...,len(nums)-1} and, for every j with 1 <= j <= r, max_{i in S_j} nums[i] - min_{i in S_j} nums[i] <= k.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PartitionArray.spec_9",
+    "negation": "AegisSpec.PartitionArray.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every integer m with 1 <= m < r there is no valid m-partition of nums, where a valid m-partition is a collection of m nonempty pairwise disjoint index sets covering all indices and each having maximum value minus minimum value at most k.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PartitionArray.spec_10",
+    "negation": "AegisSpec.PartitionArray.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let sorted be a nondecreasing rearrangement of nums (same multiset of values). Whenever the function returns a result r, r is the least integer m >= 1 such that sorted can be split into m nonempty contiguous blocks sorted[l_0..u_0], sorted[l_1..u_1], ..., sorted[l_{m-1}..u_{m-1}] covering all positions, with sorted[u_j] - sorted[l_j] <= k for every j with 0 <= j < m.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PartitionArray.spec_11",
+    "negation": "AegisSpec.PartitionArray.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever partition_array nums k returns a result r and partition_array nums' k returns a result r', we have r = r'.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; nums' is any list of 64-bit integers with len(nums') = len(nums) and the same multiset of values as nums (each value occurs the same number of times); 0 <= k <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PartitionArray.spec_12",
+    "negation": "AegisSpec.PartitionArray.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever partition_array nums k returns a result r and partition_array uniq k returns a result r_u, we have r = r_u.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; uniq is any list obtained from nums by keeping exactly one occurrence of each distinct value and deleting all other occurrences (so uniq has no repeated values and the same set of distinct values as nums); 0 <= k <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PartitionArray.spec_13",
+    "negation": "AegisSpec.PartitionArray.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever partition_array nums k1 returns a result r1 and partition_array nums k2 returns a result r2, we have r1 >= r2.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k1 <= k2 <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PartitionArray.spec_14",
+    "negation": "AegisSpec.PartitionArray.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever partition_array nums k returns a result r and partition_array nums' k returns a result r', we have r' <= r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; nums' is a nonempty list of 64-bit integers that is a submultiset of nums (i.e., every value occurs in nums' no more often than in nums) and satisfies 0 <= nums'[i] <= 100000 for every i; 0 <= k <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.PartitionArray.spec_15",
+    "negation": "AegisSpec.PartitionArray.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every set T of indices with T subset of {0,...,len(nums)-1}, if |nums[i] - nums[j]| > k for every two distinct indices i,j in T, then |T| <= r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.PartitionArray.spec_16",
+    "negation": "AegisSpec.PartitionArray.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the maximum cardinality of a set T of indices with T subset of {0,...,len(nums)-1} such that |nums[i] - nums[j]| > k for every two distinct indices i,j in T.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000; 0 <= k <= 100000."
+  }
+]

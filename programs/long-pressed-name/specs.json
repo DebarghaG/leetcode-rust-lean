@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsLongPressedName.spec_1",
+    "negation": "AegisSpec.IsLongPressedName.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r, we have r = true if and only if the following condition holds. Decompose name into its maximal nonempty contiguous runs of equal bytes, written as (c_0,a_0),...,(c_{k-1},a_{k-1}), where c_i is the byte of the i-th run and a_i is its length, and adjacent runs have different bytes. Decompose typed similarly as (d_0,b_0),...,(d_{m-1},b_{m-1}). Then k = m, and for every i with 0 <= i < k, c_i = d_i and b_i >= a_i.",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsLongPressedName.spec_2",
+    "negation": "AegisSpec.IsLongPressedName.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every name and typed satisfying the preconditions, is_long_pressed_name(name, typed) returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsLongPressedName.spec_3",
+    "negation": "AegisSpec.IsLongPressedName.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, we have len(name) <= len(typed).",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsLongPressedName.spec_4",
+    "negation": "AegisSpec.IsLongPressedName.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, we have name[0] = typed[0].",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsLongPressedName.spec_5",
+    "negation": "AegisSpec.IsLongPressedName.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, we have name[len(name)-1] = typed[len(typed)-1].",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsLongPressedName.spec_6",
+    "negation": "AegisSpec.IsLongPressedName.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r, we have r = true if and only if for every i with 0 <= i < len(name), name[i] = typed[i].",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, every byte of both lies in the lowercase ASCII range 97 through 122 inclusive, and len(name) = len(typed)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsLongPressedName.spec_7",
+    "negation": "AegisSpec.IsLongPressedName.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, name is a subsequence of typed: there exist indices j_0 < j_1 < ... < j_{len(name)-1} with 0 <= j_0 and j_{len(name)-1} < len(typed), such that typed[j_i] = name[i] for every i with 0 <= i < len(name).",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsLongPressedName.spec_8",
+    "negation": "AegisSpec.IsLongPressedName.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, for every byte c with 0 <= c < 256, the number of indices i with 0 <= i < len(typed) and typed[i] = c is at least the number of indices i with 0 <= i < len(name) and name[i] = c.",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsLongPressedName.spec_9",
+    "negation": "AegisSpec.IsLongPressedName.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r and r = true, the sequence obtained by replacing each maximal nonempty run of equal bytes in name by that single byte is equal, element for element, to the sequence obtained the same way from typed.",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, and every byte of both lies in the lowercase ASCII range 97 through 122 inclusive."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsLongPressedName.spec_10",
+    "negation": "AegisSpec.IsLongPressedName.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r, we have r = false.",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, every byte of both lies in the lowercase ASCII range 97 through 122 inclusive, and there exists a byte c with 97 <= c <= 122 such that c occurs in typed but c does not occur in name."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsLongPressedName.spec_11",
+    "negation": "AegisSpec.IsLongPressedName.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r, we have r = true.",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, every byte of both lies in the lowercase ASCII range 97 through 122 inclusive, and there exists an index i with 0 <= i < len(name) such that len(typed) = len(name) + 1, typed[j] = name[j] for every j with 0 <= j <= i, typed[i+1] = name[i], and typed[j+1] = name[j] for every j with i+1 <= j < len(name)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsLongPressedName.spec_12",
+    "negation": "AegisSpec.IsLongPressedName.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r with r = true and is_long_pressed_name(name, typed2) returns a result r2, we have r2 = true.",
+    "preconditions": "name, typed, and typed2 are nonempty byte slices with lengths between 1 and 1000, every byte of all three lies in the lowercase ASCII range 97 through 122 inclusive, and typed2 is obtained from typed by increasing the length of exactly one maximal nonempty run: there exist indices l,u with 0 <= l < u <= len(typed), a byte c, and an integer d >= 1 such that typed[j] = c for every j with l <= j < u; l = 0 or typed[l-1] != c; u = len(typed) or typed[u] != c; len(typed2) = len(typed) + d; typed2[j] = typed[j] for every j with 0 <= j < l; typed2[j] = c for every j with l <= j < u + d; and typed2[j+d] = typed[j] for every j with u <= j < len(typed)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsLongPressedName.spec_13",
+    "negation": "AegisSpec.IsLongPressedName.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever is_long_pressed_name(name, typed) returns a result r, we have r = true if and only if for every i with 0 <= i < len(typed), typed[i] = name[0].",
+    "preconditions": "name and typed are nonempty byte slices with 1 <= len(name), len(typed) <= 1000, every byte of both lies in the lowercase ASCII range 97 through 122 inclusive, and len(name) = 1."
+  }
+]

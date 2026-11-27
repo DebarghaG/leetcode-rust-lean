@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CoinChange.spec_1",
+    "negation": "AegisSpec.CoinChange.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever coin_change(coins, amount) returns a result r, the following holds. Call a finite sequence of indices (i_1, ..., i_n) a coin sequence for x if n >= 0 (the empty sequence is allowed), each 0 <= i_t < len(coins), and the sum of coins[i_t] over t = 1..n equals x (the empty sum is 0). Then: (a) r = -1 if and only if there is no coin sequence for amount; and (b) if there is a coin sequence for amount, then r >= 0, there exists a coin sequence for amount of length exactly r, and every coin sequence for amount has length at least r.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CoinChange.spec_2",
+    "negation": "AegisSpec.CoinChange.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every coins and amount satisfying the preconditions, coin_change(coins, amount) returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CoinChange.spec_3",
+    "negation": "AegisSpec.CoinChange.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever coin_change(coins, amount) returns a result r, either r = -1 or (0 <= r and r <= amount).",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CoinChange.spec_4",
+    "negation": "AegisSpec.CoinChange.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever coin_change(coins, amount) returns a result r with r >= 0, let M = max { coins[i] | 0 <= i < len(coins) }. Then amount <= r * M.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CoinChange.spec_5",
+    "negation": "AegisSpec.CoinChange.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever coin_change(coins, amount) returns a result r with r >= 0, let m = min { coins[i] | 0 <= i < len(coins) }. Then r <= amount / m, equivalently r * m <= amount, where / is integer division.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000; additionally amount > 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CoinChange.spec_6",
+    "negation": "AegisSpec.CoinChange.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every index i with 0 <= i < len(coins) such that coins[i] divides amount, whenever coin_change(coins, amount) returns a result r, we have r >= 0 and r <= amount / coins[i].",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000; additionally amount > 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CoinChange.spec_7",
+    "negation": "AegisSpec.CoinChange.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let π be any permutation of the index set {0, ..., len(coins)-1}, and define coins' by coins'[j] = coins[π(j)] for 0 <= j < len(coins). Whenever coin_change(coins, amount) returns r and coin_change(coins', amount) returns r', we have r = r'.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CoinChange.spec_8",
+    "negation": "AegisSpec.CoinChange.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let coins' be any slice obtained from coins by deleting all but one occurrence of each denomination value that appears, so coins' has no repeated values and the set of values occurring in coins' equals the set of values occurring in coins. Whenever coin_change(coins, amount) returns r and coin_change(coins', amount) returns r', we have r = r'.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CoinChange.spec_9",
+    "negation": "AegisSpec.CoinChange.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever coin_change(coins, amount) returns a result r with r >= 0, we have r >= 1.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000; additionally amount > 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CoinChange.spec_10",
+    "negation": "AegisSpec.CoinChange.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever coin_change(coins, amount) returns r and coin_change(coins', amount) returns r', we have: if r = -1 then r' = -1 or r' >= 0; and if r >= 0 then r' >= 0 and r' <= r.",
+    "preconditions": "coins and coins' are slices of 64-bit integers with 1 <= len(coins) <= 12 and 1 <= len(coins') <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; for every i with 0 <= i < len(coins'), 1 <= coins'[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000; additionally every value occurring in coins also occurs in coins' (i.e., coins' is obtained from coins by adding zero or more coins)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CoinChange.spec_11",
+    "negation": "AegisSpec.CoinChange.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any index j with 0 <= j < len(coins) and coins[j] > amount, let coins' be the slice obtained from coins by deleting index j (so len(coins') = len(coins)-1 and coins'[i] = coins[i] for i < j, coins'[i] = coins[i+1] for i >= j). Then coin_change(coins, amount) = coin_change(coins', amount).",
+    "preconditions": "coins is a slice of 64-bit integers with 2 <= len(coins) <= 12; for every i with 0 <= i < len(coins), 1 <= coins[i] <= 2^31 - 1; amount is a 64-bit integer with 0 <= amount <= 10000; additionally there exists j with 0 <= j < len(coins) and coins[j] > amount."
+  }
+]

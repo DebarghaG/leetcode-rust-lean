@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_1",
+    "negation": "AegisSpec.ShortestSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. It holds that len(r) = n. Define: u is a substring of s iff u is non-empty and there exists p with 0 <= p <= len(s)-len(u) such that for all t with 0 <= t < len(u), u[t] = s[p+t]. Define u <=lex v to be the usual lexicographic order on byte arrays: u is a prefix of v (including u = v), or at the first index k where u and v differ, u[k] < v[k], comparing bytes as natural numbers. Then for every i with 0 <= i < n: if there exists a byte array u that is a substring of arr[i] and is not a substring of arr[j] for every j with 0 <= j < n and j != i, then r[i] is a substring of arr[i], r[i] is not a substring of any arr[j] with j != i, len(r[i]) <= len(u) for every such u, and r[i] <=lex u for every such u with len(u) = len(r[i]). If no such u exists, then r[i] is the empty byte array.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters). Indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_2",
+    "negation": "AegisSpec.ShortestSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, the function returns a result r; it does not panic, overflow, go out of bounds, or otherwise fail.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_3",
+    "negation": "AegisSpec.ShortestSubstrings.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(arr).",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_4",
+    "negation": "AegisSpec.ShortestSubstrings.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), if r[i] is non-empty then: (a) there exists p with 0 <= p <= len(arr[i]) - len(r[i]) such that for all t with 0 <= t < len(r[i]), r[i][t] = arr[i][p+t]; and (b) for every j with 0 <= j < len(arr) and j != i, there is no q with 0 <= q <= len(arr[j]) - len(r[i]) such that for all t with 0 <= t < len(r[i]), r[i][t] = arr[j][q+t].",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_5",
+    "negation": "AegisSpec.ShortestSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), r[i] is the empty byte array if and only if there is no non-empty byte array u for which there exists p with 0 <= p <= len(arr[i]) - len(u) and (for all t with 0 <= t < len(u), u[t] = arr[i][p+t]) and, for every j with 0 <= j < len(arr) and j != i, there is no q with 0 <= q <= len(arr[j]) - len(u) and (for all t with 0 <= t < len(u), u[t] = arr[j][q+t]).",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_6",
+    "negation": "AegisSpec.ShortestSubstrings.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), if there exists at least one non-empty byte array u that is a substring of arr[i] and is not a substring of any arr[j] with j != i (substring means contiguous non-empty occurrence), then r[i] is non-empty and len(r[i]) <= len(u) for every such u.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_7",
+    "negation": "AegisSpec.ShortestSubstrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), if there exists at least one non-empty byte array u that is a substring of arr[i] and is not a substring of any arr[j] with j != i (substring means contiguous non-empty occurrence), then for every such u with len(u) = len(r[i]), r[i] <=lex u, where <=lex is the usual lexicographic order on byte arrays.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_8",
+    "negation": "AegisSpec.ShortestSubstrings.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), every non-empty byte array u that is a substring of r[i] and has len(u) < len(r[i]) is a substring of arr[j] for at least one j with 0 <= j < len(arr) and j != i. (Substring means contiguous occurrence.)",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_9",
+    "negation": "AegisSpec.ShortestSubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), if there exists j with 0 <= j < len(arr), j != i, and arr[j] = arr[i] (byte-for-byte equality), then r[i] is the empty byte array.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_10",
+    "negation": "AegisSpec.ShortestSubstrings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), let C be the set of bytes c with 97 <= c <= 122 such that there exists k with 0 <= k < len(arr[i]) and arr[i][k] = c, and for every j with 0 <= j < len(arr) and j != i there is no k with 0 <= k < len(arr[j]) and arr[j][k] = c. If C is non-empty, then len(r[i]) = 1 and r[i][0] is the least byte in C (equivalently the lexicographically smallest one-byte string from C).",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_11",
+    "negation": "AegisSpec.ShortestSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i and k with 0 <= i < len(arr) and 0 <= k < len(r[i]), the byte r[i][k] satisfies 97 <= r[i][k] <= 122.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_12",
+    "negation": "AegisSpec.ShortestSubstrings.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr), len(r[i]) <= len(arr[i]); consequently, by the constraints, len(r[i]) <= 20.",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ShortestSubstrings.spec_13",
+    "negation": "AegisSpec.ShortestSubstrings.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr) and len(arr[i]) = 1, r[i] = arr[i] if arr[i] is not a substring of any arr[j] with j != i, and r[i] is the empty byte array otherwise. (Substring means contiguous occurrence.)",
+    "preconditions": "Let n = len(arr). The input arr satisfies the problem constraints: 2 <= n <= 100; for every i with 0 <= i < n, 1 <= len(arr[i]) <= 20 and every byte of arr[i] is in {97,...,122} (lowercase English letters)."
+  }
+]

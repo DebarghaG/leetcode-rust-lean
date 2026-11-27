@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_1",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For a non-empty finite set S ⊆ {0,1,...,n-1}, let or(S) be the bitwise OR of the values nums[i] for i ∈ S, using the usual bitwise OR on the 64-bit representations (all nums[i] are between 1 and 100000, so this coincides with the usual bitwise OR on non-negative integers). Let M = max { or(S) | S ⊆ {0,1,...,n-1}, S ≠ ∅ }. The function returns a result r and r equals the number of non-empty sets S ⊆ {0,1,...,n-1} such that or(S) = M.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_2",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not panic, overflow, or go out of bounds) for every input satisfying the preconditions.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_3",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r ≥ 1.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_4",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r ≤ 2^{len(nums)} - 1.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_5",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2^{len(nums)} - 1.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000. Additionally, there exists an integer c such that for every i with 0 ≤ i < n, nums[i] = c."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_6",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000. Additionally, for every i, j with 0 ≤ i < j < n, the bitwise AND (nums[i] & nums[j]) equals 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_7",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2^{len(nums)-1}.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000. Additionally, there exists an index k with 0 ≤ k < n such that nums[k] = M, where M = nums[0] | nums[1] | ... | nums[n-1], and the bitwise OR of the values nums[i] for all i with 0 ≤ i < n and i ≠ k is strictly less than M. (By convention, the OR of the empty set is 0; this condition is automatically satisfied when n = 1.)"
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_8",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 + [nums[1] is a bitwise submask of nums[0]] + [nums[0] is a bitwise submask of nums[1]], where [P] is 1 if P is true and 0 otherwise, and 'x is a bitwise submask of y' means (x | y) = y (equivalently, every bit set in x is also set in y).",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000. Additionally, len(nums) = 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_9",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns results r and r' on nums and nums' respectively, and r = r'.",
+    "preconditions": "Let nums and nums' be two slices of 64-bit signed integers, both satisfying the general constraints (so both have length n with 1 ≤ n ≤ 16 and all elements between 1 and 100000). Suppose nums' is a permutation of nums, i.e., there exists a bijection σ : {0,...,n-1} → {0,...,n-1} such that nums'[i] = nums[σ(i)] for every 0 ≤ i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_10",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = nums[0] | nums[1] | ... | nums[n-1] (the maximum possible OR). Let k be the number of indices i with 0 ≤ i < n such that nums[i] = M. Whenever the function returns a result r, we have r ≥ 2^n - 2^{n-k}.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 ≤ n ≤ 16; for every i with 0 ≤ i < n, 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_11",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns results r and r' on nums and nums' respectively, and r' = 2 * r.",
+    "preconditions": "Let nums be a slice satisfying the general constraints, with n = len(nums). Let M = nums[0] | ... | nums[n-1]. Let v be an integer with 1 ≤ v ≤ 100000 such that v is a bitwise submask of every nums[i] (i.e., (v | nums[i]) = nums[i] for all i) and v < M. Let nums' be the slice of length n+1 obtained by appending v to nums (nums'[i] = nums[i] for i < n and nums'[n] = v). Assume nums' also satisfies the general constraints (i.e., n+1 ≤ 16, and v ≤ 100000)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountMaxOrSubsets.spec_12",
+    "negation": "AegisSpec.CountMaxOrSubsets.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns results r and r' on nums and nums' respectively, and r' = r + 2^n.",
+    "preconditions": "nums is a slice of 64-bit signed integers with n = len(nums). The constraints are: 1 <= n <= 16; for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let M = nums[0] | ... | nums[n-1]. Let nums' be the slice of length n+1 with nums'[i] = nums[i] for 0 <= i < n and nums'[n] = M. Assume n+1 <= 16 and M <= 100000, so nums' also satisfies the general constraints."
+  }
+]

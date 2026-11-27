@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Compress.spec_1",
+    "negation": "AegisSpec.Compress.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(chars). Call an index i a group start if 0 <= i < n and (i = 0 or chars[i] != chars[i-1]). For a group start i, let next(i) be the least j with i < j <= n such that j = n or chars[j] != chars[j-1], and let g_i = next(i) - i. Let digits(g) be the number of decimal digits of g for g >= 1. The function returns Result.ok ret for some Std.I64 ret, and ret = the sum over all group starts i of (1 if g_i = 1 else 1 + digits(g_i)).",
+    "preconditions": "1 <= len(chars) <= 2000, and for every i with 0 <= i < len(chars), len(chars[i]) = 1 (each element is a one-byte character)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Compress.spec_2",
+    "negation": "AegisSpec.Compress.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the value of compress chars is Result.ok ret for some Std.I64 ret; the function does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "1 <= len(chars) <= 2000, and for every i with 0 <= i < len(chars), len(chars[i]) = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Compress.spec_3",
+    "negation": "AegisSpec.Compress.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever compress chars returns Result.ok ret, 1 <= ret <= len(chars).",
+    "preconditions": "1 <= len(chars) <= 2000, and for every i with 0 <= i < len(chars), len(chars[i]) = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Compress.spec_4",
+    "negation": "AegisSpec.Compress.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let G be the number of maximal contiguous groups of equal elements in chars; equivalently, G is the number of indices i with 0 <= i < len(chars) and (i = 0 or chars[i] != chars[i-1]). Whenever compress chars returns Result.ok ret, ret >= G.",
+    "preconditions": "1 <= len(chars) <= 2000, and for every i with 0 <= i < len(chars), len(chars[i]) = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Compress.spec_5",
+    "negation": "AegisSpec.Compress.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever compress chars returns Result.ok ret, ret = len(chars).",
+    "preconditions": "1 <= len(chars) <= 2000, for every i with 0 <= i < len(chars), len(chars[i]) = 1, and for every i with 0 <= i < len(chars)-1, chars[i] != chars[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Compress.spec_6",
+    "negation": "AegisSpec.Compress.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(chars). Whenever compress chars returns Result.ok ret, ret = 1 if n = 1, and ret = 1 + digits(n) if n >= 2, where digits(n) is the number of decimal digits of n.",
+    "preconditions": "1 <= len(chars) <= 2000, for every i with 0 <= i < len(chars), len(chars[i]) = 1, and for every i with 0 <= i < len(chars)-1, chars[i] = chars[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Compress.spec_7",
+    "negation": "AegisSpec.Compress.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever compress chars returns Result.ok ret, ret < len(chars).",
+    "preconditions": "1 <= len(chars) <= 2000, for every i with 0 <= i < len(chars), len(chars[i]) = 1, and there exists i with i + 2 < len(chars) such that chars[i] = chars[i+1] and chars[i+1] = chars[i+2]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Compress.spec_8",
+    "negation": "AegisSpec.Compress.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the number of maximal contiguous groups of equal elements in chars, and let H be the number of those groups whose length is at least 2. Whenever compress chars returns Result.ok ret, ret = G + H.",
+    "preconditions": "1 <= len(chars) <= 2000, for every i with 0 <= i < len(chars), len(chars[i]) = 1, and for every i with i + 9 < len(chars), not all of chars[i], chars[i+1], ..., chars[i+9] are equal."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Compress.spec_9",
+    "negation": "AegisSpec.Compress.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every i with 0 <= i < n-1, (chars[i] = chars[i+1]) iff (other[i] = other[i+1]), then whenever compress chars returns Result.ok ret1 and compress other returns Result.ok ret2, ret1 = ret2.",
+    "preconditions": "Both chars and other satisfy 1 <= len <= 2000 and have all elements of length 1, and len(chars) = len(other) = n."
+  }
+]

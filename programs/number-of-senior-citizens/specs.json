@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSeniors.spec_1",
+    "negation": "AegisSpec.CountSeniors.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = |{ i | 0 <= i < len(details) and age_i > 60 }|.",
+    "preconditions": "1 <= len(details) <= 100. For every i with 0 <= i < len(details): len(details[i]) = 15; for every j with 0 <= j < 15 and j != 10, details[i][j] is an ASCII decimal digit code (48 <= details[i][j] <= 57); details[i][10] is 77 (M), 70 (F), or 79 (O). The phone numbers details[i][0..9] and seat numbers details[i][13..14] are pairwise distinct. For each i define age_i = 10*(details[i][11]-48) + (details[i][12]-48)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSeniors.spec_2",
+    "negation": "AegisSpec.CountSeniors.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for every such details.",
+    "preconditions": "len(details) <= 100. For every i with 0 <= i < len(details): len(details[i]) = 15, and details[i][11] and details[i][12] are ASCII decimal digit codes (48 <= details[i][11] <= 57 and 48 <= details[i][12] <= 57). No other format, gender, or distinctness condition is imposed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSeniors.spec_3",
+    "negation": "AegisSpec.CountSeniors.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r for such details, 0 <= r <= len(details).",
+    "preconditions": "len(details) <= 100. For every i with 0 <= i < len(details): len(details[i]) = 15, and details[i][11] and details[i][12] are ASCII decimal digit codes (48 <= details[i][11] <= 57 and 48 <= details[i][12] <= 57). No other format, gender, or distinctness condition is imposed."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSeniors.spec_4",
+    "negation": "AegisSpec.CountSeniors.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r + |{ i | 0 <= i < len(details) and age_i <= 60 }| = len(details).",
+    "preconditions": "The full well-formedness conditions hold: 1 <= len(details) <= 100; each details[i] has length 15; positions other than 10 are ASCII decimal digits (48..57); position 10 is 77, 70, or 79; phone and seat numbers are pairwise distinct. For each i define age_i = 10*(details[i][11]-48) + (details[i][12]-48)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSeniors.spec_5",
+    "negation": "AegisSpec.CountSeniors.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for details, rA for detailsA, and rB for detailsB, r = rA + rB.",
+    "preconditions": "details, detailsA, and detailsB are slices of byte vectors. details is the concatenation of detailsA and detailsB: len(details) = len(detailsA)+len(detailsB), details[i] = detailsA[i] for 0 <= i < len(detailsA), and details[len(detailsA)+i] = detailsB[i] for 0 <= i < len(detailsB). len(details) <= 100, and detailsA and detailsB are nonempty. Every element of all three slices has length 15, positions other than 10 are ASCII decimal digits (48..57), and position 10 is 77, 70, or 79. For each string define its age by 10*(byte[11]-48)+(byte[12]-48)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSeniors.spec_6",
+    "negation": "AegisSpec.CountSeniors.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for details and r_prime for details_prime, r = r_prime.",
+    "preconditions": "details and details_prime are slices of byte vectors. Both satisfy the full well-formedness conditions: lengths between 1 and 100; every element has length 15; positions other than 10 are ASCII decimal digits (48..57); position 10 is 77, 70, or 79; phone and seat numbers are pairwise distinct. details_prime is a permutation of details: there is a bijection pi from {0,...,len(details)-1} to {0,...,len(details_prime)-1} such that details_prime[pi(i)] = details[i] for every i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSeniors.spec_7",
+    "negation": "AegisSpec.CountSeniors.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for details and r_prime for details_prime, r_prime >= r.",
+    "preconditions": "details and details_prime are slices of byte vectors with len(details) = len(details_prime) <= 100. For every i with 0 <= i < len(details): len(details[i]) = len(details_prime[i]) = 15; positions other than 10 are ASCII decimal digits (48..57); position 10 is 77, 70, or 79. Define age_i = 10*(details[i][11]-48)+(details[i][12]-48) and age_prime_i = 10*(details_prime[i][11]-48)+(details_prime[i][12]-48). Assume for every i, age_prime_i >= age_i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSeniors.spec_8",
+    "negation": "AegisSpec.CountSeniors.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for details and r_prime for details_prime, r_prime = r + 1.",
+    "preconditions": "details and details_prime are slices of byte vectors with len(details) = len(details_prime) <= 100. For every i with 0 <= i < len(details): len(details[i]) = len(details_prime[i]) = 15; positions other than 10 are ASCII decimal digits (48..57); position 10 is 77, 70, or 79. Define age_i = 10*(details[i][11]-48)+(details[i][12]-48) and age_prime_i = 10*(details_prime[i][11]-48)+(details_prime[i][12]-48). There is exactly one index k with 0 <= k < len(details) such that age_k <= 60 and age_prime_k > 60; for every i with 0 <= i < len(details) and i != k, age_prime_i = age_i."
+  }
+]

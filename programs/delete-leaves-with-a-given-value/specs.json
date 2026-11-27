@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_1",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the tree obtained by the following recursive pruning operation: prune(Null) = Null; for a node Node(v, l, r), first prune l and r to pl and pr, then prune(Node(v, l, r)) = Null if v = target and pl = Null and pr = Null, and prune(Node(v, l, r)) = Node(v, pl, pr) otherwise.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_2",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_3",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, there is no node in r that is a leaf of r (i.e., has both children Null) and whose value is target.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_4",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every path p valid in root, if the node at p in root has value different from target, then p is valid in r and the node at p in r has the same value as the node at p in root.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_5",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every path p valid in root with value_root(p) = target, p is valid in r if and only if there exists a finite path q such that p@q is valid in root and value_root(p@q) != target.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_6",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the nodes of r can be identified with a subset S of the nodes of root such that: every node in S has the same value as the corresponding node of root; for every x in S, the left child of x in r is the node corresponding to x's left child in root if that child belongs to S, and is Null otherwise, and similarly for the right child; if root belongs to S then the root of r corresponds to root, and if root does not belong to S then r = Null.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_7",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let D be the set of nodes x of root such that x.value = target and every node in the subtree of root rooted at x has value target. Then the number of nodes of r equals the number of nodes of root minus the number of nodes in D.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_8",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = Null if and only if every node of root has value target.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_9",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if no node of root has value target, then r = root.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_10",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every path p valid in root with value_root(p) != target, p is valid in r, and p is a leaf of r if and only if no nonempty extension p@q is valid in root with value_root(p@q) != target.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveLeafNodes.spec_11",
+    "negation": "AegisSpec.RemoveLeafNodes.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the in-order sequence of values of r is a subsequence of the in-order sequence of values of root.",
+    "preconditions": "root has between 1 and 3000 nodes inclusive, every node value in root is in [1, 1000], and target is in [1, 1000]."
+  }
+]

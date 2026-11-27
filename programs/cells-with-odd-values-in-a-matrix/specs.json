@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.OddCells.spec_1",
+    "negation": "AegisSpec.OddCells.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (a 64-bit integer) and r = |{ (i,j) | 0 <= i < m and 0 <= j < n and R(i)+C(j) is odd }|, where R(i) = |{ k | 0 <= k < len(indices) and indices[k][0] = i }| for 0 <= i < m, and C(j) = |{ k | 0 <= k < len(indices) and indices[k][1] = j }| for 0 <= j < n.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.OddCells.spec_2",
+    "negation": "AegisSpec.OddCells.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= m*n.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.OddCells.spec_3",
+    "negation": "AegisSpec.OddCells.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow for every input satisfying the preconditions.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.OddCells.spec_4",
+    "negation": "AegisSpec.OddCells.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let R(i) = |{ k | 0 <= k < len(indices) and indices[k][0] = i }| for 0 <= i < m, and C(j) = |{ k | 0 <= k < len(indices) and indices[k][1] = j }| for 0 <= j < n. Let rowOdd = |{ i | 0 <= i < m and R(i) is odd }| and colOdd = |{ j | 0 <= j < n and C(j) is odd }|. The function returns a result r and r = rowOdd*(n - colOdd) + (m - rowOdd)*colOdd.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.OddCells.spec_5",
+    "negation": "AegisSpec.OddCells.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r and r mod 2 = ((m+n) * len(indices)) mod 2.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.OddCells.spec_6",
+    "negation": "AegisSpec.OddCells.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r; if len(indices) is odd then r = m + n - 2, and otherwise r = 0.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and there exist integers a,b with 0 <= a < m and 0 <= b < n such that for every k with 0 <= k < len(indices), len(indices[k]) = 2, indices[k][0] = a, and indices[k][1] = b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.OddCells.spec_7",
+    "negation": "AegisSpec.OddCells.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let R(i) = |{ k | 0 <= k < len(indices) and indices[k][0] = i }| for 0 <= i < m, and C(j) = |{ k | 0 <= k < len(indices) and indices[k][1] = j }| for 0 <= j < n. The function returns a result r, and (r = 0) if and only if ( (for every i with 0 <= i < m, R(i) is even) and (for every j with 0 <= j < n, C(j) is even) ) or ( (for every i with 0 <= i < m, R(i) is odd) and (for every j with 0 <= j < n, C(j) is odd) ).",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.OddCells.spec_8",
+    "negation": "AegisSpec.OddCells.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let indicesT be the slice of vectors of the same length with len(indicesT[k]) = 2, indicesT[k][0] = indices[k][1], and indicesT[k][1] = indices[k][0] for every k with 0 <= k < len(indices). The function returns a result r on (m,n,indices), and the call odd_cells(n,m,indicesT) also returns the same result r.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.OddCells.spec_9",
+    "negation": "AegisSpec.OddCells.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice indices' that is a reordering of indices — that is, len(indices') = len(indices) and there is a bijection p from {0,...,len(indices)-1} to itself such that indices'[k] = indices[p(k)] for every k — the function returns a result r on (m,n,indices), and odd_cells(m,n,indices') also returns the same result r.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.OddCells.spec_10",
+    "negation": "AegisSpec.OddCells.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every a,b with 0 <= a < m and 0 <= b < n, let indices' be the slice obtained from indices by appending two vectors [a,b], so len(indices') = len(indices)+2 and the last two entries both have first component a and second component b. The function returns a result r on (m,n,indices), and odd_cells(m,n,indices') also returns the same result r.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, len(indices)+2 <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.OddCells.spec_11",
+    "negation": "AegisSpec.OddCells.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let R(i) = |{ k | 0 <= k < len(indices) and indices[k][0] = i }| for 0 <= i < m, and C(j) = |{ k | 0 <= k < len(indices) and indices[k][1] = j }| for 0 <= j < n. The function returns a result r and, if there exist i with 0 <= i < m such that R(i) is odd and j with 0 <= j < n such that C(j) is even, then r > 0.",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.OddCells.spec_12",
+    "negation": "AegisSpec.OddCells.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let R(i) = |{ k | 0 <= k < len(indices) and indices[k][0] = i }| for 0 <= i < m, and C(j) = |{ k | 0 <= k < len(indices) and indices[k][1] = j }| for 0 <= j < n. The function returns a result r, and r = m*n if and only if either (for every i with 0 <= i < m, R(i) is odd and for every j with 0 <= j < n, C(j) is even) or (for every i with 0 <= i < m, R(i) is even and for every j with 0 <= j < n, C(j) is odd).",
+    "preconditions": "m and n are 64-bit integers with 1 <= m <= 50 and 1 <= n <= 50. indices is a slice of vectors, 1 <= len(indices) <= 100, and for every k with 0 <= k < len(indices), len(indices[k]) = 2, 0 <= indices[k][0] < m, and 0 <= indices[k][1] < n."
+  }
+]

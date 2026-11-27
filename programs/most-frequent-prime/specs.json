@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_1",
+    "negation": "AegisSpec.MostFrequentPrime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let D = {(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1),(-1,0),(-1,1)}. For any cell (i,j) with 0 <= i < m and 0 <= j < n, any direction (di,dj) in D, and any integer L >= 2 such that for all k with 0 <= k < L, the cell (i + k*di, j + k*dj) satisfies 0 <= i + k*di < m and 0 <= j + k*dj < n, define the number formed as N(i,j,di,dj,L) = sum_{k=0}^{L-1} mat[i + k*di][j + k*dj] * 10^{L-1-k}. Let Generated(mat) be the multiset containing exactly one occurrence of N(i,j,di,dj,L) for each valid choice of (i,j), (di,dj), and L. For any integer p, let freq(p) be the number of occurrences of p in Generated(mat). The function returns Ok r such that either (r = -1 and there is no prime p > 10 with freq(p) > 0), or (r > 10, r is prime, freq(r) > 0, and for every prime q > 10 with freq(q) > 0, either freq(q) < freq(r) or (freq(q) = freq(r) and q <= r)).",
+    "preconditions": "mat is a non-empty 2D array of 64-bit integers. Let m = len(mat) and n = len(mat[0]). We assume 1 <= m <= 6, 1 <= n <= 6, and for all i with 0 <= i < m, len(mat[i]) = n. Also, for all i with 0 <= i < m and j with 0 <= j < n, 1 <= mat[i][j] <= 9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_2",
+    "negation": "AegisSpec.MostFrequentPrime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result of the form Ok r for some 64-bit integer r. (It does not return Err, i.e., it does not fail due to overflow, out-of-bounds access, or panic.)",
+    "preconditions": "mat is a non-empty 2D array of 64-bit integers. Let m = len(mat) and n = len(mat[0]). We assume 1 <= m <= 6, 1 <= n <= 6, and for all i with 0 <= i < m, len(mat[i]) = n. Also, for all i with 0 <= i < m and j with 0 <= j < n, 1 <= mat[i][j] <= 9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_3",
+    "negation": "AegisSpec.MostFrequentPrime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns Ok r, then either r = -1 or (11 <= r <= 999999).",
+    "preconditions": "mat is a non-empty 2D array of 64-bit integers. Let m = len(mat) and n = len(mat[0]). We assume 1 <= m <= 6, 1 <= n <= 6, and for all i with 0 <= i < m, len(mat[i]) = n. Also, for all i with 0 <= i < m and j with 0 <= j < n, 1 <= mat[i][j] <= 9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_4",
+    "negation": "AegisSpec.MostFrequentPrime.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns Ok (-1).",
+    "preconditions": "mat is a 1x1 matrix: m = len(mat) = 1, n = len(mat[0]) = 1, and 1 <= mat[0][0] <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_5",
+    "negation": "AegisSpec.MostFrequentPrime.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns Ok 11.",
+    "preconditions": "mat is a non-empty rectangular matrix with m = len(mat), n = len(mat[0]), 1 <= m <= 6, 1 <= n <= 6, all entries are 1, and m * n >= 2 (i.e., the matrix is not 1x1)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_6",
+    "negation": "AegisSpec.MostFrequentPrime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A = 10*a + b and B = 10*b + a. The function returns Ok r where r = -1 if neither A nor B is prime, and otherwise r = max({p in {A,B} : p is prime}).",
+    "preconditions": "mat is a 1x2 matrix: m = len(mat) = 1, n = len(mat[0]) = 2, and a = mat[0][0], b = mat[0][1] are integers with 1 <= a,b <= 9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_7",
+    "negation": "AegisSpec.MostFrequentPrime.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "most_frequent_prime(mat) = most_frequent_prime(matT). That is, if the function returns Ok r on mat, it returns Ok r on matT, and if it fails on one, it fails on the other.",
+    "preconditions": "mat is a rectangular matrix with m = len(mat), n = len(mat[0]), 1 <= m <= 6, 1 <= n <= 6, and all entries in 1..9. Let matT be the n x m matrix defined by matT[j][i] = mat[i][j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_8",
+    "negation": "AegisSpec.MostFrequentPrime.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "most_frequent_prime(mat) = most_frequent_prime(matH).",
+    "preconditions": "mat is a rectangular matrix with m = len(mat), n = len(mat[0]), 1 <= m <= 6, 1 <= n <= 6, and all entries in 1..9. Let matH be the matrix defined by matH[i][j] = mat[i][n-1-j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_9",
+    "negation": "AegisSpec.MostFrequentPrime.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "most_frequent_prime(mat) = most_frequent_prime(matV).",
+    "preconditions": "mat is a rectangular matrix with m = len(mat), n = len(mat[0]), 1 <= m <= 6, 1 <= n <= 6, and all entries in 1..9. Let matV be the matrix defined by matV[i][j] = mat[m-1-i][j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_10",
+    "negation": "AegisSpec.MostFrequentPrime.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "most_frequent_prime(mat) = most_frequent_prime(matR).",
+    "preconditions": "mat is a rectangular matrix with m = len(mat), n = len(mat[0]), 1 <= m <= 6, 1 <= n <= 6, and all entries in 1..9. Let matR be the matrix defined by matR[i][j] = mat[m-1-i][n-1-j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_11",
+    "negation": "AegisSpec.MostFrequentPrime.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S be the multiset of all numbers formed by taking any contiguous segment of the row mat[0] of length L >= 2, in either left-to-right or right-to-left order. That is, for every j with 0 <= j < n and L >= 2 with j+L <= n, include the number formed by mat[0][j], mat[0][j+1], ..., mat[0][j+L-1] (most significant digit first); and for every j with 0 <= j < n and L >= 2 with j-L+1 >= 0, include the number formed by mat[0][j], mat[0][j-1], ..., mat[0][j-L+1] (most significant digit first). Then the function returns Ok r where either r = -1 and no prime >10 appears in S, or r > 10 is prime, appears in S, and for every prime q > 10 appearing in S, either freq_S(q) < freq_S(r) or (freq_S(q) = freq_S(r) and q <= r), where freq_S denotes multiplicity in S.",
+    "preconditions": "mat is a 1 x n matrix: m = len(mat) = 1, n = len(mat[0]), 1 <= n <= 6, and all entries in 1..9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MostFrequentPrime.spec_12",
+    "negation": "AegisSpec.MostFrequentPrime.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S be the multiset of all numbers formed by taking any contiguous segment of the column (i.e., the sequence mat[0][0], mat[1][0], ..., mat[m-1][0]) of length L >= 2, in either top-to-bottom or bottom-to-top order. That is, for every i with 0 <= i < m and L >= 2 with i+L <= m, include the number formed by mat[i][0], mat[i+1][0], ..., mat[i+L-1][0] (most significant digit first); and for every i with 0 <= i < m and L >= 2 with i-L+1 >= 0, include the number formed by mat[i][0], mat[i-1][0], ..., mat[i-L+1][0] (most significant digit first). Then the function returns Ok r where either r = -1 and no prime >10 appears in S, or r > 10 is prime, appears in S, and for every prime q > 10 appearing in S, either freq_S(q) < freq_S(r) or (freq_S(q) = freq_S(r) and q <= r), where freq_S denotes multiplicity in S.",
+    "preconditions": "mat is an m x 1 matrix: m = len(mat), n = len(mat[0]) = 1, 1 <= m <= 6, and all entries in 1..9."
+  }
+]

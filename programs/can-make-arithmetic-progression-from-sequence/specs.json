@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_1",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_make_arithmetic_progression(arr) returns a result r, r is true if and only if there exist an integer d and a bijection p from the set {0,...,len(arr)-1} to itself such that for every i with 0 <= i < len(arr)-1, arr[p(i+1)] - arr[p(i)] = d. Equivalently, the entries p(0),...,p(len(arr)-1) are a rearrangement of arr whose consecutive differences are all equal to d.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000 (arr[i] is interpreted as the mathematical integer value of the 64-bit element)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_2",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, the call can_make_arithmetic_progression(arr) returns a result r; it does not fail, overflow, panic, or go out of bounds.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_3",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every arr satisfying the preconditions and every slice arr2 such that len(arr2) = len(arr), every element of arr2 lies in [-1000000,1000000], and arr2 is a rearrangement of arr (there is a bijection q with arr2[i] = arr[q(i)] for all i), if can_make_arithmetic_progression(arr) returns r and can_make_arithmetic_progression(arr2) returns r2, then r = r2.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_4",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that -1000000 <= arr[i] + c <= 1000000 for every i with 0 <= i < len(arr), let arr2 be the slice of the same length with arr2[i] = arr[i] + c for all i. If can_make_arithmetic_progression(arr) returns r and can_make_arithmetic_progression(arr2) returns r2, then r = r2.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_5",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every nonzero integer k such that -1000000 <= k * arr[i] <= 1000000 for every i with 0 <= i < len(arr), let arr2 be the slice of the same length with arr2[i] = k * arr[i] for all i. If can_make_arithmetic_progression(arr) returns r and can_make_arithmetic_progression(arr2) returns r2, then r = r2.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_6",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every arr satisfying the preconditions, if there exist values x and y with x != y such that every element arr[i] is equal to either x or y, and both x and y occur among the elements, then whenever can_make_arithmetic_progression(arr) returns a result r, r is false.",
+    "preconditions": "len(arr) >= 3; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_7",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every arr satisfying the preconditions, whenever can_make_arithmetic_progression(arr) returns a result r and r is true, either arr[i] = arr[j] for all i and j with 0 <= i,j < len(arr), or arr[i] != arr[j] for all i and j with 0 <= i < j < len(arr).",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_8",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every arr satisfying the preconditions, whenever can_make_arithmetic_progression(arr) returns a result r and r is true, let m be the minimum of arr[i] over 0 <= i < len(arr) and M be the maximum of arr[i] over 0 <= i < len(arr); then M - m is divisible by len(arr) - 1.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_9",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every arr satisfying the preconditions, let s be any sequence of length len(arr) that is a nondecreasing rearrangement of arr. Whenever can_make_arithmetic_progression(arr) returns a result r and r is true, for every i with 0 <= i < len(arr)-1 we have s[i+1] - s[i] = s[1] - s[0].",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanMakeArithmeticProgression.spec_10",
+    "negation": "AegisSpec.CanMakeArithmeticProgression.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every arr satisfying the preconditions, let s be any sequence of length len(arr) that is a nondecreasing rearrangement of arr. If for every i with 0 <= i < len(arr)-1 we have s[i+1] - s[i] = s[1] - s[0], then whenever can_make_arithmetic_progression(arr) returns a result r, r is true.",
+    "preconditions": "len(arr) >= 2; len(arr) <= 1000; and for every i with 0 <= i < len(arr), -1000000 <= arr[i] <= 1000000."
+  }
+]

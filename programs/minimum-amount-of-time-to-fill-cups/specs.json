@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FillCups.spec_1",
+    "negation": "AegisSpec.FillCups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let S = amount[0] + amount[1] + amount[2] and M = max(amount[0], amount[1], amount[2]). Then r = max(M, (S + 1) / 2), where / is integer division. Equivalently, r is the least integer t such that t >= amount[0], t >= amount[1], t >= amount[2], and 2*t >= S.",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FillCups.spec_2",
+    "negation": "AegisSpec.FillCups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: under these preconditions there is no arithmetic overflow, no out-of-bounds access, and no panic.",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FillCups.spec_3",
+    "negation": "AegisSpec.FillCups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every i with 0 <= i < 3, r >= amount[i].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FillCups.spec_4",
+    "negation": "AegisSpec.FillCups.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 2*r >= amount[0] + amount[1] + amount[2].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FillCups.spec_5",
+    "negation": "AegisSpec.FillCups.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= amount[0] + amount[1] + amount[2].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FillCups.spec_6",
+    "negation": "AegisSpec.FillCups.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and for every i with 0 <= i < 3, if amount[i] >= amount[j] + amount[k] where {j,k} = {0,1,2} \\ {i}, then r = amount[i].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FillCups.spec_7",
+    "negation": "AegisSpec.FillCups.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and if for every i with 0 <= i < 3, 2*amount[i] <= amount[0] + amount[1] + amount[2], then r = (amount[0] + amount[1] + amount[2] + 1) / 2, where / is integer division.",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FillCups.spec_8",
+    "negation": "AegisSpec.FillCups.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a valid filling schedule lasting exactly r seconds that fills all cups, where a schedule is a sequence of r seconds, each second filling either one cup of a single type or two cups of two distinct types among {0,1,2}, such that for each i with 0 <= i < 3 the total number of type-i cups filled over all seconds equals amount[i].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FillCups.spec_9",
+    "negation": "AegisSpec.FillCups.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and there is no valid filling schedule lasting t seconds with 0 <= t < r that fills all cups, where a schedule is a sequence of t seconds, each second filling either one cup of a single type or two cups of two distinct types among {0,1,2}, such that for each i with 0 <= i < 3 the total number of type-i cups filled over all seconds equals amount[i].",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FillCups.spec_10",
+    "negation": "AegisSpec.FillCups.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and, with M = max(amount[0], amount[1], amount[2]) and S = amount[0] + amount[1] + amount[2], either r = M or r = (S + 1) / 2 (integer division). In other words, the optimum is one of the two natural lower bounds.",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FillCups.spec_11",
+    "negation": "AegisSpec.FillCups.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r for the input amount and a result r' for the input amount', and r = r'.",
+    "preconditions": "len(amount) = 3 and for every i with 0 <= i < 3, 0 <= amount[i] <= 100. Also amount' is a slice with len(amount') = 3, for every i with 0 <= i < 3, 0 <= amount'[i] <= 100, and amount' is a permutation of amount (there exists a permutation pi of {0,1,2} such that amount'[i] = amount[pi(i)] for every i)."
+  }
+]

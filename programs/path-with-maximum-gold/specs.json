@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetMaximumGold.spec_1",
+    "negation": "AegisSpec.GetMaximumGold.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever get_maximum_gold returns a result r, r equals the maximum value over all valid gold paths, where a valid gold path is a finite sequence p_0,...,p_{k-1} of cells (k >= 0) such that each p_t=(i_t,j_t) satisfies 0<=i_t<m, 0<=j_t<n and grid[i_t][j_t]>0, all p_t are distinct, and for each 0<=t<k-1 the cells p_t and p_{t+1} are orthogonally adjacent (|i_{t+1}-i_t|+|j_{t+1}-j_t|=1); its value is sum_{t=0}^{k-1} grid[i_t][j_t], and the empty path has value 0.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetMaximumGold.spec_2",
+    "negation": "AegisSpec.GetMaximumGold.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, get_maximum_gold returns a result r; it does not fail because of arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetMaximumGold.spec_3",
+    "negation": "AegisSpec.GetMaximumGold.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever get_maximum_gold returns r, there exists a valid gold path in grid whose value is exactly r. A valid gold path is a pairwise-distinct sequence of in-bounds cells with positive grid values, consecutive cells orthogonally adjacent; the empty path is allowed and has value 0.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetMaximumGold.spec_4",
+    "negation": "AegisSpec.GetMaximumGold.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_maximum_gold returns r, every valid gold path in grid has value at most r. A valid gold path is a pairwise-distinct sequence of in-bounds cells with positive grid values, consecutive cells orthogonally adjacent; the empty path is allowed and has value 0.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetMaximumGold.spec_5",
+    "negation": "AegisSpec.GetMaximumGold.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_maximum_gold returns r, 0 <= r <= sum of grid[i][j] over all cells (i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j] > 0.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetMaximumGold.spec_6",
+    "negation": "AegisSpec.GetMaximumGold.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_maximum_gold returns r, r >= max { grid[i][j] | 0 <= i < m, 0 <= j < n }, i.e. r is at least the largest cell value in the whole grid (which is 0 if all cells are zero).",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetMaximumGold.spec_7",
+    "negation": "AegisSpec.GetMaximumGold.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_maximum_gold(grid) returns r and get_maximum_gold(grid2) returns r2, we have r <= r2.",
+    "preconditions": "grid and grid2 are rectangular with the same dimensions m = len(grid)=len(grid2) and n = len(grid[0])=len(grid2[0]), 1 <= m,n <= 15; all cells of both satisfy 0 <= grid[i][j] <= 100 and 0 <= grid2[i][j] <= 100; each grid has at most 25 positive cells; and grid[i][j] <= grid2[i][j] for every i,j."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetMaximumGold.spec_8",
+    "negation": "AegisSpec.GetMaximumGold.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridH be the horizontal reflection of grid: for 0 <= i < m and 0 <= j < n, gridH[i][j] = grid[i][n-1-j]. Whenever get_maximum_gold(grid) returns r and get_maximum_gold(gridH) returns rH, r = rH.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetMaximumGold.spec_9",
+    "negation": "AegisSpec.GetMaximumGold.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be the transpose of grid: gridT has len(gridT) = n and len(gridT[0]) = m, and for 0 <= i < m, 0 <= j < n, gridT[j][i] = grid[i][j]. Whenever get_maximum_gold(grid) returns r and get_maximum_gold(gridT) returns rT, r = rT.",
+    "preconditions": "grid is rectangular: m = len(grid), n = len(grid[0]), 1 <= m,n <= 15; for every i with 0 <= i < m and every j with 0 <= j < n, 0 <= grid[i][j] <= 100; at most 25 pairs (i,j) satisfy grid[i][j] > 0."
+  }
+]

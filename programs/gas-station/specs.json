@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanCompleteCircuit.spec_1",
+    "negation": "AegisSpec.CanCompleteCircuit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_complete_circuit(gas, cost) returns a value r, exactly one of the following holds: (a) r = -1 and no s with 0 <= s < n is feasible; (b) 0 <= r < n and r is feasible. In particular, if any feasible start exists, r must be one such start; if none exists, r must be -1.",
+    "preconditions": "Let n = len(gas) = len(cost). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 0 <= gas[i] <= 10000 and 0 <= cost[i] <= 10000. All indices are 0-based. For 0 <= s < n and 0 <= k < n, define D_s(k) = sum_{j=0}^{k} (gas[(s+j) mod n] - cost[(s+j) mod n]); call s feasible iff D_s(k) >= 0 for every k with 0 <= k < n. (Intuitively, starting at s with an empty tank and processing stations clockwise, the tank is nonnegative after every edge, including the last edge back to s.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanCompleteCircuit.spec_2",
+    "negation": "AegisSpec.CanCompleteCircuit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, can_complete_circuit(gas, cost) returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(gas) = len(cost). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 0 <= gas[i] <= 10000 and 0 <= cost[i] <= 10000. All indices are 0-based. For 0 <= s < n and 0 <= k < n, define D_s(k) = sum_{j=0}^{k} (gas[(s+j) mod n] - cost[(s+j) mod n]); call s feasible iff D_s(k) >= 0 for every k with 0 <= k < n. (Intuitively, starting at s with an empty tank and processing stations clockwise, the tank is nonnegative after every edge, including the last edge back to s.)"
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanCompleteCircuit.spec_3",
+    "negation": "AegisSpec.CanCompleteCircuit.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_complete_circuit(gas, cost) returns r, r = -1 if and only if sum_{i=0}^{n-1} gas[i] < sum_{i=0}^{n-1} cost[i].",
+    "preconditions": "Let n = len(gas) = len(cost). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 0 <= gas[i] <= 10000 and 0 <= cost[i] <= 10000. All indices are 0-based. For 0 <= s < n and 0 <= k < n, define D_s(k) = sum_{j=0}^{k} (gas[(s+j) mod n] - cost[(s+j) mod n]); call s feasible iff D_s(k) >= 0 for every k with 0 <= k < n. (Intuitively, starting at s with an empty tank and processing stations clockwise, the tank is nonnegative after every edge, including the last edge back to s.)"
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanCompleteCircuit.spec_4",
+    "negation": "AegisSpec.CanCompleteCircuit.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any k with 0 <= k < n, let gas_k[i] = gas[(i+k) mod n] and cost_k[i] = cost[(i+k) mod n] for 0 <= i < n. Whenever can_complete_circuit(gas, cost) returns r and can_complete_circuit(gas_k, cost_k) returns r_k, r = -1 if and only if r_k = -1.",
+    "preconditions": "Let n = len(gas) = len(cost). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 0 <= gas[i] <= 10000 and 0 <= cost[i] <= 10000. All indices are 0-based. For 0 <= s < n and 0 <= k < n, define D_s(k) = sum_{j=0}^{k} (gas[(s+j) mod n] - cost[(s+j) mod n]); call s feasible iff D_s(k) >= 0 for every k with 0 <= k < n. (Intuitively, starting at s with an empty tank and processing stations clockwise, the tank is nonnegative after every edge, including the last edge back to s.)"
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanCompleteCircuit.spec_5",
+    "negation": "AegisSpec.CanCompleteCircuit.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any k with 0 <= k < n, let gas_k and cost_k be as in spec_4. Whenever can_complete_circuit(gas, cost) returns r with r != -1, the index (r - k) mod n, taken in {0,...,n-1}, is a feasible start for (gas_k, cost_k).",
+    "preconditions": "Let n = len(gas) = len(cost). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, 0 <= gas[i] <= 10000 and 0 <= cost[i] <= 10000. All indices are 0-based. For 0 <= s < n and 0 <= k < n, define D_s(k) = sum_{j=0}^{k} (gas[(s+j) mod n] - cost[(s+j) mod n]); call s feasible iff D_s(k) >= 0 for every k with 0 <= k < n. (Intuitively, starting at s with an empty tank and processing stations clockwise, the tank is nonnegative after every edge, including the last edge back to s.)"
+  }
+]

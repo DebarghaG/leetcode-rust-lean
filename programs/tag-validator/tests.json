@@ -1,0 +1,926 @@
+[
+{
+"input": "[\"<A>abc</A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[wahaha]]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"This is the first line <DIV></DIV>\"]",
+"output": "false"
+},
+{
+"input": "[\"<![CDATA[CDATA_CONTENT]]>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B></A></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A> <B> <C></C> </B> </A>\"]",
+"output": "true"
+},
+{
+"input": "[\"This is the first line <DIV> [CDATA[CDATA_CONTENT]] </DIV>\"]",
+"output": "false"
+},
+{
+"input": "[\">>  ![cdata[]] <div>]>]]>>]\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[CDATA]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"This is the first line <DIV><SPAN></SPAN></DIV>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A></A><B></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><A><A></A></A></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><TAG></TAG></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><A>456</A>  <A> 123  <B> <C>  123 </C> <B></B> </A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<![CDATA[CDATA_CONTENT]]></DIV>\"]",
+"output": "false"
+},
+{
+"input": "[\"      \"]",
+"output": "false"
+},
+{
+"input": "[\"<A>text <![CDATA[CDATA_CONTENT]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[unmatched < > ]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A>abc<![CDATA[CDATA]]>def</A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><TAG>sometext</TAG></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<![CDATA[<![CDATA[]]]]><TAG>sometext</TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[CDATA_CONTENT]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A></A><A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><A>abc</A></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[unmatched < > ]]><TAG></TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<![CDATA[wahaha]]]><TAG>sometext</TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B></B></A><A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[CDATA_CONTENT]]></CDATA>\"]",
+"output": "false"
+},
+{
+"input": "[\"<VALID><![CDATA[<INVALID></INVALID>]]></VALID>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A>content<![CDATA[<B>content</B>]]></A><C>content</C><![CDATA[content]]></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><![CDATA[ignore <F> here]]></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<S><E><![CDATA[<INVALID></INVALID>]]></E></S>\"]",
+"output": "true"
+},
+{
+"input": "[\"<NESTEDCDATA><CDATA><![CDATA[Nested CDATA]]></CDATA>]]></NESTEDCDATA>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[unmatched <]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<UNBALANCED></UNBALANCED></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<P><![CDATA[<P><P><P><P><P><P><P>many</P></P></P></P></P></P></P>]]></P>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[abc]]></B><![CDATA[def]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><H><I><J><K></K></J></I></H></G></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><H><I><![CDATA[</I></H></G></F></E></D></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[TEXT]]></C></B><D><![CDATA[TEXT]]></D></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<B>]]></A></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[TEXT]]></B><![CDATA[TEXT]]></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[ignore <B><C></C></B> here]]><B></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<A>content</A>]]><A>content</A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[</]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<NINECHARS><INNER><INNERMOST></INNERMOST></INNER></NINECHARS>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></D>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[</A><B>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG><![CDATA[<TAG>data</TAG>]]></TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<A>content</A>]]><B>content<![CDATA[<C>content</C>]]></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<A></A>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<A><B></B></A>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<AA><BB><CC><DD><![CDATA[DDDD]]></DD></CC></BB></AA>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<A>content</A>]]><B><![CDATA[<C>content</C>]]></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[TEXT]]></B><B><![CDATA[TEXT]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D><E>deep</E></D>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG><INNER><CDATA><TAG>invalid</TAG></CDATA></INNER></TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[This is a <tag> inside CDATA]]></CDATA><TAG></TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<A><B></B>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG>Some text <![CDATA[<TAG>more text</TAG>]]> even more text</TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[wahaha]]></C></B></D>\"]",
+"output": "false"
+},
+{
+"input": "[\"<![CDATA[ignore <A><B><C> here]]></A></B></C>]]>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><H><I><![CDATA[CDATA]]></I></H></G></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[wahaha]]></B></C></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[ignore <D></D> here]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[CDATA]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<A>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<CODE><CODE><![CDATA[CODE]]></CODE></CODE>\"]",
+"output": "true"
+},
+{
+"input": "[\"<T><![CDATA[This is a ]]><![CDATA[CDATA section]]></T>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A>content<![CDATA[<>]]>content</A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<LONGTAG><SHORT><LONGER></LONGER></SHORT></LONGTAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<X><Y><Z><![CDATA[X]]></Z></Y></X>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[TEXT]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D></D>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A>content<![CDATA[<B>content</B>]]>content</A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B></B>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<WRONG><TAG></WRONG></TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<TAG><![CDATA[<TAG>content</TAG>]]></TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D><E>INNER</E></D>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><![CDATA[<E>]]></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><![CDATA[FGHIJKL]]></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<MULTIPLECDATA><![CDATA[First CDATA]]></MULTIPLECDATA><![CDATA[Second CDATA]]></MULTIPLECDATA>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[wahaha]]></B></A><C></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<NEST><INNER1><INNER2></INNER2></INNER1></NEST>\"]",
+"output": "false"
+},
+{
+"input": "[\"<XYZ><XYZ><![CDATA[XYZ]]></XYZ></XYZ>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><H><I></I></H></G></F></E></D></C></B>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<OUTER><INNER><![CDATA[<OUTER><INNER>]]></INNER></OUTER>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[wahaha>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<NOTATAG><INSIDECDATA>]]></NOTATAG>]<A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B></B></A><![CDATA[abc<def>ghi]]>\"]",
+"output": "false"
+},
+{
+"input": "[\"<X><![CDATA[<Y><Z></Z></Y>]]></X>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F><G><![CDATA[CDATA]]></G><H><![CDATA[CDATA]]></H><I><![CDATA[CDATA]]></I>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A>content<![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<X1><X2><X3></X3><X4><X5><X6></X6></X5></X4></X2></X1>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D>></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<INVALID><INNER></INNER></OUTER>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[abc<def>ghi]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<SINGLE><CDATA></CDATA></SINGLE><![CDATA[<![CDATA[<SINGLE>]]></SINGLE>]]>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[abc]]></B><![CDATA[def]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B></B><C></C><D></D><E></E></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<NESTED><INSIDE><MOREINSIDE>content</MOREINSIDE></INSIDE></NESTED>\"]",
+"output": "false"
+},
+{
+"input": "[\"<Z><Z></Z></Z><Z><Z></Z></Z>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<UNBALANCED>data</C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[wahaha>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<X><Y><Z></Z></Y></X> <![CDATA[DATA]]></X>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B>![CDATA[wahaha]]]>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG1><TAG2><![CDATA[valid CDATA]]></TAG2><TAG3>content</TAG3></TAG1>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B><![CDATA[wahaha]]]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F>></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E>CDATA</E></D></C></B>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[ignore <B><C></C></B> here]]></A><B></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<UNBALANCED></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[ignore <D> here]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[ignore <B><C></C></B> here]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<A><B><C></C></B></A>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG>some <TAG> nested <TAG></TAG> tags</TAG></TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B>content</B>]]></A><B>content</B><![CDATA[content]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<MAIN><SUB1><SUB2>data</SUB2></SUB1></MAIN>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B><![CDATA[<C>content</C>]]></B>]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C>></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B>></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<VALID><INNER> <![CDATA[<INNER>CDATA_CONTENT</INNER>]]> </INNER></VALID>\"]",
+"output": "true"
+},
+{
+"input": "[\"<NESTED><INNER>CONTENT</INNER></NESTED>\"]",
+"output": "true"
+},
+{
+"input": "[\"<PARENT><CHILD><GRANDCHILD></GRANDCHILD></CHILD></PARENT><![CDATA[<PARENT><CHILD></CHILD></PARENT>]]></PARENT>\"]",
+"output": "false"
+},
+{
+"input": "[\"<ROOT><CHILD><![CDATA[<DIV>unparsed</DIV>]]></CHILD></ROOT>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D></E>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<A></B>]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A>></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<X><Y><![CDATA[<Z>]]></X></Y></Z>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C></C></B></A><![CDATA[<D>]]></D>]><A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C></C></B><![CDATA[TEXT]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<VALID><INNER>TEXT<![CDATA[CDATA_CONTENT]]></INNER></VALID>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A><C><D><![CDATA[CDATA]]></D></C><E><F><![CDATA[CDATA]]></F></E><G><H><![CDATA[CDATA]]></H></G><I><J><![CDATA[CDATA]]></J></I>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C></D></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<MAIN><SUB1><SUB2></SUB2></SUB1></MAIN>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[content]]></A><B>content</B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[TEXT]]></A><![CDATA[TEXT]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<ROOT><CHILD1><GRANDCHILD></GRANDCHILD></CHILD1><CHILD2></CHILD2></ROOT>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<C></D>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<ROOT><![CDATA[<A></A>]]></ROOT>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[wahaha]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<C><D></C>]]></D></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[content]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[ignore <TAG> and </TAG> here]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<P><A><![CDATA[<BR>]]></A><SPAN>text</SPAN></P>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<OUTER><MID><![CDATA[<INNER></INNER>]]></MID></OUTER>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG1><TAG2><TAG3>CONTENT</TAG3></TAG2></TAG1>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D><E>CDATA</E></D>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[unmatched </]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha>]]></G></F></E></D></C></B>]]></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[CDATA]]></B></A><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E>\"]",
+"output": "false"
+},
+{
+"input": "[\"<T><T><![CDATA[<T><T>INNER</T></T>]]></T></T>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[ignore <A><B><C></C></B></A> here]]>\"]",
+"output": "true"
+},
+{
+"input": "[\"<TAG><![CDATA[<TAG><![CDATA[CDATA_CONTENT]]></TAG>]]></TAG>\"]",
+"output": "false"
+},
+{
+"input": "[\"<HELLO><WORLD><![CDATA[<HELLO>world</WORLD>]]></HELLO>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[not <CLOSING]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E>></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[TEXT]]></C><D><![CDATA[TEXT]]></D></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[</]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D><E><![CDATA[CONTENT]]></E></D>]]></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G></G></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[CDATA]]></A><B><![CDATA[CDATA]]></B><C><![CDATA[CDATA]]></C><D><![CDATA[CDATA]]></D><E><![CDATA[CDATA]]></E><F><![CDATA[CDATA]]></F><G><![CDATA[CDATA]]></G>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><H><I></I></H></G></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<A>]]><C></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><![CDATA[<E><F></F>]]></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C></B><D><![CDATA[TEXT]]></D></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<NEST><INNER><![CDATA[<NEST><INNER><![CDATA[CDATA_CONTENT]]></INNER></NEST>]]></INNER></NEST>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<CORRECT><INSIDE></INSIDE></CORRECT>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><H><I><J><K><L><M><N><O><P><Q><R><S><T><U><V><W><X><Y><Z></Z></Y></X></W></V></U></T></S></R></Q></P></O></N></M></L></K></J></I></H></G></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<D><E><![CDATA[CDATA_CONTENT]]></E></D>]]></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></F></E></D></C></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B>content<![CDATA[<C>content</C>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<NOTATAG>data</NOTATAG>]]><VALID></VALID>\"]",
+"output": "false"
+},
+{
+"input": "[\"<LAYER1><LAYER2><LAYER3></LAYER3></LAYER2></LAYER1>\"]",
+"output": "false"
+},
+{
+"input": "[\"<TAG><INNER><![CDATA[<INNER>CDATA_CONTENT</INNER>]]> <![CDATA[TEXT]]></INNER></TAG>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C><![CDATA[TEXT]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[<Z><Z></Z></Z><Z><Z></Z></Z>]]></Z>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C><D>content</D>\"]",
+"output": "false"
+},
+{
+"input": "[\"<OUTER><MID><INNER>TEXT</INNER> <![CDATA[TEXT]]></MID></OUTER>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><![CDATA[ABCDE]]></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[&]][CDATA[]]><B></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B>content</B>]]></A><C><![CDATA[content]]></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><![CDATA[content]]></A><![CDATA[morecontent]]>\"]",
+"output": "false"
+},
+{
+"input": "[\"<NEST><LVL1><LVL2><LVL3><![CDATA[<NEST><LVL1>deep</LVL1></NEST>]]></LVL3></LVL2></LVL1></NEST>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B>content</B><![CDATA[content]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><![CDATA[ignore <F></F> here]]></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><![CDATA[<A><B><C>]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<!CDATA[CDATA_CONTENT]]]]><B></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[This is a <C></C> test]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><![CDATA[<C></C>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<OUTER><INNER><![CDATA[<INNER>CDATA</INNER>]]></INNER></OUTER>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[ignore <TAG> tags <INSIDE> </INSIDE> </TAG> ]]>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C><D><![CDATA[TEXT]]></D></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C><D></D></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<![CDATA[ignore <A><B><C></C></B></A> here]]><A></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<C><D></D></C>]]></B><C><D><![CDATA[<E><F></F></E>]]></D></C></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<ALMOST><INNER><![CDATA[</INNER>]]></ALMOST>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[unmatched ]]></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><![CDATA[wahaha>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<X><Y><![CDATA[Not a tag>]]></Y></X>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[This is some text <B></B> with CDATA]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C></C></B></A><D></D>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<A></A>]]></B></A><C><D><![CDATA[<E></E>]]></D></C>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B>content<![CDATA[<C>content</C>]]></B><![CDATA[content]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><![CDATA[<B><C><D><E><F><G><![CDATA[wahaha]]></G></F></E></D></C></B></A>></B>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><C><![CDATA[wahaha]]></C></D></B></A>\"]",
+"output": "false"
+},
+{
+"input": "[\"<A><B><![CDATA[<B></C>]]></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha]]></G>></F></E></D></C></B></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A>content<![CDATA[<B>content</B>]]></A>\"]",
+"output": "true"
+},
+{
+"input": "[\"<A><B><C><D><E><F><G><![CDATA[wahaha>]]></F></E></D></C></B></A>\"]",
+"output": "false"
+}
+]

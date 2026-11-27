@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_1",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns Ok v, v = [root.val] ++ values(LB) ++ values(L) ++ reverse(values(RB)), where values(...) maps a sequence of nodes to the sequence of their integer values, and LB, L, RB are defined as follows. LB (left boundary): if root.left is Null, LB is empty; otherwise LB is the sequence of non-leaf nodes obtained by starting at root.left and repeatedly moving to the left child if it exists, otherwise to the right child, stopping before the first leaf (a node with no children). L (leaves): the sequence of all leaves (nodes with no children) in the tree except that the root is not considered a leaf even if it has no children, ordered from left to right (for any node, all leaves in its left subtree precede all leaves in its right subtree). RB (right boundary): if root.right is Null, RB is empty; otherwise RB is the sequence of non-leaf nodes obtained by starting at root.right and repeatedly moving to the right child if it exists, otherwise to the left child, stopping before the first leaf.",
+    "preconditions": "root is not Null. The number of nodes in the tree is at least 1 and at most 10^4; every node value is in [-1000, 1000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_2",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns Ok v for some vector v; it never fails (no overflow, no out-of-bounds, no panic).",
+    "preconditions": "root is not Null. The number of nodes in the tree is at least 1 and at most 10^4; every node value is in [-1000, 1000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_3",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok v, len(v) <= N, where N is the number of nodes in the tree rooted at root.",
+    "preconditions": "root is not Null. The number of nodes in the tree is at least 1 and at most 10^4."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_4",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok v, for every index i with 0 <= i < len(v), -1000 <= v[i] <= 1000.",
+    "preconditions": "root is not Null. The number of nodes in the tree is at least 1 and at most 10^4; every node value is in [-1000, 1000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_5",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns Ok v, len(v) >= 1 and v[0] = root.val.",
+    "preconditions": "root is not Null. The number of nodes in the tree is at least 1 and at most 10^4; every node value is in [-1000, 1000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_6",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Ok v, len(v) >= 2 and v[1] = root.left.val.",
+    "preconditions": "root is not Null, root.left is not Null, and root.left is not a leaf (i.e., root.left has at least one child). The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_7",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Ok v, len(v) >= 1 and v[len(v)-1] = root.right.val.",
+    "preconditions": "root is not Null, root.right is not Null, and root.right is not a leaf (i.e., root.right has at least one child). The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_8",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns Ok v, len(v) = 1 + len(LB) + len(L) + len(RB), where LB is the left boundary (non-leaf nodes from root.left preferring left then right until before a leaf), L is the leaves list (all nodes with no children except the root, in left-to-right order), and RB is the right boundary (non-leaf nodes from root.right preferring right then left until before a leaf).",
+    "preconditions": "root is not Null. The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_9",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Ok v, let L be the sequence of all non-root leaves in left-to-right order (as defined in spec_1). Then the leaves segment of v (the contiguous subvector of v consisting of the leaf values) has length len(L) and equals values(L); in particular, every non-root leaf is represented by a distinct occurrence in that segment.",
+    "preconditions": "root is not Null. The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_10",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns Ok v, the last len(RB) elements of v are exactly the values of RB in reverse order, where RB is defined as: starting at root.right, repeatedly move to the right child if it exists, otherwise to the left child, appending each non-leaf node visited, and stop before the first leaf.",
+    "preconditions": "root is not Null, root.right is not Null, and root.right is not a leaf (i.e., root.right has at least one child). The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_11",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok out, len(out) >= 2 and out[1] = l.",
+    "preconditions": "root = Node(v, Node(l, Null, Null), R) for some integers v, l with -1000 <= v, l <= 1000 and some tree R (possibly Null). The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_12",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok out, len(out) >= 1 and out[len(out)-1] = r.",
+    "preconditions": "root = Node(v, L, Node(r, Null, Null)) for some integers v, r with -1000 <= v, r <= 1000 and some tree L (possibly Null). The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BoundaryOfBinaryTree.spec_13",
+    "negation": "AegisSpec.BoundaryOfBinaryTree.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Ok out, let LB be the left boundary as defined in spec_1. Then the segment of out immediately after the root, out[1 .. 1+len(LB)), is exactly values(LB) in order; i.e., for every 0 <= i < len(LB), out[1+i] = (the i-th node of LB).val.",
+    "preconditions": "root is not Null. The number of nodes is at most 10^4 and all node values are in [-1000, 1000]."
+  }
+]

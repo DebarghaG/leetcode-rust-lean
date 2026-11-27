@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxMoves.spec_1",
+    "negation": "AegisSpec.MaxMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (max_moves(grid) = Result.ok r), and r = max { k | 0 <= k <= n-1 and there exist row indices s_0, ..., s_k such that: (i) 0 <= s_j < m for every j with 0 <= j <= k; (ii) |s_{j+1} - s_j| <= 1 for every j with 0 <= j < k; (iii) grid[s_j][j] < grid[s_{j+1}][j+1] for every j with 0 <= j < k }. The set is nonempty because k = 0 is allowed with any valid s_0.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxMoves.spec_2",
+    "negation": "AegisSpec.MaxMoves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail: there exists an integer r such that max_moves(grid) = Result.ok r. In particular, under the preconditions no index is out of bounds and no 64-bit arithmetic overflows.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxMoves.spec_3",
+    "negation": "AegisSpec.MaxMoves.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_moves(grid) = Result.ok r, we have 0 <= r <= n-1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxMoves.spec_4",
+    "negation": "AegisSpec.MaxMoves.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_moves(grid) = Result.ok r, there exists a legal path of exactly r moves, where a legal path of k moves is a sequence of row indices (s_0, ..., s_k) such that 0 <= k <= n-1, 0 <= s_j < m for all 0 <= j <= k, |s_{j+1} - s_j| <= 1 for all 0 <= j < k, and grid[s_j][j] < grid[s_{j+1}][j+1] for all 0 <= j < k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxMoves.spec_5",
+    "negation": "AegisSpec.MaxMoves.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_moves(grid) = Result.ok r, for every k and every legal path of k moves, we have k <= r. Here a legal path of k moves is a sequence of row indices (s_0, ..., s_k) such that 0 <= k <= n-1, 0 <= s_j < m for all 0 <= j <= k, |s_{j+1} - s_j| <= 1 for all 0 <= j < k, and grid[s_j][j] < grid[s_{j+1}][j+1] for all 0 <= j < k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxMoves.spec_6",
+    "negation": "AegisSpec.MaxMoves.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_moves(grid) = Result.ok r, r = 0 if and only if there is no legal path of 1 move; equivalently, for every a,b with 0 <= a,b < m and |b-a| <= 1, grid[a][0] >= grid[b][1].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxMoves.spec_7",
+    "negation": "AegisSpec.MaxMoves.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_moves(grid) = Result.ok r, for every integer k with 0 <= k <= r, there exists a legal path of exactly k moves, where a legal path of k moves is a sequence of row indices (s_0, ..., s_k) such that 0 <= k <= n-1, 0 <= s_j < m for all 0 <= j <= k, |s_{j+1} - s_j| <= 1 for all 0 <= j < k, and grid[s_j][j] < grid[s_{j+1}][j+1] for all 0 <= j < k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxMoves.spec_8",
+    "negation": "AegisSpec.MaxMoves.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_moves(grid) = Result.ok r, r = n-1 if and only if there exists a legal path of n-1 moves, where a legal path of k moves is a sequence of row indices (s_0, ..., s_k) such that 0 <= k <= n-1, 0 <= s_j < m for all 0 <= j <= k, |s_{j+1} - s_j| <= 1 for all 0 <= j < k, and grid[s_j][j] < grid[s_{j+1}][j+1] for all 0 <= j < k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxMoves.spec_9",
+    "negation": "AegisSpec.MaxMoves.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_moves(grid) = Result.ok r, if there exists a row s with 0 <= s < m such that grid[s][j] < grid[s][j+1] for every j with 0 <= j < n-1, then r = n-1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxMoves.spec_10",
+    "negation": "AegisSpec.MaxMoves.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_moves(grid) = Result.ok r, let grid_rev be the m x n matrix defined by grid_rev[i][j] = grid[m-1-i][j] for 0 <= i < m and 0 <= j < n. Then max_moves(grid_rev) = Result.ok r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxMoves.spec_11",
+    "negation": "AegisSpec.MaxMoves.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_moves(grid) = Result.ok r, for any integer c such that 1 <= grid[i][j]+c <= 1000000 for every 0 <= i < m and 0 <= j < n, let grid_shift[i][j] = grid[i][j]+c. Then max_moves(grid_shift) = Result.ok r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxMoves.spec_12",
+    "negation": "AegisSpec.MaxMoves.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_moves(grid) = Result.ok r, for every integer n' with 2 <= n' <= n, let grid_prefix be the m x n' matrix with grid_prefix[i][j] = grid[i][j] for 0 <= i < m and 0 <= j < n'. Then max_moves(grid_prefix) = Result.ok r' for some integer r' with r' <= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxMoves.spec_13",
+    "negation": "AegisSpec.MaxMoves.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_moves(grid) = Result.ok r, let grid_ext be any matrix satisfying the same problem constraints, with the same number n of columns, with m' >= m rows, and with grid_ext[i][j] = grid[i][j] for all 0 <= i < m and 0 <= j < n. Then max_moves(grid_ext) = Result.ok r' for some integer r' with r' >= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 1000, 2 <= n <= 1000, every row grid[i] has length n, 4 <= m*n <= 100000, and 1 <= grid[i][j] <= 1000000 for all 0 <= i < m and 0 <= j < n."
+  }
+]

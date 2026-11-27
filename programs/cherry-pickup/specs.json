@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CherryPickup.spec_1",
+    "negation": "AegisSpec.CherryPickup.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "A forward monotone path is a sequence of cells from (0,0) to (n-1,n-1) in which each step is either right or down and every cell has grid value 0 or 1. For any two such paths P and Q, let score(P,Q) be the number of distinct cells (i,j) that belong to P or Q and satisfy grid[i][j] = 1. The function returns a result r and r = max score(P,Q) over all ordered pairs (P,Q) of forward monotone paths when at least one forward monotone path exists; if no forward monotone path exists, r = 0.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CherryPickup.spec_2",
+    "negation": "AegisSpec.CherryPickup.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CherryPickup.spec_3",
+    "negation": "AegisSpec.CherryPickup.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= min(C, 4n - 4), where C is the number of cells (i,j) with 0 <= i,j < n and grid[i][j] = 1.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1; additionally n >= 2."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CherryPickup.spec_4",
+    "negation": "AegisSpec.CherryPickup.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = grid[0][0].",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1; additionally n = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CherryPickup.spec_5",
+    "negation": "AegisSpec.CherryPickup.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every forward monotone path P from (0,0) to (n-1,n-1), r >= c(P), where c(P) is the number of cells of P with grid[i][j] = 1. A forward monotone path uses only right or down steps and only cells with grid value 0 or 1.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CherryPickup.spec_6",
+    "negation": "AegisSpec.CherryPickup.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every ordered pair (P,Q) of forward monotone paths from (0,0) to (n-1,n-1), the number of distinct cells (i,j) that belong to P or Q and satisfy grid[i][j] = 1 is at most r.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CherryPickup.spec_7",
+    "negation": "AegisSpec.CherryPickup.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist forward monotone paths P and Q from (0,0) to (n-1,n-1) such that the number of distinct cells (i,j) that belong to P or Q and satisfy grid[i][j] = 1 equals r.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1; additionally there exists at least one forward monotone path from (0,0) to (n-1,n-1)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CherryPickup.spec_8",
+    "negation": "AegisSpec.CherryPickup.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there is no forward monotone path from (0,0) to (n-1,n-1), then r = 0.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CherryPickup.spec_9",
+    "negation": "AegisSpec.CherryPickup.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if grid[i][j] != 1 for every 0 <= i,j < n, then r = 0.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CherryPickup.spec_10",
+    "negation": "AegisSpec.CherryPickup.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be the n x n grid defined by gridT[i][j] = grid[j][i] for 0 <= i,j < n. For every grid satisfying the preconditions, if r is the result returned by the function on grid and rT is the result returned by the function on gridT, then r = rT.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CherryPickup.spec_11",
+    "negation": "AegisSpec.CherryPickup.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns result rA on A and result rB on B, rB <= rA.",
+    "preconditions": "Let A and B be two n x n grids with 1 <= n <= 50, every entry in {-1,0,1}, A[0][0] != -1, A[n-1][n-1] != -1, B[0][0] != -1, and B[n-1][n-1] != -1. Suppose B is obtained from A by changing zero or more cells with A[i][j] = 1 to B[i][j] = 0 and leaving every other cell unchanged."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CherryPickup.spec_12",
+    "negation": "AegisSpec.CherryPickup.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns result rA on A and result rB on B, rA <= rB.",
+    "preconditions": "Let A and B be two n x n grids with 1 <= n <= 50, every entry in {-1,0,1}, A[0][0] != -1, A[n-1][n-1] != -1, B[0][0] != -1, and B[n-1][n-1] != -1. Suppose B is obtained from A by changing zero or more cells with A[i][j] = -1 to B[i][j] = 0 and leaving every other cell unchanged."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CherryPickup.spec_13",
+    "negation": "AegisSpec.CherryPickup.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 4n - 4.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1; additionally n >= 2 and grid[i][j] = 1 for every 0 <= i,j < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CherryPickup.spec_14",
+    "negation": "AegisSpec.CherryPickup.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = c(P), where c(P) is the number of cells of P with grid[i][j] = 1.",
+    "preconditions": "Let n = len(grid). The input is an n x n grid (so every row has length n) with 1 <= n <= 50, every entry in {-1,0,1}, grid[0][0] != -1, and grid[n-1][n-1] != -1. Additionally, there is exactly one forward monotone path P from (0,0) to (n-1,n-1), where a forward monotone path uses only right or down steps and only cells with grid value 0 or 1."
+  }
+]

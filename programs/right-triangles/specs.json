@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_1",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is exactly the number of 3-element sets S of cells (i,j) of grid such that every cell in S has grid[i][j] = 1 and there is a cell (i0,j0) in S that has the same row as one other cell of S and the same column as the remaining cell of S. Equivalently, r = Σ_{0 <= i < m, 0 <= j < n, grid[i][j] = 1} (R_i - 1) * (C_j - 1), where R_i is the number of columns j' with 0 <= j' < n and grid[i][j'] = 1, and C_j is the number of rows i' with 0 <= i' < m and grid[i'][j] = 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_2",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; for every input satisfying the preconditions it does not fail (no arithmetic overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_3",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = m*n*(m-1)*(n-1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1. Additionally, for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_4",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let K be the number of pairs (i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j] = 1. Whenever the function returns a result r, r <= (m-1)*(n-1)*K.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_5",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if grid[i0][j0] = 1 then r = (R_i0 - 1)*(C_j0 - 1), and if grid[i0][j0] = 0 then r = 0, where R_i0 is the number of 1s in row i0 and C_j0 is the number of 1s in column j0.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1. There is exactly one row i0 containing at least two 1s, and exactly one column j0 containing at least two 1s."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_6",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if either every row i has at most one j with grid[i][j] = 1, or every column j has at most one i with grid[i][j] = 1, then r = 0.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_7",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist rows i != i' and columns j != j' such that grid[i][j] = 1, grid[i][j'] = 1, and grid[i'][j] = 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_8",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be the n by m matrix defined by gridT[j][i] = grid[i][j] for 0 <= i < m and 0 <= j < n. Whenever the function returns r on grid and rT on gridT, r = rT.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_9",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation p of {0,...,m-1} and every permutation q of {0,...,n-1}, let grid' be the m by n matrix defined by grid'[i][j] = grid[p(i)][q(j)] for 0 <= i < m and 0 <= j < n. Whenever the function returns r on grid and r' on grid', r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_10",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on grid and r' on grid', r <= r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Both grid and grid' are m by n matrices satisfying 1 <= m <= 1000, 1 <= n <= 1000, every row has length n, every entry is 0 or 1, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] <= grid'[i][j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_11",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on grid and r' on grid', r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1. Let grid' be obtained from grid either by inserting one all-zero row (giving an (m+1) by n matrix with m < 1000) or by inserting one all-zero column (giving an m by (n+1) matrix with n < 1000); the old rows or columns appear in the same relative order."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfRightTriangles.spec_12",
+    "negation": "AegisSpec.NumberOfRightTriangles.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every cell (i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j] = 1, either R_i = 1 or C_j = 1, where R_i is the number of 1s in row i and C_j is the number of 1s in column j. Equivalently, r > 0 if and only if there exist i,i',j,j' with 0 <= i < m, 0 <= i' < m, i != i', 0 <= j < n, 0 <= j' < n, j != j', and grid[i][j] = grid[i][j'] = grid[i'][j] = 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies 1 <= m <= 1000, 1 <= n <= 1000, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0 or 1."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumImportance.spec_1",
+    "negation": "AegisSpec.MaximumImportance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "whenever the function returns a result r, r is the maximum over all bijections f from {0,...,n-1} to {1,...,n} of the total importance sum_{j=0}^{len(roads)-1} (f(roads[j][0]) + f(roads[j][1])). That is, for every such bijection f, sum_{j=0}^{len(roads)-1} (f(roads[j][0]) + f(roads[j][1])) <= r, and there exists at least one such bijection f for which equality holds.",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumImportance.spec_2",
+    "negation": "AegisSpec.MaximumImportance.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "whenever the function returns a result r, let d(i) for i in 0..n-1 be the number of roads incident to city i (i.e., the number of j in 0..len(roads)-1 with roads[j][0]=i or roads[j][1]=i). Let s_1 <= s_2 <= ... <= s_n be the nondecreasing rearrangement of (d(0),...,d(n-1)). Then r = sum_{k=1}^{n} k * s_k.",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumImportance.spec_3",
+    "negation": "AegisSpec.MaximumImportance.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "the function returns a result r (i.e., it does not fail due to arithmetic overflow, out-of-bounds access, or panic) for every input satisfying the preconditions.",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumImportance.spec_4",
+    "negation": "AegisSpec.MaximumImportance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "whenever the function returns a result r, r >= 3 * len(roads).",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumImportance.spec_5",
+    "negation": "AegisSpec.MaximumImportance.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "whenever the function returns a result r, r <= (2*n - 1) * len(roads).",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumImportance.spec_6",
+    "negation": "AegisSpec.MaximumImportance.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "whenever the function returns results r1 for (n, roads1) and r2 for (n, roads2), we have r1 = r2.",
+    "preconditions": "for any n, roads1, roads2 satisfying the preconditions of spec_1 with the same n, and such that the multiset of degrees of roads1 equals the multiset of degrees of roads2 (i.e., there is a permutation π of {0,...,n-1} with d1(i) = d2(π(i)) for all i)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumImportance.spec_7",
+    "negation": "AegisSpec.MaximumImportance.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "whenever the function returns results r1 for (n, roads1) and r2 for (n, roads2), we have r1 <= r2.",
+    "preconditions": "for any n, roads1, roads2 satisfying the preconditions of spec_1 with the same n, and such that for every i in 0..n-1, d1(i) <= d2(i) (where d1, d2 are the degree functions of roads1, roads2)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumImportance.spec_8",
+    "negation": "AegisSpec.MaximumImportance.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "whenever the function returns a result r, let σ be any permutation of {0,...,n-1} such that d(σ(0)) <= d(σ(1)) <= ... <= d(σ(n-1)), where d(i) is the number of roads incident to city i. Define f(σ(k)) = k+1 for k=0..n-1. Then sum_{j=0}^{len(roads)-1} (f(roads[j][0]) + f(roads[j][1])) = r.",
+    "preconditions": "2 <= n <= 50000, 1 <= len(roads) <= 50000, every road has length 2, for every j in 0..len(roads)-1, 0 <= roads[j][0] < n, 0 <= roads[j][1] < n, roads[j][0] != roads[j][1], and no two roads are the same unordered pair."
+  }
+]

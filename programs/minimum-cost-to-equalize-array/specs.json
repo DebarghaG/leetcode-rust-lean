@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_1",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let C = 1000000007. For an integer T, define d_i(T) = T - nums[i] for 0 <= i < len(nums), S(T) = sum_{i=0}^{len(nums)-1} d_i(T), Max(T) = max_{0 <= i < len(nums)} d_i(T), and P(T) = min(floor(S(T)/2), S(T) - Max(T)). Then the function returns a result r, and r is the unique integer such that 0 <= r < C and r is congruent modulo C to M, where M = min { p*cost2 + (S(T)-2*p)*cost1 : T is an integer with T >= max_i nums[i], and p is an integer with 0 <= p <= P(T) }.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_2",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail: it does not overflow, panic, or access an out-of-bounds index.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_3",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_4",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; for every i and j with 0 <= i < len(nums) and 0 <= j < len(nums), nums[i] = nums[j]; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_5",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a = nums[0] and b = nums[1]. The function returns r with r = ((max(a,b) - min(a,b)) * cost1) mod 1000000007.",
+    "preconditions": "len(nums) = 2; 1 <= nums[0] <= 1000000; 1 <= nums[1] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_6",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let B = max_{0 <= i < len(nums)} nums[i] and D = sum_{i=0}^{len(nums)-1} (B - nums[i]). The function returns r = (cost1 * D) mod 1000000007.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000; cost2 >= 2*cost1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_7",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r = ((S0/2) * cost2) mod 1000000007.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000; cost2 < 2*cost1. Let B = max_i nums[i]. For each i define e_i = B - nums[i], S0 = sum_i e_i, and M0 = max_i e_i. Require S0 to be even and 2*M0 <= S0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_8",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of the call on nums, cost1, cost2, and let r2 be the result of the call on nums2, cost1, cost2. Then r = r2.",
+    "preconditions": "There is an integer n with 1 <= n <= 100000 such that len(nums) = n and len(nums2) = n; every entry of nums and nums2 lies between 1 and 1000000 inclusive; nums2 is a permutation of nums; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_9",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result for nums with cost1, cost2, and let r2 be the result for nums2 with the same cost1, cost2. Then r = r2.",
+    "preconditions": "There is an integer n with 1 <= n <= 100000 such that len(nums) = n and len(nums2) = n; every entry of nums and nums2 lies between 1 and 1000000 inclusive; there is an integer c such that nums2[i] = nums[i] + c for every 0 <= i < n; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_10",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result for nums, cost1, cost2, and let r2 be the result for nums, k*cost1, k*cost2. Then r2 = (k * r) mod 1000000007.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; every nums[i] lies between 1 and 1000000 inclusive; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000; k is a positive integer such that 1 <= k*cost1 <= 1000000 and 1 <= k*cost2 <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_11",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For a pair cost c, define M(c) = min { p*c + (S(T)-2*p)*cost1 : T is an integer with T >= max_i nums[i], and p is an integer with 0 <= p <= P(T) }, where S(T) = sum_i (T - nums[i]) and P(T) = min(floor(S(T)/2), S(T) - max_i (T - nums[i])). Let r_a and r_b be the results for cost2a and cost2b respectively. Then r_a is congruent to M(cost2a) modulo 1000000007, r_b is congruent to M(cost2b) modulo 1000000007, and M(cost2a) <= M(cost2b).",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; every nums[i] lies between 1 and 1000000 inclusive; 1 <= cost1 <= 1000000; 1 <= cost2a <= cost2b <= 1000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_12",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For an integer T define d_i(T) = T - nums[i], S(T) = sum_i d_i(T), Max(T) = max_i d_i(T), and P(T) = min(floor(S(T)/2), S(T) - Max(T)). Let M be the minimum value of p*cost2 + (S(T)-2*p)*cost1 over T >= max_i nums[i] and 0 <= p <= P(T). There exist an integer T0 >= max_i nums[i] and an integer p0 with 0 <= p0 <= P(T0) such that M = p0*cost2 + (S(T0)-2*p0)*cost1. Moreover, the array can be made all equal to T0 using exactly p0 pair operations and S(T0)-2*p0 single operations, for total cost M.",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_13",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For an integer c, define M(c) = min { p*cost2 + (S(T)-2*p)*c : T is an integer with T >= max_i nums[i], and p is an integer with 0 <= p <= P(T) }, where S(T)=sum_i (T-nums[i]) and P(T)=min(floor(S(T)/2), S(T)-max_i(T-nums[i])). Let r_a and r_b be the results for cost1a and cost1b respectively. Then r_a is congruent to M(cost1a) modulo 1000000007, r_b is congruent to M(cost1b) modulo 1000000007, and M(cost1a) <= M(cost1b).",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1a <= cost1b <= 1000000; 1 <= cost2 <= 1000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinCostToEqualizeArray.spec_14",
+    "negation": "AegisSpec.MinCostToEqualizeArray.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let B = max_i nums[i], D = sum_i (B - nums[i]), and let M be the minimum from spec_1 for this input. Then M <= cost1 * D. Furthermore, M = 0 if and only if nums[0] = nums[1] = ... = nums[len(nums)-1].",
+    "preconditions": "len(nums) is an integer with 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= cost1 <= 1000000; 1 <= cost2 <= 1000000."
+  }
+]

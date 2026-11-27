@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_1",
+    "negation": "AegisSpec.SubsequencePairCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let C be the number of ordered pairs (S, T) of finite sets of indices such that S is a subset of {0,...,n-1}, T is a subset of {0,...,n-1}, S is non-empty, T is non-empty, S and T are disjoint, and gcd({nums[i] : i in S}) = gcd({nums[i] : i in T}), where the gcd of a non-empty set of positive integers is the usual greatest common divisor. Let M = 1000000007. The function returns a result r and r is the unique integer such that 0 <= r < M and r is congruent to C modulo M; equivalently, r = C mod M.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, and for every i with 0 <= i < n, 1 <= nums[i] <= 200."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_2",
+    "negation": "AegisSpec.SubsequencePairCount.spec_2_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "len(nums) = 1 and 1 <= nums[0] <= 200."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_3",
+    "negation": "AegisSpec.SubsequencePairCount.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2 if nums[0] = nums[1], and r = 0 otherwise.",
+    "preconditions": "len(nums) = 2, 1 <= nums[0] <= 200, and 1 <= nums[1] <= 200."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_4",
+    "negation": "AegisSpec.SubsequencePairCount.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let e be the number of pairs (i,j) with 0 <= i < j < 3 and nums[i] = nums[j]. For each i in {0,1,2}, let j and k be the other two indices, and let m be the number of i in {0,1,2} such that nums[i] = gcd(nums[j], nums[k]). Then the function returns a result r and r = 2*e + 2*m.",
+    "preconditions": "len(nums) = 3, and 1 <= nums[0], nums[1], nums[2] <= 200."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_5",
+    "negation": "AegisSpec.SubsequencePairCount.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let M = 1000000007. The function returns a result r and r = (3^n - 2*(2^n) + 1) mod M.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, and suppose there is an integer v with 1 <= v <= 200 such that nums[i] = v for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_6",
+    "negation": "AegisSpec.SubsequencePairCount.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C be the exact count of ordered pairs of non-empty disjoint index subsets of nums whose gcds are equal, before reduction modulo 1000000007. The function returns a result r and r = C.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 18, and for every i with 0 <= i < n, 1 <= nums[i] <= 200."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_7",
+    "negation": "AegisSpec.SubsequencePairCount.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r when called on nums and returns r2 when called on nums2, then r = r2.",
+    "preconditions": "Let nums and nums2 be two slices with the same length n, where 1 <= n <= 200, all entries of both slices lie in [1,200], and nums2 is a permutation of nums: there is a bijection p on {0,...,n-1} such that nums2[i] = nums[p(i)] for every i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_8",
+    "negation": "AegisSpec.SubsequencePairCount.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let M = 1000000007. The function returns a result r and r = (3^n - 2*(2^n + n*2^(n-1)) + (n^2 + n + 1)) mod M.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, and suppose every nums[i] satisfies 1 < nums[i] <= 200 and every two distinct entries are coprime: for all i != j, gcd(nums[i], nums[j]) = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_9",
+    "negation": "AegisSpec.SubsequencePairCount.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C be the exact count, before reduction modulo 1000000007, of ordered pairs (S,T) of non-empty disjoint index subsets of nums such that gcd({nums[i] : i in S}) = gcd({nums[i] : i in T}); this C is the number whose remainder modulo 1000000007 is the returned value. Then C <= 3^n - 2*2^n + 1.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, and for every i with 0 <= i < n, 1 <= nums[i] <= 200."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_10",
+    "negation": "AegisSpec.SubsequencePairCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let C be the exact count, before reduction modulo 1000000007, of ordered pairs (S,T) of non-empty disjoint index subsets of nums with equal gcd; this C is the number whose remainder modulo 1000000007 is the returned value. Then C is even.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, and for every i with 0 <= i < n, 1 <= nums[i] <= 200."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SubsequencePairCount.spec_11",
+    "negation": "AegisSpec.SubsequencePairCount.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let C be the exact count, before reduction modulo 1000000007, of ordered pairs (S,T) of non-empty disjoint index subsets of nums with equal gcd; this C is the number whose remainder modulo 1000000007 is the returned value. Then C >= 2.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 200, for every i with 0 <= i < n, 1 <= nums[i] <= 200, and suppose there exist indices i and j with 0 <= i < j < n and nums[i] = nums[j]."
+  }
+]

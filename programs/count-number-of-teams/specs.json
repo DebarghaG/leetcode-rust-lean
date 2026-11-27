@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumTeams.spec_1",
+    "negation": "AegisSpec.NumTeams.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "num_teams(rating) returns a result r, and r equals the number of index triples (i, j, k) with 0 <= i < j < k < n such that either rating[i] < rating[j] < rating[k] or rating[i] > rating[j] > rating[k]. Equivalently, r = |{ (i,j,k) : 0 <= i < j < k < n and ((rating[i] < rating[j] and rating[j] < rating[k]) or (rating[i] > rating[j] and rating[j] > rating[k])) }|.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumTeams.spec_2",
+    "negation": "AegisSpec.NumTeams.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every rating satisfying the preconditions, num_teams(rating) returns a result r; in particular, the function never fails, overflows, or panics on any input in the precondition set.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumTeams.spec_3",
+    "negation": "AegisSpec.NumTeams.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_teams(rating) returns a result r, r <= n*(n-1)*(n-2)/6, where n = len(rating). The right-hand side is the total number of index triples 0 <= i < j < k < n.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumTeams.spec_4",
+    "negation": "AegisSpec.NumTeams.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_teams(rating) returns a result r, r is at least the number of indices i with 0 <= i <= n-3 for which the consecutive triple (rating[i], rating[i+1], rating[i+2]) is strictly increasing or strictly decreasing. In symbols, r >= |{ i : 0 <= i <= n-3 and ((rating[i] < rating[i+1] and rating[i+1] < rating[i+2]) or (rating[i] > rating[i+1] and rating[i+1] > rating[i+2])) }|.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumTeams.spec_5",
+    "negation": "AegisSpec.NumTeams.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_teams(rating) returns a result r, r = 1 if (rating[0] < rating[1] and rating[1] < rating[2]) or (rating[0] > rating[1] and rating[1] > rating[2]), and r = 0 otherwise.",
+    "preconditions": "len(rating) = 3; for every i with 0 <= i < 3, 1 <= rating[i] <= 100000; and rating[0], rating[1], rating[2] are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumTeams.spec_6",
+    "negation": "AegisSpec.NumTeams.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_teams(rating) returns a result r and rating is strictly increasing, i.e. rating[0] < rating[1] < ... < rating[n-1], then r = n*(n-1)*(n-2)/6.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumTeams.spec_7",
+    "negation": "AegisSpec.NumTeams.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_teams(rating) returns a result r and rating is strictly decreasing, i.e. rating[0] > rating[1] > ... > rating[n-1], then r = n*(n-1)*(n-2)/6.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumTeams.spec_8",
+    "negation": "AegisSpec.NumTeams.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n defined by rev[i] = rating[n-1-i] for 0 <= i < n. Whenever num_teams(rating) returns a result r and num_teams(rev) returns a result r', we have r = r'.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumTeams.spec_9",
+    "negation": "AegisSpec.NumTeams.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_teams(a) returns a result r and num_teams(b) returns a result r', we have r = r'.",
+    "preconditions": "Let n >= 3 and let a and b be slices of length n. Both satisfy: for every i with 0 <= i < n, 1 <= a[i] <= 100000 and 1 <= b[i] <= 100000; and for all 0 <= i < j < n, a[i] != a[j] and b[i] != b[j]. Additionally, for all 0 <= i, j < n, a[i] < a[j] if and only if b[i] > b[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumTeams.spec_10",
+    "negation": "AegisSpec.NumTeams.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_teams(b) returns a result r_b and num_teams(rating) returns a result r, we have r_b <= r.",
+    "preconditions": "Let n = len(rating) with 3 <= n <= 1000, and assume rating satisfies: for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]. Let b be a slice of length m with 3 <= m <= n, and suppose there exist indices 0 <= t_0 < t_1 < ... < t_{m-1} < n such that b[q] = rating[t_q] for all 0 <= q < m."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumTeams.spec_11",
+    "negation": "AegisSpec.NumTeams.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever num_teams(rating) returns a result r, r > 0 if and only if there exist indices 0 <= i < j < k < n such that (rating[i] < rating[j] and rating[j] < rating[k]) or (rating[i] > rating[j] and rating[j] > rating[k]). Equivalently, r = 0 if and only if no valid team exists.",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumTeams.spec_12",
+    "negation": "AegisSpec.NumTeams.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each middle index j with 0 <= j < n, define L_<(j) = |{ i : 0 <= i < j and rating[i] < rating[j] }|, L_>(j) = |{ i : 0 <= i < j and rating[i] > rating[j] }|, R_<(j) = |{ k : j < k < n and rating[k] < rating[j] }|, and R_>(j) = |{ k : j < k < n and rating[k] > rating[j] }|. Then num_teams(rating) returns a result r, and r = sum over j = 0 to n-1 of (L_<(j) * R_>(j) + L_>(j) * R_<(j)).",
+    "preconditions": "Let n = len(rating). The preconditions are: 3 <= n <= 1000; for every i with 0 <= i < n, 1 <= rating[i] <= 100000; and for all 0 <= i < j < n, rating[i] != rating[j]."
+  }
+]

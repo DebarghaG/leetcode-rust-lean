@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_1",
+    "negation": "AegisSpec.CircularArrayLoop.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true if and only if there exist an integer k and indices i_0, ..., i_{k-1} such that: 2 <= k <= n; i_0, ..., i_{k-1} are pairwise distinct and each lies in [0, n-1]; for every j with 0 <= j < k-1, next(i_j) = i_{j+1}, and next(i_{k-1}) = i_0, where next(x) is the unique index y with 0 <= y < n and y is congruent to x + nums[x] modulo n; and either nums[i_j] > 0 for every j with 0 <= j < k, or nums[i_j] < 0 for every j with 0 <= j < k. If no such k and indices exist, then r = false.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_2",
+    "negation": "AegisSpec.CircularArrayLoop.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; equivalently, the call does not fail (no panic, out-of-bounds, or arithmetic failure) for any input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_3",
+    "negation": "AegisSpec.CircularArrayLoop.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = false.",
+    "preconditions": "Let n = len(nums). n = 1. Also -1000 <= nums[0] <= 1000 and nums[0] != 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_4",
+    "negation": "AegisSpec.CircularArrayLoop.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. r = true if and only if nums[0] and nums[1] have the same sign (both positive or both negative) and both nums[0] and nums[1] are odd (equivalently, each is congruent to 1 modulo 2). In all other cases r = false.",
+    "preconditions": "Let n = len(nums). n = 2. For i = 0 and i = 1, -1000 <= nums[i] <= 1000 and nums[i] != 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_5",
+    "negation": "AegisSpec.CircularArrayLoop.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = true.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0. Either nums[i] > 0 for every i with 0 <= i < n, or nums[i] < 0 for every i with 0 <= i < n. For every i with 0 <= i < n, n does not divide nums[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_6",
+    "negation": "AegisSpec.CircularArrayLoop.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on nums and r_rot be the result on rot. Both calls return results, and r_rot = r.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0. Let t be an integer with 0 <= t < n, and define rot by rot[i] = nums[(i + t) mod n] for 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_7",
+    "negation": "AegisSpec.CircularArrayLoop.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on nums and r_mirror be the result on mirror. Both calls return results, and r_mirror = r.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0. Define mirror by mirror[i] = -nums[n - 1 - i] for 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_8",
+    "negation": "AegisSpec.CircularArrayLoop.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on nums and r' be the result on nums'. Both calls return results, and r' = r.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0. Let nums' be another array of length n satisfying the same bounds and nonzero conditions, and such that for every i with 0 <= i < n, nums'[i] is congruent to nums[i] modulo n and nums'[i] has the same sign as nums[i] (both positive or both negative)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_9",
+    "negation": "AegisSpec.CircularArrayLoop.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true, for any valid witness cycle (i_0, ..., i_{k-1}) as in the main specification, every index i_j in it satisfies: n does not divide nums[i_j].",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. For every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] != 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CircularArrayLoop.spec_10",
+    "negation": "AegisSpec.CircularArrayLoop.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. r = true if and only if n does not divide c. Equivalently, r = false exactly when c is congruent to 0 modulo n.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 5000. There is a nonzero integer c with -1000 <= c <= 1000 such that nums[i] = c for every i with 0 <= i < n."
+  }
+]

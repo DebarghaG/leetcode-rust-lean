@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Call a transaction any pair of indices (b, s) with 0 <= b < s < len(prices). Call a valid scheme any sequence of transactions (b_1, s_1), ..., (b_m, s_m) with 0 <= m <= k and s_j < b_{j+1} for every 1 <= j < m. Its profit is the sum over j = 1..m of (prices[s_j] - prices[b_j]); the empty scheme (m = 0) has profit 0. Then r equals the maximum profit over all valid schemes with at most k transactions.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no overflow, no out-of-bounds access, no panic) for every input satisfying the preconditions.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= k * (M - m), where M = max { prices[i] : 0 <= i < len(prices) } and m = min { prices[i] : 0 <= i < len(prices) }.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at most the sum of max(0, prices[i+1] - prices[i]) over all i with 0 <= i < len(prices)-1.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of indices i, j with 0 <= i < j < len(prices), r >= prices[j] - prices[i].",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_profit(k1, prices) returns r1 and max_profit(k2, prices) returns r2, then r1 <= r2.",
+    "preconditions": "1 <= k1 <= k2 <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the sum of max(0, prices[i+1] - prices[i]) over all i with 0 <= i < len(prices)-1.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices), and 2*k >= len(prices) - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices), and prices[i] = prices[0] for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = prices[len(prices)-1] - prices[0].",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices), and prices[i] <= prices[i+1] for every 0 <= i < len(prices)-1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a valid scheme with at most k transactions (a sequence of index pairs (b_1, s_1), ..., (b_m, s_m) with 0 <= m <= k and 0 <= b_1 < s_1 < b_2 < s_2 < ... < b_m < s_m < len(prices)) whose profit, sum over j = 1..m of (prices[s_j] - prices[b_j]), equals r.",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfit.spec_11",
+    "negation": "AegisSpec.MaxProfit.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_profit(k, p) returns r and max_profit(k, q) returns r', then r = r'.",
+    "preconditions": "1 <= k <= 100, 1 <= len(p) = len(q) <= 1000, 0 <= p[i] <= 1000 and 0 <= q[i] <= 1000 for every i with 0 <= i < len(p), and there is an integer c such that q[i] = p[i] + c for every i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxProfit.spec_12",
+    "negation": "AegisSpec.MaxProfit.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if prices[i] >= prices[i+1] for every i with 0 <= i < len(prices)-1; equivalently, no pair i < j has prices[i] < prices[j].",
+    "preconditions": "1 <= k <= 100, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxProfit.spec_13",
+    "negation": "AegisSpec.MaxProfit.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max({0} union { prices[j] - prices[i] : 0 <= i < j < len(prices) }).",
+    "preconditions": "k = 1, 1 <= len(prices) <= 1000, and 0 <= prices[i] <= 1000 for every i with 0 <= i < len(prices)."
+  }
+]

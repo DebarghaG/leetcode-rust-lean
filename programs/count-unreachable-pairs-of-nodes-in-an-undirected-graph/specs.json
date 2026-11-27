@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPairs.spec_1",
+    "negation": "AegisSpec.CountPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let G be the undirected graph with vertex set V = {0,1,...,n-1} and with one undirected edge between edges[i][0] and edges[i][1] for each i with 0 <= i < len(edges). Say two distinct vertices u and v are unreachable if there is no path in G from u to v. The function returns a result r, and the integer value of r equals the number of unordered pairs {u,v} of distinct vertices of V (equivalently, pairs with 0 <= u < v < n) such that u and v are unreachable.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPairs.spec_2",
+    "negation": "AegisSpec.CountPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, the call count_pairs(n, edges) returns a result r; it does not fail due to overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPairs.spec_3",
+    "negation": "AegisSpec.CountPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the call returns a result r, the integer value of r is nonnegative: 0 <= r.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPairs.spec_4",
+    "negation": "AegisSpec.CountPairs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the call returns a result r, the integer value of r satisfies r <= n*(n-1)/2, where the arithmetic is ordinary mathematical integer arithmetic.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPairs.spec_5",
+    "negation": "AegisSpec.CountPairs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and the integer value of r is n*(n-1)/2.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPairs.spec_6",
+    "negation": "AegisSpec.CountPairs.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph defined by n and edges. Whenever the call returns a result r, r = 0 if and only if G is connected, i.e. for every two vertices u,v in {0,...,n-1} there is a path in G from u to v (equivalently, G has exactly one connected component).",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPairs.spec_7",
+    "negation": "AegisSpec.CountPairs.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let C_1,...,C_m be the distinct connected components of the undirected graph G defined by n and edges, where a connected component is a maximal nonempty vertex set such that any two of its vertices are connected by a path. Let s_i = |C_i|. Whenever the call returns a result r, the integer value of r equals sum_{1 <= i < j <= m} s_i * s_j.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPairs.spec_8",
+    "negation": "AegisSpec.CountPairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph defined by n and edges, and let R be the number of unordered pairs {u,v} with 0 <= u < v < n such that u and v are connected by a path in G. Whenever the call returns a result r, the integer values satisfy r + R = n*(n-1)/2.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPairs.spec_9",
+    "negation": "AegisSpec.CountPairs.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The calls count_pairs(n, edges) and count_pairs(n, edges') both return results r and r', and the integer values satisfy r = r'.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges and edges' are slices of Vec<I64>, each satisfying the edge constraints for n: len(edges) <= 200000, len(edges') <= 200000, every edge has length 2, both endpoints are in [0,n-1], the two endpoints are different, and no unordered edge is repeated. Also len(edges') = len(edges), and for every i with 0 <= i < len(edges), edges'[i][0] = edges[i][1] and edges'[i][1] = edges[i][0]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPairs.spec_10",
+    "negation": "AegisSpec.CountPairs.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of count_pairs(n, edges) and let r' be the result of count_pairs(n, edges'). Both calls return results, and the integer values satisfy r' <= r.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> satisfying the edge constraints for n, and len(edges) < 200000. Let a and b satisfy 0 <= a < n, 0 <= b < n, a != b, and the unordered pair {a,b} is not already an edge in edges. Let edges' be the slice obtained by appending the one edge [a,b] to edges; edges' also satisfies all edge constraints for n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPairs.spec_11",
+    "negation": "AegisSpec.CountPairs.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the undirected graph defined by n and edges. Whenever the call returns a result r, for every two distinct connected components C and D of G, the integer value of r is at least |C| * |D|.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPairs.spec_12",
+    "negation": "AegisSpec.CountPairs.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph defined by n and edges. For each vertex u in {0,...,n-1}, let comp_size(u) be the number of vertices in the connected component of G containing u. Whenever the call returns a result r, sum_{u=0}^{n-1} (n - comp_size(u)) = 2 * r, with ordinary mathematical integer arithmetic.",
+    "preconditions": "n is an I64 satisfying 1 <= n <= 100000. edges is a slice of Vec<I64> with len(edges) <= 200000. For every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]. For distinct i,j with 0 <= i < j < len(edges), the unordered pairs {edges[i][0], edges[i][1]} and {edges[j][0], edges[j][1]} are different."
+  }
+]

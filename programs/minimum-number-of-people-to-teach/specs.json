@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTeachings.spec_1",
+    "negation": "AegisSpec.MinimumTeachings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = min_{1 ≤ L ≤ n} need(L). Equivalently, r is the least number of users that must be taught one single language L so that after teaching, for every friendship entry (u,v), either u and v originally share a language or both u and v know L.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints: 2 ≤ n ≤ 500; m = len(languages) with 1 ≤ m ≤ 500; for every i with 1 ≤ i ≤ m, languages[i-1] is a nonempty list of distinct values in [1,n] with length at most n; 1 ≤ len(friendships) ≤ 500; every friendships[k] has length 2 and satisfies 1 ≤ friendships[k][0] < friendships[k][1] ≤ m; all friendship pairs are distinct. Define Lang(i) = { languages[i-1][j] | 0 ≤ j < len(languages[i-1]) }. Call a friendship entry (u,v) bad if Lang(u) ∩ Lang(v) = ∅. Define B = { i | 1 ≤ i ≤ m and i is an endpoint of at least one bad friendship entry }. For L ∈ [1,n], define need(L) = |{ i ∈ B | L ∉ Lang(i) }|."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTeachings.spec_2",
+    "negation": "AegisSpec.MinimumTeachings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTeachings.spec_3",
+    "negation": "AegisSpec.MinimumTeachings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≥ 0.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTeachings.spec_4",
+    "negation": "AegisSpec.MinimumTeachings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, if B is nonempty, then r ≤ |B| - 1.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTeachings.spec_5",
+    "negation": "AegisSpec.MinimumTeachings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every friendship entry (u,v) satisfies Lang(u) ∩ Lang(v) ≠ ∅ (equivalently B = ∅), then the function returns r = 0.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTeachings.spec_6",
+    "negation": "AegisSpec.MinimumTeachings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If B is nonempty, then the function returns a result r and r ≥ 1.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTeachings.spec_7",
+    "negation": "AegisSpec.MinimumTeachings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If |B| = 2, then the function returns r = 1.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTeachings.spec_8",
+    "negation": "AegisSpec.MinimumTeachings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a language L* ∈ [1,n] such that |{ i ∈ B | L* ∉ Lang(i) }| = r, and teaching L* to exactly the users in that set makes every friendship pair able to communicate: for every friendship entry (u,v), either Lang(u) ∩ Lang(v) ≠ ∅, or both u and v know L* after this teaching.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTeachings.spec_9",
+    "negation": "AegisSpec.MinimumTeachings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every L ∈ [1,n] and every set T ⊆ {1,...,m}, if teaching L to the users in T makes every friendship pair able to communicate (that is, for every friendship entry (u,v), either Lang(u) ∩ Lang(v) ≠ ∅, or both (L ∈ Lang(u) or u ∈ T) and (L ∈ Lang(v) or v ∈ T) hold), then |T| ≥ r.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumTeachings.spec_10",
+    "negation": "AegisSpec.MinimumTeachings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns results r and r' on the two inputs respectively, and r = r'.",
+    "preconditions": "Two inputs (n, languages, friendships) and (n, languages', friendships) both satisfy the problem constraints stated in spec_1. Define Lang(i) from languages and Lang'(i) from languages'. Assume for every i with 1 ≤ i ≤ m, Lang'(i) = Lang(i) as sets, so only the order of languages inside each user's list may differ."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumTeachings.spec_11",
+    "negation": "AegisSpec.MinimumTeachings.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if and only if there exists L ∈ [1,n] such that exactly one user in B does not already know L, that is, |{ i ∈ B | L ∉ Lang(i) }| = 1.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1, and assume B is nonempty."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumTeachings.spec_12",
+    "negation": "AegisSpec.MinimumTeachings.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "The function returns results r and r' on the two inputs respectively, and r' ≤ r.",
+    "preconditions": "Let (n, languages, friendships) and (n, languages', friendships) both satisfy the problem constraints stated in spec_1 with the same n, m, and friendships. Define Lang(i) and Lang'(i) as in spec_1. Assume Lang(i) ⊆ Lang'(i) for every i with 1 ≤ i ≤ m; the second input may only add languages to users."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumTeachings.spec_13",
+    "negation": "AegisSpec.MinimumTeachings.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists L* ∈ [1,n] such that r = |{ i ∈ B | L* ∉ Lang(i) }| and L* ∈ ⋃_{i ∈ B} Lang(i); in particular, an optimal language can be chosen among the languages already known by at least one user in B.",
+    "preconditions": "n, languages, friendships satisfy the problem constraints stated in spec_1. Define m, Lang(i), bad friendship, B, and need(L) as in spec_1, and assume B is nonempty."
+  }
+]

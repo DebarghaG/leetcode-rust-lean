@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFlips.spec_1",
+    "negation": "AegisSpec.MinFlips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every such mat, min_flips(mat) returns a result r. A legal move is a pair (a,b) with 0 <= a < m and 0 <= b < n; it toggles every cell (i,j) with 0 <= i < m, 0 <= j < n and |i-a|+|j-b| <= 1. A k-move solution of mat is a list of k legal moves whose application in order leaves every cell equal to 0; equivalently, for every cell (i,j), the number of listed moves (a,b) with |i-a|+|j-b| <= 1 is congruent to mat[i][j] modulo 2. Then either r = -1 and there is no integer k >= 0 for which a k-move solution exists, or 0 <= r and there exists an r-move solution, and for every integer k with 0 <= k < r no k-move solution exists.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFlips.spec_2",
+    "negation": "AegisSpec.MinFlips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every mat satisfying the preconditions, min_flips(mat) returns a result r; in particular, it does not fail, panic, or overflow, and r is a 64-bit integer.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFlips.spec_3",
+    "negation": "AegisSpec.MinFlips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every mat satisfying the preconditions, min_flips(mat) returns a result r and either r = -1 or 0 <= r <= m*n (where m = len(mat) and n is the common row length); in particular r <= 9.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFlips.spec_4",
+    "negation": "AegisSpec.MinFlips.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every entry of mat is 0, then min_flips(mat) returns 0.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and every entry mat[i][j] is 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFlips.spec_5",
+    "negation": "AegisSpec.MinFlips.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m = 1 and n = 1, then min_flips(mat) returns mat[0][0].",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = 1 and n = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFlips.spec_6",
+    "negation": "AegisSpec.MinFlips.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If mat is the 2 x 2 matrix all of whose entries are 1, then min_flips(mat) returns 4.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = n = 2 and mat[i][j] = 1 for every 0 <= i < 2 and 0 <= j < 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFlips.spec_7",
+    "negation": "AegisSpec.MinFlips.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If mat is the 3 x 3 matrix all of whose entries are 1, then min_flips(mat) returns 5.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = n = 3 and mat[i][j] = 1 for every 0 <= i < 3 and 0 <= j < 3."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFlips.spec_8",
+    "negation": "AegisSpec.MinFlips.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For this mat, min_flips(mat) returns -1.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = 2, n = 3, mat[0][0] = 1, mat[1][0] = 1, and mat[i][j] = 0 for every (i,j) other than (0,0) and (1,0)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFlips.spec_9",
+    "negation": "AegisSpec.MinFlips.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m = 1 and n = 2, then: (a) if mat[0][0] = 0 and mat[0][1] = 0, min_flips(mat) returns 0; (b) if mat[0][0] = 1 and mat[0][1] = 1, min_flips(mat) returns 1; (c) if exactly one of mat[0][0], mat[0][1] is 1, min_flips(mat) returns -1.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = 1 and n = 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinFlips.spec_10",
+    "negation": "AegisSpec.MinFlips.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every mat satisfying the preconditions, let matT be the n x m matrix defined by matT[j][i] = mat[i][j] for all 0 <= i < m and 0 <= j < n. Then min_flips(mat) and min_flips(matT) both return results r and r', and r = r'.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinFlips.spec_11",
+    "negation": "AegisSpec.MinFlips.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every mat satisfying the preconditions, let matR be the m x n matrix defined by matR[i][j] = mat[i][n-1-j] for all 0 <= i < m and 0 <= j < n (reversing the order of cells in each row). Then min_flips(mat) and min_flips(matR) both return results r and r', and r = r'.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinFlips.spec_12",
+    "negation": "AegisSpec.MinFlips.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every mat satisfying the preconditions, let matV be the m x n matrix defined by matV[i][j] = mat[m-1-i][j] for all 0 <= i < m and 0 <= j < n (reversing the order of the rows). Then min_flips(mat) and min_flips(matV) both return results r and r', and r = r'.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinFlips.spec_13",
+    "negation": "AegisSpec.MinFlips.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every mat satisfying the preconditions, min_flips(mat) returns a result r, and r = 0 if and only if every entry mat[i][j] is 0.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinFlips.spec_14",
+    "negation": "AegisSpec.MinFlips.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every mat satisfying the preconditions and every legal cell (a,b) with 0 <= a < m and 0 <= b < n, let mat2 be the m x n matrix obtained from mat by toggling exactly the cells (i,j) with |i-a|+|j-b| <= 1 (i.e., applying one legal flip at (a,b)). Let r = min_flips(mat) and r2 = min_flips(mat2). Then either r = -1 and r2 = -1, or both r and r2 are nonnegative and |r - r2| <= 1.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinFlips.spec_15",
+    "negation": "AegisSpec.MinFlips.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every mat satisfying the preconditions, min_flips(mat) returns -1 if and only if there is no m x n matrix x with every x[i][j] in {0,1} such that for every cell (i,j) with 0 <= i < m and 0 <= j < n, mat[i][j] is congruent modulo 2 to the sum of x[a][b] over all valid cells (a,b) with |i-a|+|j-b| <= 1.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinFlips.spec_16",
+    "negation": "AegisSpec.MinFlips.spec_16_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every mat satisfying the preconditions, if min_flips(mat) = -1, then (m,n) is one of (1,2), (2,1), (2,3), or (3,2). Equivalently, if (m,n) is not one of those four ordered pairs, then min_flips(mat) is nonnegative for every such mat.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MinFlips.spec_17",
+    "negation": "AegisSpec.MinFlips.spec_17_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every 3x3 binary matrix mat, there is exactly one 3x3 binary matrix x such that for every cell (i,j), mat[i][j] is congruent modulo 2 to the sum of x[a][b] over all valid cells (a,b) with |i-a|+|j-b| <= 1; and min_flips(mat) is the number of entries of x equal to 1.",
+    "preconditions": "Let m = len(mat) and let n be the common length of the rows, so mat is an m x n matrix. 1 <= m <= 3, 1 <= n <= 3; every row mat[i] has length n; every entry mat[i][j] is either 0 or 1; and m = 3 and n = 3."
+  }
+]

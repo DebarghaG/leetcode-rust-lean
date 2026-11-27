@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_1",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let A(k) be the assertion that there exist subsets G_1, ..., G_k of {0, ..., n-1} such that: (1) every G_t is non-empty; (2) |G_1| < |G_2| < ... < |G_k|; and (3) for every i with 0 <= i < n, the number of t in {1, ..., k} with i in G_t is at most usageLimits[i]. The function returns a result r, and r is the largest integer k for which A(k) holds. Equivalently, A(r) holds and A(k) does not hold for any integer k > r.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_2",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every usageLimits satisfying the preconditions, max_increasing_groups(usageLimits) returns a result; it does not fail, panic, or overflow.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_3",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= n.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_4",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist subsets G_1, ..., G_r of {0, ..., n-1} such that |G_t| = t for every t with 1 <= t <= r, and for every i with 0 <= i < n, the number of t in {1, ..., r} with i in G_t is at most usageLimits[i].",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_5",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every sequence of subsets H_1, ..., H_k of {0, ..., n-1} satisfying (1) each H_t is non-empty, (2) |H_1| < |H_2| < ... < |H_k|, and (3) for every i with 0 <= i < n the number of t with i in H_t is at most usageLimits[i], must have k <= r.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_6",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t with 1 <= t <= r, the sum over i from 0 to n-1 of min(usageLimits[i], t) is at least the sum of the t largest group sizes among 1, 2, ..., r, namely sum_{s=r-t+1}^{r} s = t*(2*r - t + 1)/2.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_7",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result returned for a equals the result returned for b.",
+    "preconditions": "Let a and b be two non-empty slices of i64 with the same length n = len(a) = len(b), satisfying 1 <= n <= 100000 and 1 <= a[i], b[i] <= 1000000000 for every i. The entries of a and b are the same multiset; explicitly, there exists a bijection p from {0, ..., n-1} to itself such that b[j] = a[p(j)] for every j with 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_8",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The result returned for a is at most the result returned for b.",
+    "preconditions": "Let a and b be two slices of i64 with the same length n = len(a) = len(b), satisfying 1 <= n <= 100000 and 1 <= a[i], b[i] <= 1000000000 for every i with 0 <= i < n. Suppose a[i] <= b[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_9",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same result r when called on capped.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000, and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n. Let r be the result returned for usageLimits, and define capped[i] = min(usageLimits[i], r) for 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_10",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns n.",
+    "preconditions": "usageLimits is a non-empty slice of i64 with n = len(usageLimits), satisfying 1 <= n <= 100000 and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n. Suppose usageLimits[i] >= n for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_11",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every sequence of subsets G_1, ..., G_n of {0, ..., n-1} such that each G_t is non-empty, |G_1| < |G_2| < ... < |G_n|, and for every i with 0 <= i < n the number of t with i in G_t is at most usageLimits[i], it holds that |G_t| = t for every t with 1 <= t <= n; in particular |G_n| = n, so G_n = {0, ..., n-1}.",
+    "preconditions": "usageLimits is a non-empty slice of i64 with n = len(usageLimits), satisfying 1 <= n <= 100000 and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n. The function returns n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_12",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 2 if max(usageLimits[0], usageLimits[1]) >= 2, and returns 1 otherwise.",
+    "preconditions": "usageLimits is a non-empty slice of i64 with n = len(usageLimits) = 2, satisfying 1 <= usageLimits[i] <= 1000000000 for i = 0 and i = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_13",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let r be the returned value. Then r is the largest integer k with 0 <= k <= n such that for every integer t with 1 <= t <= k, sum_{i=0}^{n-1} min(usageLimits[i], t) >= t*(2*k - t + 1)/2 (the condition is vacuous for k = 0). In particular the Hall-type inequalities of spec_6 are not only necessary but sufficient, so this gives a computable, subset-free characterisation of the answer.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000 and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_14",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "The result returned for a is at most the result returned for b: appending a further number (with a positive usage limit) cannot decrease the maximum number of groups, since every grouping feasible for a uses only the numbers 0,...,len(a)-1 and is therefore feasible for b.",
+    "preconditions": "Let a and b be slices of i64 with 1 <= len(a) <= 99999 and len(b) = len(a) + 1 <= 100000, satisfying b[i] = a[i] for every 0 <= i < len(a), with 1 <= a[i] <= 1000000000 and 1 <= b[len(a)] <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxIncreasingGroups.spec_15",
+    "negation": "AegisSpec.MaxIncreasingGroups.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r*(r+1)/2 <= sum_{i=0}^{n-1} usageLimits[i]; that is, the total number of occurrences needed by groups of sizes 1, 2, ..., r does not exceed the total available usage budget.",
+    "preconditions": "usageLimits is a non-empty slice of i64. Let n = len(usageLimits). The constraints hold: 1 <= n <= 100000 and 1 <= usageLimits[i] <= 1000000000 for every i with 0 <= i < n."
+  }
+]

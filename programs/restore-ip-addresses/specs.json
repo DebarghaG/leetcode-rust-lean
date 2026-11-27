@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_1",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that, for every byte vector v, v occurs as an element of r exactly once if and only if there exist cut positions 0 = p0 < p1 < p2 < p3 < p4 = len(s) satisfying: (1) for each k = 0,1,2,3, 1 <= p_{k+1} - p_k <= 3; (2) for each k = 0,1,2,3, if p_{k+1} - p_k > 1 then s[p_k] != 48 (the first digit of a multi-digit part is not '0'); (3) for each k = 0,1,2,3, the decimal value of s[p_k],...,s[p_{k+1}-1] is at most 255; and (4) v is the concatenation of s[p0..p1], byte 46 ('.'), s[p1..p2], byte 46, s[p2..p3], byte 46, and s[p3..p4], in that order. No order of the elements of r is required.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57 (s consists of ASCII decimal digits)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_2",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying Pre(s), restore_ip_addresses(s) returns a result r (it does not fail by overflow, out-of-bounds access, or panic); thus every returned-value claim below refers to this r.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_3",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, for every element v of r, 7 <= len(v) <= 15.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_4",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and every element v of r satisfies: v contains exactly three occurrences of byte 46 ('.'), and every byte of v is either 46 or an ASCII decimal digit with 48 <= byte <= 57.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_5",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and every element v of r satisfies: when v is split at its three '.' bytes, exactly four nonempty byte sequences are obtained; equivalently, v[0] != 46, v[len(v)-1] != 46, and no two consecutive bytes of v are both 46.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_6",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, for every element v of r, deleting all bytes equal to 46 ('.') from v yields exactly the byte sequence s (same length and same bytes in the same order).",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_7",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, for every element v of r, if v is written as p0 '.' p1 '.' p2 '.' p3 with each pi a byte sequence not containing 46, then 1 <= len(pi) <= 3 for i = 0,1,2,3.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_8",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and, for every element v of r, for every dot-separated part p of v, if len(p) > 1 then p[0] != 48 (the ASCII code of '0').",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_9",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, for every element v of r, for every nonempty dot-separated part p of v, the decimal number represented by p, namely the sum over j with 0 <= j < len(p) of (p[j] - 48) * 10^(len(p)-1-j), is between 0 and 255 inclusive.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_10",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and every element v of r is obtainable from s by inserting exactly three dots: there exist cut positions 0 = p0 < p1 < p2 < p3 < p4 = len(s) such that 1 <= p_{k+1} - p_k <= 3 for k = 0,1,2,3, no multi-digit part begins with byte 48, each part has decimal value at most 255, and v is the dotted concatenation s[p0..p1] '.' s[p1..p2] '.' s[p2..p3] '.' s[p3..p4].",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_11",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, for every choice of cut positions 0 = p0 < p1 < p2 < p3 < p4 = len(s) satisfying (1) 1 <= p_{k+1} - p_k <= 3 for k = 0,1,2,3, (2) no part of length greater than 1 starts with byte 48, and (3) each part's decimal value is at most 255, the byte vector formed by the dotted concatenation s[p0..p1] '.' s[p1..p2] '.' s[p2..p3] '.' s[p3..p4] occurs as an element of r.",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RestoreIpAddresses.spec_12",
+    "negation": "AegisSpec.RestoreIpAddresses.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r and, for every i,j with 0 <= i < j < len(r), r[i] != r[j].",
+    "preconditions": "Pre(s): s is a byte slice with 1 <= len(s) <= 20 and, for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  }
+]

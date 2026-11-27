@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCollisions.spec_1",
+    "negation": "AegisSpec.CountCollisions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let first be the least index i such that 0 <= i < n and directions[i] != 'L', or n if no such index exists. Let last be the greatest index i such that 0 <= i < n and directions[i] != 'R', or -1 if no such index exists. Whenever the function returns a result r, r is exactly the number of indices i with first <= i <= last and directions[i] != 'S'. Equivalently, r is the number of moving cars (direction 'L' or 'R') that remain after deleting every leading 'L' and every trailing 'R' from directions.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCollisions.spec_2",
+    "negation": "AegisSpec.CountCollisions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; that is, it does not panic, access memory out of bounds, or overflow.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCollisions.spec_3",
+    "negation": "AegisSpec.CountCollisions.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= the number of indices i with 0 <= i < n and directions[i] != 'S'.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCollisions.spec_4",
+    "negation": "AegisSpec.CountCollisions.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if directions has the form L^a S^b R^c for some non-negative integers a, b, c with a + b + c = n; that is, the first a bytes are 'L', the next b bytes are 'S', and the final c bytes are 'R'.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCollisions.spec_5",
+    "negation": "AegisSpec.CountCollisions.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let firstR be the least index i with directions[i] = 'R', or n if no such index exists, and let lastL be the greatest index i with directions[i] = 'L', or -1 if no such index exists. Whenever the function returns a result r, r = max(0, lastL - firstR + 1).",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83). Additionally, directions[i] != 'S' for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCollisions.spec_6",
+    "negation": "AegisSpec.CountCollisions.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no index i with directions[i] = 'S', then whenever the function returns a result r, r = 0. Otherwise, let p be the least index with directions[p] = 'S'; then whenever the function returns a result r, r is the number of indices i with p < i < n and directions[i] = 'L'.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83). Additionally, directions[i] != 'R' for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCollisions.spec_7",
+    "negation": "AegisSpec.CountCollisions.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no index i with directions[i] = 'S', then whenever the function returns a result r, r = 0. Otherwise, let q be the greatest index with directions[q] = 'S'; then whenever the function returns a result r, r is the number of indices i with 0 <= i < q and directions[i] = 'R'.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83). Additionally, directions[i] != 'L' for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCollisions.spec_8",
+    "negation": "AegisSpec.CountCollisions.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if there exist indices i and j with 0 <= i < j < n, directions[i] = 'R', and directions[j] = 'L', then r >= 2.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountCollisions.spec_9",
+    "negation": "AegisSpec.CountCollisions.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if there exist indices i and j with 0 <= i < j < n, directions[i] = 'S', and directions[j] = 'L', then r >= 1.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountCollisions.spec_10",
+    "negation": "AegisSpec.CountCollisions.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if there exist indices i and j with 0 <= i < j < n, directions[i] = 'R', and directions[j] = 'S', then r >= 1.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountCollisions.spec_11",
+    "negation": "AegisSpec.CountCollisions.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on directions and r' on d', r' = r.",
+    "preconditions": "Let n = len(directions). The input satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, directions[i] is one of the ASCII bytes 'L' (76), 'R' (82), or 'S' (83). Let k >= 0 be an integer with k + n <= 100000, and let d' be the byte string of length k + n obtained by writing k copies of 'L' followed by directions."
+  }
+]

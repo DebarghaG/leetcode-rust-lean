@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxFreeTime.spec_1",
+    "negation": "AegisSpec.MaxFreeTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Consider every feasible reschedule of at most one meeting: choose either no meeting, or an index k with 0 <= k < n and an integer x such that 0 <= x and x + (endTime[k]-startTime[k]) <= eventTime, and replace only meeting k by [x, x + (endTime[k]-startTime[k])], leaving all other meetings [startTime[i], endTime[i]] unchanged. The reschedule is feasible only if all resulting meetings lie in [0,eventTime] and any two resulting meetings are non-overlapping, meaning for intervals [a,b] and [c,d] either b <= c or d <= a. For any feasible resulting set, sort its meetings by start time; define its longest free time as the maximum of: the first start time, nextStart - previousEnd for each consecutive pair in sorted order, and eventTime - the last end time. The function returns a result r, and r is exactly the maximum of this longest free time over all feasible reschedules, including changing no meeting.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxFreeTime.spec_2",
+    "negation": "AegisSpec.MaxFreeTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail by overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxFreeTime.spec_3",
+    "negation": "AegisSpec.MaxFreeTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input satisfying the preconditions, the returned value r satisfies r >= 0.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxFreeTime.spec_4",
+    "negation": "AegisSpec.MaxFreeTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input satisfying the preconditions, let d_i = endTime[i]-startTime[i] for 0 <= i < n. Then r <= eventTime - (sum_{i=0}^{n-1} d_i).",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxFreeTime.spec_5",
+    "negation": "AegisSpec.MaxFreeTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input satisfying the preconditions and every i with 0 <= i < n, define L_i = startTime[0] if i=0, otherwise startTime[i]-endTime[i-1], and R_i = eventTime-endTime[n-1] if i=n-1, otherwise startTime[i+1]-endTime[i]. Then r >= L_i + R_i.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxFreeTime.spec_6",
+    "negation": "AegisSpec.MaxFreeTime.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input satisfying the preconditions, define g_0 = startTime[0], g_j = startTime[j]-endTime[j-1] for 1 <= j <= n-1, and g_n = eventTime-endTime[n-1]; also d_i = endTime[i]-startTime[i]. For every i with 0 <= i < n, if there exists j with 0 <= j <= n, j != i and j != i+1, and g_j >= d_i, then r >= g_i + d_i + g_{i+1}.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxFreeTime.spec_7",
+    "negation": "AegisSpec.MaxFreeTime.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input satisfying the preconditions, define g_0 = startTime[0], g_j = startTime[j]-endTime[j-1] for 1 <= j <= n-1, and g_n = eventTime-endTime[n-1]; also d_i = endTime[i]-startTime[i]. Then r <= max_{0 <= i < n} (g_i + d_i + g_{i+1}).",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxFreeTime.spec_8",
+    "negation": "AegisSpec.MaxFreeTime.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions, let d_i = endTime[i]-startTime[i]. Then r = 0 if and only if sum_{i=0}^{n-1} d_i = eventTime.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxFreeTime.spec_9",
+    "negation": "AegisSpec.MaxFreeTime.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions, define g_0 = startTime[0], g_j = startTime[j]-endTime[j-1] for 1 <= j <= n-1, and g_n = eventTime-endTime[n-1]; also d_i = endTime[i]-startTime[i]. If for every i with 0 <= i < n and every j with 0 <= j <= n such that j != i and j != i+1 we have g_j < d_i, then r = max_{0 <= i < n} (g_i + g_{i+1}).",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxFreeTime.spec_10",
+    "negation": "AegisSpec.MaxFreeTime.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every input satisfying the preconditions, define g_0 = startTime[0], g_j = startTime[j]-endTime[j-1] for 1 <= j <= n-1, and g_n = eventTime-endTime[n-1]; also d_i = endTime[i]-startTime[i]. There exists an index i with 0 <= i < n such that either (a) r = g_i + g_{i+1}, or (b) r = g_i + d_i + g_{i+1} and there exists j with 0 <= j <= n, j != i and j != i+1, and g_j >= d_i.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxFreeTime.spec_11",
+    "negation": "AegisSpec.MaxFreeTime.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every input satisfying the preconditions, define the reflected input by start'_i = eventTime - endTime[n-1-i] and end'_i = eventTime - startTime[n-1-i] for 0 <= i < n. Let r be the value returned for (eventTime, startTime, endTime) and let r' be the value returned for (eventTime, start', end'). Then r = r'.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxFreeTime.spec_12",
+    "negation": "AegisSpec.MaxFreeTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every input satisfying the preconditions and every integer eventTime' with eventTime <= eventTime' <= 10^9, let r be the value returned for (eventTime, startTime, endTime) and let r' be the value returned for (eventTime', startTime, endTime). Then r <= r'.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxFreeTime.spec_13",
+    "negation": "AegisSpec.MaxFreeTime.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every input satisfying the preconditions, define g_0 = startTime[0], g_j = startTime[j]-endTime[j-1] for 1 <= j <= n-1, g_n = eventTime-endTime[n-1], and d_i = endTime[i]-startTime[i]. Let E = { i | 0 <= i < n and there exists j with 0 <= j <= n, j != i, j != i+1, and g_j >= d_i }. Then r = max( max_{0 <= i < n} (g_i + g_{i+1}), max_{i in E} (g_i + d_i + g_{i+1}) ), with the second maximum omitted when E is empty. This is the exact closed-form value of the optimum.",
+    "preconditions": "Let n = len(startTime) = len(endTime). Assume 1 <= eventTime <= 10^9, 2 <= n <= 10^5, for every i with 0 <= i < n we have 0 <= startTime[i] < endTime[i] <= eventTime, and for every i with 0 <= i < n-1 we have endTime[i] <= startTime[i+1]."
+  }
+]

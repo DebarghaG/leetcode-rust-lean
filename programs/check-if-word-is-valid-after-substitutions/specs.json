@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValid.spec_1",
+    "negation": "AegisSpec.IsValid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_valid(s) returns Result.ok r, r = true if and only if s is valid, where a byte string u is valid exactly when there exist n >= 0 and byte strings u_0, ..., u_n such that u_0 is empty, u_n = u, and for every k with 0 <= k < n there is an insertion position p with 0 <= p <= len(u_k) and u_{k+1} = u_k[0..p] ++ [97,98,99] ++ u_k[p..len(u_k)].",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValid.spec_2",
+    "negation": "AegisSpec.IsValid.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call is_valid(s) returns a result of the form Result.ok r for some Boolean r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValid.spec_3",
+    "negation": "AegisSpec.IsValid.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If is_valid(s) returns Result.ok true, then there exists an integer k >= 0 with len(s) = 3*k.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValid.spec_4",
+    "negation": "AegisSpec.IsValid.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If is_valid(s) returns Result.ok true, then the number of indices i with 0 <= i < len(s) and s[i] = 97 is equal to the number of indices i with 0 <= i < len(s) and s[i] = 98, and this number is also equal to the number of indices i with 0 <= i < len(s) and s[i] = 99.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValid.spec_5",
+    "negation": "AegisSpec.IsValid.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If is_valid(s) returns Result.ok true, then for every i with 0 <= i <= len(s), if A_i, B_i, C_i are respectively the numbers of j with 0 <= j < i and s[j] = 97, 98, 99, then A_i >= B_i and B_i >= C_i.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsValid.spec_6",
+    "negation": "AegisSpec.IsValid.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If is_valid(s) returns Result.ok true, then for every i with 0 <= i <= len(s), if A_i, B_i, C_i are respectively the numbers of j with i <= j < len(s) and s[j] = 97, 98, 99, then C_i >= B_i and B_i >= A_i.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsValid.spec_7",
+    "negation": "AegisSpec.IsValid.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If is_valid(s) returns Result.ok true, then s[0] = 97.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsValid.spec_8",
+    "negation": "AegisSpec.IsValid.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If is_valid(s) returns Result.ok true, then s[len(s)-1] = 99.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsValid.spec_9",
+    "negation": "AegisSpec.IsValid.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If is_valid(s) returns Result.ok true, then there exist n >= 0 and byte strings u_0, ..., u_n such that u_0 = s, u_n is empty, and for every k with 0 <= k < n there is an index i with 0 <= i <= len(u_k)-3, u_k[i] = 97, u_k[i+1] = 98, u_k[i+2] = 99, and u_{k+1} = u_k[0..i] ++ u_k[i+3..len(u_k)].",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsValid.spec_10",
+    "negation": "AegisSpec.IsValid.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every p with 0 <= p <= len(s), let s' = s[0..p] ++ [97,98,99] ++ s[p..len(s)]. Whenever is_valid(s) returns Result.ok true, is_valid(s') returns Result.ok true.",
+    "preconditions": "1 <= len(s) <= 19997; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsValid.spec_11",
+    "negation": "AegisSpec.IsValid.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every i with 0 <= i <= len(s)-3 such that s[i] = 97, s[i+1] = 98, and s[i+2] = 99, let t_i = s[0..i] ++ s[i+3..len(s)]. Whenever is_valid(s) returns Result.ok r_s and is_valid(t_i) returns Result.ok r_t, we have r_s = r_t.",
+    "preconditions": "1 <= len(s) <= 20000; for every j with 0 <= j < len(s), s[j] is 97, 98, or 99; len(s) >= 4."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsValid.spec_12",
+    "negation": "AegisSpec.IsValid.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If is_valid(s) returns Result.ok true and len(s) > 0, then there exists an index i with 0 <= i <= len(s)-3 such that s[i] = 97, s[i+1] = 98, s[i+2] = 99, and the byte string t = s[0..i] ++ s[i+3..len(s)] is valid, where valid means obtainable from the empty string by zero or more insertions of [97,98,99] at arbitrary positions.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97, 98, or 99."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsValid.spec_13",
+    "negation": "AegisSpec.IsValid.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever is_valid(s) returns Result.ok r, r = true if and only if there exist n >= 0 and byte strings u_0, ..., u_n such that u_0 = s, u_n is empty, and for every k with 0 <= k < n there is an index i with 0 <= i <= len(u_k)-3, u_k[i] = 97, u_k[i+1] = 98, u_k[i+2] = 99, and u_{k+1} = u_k[0..i] ++ u_k[i+3..len(u_k)].",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsValid.spec_14",
+    "negation": "AegisSpec.IsValid.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever is_valid(s) returns Result.ok r, r = true if and only if the following computation leaves an empty stack: start with an empty byte string st; for j = 0, ..., len(s)-1 in order, append s[j] to st and then, while len(st) >= 3 and the last three bytes of st are [97,98,99], remove those three bytes from st; after processing all bytes, st is empty.",
+    "preconditions": "1 <= len(s) <= 20000; for every i with 0 <= i < len(s), s[i] is 97 ('a'), 98 ('b'), or 99 ('c')."
+  }
+]

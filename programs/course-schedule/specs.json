@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanFinish.spec_1",
+    "negation": "AegisSpec.CanFinish.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = true if and only if there exists a sequence p of length numCourses such that (1) p is a permutation of {0, 1, ..., numCourses-1}, meaning every course label in that range occurs exactly once in p, and (2) for every i with 0 <= i < len(prerequisites), letting a = prerequisites[i][0] and b = prerequisites[i][1], the unique index j_b with p[j_b] = b is strictly less than the unique index j_a with p[j_a] = a (so prerequisite b is taken before course a).",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanFinish.spec_2",
+    "negation": "AegisSpec.CanFinish.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanFinish.spec_3",
+    "negation": "AegisSpec.CanFinish.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct; len(prerequisites) = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanFinish.spec_4",
+    "negation": "AegisSpec.CanFinish.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct; there exists i with 0 <= i < len(prerequisites) such that prerequisites[i][0] = prerequisites[i][1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanFinish.spec_5",
+    "negation": "AegisSpec.CanFinish.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a = prerequisites[0][0] and b = prerequisites[0][1]. The function returns a result r and r = true if and only if a != b.",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct; len(prerequisites) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanFinish.spec_6",
+    "negation": "AegisSpec.CanFinish.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r_P be the result of can_finish(numCourses, P) and r_Q the result of can_finish(numCourses, Q). Both calls return results, and r_P = r_Q.",
+    "preconditions": "1 <= numCourses <= 2000; P and Q are two lists of pairs such that each of P and Q satisfies: 0 <= len <= 5000, each element has length 2, all entries are in [0,numCourses), and all pairs are distinct; and Q is a reordering of P (Q is obtained by permuting the elements of P)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanFinish.spec_7",
+    "negation": "AegisSpec.CanFinish.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define Pπ to be the list of the same length as P whose i-th element is [π(P[i][0]), π(P[i][1])]. Let r be the result of can_finish(numCourses, P) and r' the result of can_finish(numCourses, Pπ). Both calls return results, and r = r'.",
+    "preconditions": "1 <= numCourses <= 2000; P is a valid prerequisite list for numCourses: 0 <= len(P) <= 5000, each element has length 2, all entries are in [0,numCourses), and all pairs are distinct; π is a bijection from {0,...,numCourses-1} to itself."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanFinish.spec_8",
+    "negation": "AegisSpec.CanFinish.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of can_finish(n, P) and r' the result of can_finish(n+1, P). Both calls return results, and r = r'.",
+    "preconditions": "1 <= n < 2000; P is a valid prerequisite list for n: 0 <= len(P) <= 5000, each element has length 2, all entries are in [0,n), and all pairs are distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanFinish.spec_9",
+    "negation": "AegisSpec.CanFinish.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_P be the result of can_finish(numCourses, P) and r_Q the result of can_finish(numCourses, Q). Both calls return results, and if r_Q = true then r_P = true.",
+    "preconditions": "1 <= numCourses <= 2000; P and Q are valid prerequisite lists for numCourses (each has 0 <= len <= 5000, each element has length 2, all entries are in [0,numCourses), and all pairs are distinct); every pair that occurs in P also occurs in Q."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanFinish.spec_10",
+    "negation": "AegisSpec.CanFinish.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true if and only if len(prerequisites) = 0.",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct; numCourses = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanFinish.spec_11",
+    "negation": "AegisSpec.CanFinish.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = true if and only if (a) no prerequisite pair is [0,0] or [1,1], and (b) it is not the case that both [0,1] and [1,0] occur in prerequisites.",
+    "preconditions": "1 <= numCourses <= 2000; 0 <= len(prerequisites) <= 5000; for every i with 0 <= i < len(prerequisites), len(prerequisites[i]) = 2; for every i with 0 <= i < len(prerequisites), 0 <= prerequisites[i][0] < numCourses and 0 <= prerequisites[i][1] < numCourses; all pairs prerequisites[i] are distinct; numCourses = 2."
+  }
+]

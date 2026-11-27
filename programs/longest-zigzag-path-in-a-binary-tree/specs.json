@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestZigZag.spec_1",
+    "negation": "AegisSpec.LongestZigZag.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let `n` be the number of nodes in the tree. Define a zigzag path from a node `v` with initial direction `d` (where `d` is either `Left` or `Right`) as a sequence of nodes `v = v₀, v₁, …, vₖ` (for some `k ≥ 0`) such that for each `i` with `0 ≤ i < k`, `vᵢ₊₁` is the child of `vᵢ` in direction `dᵢ`, where `dᵢ = d` if `i` is even and `dᵢ` is the opposite direction if `i` is odd, and all `vᵢ` are non-`Null` nodes. The length of this path is `k`. Whenever `longest_zig_zag(root)` returns a result `r`, `r` equals the maximum length of a zigzag path in the tree, i.e., `r = max { k | there exists a node v and a direction d such that there is a zigzag path of length k starting at v with initial direction d }`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes. Every node's value is an integer between 1 and 100 inclusive."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestZigZag.spec_2",
+    "negation": "AegisSpec.LongestZigZag.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function `longest_zig_zag(root)` does not fail (it returns a result `r`, not an error or panic) for every input satisfying the preconditions.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes. Every node's value is an integer between 1 and 100 inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestZigZag.spec_3",
+    "negation": "AegisSpec.LongestZigZag.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, we have `0 ≤ r ≤ n - 1`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains `n` nodes with `1 ≤ n ≤ 50000`."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestZigZag.spec_4",
+    "negation": "AegisSpec.LongestZigZag.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let `h` be the height of the tree, defined as the maximum number of edges from the root to any leaf (so a single-node tree has `h = 0`). Whenever `longest_zig_zag(root)` returns a result `r`, we have `r ≤ h`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestZigZag.spec_5",
+    "negation": "AegisSpec.LongestZigZag.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, we have `r = 1`.",
+    "preconditions": "The tree rooted at `root` is a left-skewed path or a right-skewed path and contains `n ≥ 3` nodes. A left-skewed path means every node has at most one child and every existing child is a left child; a right-skewed path is analogous with right children."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestZigZag.spec_6",
+    "negation": "AegisSpec.LongestZigZag.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, we have `r = h`.",
+    "preconditions": "The tree rooted at `root` is a perfect binary tree of height `h ≥ 1` (all leaves are at depth `h` and every internal node has two children)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestZigZag.spec_7",
+    "negation": "AegisSpec.LongestZigZag.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, there exists a node `v` and a direction `d` (where `d` is either `Left` or `Right`) such that there is a zigzag path of length `r` starting at `v` with initial direction `d` (using the definition of zigzag path from spec_1).",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestZigZag.spec_8",
+    "negation": "AegisSpec.LongestZigZag.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, for every node `v` and every direction `d` (where `d` is either `Left` or `Right`), if there is a zigzag path starting at `v` with initial direction `d`, then its length is at most `r`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestZigZag.spec_9",
+    "negation": "AegisSpec.LongestZigZag.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever `longest_zig_zag(t₁)` returns `r₁` and `longest_zig_zag(t₂)` returns `r₂`, we have `r₁ = r₂`.",
+    "preconditions": "Let `t₁` and `t₂` be two non-empty trees with at most 50000 nodes each. They have the same shape: `t₁` is `Null` if and only if `t₂` is `Null`, and where both are `Node`, their left subtrees have the same shape and their right subtrees have the same shape. (Node values may differ.)"
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestZigZag.spec_10",
+    "negation": "AegisSpec.LongestZigZag.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `longest_zig_zag(root)` returns `r` and `longest_zig_zag(mirror(root))` returns `r'`, we have `r = r'`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes. Let `mirror(root)` be the tree obtained by swapping the left and right children at every node (recursively)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestZigZag.spec_11",
+    "negation": "AegisSpec.LongestZigZag.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `longest_zig_zag(t)` returns `r` and `longest_zig_zag(t')` returns `r'`, we have `r' ≥ r`.",
+    "preconditions": "Let `t` be a tree satisfying the problem constraints (non-empty, at most 50000 nodes). Let `t'` be obtained from `t` by replacing exactly one occurrence of `Null` (i.e., a missing child of some node) with a non-empty subtree `s`, so that `t'` is a tree that contains `t` as a subtree and has at most 50000 nodes."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestZigZag.spec_12",
+    "negation": "AegisSpec.LongestZigZag.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `longest_zig_zag(root)` returns a result `r`, we have `r = n - 1`.",
+    "preconditions": "The tree rooted at `root` is a single path (every node has at most one child) with alternating edge directions and contains `n ≥ 2` nodes. That is, if the path is `v₀, v₁, …, v_{n-1}` with `v₀ = root`, then for each `i` with `1 ≤ i < n-1`, the direction from `vᵢ` to `vᵢ₊₁` is opposite to the direction from `vᵢ₋₁` to `vᵢ`."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestZigZag.spec_13",
+    "negation": "AegisSpec.LongestZigZag.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every node `v` in the tree, define `L(v)` and `R(v)` as follows: if `v` has no left child, `L(v) = 0`; otherwise `L(v) = 1 + R(left(v))`. If `v` has no right child, `R(v) = 0`; otherwise `R(v) = 1 + L(right(v))`. Whenever `longest_zig_zag(root)` returns a result `r`, we have `r = max { max(L(v), R(v)) | v is a node in the tree }`.",
+    "preconditions": "The tree rooted at `root` is non-empty (`root ≠ Null`) and contains at most 50000 nodes."
+  }
+]

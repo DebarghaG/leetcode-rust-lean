@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_1",
+    "negation": "AegisSpec.WordsAbbreviation.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r with len(r) = len(words). For every i with 0 <= i < len(words), let w = words[i] and n = len(w). For 1 <= p <= n-1, write A(w,p) for w[0] through w[p-1], followed by the decimal ASCII representation of n-p-1 (no leading zeros; the value 0 is the single ASCII digit zero), followed by w[n-1]. Let p_i be the least p in [1,n-1] such that for every j != i and every q with 1 <= q <= len(words[j])-1, A(words[j],q) != A(w,p). Let a = A(w,p_i). Then r[i] = a if len(a) < n, and r[i] = w otherwise.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_2",
+    "negation": "AegisSpec.WordsAbbreviation.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, for every input satisfying the preconditions it does not fail, panic, or overflow.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_3",
+    "negation": "AegisSpec.WordsAbbreviation.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r with len(r) = len(words); for every i with 0 <= i < len(words), r[i] is nonempty and len(r[i]) <= len(words[i]).",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_4",
+    "negation": "AegisSpec.WordsAbbreviation.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every i with 0 <= i < len(words), if r[i] != words[i], then there exists an integer k with 1 <= k <= len(words[i])-1 such that r[i] is exactly words[i][0] through words[i][k-1], followed by the decimal ASCII representation of len(words[i])-k-1, followed by words[i][len(words[i])-1]. Moreover, k is the number of leading bytes of r[i] that are ASCII lowercase letters.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_5",
+    "negation": "AegisSpec.WordsAbbreviation.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every i with 0 <= i < len(words), if r[i] != words[i], then len(r[i]) < len(words[i]).",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_6",
+    "negation": "AegisSpec.WordsAbbreviation.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every i with 0 <= i < len(words), if len(words[i]) <= 3, then r[i] = words[i].",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_7",
+    "negation": "AegisSpec.WordsAbbreviation.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every i with 0 <= i < len(words), suppose no j != i has len(words[j]) = len(words[i]), words[j][0] = words[i][0], and words[j][len(words[j])-1] = words[i][len(words[i])-1]. Let a be words[i][0], followed by the decimal ASCII representation of len(words[i])-2, followed by words[i][len(words[i])-1]. Then r[i] = a if len(a) < len(words[i]), and r[i] = words[i] otherwise.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_8",
+    "negation": "AegisSpec.WordsAbbreviation.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every i with 0 <= i < len(words) such that r[i] != words[i], let k be the number of leading ASCII lowercase bytes of r[i]. Then for every integer q with 1 <= q < k, there exists j != i such that q <= len(words[j])-1 and A(words[j],q) = A(words[i],q), where A(w,p) is the first p bytes of w, followed by the decimal ASCII representation of len(w)-p-1, followed by the last byte of w.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_9",
+    "negation": "AegisSpec.WordsAbbreviation.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i < len(words) such that r[i] != words[i], if k is the number of leading ASCII lowercase bytes of r[i], then k <= len(words[i])-1 and for every j != i with len(words[j]) > k, A(words[j],k) != A(words[i],k), where A(w,p) is the first p bytes of w, followed by the decimal ASCII representation of len(w)-p-1, followed by the last byte of w.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_10",
+    "negation": "AegisSpec.WordsAbbreviation.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i and j with 0 <= i < j < len(words), r[i] != r[j].",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_11",
+    "negation": "AegisSpec.WordsAbbreviation.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for words and r' for words', for every k with 0 <= k < len(words), r'[k] = r[pi(k)].",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i. Also words' is a slice of the same length with the same entries as words, and pi is a bijection on the indices with words'[k] = words[pi(k)] for every k."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_12",
+    "negation": "AegisSpec.WordsAbbreviation.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every i with 0 <= i < len(words), every byte of r[i] is either an ASCII lowercase letter or an ASCII decimal digit. If r[i] != words[i], then r[i] contains at least one ASCII digit; all digits of r[i] form a single contiguous block; every byte before that block is an ASCII lowercase letter; and the digit block is followed by exactly one byte, which is an ASCII lowercase letter.",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.WordsAbbreviation.spec_13",
+    "negation": "AegisSpec.WordsAbbreviation.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every i with 0 <= i < len(words), if len(words[i]) >= 4 and r[i] = words[i], let p_i be the least p in [1,len(words[i])-1] such that A(words[i],p) is unique among all A(words[j],q) for j != i and 1 <= q <= len(words[j])-1, where A(w,p) is the first p bytes of w, followed by the decimal ASCII representation of len(w)-p-1, followed by the last byte of w. Then len(A(words[i],p_i)) >= len(words[i]).",
+    "preconditions": "words is a slice of byte vectors with 1 <= len(words) <= 400; for every i with 0 <= i < len(words), 2 <= len(words[i]) <= 400, every byte of words[i] is an ASCII lowercase letter a through z, and words[i] is distinct from words[j] for every j != i."
+  }
+]

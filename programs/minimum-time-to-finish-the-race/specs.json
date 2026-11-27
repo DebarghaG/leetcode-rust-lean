@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_1",
+    "negation": "AegisSpec.MinimumFinishTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define f_i = tires[i][0] and r_i = tires[i][1] for 0 <= i < len(tires). For any index i and integer k >= 1, let seg(i,k) = f_i * (r_i^k - 1) / (r_i - 1). A race plan is a pair of finite sequences (k_1,...,k_m) and (i_1,...,i_m) such that m >= 1, each k_t >= 1, 0 <= i_t < len(tires), and sum_{t=1}^m k_t = numLaps. Its time is seg(i_1,k_1) + sum_{t=2}^m (changeTime + seg(i_t,k_t)). Let OPT be the minimum time over all race plans. Whenever the function returns a result r, r = OPT.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_2",
+    "negation": "AegisSpec.MinimumFinishTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) on every input satisfying the preconditions.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_3",
+    "negation": "AegisSpec.MinimumFinishTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let minF = min { tires[i][0] | 0 <= i < len(tires) }. Whenever the function returns a result r, numLaps * minF <= r.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_4",
+    "negation": "AegisSpec.MinimumFinishTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let minF = min { tires[i][0] | 0 <= i < len(tires) }. Whenever the function returns a result r, r <= numLaps * minF + (numLaps - 1) * changeTime. This bound is achieved by using a tire with first-lap time minF and changing after every lap except the last (equivalently, before every lap except the first).",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_5",
+    "negation": "AegisSpec.MinimumFinishTime.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define seg(i,k) = tires[i][0] * (tires[i][1]^k - 1) / (tires[i][1] - 1) for 0 <= i < len(tires) and k >= 1. Whenever the function returns a result r, there exist m >= 1, integers k_1,...,k_m >= 1, and indices i_1,...,i_m with 0 <= i_t < len(tires), sum_{t=1}^m k_t = numLaps, and r = seg(i_1,k_1) + sum_{t=2}^m (changeTime + seg(i_t,k_t)).",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_6",
+    "negation": "AegisSpec.MinimumFinishTime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let minF = min { tires[i][0] | 0 <= i < len(tires) }. Whenever the function returns a result r, r = minF.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and numLaps = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_7",
+    "negation": "AegisSpec.MinimumFinishTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let minF = min { tires[i][0] | 0 <= i < len(tires) }. Whenever the function returns a result r, r = min( min { tires[i][0] * (1 + tires[i][1]) | 0 <= i < len(tires) }, 2 * minF + changeTime ).",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and numLaps = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_8",
+    "negation": "AegisSpec.MinimumFinishTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer n with 1 <= n <= numLaps, whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires, changeTime, n) returns r_n, we have r >= r_n.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_9",
+    "negation": "AegisSpec.MinimumFinishTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer c with changeTime <= c <= 100000, whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires, c, numLaps) returns r_c, we have r <= r_c.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_10",
+    "negation": "AegisSpec.MinimumFinishTime.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of {0,...,len(tires)-1}, let tires' be the list of length len(tires) with tires'[j] = tires[pi(j)] for 0 <= j < len(tires). Whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires', changeTime, numLaps) returns r', we have r = r'.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_11",
+    "negation": "AegisSpec.MinimumFinishTime.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let a and b be distinct indices with 0 <= a,b < len(tires), tires[a][0] >= tires[b][0], and tires[a][1] >= tires[b][1]. Let tires' be the list obtained from tires by deleting the entry at position a. Whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires', changeTime, numLaps) returns r', we have r = r'.",
+    "preconditions": "len(tires) >= 2, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_12",
+    "negation": "AegisSpec.MinimumFinishTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let tires' be any list satisfying the same constraints, with len(tires') <= 100000 and each entry [f,r] having 1 <= f <= 100000 and 2 <= r <= 100000, for which there exists a strictly increasing function phi from {0,...,len(tires)-1} to {0,...,len(tires')-1} such that tires'[phi(i)] = tires[i] for every i. Whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires', changeTime, numLaps) returns r', we have r' <= r.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_13",
+    "negation": "AegisSpec.MinimumFinishTime.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let j be any index with 0 <= j < len(tires), and let tires' be tires with one additional final entry equal to tires[j], so len(tires') = len(tires)+1. Whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires', changeTime, numLaps) returns r', we have r = r'.",
+    "preconditions": "len(tires) >= 1, len(tires) < 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_14",
+    "negation": "AegisSpec.MinimumFinishTime.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define seg(i,k) = tires[i][0] * (tires[i][1]^k - 1) / (tires[i][1] - 1) for 0 <= i < len(tires) and k >= 1. Whenever the function returns a result r, r <= min { seg(i, numLaps) | 0 <= i < len(tires) }.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumFinishTime.spec_15",
+    "negation": "AegisSpec.MinimumFinishTime.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function on (tires, changeTime, numLaps) returns r and the function on (tires', changeTime, numLaps) returns r', we have r' <= r.",
+    "preconditions": "len(tires) >= 1, len(tires) <= 100000, and for every i with 0 <= i < len(tires), tires[i] has length 2, 1 <= tires[i][0] <= 100000, and 2 <= tires[i][1] <= 100000; also 1 <= changeTime <= 100000 and 1 <= numLaps <= 1000. Let tires' be any list with len(tires') = len(tires), each entry [f'_i, r'_i] satisfying 1 <= f'_i <= 100000 and 2 <= r'_i <= 100000, and f'_i <= tires[i][0] and r'_i <= tires[i][1] for every i."
+  }
+]

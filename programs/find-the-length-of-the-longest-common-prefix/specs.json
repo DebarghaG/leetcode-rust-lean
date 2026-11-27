@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_1",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals max { LCP(arr1[i], arr2[j]) | 0 <= i < len(arr1) and 0 <= j < len(arr2) }. Equivalently, r is the largest k >= 0 such that some arr1[i] and arr2[j] share their first k decimal digits; if no pair shares a nonempty prefix, this maximum is 0.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For a positive integer n, let D(n) be its decimal digit string with no leading zeros, and let d(n) = len(D(n)). For positive a,b, let LCP(a,b) be the largest k with 0 <= k <= min(d(a),d(b)) such that the first k digits of D(a) and D(b) are equal; k=0 is always allowed and means no nonempty common prefix."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_2",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no arithmetic overflow, no out-of-bounds access, and no panic).",
+    "preconditions": "1 <= len(arr1) <= 50000; 1 <= len(arr2) <= 50000; for every i with 0 <= i < len(arr1), 1 <= arr1[i] <= 100000000; for every j with 0 <= j < len(arr2), 1 <= arr2[j] <= 100000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_3",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= min( max_{0 <= i < len(arr1)} d(arr1[i]), max_{0 <= j < len(arr2)} d(arr2[j]) ).",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For positive n, d(n) is the number of decimal digits of n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_4",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(arr1) and every j with 0 <= j < len(arr2), LCP(arr1[i], arr2[j]) <= r.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For positive n, d(n) is the number of decimal digits of n; LCP(a,b) is the largest k with 0 <= k <= min(d(a),d(b)) and equal first k decimal digits."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_5",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices i and j with 0 <= i < len(arr1) and 0 <= j < len(arr2) such that arr1[i] and arr2[j] share their first r decimal digits; that is, LCP(arr1[i], arr2[j]) >= r.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For positive n, d(n) is the number of decimal digits of n; LCP(a,b) is the largest k with 0 <= k <= min(d(a),d(b)) and equal first k decimal digits."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_6",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices i and j such that arr1[i] and arr2[j] share their first r decimal digits and, if r < min(d(arr1[i]), d(arr2[j])), then their (r+1)-st decimal digits differ.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For positive n, d(n) is the number of decimal digits of n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_7",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < len(arr1) and every j with 0 <= j < len(arr2), the first decimal digit of arr1[i] is different from the first decimal digit of arr2[j].",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_8",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if there exist i and j such that the decimal digit string D(arr1[i]) is a prefix of D(arr2[j]), then r >= d(arr1[i]); symmetrically, if D(arr2[j]) is a prefix of D(arr1[i]), then r >= d(arr2[j]).",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0. For positive n, D(n) is its decimal digit string and d(n) = len(D(n))."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_9",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice arr1' that is a permutation of arr1 (same multiset of elements) and every slice arr2' that is a permutation of arr2, if the function returns r on (arr1, arr2) and returns r' on (arr1', arr2'), then r = r'.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_10",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (arr1, arr2) and returns r' on (arr2, arr1), then r = r'.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; for every i with 0 <= i < len(arr1), arr1[i] > 0; for every j with 0 <= j < len(arr2), arr2[j] > 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_11",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on (arr1, arr2) and returns r' on (arr1', arr2'), then r' >= r.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; len(arr1') >= 1; len(arr2') >= 1; all elements of arr1, arr2, arr1', arr2' are positive; the set of values occurring in arr1 is a subset of the set of values occurring in arr1'; the set of values occurring in arr2 is a subset of the set of values occurring in arr2'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestCommonPrefix.spec_12",
+    "negation": "AegisSpec.LongestCommonPrefix.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (arr1, arr2) and returns r' on (arr1', arr2'), then r = r'.",
+    "preconditions": "len(arr1) >= 1; len(arr2) >= 1; all elements of arr1 and arr2 are positive; arr1' is a slice whose set of values is exactly the set of values occurring in arr1, with each distinct value occurring once; arr2' is a slice whose set of values is exactly the set of values occurring in arr2, with each distinct value occurring once."
+  }
+]

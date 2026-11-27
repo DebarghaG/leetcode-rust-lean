@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCombinations.spec_1",
+    "negation": "AegisSpec.CountCombinations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For each i, let s_i = (positions[i][0], positions[i][1]). Define the reachable set M_i subset of {1,...,8}^2 as follows: if pieces[i] is the ASCII byte sequence for \"rook\", M_i = { (r,c) in {1,...,8}^2 : r = s_i.0 or c = s_i.1 }; if pieces[i] is \"queen\", M_i = { (r,c) in {1,...,8}^2 : r = s_i.0 or c = s_i.1 or |r - s_i.0| = |c - s_i.1| }; if pieces[i] is \"bishop\", M_i = { (r,c) in {1,...,8}^2 : |r - s_i.0| = |c - s_i.1| }. A move combination is a tuple (d_0,...,d_{n-1}) with d_i in M_i for each i. For each i and integer t >= 0, define p_i(t) as follows. Let delta_i = max(|d_i.0 - s_i.0|, |d_i.1 - s_i.1|). If delta_i = 0, then p_i(t) = s_i for all t. If delta_i > 0, let u_i = ((d_i.0 - s_i.0)/delta_i, (d_i.1 - s_i.1)/delta_i); if t >= delta_i then p_i(t) = d_i, and if t < delta_i then p_i(t) = (s_i.0 + t * u_i.0, s_i.1 + t * u_i.1). Because d_i is in M_i, the non-zero entries of u_i are 0 or +/-1 and the path is along an allowed rook/queen/bishop line. A move combination is valid iff for every integer t >= 0 and every pair i != j, p_i(t) != p_j(t). The function returns a result res and res is the number of valid move combinations. Pieces do not block one another; reachability is determined only by the geometric rule above.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCombinations.spec_2",
+    "negation": "AegisSpec.CountCombinations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (i.e., it does not fail, panic, or overflow).",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCombinations.spec_3",
+    "negation": "AegisSpec.CountCombinations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res >= 1.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCombinations.spec_4",
+    "negation": "AegisSpec.CountCombinations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res <= ∏_{i=0}^{n-1} |M_i|, where M_i is the set of squares reachable by piece i (as defined in spec_1), and |M_i| denotes its cardinality.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCombinations.spec_5",
+    "negation": "AegisSpec.CountCombinations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = |M_0|, where M_0 is the set of squares reachable by the single piece (as defined in spec_1). In other words, every reachable destination is a valid move combination when there is only one piece.",
+    "preconditions": "n = len(pieces) = len(positions) = 1; pieces[0] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; positions[0] is a vector of length 2 with positions[0][0] and positions[0][1] in {1,2,...,8}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCombinations.spec_6",
+    "negation": "AegisSpec.CountCombinations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res = 15.",
+    "preconditions": "n = len(pieces) = len(positions) = 1; pieces[0] is the ASCII byte sequence for \"rook\"; positions[0] is a vector of length 2 with positions[0][0] and positions[0][1] in {1,2,...,8}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCombinations.spec_7",
+    "negation": "AegisSpec.CountCombinations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res = 15 + min(8-r, 8-c) + min(8-r, c-1) + min(r-1, 8-c) + min(r-1, c-1).",
+    "preconditions": "n = len(pieces) = len(positions) = 1; pieces[0] is the ASCII byte sequence for \"queen\"; positions[0] = [r, c] with 1 <= r,c <= 8."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCombinations.spec_8",
+    "negation": "AegisSpec.CountCombinations.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res = 1 + min(8-r, 8-c) + min(8-r, c-1) + min(r-1, 8-c) + min(r-1, c-1).",
+    "preconditions": "n = len(pieces) = len(positions) = 1; pieces[0] is the ASCII byte sequence for \"bishop\"; positions[0] = [r, c] with 1 <= r,c <= 8."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountCombinations.spec_9",
+    "negation": "AegisSpec.CountCombinations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any permutation π of {0,...,n-1}, let pieces' and positions' be defined by pieces'[i] = pieces[π(i)] and positions'[i] = positions[π(i)] for all i. The function returns a result res for (pieces, positions) and a result res' for (pieces', positions'), and res = res'.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountCombinations.spec_10",
+    "negation": "AegisSpec.CountCombinations.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let f be any symmetry of the 8x8 board, i.e., a composition of the reflections (r,c) -> (9-r,c) and (r,c) -> (r,9-c) and the transpose (r,c) -> (c,r). Let positions' be obtained from positions by applying f to each position: positions'[i] = [f(positions[i][0], positions[i][1])]. The function returns a result res for (pieces, positions) and a result res' for (pieces, positions'), and res = res'.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountCombinations.spec_11",
+    "negation": "AegisSpec.CountCombinations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result res = ∏_{i=0}^{n-1} |M_i|.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct. Additionally, for all i != j, M_i ∩ M_j = ∅, where M_i is the set of squares reachable by piece i (as defined in spec_1)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountCombinations.spec_12",
+    "negation": "AegisSpec.CountCombinations.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result res' for (pieces', positions') and a result res for (pieces, positions), and res' = res * |M_new|.",
+    "preconditions": "Let (pieces, positions) be any input satisfying the constraints with n pieces and n < 4. Let T be a piece type in {\"rook\", \"queen\", \"bishop\"} and P a position in [1,8]^2 such that: (a) if T = \"queen\", then no piece in pieces is \"queen\"; (b) P is distinct from all positions in positions; (c) the reachable set M_new of a piece of type T starting at P is disjoint from M_i for every i = 0..n-1, where M_i is the reachable set of piece i. Let pieces' = pieces concatenated with [T] and positions' = positions concatenated with [P]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountCombinations.spec_13",
+    "negation": "AegisSpec.CountCombinations.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res <= 94500.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountCombinations.spec_14",
+    "negation": "AegisSpec.CountCombinations.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result res and res equals the number of tuples (d_0,...,d_{n-1}) with d_i in M_i (as defined in spec_1) such that for every t in {0,1,...,7} and every i != j, p_i(t) != p_j(t), where p_i(t) is defined as in spec_1. It is sufficient to check t = 0,...,7 because every allowed destination is at distance at most 7 from the starting square, so after time 7 every piece has reached its destination and remains there.",
+    "preconditions": "n = len(pieces) = len(positions); 1 <= n <= 4; for each i with 0 <= i < n, pieces[i] is the ASCII byte sequence for one of \"rook\", \"queen\", \"bishop\"; at most one pieces[i] is \"queen\"; positions[i] is a vector of length 2 with positions[i][0] and positions[i][1] in {1,2,...,8}; all positions[i] are pairwise distinct."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountCombinations.spec_15",
+    "negation": "AegisSpec.CountCombinations.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = 309.",
+    "preconditions": "n = len(pieces) = len(positions) = 2; pieces[0] is the ASCII byte sequence for \"queen\"; pieces[1] is the ASCII byte sequence for \"rook\"; positions[0] = [1,1]; positions[1] = [2,2]."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.CountCombinations.spec_16",
+    "negation": "AegisSpec.CountCombinations.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = 223.",
+    "preconditions": "n = len(pieces) = len(positions) = 2; pieces[0] is the ASCII byte sequence for \"rook\"; pieces[1] is the ASCII byte sequence for \"rook\"; positions[0] = [1,1]; positions[1] = [8,8]."
+  }
+]

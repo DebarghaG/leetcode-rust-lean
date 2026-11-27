@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_1",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let V = {0,...,n-1}. Let E be the set of unordered pairs {edges[i][0], edges[i][1]} for 0 <= i < len(edges). Let S = sum_{v in V} values[v]. For a subset R of E, let G_R be the graph with vertex set V and edge set E \\ R; its connected components partition V. Call R valid if for every connected component C of G_R, the integer sum_{v in C} values[v] is divisible by k. If S is not divisible by k, set r = 0; otherwise set r = max { |R| + 1 | R is a valid subset of E }. The function returns Result.ok r, where r is the i64 representing this integer.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; all sums mentioned in the statement are within the i64 range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_2",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result: there exists an i64 r such that max_k_divisible_components n edges values k = Result.ok r. It does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_3",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer value of r satisfies 0 <= r <= n.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_4",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 1.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_5",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = n if and only if for every i with 0 <= i < n, values[i] is divisible by k.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_6",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r >= 2 if and only if there exists an edge {a,b} in E such that in the graph (V, E \\ {{a,b}}), the two connected components both have value divisible by k.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_7",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every integer j with 1 <= j <= r there exists a subset R of E such that |R| + 1 = j and every connected component of G_R has value divisible by k.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_8",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a subset R of E such that |R| = r - 1 and every connected component of G_R has value divisible by k.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_9",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every subset R of E, if every connected component of G_R has value divisible by k, then |R| + 1 <= r.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_10",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of max_k_divisible_components n edges values k and let r' be the result of max_k_divisible_components n edges' values k. Whenever both calls return results, the integer values r and r' are equal.",
+    "preconditions": "n, values, and k satisfy 1 <= n <= 30000, len(values) = n, 0 <= values[i] <= 10^9 for every i, and 1 <= k <= 10^9. Both edges and edges' are lists of unordered pairs that represent the same valid undirected tree on nodes 0,...,n-1; each has length n-1 and each pair has endpoints in 0,...,n-1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxKDivisibleComponents.spec_11",
+    "negation": "AegisSpec.MaxKDivisibleComponents.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let V = {0,...,n-1} and E = {{edges[i][0], edges[i][1]} | 0 <= i < len(edges)}. For each e in E, deleting e from the tree splits V into two connected components; define T as the set of e in E for which at least one of these two components has value divisible by k. Then the function returns Result.ok r with r = |T| + 1.",
+    "preconditions": "1 <= n <= 30000; len(edges) = n - 1; for every i with 0 <= i < len(edges), len(edges[i]) = 2 and 0 <= edges[i][0], edges[i][1] < n; edges represents a valid undirected tree on nodes 0,...,n-1; len(values) = n; for every i with 0 <= i < n, 0 <= values[i] <= 10^9; 1 <= k <= 10^9; sum_{i=0}^{n-1} values[i] is divisible by k."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_1",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For 0 <= i <= j < n, let zeros(s,i,j) be the number of indices k with i <= k <= j and s[k] = 48, and let ones(s,i,j) be the number of indices k with i <= k <= j and s[k] = 49. The function returns a result r and r is exactly the number of pairs (i,j) such that 0 <= i <= j < n and ones(s,i,j) >= (zeros(s,i,j))^2. Equivalently, r counts all non-empty contiguous substrings of s that have at least as many '1' bytes as the square of their number of '0' bytes.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 (the ASCII code for '0') or 49 (the ASCII code for '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_2",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such s, the function returns a result r for some 64-bit integer r; it does not fail, panic, or overflow.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 or 49."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_3",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 or 49."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_4",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r <= n * (n + 1) / 2.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 or 49."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_5",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s), and let z be the number of indices k with 0 <= k < n and s[k] = 48. Whenever the function returns a result r, r <= n * (n + 1) / 2 - z.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 or 49."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_6",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let A be the number of pairs (i,j) with 0 <= i <= j < len(s) such that for every k with i <= k <= j, s[k] = 49. Whenever the function returns a result r, r >= A.",
+    "preconditions": "len(s) >= 1 and len(s) <= 40000, and for every k with 0 <= k < len(s), s[k] is either 48 or 49."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_7",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on input s and a result r' on input rev(s), we have r = r'.",
+    "preconditions": "len(s) = n with 1 <= n <= 40000, and for every k with 0 <= k < n, s[k] is either 48 or 49. Let rev(s) be the byte array of length n with rev(s)[k] = s[n-1-k] for every k with 0 <= k < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_8",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on input s and a result r_t on input t, r_t = r + C, where C is the number of indices i with 0 <= i <= n such that ones_s(i,n-1) + 1 >= (zeros_s(i,n-1))^2. Here zeros_s(i,n-1) is the number of k with i <= k < n and s[k] = 48, and ones_s(i,n-1) is the number of k with i <= k < n and s[k] = 49 (both are 0 when i = n).",
+    "preconditions": "len(s) = n with 1 <= n <= 39999, and for every k with 0 <= k < n, s[k] is either 48 or 49. Let t be the byte array of length n+1 with t[k] = s[k] for 0 <= k < n and t[n] = 49 (append a '1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_9",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_9_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns a result r on input s and a result r' on input s', we have r' >= r.",
+    "preconditions": "len(s) = n with 1 <= n <= 40000, and for every k with 0 <= k < n, s[k] is either 48 or 49. Let p be an index with 0 <= p < n and s[p] = 48, and let s' be the byte array of length n with s'[p] = 49 and s'[k] = s[k] for every k with 0 <= k < n and k != p."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_10",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on input s and a result r_t on input t, r_t = r + C, where C is the number of indices i with 0 <= i <= n such that ones_s(i,n-1) >= (zeros_s(i,n-1) + 1)^2. Here zeros_s(i,n-1) is the number of k with i <= k < n and s[k] = 48, and ones_s(i,n-1) is the number of k with i <= k < n and s[k] = 49 (both are 0 when i = n).",
+    "preconditions": "len(s) = n with 1 <= n <= 39999, and for every k with 0 <= k < n, s[k] is either 48 or 49. Let t be the byte array of length n+1 with t[k] = s[k] for 0 <= k < n and t[n] = 48 (append a '0')."
+  }
+]

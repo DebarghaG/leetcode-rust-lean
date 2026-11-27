@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MincostTickets.spec_1",
+    "negation": "AegisSpec.MincostTickets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever mincost_tickets(days, costs) returns a result r, r is the minimum total cost over all finite multisets P of tickets such that: each ticket has a type k in {0,1,2} and a purchase day d with 1 <= d <= 365; a type-k ticket covers exactly those travel days x for which d <= x <= d + L_k - 1, where L_0=1, L_1=7, L_2=30; and every day days[i] with 0 <= i < len(days) is covered by at least one ticket in P. The total cost of P is the sum of costs[k] over all tickets (d,k) in P.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MincostTickets.spec_2",
+    "negation": "AegisSpec.MincostTickets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, mincost_tickets(days, costs) returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MincostTickets.spec_3",
+    "negation": "AegisSpec.MincostTickets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r >= min(costs[0], costs[1], costs[2]).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MincostTickets.spec_4",
+    "negation": "AegisSpec.MincostTickets.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(days), first = days[0], last = days[n-1], span = last - first + 1, K7 = ceil(span/7), and K30 = ceil(span/30). Whenever mincost_tickets(days, costs) returns r, r <= min(n*costs[0], K7*costs[1], K30*costs[2]).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MincostTickets.spec_5",
+    "negation": "AegisSpec.MincostTickets.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r = min(len(days)*costs[0], costs[1], costs[2]).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; days[len(days)-1] - days[0] <= 6."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MincostTickets.spec_6",
+    "negation": "AegisSpec.MincostTickets.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r = costs[2].",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; days[len(days)-1] - days[0] <= 29; costs[2] <= costs[0]; costs[2] <= costs[1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MincostTickets.spec_7",
+    "negation": "AegisSpec.MincostTickets.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If mincost_tickets(days, costs) returns r and mincost_tickets(days, costs2) returns r2, then r <= r2.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; costs2 is any length-3 integer array with 1 <= costs2[j] <= 1000 for j=0,1,2 and costs[j] <= costs2[j] for j=0,1,2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MincostTickets.spec_8",
+    "negation": "AegisSpec.MincostTickets.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If mincost_tickets(days, costs) returns r and mincost_tickets(days2, costs) returns r2, then r <= r2.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; days2 is any list with 1 <= len(days2) <= 365, all entries in 1..365, strictly increasing, and every value occurring in days also occurs in days2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MincostTickets.spec_9",
+    "negation": "AegisSpec.MincostTickets.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If mincost_tickets(days, costs) returns r and mincost_tickets(days2, costs) returns r2, then r = r2.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; days2 is any list with len(days2)=len(days), all entries in 1..365, strictly increasing, and there is an integer k with days2[i] = days[i] + k for every 0 <= i < len(days)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MincostTickets.spec_10",
+    "negation": "AegisSpec.MincostTickets.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If mincost_tickets(days, costs) returns r and mincost_tickets(days, costs2) returns r2, then r2 = k*r.",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; k is a positive integer and costs2 is a length-3 integer array with costs2[j] = k*costs[j] for j=0,1,2 and 1 <= costs2[j] <= 1000 for j=0,1,2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MincostTickets.spec_11",
+    "negation": "AegisSpec.MincostTickets.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, there exists a finite multiset P of tickets such that: each ticket is (d,k) with k in {0,1,2} and d equal to some days[i]; a ticket (d,k) covers a travel day x iff d <= x <= d + L_k - 1, where L_0=1, L_1=7, L_2=30; every day days[i] is covered by some ticket in P; the sum of costs[k] over (d,k) in P is exactly r; and the number of tickets in P is at most len(days).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MincostTickets.spec_12",
+    "negation": "AegisSpec.MincostTickets.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r = len(days)*costs[0].",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; costs[1] >= 7*costs[0]; costs[2] >= 30*costs[0]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MincostTickets.spec_13",
+    "negation": "AegisSpec.MincostTickets.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r = len(days) * min(costs[0], costs[1], costs[2]).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000; for every i with 0 <= i < len(days)-1, days[i+1] - days[i] >= 30."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MincostTickets.spec_14",
+    "negation": "AegisSpec.MincostTickets.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever mincost_tickets(days, costs) returns r, r <= len(days) * min(costs[0], costs[1], costs[2]).",
+    "preconditions": "1 <= len(days) <= 365; for every i with 0 <= i < len(days), 1 <= days[i] <= 365; for every i with 0 <= i < len(days)-1, days[i] < days[i+1]; len(costs) = 3; for every j with 0 <= j < 3, 1 <= costs[j] <= 1000."
+  }
+]

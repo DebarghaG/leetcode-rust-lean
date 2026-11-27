@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EquationsPossible.spec_1",
+    "negation": "AegisSpec.EquationsPossible.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever equations_possible(equations) returns a result r, r is true if and only if there exists a total function A from the 26 lowercase ASCII letters {97,98,...,122} to the mathematical integers such that, for every i with 0 <= i < len(equations), the i-th equation is satisfied by A: if equations[i][1] = 61 then A(equations[i][0]) = A(equations[i][3]); if equations[i][1] = 33 then A(equations[i][0]) != A(equations[i][3]). Consequently r is false exactly when no such assignment A exists.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('=')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EquationsPossible.spec_2",
+    "negation": "AegisSpec.EquationsPossible.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call equations_possible(equations) returns a Boolean result (true or false); it does not fail, panic, access an index outside a byte vector, or overflow any machine integer.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('=')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EquationsPossible.spec_3",
+    "negation": "AegisSpec.EquationsPossible.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If e[1] = 61 (the equation is x==y), then equations_possible(equations) returns true. If e[1] = 33 (the equation is x!=y), then equations_possible(equations) returns true exactly when e[0] != e[3], and returns false exactly when e[0] = e[3].",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('='). Also len(equations) = 1. Let e = equations[0]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EquationsPossible.spec_4",
+    "negation": "AegisSpec.EquationsPossible.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "equations_possible(equations) returns true.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('='). Also, for every i with 0 <= i < len(equations), equations[i][1] = 61."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EquationsPossible.spec_5",
+    "negation": "AegisSpec.EquationsPossible.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "equations_possible(equations) returns false.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('='). Also, there exists an index i with 0 <= i < len(equations) such that equations[i][1] = 33 and equations[i][0] = equations[i][3]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EquationsPossible.spec_6",
+    "negation": "AegisSpec.EquationsPossible.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The calls equations_possible(equations) and equations_possible(equations') return the same Boolean result.",
+    "preconditions": "Both equations and equations' are lists satisfying the problem constraints: 1 <= len <= 500; every entry is a four-byte vector with lowercase letters at positions 0 and 3, byte 61 or 33 at position 1, and byte 61 at position 2. Additionally, equations' is a permutation of equations as a multiset of four-byte vectors (the two lists have the same length and every four-byte vector occurs the same number of times in each)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EquationsPossible.spec_7",
+    "negation": "AegisSpec.EquationsPossible.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If equations_possible(F) returns true, then equations_possible(equations) returns true.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('='). Let F be any list satisfying the same constraints. Assume that every four-byte equation q occurs in equations with multiplicity at most its multiplicity in F (equivalently, the multiset of equations is a sub-multiset of the multiset of equations in F)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EquationsPossible.spec_8",
+    "negation": "AegisSpec.EquationsPossible.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever equations_possible(equations) returns false, there exists an index i with 0 <= i < len(equations) such that equations[i][1] = 33 and, writing x = equations[i][0] and y = equations[i][3], there is a finite sequence of lowercase ASCII letters v0,...,vk with k >= 0, v0 = x, vk = y, and with the following property: for every t with 0 <= t < k, there is an index j with 0 <= j < len(equations) such that equations[j][1] = 61 and the unordered pair {equations[j][0], equations[j][3]} equals {v_t, v_{t+1}}. In words, some disequality x!=y has its two sides forced equal by a chain of equality equations.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('=')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EquationsPossible.spec_9",
+    "negation": "AegisSpec.EquationsPossible.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever equations_possible(equations) returns true, there exists a total function A from the 26 lowercase ASCII letters {97,...,122} to the set {0,1,...,25} such that for every i with 0 <= i < len(equations), if equations[i][1] = 61 then A(equations[i][0]) = A(equations[i][3]), and if equations[i][1] = 33 then A(equations[i][0]) != A(equations[i][3]).",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('=')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EquationsPossible.spec_10",
+    "negation": "AegisSpec.EquationsPossible.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists an index i with 0 <= i < len(equations) such that equations[i][1] = 33, and, writing x = equations[i][0] and y = equations[i][3], there is a finite sequence of lowercase ASCII letters v0,...,vk with k >= 0, v0 = x, vk = y, and for every t with 0 <= t < k there is an index j with 0 <= j < len(equations) such that equations[j][1] = 61 and the unordered pair {equations[j][0], equations[j][3]} equals {v_t, v_{t+1}}, then equations_possible(equations) returns false.",
+    "preconditions": "The input list equations satisfies the problem constraints: 1 <= len(equations) <= 500; for every i with 0 <= i < len(equations), len(equations[i]) = 4; equations[i][0] and equations[i][3] are lowercase ASCII letters (byte codes 97 through 122 inclusive); equations[i][1] is either 61 ('=') or 33 ('!'); equations[i][2] is 61 ('=')."
+  }
+]

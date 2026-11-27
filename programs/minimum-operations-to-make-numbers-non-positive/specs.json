@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. For an integer k >= 0, call a count vector c k-feasible when c assigns a nonnegative integer c(i) to every index 0 <= i < len(nums), the sum of all c(i) over 0 <= i < len(nums) equals k, and for every i with 0 <= i < len(nums), nums[i] - y*k - (x-y)*c(i) <= 0. Then r is the least nonnegative integer k for which a k-feasible count vector exists.",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by overflow, panic, or out-of-bounds access on any input satisfying the preconditions.",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max over 0 <= i < len(nums) of nums[i]. The function returns a result r and r <= (M + y - 1) / y, using integer division; equivalently r <= ceil(M / y).",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max over 0 <= i < len(nums) of nums[i]. The function returns a result r and x*r >= M.",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum over 0 <= i < len(nums) of nums[i] and D = x + (len(nums)-1)*y. The function returns a result r and r >= (S + D - 1) / D, using integer division; equivalently r >= ceil(S / D).",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is the least nonnegative integer t with t*x >= nums[0]; equivalently r = (nums[0] + x - 1) / x using integer division.",
+    "preconditions": "len(nums) = 1; 1 <= nums[0] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 if and only if there exists an index i with 0 <= i < len(nums) such that nums[i] <= x and, for every j with 0 <= j < len(nums) and j != i, nums[j] <= y.",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_operations(nums,x,y) returns r and min_operations(nums',x,y) returns r', we have r = r'.",
+    "preconditions": "nums and nums' both satisfy len(nums') = len(nums) = n with 1 <= n <= 10^5, all their entries are in [1, 10^9], 1 <= y < x <= 10^9, and nums' is a permutation of nums: there is a bijection p on the indices with nums'[j] = nums[p(j)] for every j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_operations(nums,x,y) returns r and min_operations(nums',x,y) returns r', we have r <= r'.",
+    "preconditions": "nums and nums' both satisfy len(nums') = len(nums) = n with 1 <= n <= 10^5, all their entries are in [1, 10^9], 1 <= y < x <= 10^9, and nums[i] <= nums'[i] for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_operations(nums,x1,y) returns r1 and min_operations(nums,x2,y) returns r2, we have r2 <= r1.",
+    "preconditions": "nums satisfies len(nums) = n with 1 <= n <= 10^5, all entries are in [1, 10^9], and 1 <= y < x1 <= x2 <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_operations(nums,x,y) returns r and min_operations(nums',x',y') returns r', we have r = r'.",
+    "preconditions": "len(nums) = len(nums') = n with 1 <= n <= 10^5; for every i with 0 <= i < n, 1 <= nums[i] <= 10^9 and 1 <= nums'[i] <= 10^9; 1 <= y < x <= 10^9; t is a positive integer; x' = t*x and y' = t*y satisfy 1 <= y' < x' <= 10^9; and for every i with 0 <= i < n, nums'[i] = t*nums[i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperations.spec_12",
+    "negation": "AegisSpec.MinOperations.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r. Define a count vector c for r to be r-feasible when c assigns a nonnegative integer to every index, the sum of all c(i) over 0 <= i < len(nums) equals r, and for every i, nums[i] - y*r - (x-y)*c(i) <= 0. Then there exist an r-feasible count vector c and an index m with 0 <= m < len(nums) such that nums[m] = max over 0 <= i < len(nums) of nums[i] and c(m) >= 1.",
+    "preconditions": "len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y < x <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinOperations.spec_13",
+    "negation": "AegisSpec.MinOperations.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_operations(nums,x,y1) returns r1 and min_operations(nums,x,y2) returns r2, we have r2 <= r1.",
+    "preconditions": "nums satisfies len(nums) = n with 1 <= n <= 10^5; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^9; 1 <= y1 <= y2 < x <= 10^9."
+  }
+]

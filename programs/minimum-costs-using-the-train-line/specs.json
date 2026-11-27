@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCosts.spec_1",
+    "negation": "AegisSpec.MinimumCosts.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = n and for every j with 0 <= j < n, r[j] = mc(j+1), where mc(k) is the minimum cost to reach stop k from stop 0 over all journeys defined as follows. A state is (i,t) with 0 <= i <= n and t in {R,E}. A journey from (0,R) to (k,u) is a finite sequence of steps, each of one of these forms: (i,R) -> (i+1,R) with cost regular[i] for 0 <= i < n; (i,E) -> (i+1,E) with cost express[i] for 0 <= i < n; (i,R) -> (i,E) with cost express_cost for 0 <= i <= n; (i,E) -> (i,R) with cost 0 for 0 <= i <= n. The cost of a journey is the sum of its step costs. mc(k) is the least integer c for which such a journey from (0,R) to (k,R) or from (0,R) to (k,E) has cost c.",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000. All indices used below are 0-based; in the original 1-indexed statement, regular[i] and express[i] are the costs from stop i to stop i+1, and output position j describes stop j+1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCosts.spec_2",
+    "negation": "AegisSpec.MinimumCosts.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(regular).",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCosts.spec_3",
+    "negation": "AegisSpec.MinimumCosts.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n, 1 <= r[j].",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCosts.spec_4",
+    "negation": "AegisSpec.MinimumCosts.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[0] = min(regular[0], express_cost + express[0]).",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCosts.spec_5",
+    "negation": "AegisSpec.MinimumCosts.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n, r[j] <= sum_{t=0}^{j} regular[t].",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCosts.spec_6",
+    "negation": "AegisSpec.MinimumCosts.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n, r[j] <= express_cost + sum_{t=0}^{j} express[t].",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCosts.spec_7",
+    "negation": "AegisSpec.MinimumCosts.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n, r[j] >= sum_{t=0}^{j} min(regular[t], express[t]).",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCosts.spec_8",
+    "negation": "AegisSpec.MinimumCosts.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n - 1, r[j+1] >= r[j] + min(regular[j+1], express[j+1]).",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCosts.spec_9",
+    "negation": "AegisSpec.MinimumCosts.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n - 1, r[j+1] <= r[j] + regular[j+1].",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCosts.spec_10",
+    "negation": "AegisSpec.MinimumCosts.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n - 1, r[j+1] <= r[j] + express[j+1] + express_cost.",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumCosts.spec_11",
+    "negation": "AegisSpec.MinimumCosts.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n there exists a journey from (0,R) to stop j+1, ending on either R or E, whose total cost is exactly r[j], where a journey uses these moves: advance on the current route with cost regular[i] or express[i] for an edge from stop i to i+1; transfer from R to E at any stop with cost express_cost; transfer from E to R at any stop with cost 0.",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumCosts.spec_12",
+    "negation": "AegisSpec.MinimumCosts.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < n and every journey from (0,R) to stop j+1 ending on either R or E, the total cost of that journey is at least r[j].",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumCosts.spec_13",
+    "negation": "AegisSpec.MinimumCosts.spec_13_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for every input satisfying the preconditions; no i64 arithmetic overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumCosts.spec_14",
+    "negation": "AegisSpec.MinimumCosts.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let R[k] be the minimum cost of a journey from (0,R) to (k,R) and E[k] the minimum cost of a journey from (0,R) to (k,E), for 0 <= k <= n, using the journey model of spec_1. Then R[0] = 0, E[0] = express_cost, and for every k with 0 <= k < n, R[k+1] = min(R[k] + regular[k], E[k] + express[k]) and E[k+1] = min(E[k] + express[k], R[k] + regular[k] + express_cost); moreover, for every j with 0 <= j < n, r[j] = min(R[j+1], E[j+1]).",
+    "preconditions": "Let n = len(regular). The constraints are: len(regular) = len(express) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= regular[i] <= 100000 and 1 <= express[i] <= 100000, and 1 <= express_cost <= 100000."
+  }
+]

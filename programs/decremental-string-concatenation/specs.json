@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_1",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(words). For each i with 0 <= i < n, let L_i = len(words[i]), A_i = words[i][0], B_i = words[i][L_i - 1]. A strategy is a sequence of choices c_1, c_2, ..., c_{n-1} where each c_k is either `append` or `prepend`. For a strategy, define f_0 = A_0, l_0 = B_0, and len_0 = L_0. For k = 1 to n-1: if c_k = `append`, then reduction_k = 1 if l_{k-1} == A_k else 0, f_k = f_{k-1}, l_k = B_k, len_k = len_{k-1} + L_k - reduction_k; if c_k = `prepend`, then reduction_k = 1 if B_k == f_{k-1} else 0, f_k = A_k, l_k = l_{k-1}, len_k = len_{k-1} + L_k - reduction_k. The function returns a result r such that r = min { len_{n-1} | c is a strategy }. (If n = 1, the minimum is L_0.)",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter (ASCII code 97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_2",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and sum_{i=0}^{n-1} len(words[i]) - (n - 1) <= r <= sum_{i=0}^{n-1} len(words[i]), where n = len(words).",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter (ASCII code 97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_3",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r1 be the result of the function on words1, and r2 be the result on words2. Then r1 = r2 (and both are results, i.e., neither fails).",
+    "preconditions": "words1 and words2 are two slices of vectors of bytes, each satisfying the constraints of S1 (i.e., 1 <= len <= 1000, word lengths 1..50, English lowercase). They have the same length n = len(words1) = len(words2). For every i with 0 <= i < n, len(words1[i]) = len(words2[i]), words1[i][0] = words2[i][0], and words1[i][len(words1[i])-1] = words2[i][len(words2[i])-1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_4",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result on words and r' be the result on words'. Then r' = r + d.",
+    "preconditions": "words and words' are two slices of vectors of bytes satisfying the constraints of spec_1. They have the same length n. There exists an index i (0 <= i < n) such that for all j != i, words'[j] = words[j]. For the index i, words'[i] has length len(words[i]) + d for some integer d >= 0, and words'[i][0] = words[i][0], words'[i][len(words'[i])-1] = words[i][len(words[i])-1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_5",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let K_append = the number of indices i with 1 <= i < n such that words[i-1][len(words[i-1])-1] == words[i][0], where n = len(words). Then the function returns a result r and r <= sum_{i=0}^{n-1} len(words[i]) - K_append.",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_6",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let K_prepend = the number of indices i with 1 <= i < n such that words[i][len(words[i])-1] == words[i-1][0], where n = len(words). Then the function returns a result r and r <= sum_{i=0}^{n-1} len(words[i]) - K_prepend.",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_7",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_7_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (i.e., it does not return an error or panic) for every input satisfying the preconditions.",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_8",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(words) and S = sum_{i=0}^{n-1} len(words[i]), and let r be the result of the function. Then r = S if and only if for all pairs (i, j) with 0 <= i < j < n, it is not the case that words[i][len(words[i])-1] == words[j][0] and it is not the case that words[j][len(words[j])-1] == words[i][0]. Equivalently, r < S if and only if there exist i < j such that words[i][len(words[i])-1] == words[j][0] or words[j][len(words[j])-1] == words[i][0].",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter (ASCII code 97..122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_9",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{n-1} len(words[i]) - (n - 1), where n = len(words).",
+    "preconditions": "words is a slice of vectors of bytes such that 1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 50, and every byte in words[i] is an English lowercase letter (ASCII code 97..122). There exists a byte c such that for every i with 0 <= i < len(words), words[i][0] = c and words[i][len(words[i])-1] = c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_10",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of the function on words, and r' the result on words'. Then r' = r + len(w) - 1 or r' = r + len(w).",
+    "preconditions": "words satisfies the constraints of spec_1. Let n = len(words). Assume n <= 999. w is a vector of bytes with 1 <= len(w) <= 50 and all bytes are English lowercase letters. Let words' be the concatenation of words and w (so words' has length n+1, with words'[i] = words[i] for 0 <= i < n, and words'[n] = w)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimizeConcatenatedLength.spec_11",
+    "negation": "AegisSpec.MinimizeConcatenatedLength.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on words and r' the result on words'. Then r = r'.",
+    "preconditions": "words satisfies the constraints of spec_1. Let n = len(words). Define words' by reversing each word: for each i with 0 <= i < n, words'[i] has the same length as words[i], and words'[i][j] = words[i][len(words[i])-1-j] for all 0 <= j < len(words[i])."
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetLucky.spec_1",
+    "negation": "AegisSpec.GetLucky.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let v(i) = s[i] - 96 for 0 <= i < len(s). Let D be the sequence of decimal digits obtained by writing v(0), v(1), ..., v(len(s)-1) in ordinary base 10 without leading zeros and concatenating these digit strings in that order. Let N be the integer represented by D. Let ds(n) be the sum of the decimal digits of n for n >= 0, and define ds^k by ds^0(n)=n and ds^(j+1)(n)=ds(ds^j(n)). For every valid input, get_lucky(s,k) returns a result r and r = ds^k(N).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (lowercase ASCII); and 1 <= k <= 10."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetLucky.spec_2",
+    "negation": "AegisSpec.GetLucky.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid input, the call get_lucky(s,k) returns a result. No out-of-bounds access, panic, or 64-bit integer overflow occurs in forming the converted integer or in any of the k digit-sum steps.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 1 <= k <= 10."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetLucky.spec_3",
+    "negation": "AegisSpec.GetLucky.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid input, whenever get_lucky(s,k) returns r, 1 <= r <= 10 * len(s).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 1 <= k <= 10."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetLucky.spec_4",
+    "negation": "AegisSpec.GetLucky.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S = sum_{i=0}^{len(s)-1} ds(s[i] - 96), where ds(v) is the sum of the decimal digits of v. For every valid input, whenever get_lucky(s,k) returns r, r = ds^(k-1)(S), with ds^0(S)=S.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 1 <= k <= 10."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetLucky.spec_5",
+    "negation": "AegisSpec.GetLucky.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every valid input with k >= 4, whenever get_lucky(s,k) returns r, r is the unique integer d such that 1 <= d <= 9 and N is congruent to d modulo 9, where N is the integer represented by the concatenation of the decimal representations of s[i] - 96 for i = 0, ..., len(s)-1, without leading zeros.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 4 <= k <= 10."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetLucky.spec_6",
+    "negation": "AegisSpec.GetLucky.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every valid s and all such k1 and k2, the calls get_lucky(s,k1) and get_lucky(s,k2) return the same integer.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and k1, k2 satisfy 4 <= k1 <= 10 and 4 <= k2 <= 10."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetLucky.spec_7",
+    "negation": "AegisSpec.GetLucky.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every valid s and all such k1 and k2, if get_lucky(s,k1) returns r1 and get_lucky(s,k2) returns r2, then r2 <= r1.",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 1 <= k1 <= k2 <= 10."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetLucky.spec_8",
+    "negation": "AegisSpec.GetLucky.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every valid input, whenever get_lucky(s,k) returns r, r is congruent modulo 9 to sum_{i=0}^{len(s)-1} (s[i] - 96).",
+    "preconditions": "s is a byte slice with 1 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; and 1 <= k <= 10."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetLucky.spec_9",
+    "negation": "AegisSpec.GetLucky.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any two valid byte slices s and t and any valid k, if sum_{i=0}^{len(s)-1} ds(s[i] - 96) = sum_{j=0}^{len(t)-1} ds(t[j] - 96), where ds(v) is the decimal digit sum of v, then the calls get_lucky(s,k) and get_lucky(t,k) return the same integer.",
+    "preconditions": "s and t are byte slices, each with length between 1 and 100; every byte of each is between 97 and 122; and 1 <= k <= 10."
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.XorQueries.spec_1",
+    "negation": "AegisSpec.XorQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries), and for every i with 0 <= i < len(queries), writing l = queries[i][0] and m = queries[i][1], we have r[i] = arr[l] XOR arr[l+1] XOR ... XOR arr[m], i.e. r[i] is the bitwise XOR of all arr[j] with l <= j <= m. This range is non-empty because l <= m.",
+    "preconditions": "len(arr) >= 1 and len(queries) >= 1; len(arr) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2 and 0 <= queries[i][0] <= queries[i][1] < len(arr)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.XorQueries.spec_2",
+    "negation": "AegisSpec.XorQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, fail an arithmetic overflow check, or access arr or any query vector out of bounds).",
+    "preconditions": "len(arr) >= 1 and len(queries) >= 1; len(arr) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2 and 0 <= queries[i][0] <= queries[i][1] < len(arr)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.XorQueries.spec_3",
+    "negation": "AegisSpec.XorQueries.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), 0 <= r[i] < 2^30.",
+    "preconditions": "len(arr) >= 1 and len(queries) >= 1; len(arr) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2 and 0 <= queries[i][0] <= queries[i][1] < len(arr)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.XorQueries.spec_4",
+    "negation": "AegisSpec.XorQueries.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all i and j with 0 <= i < len(queries) and 0 <= j < len(queries), if queries[i][0] = queries[j][0] and queries[i][1] < queries[j][1], then r[i] XOR r[j] = arr[queries[i][1]+1] XOR arr[queries[i][1]+2] XOR ... XOR arr[queries[j][1]].",
+    "preconditions": "len(arr) >= 1 and len(queries) >= 1; len(arr) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2 and 0 <= queries[i][0] <= queries[i][1] < len(arr)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.XorQueries.spec_5",
+    "negation": "AegisSpec.XorQueries.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all i, j, and k with 0 <= i < len(queries), 0 <= j < len(queries), and 0 <= k < len(queries), if there exist l, m, and n such that 0 <= l <= m < n < len(arr), queries[i][0] = l, queries[i][1] = m, queries[j][0] = m+1, queries[j][1] = n, queries[k][0] = l, and queries[k][1] = n, then r[k] = r[i] XOR r[j].",
+    "preconditions": "len(arr) >= 1 and len(queries) >= 1; len(arr) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every i with 0 <= i < len(queries), len(queries[i]) = 2 and 0 <= queries[i][0] <= queries[i][1] < len(arr)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.XorQueries.spec_6",
+    "negation": "AegisSpec.XorQueries.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (arr, queries) and r_prime on (arr, queries_prime), for every i with 0 <= i < len(queries), if queries[i] = queries_prime[i], then r[i] = r_prime[i].",
+    "preconditions": "Both (arr, queries) and (arr, queries_prime) are valid inputs: len(arr) >= 1; len(queries) >= 1 and len(queries_prime) >= 1; len(arr) <= 30000 and len(queries) <= 30000 and len(queries_prime) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; every query vector in either list has length 2 and endpoints satisfying 0 <= left <= right < len(arr); also len(queries) = len(queries_prime)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.XorQueries.spec_7",
+    "negation": "AegisSpec.XorQueries.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (arr, queries) and r_prime on (arr_prime, queries), for every i with 0 <= i < len(queries), if arr[j] = arr_prime[j] for every j with queries[i][0] <= j <= queries[i][1], then r[i] = r_prime[i].",
+    "preconditions": "Both (arr, queries) and (arr_prime, queries) are valid inputs: len(arr) >= 1 and len(arr_prime) >= 1; len(queries) >= 1; len(arr) <= 30000 and len(arr_prime) <= 30000 and len(queries) <= 30000; for every k with 0 <= k < len(arr), 1 <= arr[k] <= 1000000000; for every k with 0 <= k < len(arr_prime), 1 <= arr_prime[k] <= 1000000000; every query vector has length 2 and endpoints satisfying 0 <= left <= right < len(arr) and 0 <= left <= right < len(arr_prime); also len(arr) = len(arr_prime)."
+  }
+]

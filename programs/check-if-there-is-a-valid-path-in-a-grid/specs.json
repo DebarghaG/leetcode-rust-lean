@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasValidPath.spec_1",
+    "negation": "AegisSpec.HasValidPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever has_valid_path(grid) returns a result r, r is true if and only if (0,0) and (m-1,n-1) lie in the same connected component of the undirected graph whose vertices are all pairs (i,j) with 0 <= i < m and 0 <= j < n and whose edges join exactly those orthogonally adjacent vertices (|i-i'| + |j-j'| = 1) whose streets open toward each other. A cell opens left iff its value is in {1,3,5}, opens right iff its value is in {1,4,6}, opens up iff its value is in {2,5,6}, and opens down iff its value is in {2,3,4}. Coordinates are 0-based.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasValidPath.spec_2",
+    "negation": "AegisSpec.HasValidPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "has_valid_path(grid) returns some result r; it does not fail, overflow, access out of bounds, or panic.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasValidPath.spec_3",
+    "negation": "AegisSpec.HasValidPath.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever has_valid_path(grid) returns a result r, r = true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m = 1, n = 1, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasValidPath.spec_4",
+    "negation": "AegisSpec.HasValidPath.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever has_valid_path(grid) returns a result r, r = true if and only if for every j with 0 <= j < n-1, grid[0][j] opens right (its value is in {1,4,6}) and grid[0][j+1] opens left (its value is in {1,3,5}). For n = 1 the universal condition is vacuously true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m = 1, n >= 1, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasValidPath.spec_5",
+    "negation": "AegisSpec.HasValidPath.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever has_valid_path(grid) returns a result r, r = true if and only if for every i with 0 <= i < m-1, grid[i][0] opens down (its value is in {2,3,4}) and grid[i+1][0] opens up (its value is in {2,5,6}). For m = 1 the universal condition is vacuously true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume n = 1, m >= 1, m <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasValidPath.spec_6",
+    "negation": "AegisSpec.HasValidPath.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If (n = 1 or grid[0][0] is not in {1,4,6}) and (m = 1 or grid[0][0] is not in {2,3,4}), then whenever has_valid_path(grid) returns a result r, r = false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, m > 1 or n > 1, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HasValidPath.spec_7",
+    "negation": "AegisSpec.HasValidPath.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If (n = 1 or grid[m-1][n-1] is not in {1,3,5}) and (m = 1 or grid[m-1][n-1] is not in {2,5,6}), then whenever has_valid_path(grid) returns a result r, r = false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, m > 1 or n > 1, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HasValidPath.spec_8",
+    "negation": "AegisSpec.HasValidPath.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever has_valid_path(grid) returns true, there exists a valid street-following path from (0,0) to (m-1,n-1), with no repeated cells, having k steps where 0 <= k <= m*n - 1. A street-following path is a sequence of orthogonally adjacent cells in the grid where each consecutive pair is mutually connected by the opening sets left {1,3,5}, right {1,4,6}, up {2,5,6}, down {2,3,4}.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HasValidPath.spec_9",
+    "negation": "AegisSpec.HasValidPath.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G' be the n by m grid defined by G'[i][j] = t(grid[j][i]) for 0 <= i < n and 0 <= j < m, where t(1)=2, t(2)=1, t(3)=6, t(4)=4, t(5)=5, t(6)=3. Whenever has_valid_path(grid) returns r and has_valid_path(G') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HasValidPath.spec_10",
+    "negation": "AegisSpec.HasValidPath.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let G' be the m by n grid defined by G'[i][j] = u(grid[m-1-i][n-1-j]) for 0 <= i < m and 0 <= j < n, where u(1)=1, u(2)=2, u(3)=6, u(4)=5, u(5)=4, u(6)=3. Whenever has_valid_path(grid) returns r and has_valid_path(G') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, m <= 300, n <= 300, every row of grid has length n, and for every i,j with 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 6."
+  }
+]

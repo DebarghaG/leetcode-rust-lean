@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_1",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Let c be the integer value of r, and for any string x let c1(x) = #{i | 0 <= i < len(x) and x[i] = '1'}. Then c is the maximum of c1(u) over all strings u of length len(s) over {'0','1'} that are obtained from s by at most one valid trade, defined as follows. Put t = '1' ++ s ++ '1'. A valid trade either does nothing (u = s), or: choose a nonempty contiguous index block [a,b] of t such that t[a..b] are all '1', a > 0, b+1 < len(t), t[a-1] = '0', and t[b+1] = '0'; replace t[a..b] by '0', obtaining t1; then choose a nonempty contiguous index block [c,d] of t1 such that t1[c..d] are all '0', c > 0, d+1 < len(t1), t1[c-1] = '1', and t1[d+1] = '1'; replace t1[c..d] by '1', obtaining t2; and set u to be the string obtained from t2 by deleting its first and last bytes.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_2",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_3",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with integer value c, 0 <= c <= len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_4",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with integer value c, c >= c1(s), where c1(s) = #{i | 0 <= i < len(s) and s[i] = '1'}.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_5",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with integer value c, if there exists a maximal contiguous run of '1's in s with a byte immediately before it in s equal to '0' and a byte immediately after it in s equal to '0', then c >= c1(s) + 2, where c1(s) = #{i | 0 <= i < len(s) and s[i] = '1'}.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_6",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with integer value c, if s[i] = '0' for every 0 <= i < len(s), then c = 0.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_7",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with integer value c, if s[i] = '1' for every 0 <= i < len(s), then c = len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_8",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with integer value c, if len(s) = 1 then c = 1 when s[0] = '1', and c = 0 when s[0] = '0'.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_9",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with integer value c, if no maximal contiguous run of '1's in s has both a byte immediately before the run in s and a byte immediately after the run in s equal to '0', then c = c1(s), where c1(s) = #{i | 0 <= i < len(s) and s[i] = '1'}.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_10",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with integer value c, suppose exactly one maximal contiguous run of '1's in s is surrounded by '0's. Let p and q be the first and last indices of that run, so s[p..q] are '1', p > 0, q+1 < len(s), s[p-1] = '0', and s[q+1] = '0'. Let L be the unique positive integer such that s[p-L..p-1] are all '0' and (p-L = 0 or s[p-L-1] = '1'), and let R be the unique positive integer such that s[q+1..q+R] are all '0' and (q+R = len(s)-1 or s[q+R+1] = '1'). Then c = c1(s) + L + R, where c1(s) = #{i | 0 <= i < len(s) and s[i] = '1'}.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_11",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with integer value c, there exists a string u of length len(s) over {'0','1'} such that c1(u) = c, where c1(u) = #{i | 0 <= i < len(u) and u[i] = '1'}, and u is obtained from s by at most one valid trade as follows: put t = '1' ++ s ++ '1'; either u = s, or replace a nonempty contiguous block of '1's in t having immediate neighbors '0' by '0's, then replace a nonempty contiguous block of '0's in the resulting string having immediate neighbors '1' by '1's, and delete the first and last augmented bytes.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_12",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any two slices s and s' of the same length satisfying the preconditions, if s'[i] = s[len(s)-1-i] for every 0 <= i < len(s) so that s' is the left-to-right reversal of s, and if r and r' are the results returned on s and s' respectively, then the integer values of r and r' are equal.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_13",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with integer value c, for every string u of length len(s) over {'0','1'} that is obtained from s by at most one valid trade as follows: put t = '1' ++ s ++ '1'; either u = s, or replace a nonempty contiguous block of '1's in t having immediate neighbors '0' by '0's, then replace a nonempty contiguous block of '0's in the resulting string having immediate neighbors '1' by '1's, and delete the first and last augmented bytes, we have c1(u) <= c, where c1(u) = #{i | 0 <= i < len(u) and u[i] = '1'}.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is the ASCII byte for '0' or '1'."
+  }
+]

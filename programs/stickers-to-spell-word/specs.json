@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinStickers.spec_1",
+    "negation": "AegisSpec.MinStickers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Call a sticker multiset any tuple (m_0,...,m_{n-1}) of nonnegative integers; its size is sum_{j=0}^{n-1} m_j, and it spells target if for every byte c, cnt(target,c) <= sum_{j=0}^{n-1} m_j * cnt(stickers[j],c). Whenever the function returns a result r, the following holds: if no sticker multiset spells target, then r = -1; otherwise r >= 0 and r is the minimum size of a sticker multiset that spells target, i.e., there exists a sticker multiset of size r that spells target, and every sticker multiset that spells target has size at least r.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinStickers.spec_2",
+    "negation": "AegisSpec.MinStickers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (some Std.I64 value); it does not fail, panic, overflow, or read out of bounds.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinStickers.spec_3",
+    "negation": "AegisSpec.MinStickers.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever the function returns a result r, r = -1 if and only if there exists a byte c such that cnt(target,c) > 0 and for every j with 0 <= j < n, cnt(stickers[j],c) = 0.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinStickers.spec_4",
+    "negation": "AegisSpec.MinStickers.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= len(target).",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinStickers.spec_5",
+    "negation": "AegisSpec.MinStickers.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever the function returns a result r, r = 1 if and only if there exists j with 0 <= j < n such that for every byte c, cnt(target,c) <= cnt(stickers[j],c).",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinStickers.spec_6",
+    "negation": "AegisSpec.MinStickers.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever the function returns a result r, if there is a byte c such that target[i] = c for every i with 0 <= i < len(target), then the following holds. Let M = max_{0 <= j < n} cnt(stickers[j],c). If M = 0 then r = -1; otherwise r = ceil(cnt(target,c)/M), equivalently r = (cnt(target,c) + M - 1) div M.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinStickers.spec_7",
+    "negation": "AegisSpec.MinStickers.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever the function returns a result r with r != -1, for every byte c such that cnt(target,c) > 0, let M_c = max_{0 <= j < n} cnt(stickers[j],c). Then M_c > 0 and r * M_c >= cnt(target,c).",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinStickers.spec_8",
+    "negation": "AegisSpec.MinStickers.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, let L = max_{0 <= j < n} len(stickers[j]); then r * L >= len(target).",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinStickers.spec_9",
+    "negation": "AegisSpec.MinStickers.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever the function returns a result r with r >= 0, there exist nonnegative integers m_0,...,m_{n-1} such that sum_{j=0}^{n-1} m_j = r, and for every byte c, cnt(target,c) <= sum_{j=0}^{n-1} m_j * cnt(stickers[j],c); moreover, for every j with m_j > 0, decreasing m_j by 1 while leaving all other m_k unchanged gives a multiset that does not spell target (i.e., some byte c then violates the displayed inequality).",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinStickers.spec_10",
+    "negation": "AegisSpec.MinStickers.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_stickers(stickers,target) returns a result r and min_stickers(stickers',target) returns a result r', we have r = r'.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z'). Also let stickers' be any slice of length n such that there is a permutation pi of {0,...,n-1} with stickers'[i] = stickers[pi(i)] for all i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinStickers.spec_11",
+    "negation": "AegisSpec.MinStickers.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_stickers(stickers,target) returns a result r and min_stickers(stickers'',target) returns a result r'', we have r = r''.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z'). Suppose n >= 2 and there exist distinct indices j,k with 0 <= j < n, 0 <= k < n, and stickers[j] = stickers[k]. Let stickers'' be the slice of length n-1 obtained by deleting index k from stickers."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinStickers.spec_12",
+    "negation": "AegisSpec.MinStickers.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_stickers(stickers,target) returns a result r and min_stickers(stickers+,target) returns a result r+, if r >= 0 then r+ >= 0 and r+ <= r.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z'). Suppose n <= 49. Let w be any byte sequence of ASCII lowercase English letters with 1 <= len(w) <= 10, and let stickers+ be any slice of length n+1 whose entries are exactly the entries of stickers together with one extra entry w."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinStickers.spec_13",
+    "negation": "AegisSpec.MinStickers.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let cnt(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Suppose cnt(t,c) <= cnt(t',c) for every byte c. Whenever min_stickers(stickers,t') returns a result r' with r' != -1, the call min_stickers(stickers,t) returns a result r with r != -1 and r <= r'.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; every byte of every stickers[j] is an ASCII lowercase English letter ('a'..'z'). Let t and t' be two target byte sequences, each of length between 1 and 15 and consisting entirely of ASCII lowercase English letters."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinStickers.spec_14",
+    "negation": "AegisSpec.MinStickers.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_stickers(stickers,target) returns a result r and min_stickers(stickers,target') returns a result r', we have r = r'.",
+    "preconditions": "n = len(stickers); 1 <= n <= 50; for every j with 0 <= j < n, 1 <= len(stickers[j]) <= 10; 1 <= len(target) <= 15; every byte of every stickers[j] and every byte of target is an ASCII lowercase English letter ('a'..'z'). Let target' be any byte sequence of ASCII lowercase English letters with 1 <= len(target') <= 15 such that for every byte c, cnt(target',c) = cnt(target,c), where cnt(x,c) is the number of indices i with 0 <= i < len(x) and x[i] = c."
+  }
+]

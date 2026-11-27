@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_1",
+    "negation": "AegisSpec.MakeStringsEqual.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "make_strings_equal returns a result r and does not fail. The Boolean r is true if and only if the following two propositions have the same truth value: (A) there exists an index i with 0 <= i < n such that s[i] = 49; (B) there exists an index j with 0 <= j < n such that target[j] = 49. Equivalently, r is true exactly when either both s and target contain at least one '1', or both consist entirely of '0's.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'), and target[i] is either 48 or 49."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_2",
+    "negation": "AegisSpec.MakeStringsEqual.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every pair of inputs satisfying the preconditions, make_strings_equal returns some Boolean value r; it does not fail, panic, overflow, or access an index outside 0 <= i < n.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_3",
+    "negation": "AegisSpec.MakeStringsEqual.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the Boolean returned for inputs (s, target), and let r2 be the Boolean returned for inputs (target, s), where the two arguments are swapped. Then r1 = r2.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_4",
+    "negation": "AegisSpec.MakeStringsEqual.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every m with 2 <= m <= 100000 and every binary slices s2 and target2 of length m, if the statement 'there exists i with 0 <= i < m and s2[i] = 49' has the same truth value as 'there exists i with 0 <= i < n and s[i] = 49', and likewise 'there exists j with 0 <= j < m and target2[j] = 49' has the same truth value as 'there exists j with 0 <= j < n and target[j] = 49', then make_strings_equal s2 target2 returns the same Boolean value as make_strings_equal s target.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_5",
+    "negation": "AegisSpec.MakeStringsEqual.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever make_strings_equal returns true for s and target, there exist k >= 0 and byte arrays u_0, u_1, ..., u_k of length n, each entry being 48 or 49, such that u_0 = s, u_k = target, and for every t with 0 <= t < k there are distinct indices i and j with 0 <= i,j < n for which: (a) u_{t+1}[i] = 49 if and only if u_t[i] = 49 or u_t[j] = 49; (b) u_{t+1}[j] = 49 if and only if exactly one of u_t[i] and u_t[j] equals 49; and (c) u_{t+1}[m] = u_t[m] for every m with 0 <= m < n and m not in {i,j}.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_6",
+    "negation": "AegisSpec.MakeStringsEqual.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever make_strings_equal returns false for s and target, there do not exist k >= 0 and byte arrays u_0, u_1, ..., u_k of length n, each entry being 48 or 49, such that u_0 = s, u_k = target, and for every t with 0 <= t < k there are distinct indices i and j with 0 <= i,j < n for which: (a) u_{t+1}[i] = 49 if and only if u_t[i] = 49 or u_t[j] = 49; (b) u_{t+1}[j] = 49 if and only if exactly one of u_t[i] and u_t[j] equals 49; and (c) u_{t+1}[m] = u_t[m] for every m with 0 <= m < n and m not in {i,j}.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MakeStringsEqual.spec_7",
+    "negation": "AegisSpec.MakeStringsEqual.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If make_strings_equal returns false, then exactly one of the following two cases holds: (1) every entry of s is 48 and there exists j with 0 <= j < n such that target[j] = 49; or (2) every entry of target is 48 and there exists i with 0 <= i < n such that s[i] = 49.",
+    "preconditions": "Let n = len(s). The inputs satisfy n = len(target), 2 <= n <= 100000, and all entries of s and target are either 48 or 49."
+  }
+]

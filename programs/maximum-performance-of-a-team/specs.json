@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxPerformance.spec_1",
+    "negation": "AegisSpec.MaxPerformance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For a nonempty set S of indices from {0, ..., n-1}, define perf(S) = (sum_{i in S} speed[i]) * (min_{i in S} efficiency[i]). Let P* = max { perf(S) : S is nonempty and |S| <= k }. The function returns a result r, and r is the unique integer such that 0 <= r < M and r ≡ P* (mod M); equivalently, r = P* mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxPerformance.spec_2",
+    "negation": "AegisSpec.MaxPerformance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxPerformance.spec_3",
+    "negation": "AegisSpec.MaxPerformance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < M, where M = 1000000007.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxPerformance.spec_4",
+    "negation": "AegisSpec.MaxPerformance.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007 and let Q = max_{0 <= i < n} (speed[i] * efficiency[i]). The function returns a result r, and r = Q mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; k = 1; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxPerformance.spec_5",
+    "negation": "AegisSpec.MaxPerformance.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007. Let T be the sum of the k largest values among speed[0], ..., speed[n-1], counted with multiplicity (so if these speeds are sorted nonincreasingly as u_1 >= ... >= u_n, then T = u_1 + ... + u_k). The function returns a result r, and r = (e * T) mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000; there exists an integer e such that efficiency[i] = e for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxPerformance.spec_6",
+    "negation": "AegisSpec.MaxPerformance.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007. Let d_1 >= d_2 >= ... >= d_n be the values efficiency[0], ..., efficiency[n-1] sorted in nonincreasing order. The function returns a result r, and r = ( max_{1 <= m <= k} (m * s * d_m) ) mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000; there exists an integer s such that speed[i] = s for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxPerformance.spec_7",
+    "negation": "AegisSpec.MaxPerformance.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a nonempty set S of indices with S subset of {0, ..., n-1} and |S| <= k such that r ≡ (sum_{i in S} speed[i]) * (min_{i in S} efficiency[i]) (mod 1000000007).",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxPerformance.spec_8",
+    "negation": "AegisSpec.MaxPerformance.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. For each index j with 0 <= j < n, let A_j = { i : 0 <= i < n and efficiency[i] >= efficiency[j] }, and let S_j be the sum of the min(k, |A_j|) largest values of speed[i] over i in A_j. Let P* = max_{0 <= j < n} (efficiency[j] * S_j). The function returns a result r, and r = P* mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxPerformance.spec_9",
+    "negation": "AegisSpec.MaxPerformance.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007. For a nonempty set S of indices from {0, ..., n-1}, define perf(S) = (sum_{i in S} speed[i]) * (min_{i in S} efficiency[i]), and let P* = max { perf(S) : S is nonempty and |S| <= k }. Whenever the function returns a result r, r = 0 if and only if M divides P*.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxPerformance.spec_10",
+    "negation": "AegisSpec.MaxPerformance.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be any permutation of {0, ..., n-1}. Define speed'[i] = speed[pi(i)] and efficiency'[i] = efficiency[pi(i)] for 0 <= i < n. If r is the result for (n, speed, efficiency, k) and r' is the result for (n, speed', efficiency', k), then r = r'.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxPerformance.spec_11",
+    "negation": "AegisSpec.MaxPerformance.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Let P* be the maximum performance for (n, speed, efficiency, k) as defined in the main specification. The function returns a result r' for (n, speed', efficiency, k), and r' = (c * P*) mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000; c is a positive integer, and the array speed' defined by speed'[i] = c * speed[i] for 0 <= i < n also satisfies 1 <= speed'[i] <= 100000 for every i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxPerformance.spec_12",
+    "negation": "AegisSpec.MaxPerformance.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Let P* be the maximum performance for (n, speed, efficiency, k) as defined in the main specification. The function returns a result r' for (n, speed, efficiency', k), and r' = (c * P*) mod M.",
+    "preconditions": "n = len(speed) = len(efficiency); 1 <= n <= 100000; 1 <= k <= n; for every i with 0 <= i < n, 1 <= speed[i] <= 100000 and 1 <= efficiency[i] <= 100000000; c is a positive integer, and the array efficiency' defined by efficiency'[i] = c * efficiency[i] for 0 <= i < n also satisfies 1 <= efficiency'[i] <= 100000000 for every i."
+  }
+]

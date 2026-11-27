@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_1",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_trailing_zeros(grid) returns a result r, r equals the maximum of score(P) over all cornered paths P in grid. For a positive integer x, v2(x) is the largest e >= 0 such that 2^e divides x, and v5(x) is the largest e >= 0 such that 5^e divides x. For a nonempty finite set P of cells, score(P) = min( sum_{(i,j) in P} v2(grid[i][j]), sum_{(i,j) in P} v5(grid[i][j]) ). A cornered path is a nonempty set P of cells for which there exist integers r0,c0,r1,c1 with 0 <= r0,r1 < m and 0 <= c0,c1 < n such that P = { (r0,k) : min(c0,c1) <= k <= max(c0,c1) } union { (i,c0) : min(r0,r1) <= i <= max(r0,r1) }. Indices are 0-based; the maximum is over all such P.",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_2",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid grid, max_trailing_zeros(grid) does not fail: there exists an integer r such that max_trailing_zeros(grid) returns r.",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_3",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_trailing_zeros(grid) returns a result r, 0 <= r <= min(T2,T5), where T2 = sum_{0 <= i < m} sum_{0 <= j < n} v2(grid[i][j]) and T5 = sum_{0 <= i < m} sum_{0 <= j < n} v5(grid[i][j]).",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_4",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_trailing_zeros(grid) returns a result r, there exists a cornered path P in grid such that score(P) = r. Here a cornered path is any set P of the form { (r0,k) : min(c0,c1) <= k <= max(c0,c1) } union { (i,c0) : min(r0,r1) <= i <= max(r0,r1) } for some 0 <= r0,r1 < m and 0 <= c0,c1 < n, and score(P) = min( sum_{(i,j) in P} v2(grid[i][j]), sum_{(i,j) in P} v5(grid[i][j]) ).",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_5",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_trailing_zeros(grid) returns a result r, for every cornered path P in grid, score(P) <= r. Here a cornered path is any union of one contiguous row segment and one contiguous column segment that meet at one endpoint cell of each, including straight and one-cell paths, and score(P) is the minimum of the summed v2 counts and the summed v5 counts over the cells of P.",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_6",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_trailing_zeros(G) returns r and max_trailing_zeros(H) returns s, then r = s.",
+    "preconditions": "Let G and H be two valid grids with the same number of rows m and the same common row length n, where m >= 1, n >= 1, m*n <= 100000, and all entries of both grids are in 1..1000. For every 0 <= i < m and 0 <= j < n, v2(G[i][j]) = v2(H[i][j]) and v5(G[i][j]) = v5(H[i][j])."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_7",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_trailing_zeros(G) returns r and max_trailing_zeros(H) returns s, then s >= r.",
+    "preconditions": "Let G and H be two valid grids with the same number of rows m and the same common row length n, where m >= 1, n >= 1, m*n <= 100000, and all entries of both grids are in 1..1000. For every 0 <= i < m and 0 <= j < n, v2(H[i][j]) >= v2(G[i][j]) and v5(H[i][j]) >= v5(G[i][j])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTrailingZeros.spec_8",
+    "negation": "AegisSpec.MaxTrailingZeros.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_trailing_zeros(grid) returns a result r, r is at least the maximum of the score of every nonempty contiguous horizontal segment and every nonempty contiguous vertical segment of grid. Explicitly, this lower bound is the maximum of min( sum_{k=l}^{u} v2(grid[i][k]), sum_{k=l}^{u} v5(grid[i][k]) ) over all 0 <= i < m and 0 <= l <= u < n, and of min( sum_{k=l}^{u} v2(grid[k][j]), sum_{k=l}^{u} v5(grid[k][j]) ) over all 0 <= j < n and 0 <= l <= u < m.",
+    "preconditions": "Let m = len(grid). There exists an integer n >= 1 such that len(grid[i]) = n for every 0 <= i < m; moreover m >= 1, m*n <= 100000, and 1 <= grid[i][j] <= 1000 for every 0 <= i < m and 0 <= j < n."
+  }
+]

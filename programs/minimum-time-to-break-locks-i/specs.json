@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMinimumTime.spec_1",
+    "negation": "AegisSpec.FindMinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum, over all permutations p = (p(0),...,p(n-1)) of the index set {0,...,n-1}, of T(p) = sum_{j=0}^{n-1} ceil(strength[p(j)] / (1 + j*k)), where ceil(a/b) for positive integer b and integer a is the least integer t >= 0 with t*b >= a.",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMinimumTime.spec_2",
+    "negation": "AegisSpec.FindMinimumTime.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= min_{0 <= i < n} strength[i] + (n - 1).",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMinimumTime.spec_3",
+    "negation": "AegisSpec.FindMinimumTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{n-1} ceil(strength[i] / (1 + (n-1)*k)), where ceil(a/b) is the least integer t >= 0 with t*b >= a.",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMinimumTime.spec_4",
+    "negation": "AegisSpec.FindMinimumTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{n-1} ceil(strength[i] / (1 + i*k)), where ceil(a/b) is the least integer t >= 0 with t*b >= a.",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMinimumTime.spec_5",
+    "negation": "AegisSpec.FindMinimumTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every index m with 0 <= m < n and strength[m] = min_{0 <= i < n} strength[i], whenever the function returns a result r, r <= strength[m] + sum_{0 <= i < n, i != m} ceil(strength[i] / (1 + k)), where ceil(a/b) is the least integer t >= 0 with t*b >= a.",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMinimumTime.spec_6",
+    "negation": "AegisSpec.FindMinimumTime.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If find_minimum_time(a,k) returns r_a and find_minimum_time(b,k) returns r_b, then r_a = r_b.",
+    "preconditions": "Let a and b be two strength slices of the same length n. Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= a[i] <= 1000000 and 1 <= b[i] <= 1000000. Assume b is a permutation of a, meaning there is a bijection sigma on {0,...,n-1} with b[j] = a[sigma(j)] for every j."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMinimumTime.spec_7",
+    "negation": "AegisSpec.FindMinimumTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If find_minimum_time(a,k) returns r_a and find_minimum_time(b,k) returns r_b, then r_a <= r_b.",
+    "preconditions": "Let a and b be two strength slices of the same length n. Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= a[i] <= b[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMinimumTime.spec_8",
+    "negation": "AegisSpec.FindMinimumTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If find_minimum_time(strength,k1) returns r1 and find_minimum_time(strength,k2) returns r2, then r2 <= r1.",
+    "preconditions": "Let strength be a slice with n = len(strength). Assume 1 <= n <= 8 and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000. Let k1 and k2 satisfy 1 <= k1 <= k2 <= 10."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMinimumTime.spec_9",
+    "negation": "AegisSpec.FindMinimumTime.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min_{0 <= i < n} strength[i] + (n - 1).",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000. Assume in addition that strength[i] <= 1 + k for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMinimumTime.spec_10",
+    "negation": "AegisSpec.FindMinimumTime.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail), and 1 <= r <= 8000000; more sharply, r <= sum_{i=0}^{n-1} strength[i].",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindMinimumTime.spec_11",
+    "negation": "AegisSpec.FindMinimumTime.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, there exists a permutation p = (p(0),...,p(n-1)) of the index set {0,...,n-1} such that r = sum_{j=0}^{n-1} ceil(strength[p(j)] / (1 + j*k)) and strength[p(0)] = min_{0 <= i < n} strength[i], where ceil(a/b) for positive integer b and integer a is the least integer t >= 0 with t*b >= a.",
+    "preconditions": "Let n = len(strength). Assume 1 <= n <= 8, 1 <= k <= 10, and for every i with 0 <= i < n, 1 <= strength[i] <= 1000000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_1",
+    "negation": "AegisSpec.ZigzagTraversal.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Let T = m*n. Then len(r) = (T + 1) div 2, and for every integer k with 0 <= k < len(r), setting t = 2*k, i = t div n, p = t mod n, and j = p if i is even and j = n - 1 - p if i is odd, we have r[k] = grid[i][j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_2",
+    "negation": "AegisSpec.ZigzagTraversal.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail: for every input satisfying the precondition, it returns some vector r rather than an error. In particular, no panic, out-of-bounds access, or integer overflow occurs.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_3",
+    "negation": "AegisSpec.ZigzagTraversal.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = (len(grid) * len(grid[0]) + 1) div 2. Equivalently, len(r) = ceil(m*n/2), the number of even integers t with 0 <= t < m*n.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_4",
+    "negation": "AegisSpec.ZigzagTraversal.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[0] = grid[0][0].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_5",
+    "negation": "AegisSpec.ZigzagTraversal.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k < len(r), 1 <= r[k] <= 2500.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_6",
+    "negation": "AegisSpec.ZigzagTraversal.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, define i_k = (2*k) div n for each k with 0 <= k < len(r). Then for every such k, 0 <= i_k < m; for every k with 0 <= k+1 < len(r), i_k <= i_{k+1} <= i_k + 1. Thus the source rows are nondecreasing and never skip a row between consecutive result entries.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_7",
+    "negation": "AegisSpec.ZigzagTraversal.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k+1 < len(r), let t = 2*k, i = t div n, p = t mod n, t' = 2*(k+1), i' = t' div n, p' = t' mod n. If i' = i, then p' = p + 2. Consequently, if i is even the physical column increases by 2, and if i is odd the physical column decreases by 2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_8",
+    "negation": "AegisSpec.ZigzagTraversal.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k+1 < len(r), let t = 2*k, i = t div n, p = t mod n, t' = 2*(k+1), i' = t' div n, p' = t' mod n. If i' != i, then i' = i + 1 and p' = p + 2 - n. In particular p' is either 0 or 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_9",
+    "negation": "AegisSpec.ZigzagTraversal.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every row index i with 0 <= i < m and every traversal position p with 0 <= p < n within that row, the cell reached at position p of row i in the zigzag order is the source of exactly one entry of r if p is congruent to i*n modulo 2, and is the source of no entry of r otherwise. Equivalently, in row i the kept traversal positions are r_i, r_i+2, r_i+4, ... where r_i = 0 if i*n is even and r_i = 1 if i*n is odd.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ZigzagTraversal.spec_10",
+    "negation": "AegisSpec.ZigzagTraversal.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let t_last = 2*(len(r)-1). Then t_last div n = m - 1. Equivalently, the last entry r[len(r)-1] comes from the last row of grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m <= 50, every row of grid has length n, 2 <= n <= 50, and for every 0 <= i < m and 0 <= j < n, 1 <= grid[i][j] <= 2500."
+  }
+]

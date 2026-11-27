@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_1",
+    "negation": "AegisSpec.MaxHappyGroups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(groups). Call a sequence p a permutation of the groups if p is a sequence of the n indices 0,...,n-1 in which every index occurs exactly once. For such p and an index j with 0 <= j < n, the group at position j is happy when (sum_{k=0}^{j-1} groups[p[k]]) mod batchSize = 0, where the empty sum at j=0 is 0. Let H(p) be the number of positions j with 0 <= j < n at which the group is happy. The function returns a result r and r = max { H(p) | p is a permutation of the groups }.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_2",
+    "negation": "AegisSpec.MaxHappyGroups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_3",
+    "negation": "AegisSpec.MaxHappyGroups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r for an input satisfying the preconditions, 1 <= r <= len(groups).",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_4",
+    "negation": "AegisSpec.MaxHappyGroups.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let z = number of indices i with 0 <= i < len(groups) and groups[i] mod batchSize = 0. Whenever the function returns r, r >= min(len(groups), z + 1).",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_5",
+    "negation": "AegisSpec.MaxHappyGroups.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let z = number of indices i with 0 <= i < len(groups) and groups[i] mod batchSize = 0, and let m = len(groups) - z. Whenever the function returns r, r <= z + ceil(m / 2), where ceil(m / 2) = (m + 1) div 2.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_6",
+    "negation": "AegisSpec.MaxHappyGroups.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = number of indices i with 0 <= i < len(groups) and groups[i] mod batchSize != 0. Whenever the function returns r, r = len(groups) if and only if m <= 1.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_7",
+    "negation": "AegisSpec.MaxHappyGroups.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = number of indices i with 0 <= i < len(groups) and groups[i] mod batchSize != 0. If m = 2, then whenever the function returns r, r = len(groups) - 1.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_8",
+    "negation": "AegisSpec.MaxHappyGroups.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume batchSize = 2. Let z = number of even values among groups[i] and m = number of odd values among groups[i], so z + m = len(groups). Whenever the function returns r, r = z + ceil(m / 2), where ceil(m / 2) = (m + 1) div 2.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_9",
+    "negation": "AegisSpec.MaxHappyGroups.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If groups[i] = 1 for every index i with 0 <= i < len(groups), then whenever the function returns r, r = ceil(len(groups) / batchSize), where ceil(n / batchSize) = (n + batchSize - 1) div batchSize.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_10",
+    "negation": "AegisSpec.MaxHappyGroups.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let S = sum_{i=0}^{len(groups)-1} groups[i]. If S < batchSize, then whenever the function returns r, r = 1.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_11",
+    "negation": "AegisSpec.MaxHappyGroups.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result on (batchSize, groups) and r' is the result on (batchSize, groups'), then r' = r + 1.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n. Let g be an integer with 1 <= g <= 10^9 and g mod batchSize = 0. Let n = len(groups) and assume n <= 29. Let groups' be the slice of length n+1 with groups'[i] = groups[i] for 0 <= i < n and groups'[n] = g."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_12",
+    "negation": "AegisSpec.MaxHappyGroups.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If r is the result on (batchSize, groups) and r' is the result on (batchSize, groups'), then r' = r.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n. Let q be a permutation of the indices 0,...,n-1, and let groups' be the slice of length n with groups'[j] = groups[q[j]] for every 0 <= j < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxHappyGroups.spec_13",
+    "negation": "AegisSpec.MaxHappyGroups.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(groups). A permutation p is a sequence of the n indices 0,...,n-1 in which every index occurs exactly once. Define H(p) = the number of indices j with 0 <= j < n such that (sum_{k=0}^{j-1} groups[p[k]]) mod batchSize = 0, with the empty sum at j=0 equal to 0. Whenever the function returns r, there exists a permutation p of 0,...,n-1 with H(p) = r.",
+    "preconditions": "batchSize is an integer with 1 <= batchSize <= 9. groups is a nonempty slice of 64-bit integers with n = len(groups), 1 <= n <= 30, and 1 <= groups[i] <= 10^9 for every 0 <= i < n."
+  }
+]

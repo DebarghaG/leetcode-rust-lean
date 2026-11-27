@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReachableNodes.spec_1",
+    "negation": "AegisSpec.ReachableNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Construct the subdivided graph G' from n and edges as follows. Its vertices are the original vertices 0,...,n-1 together with, for each edge e_i = [u_i,v_i,c_i], c_i distinct new vertices x_{i,1},...,x_{i,c_i}. Its edges are, for each i, the unit-length path u_i - x_{i,1} - x_{i,2} - ... - x_{i,c_i} - v_i (when c_i=0 this is the single edge u_i-v_i). For a vertex y of G', let dist(y) be the minimum number of edges on a path from 0 to y in G', or infinity if no such path exists. Whenever reachable_nodes returns a result r, r equals the number of vertices y of G' with dist(y) <= maxMoves.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReachableNodes.spec_2",
+    "negation": "AegisSpec.ReachableNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, reachable_nodes returns an ok result of type i64 and does not fail by overflow, panic, out-of-bounds access, or any other runtime error.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReachableNodes.spec_3",
+    "negation": "AegisSpec.ReachableNodes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever reachable_nodes returns r, 1 <= r <= n + sum_{i=0}^{len(edges)-1} edges[i][2].",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReachableNodes.spec_4",
+    "negation": "AegisSpec.ReachableNodes.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let C be the set of original vertices v with 0 <= v < n that are connected to 0 in the undirected graph on vertices 0,...,n-1 having an edge {u_i,v_i} for each i. Let S = |C| + sum_{i: u_i in C or v_i in C} edges[i][2]. If maxMoves >= S - 1, then whenever reachable_nodes returns r, r = S.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReachableNodes.spec_5",
+    "negation": "AegisSpec.ReachableNodes.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of reachable_nodes(edges, m1, n) and r2 be the result of reachable_nodes(edges, m2, n). Whenever both calls return results, r1 <= r2.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4). Also 0 <= m1 <= m2 <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReachableNodes.spec_6",
+    "negation": "AegisSpec.ReachableNodes.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever reachable_nodes(edges, maxMoves, n) returns r and reachable_nodes(edges', maxMoves, n) returns r', we have r = r'.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4). Also edges' is any permutation of the list edges."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReachableNodes.spec_7",
+    "negation": "AegisSpec.ReachableNodes.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let edges' be edges with entry i removed. Whenever reachable_nodes(edges, maxMoves, n) returns r and reachable_nodes(edges', maxMoves, n) returns r', we have r = r'.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4). Also i is an index with 0 <= i < len(edges); C is the set of original vertices connected to 0 in the original graph using all edges and ignoring cnt; neither u_i nor v_i belongs to C."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReachableNodes.spec_8",
+    "negation": "AegisSpec.ReachableNodes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n' = n + 1. Whenever reachable_nodes(edges, maxMoves, n) returns r and reachable_nodes(edges, maxMoves, n') returns r', we have r = r'.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4). Also n < 3000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReachableNodes.spec_9",
+    "negation": "AegisSpec.ReachableNodes.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define an undirected weighted graph W on vertices 0,...,n-1 by giving each edge i = [u_i,v_i,c_i] weight c_i+1. For a vertex v, let D(v) be the minimum total weight of a path from 0 to v in W, or infinity if no such path exists. Whenever reachable_nodes returns r, let R be the set of vertices of the subdivided graph G' (as in spec_1) with dist <= maxMoves, so |R| = r. For every original vertex v with 0 <= v < n, v is in R if and only if D(v) <= maxMoves.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReachableNodes.spec_10",
+    "negation": "AegisSpec.ReachableNodes.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G' be the subdivided graph, and for each edge i let x_{i,k} be the k-th new vertex on the path from u_i to v_i. Define an undirected weighted graph W on vertices 0,...,n-1 by giving edge i weight c_i+1, and let D(v) be the minimum total weight of a path from 0 to v in W, or infinity if no such path exists; take infinity + t = infinity for every integer t and treat infinity as larger than all integers in min. Whenever reachable_nodes returns r, let R be the set of vertices of G' with dist <= maxMoves, so |R| = r. For every edge i and every k with 1 <= k <= edges[i][2], x_{i,k} is in R if and only if min(D(u_i) + k, D(v_i) + edges[i][2] + 1 - k) <= maxMoves.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ReachableNodes.spec_11",
+    "negation": "AegisSpec.ReachableNodes.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever reachable_nodes returns r, r >= 2.",
+    "preconditions": "All inputs satisfy the problem Constraints: 1 <= n <= 3000; 0 <= maxMoves <= 10^9; edges is a list of triples [u_i,v_i,c_i] with 0 <= u_i < v_i < n, 0 <= c_i <= 10^4, no unordered pair {u_i,v_i} occurs twice, and len(edges) <= min(n*(n-1)/2, 10^4). Also maxMoves >= 1 and there exists an index i with 0 <= i < len(edges) and (edges[i][0] = 0 or edges[i][1] = 0)."
+  }
+]

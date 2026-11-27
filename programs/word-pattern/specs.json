@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WordPattern.spec_1",
+    "negation": "AegisSpec.WordPattern.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let W be the list of words of s, i.e. the maximal contiguous byte segments of s that do not contain a space byte, in left-to-right order; under the preconditions W is non-empty and every W[t] is non-empty. Whenever word_pattern pattern s returns a result r, r is true if and only if len(W) = len(pattern) and, for every i and j with 0 <= i < len(pattern) and 0 <= j < len(pattern), pattern[i] = pattern[j] if and only if W[i] = W[j] (word equality is equality of byte sequences).",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WordPattern.spec_2",
+    "negation": "AegisSpec.WordPattern.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every pattern and s satisfying the preconditions, word_pattern pattern s returns a result r (it does not fail: no overflow, out-of-bounds access, or panic).",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WordPattern.spec_3",
+    "negation": "AegisSpec.WordPattern.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let W be the list of words of s. Whenever word_pattern pattern s returns a result r and len(W) != len(pattern), r is false. Equivalently, if word_pattern pattern s returns true, then len(W) = len(pattern).",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WordPattern.spec_4",
+    "negation": "AegisSpec.WordPattern.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let W be the list of words of s. Whenever word_pattern pattern s returns true, for every i and j with 0 <= i < len(pattern) and 0 <= j < len(pattern), the words W[i] and W[j] are defined and pattern[i] = pattern[j] implies W[i] = W[j].",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WordPattern.spec_5",
+    "negation": "AegisSpec.WordPattern.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let W be the list of words of s. Whenever word_pattern pattern s returns true, for every i and j with 0 <= i < len(pattern) and 0 <= j < len(pattern), the words W[i] and W[j] are defined and W[i] = W[j] implies pattern[i] = pattern[j].",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WordPattern.spec_6",
+    "negation": "AegisSpec.WordPattern.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let W be the list of words of s. Let rev_pattern be the byte slice of length len(pattern) with rev_pattern[i] = pattern[len(pattern)-1-i] for 0 <= i < len(pattern). Let rev_s be the byte string obtained by writing W[len(W)-1], W[len(W)-2], ..., W[0] in that order, separated by single space bytes, with no leading or trailing space. Whenever word_pattern pattern s and word_pattern rev_pattern rev_s both return results r1 and r2, r1 = r2.",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WordPattern.spec_7",
+    "negation": "AegisSpec.WordPattern.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice p' such that len(p') = len(pattern), every byte of p' is a lowercase English letter, and for all i and j with 0 <= i < len(pattern) and 0 <= j < len(pattern), p'[i] = p'[j] if and only if pattern[i] = pattern[j], whenever word_pattern pattern s and word_pattern p' s both return results r and r', we have r = r'.",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WordPattern.spec_8",
+    "negation": "AegisSpec.WordPattern.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let W be the list of words of s. For every byte string s' satisfying the same syntactic conditions as s (1 <= len(s') <= 3000, every byte is a lowercase English letter or a space, no leading or trailing space, no two consecutive spaces), if W' is the list of words of s', len(W') = len(W), and for all i and j with 0 <= i < len(W) and 0 <= j < len(W), W'[i] = W'[j] if and only if W[i] = W[j], then whenever word_pattern pattern s and word_pattern pattern s' both return results r and r', we have r = r'.",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WordPattern.spec_9",
+    "negation": "AegisSpec.WordPattern.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let W be the list of words of s. Let D be the set of distinct byte values occurring in pattern, and let E be the set of distinct words occurring among the words W. Whenever word_pattern pattern s returns true, len(W) = len(pattern) and there exists a bijection f from D to E such that for every i with 0 <= i < len(pattern), f(pattern[i]) = W[i].",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WordPattern.spec_10",
+    "negation": "AegisSpec.WordPattern.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let W be the list of words of s. Whenever word_pattern pattern s returns false, exactly one of the following holds: (a) len(W) != len(pattern); or (b) len(W) = len(pattern) and there exist indices i and j with 0 <= i < len(pattern) and 0 <= j < len(pattern) such that either (pattern[i] = pattern[j] and W[i] != W[j]) or (pattern[i] != pattern[j] and W[i] = W[j]).",
+    "preconditions": "pattern and s are byte slices. 1 <= len(pattern) <= 300. Every byte of pattern is a lowercase English letter (byte value 97 through 122). 1 <= len(s) <= 3000. Every byte of s is a lowercase English letter or a space (byte value 32). s[0] is not a space and s[len(s)-1] is not a space. No two consecutive bytes of s are spaces; thus the words of s are separated by single spaces."
+  }
+]

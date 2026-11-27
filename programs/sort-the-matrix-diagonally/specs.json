@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DiagonalSort.spec_1",
+    "negation": "AegisSpec.DiagonalSort.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(mat) and n be the common row length. The function returns a result r such that len(r) = m, len(r[i]) = n for every i with 0 <= i < m, and for every cell (i, j) with 0 <= i < m and 0 <= j < n the following holds. Set d = j - i, i0 = max(0, -d), j0 = i0 + d (= max(0, d)), and L = min(m - i0, n - j0). Let D be the sequence D[t] = mat[i0 + t][j0 + t] for t = 0, ..., L - 1; these are exactly the values on the diagonal j' - i' = d, listed from top-left to bottom-right. Then r[i][j] equals the element at 0-indexed position (i - i0) of D sorted in non-decreasing order (equivalently, the (i - i0 + 1)-th smallest element of the multiset of D's values).",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DiagonalSort.spec_2",
+    "negation": "AegisSpec.DiagonalSort.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, r has the same dimensions as mat: len(r) = len(mat), and for every i with 0 <= i < len(mat), len(r[i]) = len(mat[i]). In particular every row of r has length n.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DiagonalSort.spec_3",
+    "negation": "AegisSpec.DiagonalSort.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input mat satisfying the preconditions, the function returns a result r; it does not overflow, panic, or fail.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DiagonalSort.spec_4",
+    "negation": "AegisSpec.DiagonalSort.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, for every i, j with 0 <= i < m, 0 <= j < n, i + 1 < m, and j + 1 < n, we have r[i][j] <= r[i+1][j+1]. That is, adjacent cells along every diagonal of r are non-decreasing from top-left to bottom-right.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DiagonalSort.spec_5",
+    "negation": "AegisSpec.DiagonalSort.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, for every integer d with -(m - 1) <= d <= n - 1, the multiset of values { r[i][j] : 0 <= i < m, 0 <= j < n, j - i = d } equals the multiset of values { mat[i][j] : 0 <= i < m, 0 <= j < n, j - i = d }.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DiagonalSort.spec_6",
+    "negation": "AegisSpec.DiagonalSort.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, for every cell (i, j) with 0 <= i < m and 0 <= j < n there exists a cell (i', j') with 0 <= i' < m, 0 <= j' < n such that j' - i' = j - i and mat[i'][j'] = r[i][j].",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DiagonalSort.spec_7",
+    "negation": "AegisSpec.DiagonalSort.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, every entry of r lies in the input range: for every i, j with 0 <= i < m and 0 <= j < n, 1 <= r[i][j] <= 100.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DiagonalSort.spec_8",
+    "negation": "AegisSpec.DiagonalSort.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r and len(mat) = 1 (so m = 1), it holds that r[0][j] = mat[0][j] for every j with 0 <= j < n; that is, r = mat.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DiagonalSort.spec_9",
+    "negation": "AegisSpec.DiagonalSort.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r and n = 1 (so every row of mat has length 1), it holds that r[i][0] = mat[i][0] for every i with 0 <= i < m; that is, r = mat.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DiagonalSort.spec_10",
+    "negation": "AegisSpec.DiagonalSort.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r and the input already has non-decreasing diagonals, i.e. for every i, j with 0 <= i < m, 0 <= j < n, i + 1 < m, and j + 1 < n we have mat[i][j] <= mat[i+1][j+1], it holds that r[i][j] = mat[i][j] for every cell (i, j) with 0 <= i < m and 0 <= j < n; that is, r = mat.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DiagonalSort.spec_11",
+    "negation": "AegisSpec.DiagonalSort.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, for every cell (i, j) with 0 <= i < m and 0 <= j < n such that i = 0 or j = 0, r[i][j] equals the minimum of the input values on the diagonal j' - i' = j - i, i.e. r[i][j] = min { mat[i'][j'] : 0 <= i' < m, 0 <= j' < n, j' - i' = j - i }.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DiagonalSort.spec_12",
+    "negation": "AegisSpec.DiagonalSort.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "With m = len(mat) and n the common row length, whenever the function returns a result r, for every cell (i, j) with 0 <= i < m and 0 <= j < n such that i = m - 1 or j = n - 1, r[i][j] equals the maximum of the input values on the diagonal j' - i' = j - i, i.e. r[i][j] = max { mat[i'][j'] : 0 <= i' < m, 0 <= j' < n, j' - i' = j - i }.",
+    "preconditions": "mat is a slice of vectors representing an m x n matrix: m = len(mat) with 1 <= m <= 100, and there is an integer n with 1 <= n <= 100 such that for every i with 0 <= i < m, len(mat[i]) = n. For every i, j with 0 <= i < m and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  }
+]

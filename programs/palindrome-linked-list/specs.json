@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPalindrome.spec_1",
+    "negation": "AegisSpec.IsPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let vals(head) = [a_0, ..., a_{n-1}] be the sequence of node values obtained by following the list from head, so n = len(head). Whenever is_palindrome(head) returns a result r : Bool, r = true if and only if for every index i with 0 <= i < n we have a_i = a_{n-1-i} (equivalently, the sequence vals(head) equals its own reverse).",
+    "preconditions": "head is a finite singly linked list. Let n = len(head). The input satisfies 1 <= n <= 100000, and every node value v is an i64 with 0 <= v <= 9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPalindrome.spec_2",
+    "negation": "AegisSpec.IsPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, is_palindrome(head) returns a result r : Bool; it does not fail (no arithmetic overflow, out-of-bounds access, panic, or error result).",
+    "preconditions": "head is a finite singly linked list. Let n = len(head). The input satisfies 1 <= n <= 100000, and every node value v is an i64 with 0 <= v <= 9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPalindrome.spec_3",
+    "negation": "AegisSpec.IsPalindrome.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let vals(head) = [a_0, ..., a_{n-1}] be the sequence of node values from head and n = len(head). Whenever is_palindrome(head) returns r = false, there exists an index i with 0 <= i < floor(n/2) such that a_i != a_{n-1-i}.",
+    "preconditions": "head is a finite singly linked list. Let n = len(head). The input satisfies 1 <= n <= 100000, and every node value v is an i64 with 0 <= v <= 9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPalindrome.spec_4",
+    "negation": "AegisSpec.IsPalindrome.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_palindrome(head1) returns r1 and is_palindrome(head2) returns r2, r1 = r2.",
+    "preconditions": "head1 and head2 are finite singly linked lists with the same odd length n = 2k+1 for some integer k with 0 <= k <= 49999 (so 1 <= n <= 100000). Every node value is an i64 with 0 <= v <= 9. For every index i with 0 <= i < n and i != k, the i-th value of head1 equals the i-th value of head2; the k-th values may differ."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPalindrome.spec_5",
+    "negation": "AegisSpec.IsPalindrome.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_palindrome(head) returns r and is_palindrome(head_rev) returns r_rev, r = r_rev.",
+    "preconditions": "head and head_rev are admissible finite singly linked lists of the same length n, where 1 <= n <= 100000, and every node value is an i64 with 0 <= value <= 9. For every index i with 0 <= i < n, the i-th value of head_rev equals the (n-1-i)-th value of head."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPalindrome.spec_6",
+    "negation": "AegisSpec.IsPalindrome.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_palindrome(head) returns r and is_palindrome(inner) returns r_inner, r = r_inner.",
+    "preconditions": "head is a finite singly linked list with n = len(head) and 3 <= n <= 100000. Every node value is an i64 with 0 <= v <= 9. Let vals(head) = [a_0, ..., a_{n-1}] and assume a_0 = a_{n-1}. Let inner be the list with value sequence [a_1, ..., a_{n-2}]; it is nonempty because n >= 3."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPalindrome.spec_7",
+    "negation": "AegisSpec.IsPalindrome.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_palindrome(head) returns r and is_palindrome(midless) returns r_midless, r = r_midless.",
+    "preconditions": "head is a finite singly linked list with n = len(head) = 2k+1 for some integer k with 1 <= k <= 49999 (so 3 <= n <= 100000). Every node value is an i64 with 0 <= v <= 9. Let vals(head) = [a_0, ..., a_{2k}]. Let midless be the list with value sequence [a_0, ..., a_{k-1}, a_{k+1}, ..., a_{2k}], of length 2k."
+  }
+]

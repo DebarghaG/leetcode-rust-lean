@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_1",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let Count(s) be the number of distinct byte triples (a,b,c) such that a=c, 97 <= a <= 122, 97 <= b <= 122, and there exist indices i,j,k with 0 <= i < j < k < len(s), s[i]=a, s[j]=b, s[k]=c. The function returns a result r, and r = Count(s). Equivalently, r is the cardinality of the set of length-three palindromic strings a b a that are a subsequence of s; each distinct string is counted once even if it has several embeddings.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_2",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every slice s satisfying the preconditions, the function returns a result r; it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_3",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 676.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_4",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= d*d, where d is the number of distinct byte values occurring in s, i.e., d = |{ s[i] | 0 <= i < len(s) }|.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_5",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = sum over a from 97 to 122 of C(a), where for each a, C(a) = 0 if a occurs fewer than two times in s, and otherwise C(a) = |{ b | 97 <= b <= 122 and there exists j with first(a) < j < last(a) and s[j]=b }|, with first(a) and last(a) the least and greatest indices where s has byte a.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_6",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exist indices i,j,k with 0 <= i < j < k < len(s) and s[i]=s[k].",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_7",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every pair of indices i,k with 0 <= i < k < len(s) and s[i]=s[k], we have k = i+1.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_8",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be any byte slice with len(t)=len(s) and t[i]=s[len(s)-1-i] for all i with 0 <= i < len(s). Whenever the function returns a result r on input s and a result r' on input t, we have r = r'.",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_9",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r_s on input s and a result r_t on input t, we have r_s <= r_t.",
+    "preconditions": "3 <= len(s) <= 100000, 3 <= len(t) <= 100000, every byte of s and t is in 97..122, and s is a subsequence of t (there exist indices j_0 < ... < j_{len(s)-1} with t[j_m]=s[m] for all m with 0 <= m < len(s))."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_10",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= E(s), where E(s) is the number of triples of indices (i,j,k) such that 0 <= i < j < k < len(s) and s[i]=s[k].",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPalindromicSubsequence.spec_11",
+    "negation": "AegisSpec.CountPalindromicSubsequence.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= m, where m is the number of byte values a with 97 <= a <= 122 for which there exist indices i,k with 0 <= i < k < len(s), s[i]=s[k]=a, and k >= i+2 (equivalently, the first and last occurrences of a in s differ by at least 2).",
+    "preconditions": "3 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

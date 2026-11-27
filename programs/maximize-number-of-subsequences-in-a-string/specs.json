@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_1",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(text), a = pattern[0], b = pattern[1]. Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Let occ(s,x,y) be the number of pairs (i,j) with 0 <= i < j < len(s), s[i] = x, and s[j] = y. The function returns a result r and r = occ(text,a,b) + max(cnt(text,a), cnt(text,b)).",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_2",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every text and pattern satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_3",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let n = len(text); then 0 <= r <= n*(n+1)/2.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_4",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let a = pattern[0], b = pattern[1], and let occ(s,x,y) be the number of pairs (i,j) with 0 <= i < j < len(s), s[i] = x, and s[j] = y. Then r >= occ(text,a,b).",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_5",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let a = pattern[0], b = pattern[1], and let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Then r >= max(cnt(text,a), cnt(text,b)).",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_6",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k with 0 <= k <= len(text) and every c in {pattern[0], pattern[1]}, let T be the length len(text)+1 string defined by T[i] = text[i] for 0 <= i < k, T[k] = c, and T[i] = text[i-1] for k < i <= len(text). Let occ(T,x,y) be the number of pairs (i,j) with 0 <= i < j < len(T), T[i] = x, and T[j] = y. Then occ(T,pattern[0],pattern[1]) <= r.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_7",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist an integer k with 0 <= k <= len(text) and a character c in {pattern[0], pattern[1]} such that, if T is the length len(text)+1 string defined by T[i] = text[i] for 0 <= i < k, T[k] = c, and T[i] = text[i-1] for k < i <= len(text), then the number of pairs (i,j) with 0 <= i < j < len(T), T[i] = pattern[0], and T[j] = pattern[1], is exactly r.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_8",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(text) be the string of length len(text) with rev(text)[i] = text[len(text)-1-i]. Let swapped(pattern) be the length-2 string with swapped(pattern)[0] = pattern[1] and swapped(pattern)[1] = pattern[0]. Then the value returned by maximum_subsequence_count(text,pattern) equals the value returned by maximum_subsequence_count(rev(text),swapped(pattern)), whenever both calls return results.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_9",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If pattern[0] != pattern[1], then whenever the function returns a result r, r <= floor(((len(text)+1)*(len(text)+1))/4).",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumSubsequenceCount.spec_10",
+    "negation": "AegisSpec.MaximumSubsequenceCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If pattern[0] = pattern[1] = x, then for every integer k with 0 <= k <= len(text), let T be the length len(text)+1 string defined by T[i] = text[i] for 0 <= i < k, T[k] = x, and T[i] = text[i-1] for k < i <= len(text). The number of pairs (i,j) with 0 <= i < j < len(T), T[i] = x, and T[j] = x, is exactly r, where r is the result returned by the function.",
+    "preconditions": "len(text) >= 1, len(text) <= 100000, len(pattern) = 2, and every byte of text and pattern is a lowercase English letter (97 <= byte <= 122)."
+  }
+]

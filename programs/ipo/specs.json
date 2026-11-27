@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_1",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, r equals the maximum final capital over all feasible plans, defined as follows. A plan is a finite sequence P = (p_0, ..., p_{m-1}) where m is an integer with 0 <= m <= k and p_0, ..., p_{m-1} are pairwise distinct integers with 0 <= p_j < n for all j. For a plan P set C_0 = w and C_{j+1} = C_j + profits[p_j] for 0 <= j < m; P is feasible iff C_j >= capital[p_j] for every j with 0 <= j < m; its final capital is C_m. Then r = max { C_m : P is a feasible plan }.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9. (These bounds imply the maximized capital is at most 2*10^9, which fits in the 32-bit signed range as the statement guarantees.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_2",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "find_maximized_capital(k, w, profits, capital) returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_3",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, we have r >= w.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_4",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, if L is the sum of the min(k, n) largest values among profits[0], ..., profits[n-1] (the sum of the min(k,n) largest elements of the multiset of profits, counting multiplicity), then r <= w + L.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_5",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, there exists a feasible plan P (as defined in the main specification) whose final capital equals r.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_6",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, for every i with 0 <= i < n and capital[i] <= w we have r >= w + profits[i].",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_7",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, we have r = w.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9; and for every i with 0 <= i < n, capital[i] > w."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_8",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r, if L is the sum of the min(k, n) largest values among profits[0], ..., profits[n-1], then r = w + L.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9; and for every i with 0 <= i < n, capital[i] <= w."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_9",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r: if there exists i with 0 <= i < n and capital[i] <= w, then r = w + max{ profits[i] : 0 <= i < n and capital[i] <= w }; otherwise r = w.",
+    "preconditions": "1 <= k <= 100000; 0 <= w <= 10^9; n := len(profits) = len(capital); 1 <= n <= 100000; for every i with 0 <= i < n: 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9; and k = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_10",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_maximized_capital(k, w1, profits, capital) returns a result r1 and find_maximized_capital(k, w2, profits, capital) returns a result r2, we have r1 <= r2.",
+    "preconditions": "k, profits, capital satisfy the constraints (1 <= k <= 100000, n = len(profits) = len(capital), 1 <= n <= 100000, 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9 for all i); and w1, w2 are integers with 0 <= w1 <= w2 <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_11",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_maximized_capital(k1, w, profits, capital) returns a result r1 and find_maximized_capital(k2, w, profits, capital) returns a result r2, we have r1 <= r2.",
+    "preconditions": "w, profits, capital satisfy the constraints (0 <= w <= 10^9, n = len(profits) = len(capital), 1 <= n <= 100000, 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9 for all i); and k1, k2 are integers with 1 <= k1 <= k2 <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_12",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r and find_maximized_capital(k, w, profits', capital') returns a result r', we have r = r'.",
+    "preconditions": "k, w, profits, capital satisfy the constraints (1 <= k <= 100000, 0 <= w <= 10^9, n = len(profits) = len(capital), 1 <= n <= 100000, 0 <= profits[i] <= 10000 and 0 <= capital[i] <= 10^9 for all i); and sigma is a permutation (bijection) of {0, ..., n-1}; define profits'[i] = profits[sigma(i)] and capital'[i] = capital[sigma(i)] for 0 <= i < n (both arrays still satisfy the constraints)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_13",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r and find_maximized_capital(k, w, profits', capital) returns a result r', we have r <= r'.",
+    "preconditions": "k, w, capital satisfy the constraints (1 <= k <= 100000, 0 <= w <= 10^9, n = len(capital), 1 <= n <= 100000, 0 <= capital[i] <= 10^9 for all i); and profits and profits' are arrays of length n with 0 <= profits[i] <= profits'[i] <= 10000 for every i."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindMaximizedCapital.spec_14",
+    "negation": "AegisSpec.FindMaximizedCapital.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_maximized_capital(k, w, profits, capital) returns a result r and find_maximized_capital(k, w, profits, capital') returns a result r', we have r >= r'.",
+    "preconditions": "k, w, profits satisfy the constraints (1 <= k <= 100000, 0 <= w <= 10^9, n = len(profits), 1 <= n <= 100000, 0 <= profits[i] <= 10000 for all i); and capital and capital' are arrays of length n with 0 <= capital[i] <= capital'[i] <= 10^9 for every i."
+  }
+]

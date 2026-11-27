@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetSum.spec_1",
+    "negation": "AegisSpec.GetSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that 0 <= r < 1000000007 and r is congruent modulo 1000000007 to S(nums), where S(nums) is the sum, over all choices of an integer k >= 1 and indices 0 <= i_0 < i_1 < ... < i_{k-1} < len(nums) such that either nums[i_j] = nums[i_{j-1}] + 1 for every j with 1 <= j < k, or nums[i_j] = nums[i_{j-1}] - 1 for every j with 1 <= j < k, of the value nums[i_0] + nums[i_1] + ... + nums[i_{k-1}]. For k = 1 the difference conditions are vacuous, so every singleton index choice is included.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetSum.spec_2",
+    "negation": "AegisSpec.GetSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every nums satisfying the preconditions; in particular it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetSum.spec_3",
+    "negation": "AegisSpec.GetSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetSum.spec_4",
+    "negation": "AegisSpec.GetSum.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 1000000007 to S(nums), where S(nums) is the total sum of values of all non-empty consecutive subsequences of nums counted by index choices as in spec_1.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetSum.spec_5",
+    "negation": "AegisSpec.GetSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i and j with 0 <= i < j < len(nums) we have nums[j] - nums[i] not equal to 1 and not equal to -1, then the function returns a result r and r is congruent modulo 1000000007 to nums[0] + nums[1] + ... + nums[len(nums)-1].",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetSum.spec_6",
+    "negation": "AegisSpec.GetSum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists an integer a such that nums[i] = a + i for every i with 0 <= i < len(nums), then the function returns a result r and r is congruent modulo 1000000007 to sum_{i=0}^{len(nums)-1} (a + i) * (i + 1) * (len(nums) - i).",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetSum.spec_7",
+    "negation": "AegisSpec.GetSum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists an integer a such that nums[i] = a - i for every i with 0 <= i < len(nums), then the function returns a result r and r is congruent modulo 1000000007 to sum_{i=0}^{len(nums)-1} (a - i) * (i + 1) * (len(nums) - i).",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetSum.spec_8",
+    "negation": "AegisSpec.GetSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length len(nums) with rev[i] = nums[len(nums)-1-i] for 0 <= i < len(nums). If r is the result returned by get_sum(nums) and r' is the result returned by get_sum(rev), then r = r'.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetSum.spec_9",
+    "negation": "AegisSpec.GetSum.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let S(nums) be the total sum of values of all non-empty consecutive subsequences counted by index choices as in spec_1. If S(nums) < 1000000007, then the function returns a result r and r = S(nums).",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetSum.spec_10",
+    "negation": "AegisSpec.GetSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = 0 if and only if S(nums) is divisible by 1000000007, where S(nums) is the total sum of values of all non-empty consecutive subsequences counted by index choices as in spec_1.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  }
+]

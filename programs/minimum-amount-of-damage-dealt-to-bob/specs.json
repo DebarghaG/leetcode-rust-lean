@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDamage.spec_1",
+    "negation": "AegisSpec.MinDamage.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_damage(power, damage, health) returns a result r, define t_i = ceil(health[i]/power) for 0<=i<n, i.e. the least positive integer k with k*power>=health[i]. For a permutation p=(p_0,...,p_{n-1}) of {0,...,n-1}, define T(p) = sum_{k=0}^{n-1} t_{p_k} * (sum_{j=k}^{n-1} damage[p_j]). Then r = min { T(p) | p is a permutation of {0,...,n-1} }.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDamage.spec_2",
+    "negation": "AegisSpec.MinDamage.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call min_damage(power, damage, health) returns a result (some Result.ok value); it does not fail with overflow, out-of-bounds, or panic.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDamage.spec_3",
+    "negation": "AegisSpec.MinDamage.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the call returns a result r, with t_i = ceil(health[i]/power), we have r >= sum_{i=0}^{n-1} damage[i] * t_i.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDamage.spec_4",
+    "negation": "AegisSpec.MinDamage.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the call returns a result r, let T = sum_{i=0}^{n-1} ceil(health[i]/power). Then r <= (sum_{i=0}^{n-1} damage[i]) * T.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDamage.spec_5",
+    "negation": "AegisSpec.MinDamage.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the call returns r, r = damage[0] * ceil(health[0]/power).",
+    "preconditions": "len(damage)=len(health)=n, n=1, 1<=power<=10^4, 1<=damage[0]<=10^4, and 1<=health[0]<=10^4."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDamage.spec_6",
+    "negation": "AegisSpec.MinDamage.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d_(0) >= d_(1) >= ... >= d_(n-1) be the values damage[0],...,damage[n-1] sorted in non-increasing order. Whenever the call returns r, r = sum_{j=0}^{n-1} (j+1) * d_(j).",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4, and for every i with 0<=i<n, health[i]<=power."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDamage.spec_7",
+    "negation": "AegisSpec.MinDamage.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let t_i = ceil(health[i]/power), and let t_(0) <= t_(1) <= ... <= t_(n-1) be these values sorted in non-decreasing order. Whenever the call returns r, r = D * sum_{j=0}^{n-1} t_(j) * (n-j).",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4, and there exists D with damage[i]=D for every i with 0<=i<n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDamage.spec_8",
+    "negation": "AegisSpec.MinDamage.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let t = ceil(h/power), and let d_(0) >= d_(1) >= ... >= d_(n-1) be the values damage[0],...,damage[n-1] sorted in non-increasing order. Whenever the call returns r, r = t * sum_{j=0}^{n-1} (j+1) * d_(j).",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4, and there exists h with health[i]=h for every i with 0<=i<n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDamage.spec_9",
+    "negation": "AegisSpec.MinDamage.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_damage(power, damage, health) returns r and min_damage(power, damage', health') returns r', we have r = r'.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4. Also let sigma be any permutation of {0,...,n-1}, and define damage'[i]=damage[sigma(i)] and health'[i]=health[sigma(i)] for 0<=i<n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDamage.spec_10",
+    "negation": "AegisSpec.MinDamage.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_damage(power, damage, health) returns r and min_damage(power, damage', health) returns r', we have r' = c * r.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4. Also let c be an integer with 1<=c and 1<=c*damage[i]<=10^4 for every i, and define damage'[i]=c*damage[i]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDamage.spec_11",
+    "negation": "AegisSpec.MinDamage.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_damage(power, damage, health) returns r and min_damage(power', damage, health') returns r', we have r' = r.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4. Also let c be an integer with 1<=c, c*power<=10^4, and 1<=c*health[i]<=10^4 for every i. Define power'=c*power and health'[i]=c*health[i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDamage.spec_12",
+    "negation": "AegisSpec.MinDamage.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_damage(power, damage, health) returns r, there exists a permutation p=(p_0,...,p_{n-1}) of {0,...,n-1} such that, with t_i=ceil(health[i]/power) and T(p)=sum_{k=0}^{n-1} t_{p_k}*(sum_{j=k}^{n-1} damage[p_j]), we have T(p)=r and, for all 0<=a<b<n, t_{p_a}*damage[p_b] <= t_{p_b}*damage[p_a].",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinDamage.spec_13",
+    "negation": "AegisSpec.MinDamage.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_damage(power, damage, health) returns r and min_damage(power, damage', health') returns r', we have r' > r.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<10^5, 1<=power<=10^4, for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4. Also let d,h be integers with 1<=d<=10^4 and 1<=h<=10^4, and define damage' = damage with d appended and health' = health with h appended."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinDamage.spec_14",
+    "negation": "AegisSpec.MinDamage.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever min_damage(power1, damage, health) returns r1 and min_damage(power2, damage, health) returns r2, we have r2 <= r1.",
+    "preconditions": "len(damage)=len(health)=n, 1<=n<=10^5, 1<=power1<=power2<=10^4, and for every i with 0<=i<n, 1<=damage[i]<=10^4 and 1<=health[i]<=10^4."
+  }
+]

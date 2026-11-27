@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LastStoneWeight.spec_1",
+    "negation": "AegisSpec.LastStoneWeight.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever last_stone_weight(stones) returns a result r, r is the terminal value of the following game. Start with the multiset S = {stones[0], ..., stones[len(stones)-1]}. While S has at least two elements, let y be a maximum element of S and let x be a maximum element of S after deleting one occurrence of y (so x <= y are the two largest elements, with ties allowed); delete one occurrence of x and one occurrence of y, and if y > x insert one occurrence of y - x, while if y = x insert nothing. When S has at most one element, r is the sole element if S is nonempty and r = 0 if S is empty. This terminal value is independent of which equal largest elements are chosen at a tie.",
+    "preconditions": "stones is a slice of 64-bit integers with 1 <= len(stones) <= 30 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LastStoneWeight.spec_2",
+    "negation": "AegisSpec.LastStoneWeight.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, last_stone_weight(stones) returns a result r; it does not fail, panic, access out of bounds, or perform an out-of-range 64-bit arithmetic operation. Every stone weight occurring during the game is a nonnegative integer at most 1000, so all subtractions y - x stay within the 64-bit range.",
+    "preconditions": "stones is a slice of 64-bit integers with 1 <= len(stones) <= 30 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LastStoneWeight.spec_3",
+    "negation": "AegisSpec.LastStoneWeight.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, 0 <= r <= max{stones[i] | 0 <= i < len(stones)}.",
+    "preconditions": "stones is a slice of 64-bit integers with 1 <= len(stones) <= 30 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LastStoneWeight.spec_4",
+    "negation": "AegisSpec.LastStoneWeight.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, r is congruent to the total sum sum_{i=0}^{len(stones)-1} stones[i] modulo 2.",
+    "preconditions": "stones is a slice of 64-bit integers with 1 <= len(stones) <= 30 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LastStoneWeight.spec_5",
+    "negation": "AegisSpec.LastStoneWeight.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = stones[0].",
+    "preconditions": "stones is a valid input (1 <= len(stones) <= 30 and 1 <= stones[i] <= 1000 for every i) and len(stones) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LastStoneWeight.spec_6",
+    "negation": "AegisSpec.LastStoneWeight.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = |stones[0] - stones[1]|.",
+    "preconditions": "stones is a valid input (1 <= len(stones) <= 30 and 1 <= stones[i] <= 1000 for every i) and len(stones) = 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LastStoneWeight.spec_7",
+    "negation": "AegisSpec.LastStoneWeight.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = w if n is odd, and r = 0 if n is even.",
+    "preconditions": "stones is a valid input with n = len(stones) >= 3, and there is a weight w with 1 <= w <= 1000 such that stones[i] = w for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LastStoneWeight.spec_8",
+    "negation": "AegisSpec.LastStoneWeight.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the two calls return results, last_stone_weight(stones) = last_stone_weight(stones').",
+    "preconditions": "stones and stones' are two valid inputs (each length between 1 and 30, each entry between 1 and 1000), and stones' is a permutation of stones, i.e. the two slices have the same length and the same multiset of weights."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LastStoneWeight.spec_9",
+    "negation": "AegisSpec.LastStoneWeight.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both calls return results, last_stone_weight(scaled) = c * last_stone_weight(stones).",
+    "preconditions": "stones is a valid input, c is a positive integer, and for every i with 0 <= i < len(stones), 1 <= c * stones[i] <= 1000; let scaled be the valid slice with scaled[i] = c * stones[i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LastStoneWeight.spec_10",
+    "negation": "AegisSpec.LastStoneWeight.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r = stones[m] - sum_{0 <= i < len(stones), i != m} stones[i].",
+    "preconditions": "stones is a valid input and there exists an index m with 0 <= m < len(stones) such that stones[m] > sum_{0 <= i < len(stones), i != m} stones[i]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LastStoneWeight.spec_11",
+    "negation": "AegisSpec.LastStoneWeight.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both calls return results, last_stone_weight(stones) = last_stone_weight(stones').",
+    "preconditions": "stones is a valid input with n = len(stones) >= 3, M = max{stones[i] | 0 <= i < n}, and at least two indices p < q with stones[p] = stones[q] = M; let stones' be the slice of length n - 2 obtained by deleting stones[p] and stones[q]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LastStoneWeight.spec_12",
+    "negation": "AegisSpec.LastStoneWeight.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r < max{stones[i] | 0 <= i < len(stones)}.",
+    "preconditions": "stones is a valid input with len(stones) >= 2, and not all entries of stones are equal, i.e. there exist i and j with stones[i] != stones[j]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LastStoneWeight.spec_13",
+    "negation": "AegisSpec.LastStoneWeight.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r = 0.",
+    "preconditions": "stones is a valid input and there exists an index m with 0 <= m < len(stones) such that stones[m] = sum_{0 <= i < len(stones), i != m} stones[i]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LastStoneWeight.spec_14",
+    "negation": "AegisSpec.LastStoneWeight.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, there exist signs e_i in {-1, +1} for i = 0, ..., len(stones)-1 such that r = |sum_{i=0}^{len(stones)-1} e_i * stones[i]|.",
+    "preconditions": "stones is a slice of 64-bit integers with 1 <= len(stones) <= 30 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPalindromes.spec_1",
+    "negation": "AegisSpec.CountPalindromes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = P(s) mod 1000000007, where P(s) is the number of index tuples (i0,i1,i2,i3,i4) such that 0 <= i0 < i1 < i2 < i3 < i4 < len(s), s[i0] = s[i4], and s[i1] = s[i3]. Different index tuples are counted separately even when they produce the same digit string, and 'mod 1000000007' denotes the unique integer in [0, 1000000007) congruent to P(s).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPalindromes.spec_2",
+    "negation": "AegisSpec.CountPalindromes.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r < 1000000007.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPalindromes.spec_3",
+    "negation": "AegisSpec.CountPalindromes.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; in particular it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPalindromes.spec_4",
+    "negation": "AegisSpec.CountPalindromes.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "1 <= len(s) <= 4, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPalindromes.spec_5",
+    "negation": "AegisSpec.CountPalindromes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if s[0] = s[4] and s[1] = s[3], while r = 0 otherwise.",
+    "preconditions": "len(s) = 5, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPalindromes.spec_6",
+    "negation": "AegisSpec.CountPalindromes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = C(n,5) mod 1000000007, where C(n,5) is the binomial coefficient and C(n,5) = 0 when n < 5.",
+    "preconditions": "Let n = len(s). We have 1 <= n <= 10000, and there is a decimal-digit byte c such that s[i] = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPalindromes.spec_7",
+    "negation": "AegisSpec.CountPalindromes.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s) and let rev(s) be the byte sequence of length n defined by rev(s)[i] = s[n-1-i] for 0 <= i < n. The function returns a result r on input s and a result r_rev on input rev(s), and r = r_rev.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPalindromes.spec_8",
+    "negation": "AegisSpec.CountPalindromes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r on input s and a result r' on input s', and r = r'.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57). Let D be the set of bytes occurring in s. Let f be a function from D to the set of decimal-digit bytes {48,...,57} such that f is injective on D. Define s' by s'[i] = f(s[i]) for 0 <= i < len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPalindromes.spec_9",
+    "negation": "AegisSpec.CountPalindromes.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= C(n,5), where n = len(s), C(n,5) is the binomial coefficient, and C(n,5) = 0 when n < 5.",
+    "preconditions": "len(s) is between 1 and 100 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPalindromes.spec_10",
+    "negation": "AegisSpec.CountPalindromes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices i0,i1,i2,i3,i4 such that 0 <= i0 < i1 < i2 < i3 < i4 < len(s), s[i0] = s[i4], and s[i1] = s[i3].",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPalindromes.spec_11",
+    "negation": "AegisSpec.CountPalindromes.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s) and let P(s) be the count defined in spec_1. The function returns a result r, and P(s) <= C(n,5) (where C(n,5) is the binomial coefficient, with C(n,5)=0 for n<5). Consequently P(s) <= C(10000,5) < 2^63 and r <= C(n,5).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPalindromes.spec_12",
+    "negation": "AegisSpec.CountPalindromes.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if P(s) is divisible by 1000000007, where P(s) is the count defined in spec_1.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is the ASCII code of a decimal digit (48 <= s[i] <= 57)."
+  }
+]

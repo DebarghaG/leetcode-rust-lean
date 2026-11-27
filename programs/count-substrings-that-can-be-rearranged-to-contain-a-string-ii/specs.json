@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_1",
+    "negation": "AegisSpec.ValidSubstringCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns Result.ok r, let v be the integer value represented by r. Then v equals the number of pairs (i,j) of natural numbers such that 0 <= i <= j < len(word1) and, for every byte b with 97 <= b <= 122, the number of indices k with i <= k <= j and word1[k] = b is at least the number of indices k with 0 <= k < len(word2) and word2[k] = b.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and for every index i with 0 <= i < len(word1), 97 <= word1[i] <= 122, and for every index i with 0 <= i < len(word2), 97 <= word2[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_2",
+    "negation": "AegisSpec.ValidSubstringCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word1 and word2 satisfying the preconditions, the function returns Result.ok r for some r : Std.I64; it does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and all bytes of word1 and word2 have codes between 97 and 122 inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_3",
+    "negation": "AegisSpec.ValidSubstringCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Result.ok r, let v be the integer value represented by r, n = len(word1), and m = len(word2). Let T = 0 if m > n, and T = (n - m + 1) * (n - m + 2) / 2 if m <= n. Then v <= T.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and all bytes of word1 and word2 have codes between 97 and 122 inclusive."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_4",
+    "negation": "AegisSpec.ValidSubstringCount.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Result.ok r, let v be the integer value represented by r. Then v = 1 if for every byte b with 97 <= b <= 122 the number of indices k with word1[k] = b equals the number of indices k with word2[k] = b; otherwise v = 0.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, all bytes of word1 and word2 have codes between 97 and 122 inclusive, and len(word1) = len(word2)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_5",
+    "negation": "AegisSpec.ValidSubstringCount.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists a byte b with 97 <= b <= 122 such that the number of indices k with word2[k] = b is greater than the number of indices k with word1[k] = b, then whenever the function returns Result.ok r, the integer value represented by r is 0.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and all bytes of word1 and word2 have codes between 97 and 122 inclusive."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_6",
+    "negation": "AegisSpec.ValidSubstringCount.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Result.ok r, the integer value represented by r is at least 1.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, all bytes of word1 and word2 have codes between 97 and 122 inclusive, and for every byte b with 97 <= b <= 122, the number of indices k with word1[k] = b is at least the number of indices k with word2[k] = b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_7",
+    "negation": "AegisSpec.ValidSubstringCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rA be the result of valid_substring_count word1 word2a and rB be the result of valid_substring_count word1 word2b. Whenever both rA and rB are Result.ok values, the integer value represented by rA is at least the integer value represented by rB.",
+    "preconditions": "word1, word2a, and word2b are slices of Std.U8; len(word1) is between 1 and 1000000; len(word2a) and len(word2b) are between 1 and 10000; all bytes of these slices have codes between 97 and 122 inclusive; and for every byte b with 97 <= b <= 122, the number of indices k with word2a[k] = b is at most the number of indices k with word2b[k] = b."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_8",
+    "negation": "AegisSpec.ValidSubstringCount.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If valid_substring_count word1 word2a returns Result.ok rA and valid_substring_count word1 word2b returns Result.ok rB, then the integer value represented by rA equals the integer value represented by rB.",
+    "preconditions": "word1, word2a, and word2b are slices of Std.U8; len(word1) is between 1 and 1000000; len(word2a) and len(word2b) are between 1 and 10000; all bytes of these slices have codes between 97 and 122 inclusive; and for every byte b with 97 <= b <= 122, the number of indices k with word2a[k] = b equals the number of indices k with word2b[k] = b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_9",
+    "negation": "AegisSpec.ValidSubstringCount.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Result.ok r, let v be the integer value represented by r, n = len(word1), and m = len(word2). Let W = 0 if m > n. If m <= n, let W be the number of indices i with 0 <= i <= n - m such that for every byte b with 97 <= b <= 122, the number of k with i <= k <= i + m - 1 and word1[k] = b equals the number of k with 0 <= k < len(word2) and word2[k] = b. Then v >= W.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and all bytes of word1 and word2 have codes between 97 and 122 inclusive."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidSubstringCount.spec_10",
+    "negation": "AegisSpec.ValidSubstringCount.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Result.ok r, let v be the integer value represented by r. Let A be the number of pairs (i,j) with 0 <= i <= j < len(word1) such that for every byte b with 97 <= b <= 122 for which the number of k with word2[k] = b is positive, there exists an index k with i <= k <= j and word1[k] = b. Then v <= A.",
+    "preconditions": "len(word1) >= 1, len(word1) <= 1000000, len(word2) >= 1, len(word2) <= 10000, and all bytes of word1 and word2 have codes between 97 and 122 inclusive."
+  }
+]

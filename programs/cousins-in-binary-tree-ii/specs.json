@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_1",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a node occurrence be identified by the finite sequence p of L/R moves from the root; let depth(p) be the number of moves in p, and for nonempty p let parent(p) be p with its last move removed. Two existing node occurrences at paths p and q are cousins iff depth(p) = depth(q), p != q, and parent(p) != parent(q) (the root has no parent and therefore no cousins). For each path p at which root has a Node, let C(p) be the sum of the original values of all node occurrences q in root that are cousins of p, with C(p) = 0 if there are none. The function returns a result r such that for every finite L/R path p, r has a Node at p if and only if root has a Node at p; and whenever root has a Node at p, the value stored at that node in r is C(p).",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_2",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and r has exactly the same tree shape as root: for every finite L/R path p, r has a Node at p if and only if root has a Node at p. Equivalently, Null and Node positions in r are identical to those in root.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_3",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail (no arithmetic overflow, no out-of-bounds access, and no panic).",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_4",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and the value stored at the root of r (the node at the empty path) is 0.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_5",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and every node of r at depth 1 (every existing left or right child of the root) has value 0.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_6",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and every node value in r is 0.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, every Node value v satisfies 1 <= v <= 10000, and root has no node at depth 2 (equivalently, every child of the root is either Null or a leaf)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_7",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and every node value in r is at least 0.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_8",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and every node value in r is at most the sum of the original values of all Node occurrences in root.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_9",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. For every path p such that root has both a left child and a right child at p (that is, root has Nodes at pL and pR), r has Nodes at pL and pR and their values are equal.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_10",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If replace_value_in_tree(root) returns r and replace_value_in_tree(root') returns r', then for every path p of depth d at which root has a Node, r and r' have Nodes at p and the values at p in r and r' are equal.",
+    "preconditions": "root and root' are finite binary trees with between 1 and 100000 Node occurrences, every Node value in each is between 1 and 10000, they have the same shape (for every L/R path p, root has a Node at p iff root' has a Node at p), and for some depth d >= 0, for every path p of depth d at which root has a Node, the original value at p in root equals the original value at p in root'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_11",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. For every path p at which root has a Node, the value at p in r is 0 if and only if p has no cousin in root, that is, if and only if there is no path q such that root has a Node at q, depth(q) = depth(p), and parent(q) != parent(p), with the root defined to have no cousins.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_12",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = Node(0, Null, Null).",
+    "preconditions": "root = Node(v, Null, Null) for some integer v with 1 <= v <= 10000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_13",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For root = Node(1, Node(2, Node(4, Null, Null), Node(5, Null, Null)), Node(3, Node(6, Null, Null), Node(7, Null, Null))), the function returns r = Node(0, Node(0, Node(13, Null, Null), Node(13, Null, Null)), Node(0, Node(9, Null, Null), Node(9, Null, Null))).",
+    "preconditions": "This is a concrete input satisfying the problem constraints."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ReplaceValueInTree.spec_14",
+    "negation": "AegisSpec.ReplaceValueInTree.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. For any two paths p and q at which root has Nodes, if p and q are cousins (depth(p) = depth(q), p != q, and parent(p) != parent(q)), then r has Nodes at p and q, the value at p in r is at least the original value at q in root, and the value at q in r is at least the original value at p in root.",
+    "preconditions": "root is a finite binary tree with between 1 and 100000 Node occurrences, and every Node value v satisfies 1 <= v <= 10000."
+  }
+]

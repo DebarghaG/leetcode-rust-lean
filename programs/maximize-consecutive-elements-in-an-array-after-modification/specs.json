@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_1",
+    "negation": "AegisSpec.MaxSelectedElements.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum cardinality of a nonempty set S of distinct indices from {0,...,len(nums)-1} for which there exist an integer a and a bijection f from S to {a, a+1, ..., a+|S|-1} such that f(i) = nums[i] or f(i) = nums[i]+1 for every i in S. In other words, after increasing each selected element by either 0 or 1, the selected values are exactly |S| distinct consecutive integers, and r is the largest possible number of selected elements.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_2",
+    "negation": "AegisSpec.MaxSelectedElements.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every nums satisfying the precondition; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_3",
+    "negation": "AegisSpec.MaxSelectedElements.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= len(nums).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_4",
+    "negation": "AegisSpec.MaxSelectedElements.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 1.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_5",
+    "negation": "AegisSpec.MaxSelectedElements.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 2, then the function returns r = 2 when |nums[0] - nums[1]| <= 2, and r = 1 otherwise.",
+    "preconditions": "nums is a slice of 64-bit integers with len(nums) = 2 and, for i = 0 and i = 1, 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_6",
+    "negation": "AegisSpec.MaxSelectedElements.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let lo = min(nums) and hi = max(nums) over all entries. If hi - lo <= 1, then the function returns r = min(len(nums), hi - lo + 2).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_7",
+    "negation": "AegisSpec.MaxSelectedElements.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let lo = min(nums) and hi = max(nums) over all entries. The function returns a result r and r <= hi - lo + 2.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_8",
+    "negation": "AegisSpec.MaxSelectedElements.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D be the number of distinct integer values appearing among nums[0],...,nums[len(nums)-1]. The function returns a result r and r <= 2*D.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_9",
+    "negation": "AegisSpec.MaxSelectedElements.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on nums and r' on nums', then r' = r.",
+    "preconditions": "nums and nums' are slices of 64-bit integers, each satisfying 1 <= len <= 100000 and all entries between 1 and 1000000 inclusive; nums' is a permutation of nums (same length and the same number of occurrences of every integer value)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_10",
+    "negation": "AegisSpec.MaxSelectedElements.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on nums and r' on nums', then r' >= r.",
+    "preconditions": "nums and nums' are slices of 64-bit integers, each satisfying 1 <= len <= 100000 and all entries between 1 and 1000000 inclusive; x is an integer with 1 <= x <= 1000000, and nums' is obtained from nums by inserting one extra occurrence of x at some position."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_11",
+    "negation": "AegisSpec.MaxSelectedElements.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r for which there exist r distinct indices i_1,...,i_r and an integer a such that, after choosing for each j one value v_j in {nums[i_j], nums[i_j]+1}, the set {v_1,...,v_r} is exactly {a, a+1, ..., a+r-1}.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_12",
+    "negation": "AegisSpec.MaxSelectedElements.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the entries of nums are pairwise distinct and, after sorting them increasingly, they form a consecutive sequence (that is, there exists an integer a such that the sorted entries are a, a+1, ..., a+len(nums)-1), then the function returns r = len(nums).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_13",
+    "negation": "AegisSpec.MaxSelectedElements.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= 2 if and only if there exist distinct indices i and j with 0 <= i < len(nums), 0 <= j < len(nums) such that |nums[i] - nums[j]| <= 2. Equivalently, r = 1 if and only if |nums[i] - nums[j]| > 2 for every pair of distinct indices i and j.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_14",
+    "negation": "AegisSpec.MaxSelectedElements.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If k is an integer with 1 <= k <= len(nums) and there exist k distinct integer values v_1 < ... < v_k, each appearing among the entries of nums, such that v_k - v_1 <= k, then the function returns a result r with r >= k.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxSelectedElements.spec_15",
+    "negation": "AegisSpec.MaxSelectedElements.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on nums and r' on nums', then r' <= r + 1.",
+    "preconditions": "nums and nums' are slices of 64-bit integers, each satisfying 1 <= len <= 100000 and all entries between 1 and 1000000 inclusive; x is an integer with 1 <= x <= 1000000, and nums' is obtained from nums by inserting one extra occurrence of x at some position."
+  }
+]

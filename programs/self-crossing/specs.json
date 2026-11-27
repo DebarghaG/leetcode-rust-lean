@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_1",
+    "negation": "AegisSpec.IsSelfCrossing.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P_0 = (0,0) and for k >= 0, P_{k+1} = P_k + distance[k] * v_k, where v_k = (0,1) if k mod 4 = 0, (-1,0) if k mod 4 = 1, (0,-1) if k mod 4 = 2, (1,0) if k mod 4 = 3. Let S_k be the closed line segment from P_k to P_{k+1} for 0 <= k < len(distance). The function returns a result r (i.e., it does not fail) and r = true if and only if there exist indices i and j with 0 <= i < j < len(distance) and j >= i+2 such that S_i and S_j intersect (i.e., share at least one point).",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_2",
+    "negation": "AegisSpec.IsSelfCrossing.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail).",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_3",
+    "negation": "AegisSpec.IsSelfCrossing.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P_0 = (0,0) and for k >= 0, P_{k+1} = P_k + distance[k] * v_k, where v_k = (0,1) if k mod 4 = 0, (-1,0) if k mod 4 = 1, (0,-1) if k mod 4 = 2, (1,0) if k mod 4 = 3. If there exist indices k and m with 0 <= k < m <= len(distance) such that P_k = P_m, then the function returns a result r with r = true.",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_4",
+    "negation": "AegisSpec.IsSelfCrossing.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let distance' be the slice with distance'[i] = c * distance[i] for all i. Then is_self_crossing(distance) = is_self_crossing(distance').",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance). Let c be a positive integer such that c * distance[i] <= 10^5 for all i with 0 <= i < len(distance)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_5",
+    "negation": "AegisSpec.IsSelfCrossing.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance). Additionally, for all i with 2 <= i < len(distance), distance[i] > distance[i-2]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_6",
+    "negation": "AegisSpec.IsSelfCrossing.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P_0 = (0,0) and for k >= 0, P_{k+1} = P_k + distance[k] * v_k, where v_k = (0,1) if k mod 4 = 0, (-1,0) if k mod 4 = 1, (0,-1) if k mod 4 = 2, (1,0) if k mod 4 = 3. Let S_k be the closed line segment from P_k to P_{k+1} for 0 <= k < len(distance). If the function returns a result r with r = true, then there exist indices i and j with 0 <= i < j < len(distance) such that 3 <= j - i <= 5 and S_i and S_j intersect.",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsSelfCrossing.spec_7",
+    "negation": "AegisSpec.IsSelfCrossing.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "distance is a slice of i64 with 1 <= len(distance) <= 10^5 and 1 <= distance[i] <= 10^5 for all i with 0 <= i < len(distance). There exists an index i with 0 <= i and i+3 < len(distance) such that distance[i+2] <= distance[i] and distance[i+3] >= distance[i+1]."
+  }
+]

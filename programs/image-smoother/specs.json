@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ImageSmoother.spec_1",
+    "negation": "AegisSpec.ImageSmoother.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever image_smoother(img) returns a result r, the following holds. len(r) = m; for every i with 0 <= i < m, len(r[i]) = n; and for every i,j with 0 <= i < m and 0 <= j < n, let N(i,j) = { (p,q) | 0 <= p < m, 0 <= q < n, |p-i| <= 1, |q-j| <= 1 }, let c = |N(i,j)| (the number of cells in N(i,j)), and let S = sum_{(p,q) in N(i,j)} img[p][q]. Then r[i][j] = floor(S / c), where S and c are nonnegative integers and floor is mathematical floor (equivalently, integer division of S by c).",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ImageSmoother.spec_2",
+    "negation": "AegisSpec.ImageSmoother.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every img satisfying the preconditions, image_smoother(img) returns a result r. In particular, it does not fail from arithmetic overflow, index out of bounds, or panic on these inputs.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ImageSmoother.spec_3",
+    "negation": "AegisSpec.ImageSmoother.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever image_smoother(img) returns a result r, len(r) = len(img) and for every i with 0 <= i < len(img), len(r[i]) = len(img[i]).",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ImageSmoother.spec_4",
+    "negation": "AegisSpec.ImageSmoother.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever image_smoother(img) returns a result r, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= r[i][j] <= 255.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ImageSmoother.spec_5",
+    "negation": "AegisSpec.ImageSmoother.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever image_smoother(img) returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, let N(i,j) = { (p,q) | 0 <= p < m, 0 <= q < n, |p-i| <= 1, |q-j| <= 1 }, let lo = min { img[p][q] | (p,q) in N(i,j) }, and let hi = max { img[p][q] | (p,q) in N(i,j) }. Then lo <= r[i][j] <= hi.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ImageSmoother.spec_6",
+    "negation": "AegisSpec.ImageSmoother.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever image_smoother(img) returns a result r, if there exists an integer v such that for every i,j with 0 <= i < m and 0 <= j < n we have img[i][j] = v, then for every i,j with 0 <= i < m and 0 <= j < n we have r[i][j] = v.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, for every i with 0 <= i < m we have len(img[i]) = n, and for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] <= 255."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ImageSmoother.spec_7",
+    "negation": "AegisSpec.ImageSmoother.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d be any integer such that for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= img[i][j] + d <= 255, and let img2 be the m x n matrix defined by img2[i][j] = img[i][j] + d. Whenever image_smoother(img) returns r and image_smoother(img2) returns r2, for every i,j with 0 <= i < m and 0 <= j < n we have r2[i][j] = r[i][j] + d.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, every row of img has length n, and every entry of img is in 0..255."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ImageSmoother.spec_8",
+    "negation": "AegisSpec.ImageSmoother.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If for every i,j with 0 <= i < m and 0 <= j < n we have img[i][j] <= img2[i][j], then whenever image_smoother(img) returns r and image_smoother(img2) returns r2, for every i,j with 0 <= i < m and 0 <= j < n we have r[i][j] <= r2[i][j].",
+    "preconditions": "Let img and img2 be two inputs. Let m = len(img) and n = len(img[0]) with 1 <= m <= 200 and 1 <= n <= 200. Assume every row of img and of img2 has length n, len(img2) = m, and every entry of both img and img2 is in 0..255."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ImageSmoother.spec_9",
+    "negation": "AegisSpec.ImageSmoother.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever image_smoother(img) returns a result r, for every i,j with 0 <= i < m and 0 <= j < m we have r[i][j] = r[j][i].",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, every row has length n, every entry is in 0..255, and additionally m = n and for every i,j with 0 <= i < m and 0 <= j < m we have img[i][j] = img[j][i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ImageSmoother.spec_10",
+    "negation": "AegisSpec.ImageSmoother.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever image_smoother(img) returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, let N(i,j) = { (p,q) | 0 <= p < m, 0 <= q < n, |p-i| <= 1, |q-j| <= 1 }, let c = |N(i,j)|, and let S = sum_{(p,q) in N(i,j)} img[p][q]. Then r[i][j] is the unique integer q such that q*c <= S < (q+1)*c.",
+    "preconditions": "Let m = len(img). Assume 1 <= m <= 200. Let n = len(img[0]) (well-defined since m >= 1). Assume 1 <= n <= 200, every row has length n, and every entry is in 0..255."
+  }
+]

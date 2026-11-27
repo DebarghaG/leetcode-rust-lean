@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinWastedSpace.spec_1",
+    "negation": "AegisSpec.MinWastedSpace.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For a supplier j < len(boxes), call j feasible if for every i < len(packages) there is k < len(boxes[j]) with packages[i] <= boxes[j][k]. For a feasible j, let Waste(j) be the minimum, over all functions a from {0,...,len(packages)-1} to {0,...,len(boxes[j])-1} satisfying packages[i] <= boxes[j][a(i)] for every i, of sum_{i=0}^{len(packages)-1} (boxes[j][a(i)] - packages[i]); the same box size may be reused any number of times. Whenever the function returns a result r, if no supplier is feasible then r = -1; otherwise, letting W = min{ Waste(j) | j < len(boxes) and j is feasible }, we have 0 <= r < M and r is congruent to W modulo M.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinWastedSpace.spec_2",
+    "negation": "AegisSpec.MinWastedSpace.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow for any input satisfying the preconditions.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinWastedSpace.spec_3",
+    "negation": "AegisSpec.MinWastedSpace.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 0 <= r < 1000000007.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinWastedSpace.spec_4",
+    "negation": "AegisSpec.MinWastedSpace.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if for every supplier j < len(boxes) there exists a package index i < len(packages) such that packages[i] > boxes[j][k] for all k < len(boxes[j]).",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinWastedSpace.spec_5",
+    "negation": "AegisSpec.MinWastedSpace.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r != -1, let W be the exact minimum total waste over all feasible suppliers, where a supplier is feasible if every package fits some box of that supplier, and waste for a supplier is minimized using only that supplier's box sizes with unlimited reuse. Then W = 0 if and only if there exists a supplier j < len(boxes) such that for every package i < len(packages) there is an index k < len(boxes[j]) with boxes[j][k] = packages[i]. In particular, if such a supplier exists then r = 0.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinWastedSpace.spec_6",
+    "negation": "AegisSpec.MinWastedSpace.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let p = packages[0]. If there is no pair (j,k) with j < len(boxes), k < len(boxes[j]), and boxes[j][k] >= p, then r = -1. Otherwise let B = min{ boxes[j][k] | j < len(boxes), k < len(boxes[j]), and boxes[j][k] >= p }. Then r = B - p.",
+    "preconditions": "len(packages) = 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinWastedSpace.spec_7",
+    "negation": "AegisSpec.MinWastedSpace.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (packages, boxes) and r' on (packages', boxes), where packages' is any permutation of the slice packages with len(packages') = len(packages), and (packages', boxes) also satisfies the preconditions, then r = r'.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinWastedSpace.spec_8",
+    "negation": "AegisSpec.MinWastedSpace.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (packages, boxes) and r' on (packages, boxes'), where boxes' is any permutation of the outer slice boxes with len(boxes') = len(boxes) and each row of boxes' is one of the rows of boxes, and (packages, boxes') also satisfies the preconditions, then r = r'.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinWastedSpace.spec_9",
+    "negation": "AegisSpec.MinWastedSpace.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (packages, boxes) and r' on (packages, boxes'), where for every j < len(boxes) the row boxes'[j] has the same length as boxes[j] and is a permutation of boxes[j], and (packages, boxes') also satisfies the preconditions, then r = r'.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinWastedSpace.spec_10",
+    "negation": "AegisSpec.MinWastedSpace.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists a supplier j0 < len(boxes) such that j0 is feasible, Waste(j0) = min{ Waste(j) | j < len(boxes) and j is feasible }, and r is congruent to Waste(j0) modulo 1000000007. Here feasible means every package fits some box of that supplier, and Waste(j) is the minimum total waste using only supplier j's box sizes with unlimited reuse.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinWastedSpace.spec_11",
+    "negation": "AegisSpec.MinWastedSpace.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, let W be the exact minimum total waste over all feasible suppliers, where feasible and waste are defined as in the main specification, and let B = max{ boxes[j][k] | j < len(boxes), k < len(boxes[j]) }. Then W <= sum_{i=0}^{len(packages)-1} (B - packages[i]).",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinWastedSpace.spec_12",
+    "negation": "AegisSpec.MinWastedSpace.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != -1, let W be the exact minimum total waste over all feasible suppliers. If W < 1000000007, then r = W.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinWastedSpace.spec_13",
+    "negation": "AegisSpec.MinWastedSpace.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let boxes' be any slice of vectors obtained from boxes by inserting one additional nonempty supplier row, so len(boxes') = len(boxes)+1 and the old rows appear in the same order with one new row somewhere, and suppose (packages, boxes') satisfies the preconditions. Whenever the function returns r on (packages, boxes) with r != -1 and returns r' on (packages, boxes'), let W and W' be the exact minimum total wastes for boxes and boxes' respectively. Then W' <= W.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinWastedSpace.spec_14",
+    "negation": "AegisSpec.MinWastedSpace.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every feasible supplier j < len(boxes), Waste(j) = sum_{i=0}^{len(packages)-1} (min{ boxes[j][k] | k < len(boxes[j]) and boxes[j][k] >= packages[i] } - packages[i]). Consequently, if some supplier is feasible, W = min{ sum_{i=0}^{len(packages)-1} (min{ boxes[j][k] | k < len(boxes[j]) and boxes[j][k] >= packages[i] } - packages[i]) | j < len(boxes) and j is feasible }, and r = W mod 1000000007. For a fixed supplier, the minimum is attained by assigning each package independently to the smallest box size of that supplier that is at least the package; unlimited supply makes the choices independent.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinWastedSpace.spec_15",
+    "negation": "AegisSpec.MinWastedSpace.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (packages, boxes) with r != -1 and returns r' on (packages, boxes'), let W and W' be the exact minimum total wastes for boxes and boxes' respectively, as in the main specification. Then W' <= W.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000; boxes' is obtained from boxes by choosing one supplier j0 < len(boxes) and inserting one additional value into boxes'[j0], with len(boxes') = len(boxes), boxes'[j] = boxes[j] for j != j0, all entries of each boxes'[j] distinct, and (packages, boxes') satisfying the same size and sum constraints."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinWastedSpace.spec_16",
+    "negation": "AegisSpec.MinWastedSpace.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r != -1, let W be the exact minimum total waste over all feasible suppliers, as in the main specification. Then r = 0 if and only if W is a multiple of 1000000007. In particular, a returned value 0 can arise either from W = 0 or from a positive exact waste W divisible by 1000000007.",
+    "preconditions": "len(packages) >= 1; len(boxes) >= 1; for every j < len(boxes), len(boxes[j]) >= 1; for every i < len(packages), 1 <= packages[i] <= 100000; for every j < len(boxes) and k < len(boxes[j]), 1 <= boxes[j][k] <= 100000; all entries of each boxes[j] are distinct; len(packages) <= 100000; len(boxes) <= 100000; for every j, len(boxes[j]) <= 100000; sum over j of len(boxes[j]) <= 100000."
+  }
+]

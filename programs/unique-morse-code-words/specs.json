@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_1",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the cardinality of the set { T(words[i]) | 0 <= i < len(words) }, where T(w) is the concatenation of the standard Morse codes of the letters of w (the 26-letter table: a='.-', b='-...', c='-.-.', d='-..', e='.', f='..-.', g='--.', h='....', i='..', j='.---', k='-.-', l='.-..', m='--', n='-.', o='---', p='.--.', q='--.-', r='.-.', s='...', t='-', u='..-', v='...-', w='.--', x='-..-', y='-.--', z='--..'). Equivalently, if M is the 26-element array ['.-','-...','-.-.','-..','.','..-.','--.','....','..','.---','-.-','.-..','--','-.','---','.--.','--.-','.-.','...','-','..-','...-','.--','-..-','-.--','--..'] indexed from 0 for 'a' to 25 for 'z', then T(w) = M[w[0]-97] concatenated with M[w[1]-97] concatenated ... with M[w[len(w)-1]-97].",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122 (the byte is an ASCII lowercase letter 'a'..'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_2",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_3",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(words).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_4",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if for every i and j with 0 <= i < len(words) and 0 <= j < len(words), T(words[i]) = T(words[j]), where T is the standard Morse transformation (a='.-', b='-...', c='-.-.', d='-..', e='.', f='..-.', g='--.', h='....', i='..', j='.---', k='-.-', l='.-..', m='--', n='-.', o='---', p='.--.', q='--.-', r='.-.', s='...', t='-', u='..-', v='...-', w='.--', x='-..-', y='-.--', z='--..').",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_5",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(words) if and only if for every i and j with 0 <= i < len(words), 0 <= j < len(words), and i != j, T(words[i]) != T(words[j]), where T is the standard Morse transformation (a='.-', b='-...', c='-.-.', d='-..', e='.', f='..-.', g='--.', h='....', i='..', j='.---', k='-.-', l='.-..', m='--', n='-.', o='---', p='.--.', q='--.-', r='.-.', s='...', t='-', u='..-', v='...-', w='.--', x='-..-', y='-.--', z='--..').",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_6",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every list words' satisfying the preconditions that is obtained from words by inserting one extra word w at any position (so len(words') = len(words) + 1 and deleting that inserted entry recovers words), if T(w) != T(words[i]) for every i with 0 <= i < len(words), where T is the standard Morse transformation (a='.-', b='-...', c='-.-.', d='-..', e='.', f='..-.', g='--.', h='....', i='..', j='.---', k='-.-', l='.-..', m='--', n='-.', o='---', p='.--.', q='--.-', r='.-.', s='...', t='-', u='..-', v='...-', w='.--', x='-..-', y='-.--', z='--..'), then whenever the function returns r on words and r' on words', r' = r + 1.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.UniqueMorseRepresentations.spec_7",
+    "negation": "AegisSpec.UniqueMorseRepresentations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of inputs words and words' both satisfying the preconditions, if { T(words[i]) | 0 <= i < len(words) } = { T(words'[j]) | 0 <= j < len(words') } as sets of byte strings, where T is the standard Morse transformation (a='.-', b='-...', c='-.-.', d='-..', e='.', f='..-.', g='--.', h='....', i='..', j='.---', k='-.-', l='.-..', m='--', n='-.', o='---', p='.--.', q='--.-', r='.-.', s='...', t='-', u='..-', v='...-', w='.--', x='-..-', y='-.--', z='--..'), then whenever the function returns r on words and r' on words', r = r'.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 12; for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), 97 <= words[i][j] <= 122."
+  }
+]

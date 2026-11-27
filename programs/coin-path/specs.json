@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheapestJump.spec_1",
+    "negation": "AegisSpec.CheapestJump.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(coins). A sequence p of integers is a valid path if: len(p) >= 1; p[0] = 1; p[len(p)-1] = n; for all j with 0 <= j < len(p), 1 <= p[j] <= n and coins[p[j]-1] != -1; and for all j with 0 <= j < len(p)-1, 1 <= p[j+1] - p[j] <= maxJump. The cost of a valid path p is sum_{j=0}^{len(p)-1} coins[p[j]-1]. Let P be the set of all valid paths. If P is empty, then the function returns a result r and len(r) = 0. If P is not empty, let c = min_{p in P} cost(p). Then the function returns a result r such that r is a valid path, cost(r) = c, and for every q in P with cost(q) = c, r is lexicographically smaller than or equal to q, where the lexicographic order on integer sequences is: r <= q iff either r = q, or there exists an index j with 0 <= j < min(len(r), len(q)) such that for all i < j, r[i] = q[i] and r[j] < q[j], or (len(r) < len(q) and for all i < len(r), r[i] = q[i]).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheapestJump.spec_2",
+    "negation": "AegisSpec.CheapestJump.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheapestJump.spec_3",
+    "negation": "AegisSpec.CheapestJump.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(coins). Let P be the set of valid paths as defined in spec_1. The function returns r such that len(r) = 0 if and only if P is empty.",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheapestJump.spec_4",
+    "negation": "AegisSpec.CheapestJump.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If the returned r is non-empty, then r[0] = 1 and r[len(r)-1] = n, where n = len(coins).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheapestJump.spec_5",
+    "negation": "AegisSpec.CheapestJump.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the returned r is non-empty, then for every j with 0 <= j < len(r)-1, r[j] < r[j+1].",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheapestJump.spec_6",
+    "negation": "AegisSpec.CheapestJump.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the returned r is non-empty, then for every j with 0 <= j < len(r)-1, 1 <= r[j+1] - r[j] <= maxJump.",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheapestJump.spec_7",
+    "negation": "AegisSpec.CheapestJump.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the returned r is non-empty, then for every j with 0 <= j < len(r), 1 <= r[j] <= n and coins[r[j]-1] != -1, where n = len(coins).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheapestJump.spec_8",
+    "negation": "AegisSpec.CheapestJump.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the returned r is non-empty, then for every valid path q (as defined in spec_1), cost(r) <= cost(q), where cost(p) = sum_{j=0}^{len(p)-1} coins[p[j]-1].",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheapestJump.spec_9",
+    "negation": "AegisSpec.CheapestJump.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the returned r is non-empty, then for every valid path q (as defined in spec_1) with cost(q) = cost(r), r is lexicographically smaller than or equal to q, where the lexicographic order on integer sequences is: r <= q iff either r = q, or there exists an index j with 0 <= j < min(len(r), len(q)) such that for all i < j, r[i] = q[i] and r[j] < q[j], or (len(r) < len(q) and for all i < len(r), r[i] = q[i]).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheapestJump.spec_10",
+    "negation": "AegisSpec.CheapestJump.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the returned r is non-empty, then 1 <= len(r) <= n, where n = len(coins).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheapestJump.spec_11",
+    "negation": "AegisSpec.CheapestJump.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(coins) = 1, then the function returns r = [1].",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CheapestJump.spec_12",
+    "negation": "AegisSpec.CheapestJump.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(coins) >= 1 and coins[len(coins)-1] = -1, then the function returns r with len(r) = 0.",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CheapestJump.spec_13",
+    "negation": "AegisSpec.CheapestJump.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If maxJump = 1, then: if there exists an index i with 0 <= i < len(coins) and coins[i] = -1, the function returns r with len(r) = 0; otherwise, the function returns r = [1, 2, ..., len(coins)] (the sequence of all integers from 1 to n).",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CheapestJump.spec_14",
+    "negation": "AegisSpec.CheapestJump.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If len(coins) >= 2 and maxJump >= len(coins)-1 and coins[len(coins)-1] != -1, then the returned r is non-empty and cost(r) = coins[0] + coins[len(coins)-1], where cost is as defined in spec_1.",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CheapestJump.spec_15",
+    "negation": "AegisSpec.CheapestJump.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the returned r is non-empty, then cost(r) >= coins[0] + (if len(coins) > 1 then coins[len(coins)-1] else 0), where cost is as defined in spec_1.",
+    "preconditions": "len(coins) >= 1, len(coins) <= 1000, for all i with 0 <= i < len(coins), -1 <= coins[i] <= 100, coins[0] != -1, 1 <= maxJump <= 100."
+  }
+]

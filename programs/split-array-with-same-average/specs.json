@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_1",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let T = nums[0] + ... + nums[n-1]. Whenever split_array_same_average(nums) returns a result r, we have r = true if and only if there exists a set of indices I such that: (a) I is a subset of {0,1,...,n-1}; (b) I is non-empty; (c) I is not the whole index set; and (d) (sum_{i in I} nums[i]) * n = |I| * T. If no such I exists, then r = false.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 30 and, for every i with 0 <= i < n, 0 <= nums[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_2",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such input, split_array_same_average(nums) returns a result r : Bool; it does not fail, panic, overflow, or index out of bounds.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 30 and, for every i with 0 <= i < n, 0 <= nums[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_3",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever split_array_same_average(nums) returns a result r, r = false.",
+    "preconditions": "n = len(nums) = 1 and 0 <= nums[0] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_4",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever split_array_same_average(nums) returns a result r, r = true if and only if nums[0] = nums[1].",
+    "preconditions": "n = len(nums) = 2 and 0 <= nums[0] <= 10000 and 0 <= nums[1] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_5",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever split_array_same_average(nums) returns a result r, r = true if and only if there exists an index i in {0,1,2} such that nums[i] * 3 = T.",
+    "preconditions": "n = len(nums) = 3 and 0 <= nums[i] <= 10000 for i = 0,1,2. Let T = nums[0] + nums[1] + nums[2]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_6",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever split_array_same_average(nums) returns a result r, r = true.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 2 <= n <= 30, 0 <= nums[i] <= 10000 for all i, and there exists an index j with 0 <= j < n such that nums[j] * n = T."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_7",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever split_array_same_average(nums) returns a result r with r = true, there exists a set of indices I such that: I is a subset of {0,...,n-1}, 1 <= |I|, 2*|I| <= n, and (sum_{i in I} nums[i]) * n = |I| * T.",
+    "preconditions": "Let n = len(nums) and T = sum_{i=0}^{n-1} nums[i]. Assume 2 <= n <= 30 and 0 <= nums[i] <= 10000 for all i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SplitArraySameAverage.spec_8",
+    "negation": "AegisSpec.SplitArraySameAverage.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever split_array_same_average(nums) returns r and split_array_same_average(nums') returns r', we have r = r'.",
+    "preconditions": "Let nums and nums' be two slices, each satisfying 1 <= len <= 30 and all entries in [0,10000], with len(nums) = len(nums') = n. Assume there is a bijection phi : {0,...,n-1} -> {0,...,n-1} such that nums'[i] = nums[phi(i)] for every i; thus nums' is a permutation of nums."
+  }
+]

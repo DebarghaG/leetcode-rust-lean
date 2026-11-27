@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum obtainable score with exactly k cards taken from the two ends. For each integer t with 0 <= t <= k define score(t) = (sum of cardPoints[i] for 0 <= i < t) + (sum of cardPoints[j] for n-k+t <= j < n), where an empty sum is 0. Then: (a) score(t) <= r for every t with 0 <= t <= k; and (b) there exists t0 with 0 <= t0 <= k such that r = score(t0).",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, overflow, or go out of bounds.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (sum of cardPoints[i] for 0 <= i < n).",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (sum of cardPoints[i] for n-k <= i < n).",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (sum of cardPoints[i] for 0 <= i < k).",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = n, then whenever the function returns a result r, r = (sum of cardPoints[i] for 0 <= i < n).",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and k = n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, then whenever the function returns a result r, r = max(cardPoints[0], cardPoints[n-1]), where max denotes the larger of the two values.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and k = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n >= 2 and k = n-1, then whenever the function returns a result r, r = (sum of cardPoints[i] for 0 <= i < n) - min(cardPoints[i] for 0 <= i < n), where min denotes the smallest card value.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 2 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and k = n-1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rev be the slice of length n with rev[i] = cardPoints[n-1-i] for every i with 0 <= i < n. Whenever max_score(cardPoints, k) returns r and max_score(rev, k) returns r', we have r = r'.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let total = (sum of cardPoints[i] for 0 <= i < n) and m = n-k. For each integer s with 0 <= s <= k define middle(s) = (sum of cardPoints[i] for s <= i < s+m), with an empty sum equal to 0. Whenever the function returns a result r, r = total - min(middle(s) for 0 <= s <= k), where min denotes the smallest value among these middle sums.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and 1 <= k <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScore.spec_11",
+    "negation": "AegisSpec.MaxScore.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any k1 with 1 <= k1 < n, whenever max_score(cardPoints, k1) returns r and max_score(cardPoints, k1+1) returns r', we have r <= r'.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; and let k1 be an integer with 1 <= k1 < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxScore.spec_12",
+    "negation": "AegisSpec.MaxScore.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let shifted be the slice of length n with shifted[i] = cardPoints[i] + c for every i with 0 <= i < n. Whenever max_score(cardPoints, k) returns r and max_score(shifted, k) returns r', we have r' = r + k*c.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; 1 <= k <= n; and c is an integer with 0 <= c such that 1 <= cardPoints[i]+c <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxScore.spec_13",
+    "negation": "AegisSpec.MaxScore.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let scaled be the slice of length n with scaled[i] = a*cardPoints[i] for every i with 0 <= i < n. Whenever max_score(cardPoints, k) returns r and max_score(scaled, k) returns r', we have r' = a*r.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; 1 <= k <= n; and a is an integer with 1 <= a such that 1 <= a*cardPoints[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxScore.spec_14",
+    "negation": "AegisSpec.MaxScore.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_score(cardPoints, k) returns r and max_score(other, k) returns r', we have r <= r'.",
+    "preconditions": "Let n = len(cardPoints). n is an integer with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= cardPoints[i] <= 10000; 1 <= k <= n; and let other be a slice of length n with 1 <= other[i] <= 10000 and cardPoints[i] <= other[i] for every i with 0 <= i < n."
+  }
+]

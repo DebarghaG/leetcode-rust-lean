@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemainingMethods.spec_1",
+    "negation": "AegisSpec.RemainingMethods.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S be the set of all v with 0 <= v < n such that v is reachable from k in the directed graph whose directed edges are the ordered pairs [a,b] occurring as invocations[i] for some i; reachability includes the zero-length path. Let blocked be true iff there exists i with 0 <= i < len(invocations), invocations[i] = [a,b], b in S, and a not in S. For every input satisfying the preconditions, the function returns a result r and: (1) if blocked is false, then for every v with 0 <= v < n, v occurs in r exactly once iff v is not in S, and v does not occur in r iff v is in S; (2) if blocked is true, then for every v with 0 <= v < n, v occurs in r exactly once. In both cases every element of r is one of the integers v with 0 <= v < n, and no integer occurs twice in r. Here v occurs in r exactly once means there is exactly one index i with 0 <= i < len(r) and r[i] = v.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemainingMethods.spec_2",
+    "negation": "AegisSpec.RemainingMethods.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemainingMethods.spec_3",
+    "negation": "AegisSpec.RemainingMethods.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every element r[i] with 0 <= i < len(r) satisfies 0 <= r[i] < n.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemainingMethods.spec_4",
+    "negation": "AegisSpec.RemainingMethods.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S be the set of all v with 0 <= v < n reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path. Let blocked be true iff some edge [a,b] in invocations has b in S and a not in S. Let c be the number of v with 0 <= v < n and v in S. Whenever the function returns a result r, len(r) = n if blocked is true, and len(r) = n - c if blocked is false.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemainingMethods.spec_5",
+    "negation": "AegisSpec.RemainingMethods.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, v occurs in r exactly once iff v != k, and no other integer occurs in r.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; len(invocations) = 0; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemainingMethods.spec_6",
+    "negation": "AegisSpec.RemainingMethods.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 0.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs; every v with 0 <= v < n is reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemainingMethods.spec_7",
+    "negation": "AegisSpec.RemainingMethods.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S be the set of all v with 0 <= v < n reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path. Whenever the function returns a result r, for every v with 0 <= v < n, if v is not in S then v occurs in r at least once.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemainingMethods.spec_8",
+    "negation": "AegisSpec.RemainingMethods.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S be the set of all v with 0 <= v < n reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path. Let blocked be true iff some edge [a,b] in invocations has b in S and a not in S. Whenever the function returns a result r, for every v with 0 <= v < n, if v is in S then v occurs in r at least once iff blocked is true.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemainingMethods.spec_9",
+    "negation": "AegisSpec.RemainingMethods.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S be the set of all v with 0 <= v < n reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path. Let blocked be true iff some edge [a,b] in invocations has b in S and a not in S. Whenever the function returns a result r, the following are equivalent: (a) no v with 0 <= v < n and v in S occurs in r; (b) blocked is false.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemainingMethods.spec_10",
+    "negation": "AegisSpec.RemainingMethods.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S be the set of all v with 0 <= v < n reachable from k in the directed graph whose edges are the ordered pairs occurring in invocations, with reachability including the zero-length path. Let blocked be true iff some edge [a,b] in invocations has b in S and a not in S. Whenever the function returns a result r and blocked is true, r is a permutation of all method numbers 0 through n - 1; equivalently, len(r) = n, every element of r satisfies 0 <= r[i] < n, and for every v with 0 <= v < n, v occurs in r exactly once.",
+    "preconditions": "1 <= n <= 100000; 0 <= k <= n - 1; invocations is a slice of vectors with len(invocations) <= 200000; for every i with 0 <= i < len(invocations), len(invocations[i]) = 2, and if invocations[i] = [a_i, b_i] then 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; for every i and j with 0 <= i < j < len(invocations), invocations[i] != invocations[j] as ordered pairs."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemainingMethods.spec_11",
+    "negation": "AegisSpec.RemainingMethods.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let E(invocations) be the set of ordered pairs [a,b] that occur as invocations[i] for some i. For any two valid inputs (n,k,invocations) and (n,k,invocations'), if E(invocations) = E(invocations'), and the function returns r for the first input and r' for the second input, then for every v with 0 <= v < n, v occurs in r iff v occurs in r'.",
+    "preconditions": "Both (n,k,invocations) and (n,k,invocations') are valid inputs: 1 <= n <= 100000; 0 <= k <= n - 1; each invocation list has length at most 200000; every inner vector has length 2 with entries [a,b] satisfying 0 <= a < n, 0 <= b < n, and a != b; and no ordered pair is repeated within either list."
+  }
+]

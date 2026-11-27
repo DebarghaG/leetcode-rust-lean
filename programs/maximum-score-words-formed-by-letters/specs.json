@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScoreWords.spec_1",
+    "negation": "AegisSpec.MaxScoreWords.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. For a byte c with 97 <= c <= 122, let L(c) be the number of indices i with 0 <= i < len(letters) such that letters[i][0] = c. For a word index i, let W_i(c) be the number of indices j with 0 <= j < len(words[i]) such that words[i][j] = c, and let wordScore(i) = sum over j = 0 to len(words[i]) - 1 of score[words[i][j] - 97]. Call a subset S of {0, 1, ..., len(words) - 1} admissible if for every c with 97 <= c <= 122, the sum over i in S of W_i(c) is at most L(c). Then r is the maximum of sum over i in S of wordScore(i) over all admissible subsets S, including the empty subset.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScoreWords.spec_2",
+    "negation": "AegisSpec.MaxScoreWords.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, under the preconditions it does not fail, overflow, access an out-of-bounds index, or panic.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScoreWords.spec_3",
+    "negation": "AegisSpec.MaxScoreWords.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScoreWords.spec_4",
+    "negation": "AegisSpec.MaxScoreWords.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum over c = 97 to 122 of L(c) * score[c - 97], where L(c) is the number of indices i with 0 <= i < len(letters) such that letters[i][0] = c.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScoreWords.spec_5",
+    "negation": "AegisSpec.MaxScoreWords.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum over i = 0 to len(words) - 1 of wordScore(i), where wordScore(i) = sum over j = 0 to len(words[i]) - 1 of score[words[i][j] - 97].",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScoreWords.spec_6",
+    "negation": "AegisSpec.MaxScoreWords.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(words), if for every c with 97 <= c <= 122 the number of positions j with 0 <= j < len(words[i]) and words[i][j] = c is at most the number of indices k with 0 <= k < len(letters) and letters[k][0] = c, then wordScore(i) <= r, where wordScore(i) = sum over j = 0 to len(words[i]) - 1 of score[words[i][j] - 97].",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScoreWords.spec_7",
+    "negation": "AegisSpec.MaxScoreWords.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every i with 0 <= i < len(words) there exists a byte c with 97 <= c <= 122 such that the number of positions j with 0 <= j < len(words[i]) and words[i][j] = c is greater than the number of indices k with 0 <= k < len(letters) and letters[k][0] = c, then r = 0.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScoreWords.spec_8",
+    "negation": "AegisSpec.MaxScoreWords.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if for every c with 97 <= c <= 122 the sum over i = 0 to len(words) - 1 of the number of positions j with 0 <= j < len(words[i]) and words[i][j] = c is at most the number of indices k with 0 <= k < len(letters) and letters[k][0] = c, then r = sum over i = 0 to len(words) - 1 of wordScore(i), where wordScore(i) = sum over j = 0 to len(words[i]) - 1 of score[words[i][j] - 97].",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScoreWords.spec_9",
+    "negation": "AegisSpec.MaxScoreWords.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(words[i]) = 1 for every i with 0 <= i < len(words), then r = sum over c = 97 to 122 of min(L(c), M(c)) * score[c - 97], where L(c) is the number of indices k with 0 <= k < len(letters) and letters[k][0] = c, and M(c) is the number of indices i with 0 <= i < len(words) and words[i][0] = c.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScoreWords.spec_10",
+    "negation": "AegisSpec.MaxScoreWords.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(words) = 1, then r = wordScore(0) if for every c with 97 <= c <= 122 the number of positions j with 0 <= j < len(words[0]) and words[0][j] = c is at most the number of indices k with 0 <= k < len(letters) and letters[k][0] = c; otherwise r = 0. Here wordScore(0) = sum over j = 0 to len(words[0]) - 1 of score[words[0][j] - 97].",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScoreWords.spec_11",
+    "negation": "AegisSpec.MaxScoreWords.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(letters) = 1 and letters[0][0] = c0, then r = score[c0 - 97] if there exists an index i with 0 <= i < len(words) such that len(words[i]) = 1 and words[i][0] = c0, and otherwise r = 0.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxScoreWords.spec_12",
+    "negation": "AegisSpec.MaxScoreWords.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, for every permutation pi of {0, 1, ..., len(words) - 1} and every permutation sigma of {0, 1, ..., len(letters) - 1}, the function called on the permuted input (words[pi(0)], ..., words[pi(len(words)-1)]) and (letters[sigma(0)], ..., letters[sigma(len(letters)-1)]) with the same score also returns r.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxScoreWords.spec_13",
+    "negation": "AegisSpec.MaxScoreWords.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if score[k] = 0 for every k with 0 <= k < 26, then r = 0.",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxScoreWords.spec_14",
+    "negation": "AegisSpec.MaxScoreWords.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an admissible subset S of {0, 1, ..., len(words) - 1} such that sum over i in S of wordScore(i) = r. Here a subset S is admissible if for every c with 97 <= c <= 122, the sum over i in S of the number of positions j with 0 <= j < len(words[i]) and words[i][j] = c is at most the number of indices k with 0 <= k < len(letters) and letters[k][0] = c, and wordScore(i) = sum over j = 0 to len(words[i]) - 1 of score[words[i][j] - 97].",
+    "preconditions": "len(words) is between 1 and 14 inclusive; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 15 and every byte words[i][j] with 0 <= j < len(words[i]) satisfies 97 <= words[i][j] <= 122; len(letters) is between 1 and 100 inclusive; for every i with 0 <= i < len(letters), len(letters[i]) = 1 and 97 <= letters[i][0] <= 122; len(score) = 26; for every k with 0 <= k < 26, 0 <= score[k] <= 10."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindInteger.spec_1",
+    "negation": "AegisSpec.FindInteger.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define an integer n to be admissible if k < n <= 2147483647, n mod k = 0, and every digit in the standard base-10 representation of n (written without leading zeros) is equal to digit1 or digit2. Let A be the set of all admissible integers. The function returns Result.ok r for some i64 r, and r satisfies: if A is nonempty, then r = min A; if A is empty, then r = -1.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9, with k, digit1, and digit2 represented as 64-bit signed integers."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindInteger.spec_2",
+    "negation": "AegisSpec.FindInteger.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, find_integer k digit1 digit2 returns a value Result.ok r for some i64 r; it does not fail due to overflow, panic, or out-of-bounds access.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindInteger.spec_3",
+    "negation": "AegisSpec.FindInteger.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, it holds that k < r <= 2147483647.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindInteger.spec_4",
+    "negation": "AegisSpec.FindInteger.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, there exists an integer q such that 2 <= q <= floor(2147483647 / k) and r = k * q.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindInteger.spec_5",
+    "negation": "AegisSpec.FindInteger.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, every digit in the standard base-10 representation of r, written without leading zeros, is equal to digit1 or equal to digit2.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindInteger.spec_6",
+    "negation": "AegisSpec.FindInteger.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, for every integer n with k < n < r, n is not admissible, where admissible means n <= 2147483647, n mod k = 0, and every decimal digit of n is digit1 or digit2.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindInteger.spec_7",
+    "negation": "AegisSpec.FindInteger.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r = -1, there is no integer n such that k < n <= 2147483647, n mod k = 0, and every digit in the standard decimal representation of n is equal to digit1 or digit2.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindInteger.spec_8",
+    "negation": "AegisSpec.FindInteger.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r, if there exists an integer n such that k < n <= 2147483647, n mod k = 0, and every decimal digit of n is digit1 or digit2, then r != -1.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindInteger.spec_9",
+    "negation": "AegisSpec.FindInteger.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "find_integer k digit1 digit2 returns Result.ok (-1).",
+    "preconditions": "1 <= k <= 1000 and digit1 = 0 and digit2 = 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindInteger.spec_10",
+    "negation": "AegisSpec.FindInteger.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every valid input, find_integer k digit1 digit2 and find_integer k digit2 digit1 return equal Result values.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, and 0 <= digit2 <= 9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindInteger.spec_11",
+    "negation": "AegisSpec.FindInteger.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, the most significant decimal digit of r is d.",
+    "preconditions": "1 <= k <= 1000, 0 <= digit1 <= 9, 0 <= digit2 <= 9, and exactly one of digit1 and digit2 is nonzero; let d denote that nonzero digit."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindInteger.spec_12",
+    "negation": "AegisSpec.FindInteger.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever find_integer k digit1 digit2 returns Result.ok r with r != -1, every digit in the standard decimal representation of r equals d; equivalently, r is a repdigit consisting of one or more copies of d.",
+    "preconditions": "1 <= k <= 1000 and digit1 = digit2 = d with 1 <= d <= 9."
+  }
+]

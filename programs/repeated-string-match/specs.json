@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_1",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Definitions: for k >= 0, let a^k be the byte string of length k*len(a) whose t-th byte is a[t mod len(a)] for every 0 <= t < k*len(a); say that b occurs in a byte string s when there exists j with 0 <= j and j + len(b) <= len(s) such that s[j+i] = b[i] for every i with 0 <= i < len(b). Let K = { k | k >= 0 and b occurs in a^k }. Whenever the function returns a result r: if K is nonempty, then r equals the least element of K (in particular r >= 1); if K is empty, then r = -1.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, and every byte of a and b lies in 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_2",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it never fails (no panic, no arithmetic overflow, no out-of-bounds access).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_3",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Using a^k and 'b occurs' as in spec_1: whenever the function returns a result r with r >= 1, b occurs in a^r. Equivalently, there exists j with 0 <= j and j + len(b) <= r*len(a) such that a[(j+i) mod len(a)] = b[i] for every i with 0 <= i < len(b).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_4",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Using a^k and 'b occurs' as in spec_1: whenever the function returns a result r with r >= 1, for every k with 0 <= k < r, b does not occur in a^k.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_5",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Using a^k and 'b occurs' as in spec_1: whenever the function returns a result r, r = -1 if and only if for every k >= 0, b does not occur in a^k.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_6",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r: either r = -1, or r <= floor(len(b)/len(a)) + 2, where the division is integer division on the natural lengths.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_7",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r: r = -1 or r >= 1; in particular the value 0 is never returned.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_8",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Using a^k as in spec_1: whenever the function returns a result r with r >= 1, len(b) <= r * len(a).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_9",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r: r = 1 if and only if b occurs as a contiguous substring of a, i.e. there exists j with 0 <= j and j + len(b) <= len(a) such that a[j+i] = b[i] for every i with 0 <= i < len(b).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_10",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Using a^1 and a^2 as in S1 (a^1 = a, a^2 = a concatenated with a): whenever the function returns a result r, if b does not occur in a^1 but b does occur in a^2, then r = 2.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_11",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r: if len(a) = 1, writing c = a[0], then r = len(b) if b[i] = c for every i with 0 <= i < len(b), and r = -1 otherwise.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_12",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r: if len(b) = len(a), then (i) if b[i] = a[i] for every 0 <= i < len(a), then r = 1; (ii) if b is not equal to a but b occurs in a^2, then r = 2; (iii) if b does not occur in a^2, then r = -1.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_13",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Using a^k and 'b occurs' as in spec_1: whenever the function returns a result r with r >= 1, b occurs in a^(floor(len(b)/len(a)) + 2).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.RepeatedStringMatch.spec_14",
+    "negation": "AegisSpec.RepeatedStringMatch.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Using a^k and 'b occurs' as in spec_1: whenever the function returns a result r with r >= 1, for every k with k >= r, b occurs in a^k.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 10000, len(b) <= 10000, every byte of a and b lies in 97..122."
+  }
+]

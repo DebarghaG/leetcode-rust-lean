@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DayOfYear.spec_1",
+    "negation": "AegisSpec.DayOfYear.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = D + sum_{k=1}^{M-1} Dim(Y,k).",
+    "preconditions": "`date` has len(date)=10; date[4]=45 and date[7]=45 (ASCII '-'); for every i with 0<=i<10 and i not in {4,7}, 48<=date[i]<=57 (ASCII digits). Define Y=1000*(date[0]-48)+100*(date[1]-48)+10*(date[2]-48)+(date[3]-48), M=10*(date[5]-48)+(date[6]-48), D=10*(date[8]-48)+(date[9]-48). Assume 1900<=Y<=2019, 1<=M<=12, and 1<=D<=Dim(Y,M), where Leap(y) iff y mod 4 = 0 and (y mod 100 != 0 or y mod 400 = 0), and Dim(y,k)=31 for k in {1,3,5,7,8,10,12}, 30 for k in {4,6,9,11}, and 28+(if Leap(y) then 1 else 0) for k=2."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DayOfYear.spec_2",
+    "negation": "AegisSpec.DayOfYear.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such input, the function returns a result r; it does not fail, panic, access out of bounds, or overflow.",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity: len(date)=10; date[4]=date[7]=45; all other bytes are in 48..57; with Y,M,D and Leap,Dim as defined in spec_1, 1900<=Y<=2019, 1<=M<=12, and 1<=D<=Dim(Y,M)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DayOfYear.spec_3",
+    "negation": "AegisSpec.DayOfYear.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= 366.",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity: len(date)=10; date[4]=date[7]=45; all other bytes are in 48..57; with Y,M,D and Leap,Dim as defined in spec_1, 1900<=Y<=2019, 1<=M<=12, and 1<=D<=Dim(Y,M)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DayOfYear.spec_4",
+    "negation": "AegisSpec.DayOfYear.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r=1.",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity, and its decoded M,D satisfy M=1 and D=1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DayOfYear.spec_5",
+    "negation": "AegisSpec.DayOfYear.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, where r = (if Leap(Y) then 366 else 365).",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity, and its decoded M,D satisfy M=12 and D=31."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DayOfYear.spec_6",
+    "negation": "AegisSpec.DayOfYear.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, where r = (if Leap(Y) then 61 else 60).",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity, and its decoded M,D satisfy M=3 and D=1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DayOfYear.spec_7",
+    "negation": "AegisSpec.DayOfYear.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r=59.",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity, and its decoded Y,M,D satisfy Y=1900, M=2, D=28."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DayOfYear.spec_8",
+    "negation": "AegisSpec.DayOfYear.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r=61.",
+    "preconditions": "`date` satisfies the S1 input shape and calendar validity, and its decoded Y,M,D satisfy Y=2000, M=3, D=1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DayOfYear.spec_9",
+    "negation": "AegisSpec.DayOfYear.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "When the function returns r_a on date_a and r_b on date_b, r_b - r_a = (if Leap(Y(date_b)) then 1 else 0) - (if Leap(Y(date_a)) then 1 else 0).",
+    "preconditions": "`date_a` and `date_b` each satisfy the S1 input shape and calendar validity; M(date_a)=M(date_b), D(date_a)=D(date_b), and M(date_a)>=3, using the Y,M,D,Leap,Dim definitions from spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DayOfYear.spec_10",
+    "negation": "AegisSpec.DayOfYear.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "When the function returns r_a on date_a and r_b on date_b, r_a = r_b.",
+    "preconditions": "`date_a` and `date_b` each satisfy the S1 input shape and calendar validity; M(date_a)=M(date_b), D(date_a)=D(date_b), and M(date_a)<=2, using the Y,M,D,Leap,Dim definitions from spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DayOfYear.spec_11",
+    "negation": "AegisSpec.DayOfYear.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "When the function returns r_a on date_a and r_b on date_b, r_b = r_a + 1.",
+    "preconditions": "`date_a` and `date_b` each satisfy the S1 input shape and calendar validity; Y(date_a)=Y(date_b), M(date_a)=M(date_b), D(date_a)<Dim(Y(date_a),M(date_a)), and D(date_b)=D(date_a)+1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DayOfYear.spec_12",
+    "negation": "AegisSpec.DayOfYear.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "When the function returns r_a on date_a and r_b on date_b, r_b = 1 and r_a = (if Leap(Y(date_a)) then 366 else 365).",
+    "preconditions": "`date_a` and `date_b` each satisfy the S1 input shape and calendar validity; Y(date_b)=Y(date_a)+1, M(date_a)=12, D(date_a)=31, M(date_b)=1, and D(date_b)=1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.DayOfYear.spec_13",
+    "negation": "AegisSpec.DayOfYear.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "When the function returns r_a on date_a and r_b on date_b, r_b - r_a = Dim(Y(date_a),2).",
+    "preconditions": "`date_a` and `date_b` each satisfy the S1 input shape and calendar validity; Y(date_a)=Y(date_b), M(date_a)=2, D(date_a)=1, M(date_b)=3, and D(date_b)=1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.DayOfYear.spec_14",
+    "negation": "AegisSpec.DayOfYear.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r=9.",
+    "preconditions": "`date` is exactly the byte array [50,48,49,57,45,48,49,45,48,57], the ASCII text '2019-01-09'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.DayOfYear.spec_15",
+    "negation": "AegisSpec.DayOfYear.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r=232.",
+    "preconditions": "`date` is exactly the byte array [50,48,49,56,45,48,56,45,50,48], the ASCII text '2018-08-20'."
+  }
+]

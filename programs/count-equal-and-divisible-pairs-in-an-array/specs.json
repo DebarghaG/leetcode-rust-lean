@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPairs.spec_1",
+    "negation": "AegisSpec.CountPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r is exactly the number of pairs (i, j) of indices such that 0 <= i < j < len(nums), nums[i] = nums[j], and k divides i*j (that is, there exists an integer q with i*j = q*k). Each such pair is counted once, and no other pair is counted.",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPairs.spec_2",
+    "negation": "AegisSpec.CountPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (it does not fail, overflow, panic, or access an index out of bounds).",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPairs.spec_3",
+    "negation": "AegisSpec.CountPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, 0 <= r <= len(nums) * (len(nums) - 1) / 2.",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPairs.spec_4",
+    "negation": "AegisSpec.CountPairs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r <= E, where E is the number of pairs (i, j) with 0 <= i < j < len(nums) and nums[i] = nums[j].",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPairs.spec_5",
+    "negation": "AegisSpec.CountPairs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r = 0.",
+    "preconditions": "nums is a slice of i64 with len(nums) = 1; nums[0] satisfies 1 <= nums[0] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPairs.spec_6",
+    "negation": "AegisSpec.CountPairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r = 1 if nums[0] = nums[1], and r = 0 otherwise. In particular, the value of k does not affect the result for length two.",
+    "preconditions": "nums is a slice of i64 with len(nums) = 2; for i in {0,1}, 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPairs.spec_7",
+    "negation": "AegisSpec.CountPairs.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r equals the number of pairs (i, j) with 0 <= i < j < len(nums) and nums[i] = nums[j].",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPairs.spec_8",
+    "negation": "AegisSpec.CountPairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r >= C0, where C0 is the number of indices j with 1 <= j < len(nums) and nums[j] = nums[0].",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPairs.spec_9",
+    "negation": "AegisSpec.CountPairs.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r = 0 if and only if there is no pair (i, j) with 0 <= i < j < len(nums), nums[i] = nums[j], and k divides i*j.",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPairs.spec_10",
+    "negation": "AegisSpec.CountPairs.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_pairs(a, k) returns a result r_a and count_pairs(b, k) returns a result r_b, r_a = r_b.",
+    "preconditions": "Let a and b be slices of i64 and let k be an i64. Suppose 1 <= len(a) = len(b) <= 100, all elements of a and b lie in [1,100], 1 <= k <= 100, and for every i, j with 0 <= i < len(a) and 0 <= j < len(a), a[i] = a[j] if and only if b[i] = b[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPairs.spec_11",
+    "negation": "AegisSpec.CountPairs.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r equals the number of indices j with 1 <= j < len(nums) and nums[j] = nums[0].",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100; and k > (len(nums)-1)*(len(nums)-1)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPairs.spec_12",
+    "negation": "AegisSpec.CountPairs.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_pairs(nums, k1) returns a result r1 and count_pairs(nums, k2) returns a result r2, r1 >= r2.",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k1 and k2 are i64 values with 1 <= k1 <= 100, 1 <= k2 <= 100, and k1 divides k2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountPairs.spec_13",
+    "negation": "AegisSpec.CountPairs.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r = sum over j with 1 <= j < len(nums) of the cardinality of { i : 0 <= i < j, nums[i] = nums[j], k divides i*j }. That is, each index j contributes exactly the number of earlier equal-valued indices i whose product i*j is divisible by k.",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountPairs.spec_14",
+    "negation": "AegisSpec.CountPairs.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_pairs(nums, k) returns a result r and count_pairs(nums ++ [v], k) returns a result r', then r' = r + the cardinality of { i : 0 <= i < len(nums), nums[i] = v, k divides i*len(nums) } (the appending of one element can only add the pairs formed with the new last index len(nums)).",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 99; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; v is an i64 with 1 <= v <= 100; k is an i64 with 1 <= k <= 100."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountPairs.spec_15",
+    "negation": "AegisSpec.CountPairs.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_pairs(nums, k) returns a result r, r equals the number of pairs (i, j) of indices with 0 <= i < j < len(nums) such that k divides i*j (all values being equal, the equality test imposes no further restriction).",
+    "preconditions": "nums is a slice of i64 with 1 <= len(nums) <= 100; there is an i64 v with 1 <= v <= 100 such that nums[i] = v for every i with 0 <= i < len(nums); k is an i64 with 1 <= k <= 100."
+  }
+]

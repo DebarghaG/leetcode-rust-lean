@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindBestValue.spec_1",
+    "negation": "AegisSpec.FindBestValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(arr) and define M(v) = sum_{i=0}^{n-1} min(arr[i], v) for an integer v, where min is the ordinary integer minimum. The function returns a result r (an integer) such that: (a) r >= 0; (b) for every integer v with 0 <= v, |M(r) - target| <= |M(v) - target|; (c) for every integer v with 0 <= v and |M(v) - target| = |M(r) - target|, r <= v.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindBestValue.spec_2",
+    "negation": "AegisSpec.FindBestValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail on any input satisfying the preconditions (no panic, no out-of-bounds access, and no arithmetic overflow).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindBestValue.spec_3",
+    "negation": "AegisSpec.FindBestValue.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let maxarr = max_{0 <= i < len(arr)} arr[i]. The returned value r satisfies 0 <= r <= min(target, maxarr).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindBestValue.spec_4",
+    "negation": "AegisSpec.FindBestValue.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose there is an integer c such that arr[i] = c for every i with 0 <= i < len(arr) (so 1 <= c <= 100000). Let n = len(arr), q = floor(target / n) (integer division), and rem = target - q*n. If target >= n*c then r = c; if target < n*c then r = q when 2*rem <= n, and r = q + 1 when 2*rem > n.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindBestValue.spec_5",
+    "negation": "AegisSpec.FindBestValue.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If target <= len(arr), then r = 0 when 2*target <= len(arr), and r = 1 when 2*target > len(arr).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindBestValue.spec_6",
+    "negation": "AegisSpec.FindBestValue.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let total = sum_{i=0}^{len(arr)-1} arr[i] and maxarr = max_{0 <= i < len(arr)} arr[i]. If total <= target, then r = maxarr.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindBestValue.spec_7",
+    "negation": "AegisSpec.FindBestValue.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let maxarr = max_{0 <= i < len(arr)} arr[i] and M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. If r < maxarr, then M(r + 1) > target.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindBestValue.spec_8",
+    "negation": "AegisSpec.FindBestValue.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. If r > 0, then M(r - 1) < target.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindBestValue.spec_9",
+    "negation": "AegisSpec.FindBestValue.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let maxarr = max_{0 <= i < len(arr)} arr[i] and M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. If there exists an integer v with 0 <= v <= maxarr and M(v) = target, then M(r) = target, and for every integer v with 0 <= v <= maxarr and v != r it holds that M(v) != target.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindBestValue.spec_10",
+    "negation": "AegisSpec.FindBestValue.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice arr2 with len(arr2) = len(arr) for which there exists a permutation pi of {0, 1, ..., len(arr)-1} such that arr2[i] = arr[pi(i)] for every i with 0 <= i < len(arr), the value returned by find_best_value on (arr2, target) equals the value returned by find_best_value on (arr, target).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindBestValue.spec_11",
+    "negation": "AegisSpec.FindBestValue.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let maxarr = max_{0 <= i < len(arr)} arr[i] and M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. Let v0 be the largest integer v with 0 <= v <= maxarr and M(v) <= target (it exists because M(0) = 0 <= target). Then either (v0 = maxarr and r = v0), or (v0 < maxarr and (r = v0 or r = v0 + 1)).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindBestValue.spec_12",
+    "negation": "AegisSpec.FindBestValue.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v and let total = sum_{i=0}^{len(arr)-1} arr[i]. If target <= total, then 2 * |M(r) - target| <= len(arr).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindBestValue.spec_13",
+    "negation": "AegisSpec.FindBestValue.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. If M(r) >= target, then for every integer v with 0 <= v < r, M(v) < target; equivalently, r is the smallest integer v with 0 <= v and M(v) >= target.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindBestValue.spec_14",
+    "negation": "AegisSpec.FindBestValue.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v) for an integer v. If M(r) > target, then target - M(r - 1) > M(r) - target.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.FindBestValue.spec_15",
+    "negation": "AegisSpec.FindBestValue.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned value. Then r = 0 if and only if 2 * target <= len(arr).",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.FindBestValue.spec_16",
+    "negation": "AegisSpec.FindBestValue.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let maxarr = max_{0 <= i < len(arr)} arr[i], M(v) = sum_{i=0}^{len(arr)-1} min(arr[i], v), and let v0 be the largest integer v with 0 <= v <= maxarr and M(v) <= target. Then v0 exists. If v0 = maxarr, r = v0. If v0 < maxarr, put a = target - M(v0) and b = M(v0+1) - target; then a >= 0, b > 0, and r = v0 when a <= b, while r = v0+1 when a > b.",
+    "preconditions": "1 <= len(arr) <= 10000 and, for every i with 0 <= i < len(arr), 1 <= arr[i] <= 100000, and 1 <= target <= 100000."
+  }
+]

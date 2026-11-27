@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_1",
+    "negation": "AegisSpec.SumSubarrayMins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Define S(arr) = sum over all pairs (l, r) with 0 <= l <= r < n of min{ arr[k] | l <= k <= r }; the inner minimum is over a nonempty contiguous segment. Whenever sum_subarray_mins arr returns a result r, r = S(arr) mod M, i.e. r is the unique integer with 0 <= r < M such that S(arr) - r is divisible by M.",
+    "preconditions": "arr is a slice of 64-bit integers with length n, where 1 <= n <= 30000, and 1 <= arr[i] <= 30000 for every 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_2",
+    "negation": "AegisSpec.SumSubarrayMins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, sum_subarray_mins arr returns a result r; it does not fail (no arithmetic overflow, indexing error, or panic).",
+    "preconditions": "arr is a slice of 64-bit integers with length n, where 1 <= n <= 30000, and 1 <= arr[i] <= 30000 for every 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_3",
+    "negation": "AegisSpec.SumSubarrayMins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_subarray_mins arr returns r, 0 <= r < 1000000007.",
+    "preconditions": "arr is a slice of 64-bit integers with length n, where 1 <= n <= 30000, and 1 <= arr[i] <= 30000 for every 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_4",
+    "negation": "AegisSpec.SumSubarrayMins.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_subarray_mins arr returns r, r = (c * n * (n + 1) / 2) mod 1000000007, where n(n+1)/2 is the exact number of nonempty contiguous subarrays.",
+    "preconditions": "n = len(arr), 1 <= n <= 30000, and there is an integer c with 1 <= c <= 30000 such that arr[i] = c for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_5",
+    "negation": "AegisSpec.SumSubarrayMins.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r, r = (sum_{i=0}^{n-1} arr[i] * (n - i)) mod 1000000007.",
+    "preconditions": "n = len(arr), 1 <= n <= 30000, 1 <= arr[i] <= 30000 for every i, and arr[0] < arr[1] < ... < arr[n-1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_6",
+    "negation": "AegisSpec.SumSubarrayMins.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r, r = (sum_{i=0}^{n-1} arr[i] * (i + 1)) mod 1000000007.",
+    "preconditions": "n = len(arr), 1 <= n <= 30000, 1 <= arr[i] <= 30000 for every i, and arr[0] > arr[1] > ... > arr[n-1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_7",
+    "negation": "AegisSpec.SumSubarrayMins.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_subarray_mins arr returns r and sum_subarray_mins rev returns r_rev, r = r_rev.",
+    "preconditions": "n = len(arr), 1 <= n <= 30000, 1 <= arr[i] <= 30000 for every i. Let rev be the slice of length n with rev[i] = arr[n - 1 - i] for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_8",
+    "negation": "AegisSpec.SumSubarrayMins.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r and sum_subarray_mins arr2 returns r2, r2 is congruent to r + c * (n * (n + 1) / 2) modulo 1000000007.",
+    "preconditions": "arr and arr2 are slices of the same length n, with 1 <= n <= 30000 and all their entries in [1, 30000]. There is an integer c such that arr2[i] = arr[i] + c for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_9",
+    "negation": "AegisSpec.SumSubarrayMins.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r and sum_subarray_mins arr2 returns r2, r2 is congruent to c * r modulo 1000000007.",
+    "preconditions": "arr and arr2 are slices of the same length n, with 1 <= n <= 30000 and all their entries in [1, 30000]. There is an integer c with c >= 1 such that arr2[i] = c * arr[i] for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_10",
+    "negation": "AegisSpec.SumSubarrayMins.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r and sum_subarray_mins arr2 returns r2, r2 is congruent to r + c * (n + 1) modulo 1000000007.",
+    "preconditions": "arr has length n with 1 <= n <= 29999 (so arr2 has length n+1 <= 30000), arr2 has length n+1, all entries of arr and arr2 are in [1, 30000], arr2[i] = arr[i] for 0 <= i < n, and arr2[n] = c where 1 <= c <= 30000 and c <= arr[i] for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumSubarrayMins.spec_11",
+    "negation": "AegisSpec.SumSubarrayMins.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subarray_mins arr returns r and sum_subarray_mins arr2 returns r2, r2 is congruent to r + c + sum_{l=0}^{n-1} sufmin(l) modulo 1000000007.",
+    "preconditions": "arr has length n with 1 <= n <= 29999 (so arr2 has length n+1 <= 30000), arr2 has length n+1, all entries of arr and arr2 are in [1, 30000], arr2[i] = arr[i] for 0 <= i < n, and arr2[n] = c where 1 <= c <= 30000 and c >= arr[i] for every 0 <= i < n. For 0 <= l < n let sufmin(l) = min{ arr[k] | l <= k < n }."
+  }
+]

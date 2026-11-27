@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDeletions.spec_1",
+    "negation": "AegisSpec.MinimumDeletions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cnt(c), for a lowercase letter c, be the number of indices i with 0 <= i < len(word) and word[i] = c. Call a function g from the 26 lowercase letters to the non-negative integers admissible when (a) g(c) <= cnt(c) for every lowercase letter c, and (b) |g(c) - g(d)| <= k for all lowercase letters c, d with g(c) >= 1 and g(d) >= 1. The function returns a result r, and r = len(word) - M, where M = max { (sum over the 26 lowercase letters c of g(c)) : g is admissible } (this maximum exists, because the identically zero function is admissible).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDeletions.spec_2",
+    "negation": "AegisSpec.MinimumDeletions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r: it does not fail (no arithmetic overflow, no out-of-bounds access, no panic).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDeletions.spec_3",
+    "negation": "AegisSpec.MinimumDeletions.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For an integer t >= 1 and an integer x >= 0 put keep_t(x) = x when t <= x <= t + k, keep_t(x) = t + k when x > t + k, and keep_t(x) = 0 when x < t; let cnt(c) be the number of occurrences of the lowercase letter c in word and let maxcnt = max { cnt(c) : c a lowercase letter }. Whenever the function returns a result r, there exists an integer t with 1 <= t <= maxcnt such that (sum over the 26 lowercase letters c of keep_t(cnt(c))) = len(word) - r. Equivalently: deleting every occurrence of each letter c with cnt(c) < t, and deleting exactly cnt(c) - (t + k) occurrences of each letter c with cnt(c) > t + k, deletes precisely r characters and leaves a string in which every occurring letter has between t and t + k occurrences.",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDeletions.spec_4",
+    "negation": "AegisSpec.MinimumDeletions.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let cnt(c) be the number of occurrences of the lowercase letter c in word, and call a function g from the 26 lowercase letters to the non-negative integers admissible when g(c) <= cnt(c) for every lowercase letter c and |g(c) - g(d)| <= k for all c, d with g(c) >= 1 and g(d) >= 1. Whenever the function returns a result r, every admissible g satisfies (sum over the 26 lowercase letters c of g(c)) <= len(word) - r.",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDeletions.spec_5",
+    "negation": "AegisSpec.MinimumDeletions.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let cnt(c) be the number of occurrences of the lowercase letter c in word. Whenever the function returns a result r, we have r = 0 if and only if |cnt(c) - cnt(d)| <= k for all lowercase letters c, d with cnt(c) >= 1 and cnt(d) >= 1 (that is, word itself is already k-special).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDeletions.spec_6",
+    "negation": "AegisSpec.MinimumDeletions.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let 0 <= k1 <= k2 <= 100000 and let word satisfy the preconditions. Whenever the function returns r1 on the inputs (word, k1) and r2 on the inputs (word, k2), we have r1 >= r2.",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k1 <= k2 <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDeletions.spec_7",
+    "negation": "AegisSpec.MinimumDeletions.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For a byte array w and a byte b let counts(w, b) be the number of indices i with 0 <= i < len(w) and w[i] = b. Whenever both calls return, for every byte array word' satisfying the preconditions (with the same k) such that for every integer v >= 0 the number of bytes b with counts(word', b) = v equals the number of bytes b with counts(word, b) = v, we have minimum_deletions(word', k) = minimum_deletions(word, k).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000. The same conditions hold for word' below."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDeletions.spec_8",
+    "negation": "AegisSpec.MinimumDeletions.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let cnt(c) be the number of occurrences of the lowercase letter c in word. Whenever the function returns a result r, there exists a function g from the 26 lowercase letters to the non-negative integers such that g(c) <= cnt(c) for every c, |g(c) - g(d)| <= k whenever g(c) >= 1 and g(d) >= 1, (sum over the 26 lowercase letters c of g(c)) = len(word) - r, and g is monotone with respect to the letter counts: for all lowercase letters c, d, cnt(c) <= cnt(d) implies g(c) <= g(d).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDeletions.spec_9",
+    "negation": "AegisSpec.MinimumDeletions.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For an integer t >= 1 and an integer x >= 0 put keep_t(x) = x when t <= x <= t + k, keep_t(x) = t + k when x > t + k, and keep_t(x) = 0 when x < t; let cnt(c) be the number of occurrences of the lowercase letter c in word. Whenever the function returns a result r, for every integer t >= 1 we have r <= len(word) - (sum over the 26 lowercase letters c of keep_t(cnt(c))).",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDeletions.spec_10",
+    "negation": "AegisSpec.MinimumDeletions.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r: there is a subsequence s of word with len(s) = len(word) - r such that all frequencies of letters occurring in s differ by at most k (i.e. |freq_s(c) - freq_s(d)| <= k for all letters c, d occurring in s, where freq_s(x) is the number of occurrences of x in s), and every subsequence s' of word with len(s') > len(word) - r is not of this kind. In other words, len(word) - r is the maximum length of a k-special subsequence of word.",
+    "preconditions": "len(word) >= 1 and len(word) <= 100000; every byte of word is a lowercase English letter, i.e. 97 <= word[i] <= 122 for every i with 0 <= i < len(word); 0 <= k <= 100000."
+  }
+]

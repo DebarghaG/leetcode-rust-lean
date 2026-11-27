@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_1",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and, interpreting r as a mathematical integer, r equals the number of integers i such that 0 <= i < n - m and for every k with 0 <= k < m: pattern[k] = 1 implies nums[i+k+1] > nums[i+k]; pattern[k] = 0 implies nums[i+k+1] = nums[i+k]; and pattern[k] = -1 implies nums[i+k+1] < nums[i+k].",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_2",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, interpreting r as a mathematical integer, 0 <= r <= n - m.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_3",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define an array c of length n-1 by c[t] = 1 if nums[t+1] > nums[t], c[t] = 0 if nums[t+1] = nums[t], and c[t] = -1 if nums[t+1] < nums[t]. Whenever the function returns a result r, interpreting r as a mathematical integer, r equals the number of integers i such that 0 <= i < n - m and pattern[k] = c[i+k] for every k with 0 <= k < m.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_4",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, interpreting r as a mathematical integer, r > 0 if and only if there exists an integer i with 0 <= i < n - m such that for every k with 0 <= k < m, the required comparison holds: nums[i+k+1] > nums[i+k] when pattern[k] = 1, nums[i+k+1] = nums[i+k] when pattern[k] = 0, and nums[i+k+1] < nums[i+k] when pattern[k] = -1.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_5",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, interpreting r as a mathematical integer, r = 0 if and only if for every integer i with 0 <= i < n - m there exists an integer k with 0 <= k < m such that the comparison between nums[i+k+1] and nums[i+k] is not the one required by pattern[k]; explicitly, at least one of the following holds: pattern[k] = 1 and nums[i+k+1] <= nums[i+k], or pattern[k] = 0 and nums[i+k+1] != nums[i+k], or pattern[k] = -1 and nums[i+k+1] >= nums[i+k].",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_6",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_6_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_7",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (nums, pattern) and returns r' on (nums', pattern), interpreting both as mathematical integers, r = r'.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}. Let c be an integer and let nums' be the array with nums'[j] = nums[j] + c for every j with 0 <= j < n. Assume nums' also satisfies 2 <= len(nums') <= 10^6 and every nums'[j] is in [1, 10^9]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountMatchingSubarrays.spec_8",
+    "negation": "AegisSpec.CountMatchingSubarrays.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let revnums be the array of length n with revnums[j] = nums[n-1-j] for 0 <= j < n, and let revpattern be the array of length m with revpattern[k] = -pattern[m-1-k] for 0 <= k < m. Whenever the function returns r on (nums, pattern) and returns r' on (revnums, revpattern), interpreting both as mathematical integers, r = r'.",
+    "preconditions": "Let n = len(nums) and m = len(pattern). The input satisfies 2 <= n <= 10^6, 1 <= m < n, every nums[j] is an integer in [1, 10^9], and every pattern[k] is in {-1, 0, 1}."
+  }
+]

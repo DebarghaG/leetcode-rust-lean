@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFlips.spec_1",
+    "negation": "AegisSpec.MinFlips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum, over all pairs (x,y) of nonnegative integers with (x OR y) = c, of the total number of bit positions i >= 0 with bit_i(x) != bit_i(a) plus the total number of bit positions i >= 0 with bit_i(y) != bit_i(b). Equivalently, r is the least possible number of single-bit flips in a and b, where each flip changes one bit in exactly one of the two numbers, needed so that the bitwise OR of the two resulting nonnegative integers equals c. The minimum is attained.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFlips.spec_2",
+    "negation": "AegisSpec.MinFlips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every a,b,c satisfying the preconditions, the function returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFlips.spec_3",
+    "negation": "AegisSpec.MinFlips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFlips.spec_4",
+    "negation": "AegisSpec.MinFlips.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 60.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFlips.spec_5",
+    "negation": "AegisSpec.MinFlips.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if (a OR b) = c, where OR is bitwise OR on the nonnegative integers represented by a and b.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFlips.spec_6",
+    "negation": "AegisSpec.MinFlips.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every a,b,c satisfying the preconditions, the value returned for inputs (a,b,c) equals the value returned for inputs (b,a,c) with the same c; that is, the minimum number of flips is symmetric in a and b.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFlips.spec_7",
+    "negation": "AegisSpec.MinFlips.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = sum over all i >= 0 of cost_i, where a_i = bit_i(a), b_i = bit_i(b), c_i = bit_i(c), and cost_i is defined by: cost_i = 0 if c_i = 1 and (a_i = 1 or b_i = 1); cost_i = 1 if c_i = 1 and a_i = b_i = 0; and cost_i = a_i + b_i if c_i = 0. The sum has only finitely many nonzero terms.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFlips.spec_8",
+    "negation": "AegisSpec.MinFlips.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the number of bit positions i >= 0 for which bit_i(c) = 1 and bit_i(a) = bit_i(b) = 0.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFlips.spec_9",
+    "negation": "AegisSpec.MinFlips.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the sum, over all bit positions i >= 0 with bit_i(c) = 0, of (bit_i(a) + bit_i(b)).",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinFlips.spec_10",
+    "negation": "AegisSpec.MinFlips.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= popcount(a) + popcount(b) + popcount(c).",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2; popcount(n) is the number of bit positions i >= 0 with bit_i(n) = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinFlips.spec_11",
+    "negation": "AegisSpec.MinFlips.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such k, the value returned for inputs (a,b,c) equals the value returned for inputs (2^k * a, 2^k * b, 2^k * c).",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000, and for an integer k >= 0, 1 <= 2^k * a <= 1000000000, 1 <= 2^k * b <= 1000000000, 1 <= 2^k * c <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinFlips.spec_12",
+    "negation": "AegisSpec.MinFlips.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist nonnegative integers x and y such that (x OR y) = c and the total number of bit positions i >= 0 with bit_i(x) != bit_i(a) plus the total number of bit positions i >= 0 with bit_i(y) != bit_i(b) is exactly r.",
+    "preconditions": "1 <= a <= 1000000000, 1 <= b <= 1000000000, 1 <= c <= 1000000000. For a nonnegative integer n and integer i >= 0, bit_i(n) = floor(n / 2^i) mod 2."
+  }
+]

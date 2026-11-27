@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KBigIndices.spec_1",
+    "negation": "AegisSpec.KBigIndices.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of integers i with 0 <= i < len(nums) such that both (1) the number of integers j with 0 <= j < i and nums[j] < nums[i] is at least k, and (2) the number of integers j with i < j < len(nums) and nums[j] < nums[i] is at least k.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums). Here len(nums) is the number of elements of the slice nums, and nums[i] is the i-th element (0-indexed)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KBigIndices.spec_2",
+    "negation": "AegisSpec.KBigIndices.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KBigIndices.spec_3",
+    "negation": "AegisSpec.KBigIndices.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KBigIndices.spec_4",
+    "negation": "AegisSpec.KBigIndices.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(nums).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KBigIndices.spec_5",
+    "negation": "AegisSpec.KBigIndices.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= max(0, len(nums) - 2*k), where max(0, len(nums) - 2*k) is the larger of 0 and the integer len(nums) - 2*k.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KBigIndices.spec_6",
+    "negation": "AegisSpec.KBigIndices.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums), and for every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KBigIndices.spec_7",
+    "negation": "AegisSpec.KBigIndices.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_big_indices(nums, k1) returns a result r1 and k_big_indices(nums, k2) returns a result r2, we have r2 <= r1.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums), and 1 <= k1 <= k2 <= len(nums)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KBigIndices.spec_8",
+    "negation": "AegisSpec.KBigIndices.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(nums) be the slice of length len(nums) with rev(nums)[i] = nums[len(nums)-1-i] for every 0 <= i < len(nums). Whenever k_big_indices(nums, k) returns a result r and k_big_indices(rev(nums), k) returns a result r', we have r = r'.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KBigIndices.spec_9",
+    "negation": "AegisSpec.KBigIndices.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every i,j with 0 <= i < len(nums) and 0 <= j < len(nums) we have nums[i] < nums[j] if and only if nums'[i] < nums'[j], then whenever k_big_indices(nums, k) returns a result r and k_big_indices(nums', k) returns a result r', we have r = r'.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums), and nums' is a slice of i64 with len(nums') = len(nums) and for every i with 0 <= i < len(nums), 1 <= nums'[i] <= len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KBigIndices.spec_10",
+    "negation": "AegisSpec.KBigIndices.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exists an integer i with 0 <= i < len(nums) such that i is k-big (the number of j with 0 <= j < i and nums[j] < nums[i] is at least k, and the number of j with i < j < len(nums) and nums[j] < nums[i] is at least k).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.KBigIndices.spec_11",
+    "negation": "AegisSpec.KBigIndices.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if len(nums) >= 2*k and r = len(nums) - 2*k, then for every integer i with k <= i <= len(nums) - 1 - k, i is k-big (the number of j with 0 <= j < i and nums[j] < nums[i] is at least k, and the number of j with i < j < len(nums) and nums[j] < nums[i] is at least k).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100000, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 1 <= nums[i] <= len(nums)."
+  }
+]

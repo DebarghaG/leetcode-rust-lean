@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SummaryRanges.spec_1",
+    "negation": "AegisSpec.SummaryRanges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is a vector of strings of length k, where k is the number of maximal consecutive runs of nums. A maximal consecutive run is a pair (a,b) with a <= b such that a and b are elements of nums, every integer x with a <= x <= b is in nums, and either a is the first element of nums or a-1 is not in nums, and either b is the last element of nums or b+1 is not in nums. The runs are ordered by increasing a. For each i in [0, k), if (a_i,b_i) is the i-th run, then r[i] is the string representation of [a_i,b_i]: if a_i = b_i, r[i] is the standard decimal representation of a_i; otherwise r[i] is the concatenation of the standard decimal representation of a_i, the two bytes '-' and '>', and the standard decimal representation of b_i. The standard decimal representation of an integer x is the standard ASCII string: '0' for 0; for positive x, the base-10 digits without leading zeros; for negative x, a '-' followed by the standard decimal representation of -x.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SummaryRanges.spec_2",
+    "negation": "AegisSpec.SummaryRanges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, the function returns a result r (i.e., it does not fail).",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SummaryRanges.spec_3",
+    "negation": "AegisSpec.SummaryRanges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) <= len(nums).",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SummaryRanges.spec_4",
+    "negation": "AegisSpec.SummaryRanges.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every string in r is non-empty.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SummaryRanges.spec_5",
+    "negation": "AegisSpec.SummaryRanges.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every byte in every string in r is one of the ASCII characters '0' through '9', '-', or '>'. (That is, its numeric value is in {45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 62}.)",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SummaryRanges.spec_6",
+    "negation": "AegisSpec.SummaryRanges.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every integer x in nums, there is exactly one index i with 0 <= i < len(r) such that the range represented by r[i] contains x. The range represented by a string s is defined as: if s is the standard decimal representation of an integer a and does not contain the two-byte sequence '-' followed by '>', then the range is [a,a]; if s is the concatenation of the standard decimal representation of some a, the bytes '-' and '>', and the standard decimal representation of some b with a < b, then the range is [a,b].",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SummaryRanges.spec_7",
+    "negation": "AegisSpec.SummaryRanges.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(r), if r[i] represents the range [a,b] (as defined in spec_6), then every integer x with a <= x <= b is an element of nums.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SummaryRanges.spec_8",
+    "negation": "AegisSpec.SummaryRanges.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(r), if r[i] represents the range [a,b], then a-1 is not an element of nums and b+1 is not an element of nums.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SummaryRanges.spec_9",
+    "negation": "AegisSpec.SummaryRanges.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r)-1, if r[i] represents [a_i,b_i] and r[i+1] represents [a_{i+1},b_{i+1}], then b_i + 1 < a_{i+1}.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SummaryRanges.spec_10",
+    "negation": "AegisSpec.SummaryRanges.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), if r[i] represents a range [a,a] (a single element), then r[i] is exactly the standard decimal representation of a (no leading zeros, with a leading '-' if a < 0) and does not contain the two-byte sequence '-' followed by '>'.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SummaryRanges.spec_11",
+    "negation": "AegisSpec.SummaryRanges.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), if r[i] represents a range [a,b] with a < b, then r[i] is the concatenation of the standard decimal representation of a, the two bytes '-' and '>', and the standard decimal representation of b.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SummaryRanges.spec_12",
+    "negation": "AegisSpec.SummaryRanges.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is nonempty, and if r[0] represents the range [a,b] and r[len(r)-1] represents the range [c,d], then a = nums[0] and d = nums[len(nums)-1].",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]; and len(nums) > 0."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SummaryRanges.spec_13",
+    "negation": "AegisSpec.SummaryRanges.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if we expand each range represented by r in order (i.e., replace each string by the sequence of integers in its range, from a to b inclusive), the concatenation of these sequences is exactly nums.",
+    "preconditions": "len(nums) <= 20; for all i with 0 <= i < len(nums), -2^31 <= nums[i] <= 2^31 - 1; for all i with 0 <= i < len(nums)-1, nums[i] < nums[i+1]."
+  }
+]

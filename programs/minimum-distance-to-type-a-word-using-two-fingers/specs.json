@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDistance.spec_1",
+    "negation": "AegisSpec.MinimumDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(word). For an uppercase byte c, define idx(c) = c - 65, row(c) = floor(idx(c)/6), col(c) = idx(c) mod 6, and d(c1,c2) = |row(c1)-row(c2)| + |col(c1)-col(c2)|. An assignment is any function f from {0,...,n-1} to {1,2}. For a finger t, let i_1 < ... < i_m be the indices i with f(i)=t, and define cost_t(f) = sum_{j=1}^{m-1} d(word[i_j], word[i_{j+1}]) (empty sum 0 if m <= 1). Let totalCost(f) = cost_1(f) + cost_2(f). Whenever minimum_distance(word) returns a result r, r = min over all assignments f of totalCost(f).",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDistance.spec_2",
+    "negation": "AegisSpec.MinimumDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (that is, it does not fail, panic, overflow, or access an out-of-bounds index) for every word satisfying the preconditions.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDistance.spec_3",
+    "negation": "AegisSpec.MinimumDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_distance(word) returns a result r, r >= 0.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDistance.spec_4",
+    "negation": "AegisSpec.MinimumDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(word). For uppercase bytes c1,c2 define row(c)=floor((c-65)/6), col(c)=(c-65) mod 6, and d(c1,c2)=|row(c1)-row(c2)|+|col(c1)-col(c2)|. Whenever minimum_distance(word) returns a result r, for every integer k with 0 <= k <= n-1 we have r <= C_k, where C_k = (sum_{i=0}^{k-1} d(word[i],word[i+1])) + (sum_{i=k+1}^{n-2} d(word[i],word[i+1])), and an empty sum is 0.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDistance.spec_5",
+    "negation": "AegisSpec.MinimumDistance.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_distance(word) returns a result r, r = 0 if and only if the set { word[i] | 0 <= i < len(word) } has at most 2 elements.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDistance.spec_6",
+    "negation": "AegisSpec.MinimumDistance.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(word) and let rev(word) be the byte sequence of length n with rev(word)[i] = word[n-1-i] for 0 <= i < n. Whenever minimum_distance(word) returns r and minimum_distance(rev(word)) returns r_rev, r = r_rev.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDistance.spec_7",
+    "negation": "AegisSpec.MinimumDistance.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let word' be the sequence of length n-1 obtained by deleting the occurrence at index i+1. Whenever minimum_distance(word) returns r and minimum_distance(word') returns r', r = r'.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90), n = len(word) >= 3, i is an integer with 0 <= i < n-1, and word[i] = word[i+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDistance.spec_8",
+    "negation": "AegisSpec.MinimumDistance.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let word' be the sequence of length n-1 obtained by deleting the occurrence at index i. Whenever minimum_distance(word) returns r and minimum_distance(word') returns r', r >= r'.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90), n = len(word) >= 3, and i is an integer with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDistance.spec_9",
+    "negation": "AegisSpec.MinimumDistance.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(word). Whenever minimum_distance(word) returns a result r, there exists an assignment f from {0,...,n-1} to {1,2} such that f(0)=1 and, using the keyboard-cost definition from spec_1, totalCost(f) = r.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, and every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDistance.spec_10",
+    "negation": "AegisSpec.MinimumDistance.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For uppercase bytes c1,c2 define row(c)=floor((c-65)/6), col(c)=(c-65) mod 6, and d(c1,c2)=|row(c1)-row(c2)|+|col(c1)-col(c2)|. Whenever minimum_distance(word) returns a result r, r = min( d(word[0],word[1]), d(word[1],word[2]), d(word[0],word[2]) ).",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90), and n = len(word) = 3."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumDistance.spec_11",
+    "negation": "AegisSpec.MinimumDistance.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For uppercase bytes c1,c2 define row(c)=floor((c-65)/6), col(c)=(c-65) mod 6, and d(c1,c2)=|row(c1)-row(c2)|+|col(c1)-col(c2)|. Whenever minimum_distance(word) returns a result r, r >= M, where M = min{ d(c1,c2) | c1 and c2 are bytes occurring in word and c1 != c2 }.",
+    "preconditions": "len(word) is an integer with 2 <= len(word) <= 300, every byte word[i] for 0 <= i < len(word) is an ASCII uppercase letter (code 65 through 90), and the set of bytes occurring in word has at least 3 elements."
+  }
+]

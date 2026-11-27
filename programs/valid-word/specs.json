@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValid.spec_1",
+    "negation": "AegisSpec.IsValid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = true if and only if all four conditions hold: (a) len(word) >= 3; (b) for every i with 0 <= i < len(word), word[i] is the ASCII code of an ASCII digit '0' through '9' or an English letter 'A' through 'Z' or 'a' through 'z'; (c) there exists i with 0 <= i < len(word) such that word[i] is the ASCII code of one of 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'; (d) there exists i with 0 <= i < len(word) such that word[i] is the ASCII code of an English letter (one of 'A' through 'Z' or 'a' through 'z') that is not one of 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'. If these four conditions do not all hold, then r = false.",
+    "preconditions": "1 <= len(word) <= 20 and for every i with 0 <= i < len(word), word[i] is the ASCII code of an English uppercase or lowercase letter, an ASCII digit '0' through '9', '@', '#', or '$'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValid.spec_2",
+    "negation": "AegisSpec.IsValid.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the precondition, the function returns a result r and does not fail, overflow, or panic.",
+    "preconditions": "1 <= len(word) <= 20 and for every i with 0 <= i < len(word), word[i] is the ASCII code of an English uppercase or lowercase letter, an ASCII digit '0' through '9', '@', '#', or '$'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValid.spec_3",
+    "negation": "AegisSpec.IsValid.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every byte value b, the number of indices i with 0 <= i < len(word) and word[i] = b equals the number of indices j with 0 <= j < len(other) and other[j] = b, then whenever the function returns result r on word and result s on other, r = s.",
+    "preconditions": "word and other are byte slices, each satisfying 1 <= len <= 20 and every byte being the ASCII code of an English uppercase or lowercase letter, an ASCII digit '0' through '9', '@', '#', or '$'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValid.spec_4",
+    "negation": "AegisSpec.IsValid.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If len(word) = len(other) and for every i with 0 <= i < len(word), other[i] is obtained from word[i] by either leaving it unchanged or, when word[i] is the ASCII code of an English letter, replacing it by the ASCII code of the opposite-case version of that letter, then whenever the function returns result r on word and result s on other, r = s.",
+    "preconditions": "word and other are byte slices, each satisfying 1 <= len <= 20 and every byte being the ASCII code of an English uppercase or lowercase letter, an ASCII digit '0' through '9', '@', '#', or '$'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValid.spec_5",
+    "negation": "AegisSpec.IsValid.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every byte d that is the ASCII code of a digit '0' through '9', let word2 be the slice of length len(word)+1 whose first len(word) bytes equal word and whose last byte is d. Whenever the function returns true on word, the function returns true on word2.",
+    "preconditions": "1 <= len(word) <= 19 and for every i with 0 <= i < len(word), word[i] is the ASCII code of an English uppercase or lowercase letter, an ASCII digit '0' through '9', '@', '#', or '$'."
+  }
+]

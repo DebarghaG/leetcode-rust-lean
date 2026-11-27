@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Decrypt.spec_1",
+    "negation": "AegisSpec.Decrypt.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and len(r) = n. For every i with 0 <= i < n: if k > 0, then r[i] = sum_{j=1}^{k} code[(i+j) mod n]; if k < 0, then r[i] = sum_{j=1}^{-k} code[(i-j) mod n]; if k = 0, then r[i] = 0. Here 'mod n' denotes the unique remainder in {0, 1, ..., n-1}.",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; and -n <= k <= n. This includes the original stated range -(n-1) <= k <= n-1 and also the listed test cases with k = n or k = -n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Decrypt.spec_2",
+    "negation": "AegisSpec.Decrypt.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail.",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; and -n <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Decrypt.spec_3",
+    "negation": "AegisSpec.Decrypt.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(code).",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; and -n <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Decrypt.spec_4",
+    "negation": "AegisSpec.Decrypt.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, |k| <= r[i] <= 100 * |k|, where |k| is the absolute value of k.",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; and -n <= k <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Decrypt.spec_5",
+    "negation": "AegisSpec.Decrypt.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, sum_{i=0}^{n-1} r[i] = |k| * sum_{i=0}^{n-1} code[i].",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; and -n <= k <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Decrypt.spec_6",
+    "negation": "AegisSpec.Decrypt.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[(i+1) mod n] - r[i] = code[(i+k+1) mod n] - code[(i+1) mod n].",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; -n <= k <= n; and k > 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Decrypt.spec_7",
+    "negation": "AegisSpec.Decrypt.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[(i+1) mod n] - r[i] = code[i] - code[(i+k) mod n].",
+    "preconditions": "Let n = len(code). Assume 1 <= n <= 100; for every i with 0 <= i < n, 1 <= code[i] <= 100; -n <= k <= n; and k < 0."
+  }
+]

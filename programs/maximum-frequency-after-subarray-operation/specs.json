@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxFrequency.spec_1",
+    "negation": "AegisSpec.MaxFrequency.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let out_k(i,j) be the number of indices p with 0 <= p < n, (p < i or p > j), and nums[p] = k. For an integer v, let in_v(i,j) be the number of indices p with i <= p <= j and nums[p] = v. Then r = max { out_k(i,j) + in_v(i,j) : 0 <= i <= j < n and v is an integer }.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxFrequency.spec_2",
+    "negation": "AegisSpec.MaxFrequency.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxFrequency.spec_3",
+    "negation": "AegisSpec.MaxFrequency.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= len(nums).",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxFrequency.spec_4",
+    "negation": "AegisSpec.MaxFrequency.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let totalK be the number of indices p with 0 <= p < len(nums) and nums[p] = k. The function returns a result r and r >= totalK.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxFrequency.spec_5",
+    "negation": "AegisSpec.MaxFrequency.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let totalK be the number of indices p with 0 <= p < len(nums) and nums[p] = k. If totalK < len(nums), then the function returns a result r and r >= totalK + 1.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxFrequency.spec_6",
+    "negation": "AegisSpec.MaxFrequency.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let totalK be the number of indices p with 0 <= p < len(nums) and nums[p] = k. Let M be the maximum of 0 and all numbers #{p | 0 <= p < len(nums) and nums[p] = v} for integers v with v != k. The function returns a result r and r <= totalK + M.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxFrequency.spec_7",
+    "negation": "AegisSpec.MaxFrequency.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(nums).",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50. Let totalK be the number of indices p with 0 <= p < n and nums[p] = k, and assume totalK >= n - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxFrequency.spec_8",
+    "negation": "AegisSpec.MaxFrequency.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max { #{p | 0 <= p < n and nums[p] = v} : v is an integer }.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50. Let totalK be the number of indices p with 0 <= p < n and nums[p] = k, and assume totalK = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxFrequency.spec_9",
+    "negation": "AegisSpec.MaxFrequency.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist indices i,j with 0 <= i <= j < len(nums) and an integer x with -49 <= x <= 49 such that, after adding x to every element of nums[i..j], the number of indices p with resulting value equal to k is exactly r.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxFrequency.spec_10",
+    "negation": "AegisSpec.MaxFrequency.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, for every nonempty subarray nums[i..j] with 0 <= i <= j < len(nums) and every integer x, if new_nums is obtained by adding x to every element of nums[i..j] and leaving all other elements unchanged, then the number of indices p with new_nums[p] = k is at most r.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxFrequency.spec_11",
+    "negation": "AegisSpec.MaxFrequency.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let count(v) be the number of indices p with 0 <= p < n and nums[p] = v. The function returns a result r and r >= max { count(v) : v is an integer }.",
+    "preconditions": "Let n = len(nums). The slice satisfies n >= 1 and n <= 100000. For every p with 0 <= p < n, 1 <= nums[p] <= 50. Also 1 <= k <= 50."
+  }
+]

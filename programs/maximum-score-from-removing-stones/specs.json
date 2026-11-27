@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumScore.spec_1",
+    "negation": "AegisSpec.MaximumScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S = a + b + c and M = max(a, b, c). The function returns a result r (so it does not fail) and r = min(floor(S/2), S - M), where floor(S/2) is the greatest integer k with 2*k <= S.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumScore.spec_2",
+    "negation": "AegisSpec.MaximumScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid a, b, c, the function returns some result r; in particular, evaluation of maximum_score does not overflow, panic, or access out of bounds.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumScore.spec_3",
+    "negation": "AegisSpec.MaximumScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the second largest of a, b, c, i.e. the middle value after sorting a, b, c in nondecreasing order.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumScore.spec_4",
+    "negation": "AegisSpec.MaximumScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 2*r <= a + b + c.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumScore.spec_5",
+    "negation": "AegisSpec.MaximumScore.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (a + b + c) - max(a, b, c).",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumScore.spec_6",
+    "negation": "AegisSpec.MaximumScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if max(a, b, c) <= (a + b + c) - max(a, b, c), then r = floor((a + b + c)/2).",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumScore.spec_7",
+    "negation": "AegisSpec.MaximumScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if max(a, b, c) >= (a + b + c) - max(a, b, c), then r = (a + b + c) - max(a, b, c).",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumScore.spec_8",
+    "negation": "AegisSpec.MaximumScore.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every valid a, b, c and every permutation (x, y, z) of (a, b, c), the result returned by maximum_score(a, b, c) equals the result returned by maximum_score(x, y, z).",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumScore.spec_9",
+    "negation": "AegisSpec.MaximumScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result returned by maximum_score(a, b, c) and r' is the result returned by maximum_score(a', b', c'), then r <= r'.",
+    "preconditions": "a, b, c are integer values satisfying 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000; additionally a', b', c' are integers satisfying 1 <= a' <= 100000, 1 <= b' <= 100000, 1 <= c' <= 100000, with a <= a', b <= b', and c <= c'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumScore.spec_10",
+    "negation": "AegisSpec.MaximumScore.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists a sequence of exactly r legal moves starting from (a, b, c) such that afterward fewer than two piles are nonempty. A legal move chooses two distinct currently nonempty piles and subtracts 1 from each; the score is the number of moves.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumScore.spec_11",
+    "negation": "AegisSpec.MaximumScore.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every sequence of legal moves starting from (a, b, c) that at each step chooses two distinct nonempty piles and subtracts 1 from each, and that continues until fewer than two piles are nonempty, the number of moves is at most r, where r is the result returned by maximum_score(a, b, c).",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumScore.spec_12",
+    "negation": "AegisSpec.MaximumScore.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = max(a, b, c). If M > (a + b + c) - M, then in every complete play that attains the maximum score r, the two piles other than the unique largest pile are emptied and the unique largest pile is left with 2*M - (a + b + c) stones.",
+    "preconditions": "a, b, c are the integer values of the I64 parameters and satisfy 1 <= a <= 100000, 1 <= b <= 100000, 1 <= c <= 100000."
+  }
+]

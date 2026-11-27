@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_1",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(edges). The function returns a result r. Exactly one of the following holds. (A) r is empty, and for every function w mapping each index i with 0 <= i < m and edges[i][2] = -1 to an integer in [1, 2*10^9], the shortest distance from source to destination in the undirected graph with nodes 0..n-1 and edge list E_w (whose i-th edge is [edges[i][0], edges[i][1], edges[i][2]] if edges[i][2] > 0, and [edges[i][0], edges[i][1], w(i)] otherwise) is not equal to target. Here distance is the minimum sum of edge weights over all paths from source to destination. (B) r is non-empty, for every j with 0 <= j < len(r) we have len(r[j]) = 3, and there is a bijection pi from {0,...,len(r)-1} to {0,...,m-1} such that for every j: the unordered pair {r[j][0], r[j][1]} equals {edges[pi(j)][0], edges[pi(j)][1]}; if edges[pi(j)][2] > 0 then r[j][2] = edges[pi(j)][2], and if edges[pi(j)][2] = -1 then 1 <= r[j][2] <= 2*10^9; and the shortest distance from source to destination in the undirected graph with nodes 0..n-1 and edges r is exactly target.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_2",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_3",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a non-empty result r, len(r) = len(edges) and for every j with 0 <= j < len(r), len(r[j]) = 3.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_4",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a non-empty result r such that len(r[j]) = 3 for every j, for every input index i with 0 <= i < len(edges) there is exactly one output index j with 0 <= j < len(r) such that {r[j][0], r[j][1]} = {edges[i][0], edges[i][1]}; and conversely, for every output index j with 0 <= j < len(r) there is exactly one input index i with 0 <= i < len(edges) such that the same equality holds.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_5",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a non-empty result r such that len(r[j]) = 3 for every j, for every input index i with edges[i][2] > 0, if j is the unique output index with {r[j][0], r[j][1]} = {edges[i][0], edges[i][1]}, then r[j][2] = edges[i][2].",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_6",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a non-empty result r such that len(r[j]) = 3 for every j, for every output index j with 0 <= j < len(r), 1 <= r[j][2] <= 2*10^9.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_7",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a non-empty result r, let d_min be the shortest distance from source to destination in the undirected graph with nodes 0..n-1 whose edge list is obtained from edges by replacing every weight -1 with 1 (and keeping every positive weight unchanged). Then d_min <= target.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_8",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a non-empty result r, let d_max be the shortest distance from source to destination in the undirected graph with nodes 0..n-1 whose edge list is obtained from edges by replacing every weight -1 with 2*10^9 (and keeping every positive weight unchanged). Then d_max >= target.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_9",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a non-empty result r such that len(r[j]) = 3 for every j, for every path from source to destination in the undirected graph with nodes 0..n-1 and edges r, the sum of the edge weights along the path is at least target. A path here is a finite sequence of edges in r such that consecutive edges share a vertex, the first edge is incident to source, and the last edge is incident to destination.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_10",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a non-empty result r such that len(r[j]) = 3 for every j, there exists a path from source to destination in the undirected graph with nodes 0..n-1 and edges r whose edge-weight sum is exactly target. A path here is a finite sequence of edges in r such that consecutive edges share a vertex, the first edge is incident to source, and the last edge is incident to destination.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_11",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns an empty result r, for every function w mapping each index i with 0 <= i < len(edges) and edges[i][2] = -1 to an integer in [1, 2*10^9], the shortest distance from source to destination in the undirected graph with nodes 0..n-1 and edge list E_w (whose i-th edge is [edges[i][0], edges[i][1], edges[i][2]] if edges[i][2] > 0, and [edges[i][0], edges[i][1], w(i)] otherwise) is not equal to target.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ModifiedGraphEdges.spec_12",
+    "negation": "AegisSpec.ModifiedGraphEdges.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists a function w mapping each index i with 0 <= i < len(edges) and edges[i][2] = -1 to an integer in [1, 2*10^9] such that the shortest distance from source to destination in the undirected graph with nodes 0..n-1 and edge list E_w (whose i-th edge is [edges[i][0], edges[i][1], edges[i][2]] if edges[i][2] > 0, and [edges[i][0], edges[i][1], w(i)] otherwise) equals target, then the function returns a non-empty result r.",
+    "preconditions": "n, edges, source, destination, target satisfy: 1 <= n <= 100; 1 <= len(edges) <= n*(n-1)/2; each edges[i] has length 3; for every i, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and (edges[i][2] = -1 or 1 <= edges[i][2] <= 10^7); 0 <= source < n, 0 <= destination < n, source != destination; 1 <= target <= 10^9; the undirected graph with nodes 0..n-1 and an edge {edges[i][0], edges[i][1]} for each i is connected; no two edges have the same unordered endpoint pair (no repeated edges)."
+  }
+]

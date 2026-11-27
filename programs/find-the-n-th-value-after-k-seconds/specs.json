@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_1",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1,000,000,007, and for integers 0 ≤ R ≤ N let C(N,R) = N!/(R!(N−R)!) (with 0! = 1; C(N,R)=0 when R<0 or R>N). For every n,k satisfying the preconditions, whenever value_after_k_seconds(n,k) returns a result r, r is the unique integer such that 0 ≤ r < M and r ≡ C(n+k−1,k) (mod M).",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 1 ≤ k ≤ 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_2",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n,k satisfying the preconditions, the call value_after_k_seconds(n,k) returns a result; it does not fail, panic, or overflow.",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 1 ≤ k ≤ 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_3",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = 1,000,000,007. For every n,k satisfying the preconditions, whenever value_after_k_seconds(n,k) returns a result r, we have 0 < r < M.",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 1 ≤ k ≤ 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_4",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of value_after_k_seconds(n,k) and s be the result of value_after_k_seconds(k+1,n−1). Whenever these two calls return results, r = s.",
+    "preconditions": "n and k are integers with 2 ≤ n ≤ 1000 and 1 ≤ k ≤ 999."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_5",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007. Let r be the result for (n,k), a the result for (n−1,k), and b the result for (n,k−1). Whenever these three calls return results, r ≡ a + b (mod M), equivalently r = (a+b) mod M.",
+    "preconditions": "n and k are integers with 2 ≤ n ≤ 1000 and 2 ≤ k ≤ 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_6",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007. Let r be the result for (n,k), and for each i with 1 ≤ i ≤ n let r_i be the result for (i,k−1). Whenever all these calls return results, r ≡ Σ_{i=1}^{n} r_i (mod M).",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 2 ≤ k ≤ 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_7",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007. Let s be the result for (n+1,K), and for each j with 1 ≤ j ≤ K let r_j be the result for (n,j). Whenever all these calls return results, s ≡ 1 + Σ_{j=1}^{K} r_j (mod M).",
+    "preconditions": "n and K are integers with 1 ≤ n ≤ 999 and 1 ≤ K ≤ 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_8",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007. Let r be the result for (n,k) and s the result for (n,k−1). Whenever both calls return results, k·r ≡ (n+k−1)·s (mod M).",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 2 ≤ k ≤ 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_9",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007, and let C(N,R) denote the binomial coefficient N!/(R!(N−R)!). Whenever value_after_k_seconds(n,k) returns a result r, r ≡ Σ_{i=0}^{n−1} C(k−1+i,i) (mod M).",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 1 ≤ k ≤ 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValueAfterKSeconds.spec_10",
+    "negation": "AegisSpec.ValueAfterKSeconds.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1,000,000,007, and let C(N,R) denote the binomial coefficient N!/(R!(N−R)!) for 0 ≤ R ≤ N, with C(N,R)=0 when R<0 or R>N. For every n,k satisfying the preconditions, whenever value_after_k_seconds(n,k) returns a result r, r ≡ Σ_{i=0}^{k} C(n−1,i)·C(k,i) (mod M).",
+    "preconditions": "n and k are integers with 1 ≤ n ≤ 1000 and 1 ≤ k ≤ 1000."
+  }
+]

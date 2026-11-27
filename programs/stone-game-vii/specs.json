@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGameVii.spec_1",
+    "negation": "AegisSpec.StoneGameVii.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = V(0, len(stones)-1), where V(l,r) is defined for 0 <= l <= r < len(stones) by V(l,l) = 0, and for l < r by V(l,r) = max( sum(l+1,r) - V(l+1,r), sum(l,r-1) - V(l,r-1) ), with sum(a,b) = stones[a] + ... + stones[b] for a <= b, and sum(a,b) = 0 when a > b.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGameVii.spec_2",
+    "negation": "AegisSpec.StoneGameVii.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, or panic) for every input satisfying the preconditions.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGameVii.spec_3",
+    "negation": "AegisSpec.StoneGameVii.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGameVii.spec_4",
+    "negation": "AegisSpec.StoneGameVii.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{len(stones)-1} stones[i].",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StoneGameVii.spec_5",
+    "negation": "AegisSpec.StoneGameVii.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= max_{0 <= i < len(stones)} stones[i] * (len(stones) / 2), where / is integer division.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StoneGameVii.spec_6",
+    "negation": "AegisSpec.StoneGameVii.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = (len(stones) / 2) * c, where / is integer division.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; there exists an integer c with 1 <= c <= 1000 such that for every i with 0 <= i < len(stones), stones[i] = c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StoneGameVii.spec_7",
+    "negation": "AegisSpec.StoneGameVii.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length len(stones) with rev[i] = stones[len(stones)-1-i] for 0 <= i < len(stones). If r is the result of stone_game_vii(stones) and r' is the result of stone_game_vii(rev), then r' = r. Both calls return results.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StoneGameVii.spec_8",
+    "negation": "AegisSpec.StoneGameVii.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result of stone_game_vii(stones) and r' is the result of stone_game_vii(shifted), then r' = r + c * (len(stones) / 2), where / is integer division. Both calls return results.",
+    "preconditions": "stones satisfies len(stones) >= 2, len(stones) <= 1000, and 1 <= stones[i] <= 1000 for all i. Let c be an integer such that for every i, 1 <= stones[i] + c <= 1000. Define shifted[i] = stones[i] + c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StoneGameVii.spec_9",
+    "negation": "AegisSpec.StoneGameVii.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result of stone_game_vii(stones) and r' is the result of stone_game_vii(scaled), then r' = k * r. Both calls return results.",
+    "preconditions": "stones satisfies len(stones) >= 2, len(stones) <= 1000, and 1 <= stones[i] <= 1000 for all i. Let k be a positive integer such that for every i, 1 <= k * stones[i] <= 1000. Define scaled[i] = k * stones[i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StoneGameVii.spec_10",
+    "negation": "AegisSpec.StoneGameVii.spec_10_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If r1 is the result of stone_game_vii(stones1) and r2 is the result of stone_game_vii(stones2), then r1 <= r2. Both calls return results.",
+    "preconditions": "stones1 and stones2 have equal length n with 2 <= n <= 1000, and for every i, 1 <= stones1[i] <= stones2[i] <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StoneGameVii.spec_11",
+    "negation": "AegisSpec.StoneGameVii.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= the sum of the largest floor(len(stones)/2) values in stones, where / denotes integer division.",
+    "preconditions": "len(stones) >= 2 and len(stones) <= 1000; for every i with 0 <= i < len(stones), 1 <= stones[i] <= 1000."
+  }
+]

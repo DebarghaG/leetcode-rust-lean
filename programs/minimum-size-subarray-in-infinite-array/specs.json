@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_1",
+    "negation": "AegisSpec.MinSizeSubarray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let infinite_nums[k] = nums[k mod n] for every integer k ≥ 0. The function returns a result r and: (1) if there exist an integer L ≥ 1 and a start index i ≥ 0 such that sum_{j=0}^{L-1} infinite_nums[i+j] = target, then r is the least such L; (2) otherwise r = -1.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_2",
+    "negation": "AegisSpec.MinSizeSubarray.spec_2_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i], let a = target div S, and let b = target mod S, so target = a*S + b with 0 ≤ b < S. For p with 0 ≤ p < n and L ≥ 0 define C(p,L) = sum_{j=0}^{L-1} nums[(p+j) mod n], with C(p,0) = 0. Let r be the result. If b = 0, then r = a*n. If b > 0, let m be the least integer in [1, n-1] such that there exists p with 0 ≤ p < n and C(p,m) = b. If such an m exists, then r = a*n + m; otherwise r = -1.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_3",
+    "negation": "AegisSpec.MinSizeSubarray.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or return an error) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_4",
+    "negation": "AegisSpec.MinSizeSubarray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result. If r ≥ 0, then 1 ≤ r ≤ target.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_5",
+    "negation": "AegisSpec.MinSizeSubarray.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 ≤ i < n} nums[i] and let r be the result. If r ≥ 0, then ceil(target / M) ≤ r ≤ target, where ceil(target / M) is the least integer c with c*M ≥ target.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_6",
+    "negation": "AegisSpec.MinSizeSubarray.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let r be the result. Then r = 1 if and only if there exists an index i with 0 ≤ i < n and nums[i] = target.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_7",
+    "negation": "AegisSpec.MinSizeSubarray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = min_{0 ≤ i < n} nums[i] and let r be the result. If target < m, then r = -1.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_8",
+    "negation": "AegisSpec.MinSizeSubarray.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the result. If r ≥ 1, then there exists a start index i ≥ 0 such that sum_{j=0}^{r-1} infinite_nums[i+j] = target, where infinite_nums[k] = nums[k mod n].",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_9",
+    "negation": "AegisSpec.MinSizeSubarray.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result. If r ≥ 1, then for every integer L with 1 ≤ L < r and every start index i ≥ 0, sum_{j=0}^{L-1} infinite_nums[i+j] ≠ target, where infinite_nums[k] = nums[k mod n].",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_10",
+    "negation": "AegisSpec.MinSizeSubarray.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let r be the result. Then r = -1 if and only if for every integer L ≥ 1 and every start index i ≥ 0, sum_{j=0}^{L-1} infinite_nums[i+j] ≠ target, where infinite_nums[k] = nums[k mod n].",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_11",
+    "negation": "AegisSpec.MinSizeSubarray.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i], let b = target mod S, and let r be the result. If r ≥ 0, then: (a) if b = 0, then r mod n = 0; (b) if b > 0, then 1 ≤ r mod n < n.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_12",
+    "negation": "AegisSpec.MinSizeSubarray.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i] and let r be the result. If target < S and r ≠ -1, then 1 ≤ r < n.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_13",
+    "negation": "AegisSpec.MinSizeSubarray.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k be any integer with 0 ≤ k < n, and let nums2 be the slice of length n defined by nums2[i] = nums[(i+k) mod n] for 0 ≤ i < n. Then the result returned for nums2 and target is the same as the result returned for nums and target.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_14",
+    "negation": "AegisSpec.MinSizeSubarray.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i], let a = target div S, let b = target mod S, and let r be the result. If b > 0 and r ≠ -1, then a*n + 1 ≤ r ≤ (a+1)*n - 1.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinSizeSubarray.spec_15",
+    "negation": "AegisSpec.MinSizeSubarray.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i] and let r be the result. If target ≤ S and r ≠ -1, then 1 ≤ r ≤ n.",
+    "preconditions": "Let n = len(nums). Assume 1 ≤ n ≤ 100000, for every i with 0 ≤ i < n we have 1 ≤ nums[i] ≤ 100000, and 1 ≤ target ≤ 10^9."
+  }
+]

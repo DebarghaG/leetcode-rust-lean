@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DistributeCandies.spec_1",
+    "negation": "AegisSpec.DistributeCandies.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let D(n, limit) be the set of ordered triples (a,b,c) of integers such that 0 <= a <= limit, 0 <= b <= limit, 0 <= c <= limit, and a+b+c = n. Whenever distribute_candies n limit returns a result r, the integer value of r is exactly the cardinality |D(n, limit)|. In other words, r is the number of ways to distribute the n candies among the three children so that each child receives at most limit candies.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6 and 1 <= limit <= 10^6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DistributeCandies.spec_2",
+    "negation": "AegisSpec.DistributeCandies.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and limit satisfying the preconditions, the call distribute_candies n limit returns a result r; it does not fail by overflow, panic, or out-of-bounds.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6 and 1 <= limit <= 10^6."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DistributeCandies.spec_3",
+    "negation": "AegisSpec.DistributeCandies.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D(n, limit) be the set of ordered triples (a,b,c) of integers such that 0 <= a <= limit, 0 <= b <= limit, 0 <= c <= limit, and a+b+c = n. Whenever distribute_candies n limit returns a result r, the integer value of r satisfies 0 <= r <= ((n+1)*(n+2))/2. The upper bound is the total number of ordered triples of nonnegative integers summing to n before imposing the per-child limit.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6 and 1 <= limit <= 10^6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DistributeCandies.spec_4",
+    "negation": "AegisSpec.DistributeCandies.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D(n, limit) be the set of ordered triples (a,b,c) of integers such that 0 <= a <= limit, 0 <= b <= limit, 0 <= c <= limit, and a+b+c = n. If n > 3*limit, then D(n, limit) is empty; consequently, whenever distribute_candies n limit returns a result r, the integer value of r is 0.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6, 1 <= limit <= 10^6, and n > 3*limit."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DistributeCandies.spec_5",
+    "negation": "AegisSpec.DistributeCandies.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let D(n, limit) be the set of ordered triples (a,b,c) of integers such that 0 <= a <= limit, 0 <= b <= limit, 0 <= c <= limit, and a+b+c = n. If limit >= n, then the per-child cap is not binding: D(n, limit) = {(a,b,c) in Z^3 : a >= 0, b >= 0, c >= 0, and a+b+c = n}. Consequently, whenever distribute_candies n limit returns a result r, the integer value of r is ((n+1)*(n+2))/2.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6, 1 <= limit <= 10^6, and limit >= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DistributeCandies.spec_6",
+    "negation": "AegisSpec.DistributeCandies.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let F(m, limit) be the number of ordered pairs (b,c) of integers with 0 <= b <= limit, 0 <= c <= limit, and b+c = m. Whenever distribute_candies n limit returns a result r, the integer value of r equals sum_{a=0}^{min(limit,n)} F(n-a, limit).",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6 and 1 <= limit <= 10^6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DistributeCandies.spec_7",
+    "negation": "AegisSpec.DistributeCandies.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r = distribute_candies n limit and r' = distribute_candies n (limit+1). Whenever both calls return results, the integer value of r is at most the integer value of r'.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6 and 1 <= limit <= 10^6 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DistributeCandies.spec_8",
+    "negation": "AegisSpec.DistributeCandies.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = distribute_candies n limit and r' = distribute_candies (3*limit - n) limit. Whenever both calls return results, the integer value of r equals the integer value of r'.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6, 1 <= limit <= 10^6, n < 3*limit, and 3*limit - n <= 10^6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DistributeCandies.spec_9",
+    "negation": "AegisSpec.DistributeCandies.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let D(n, limit) be the set of ordered triples (a,b,c) of integers such that 0 <= a <= limit, 0 <= b <= limit, 0 <= c <= limit, and a+b+c = n. If n <= 3*limit, then D(n, limit) is nonempty. Equivalently, whenever distribute_candies n limit returns a result r, the integer value of r is at least 1.",
+    "preconditions": "n and limit are the Std.I64 parameters, with integer values satisfying 1 <= n <= 10^6, 1 <= limit <= 10^6, and n <= 3*limit."
+  }
+]

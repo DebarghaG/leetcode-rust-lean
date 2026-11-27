@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfWays.spec_1",
+    "negation": "AegisSpec.NumberOfWays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer satisfying 0 <= r < M and r == T(n,x,y) (mod M).",
+    "preconditions": "n, x, y are Std.I64 values with 1 <= n <= 1000, 1 <= x <= 1000, and 1 <= y <= 1000. Let M = 1000000007. For k >= 1 let onto(n,k) be the number of surjective functions from {0,...,n-1} onto {0,...,k-1} (and onto(n,k)=0 for k>n). Let C(x,k)=x!/(k!(x-k)!). Define T(n,x,y) = sum_{k=1}^{min(n,x)} C(x,k) * onto(n,k) * y^k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfWays.spec_2",
+    "negation": "AegisSpec.NumberOfWays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such n, x, y, the function returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "n, x, y are Std.I64 values with 1 <= n <= 1000, 1 <= x <= 1000, and 1 <= y <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfWays.spec_3",
+    "negation": "AegisSpec.NumberOfWays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid input, let T(n,x,y) be the exact number of events, i.e. T(n,x,y) = sum over all functions f from {0,...,n-1} to {0,...,x-1} of y^{|image(f)|}, where |image(f)| is the number of nonempty stages. Then x*y <= T(n,x,y) <= (x*y)^n. In particular, the returned r is the residue modulo M of an integer satisfying these bounds.",
+    "preconditions": "1 <= n <= 1000, 1 <= x <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfWays.spec_4",
+    "negation": "AegisSpec.NumberOfWays.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = x*y.",
+    "preconditions": "n = 1, 1 <= x <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfWays.spec_5",
+    "negation": "AegisSpec.NumberOfWays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = y.",
+    "preconditions": "x = 1, 1 <= n <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfWays.spec_6",
+    "negation": "AegisSpec.NumberOfWays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == x^n (mod M).",
+    "preconditions": "y = 1, 1 <= n <= 1000, 1 <= x <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfWays.spec_7",
+    "negation": "AegisSpec.NumberOfWays.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == x*y + x*(x-1)*y^2 (mod M).",
+    "preconditions": "n = 2, 1 <= x <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfWays.spec_8",
+    "negation": "AegisSpec.NumberOfWays.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == 2*y + (2^n - 2)*y^2 (mod M).",
+    "preconditions": "x = 2, 1 <= n <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfWays.spec_9",
+    "negation": "AegisSpec.NumberOfWays.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == x*y + 3*x*(x-1)*y^2 + x*(x-1)*(x-2)*y^3 (mod M).",
+    "preconditions": "n = 3, 1 <= x <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfWays.spec_10",
+    "negation": "AegisSpec.NumberOfWays.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == 3*y + 3*(2^n - 2)*y^2 + (3^n - 3*2^n + 3)*y^3 (mod M).",
+    "preconditions": "x = 3, 1 <= n <= 1000, 1 <= y <= 1000, and M = 1000000007."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfWays.spec_11",
+    "negation": "AegisSpec.NumberOfWays.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == sum_{i=1}^{x} C(x,i) * i^n * y^i * (1-y)^{x-i} (mod M).",
+    "preconditions": "1 <= n <= 1000, 1 <= x <= 1000, 1 <= y <= 1000, M = 1000000007, and C(x,i)=x!/(i!(x-i)!). Interpret 0^0 as 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfWays.spec_12",
+    "negation": "AegisSpec.NumberOfWays.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, 0 <= r < M and r == sum over all set partitions P of {0,...,n-1} of (x)_{|P|} * y^{|P|} (mod M), where |P| is the number of blocks of P.",
+    "preconditions": "1 <= n <= 1000, 1 <= x <= 1000, 1 <= y <= 1000, and M = 1000000007. For m >= 0 let (x)_m = x(x-1)...(x-m+1), with (x)_0=1."
+  }
+]

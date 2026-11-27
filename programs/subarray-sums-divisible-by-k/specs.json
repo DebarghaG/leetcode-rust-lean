@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_1",
+    "negation": "AegisSpec.SubarraysDivByK.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals C(nums,k), where C(nums,k) is the number of pairs (i,j) of integers such that 0 <= i <= j < len(nums) and k divides the integer sum Σ_{t=i}^{j} nums[t]. Here divisibility means there exists an integer q with Σ_{t=i}^{j} nums[t] = q*k, and the sum is over the non-empty contiguous subarray nums[i], nums[i+1], ..., nums[j].",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_2",
+    "negation": "AegisSpec.SubarraysDivByK.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input nums and k satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow. In particular, since k > 0, no division by zero occurs.",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_3",
+    "negation": "AegisSpec.SubarraysDivByK.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= n*(n+1)/2, where n = len(nums).",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_4",
+    "negation": "AegisSpec.SubarraysDivByK.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the number of indices i such that 0 <= i < len(nums) and k divides nums[i].",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_5",
+    "negation": "AegisSpec.SubarraysDivByK.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n*(n+1)/2 if and only if for every index i with 0 <= i < len(nums), k divides nums[i], where n = len(nums).",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_6",
+    "negation": "AegisSpec.SubarraysDivByK.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r equals C(nums_rev, k), where n = len(nums), nums_rev is defined by nums_rev[i] = nums[n-1-i] for 0 <= i < n, and C is the count from spec_1: the number of pairs (i,j) with 0 <= i <= j < n and k divides Σ_{t=i}^{j} nums_rev[t].",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_7",
+    "negation": "AegisSpec.SubarraysDivByK.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r equals C(nums_neg, k), where nums_neg[i] = -nums[i] for 0 <= i < len(nums), and C is the count from spec_1.",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_8",
+    "negation": "AegisSpec.SubarraysDivByK.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer array nums' with len(nums') = len(nums) such that k divides (nums'[i] - nums[i]) for every i with 0 <= i < len(nums), whenever the function returns a result r, r equals C(nums', k), where C is the count from spec_1.",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_9",
+    "negation": "AegisSpec.SubarraysDivByK.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let n = len(nums) and define prefix sums P[0] = 0 and P[t] = Σ_{u=0}^{t-1} nums[u] for 1 <= t <= n. For each integer a with 0 <= a < k, let c[a] be the number of indices t with 0 <= t <= n and k divides (P[t] - a). Then r = Σ_{a=0}^{k-1} c[a]*(c[a]-1)/2.",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SubarraysDivByK.spec_10",
+    "negation": "AegisSpec.SubarraysDivByK.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r equals the number of pairs (i,j) with 0 <= i <= j < len(nums) and Σ_{t=i}^{j} nums[t] = 0.",
+    "preconditions": "1 <= len(nums) <= 30000; for every i with 0 <= i < len(nums), -10000 <= nums[i] <= 10000; 1 <= k <= 10000; Σ_{i=0}^{len(nums)-1} |nums[i]| < k."
+  }
+]

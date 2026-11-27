@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestStrChain.spec_1",
+    "negation": "AegisSpec.LongestStrChain.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is exactly the maximum length of a word chain from words: the largest integer k >= 1 for which there exist pairwise distinct indices i_1,...,i_k with 0 <= i_j < len(words) such that for every j with 1 <= j < k, words[i_j] is a predecessor of words[i_{j+1}]. Here a is a predecessor of b iff len(b) = len(a) + 1 and there is an index p with 0 <= p < len(b) such that for every t with 0 <= t < len(a), a[t] = b[t] when t < p, and a[t] = b[t+1] when t >= p; equivalently, b is obtained by inserting exactly one byte into a without changing the order of the other bytes.",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestStrChain.spec_2",
+    "negation": "AegisSpec.LongestStrChain.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, overflow (all integer arithmetic stays within the i64 range), access memory out of bounds, or panic.",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestStrChain.spec_3",
+    "negation": "AegisSpec.LongestStrChain.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(words).",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestStrChain.spec_4",
+    "negation": "AegisSpec.LongestStrChain.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let min_len = min_{0 <= i < len(words)} len(words[i]) and max_len = max_{0 <= i < len(words)} len(words[i]). Then r <= max_len - min_len + 1. In particular, since every word has length at most 16, r <= 16.",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestStrChain.spec_5",
+    "negation": "AegisSpec.LongestStrChain.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if there do not exist indices i and j with 0 <= i < len(words), 0 <= j < len(words), and i != j such that words[i] is a predecessor of words[j]. Here a is a predecessor of b iff b can be obtained by inserting exactly one letter into a without changing the order of the other letters.",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestStrChain.spec_6",
+    "negation": "AegisSpec.LongestStrChain.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a word chain from words of length exactly r: there exist pairwise distinct indices i_1,...,i_r with 0 <= i_j < len(words) such that for every j with 1 <= j < r, words[i_j] is a predecessor of words[i_{j+1}] (predecessor as in the problem: the second word can be obtained by inserting exactly one letter into the first without changing the order of the other letters).",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestStrChain.spec_7",
+    "negation": "AegisSpec.LongestStrChain.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every word chain from words has length at most r. Equivalently, there do not exist pairwise distinct indices i_1,...,i_{r+1} with 0 <= i_j < len(words) such that for every j with 1 <= j < r+1, words[i_j] is a predecessor of words[i_{j+1}] (predecessor as in the problem).",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestStrChain.spec_8",
+    "negation": "AegisSpec.LongestStrChain.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If there is a bijection f from {0,...,len(words)-1} to itself such that words'[f(i)] = words[i] for every i with 0 <= i < len(words), then whenever longest_str_chain(words) returns r and longest_str_chain(words') returns r', we have r = r'.",
+    "preconditions": "Both words and words' satisfy the common preconditions: 1 <= len(words) <= 1000, 1 <= len(words') <= 1000, every word has length 1..16, and all bytes are ASCII lowercase. Also len(words) = len(words')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestStrChain.spec_9",
+    "negation": "AegisSpec.LongestStrChain.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there is an injective function f from {0,...,len(words)-1} to {0,...,len(words')-1} such that words'[f(i)] = words[i] for every i with 0 <= i < len(words), then whenever longest_str_chain(words) returns r and longest_str_chain(words') returns r', we have r <= r'.",
+    "preconditions": "Both words and words' satisfy the common preconditions: lengths between 1 and 1000, every word has length 1..16, and all bytes are ASCII lowercase."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestStrChain.spec_10",
+    "negation": "AegisSpec.LongestStrChain.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever longest_str_chain(words) returns r and longest_str_chain(words') returns r', we have r = r'.",
+    "preconditions": "Let words satisfy the common preconditions and additionally len(words) <= 999. Let q be an index with 0 <= q < len(words). Let words' be any array obtained from words by inserting one additional copy of words[q] at some position p with 0 <= p <= len(words) (so len(words') = len(words) + 1 and all other entries keep their relative order). Then words' also satisfies the problem constraints."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestStrChain.spec_11",
+    "negation": "AegisSpec.LongestStrChain.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever longest_str_chain(words) returns r and longest_str_chain(rev_words) returns r', we have r = r'.",
+    "preconditions": "Let words satisfy the common preconditions. Let rev_words be the array of the same length such that for every i with 0 <= i < len(words), len(rev_words[i]) = len(words[i]) and rev_words[i][t] = words[i][len(words[i]) - 1 - t] for every t with 0 <= t < len(words[i]). Then rev_words also satisfies the problem constraints."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestStrChain.spec_12",
+    "negation": "AegisSpec.LongestStrChain.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there exists a permutation i_1,...,i_{len(words)} of all indices 0,...,len(words)-1 (each index appears exactly once) such that for every j with 1 <= j < len(words), words[i_j] is a predecessor of words[i_{j+1}] (predecessor as in the problem), then r = len(words).",
+    "preconditions": "1 <= len(words) <= 1000. For every i with 0 <= i < len(words), 1 <= len(words[i]) <= 16, and every byte of words[i] is an ASCII lowercase letter (97 <= byte <= 122)."
+  }
+]

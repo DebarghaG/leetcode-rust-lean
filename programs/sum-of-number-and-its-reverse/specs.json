@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_1",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exists a non-negative integer x with 0 <= x <= num such that x + reverse(x) = num. Here reverse(0)=0; for x>0, if x has decimal digits d_0,...,d_{k-1} with d_0 the units digit, d_{k-1} != 0, and each d_i in {0,...,9}, then reverse(x) = sum_{i=0}^{k-1} d_i * 10^(k-1-i), so leading zeros in the reversed decimal form are discarded.",
+    "preconditions": "num is an i64 with 0 <= num <= 100000 (the problem's bound 0 <= num <= 10^5)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_2",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every num satisfying the precondition, the function returns a Bool result r; it does not fail, panic, or overflow on these inputs.",
+    "preconditions": "num is an i64 with 0 <= num <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_3",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns false for num, there is no non-negative integer x such that x + reverse(x) = num; equivalently, there is no x with 0 <= x <= num satisfying this equation.",
+    "preconditions": "num is an i64 with 0 <= num <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_4",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns true for num, there exists an integer x with 0 <= x <= num such that x + reverse(x) = num. Thus a witness never needs to be larger than num.",
+    "preconditions": "num is an i64 with 0 <= num <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_5",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns true for num and num is not divisible by 11 (num mod 11 != 0), there exists a witness x with 0 <= x <= num and x+reverse(x)=num whose decimal representation, written without leading zeros and with 0 represented by the single digit 0, has an odd number of digits.",
+    "preconditions": "num is an i64 with 0 <= num <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_6",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true; a valid witness is x=140, because reverse(140)=41 (the reversed digits 041 are read as 41) and 140+41=181.",
+    "preconditions": "num = 181."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfNumberAndReverse.spec_7",
+    "negation": "AegisSpec.SumOfNumberAndReverse.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns false; no non-negative integer x satisfies x+reverse(x)=100000.",
+    "preconditions": "num = 100000."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_1",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let bestProfit(w) be defined as follows: if there is at least one i with 0 <= i < len(difficulty) and difficulty[i] <= w, then bestProfit(w) = max{ profit[i] | 0 <= i < len(difficulty) and difficulty[i] <= w }; otherwise bestProfit(w) = 0. The function returns a result r and r = sum_{j=0}^{len(worker)-1} bestProfit(worker[j]).",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_2",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail: it does not panic, access out of bounds, or overflow i64 arithmetic.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_3",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_4",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max{ profit[i] | 0 <= i < len(difficulty) }. Whenever the function returns a result r, r <= len(worker) * M.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_5",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every j with 0 <= j < len(worker) and every i with 0 <= i < len(difficulty), difficulty[i] > worker[j].",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_6",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let bestProfit(w) be the maximum profit[i] over all i with 0 <= i < len(difficulty) and difficulty[i] <= w, or 0 if no such i exists. Whenever the function returns a result r, r = len(worker) * bestProfit(w).",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; and there exists an integer w such that worker[j] = w for every 0 <= j < len(worker)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_7",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on (difficulty, profit, worker), r1 on (difficulty, profit, w1), and r2 on (difficulty, profit, w2), then r = r1 + r2.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(worker) >= 2; w1 and w2 are nonempty slices; len(w1) + len(w2) = len(worker); worker is the concatenation of w1 and w2, meaning worker[j] = w1[j] for 0 <= j < len(w1) and worker[len(w1) + j] = w2[j] for 0 <= j < len(w2); and every element of w1 and w2 is between 1 and 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_8",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (difficulty, profit, worker) and r' on (difficulty, profit, worker'), then r = r'.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(worker') = len(worker); worker' is a permutation of worker; and every element of worker' is between 1 and 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_9",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (difficulty, profit, worker) and r' on (difficulty', profit', worker), then r = r'.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(difficulty') = len(profit'); 1 <= len(difficulty') <= 10000; for every i with 0 <= i < len(difficulty'), 1 <= difficulty'[i] <= 100000 and 1 <= profit'[i] <= 100000; len(difficulty') = len(difficulty); len(profit') = len(profit); and there exists a permutation pi of {0, ..., len(difficulty)-1} such that difficulty'[i] = difficulty[pi(i)] and profit'[i] = profit[pi(i)] for every 0 <= i < len(difficulty)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_10",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on (difficulty, profit, worker) and r' on (difficulty, profit, worker'), then r <= r'.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(worker') = len(worker); and for every j with 0 <= j < len(worker), 1 <= worker[j] <= worker'[j] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_11",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on (difficulty, profit, worker) and r' on (difficulty, profit', worker), then r <= r'.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(profit') = len(profit); and for every i with 0 <= i < len(difficulty), 1 <= profit[i] <= profit'[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_12",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of the function on (difficulty, profit, worker) and r' the result on (difficulty', profit, worker). Whenever both calls return results, r' <= r.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; len(difficulty') = len(difficulty); and for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= difficulty'[i] <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_13",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let C be the number of j with 0 <= j < len(worker) for which there exists i with 0 <= i < len(difficulty) and difficulty[i] <= worker[j]. Whenever the function returns a result r, r = p * C.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; and there exists an integer p such that profit[i] = p for every 0 <= i < len(difficulty)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_14",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let P = max{ profit[i] | 0 <= i < len(difficulty) }, and let C be the number of j with 0 <= j < len(worker) and worker[j] >= d. Whenever the function returns a result r, r = P * C.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000; and there exists an integer d such that difficulty[i] = d for every 0 <= i < len(difficulty)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxProfitAssignment.spec_15",
+    "negation": "AegisSpec.MaxProfitAssignment.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, the following hold: (1) there exists a feasible assignment, meaning a choice for each j with 0 <= j < len(worker) of either no job or an index i_j with 0 <= i_j < len(difficulty) and difficulty[i_j] <= worker[j], such that the assignment's total profit, defined as the sum of profit[i_j] over workers assigned a job and 0 for unassigned workers, equals r, and moreover if no job is chosen for j then there is no i with 0 <= i < len(difficulty) and difficulty[i] <= worker[j]; and (2) for every feasible assignment (where a worker may choose no job even if some affordable job exists), its total profit is at most r.",
+    "preconditions": "len(difficulty) = len(profit); 1 <= len(difficulty) <= 10000; 1 <= len(worker) <= 10000; for every i with 0 <= i < len(difficulty), 1 <= difficulty[i] <= 100000 and 1 <= profit[i] <= 100000; and for every j with 0 <= j < len(worker), 1 <= worker[j] <= 100000."
+  }
+]

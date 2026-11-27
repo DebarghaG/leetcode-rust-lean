@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinChanges.spec_1",
+    "negation": "AegisSpec.MinChanges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = |{ i | 0 <= i < len(s)/2 and s[2*i] != s[2*i+1] }|. Equivalently, r is the minimum number of byte changes needed to turn s into a beautiful byte string t of the same length, where a byte string t is beautiful iff it can be partitioned into one or more contiguous nonempty substrings, each of even length and each consisting entirely of byte 48 or entirely of byte 49.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; for every i with 0 <= i < len(s), s[i] = 48 or s[i] = 49."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinChanges.spec_2",
+    "negation": "AegisSpec.MinChanges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; for every i with 0 <= i < len(s), s[i] = 48 or s[i] = 49."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinChanges.spec_3",
+    "negation": "AegisSpec.MinChanges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s)/2.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; for every i with 0 <= i < len(s), s[i] = 48 or s[i] = 49."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinChanges.spec_4",
+    "negation": "AegisSpec.MinChanges.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < len(s)/2, s[2*i] = s[2*i+1].",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; for every i with 0 <= i < len(s), s[i] = 48 or s[i] = 49."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinChanges.spec_5",
+    "negation": "AegisSpec.MinChanges.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s)/2 if and only if for every i with 0 <= i < len(s)/2, s[2*i] != s[2*i+1].",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; for every i with 0 <= i < len(s), s[i] = 48 or s[i] = 49."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinChanges.spec_6",
+    "negation": "AegisSpec.MinChanges.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_changes(s) returns r and min_changes(t) returns r', we have r = r'.",
+    "preconditions": "s and t are byte strings with 2 <= len(s) = len(t) <= 100000, len(s) is even, and every byte of s and t is 48 or 49; for every i with 0 <= i < len(s)/2, s[2*i] = s[2*i+1] if and only if t[2*i] = t[2*i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinChanges.spec_7",
+    "negation": "AegisSpec.MinChanges.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_changes(s) returns r, min_changes(u) returns r_u, and min_changes(v) returns r_v, we have r = r_u + r_v.",
+    "preconditions": "s is a byte string with 4 <= len(s) <= 100000, len(s) is even, and every byte is 48 or 49; k is an even integer with 2 <= k <= len(s)-2; u is the prefix of s of length k; v is the suffix of s of length len(s)-k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinChanges.spec_8",
+    "negation": "AegisSpec.MinChanges.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_changes(s) returns r and min_changes(t) returns r', if s[j] = s[j'] then r' = r + 1, and if s[j] != s[j'] then r' = r - 1.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; every byte of s is 48 or 49; 0 <= j < len(s); let j' = j+1 when j is even and j' = j-1 when j is odd; t is s with byte j flipped, i.e. t[j] = 49 when s[j] = 48 and t[j] = 48 when s[j] = 49, and t[i] = s[i] for all i != j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinChanges.spec_9",
+    "negation": "AegisSpec.MinChanges.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every byte string t of the same length as s, with every byte equal to 48 or 49 and beautiful (that is, partitionable into one or more contiguous nonempty substrings, each of even length and each consisting entirely of byte 48 or entirely of byte 49), the Hamming distance |{ i | 0 <= i < len(s) and s[i] != t[i] }| is at least r.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; every byte of s is 48 or 49."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinChanges.spec_10",
+    "negation": "AegisSpec.MinChanges.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a byte string t of the same length as s, with every byte equal to 48 or 49 and beautiful (that is, partitionable into one or more contiguous nonempty substrings, each of even length and each consisting entirely of byte 48 or entirely of byte 49), such that |{ i | 0 <= i < len(s) and s[i] != t[i] }| = r.",
+    "preconditions": "2 <= len(s) <= 100000; len(s) is even; every byte of s is 48 or 49."
+  }
+]

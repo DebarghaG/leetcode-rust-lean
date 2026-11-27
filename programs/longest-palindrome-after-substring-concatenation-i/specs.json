@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindrome.spec_1",
+    "negation": "AegisSpec.LongestPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "the function returns a result r and r equals the maximum, over all choices of indices 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t) such that the byte sequence s[i..j) concatenated with t[k..l) is a palindrome, of (j - i) + (l - k). Empty substrings (i = j or k = l) are allowed; a sequence is a palindrome if it equals its reverse; the maximum is taken over a nonempty finite set.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindrome.spec_2",
+    "negation": "AegisSpec.LongestPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "the function returns a result r (it does not fail, panic, or report overflow) for every pair s,t satisfying the preconditions.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindrome.spec_3",
+    "negation": "AegisSpec.LongestPalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "whenever the function returns a result r, r <= len(s) + len(t).",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindrome.spec_4",
+    "negation": "AegisSpec.LongestPalindrome.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "whenever the function returns a result r, there exist indices 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t) such that (j - i) + (l - k) = r and the concatenation s[i..j) followed by t[k..l) is a palindrome.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindrome.spec_5",
+    "negation": "AegisSpec.LongestPalindrome.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "whenever the function returns a result r, for every choice of indices 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t), if s[i..j) followed by t[k..l) is a palindrome, then (j - i) + (l - k) <= r.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindrome.spec_6",
+    "negation": "AegisSpec.LongestPalindrome.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "let L(x) be the maximum length of a contiguous substring of x that is a palindrome. Whenever the function returns a result r, r >= L(s).",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindrome.spec_7",
+    "negation": "AegisSpec.LongestPalindrome.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "let L(x) be the maximum length of a contiguous substring of x that is a palindrome. Whenever the function returns a result r, r >= L(t).",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindrome.spec_8",
+    "negation": "AegisSpec.LongestPalindrome.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "whenever the function returns a result r, for every nonempty contiguous substring x of s, if the reverse of x occurs as a contiguous substring of t, then r >= 2 * len(x).",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindrome.spec_9",
+    "negation": "AegisSpec.LongestPalindrome.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "if no byte value occurs in both s and t (that is, for every i,k with 0 <= i < len(s) and 0 <= k < len(t), s[i] != t[k]), then whenever the function returns a result r, r = max(L(s), L(t)), where L(x) is the maximum length of a contiguous palindromic substring of x.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindrome.spec_10",
+    "negation": "AegisSpec.LongestPalindrome.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "if the concatenation of all of s followed by all of t is a palindrome, then whenever the function returns a result r, r = len(s) + len(t).",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindrome.spec_11",
+    "negation": "AegisSpec.LongestPalindrome.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "whenever the function returns a result r, if r = len(s) + len(t), then the concatenation of all of s followed by all of t is a palindrome.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindrome.spec_12",
+    "negation": "AegisSpec.LongestPalindrome.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "let reverse(x) be the byte sequence x read in reverse order. Whenever the function returns r on (s,t) and returns r' on (reverse(t), reverse(s)), we have r = r'.",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindrome.spec_13",
+    "negation": "AegisSpec.LongestPalindrome.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "whenever the function returns a result r: r >= 2 if and only if at least one of the following holds: (a) there is an index i with 0 <= i and i+1 < len(s) and s[i] = s[i+1]; (b) there is an index i with 0 <= i and i+2 < len(s) and s[i] = s[i+2]; (c) there is an index i with 0 <= i and i+1 < len(t) and t[i] = t[i+1], or there is an index i with 0 <= i and i+2 < len(t) and t[i] = t[i+2]; (d) there are indices i,k with 0 <= i < len(s), 0 <= k < len(t), and s[i] = t[k].",
+    "preconditions": "s and t are byte slices (Slice Std.U8) with 1 <= len(s) <= 30, 1 <= len(t) <= 30, and every byte of s and t is an ASCII lowercase English letter (97 <= byte <= 122)."
+  }
+]

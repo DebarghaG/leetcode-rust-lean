@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_1",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = n/k. For each block index b with 0 <= b < m, define block B_b by B_b[t] = word[b*k + t] for 0 <= t < k. For 0 <= j < m, let same(j) be the number of b in [0,m) with B_b = B_j, i.e. for all t with 0 <= t < k, word[b*k+t] = word[j*k+t]. Let F = max { same(j) | 0 <= j < m }. The function returns a result r and r = m - F.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n (so n = m*k for the positive integer m = n/k), and every byte of word is an ASCII lowercase letter (97 through 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_2",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, the function returns a result r; it does not panic, overflow, underflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_3",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let m = n/k. For each block index j with 0 <= j < m, let same(j) be the number of b in [0,m) such that for all t with 0 <= t < k, word[b*k+t] = word[j*k+t]. Whenever the function returns a result r, for every j with 0 <= j < m we have r <= m - same(j).",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_4",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = n/k. Whenever the function returns a result r, r = 0 if and only if word is already k-periodic, that is, if and only if all m blocks of length k are equal: for all b and c with 0 <= b < m and 0 <= c < m and all t with 0 <= t < k, word[b*k+t] = word[c*k+t].",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_5",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(word). For each byte value c, let count(c) be the number of indices i with 0 <= i < n and word[i] = c. Let C = max { count(c) | c is a byte value appearing in word }. Whenever the function returns a result r, r = n - C.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, k = 1, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_6",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = n/k. Suppose the m blocks of length k are pairwise distinct, meaning for all b and c with 0 <= b < m, 0 <= c < m, and b != c, there exists t with 0 <= t < k and word[b*k+t] != word[c*k+t]. Whenever the function returns a result r, r = m - 1.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_7",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let B0 be word[0..k-1] and B1 be word[k..2k-1]. Whenever the function returns a result r, either B0 = B1 and r = 0, or B0 != B1 and r = 1.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, every byte of word is an ASCII lowercase letter, and n = 2*k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_8",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let m = n/k. For 0 <= j < m, define same(j) as the number of b in [0,m) with word[b*k+t] = word[j*k+t] for all t in [0,k). Whenever the function returns a result r, there exists a block index j with 0 <= j < m and same(j) = m - r, and consequently the word can be made k-periodic in exactly r allowed operations by copying B_j onto every block not equal to B_j.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_9",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let m = n/k. Whenever the function returns a result r, no sequence of fewer than r allowed operations transforms word into a k-periodic word, where an allowed operation replaces a length-k substring starting at an index divisible by k with another length-k substring starting at an index divisible by k.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_10",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input word and r2 on input word2, r = r2.",
+    "preconditions": "Let n = len(word). The input word satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and all bytes are ASCII lowercase. Let word2 be any other byte string of length n satisfying the same conditions for the same n and k, and suppose there is a bijection pi from {0,...,m-1} to itself, where m=n/k, such that word2[b*k+t] = word[pi(b)*k+t] for every b in [0,m) and t in [0,k)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_11",
+    "negation": "AegisSpec.MinimumOperationsToMakeKPeriodic.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = n/k. Whenever the function returns a result r, 0 <= r <= m - 1. Moreover, r = m - 1 if and only if the m length-k blocks B_0, ..., B_{m-1} are pairwise distinct.",
+    "preconditions": "Let n = len(word). The input satisfies 1 <= n <= 100000, 1 <= k <= n, k divides n, and every byte of word is an ASCII lowercase letter."
+  }
+]

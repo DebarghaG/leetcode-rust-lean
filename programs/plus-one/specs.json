@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PlusOne.spec_1",
+    "negation": "AegisSpec.PlusOne.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is exactly the decimal digit sequence of val(digits)+1, most significant digit first, with no leading zero. Formally, with val(x) = sum_{i=0}^{len(x)-1} x[i] * 10^(len(x)-1-i), we have len(r) >= 1, 0 <= r[i] <= 9 for every i with 0 <= i < len(r), r[0] != 0, and val(r) = val(digits) + 1. These conditions determine r uniquely.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0. The single-digit input [0] is allowed, matching the provided test cases."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PlusOne.spec_2",
+    "negation": "AegisSpec.PlusOne.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, panic, or access out of bounds) for every digits satisfying the preconditions.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PlusOne.spec_3",
+    "negation": "AegisSpec.PlusOne.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every entry of r is a decimal digit: for every i with 0 <= i < len(r), 0 <= r[i] <= 9.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PlusOne.spec_4",
+    "negation": "AegisSpec.PlusOne.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if every digit of digits equals 9 then len(r) = len(digits) + 1; otherwise len(r) = len(digits).",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PlusOne.spec_5",
+    "negation": "AegisSpec.PlusOne.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is non-empty and has no leading zero: len(r) >= 1 and r[0] != 0.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PlusOne.spec_6",
+    "negation": "AegisSpec.PlusOne.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, val(r) = val(digits) + 1, where val(x) = sum_{i=0}^{len(x)-1} x[i] * 10^(len(x)-1-i).",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PlusOne.spec_7",
+    "negation": "AegisSpec.PlusOne.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the last digit of r is the last digit of digits incremented modulo 10: r[len(r)-1] = (digits[len(digits)-1] + 1) mod 10, with mod giving the nonnegative remainder in {0,...,9}.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PlusOne.spec_8",
+    "negation": "AegisSpec.PlusOne.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if digits[len(digits)-1] < 9, then len(r) = len(digits), r[len(digits)-1] = digits[len(digits)-1] + 1, and r[i] = digits[i] for every i with 0 <= i < len(digits)-1.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PlusOne.spec_9",
+    "negation": "AegisSpec.PlusOne.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(digits), and let k be the largest integer with 0 <= k <= n such that digits[n-1-j] = 9 for every j with 0 <= j < k. If k < n, then whenever the function returns a result r: len(r) = n; r[i] = digits[i] for every i with 0 <= i < n-k-1; r[n-k-1] = digits[n-k-1] + 1; and r[i] = 0 for every i with n-k <= i < n.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PlusOne.spec_10",
+    "negation": "AegisSpec.PlusOne.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if every digit of digits equals 9, then len(r) = len(digits) + 1, r[0] = 1, and r[i] = 0 for every i with 1 <= i < len(r).",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PlusOne.spec_11",
+    "negation": "AegisSpec.PlusOne.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k be the number of trailing nines in digits, i.e. the largest k with 0 <= k <= len(digits) such that digits[len(digits)-1-j] = 9 for every j with 0 <= j < k. Whenever the function returns a result r, the number of trailing zeros in r is exactly k: if z is the largest integer with 0 <= z <= len(r) such that r[len(r)-1-j] = 0 for every j with 0 <= j < z, then z = k.",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PlusOne.spec_12",
+    "negation": "AegisSpec.PlusOne.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer p with -1 <= p < len(digits) for which exactly one of the following holds: (a) p = -1, every digit of digits is 9, len(r) = len(digits)+1, r[0] = 1, and r[i+1] = 0 for every i with 0 <= i < len(digits); or (b) p >= 0, digits[p] <= 8, digits[i] = 9 for every i with p < i < len(digits), len(r) = len(digits), r[i] = digits[i] for every i with 0 <= i < p, r[p] = digits[p]+1, and r[i] = 0 for every i with p < i < len(digits).",
+    "preconditions": "1 <= len(digits) <= 100; for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9; and if len(digits) > 1 then digits[0] != 0."
+  }
+]

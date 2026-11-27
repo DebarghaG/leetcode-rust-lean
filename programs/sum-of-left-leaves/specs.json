@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_1",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Define S(root) as the sum of the values of all node occurrences x in root such that x is the left child of some node occurrence y in root and x has no children, i.e. x = Node(a, Null, Null) for some integer a. Each such occurrence is counted exactly once, and S(root) = 0 if there are no such occurrences. Then the returned value satisfies r = S(root).",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, and every node value lies in the closed interval [-1000, 1000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_2",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail. In particular, for this execution there is no arithmetic overflow, no panic, and no out-of-bounds access.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, and every node value lies in [-1000, 1000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_3",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n be the number of node occurrences in root. The function returns a result r satisfying -1000 * n <= r <= 1000 * n.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, and every node value lies in [-1000, 1000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_4",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let T be the sum of all node values in root. The function returns a result r satisfying 0 <= r <= T.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, every node value lies in [-1000, 1000], and every node value is non-negative."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_5",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S(T) denote the sum of values of all left leaves of T, defined as in spec_1 with S(Null) = 0. If L is a leaf, write L = Node(a, Null, Null); set c = a in that case, and set c = 0 otherwise. The function returns a result r satisfying r = S(L) + S(R) + c.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, every node value lies in [-1000, 1000], and root = Node(v, L, R) for some integer v and subtrees L and R."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_6",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If r is the result returned on root and r2 is the result returned on root2, then r = r2.",
+    "preconditions": "root and root2 are Trees, each with between 1 and 1000 node occurrences inclusive, every node value in either tree lies in [-1000, 1000], root2 has exactly the same shape as root, and for every node occurrence that is a left leaf in root, the corresponding occurrence in root2 has the same value; values at all other positions may differ arbitrarily within [-1000, 1000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_7",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result returned on root and r_neg is the result returned on root_neg, then r_neg = -r.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, every node value lies in [-1000, 1000], and root_neg is obtained from root by replacing every node value x with -x."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_8",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let Q be the sum of the values of all node occurrences x in root_mir such that x is the right child of some node occurrence y in root_mir and x has no children; if there are none, Q = 0. The function returns a result r satisfying r = Q.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, every node value lies in [-1000, 1000], and root_mir is obtained from root by recursively swapping the left and right children of every node while keeping all values unchanged."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumOfLeftLeaves.spec_9",
+    "negation": "AegisSpec.SumOfLeftLeaves.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let m be the number of left-leaf node occurrences in root. If r is the result returned on root and r_shift is the result returned on root_shift, then r_shift = r + c * m.",
+    "preconditions": "root is a Tree with between 1 and 1000 node occurrences inclusive, every node value lies in [-1000, 1000], c is an integer such that x + c is in [-1000, 1000] for every node value x in root, and root_shift is obtained from root by replacing every node value x with x + c."
+  }
+]

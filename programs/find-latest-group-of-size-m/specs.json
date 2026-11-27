@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindLatestStep.spec_1",
+    "negation": "AegisSpec.FindLatestStep.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Let n = len(arr). For each integer k with 0 <= k <= n, define S_k = { arr[j] | 0 <= j < k } (the set of positions set to 1 after k steps). For 1 <= k <= n and 1 <= p <= n-m+1, say that [p, p+m-1] is a maximal group of ones of length m at step k iff: (a) for every q with p <= q <= p+m-1, q in S_k; (b) p = 1 or (p-1) not in S_k; (c) p+m-1 = n or (p+m) not in S_k. Say HasGroup(k) iff there exists p with 1 <= p <= n-m+1 satisfying (a)-(c). Then: if there exists an integer k with 1 <= k <= n and HasGroup(k), r is the maximum of { k | 1 <= k <= n and HasGroup(k) }; otherwise r = -1.",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindLatestStep.spec_2",
+    "negation": "AegisSpec.FindLatestStep.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail (no panic, no arithmetic overflow, no out-of-bounds access).",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindLatestStep.spec_3",
+    "negation": "AegisSpec.FindLatestStep.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= n, where n = len(arr).",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindLatestStep.spec_4",
+    "negation": "AegisSpec.FindLatestStep.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or m <= r <= n-1, where n = len(arr).",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume m < n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindLatestStep.spec_5",
+    "negation": "AegisSpec.FindLatestStep.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = n, where n = len(arr).",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume m = n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindLatestStep.spec_6",
+    "negation": "AegisSpec.FindLatestStep.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = -1 or r = n-1, where n = len(arr).",
+    "preconditions": "Let n = len(arr). We assume n >= 2. We assume 1 <= m <= n. We assume m = n-1. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindLatestStep.spec_7",
+    "negation": "AegisSpec.FindLatestStep.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r with r >= 1 (in particular, r != -1).",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume m = 1. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindLatestStep.spec_8",
+    "negation": "AegisSpec.FindLatestStep.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 1, there exists an integer p such that 1 <= p <= n-m+1 and [p, p+m-1] is a maximal group of ones of length m at step r. More explicitly, with S_r = { arr[j] | 0 <= j < r }: (a) for every q with p <= q <= p+m-1, q in S_r; (b) p = 1 or (p-1) not in S_r; (c) p+m-1 = n or (p+m) not in S_r.",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindLatestStep.spec_9",
+    "negation": "AegisSpec.FindLatestStep.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r >= 1, for every step k with r < k <= n there is no maximal group of ones of length m at step k. That is, with S_k = { arr[j] | 0 <= j < k }, for every p with 1 <= p <= n-m+1, at least one of the following fails: (a) all q in [p, p+m-1] are in S_k; (b) p = 1 or p-1 not in S_k; (c) p+m-1 = n or p+m not in S_k.",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindLatestStep.spec_10",
+    "negation": "AegisSpec.FindLatestStep.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r = -1, for every step k with 1 <= k <= n there is no maximal group of ones of length m at step k. That is, with S_k = { arr[j] | 0 <= j < k }, for every p with 1 <= p <= n-m+1, at least one of the following fails: (a) all q in [p, p+m-1] are in S_k; (b) p = 1 or p-1 not in S_k; (c) p+m-1 = n or p+m not in S_k.",
+    "preconditions": "Let n = len(arr). We assume n >= 1. We assume 1 <= m <= n. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindLatestStep.spec_11",
+    "negation": "AegisSpec.FindLatestStep.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, we have 1 <= r <= n-1, where n = len(arr).",
+    "preconditions": "Let n = len(arr). We assume n >= 2. We assume 1 <= m <= n. We assume m = 1. We assume arr is a permutation of the integers 1..n: for every i with 0 <= i < n, 1 <= arr[i] <= n; and for every i, j with 0 <= i < j < n, arr[i] != arr[j]. All arithmetic in the problem (indices, steps) fits in 64-bit signed integers."
+  }
+]

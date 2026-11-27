@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KEmptySlots.spec_1",
+    "negation": "AegisSpec.KEmptySlots.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define C = { c | there exists p with 1 <= p, p+k+1 <= n, c = max(day(p), day(p+k+1)), and for every y with p < y < p+k+1, day(y) > c }. The function returns a result r and satisfies: if C is empty then r = -1; if C is nonempty then r = min(C). Equivalently, r is the least day d in {1,...,n} such that there exists p with positions p and p+k+1 turned on after d days and every one of the k positions strictly between them turned off after d days; if no such d exists, r = -1.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KEmptySlots.spec_2",
+    "negation": "AegisSpec.KEmptySlots.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; in particular, it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KEmptySlots.spec_3",
+    "negation": "AegisSpec.KEmptySlots.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= n.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KEmptySlots.spec_4",
+    "negation": "AegisSpec.KEmptySlots.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists p such that 1 <= p, p+k+1 <= n, max(day(p), day(p+k+1)) = r, and for every y with p < y < p+k+1, day(y) > r.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KEmptySlots.spec_5",
+    "negation": "AegisSpec.KEmptySlots.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != -1, for every day d with 1 <= d < r and every p with 1 <= p and p+k+1 <= n, at least one of the following holds: day(p) > d, day(p+k+1) > d, or there exists y with p < y < p+k+1 and day(y) <= d.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KEmptySlots.spec_6",
+    "negation": "AegisSpec.KEmptySlots.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if for every p with 1 <= p and p+k+1 <= n there exists y such that p < y < p+k+1 and day(y) <= max(day(p), day(p+k+1)).",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KEmptySlots.spec_7",
+    "negation": "AegisSpec.KEmptySlots.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k >= n-1, then the function returns r = -1.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KEmptySlots.spec_8",
+    "negation": "AegisSpec.KEmptySlots.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if n = 1 then r = -1, while if n >= 2 then r = min{ max(day(p), day(p+1)) | 1 <= p < n }.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, bulbs is a permutation of {1,2,...,n}, and k = 0. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KEmptySlots.spec_9",
+    "negation": "AegisSpec.KEmptySlots.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r != -1, we have r <= n-1.",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 < k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KEmptySlots.spec_10",
+    "negation": "AegisSpec.KEmptySlots.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, for every p with 1 <= p and p+k+1 <= n such that for every y with p < y < p+k+1 we have day(y) > max(day(p), day(p+k+1)), it holds that r <= max(day(p), day(p+k+1)).",
+    "preconditions": "Let n = len(bulbs). Assume 1 <= n <= 20000, 0 <= k <= 20000, and bulbs is a permutation of {1,2,...,n}. For 1 <= x <= n, let day(x) be the unique d in {1,...,n} with bulbs[d-1] = x."
+  }
+]

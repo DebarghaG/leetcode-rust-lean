@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SpiralOrder.spec_1",
+    "negation": "AegisSpec.SpiralOrder.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let layers = (min(m,n) + 1) / 2 (integer division). For each l with 0 <= l < layers, put top_l = l, bottom_l = m - 1 - l, left_l = l, right_l = n - 1 - l, and define block(l) as follows: if top_l = bottom_l, block(l) is the list [(top_l, j) for j = left_l, left_l+1, ..., right_l]; else if left_l = right_l, block(l) is the list [(i, left_l) for i = top_l, top_l+1, ..., bottom_l]; otherwise block(l) is the concatenation of (a) [(top_l, j) for j = left_l, ..., right_l], then (b) [(i, right_l) for i = top_l+1, ..., bottom_l], then (c) [(bottom_l, j) for j = right_l-1, right_l-2, ..., left_l], then (d) [(i, left_l) for i = bottom_l-1, bottom_l-2, ..., top_l+1]. Let P be the concatenation block(0), block(1), ..., block(layers-1). Then the function returns a vector r such that len(r) = m*n and for every k with 0 <= k < m*n, if P[k] = (i,j) then r[k] = matrix[i][j].",
+    "preconditions": "Let m = len(matrix) and n = len(matrix[0]). Assume 1 <= m <= 10, 1 <= n <= 10, every row matrix[i] for 0 <= i < m has length n, and -100 <= matrix[i][j] <= 100 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SpiralOrder.spec_2",
+    "negation": "AegisSpec.SpiralOrder.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, overflow, or out-of-bounds).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SpiralOrder.spec_3",
+    "negation": "AegisSpec.SpiralOrder.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every integer v, the number of indices k with 0 <= k < len(r) and r[k] = v equals the number of pairs (i,j) with 0 <= i < m, 0 <= j < n and matrix[i][j] = v. Equivalently, r is a permutation (multiset) of the flattened matrix.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SpiralOrder.spec_4",
+    "negation": "AegisSpec.SpiralOrder.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every j with 0 <= j < n, r[j] = matrix[0][j]. Thus the first n entries of r are exactly the first row of matrix in left-to-right order.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SpiralOrder.spec_5",
+    "negation": "AegisSpec.SpiralOrder.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every k with 0 <= k <= m-2, r[n + k] = matrix[k+1][n-1]. After the first row, the next m-1 entries are the rightmost column from row 1 to row m-1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SpiralOrder.spec_6",
+    "negation": "AegisSpec.SpiralOrder.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every k with 0 <= k <= n-2, r[n + (m-1) + k] = matrix[m-1][n-2-k]. After the top row and the right column, the next n-1 entries are the bottom row from column n-2 down to 0.",
+    "preconditions": "Same as spec_1, and m >= 2 and n >= 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SpiralOrder.spec_7",
+    "negation": "AegisSpec.SpiralOrder.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, for every k with 0 <= k <= m-3, r[n + (m-1) + (n-1) + k] = matrix[m-2-k][0]. After the top row, right column and bottom row, the next m-2 entries are the leftmost column from row m-2 up to row 1.",
+    "preconditions": "Same as spec_1, and m >= 3 and n >= 2."
+  }
+]

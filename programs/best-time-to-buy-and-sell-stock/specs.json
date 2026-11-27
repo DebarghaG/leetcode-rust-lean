@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_profit(prices) returns a result r, r = max({0} ∪ { prices[j] - prices[i] | 0 <= i < j < len(prices) }), where max is the largest element of the finite set; in particular, if len(prices) = 1 or no pair has prices[j] > prices[i], then r = 0.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function max_profit(prices) returns a result (an Ok value) for every input satisfying the preconditions; it does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, 0 <= r.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, r <= max_price - min_price, where max_price = max{ prices[i] | 0 <= i < len(prices) } and min_price = min{ prices[i] | 0 <= i < len(prices) }.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, for every i and j with 0 <= i < j < len(prices), prices[j] - prices[i] <= r.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_profit(prices) returns a result r and r > 0, there exist indices i and j with 0 <= i < j < len(prices) such that prices[j] - prices[i] = r.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, r > 0 if and only if there exist indices i and j with 0 <= i < j < len(prices) such that prices[j] > prices[i].",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_profit(prices) returns a result r, r = 0 if and only if for all i and j with 0 <= i < j < len(prices), prices[j] <= prices[i].",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such c and q, whenever max_profit(prices) returns r and max_profit(q) returns r', we have r' = r.",
+    "preconditions": "prices is a nonempty slice with 1 <= len(prices) <= 100000 and 0 <= prices[i] <= 10000 for all i. Let c be any integer such that 0 <= prices[i] + c <= 10000 for every i, and let q be the slice of the same length with q[i] = prices[i] + c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such c and q, whenever max_profit(prices) returns r and max_profit(q) returns r', we have r' = c * r.",
+    "preconditions": "prices is a nonempty slice with 1 <= len(prices) <= 100000 and 0 <= prices[i] <= 10000 for all i. Let c be a positive integer such that 0 <= c * prices[i] <= 10000 for every i, and let q be the slice of the same length with q[i] = c * prices[i]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfit.spec_11",
+    "negation": "AegisSpec.MaxProfit.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, for every k with 1 <= k <= len(prices), r >= max({0} ∪ { prices[j] - prices[i] | 0 <= i < j < k }), where max is the largest element of the finite set.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxProfit.spec_12",
+    "negation": "AegisSpec.MaxProfit.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, for every k with 0 <= k < len(prices), r >= max({0} ∪ { prices[j] - prices[i] | k <= i < j < len(prices) }), where max is the largest element of the finite set.",
+    "preconditions": "prices is a nonempty slice of 64-bit signed integers with 1 <= len(prices) <= 100000 and, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_1",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result answer, answer has length len(queries); and for every j with 0 <= j < len(queries), if l=queries[j][0], r=queries[j][1], k=queries[j][2], then answer[j] is true if and only if odd(l,r) <= 2*k + 1, where odd(l,r) is the number of letters c in {'a',...,'z'} whose frequency among s[l], s[l+1], ..., s[r] is odd.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_2",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result answer; in particular it does not panic, access out of bounds, or fail from integer overflow.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_3",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result answer, for every j with 0 <= j < len(queries) such that answer[j] is true, let l=queries[j][0], r=queries[j][1], k=queries[j][2] and L=r-l+1. There exists a palindrome t of length L over lowercase English letters such that the minimum number of single-character replacements needed to change the multiset of letters in s[l..r] into the multiset of letters in t is at most k; equivalently, sum_{c in {'a',...,'z'}} max(0, freq_t(c) - freq_s(c;l,r)) <= k.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_4",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result answer, for any indices p,q with 0<=p,q<len(queries), if queries[p][0]=queries[q][0], queries[p][1]=queries[q][1], and queries[p][2] <= queries[q][2], then answer[p]=true implies answer[q]=true.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_5",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result answer, for every j with 0<=j<len(queries), let l=queries[j][0], r=queries[j][1], k=queries[j][2], L=r-l+1. If k >= floor(L/2), then answer[j] is true.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_6",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns results for (s,queries) and for (s',queries), for every j with 0<=j<len(queries), if for every letter c in {'a',...,'z'} the count of c in s[l..r] equals the count of c in s'[l..r], where l=queries[j][0], r=queries[j][1], then the j-th entry of the first answer equals the j-th entry of the second answer.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). The slice s' is another byte slice of the same length as s, also consisting of ASCII lowercase English letters."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_7",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns results for (s,Q) and for (s,Q'), for every j with 0<=j<len(Q) (and len(Q)=len(Q')), if Q[j] and Q'[j] are the same triple, then the j-th entry of the first answer equals the j-th entry of the second answer.",
+    "preconditions": "len(s) is between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). Q and Q' are two query vectors of the same length satisfying the query preconditions for s: each entry has exactly three components, and for every j, writing l=Q[j][0], r=Q[j][1], k=Q[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s); the same holds for Q'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_8",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result answer, for every j with 0<=j<len(queries), if queries[j][2] >= 13, then answer[j] is true.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_9",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result answer, for any p,q with 0<=p,q<len(queries), let odd_p be the number of letters c in {'a',...,'z'} whose count in s[queries[p][0]..queries[p][1]] is odd, and let odd_q be the analogous number for q. If queries[p][2]=queries[q][2] and odd_p <= odd_q and answer[q] is true, then answer[p] is true.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanMakePaliQueries.spec_10",
+    "negation": "AegisSpec.CanMakePaliQueries.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result answer, for every j with 0<=j<len(queries) such that answer[j] is false, let l=queries[j][0], r=queries[j][1], k=queries[j][2] and L=r-l+1. For every palindrome t of length L over lowercase English letters, the minimum number of single-character replacements needed to change the multiset of letters in s[l..r] into the multiset of letters in t is greater than k; equivalently, sum_{c in {'a',...,'z'}} max(0, freq_t(c) - freq_s(c;l,r)) > k.",
+    "preconditions": "len(s) and len(queries) are each between 1 and 100000. Every byte s[i] is the ASCII code of a lowercase English letter ('a' through 'z'). For every j with 0 <= j < len(queries), queries[j] has exactly three components; writing l=queries[j][0], r=queries[j][1], k=queries[j][2], we have 0 <= l <= r < len(s) and 0 <= k <= len(s). Indices are 0-based and s[l..r] includes both endpoints."
+  }
+]

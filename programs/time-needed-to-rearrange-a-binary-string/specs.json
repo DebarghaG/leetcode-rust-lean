@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_1",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define the one-second update U(x) of a binary byte slice x to be the unique binary slice of the same length such that, for every i with i+1 < len(x), if x[i]=48 and x[i+1]=49 then U(x)[i]=49 and U(x)[i+1]=48, and for every index j that is not one of the positions i or i+1 of any such occurrence, U(x)[j]=x[j]. Starting from s_0=s and s_{t+1}=U(s_t), let T be the least t >= 0 such that s_t has no index i with i+1 < len(s_t), s_t[i]=48, and s_t[i+1]=49. The function returns Ok r and r, interpreted as a mathematical integer, equals T.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_2",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns an Ok value (some r : I64); it does not return Err, panic, access out of bounds, or overflow.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_3",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok r, the mathematical integer value of r satisfies 0 <= r <= len(s) - 1.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_4",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, r = 0 if and only if there is no index i with 0 <= i < len(s)-1, s[i]=48, and s[i+1]=49. Equivalently, r = 0 exactly when s is of the form 1^a0^b for some a,b >= 0 (all ones before all zeros).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_5",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, if there exist integers a >= 0 and b >= 0 with a+b = len(s) such that the first a bytes of s are all 48 and the remaining b bytes are all 49, then r = 0 when a=0 or b=0, and r = a+b-1 when a>0 and b>0.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_6",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such s, let t be the binary byte slice of length len(s)+1 with t[0]=49 and t[i+1]=s[i] for every 0 <= i < len(s). Then whenever the call on s returns Ok r_s and the call on t returns Ok r_t, r_t = r_s.",
+    "preconditions": "1 <= len(s) <= 999, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_7",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such s, let t be the binary byte slice of length len(s)+1 with t[i]=s[i] for 0 <= i < len(s) and t[len(s)]=48. Then whenever the calls on s and t return Ok r_s and Ok r_t, r_t = r_s.",
+    "preconditions": "1 <= len(s) <= 999, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_8",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define u by len(u)=len(s) and, for every 0 <= i < len(s), u[i]=49 if s[len(s)-1-i]=48, and u[i]=48 if s[len(s)-1-i]=49. Then whenever the calls on s and u return Ok r_s and Ok r_u, r_u = r_s.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_9",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Using the simultaneous 01 -> 10 update, let s_0=s and s_{t+1} be the result after one second from s_t. Whenever the function returns Ok r, the slice s_r (after exactly r updates) has the form 1^k0^(len(s)-k) for some integer k with 0 <= k <= len(s); equivalently, s_r has no index i with s_r[i]=48 and s_r[i+1]=49.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_10",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Using the simultaneous 01 -> 10 update, let s_0=s and s_{t+1} be the result after one second from s_t. Whenever the function returns Ok r, for every integer t with 0 <= t < r, the slice s_t contains at least one index i with i+1 < len(s_t), s_t[i]=48, and s_t[i+1]=49.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_11",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For an index i, define z(i) = the number of j with 0 <= j < i and s[j]=48. Let i_0 < i_1 < ... < i_{m-1} be all indices i with s[i]=49 and z(i)>0, and let m be their number. Whenever the function returns Ok r, if m=0 then r=0, and if m>0 then r = max over 0 <= k < m of ( z(i_k) + (m-1-k) ).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_12",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For an index i, define z(i) = the number of j with 0 <= j < i and s[j]=48. Whenever the function returns Ok r, for every i with 0 <= i < len(s), s[i]=49, and z(i)>0, we have r >= z(i).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_13",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For an index i, define z(i)=the number of j with 0 <= j < i and s[j]=48, and c(i)=the number of j with i < j < len(s), s[j]=49, and z(j)>0. Whenever the function returns Ok r, either r=0 and there is no index i with s[i]=49 and z(i)>0, or there exists an index i with s[i]=49, z(i)>0, and r = z(i) + c(i).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SecondsToRemoveOccurrences.spec_14",
+    "negation": "AegisSpec.SecondsToRemoveOccurrences.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be the binary byte slice of length len(s)+1 with t[0]=48 and t[i+1]=s[i] for every 0 <= i < len(s). Then whenever the calls on s and t return Ok r_s and Ok r_t, r_t = r_s + 1.",
+    "preconditions": "1 <= len(s) <= 999, for every i with 0 <= i < len(s), s[i] is either 48 (ASCII '0') or 49 (ASCII '1'), s[0]=48, and there exists i with 0 <= i < len(s) and s[i]=49."
+  }
+]

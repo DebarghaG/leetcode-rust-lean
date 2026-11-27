@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EqualToDescendants.spec_1",
+    "negation": "AegisSpec.EqualToDescendants.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns an i64 r such that r equals the number of nodes x in T for which val(x) = descSum(x), where descSum(x) is the sum of val(y) over all proper descendants y of x (i.e., all nodes in the subtree rooted at x other than x); if x has no proper descendants, descSum(x) = 0.",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value v satisfies 0 <= v <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EqualToDescendants.spec_2",
+    "negation": "AegisSpec.EqualToDescendants.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, 0 <= r <= n, where n is the number of nodes of T.",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value v satisfies 0 <= v <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EqualToDescendants.spec_3",
+    "negation": "AegisSpec.EqualToDescendants.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail on any such input: it returns a result r (no panic, no arithmetic overflow, no out-of-bounds access).",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value v satisfies 0 <= v <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EqualToDescendants.spec_4",
+    "negation": "AegisSpec.EqualToDescendants.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r <= n - L, where L is the number of leaves of T.",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, every node value is in [0,100000], and every node of T has value at least 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EqualToDescendants.spec_5",
+    "negation": "AegisSpec.EqualToDescendants.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "equal_to_descendants(T) = equal_to_descendants(T').",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value is in [0,100000]. The tree T' is obtained from T by choosing any node x and swapping its left and right subtrees (if one child is Null, the two child slots are still swapped). T' also satisfies the same size and value bounds."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EqualToDescendants.spec_6",
+    "negation": "AegisSpec.EqualToDescendants.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "equal_to_descendants(T) = count(L) + count(R) + (1 if val(x0) = descSum(x0) in T else 0), where count(L) and count(R) are the results of equal_to_descendants on L and R respectively (and 0 when the subtree is Null).",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value is in [0,100000]. Let x0 be the root of T, and let L and R be the left and right subtrees of x0 (each possibly Null). Define count(Null) = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EqualToDescendants.spec_7",
+    "negation": "AegisSpec.EqualToDescendants.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If a = 0 then the function returns r = n; if a > 0 then it returns r = n - 1.",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, every node value is in [0,100000], and every node other than the root has value 0. Let a = val(root)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EqualToDescendants.spec_8",
+    "negation": "AegisSpec.EqualToDescendants.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "equal_to_descendants(T') = equal_to_descendants(T) + 1.",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value is in [0,100000]. The tree T' is obtained from T by choosing a node x and a Null child slot of x, and replacing that Null with a new leaf node of value 0. T' also satisfies the size and value bounds."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EqualToDescendants.spec_9",
+    "negation": "AegisSpec.EqualToDescendants.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = n - (d + 1).",
+    "preconditions": "Let T be the input tree (the value of root). T is non-null, has n nodes with 1 <= n <= 100000, and every node value is in [0,100000]. Exactly one node y of T has a positive value a > 0; every other node has value 0. Let d be the number of edges on the path from the root of T to y (so d = 0 if y is the root)."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_1",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and interpreting r as an integer, r is equal to the number of pairs (l,a) of integers such that 0 <= l, 1 <= a, l + 2*a <= len(s), and either (s[l] = 48, s[i] = 48 for every i with l <= i < l+a, and s[i] = 49 for every i with l+a <= i < l+2*a) or (s[l] = 49, s[i] = 49 for every i with l <= i < l+a, and s[i] = 48 for every i with l+a <= i < l+2*a). Each such pair corresponds to the substring occurrence s[l .. l+2*a) of length 2*a, and occurrences at different positions are counted separately.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 (the byte for '0') or 49 (the byte for '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_2",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let 0 = p_0 < p_1 < ... < p_k = len(s) be the unique maximal decomposition of s into k runs of equal bytes, so for each j with 1 <= j <= k all bytes s[p_{j-1} .. p_j) are equal, and for each j with 1 <= j < k the byte of run j differs from the byte of run j+1. Put c_j = p_j - p_{j-1}. Then r = sum_{j=1}^{k-1} min(c_j, c_{j+1}), with the empty sum equal to 0 when k = 1.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_3",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_4",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s) - 1.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_5",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if either s[i] = 48 for every i with 0 <= i < len(s), or s[i] = 49 for every i with 0 <= i < len(s).",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_6",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if s[0] != s[1], and r = 0 if s[0] = s[1].",
+    "preconditions": "len(s) = 2, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_7",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= T, where T is the number of indices i with 0 <= i < len(s) - 1 and s[i] != s[i+1].",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_8",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s) - 1.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, for every i with 0 <= i < len(s), s[i] is either 48 or 49, and for every i with 0 <= i < len(s) - 1, s[i] != s[i+1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_9",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if i is the unique index with s[i] != s[i+1], then r = min(i + 1, len(s) - i - 1).",
+    "preconditions": "len(s) >= 2, for every i with 0 <= i < len(s), s[i] is either 48 or 49, and there is exactly one index i with 0 <= i < len(s) - 1 and s[i] != s[i+1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_10",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on s and also returns r' on the slice t defined by t[i] = s[len(s) - 1 - i] for every i with 0 <= i < len(s), we have r = r'.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_11",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define t by t[i] = 49 if s[i] = 48, and t[i] = 48 if s[i] = 49. Whenever the function returns r on s and also returns r' on t, we have r = r'.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_12",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist integers l and a and a byte b in {48,49} such that 0 <= l, 1 <= a, l + 2*a <= len(s), s[i] = b for every i with l <= i < l+a, and s[i] is the other byte (49 if b = 48, and 48 if b = 49) for every i with l+a <= i < l+2*a.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountBinarySubstrings.spec_13",
+    "negation": "AegisSpec.CountBinarySubstrings.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every starting index l with 0 <= l < len(s) there is at most one integer a >= 1 such that l + 2*a <= len(s) and s[l .. l+2*a) consists of a copies of one byte b in {48,49} followed by a copies of the other byte. Consequently, r is exactly the number of indices l for which such an a exists.",
+    "preconditions": "len(s) satisfies 1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is either 48 or 49."
+  }
+]

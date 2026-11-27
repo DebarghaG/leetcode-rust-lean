@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxCoins.spec_1",
+    "negation": "AegisSpec.MaxCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the maximum collection over all admissible itineraries. An admissible itinerary consists of an interval [l,r] with 0 <= l <= r < n and a lane choice a(i) in {1,2} for each i in [l,r], whose switch count is at most 2. The switch count is (1 if a(l)=2 else 0) plus the number of indices i with l <= i < r and a(i) != a(i+1). The collection is the sum over i from l to r of lane1[i] if a(i)=1, and lane2[i] if a(i)=2. The maximum is over all such intervals and lane choices.",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxCoins.spec_2",
+    "negation": "AegisSpec.MaxCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds, or panic) on any input satisfying the preconditions.",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxCoins.spec_3",
+    "negation": "AegisSpec.MaxCoins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the length-n array with M[i] = max(lane1[i], lane2[i]) for 0 <= i < n, and let MSS(M) = max_{0 <= l <= r < n} sum_{i=l}^r M[i]. The function returns a result r and r <= MSS(M).",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxCoins.spec_4",
+    "negation": "AegisSpec.MaxCoins.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= MSS(lane1), where MSS(xs) = max_{0 <= l <= r < len(xs)} sum_{i=l}^r xs[i].",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxCoins.spec_5",
+    "negation": "AegisSpec.MaxCoins.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= MSS(lane2), where MSS(xs) = max_{0 <= l <= r < len(xs)} sum_{i=l}^r xs[i].",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxCoins.spec_6",
+    "negation": "AegisSpec.MaxCoins.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max(lane1[0], lane2[0]).",
+    "preconditions": "len(lane1) = len(lane2) = n, n = 1, and -1000000000 <= lane1[0] <= 1000000000 and -1000000000 <= lane2[0] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxCoins.spec_7",
+    "negation": "AegisSpec.MaxCoins.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max_{0 <= i < n} max(lane1[i], lane2[i]).",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 0 and -1000000000 <= lane2[i] <= 0. All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxCoins.spec_8",
+    "negation": "AegisSpec.MaxCoins.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r equals the maximum collection over all lane choices a: {0,...,n-1} -> {1,2} whose switch count (1 if a(0)=2 else 0) plus the number of i with 0 <= i < n-1 and a(i) != a(i+1) is at most 2, where the collection is sum_{i=0}^{n-1} (lane1[i] if a(i)=1 else lane2[i]). Equivalently, some optimal itinerary covers every mile from 0 through n-1.",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 0 <= lane1[i] <= 1000000000 and 0 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxCoins.spec_9",
+    "negation": "AegisSpec.MaxCoins.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = MSS(lane1), where MSS(xs) = max_{0 <= l <= r < len(xs)} sum_{i=l}^r xs[i].",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000, and for every i with 0 <= i < n, lane1[i] >= lane2[i]. All indices are 0-based."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxCoins.spec_10",
+    "negation": "AegisSpec.MaxCoins.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = MSS(lane2), where MSS(xs) = max_{0 <= l <= r < len(xs)} sum_{i=l}^r xs[i].",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000, and for every i with 0 <= i < n, lane2[i] >= lane1[i]. All indices are 0-based."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxCoins.spec_11",
+    "negation": "AegisSpec.MaxCoins.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists an admissible itinerary whose collection equals r. Here an admissible itinerary means an interval [l,r] with 0 <= l <= r < n and a lane choice a(i) in {1,2} for each i in [l,r], whose switch count (1 if a(l)=2 else 0) plus the number of i with l <= i < r and a(i) != a(i+1) is at most 2; its collection is sum_{i=l}^r (lane1[i] if a(i)=1 else lane2[i]).",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxCoins.spec_12",
+    "negation": "AegisSpec.MaxCoins.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index i with 0 <= i < n and every length-n array lane1' such that lane1'[j] = lane1[j] for all j != i and lane1[i] <= lane1'[i] <= 1000000000, the function returns a result r for (lane1,lane2), returns a result r' for (lane1',lane2), and r' >= r.",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxCoins.spec_13",
+    "negation": "AegisSpec.MaxCoins.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index i with 0 <= i < n and every length-n array lane2' such that lane2'[j] = lane2[j] for all j != i and lane2[i] <= lane2'[i] <= 1000000000, the function returns a result r for (lane1,lane2), returns a result r' for (lane1,lane2'), and r' >= r.",
+    "preconditions": "len(lane1) = len(lane2) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, -1000000000 <= lane1[i] <= 1000000000 and -1000000000 <= lane2[i] <= 1000000000. All indices are 0-based."
+  }
+]

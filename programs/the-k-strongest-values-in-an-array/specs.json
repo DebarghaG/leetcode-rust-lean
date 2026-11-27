@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetStrongest.spec_1",
+    "negation": "AegisSpec.GetStrongest.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let s be the nondecreasing sorted list of the n values arr[0],...,arr[n-1], and let m = s[(n-1) div 2], where div denotes floor division. For any value x let d(x)=|x-m|. Let L be any list formed from all n occurrences of the input values by arranging them so that whenever an occurrence of x precedes an occurrence of y, either d(x)>d(y), or d(x)=d(y) and x>=y. Whenever get_strongest(arr,k) returns a result r, r is a permutation of the first k entries of L. Equivalently, r has exactly the multiset of the k strongest occurrences of arr under the strength order: greater d first, and for equal d greater value first.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetStrongest.spec_2",
+    "negation": "AegisSpec.GetStrongest.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr and k satisfying the preconditions, get_strongest(arr,k) returns a normal result r. In particular, it does not fail, panic, go out of bounds, or overflow during the computation.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetStrongest.spec_3",
+    "negation": "AegisSpec.GetStrongest.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_strongest(arr,k) returns r, len(r) equals k, where k is interpreted as its non-negative integer value.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetStrongest.spec_4",
+    "negation": "AegisSpec.GetStrongest.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_strongest(arr,k) returns r, for every integer value v, the number of occurrences of v in r is at most the number of occurrences of v in arr.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetStrongest.spec_5",
+    "negation": "AegisSpec.GetStrongest.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever get_strongest(arr,k) returns r, there exists an injective function f from {0,1,...,k-1} to {0,1,...,n-1} such that r[i] = arr[f(i)] for every i with 0 <= i < k. Thus each output occurrence is witnessed by a distinct input occurrence.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetStrongest.spec_6",
+    "negation": "AegisSpec.GetStrongest.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_strongest(arr,k) returns r, for every i with 0 <= i < len(r), min(arr) <= r[i] <= max(arr), where min(arr) and max(arr) are the minimum and maximum of the n input values.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetStrongest.spec_7",
+    "negation": "AegisSpec.GetStrongest.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the nondecreasing sorted list of arr, let m = s[(n-1) div 2], and for a value x let d(x)=|x-m|. Whenever get_strongest(arr,k) returns r, for any integers x and y such that x is strictly stronger than y (that is, d(x)>d(y), or d(x)=d(y) and x>y), if y occurs at least once in r, then x occurs in r exactly as many times as x occurs in arr.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetStrongest.spec_8",
+    "negation": "AegisSpec.GetStrongest.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_strongest(arr,k) returns r and get_strongest(arr',k) returns r', r' is a permutation of r.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000. Let arr' be any list of length n that is a permutation of arr."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetStrongest.spec_9",
+    "negation": "AegisSpec.GetStrongest.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_strongest(arr,k) returns r and get_strongest(arr',k) returns r', r' is a permutation of the list obtained from r by adding c to each of its k entries.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000. Let c be an integer and let arr' be the list of length n with arr'[i]=arr[i]+c for every i. Assume -100000 <= arr'[i] <= 100000 for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetStrongest.spec_10",
+    "negation": "AegisSpec.GetStrongest.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_strongest(arr,k) returns r and get_strongest(arr',k) returns r', r' is a permutation of the list obtained from r by multiplying each of its k entries by c.",
+    "preconditions": "Let n = len(arr). Assume 1 <= n <= 100000, 1 <= k <= n, and for every i with 0 <= i < n, -100000 <= arr[i] <= 100000. Let c be an integer with c>0 and let arr' be the list of length n with arr'[i]=c*arr[i] for every i. Assume -100000 <= arr'[i] <= 100000 for every i."
+  }
+]

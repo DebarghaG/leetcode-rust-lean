@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ScoreOfString.spec_1",
+    "negation": "AegisSpec.ScoreOfString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = sum_{i=0}^{len(s)-2} |s[i] - s[i+1]|, where s[i] denotes the unsigned byte value at index i and |x| is the mathematical absolute value of the integer x.",
+    "preconditions": "len(s) >= 2, len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (s consists of lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ScoreOfString.spec_2",
+    "negation": "AegisSpec.ScoreOfString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail.",
+    "preconditions": "1 <= len(s) <= 100 (the bytes need not be lowercase)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ScoreOfString.spec_3",
+    "negation": "AegisSpec.ScoreOfString.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "len(s) = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ScoreOfString.spec_4",
+    "negation": "AegisSpec.ScoreOfString.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = |s[0] - s[1]|.",
+    "preconditions": "len(s) = 2 (the two bytes need not be lowercase)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ScoreOfString.spec_5",
+    "negation": "AegisSpec.ScoreOfString.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r >= 0.",
+    "preconditions": "1 <= len(s) <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ScoreOfString.spec_6",
+    "negation": "AegisSpec.ScoreOfString.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 25 * (len(s) - 1).",
+    "preconditions": "2 <= len(s) <= 100 and every byte s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ScoreOfString.spec_7",
+    "negation": "AegisSpec.ScoreOfString.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < len(s) - 1, s[i] = s[i+1].",
+    "preconditions": "1 <= len(s) <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ScoreOfString.spec_8",
+    "negation": "AegisSpec.ScoreOfString.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the slice of length len(s) defined by rev(s)[i] = s[len(s)-1-i] for all 0 <= i < len(s). If the function returns r on input s and r' on input rev(s), then r = r'.",
+    "preconditions": "1 <= len(s) <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ScoreOfString.spec_9",
+    "negation": "AegisSpec.ScoreOfString.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let z = x ++ y. If the function returns r on z, rx on x, and ry on y, then r = rx + ry + |x[len(x)-1] - y[0]|.",
+    "preconditions": "x and y are byte slices with len(x) >= 1, len(y) >= 1, and len(x) + len(y) <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ScoreOfString.spec_10",
+    "negation": "AegisSpec.ScoreOfString.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice of length len(s)+1 with t[i] = s[i] for 0 <= i < len(s) and t[len(s)] = s[len(s)-1]. If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "1 <= len(s) <= 99."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ScoreOfString.spec_11",
+    "negation": "AegisSpec.ScoreOfString.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice of length len(s) with t[i] = s[i] + c for all 0 <= i < len(s). If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "1 <= len(s) <= 100, c is an integer, and for every i with 0 <= i < len(s), 0 <= s[i] + c <= 255."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ScoreOfString.spec_12",
+    "negation": "AegisSpec.ScoreOfString.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice of length len(s) with t[i] = 255 - s[i] for all 0 <= i < len(s). If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "1 <= len(s) <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ScoreOfString.spec_13",
+    "negation": "AegisSpec.ScoreOfString.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be the slice of length len(s) with t[i] = c * s[i] for all 0 <= i < len(s). If the function returns r on s and r' on t, then r' = c * r.",
+    "preconditions": "1 <= len(s) <= 100, c is an integer with c >= 0, and for every i with 0 <= i < len(s), 0 <= c * s[i] <= 255."
+  }
+]

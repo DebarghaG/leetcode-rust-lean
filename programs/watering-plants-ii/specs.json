@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumRefill.spec_1",
+    "negation": "AegisSpec.MinimumRefill.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = n / 2 (integer division). Let A be the sequence [plants[0], plants[1], ..., plants[m-1]] (empty if m=0). Let B be the sequence [plants[n-1], plants[n-2], ..., plants[n-m]] (empty if m=0). For any integer sequence S and capacity C, define refills(C,S) and rem(C,S) by starting with current water C and count 0, and for each amount a in S from left to right: if a > current water then increase count by 1 and set current water to C, then subtract a from current water; finally output the count and current water. Let base = refills(capacityA,A) + refills(capacityB,B). If n is even, let total_refills = base. If n is odd, let a = rem(capacityA,A) and b = rem(capacityB,B); total_refills = base + 1 if (a >= b and plants[m] > a) or (a < b and plants[m] > b), and total_refills = base otherwise. Whenever the function returns a result r, r = total_refills.",
+    "preconditions": "n = len(plants); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= plants[i] <= 1000000; let M = max{plants[i] | 0 <= i < n}; M <= capacityA, capacityB <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumRefill.spec_2",
+    "negation": "AegisSpec.MinimumRefill.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumRefill.spec_3",
+    "negation": "AegisSpec.MinimumRefill.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, 0 <= r <= max(0, n-2), where max is over integers. In particular, if n=1 then r=0, and if n>=2 then r <= n-2.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumRefill.spec_4",
+    "negation": "AegisSpec.MinimumRefill.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = n / 2, and let A and B be as in spec_1. Let sumA = sum of all entries of A, and sumB = sum of all entries of B. Whenever the function returns r, r = 0 if and only if sumA <= capacityA and sumB <= capacityB and, when n is odd, plants[m] <= max(capacityA - sumA, capacityB - sumB). For n even, the last condition is omitted.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumRefill.spec_5",
+    "negation": "AegisSpec.MinimumRefill.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If n is even, then in the watering process that determines r, Alice waters exactly the plants with indices 0 <= i < n/2 in increasing order, and Bob waters exactly the plants with indices n/2 <= i < n in decreasing order. No plant is watered by both, and no plant is left unwatered. Consequently r = refills(capacityA, [plants[0],...,plants[n/2-1]]) + refills(capacityB, [plants[n-1],...,plants[n/2]]).",
+    "preconditions": "Same as spec_1, and n is even."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumRefill.spec_6",
+    "negation": "AegisSpec.MinimumRefill.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If n is odd, let m = n/2. Let A = [plants[0], plants[1], ..., plants[m-1]] and B = [plants[n-1], plants[n-2], ..., plants[m+1]], where empty sequences are allowed when m = 0. Define refills(C,S) and rem(C,S) as in spec_1. Let a = rem(capacityA,A), b = rem(capacityB,B), and base = refills(capacityA,A) + refills(capacityB,B). In the watering process, Alice waters exactly the plants with indices 0 <= i < m in increasing order, Bob waters exactly the plants with indices m+1 <= i < n in decreasing order, and plant m is watered by exactly one of them: Alice if a >= b, and Bob if a < b. Let d = 1 if (a >= b and plants[m] > a) or (a < b and plants[m] > b), and d = 0 otherwise. Whenever the function returns r, r = base + d.",
+    "preconditions": "n = len(plants); 1 <= n <= 100000; n is odd; for every i with 0 <= i < n, 1 <= plants[i] <= 1000000; let M = max{plants[i] | 0 <= i < n}; M <= capacityA, capacityB <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumRefill.spec_7",
+    "negation": "AegisSpec.MinimumRefill.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a = rem(capacityA,A) and b = rem(capacityB,B). The middle plant m is watered by Alice if a >= b, and by Bob if a < b. Whichever person waters it refills exactly once for plant m if and only if plants[m] exceeds that person's remaining water (a for Alice, b for Bob); otherwise no refill is caused by plant m.",
+    "preconditions": "Same as spec_1, and n is odd. Let m = n/2, and let A and B be as in spec_6."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumRefill.spec_8",
+    "negation": "AegisSpec.MinimumRefill.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the first call returns r1 and the second call returns r2, r1 <= r2.",
+    "preconditions": "Two valid inputs satisfy the constraints of spec_1, have the same n, the same plants at all indices except possibly m, where n is odd and m = n/2. Let their middle amounts be w1 and w2 with w1 <= w2; all other parameters capacityA and capacityB are the same, and both inputs satisfy max(plants) <= capacityA, capacityB."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumRefill.spec_9",
+    "negation": "AegisSpec.MinimumRefill.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the two calls return r1 and r2, |r1 - r2| <= 1.",
+    "preconditions": "Two valid inputs satisfy the constraints of spec_1, have the same n, the same plants at all indices except possibly m, where n is odd and m = n/2, and have the same capacityA and capacityB. Let their middle amounts be w1 and w2; both inputs satisfy max(plants) <= capacityA, capacityB."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumRefill.spec_10",
+    "negation": "AegisSpec.MinimumRefill.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both calls return results r1 and r2, r2 <= r1. That is, increasing a can's capacity cannot increase the total number of refills.",
+    "preconditions": "Two valid inputs satisfy the constraints of spec_1 and have the same plants. Either (capacityA1 <= capacityA2 and capacityB1 = capacityB2) or (capacityA1 = capacityA2 and capacityB1 <= capacityB2). Let r1 and r2 be the results on the two inputs."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumRefill.spec_11",
+    "negation": "AegisSpec.MinimumRefill.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the first call returns r and the second call returns r', r = r'.",
+    "preconditions": "The input (plants, capacityA, capacityB) satisfies the constraints of spec_1. Let rev(plants) be the sequence with rev(plants)[i] = plants[n-1-i] for 0 <= i < n. The input (rev(plants), capacityB, capacityA) also satisfies the constraints."
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SplitNum.spec_1",
+    "negation": "AegisSpec.SplitNum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let s be the decimal digit string of num, most significant digit first. Call a pair (a,b) of finite digit strings (each possibly empty and allowed to begin with '0') a split if a++b is a permutation of s. For a digit string t, let val(t) be the integer represented by t with leading zeros allowed, and let val(empty)=0. Then the function returns a result r such that r = min { val(a)+val(b) | (a,b) is a split }.",
+    "preconditions": "num is an i64 with 10 <= num; thus num is positive and its decimal representation has no leading zeros."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SplitNum.spec_2",
+    "negation": "AegisSpec.SplitNum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such num, the function returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SplitNum.spec_3",
+    "negation": "AegisSpec.SplitNum.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist finite digit strings a and b, both nonempty, such that a++b is a permutation of the decimal digit string s of num and r = val(a)+val(b), where val(t) is the integer represented by t with leading zeros allowed.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SplitNum.spec_4",
+    "negation": "AegisSpec.SplitNum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every pair of finite digit strings a,b (possibly empty, leading zeros allowed) with a++b a permutation of the decimal digit string s of num, we have r <= val(a)+val(b), where val(t) is the integer represented by t with leading zeros allowed.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SplitNum.spec_5",
+    "negation": "AegisSpec.SplitNum.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the sum of the decimal digits of num.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SplitNum.spec_6",
+    "negation": "AegisSpec.SplitNum.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= num.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SplitNum.spec_7",
+    "negation": "AegisSpec.SplitNum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is congruent modulo 9 to the sum of the decimal digits of num; equivalently, r and num have the same remainder modulo 9.",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SplitNum.spec_8",
+    "negation": "AegisSpec.SplitNum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever split_num(num) returns r and split_num(m) returns r', we have r = r'.",
+    "preconditions": "num and m are i64 with 10 <= num and 10 <= m, and the decimal digit multiset of m equals that of num (the same count of each digit 0 through 9)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SplitNum.spec_9",
+    "negation": "AegisSpec.SplitNum.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = (num div 10) + (num mod 10), i.e., the sum of the two decimal digits of num.",
+    "preconditions": "num is an i64 with 10 <= num <= 99."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SplitNum.spec_10",
+    "negation": "AegisSpec.SplitNum.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = d.",
+    "preconditions": "num is an i64 with 10 <= num, and the decimal digit string s of num has exactly one position i with digit(s[i]) != 0; let d = digit(s[i])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SplitNum.spec_11",
+    "negation": "AegisSpec.SplitNum.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = d1 + d2.",
+    "preconditions": "num is an i64 with 10 <= num, and the decimal digit string s of num has exactly two positions i != j with digit(s[i]) != 0; let d1 = digit(s[i]) and d2 = digit(s[j])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SplitNum.spec_12",
+    "negation": "AegisSpec.SplitNum.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is strictly greater than the sum of the decimal digits of num.",
+    "preconditions": "num is an i64 with 10 <= num, and the decimal digit string s of num has at least three positions with a nonzero digit."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SplitNum.spec_13",
+    "negation": "AegisSpec.SplitNum.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = d * ( (10^(floor(k/2)) - 1)/9 + (10^(ceil(k/2)) - 1)/9 ).",
+    "preconditions": "num is an i64 with 10 <= num, every digit of the decimal digit string s of num is the same digit d with 1 <= d <= 9, and k = len(s)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SplitNum.spec_14",
+    "negation": "AegisSpec.SplitNum.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is even.",
+    "preconditions": "num is an i64 with 10 <= num, and every decimal digit of num is even (0,2,4,6,8)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.SplitNum.spec_15",
+    "negation": "AegisSpec.SplitNum.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (num div 10) + (num mod 10).",
+    "preconditions": "num is an i64 with 10 <= num."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.SplitNum.spec_16",
+    "negation": "AegisSpec.SplitNum.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (10^(ceil(k/2)) - 1) + (10^(floor(k/2)) - 1).",
+    "preconditions": "num is an i64 with 10 <= num, and k = len(s) where s is the decimal digit string of num."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.SplitNum.spec_17",
+    "negation": "AegisSpec.SplitNum.spec_17_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the decimal representation of r without leading zeros has length at most ceil(k/2) + 1.",
+    "preconditions": "num is an i64 with 10 <= num, and k = len(s) where s is the decimal digit string of num."
+  }
+]

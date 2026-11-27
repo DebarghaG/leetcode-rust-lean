@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindGoodStrings.spec_1",
+    "negation": "AegisSpec.FindGoodStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = C mod 1000000007, where C is the number of byte arrays w such that: len(w)=n; every byte of w is in [97,122]; s1 <=lex w and w <=lex s2, where <=lex is lexicographic order on equal-length byte arrays; and evil does not occur as a contiguous substring of w, meaning there is no k with 0 <= k and k+len(evil) <= n such that for every j with 0 <= j < len(evil), w[k+j]=evil[j]. Here mod means the canonical remainder in [0,1000000006].",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122] (lowercase ASCII); s1 <=lex s2, where <=lex is lexicographic order on equal-length byte arrays."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindGoodStrings.spec_2",
+    "negation": "AegisSpec.FindGoodStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r of type Std.I64; it does not fail (no arithmetic overflow, out-of-bounds access, invalid slice access, or panic).",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindGoodStrings.spec_3",
+    "negation": "AegisSpec.FindGoodStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 1000000006.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindGoodStrings.spec_4",
+    "negation": "AegisSpec.FindGoodStrings.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, if no byte array w of length n over lowercase ASCII satisfies s1 <=lex w <=lex s2 and contains evil as a contiguous substring, then r = I mod 1000000007, where I is the number of byte arrays w of length n over lowercase ASCII satisfying s1 <=lex w <=lex s2. In particular, this applies whenever len(evil) > n.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindGoodStrings.spec_5",
+    "negation": "AegisSpec.FindGoodStrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if s1 = s2 as byte arrays, then r = 1 if s1 does not contain evil as a contiguous substring, and r = 0 if s1 does contain evil as a contiguous substring.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindGoodStrings.spec_6",
+    "negation": "AegisSpec.FindGoodStrings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if len(evil) = n, then r = (I - B) mod 1000000007, where I is the number of length-n lowercase ASCII byte arrays w with s1 <=lex w <=lex s2, and B is 1 if s1 <=lex evil <=lex s2 and 0 otherwise.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindGoodStrings.spec_7",
+    "negation": "AegisSpec.FindGoodStrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if s1 is the length-n byte array consisting entirely of byte 97 ('a') and s2 is the length-n byte array consisting entirely of byte 122 ('z'), then r = (26^n - B) mod 1000000007, where B is the number of length-n byte arrays over lowercase ASCII that contain evil as a contiguous substring.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindGoodStrings.spec_8",
+    "negation": "AegisSpec.FindGoodStrings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r != 0, then there exists at least one good string: a byte array w with len(w)=n, all bytes in [97,122], s1 <=lex w <=lex s2, and evil not occurring as a contiguous substring of w.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindGoodStrings.spec_9",
+    "negation": "AegisSpec.FindGoodStrings.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if the exact number C of good strings, where C is the number of length-n lowercase ASCII byte arrays w with s1 <=lex w <=lex s2 and with evil not occurring as a contiguous substring of w, is less than 1000000007, then r = C.",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindGoodStrings.spec_10",
+    "negation": "AegisSpec.FindGoodStrings.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if n = 1, then r = A mod 1000000007, where A is the number of integers c with 97 <= c <= 122, s1[0] <= c <= s2[0], and (len(evil) > 1 or c != evil[0]).",
+    "preconditions": "n is an integer with 1 <= n <= 500; interpreting n as a natural number, len(s1) = len(s2) = n; 1 <= len(evil) <= 50; every byte of s1, s2, and evil is in [97,122]; s1 <=lex s2."
+  }
+]

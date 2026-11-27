@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PhonePrefix.spec_1",
+    "negation": "AegisSpec.PhonePrefix.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever phone_prefix(numbers) returns a result r, r is true if and only if for every i and j with 0 <= i < len(numbers), 0 <= j < len(numbers), and i != j, numbers[i] is not a prefix of numbers[j]. Here a byte vector a is a prefix of a byte vector b iff len(a) <= len(b) and for every k with 0 <= k < len(a), a[k] = b[k]. Equivalently, r is false if and only if there exist distinct indices i and j for which numbers[i] is a prefix of numbers[j].",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PhonePrefix.spec_2",
+    "negation": "AegisSpec.PhonePrefix.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call phone_prefix(numbers) returns a result (either true or false); it does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PhonePrefix.spec_3",
+    "negation": "AegisSpec.PhonePrefix.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let numbers' be any slice of byte vectors with len(numbers') = len(numbers) that is a permutation of numbers, i.e. there is a bijection pi on {0,...,len(numbers)-1} such that numbers'[k] = numbers[pi(k)] for every k with 0 <= k < len(numbers). Whenever phone_prefix(numbers) returns r and phone_prefix(numbers') returns r', we have r = r'.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PhonePrefix.spec_4",
+    "negation": "AegisSpec.PhonePrefix.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever phone_prefix(numbers) returns r and phone_prefix(numbers') returns r', we have r = r'.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57). Let d be an ASCII digit byte (48 <= d <= 57). Suppose numbers' is the slice with len(numbers') = len(numbers) and, for every i, numbers'[i] is obtained by prepending d to numbers[i], so len(numbers'[i]) = len(numbers[i]) + 1, numbers'[i][0] = d, and numbers'[i][k+1] = numbers[i][k] for every 0 <= k < len(numbers[i]). Assume also that every numbers'[i] has length at most 50 (this holds in particular if every numbers[i] has length at most 49)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PhonePrefix.spec_5",
+    "negation": "AegisSpec.PhonePrefix.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever phone_prefix(numbers) returns r and r is false, there exist indices i and j with 0 <= i < j < len(numbers) such that either numbers[i] is a prefix of numbers[j] or numbers[j] is a prefix of numbers[i]. Here a is a prefix of b iff len(a) <= len(b) and a[k] = b[k] for every k with 0 <= k < len(a).",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PhonePrefix.spec_6",
+    "negation": "AegisSpec.PhonePrefix.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exist indices i and j with 0 <= i < len(numbers), 0 <= j < len(numbers), and i != j such that numbers[i] = numbers[j] (the two byte vectors are identical), then whenever phone_prefix(numbers) returns r, r is false.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PhonePrefix.spec_7",
+    "negation": "AegisSpec.PhonePrefix.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever phone_prefix(numbers) returns r, r is true.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57). All byte vectors numbers[i] have the same length L (i.e. there exists L such that len(numbers[i]) = L for every i), and no two entries are equal (for all i != j, numbers[i] != numbers[j])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PhonePrefix.spec_8",
+    "negation": "AegisSpec.PhonePrefix.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever phone_prefix(numbers) returns r, r is true if and only if for every i and j with 0 <= i < len(numbers), 0 <= j < len(numbers), and i != j, numbers[i][0] != numbers[j][0]. In other words, all one-byte phone numbers are pairwise different.",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57). For every i, len(numbers[i]) = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PhonePrefix.spec_9",
+    "negation": "AegisSpec.PhonePrefix.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever phone_prefix(numbers) returns r and r is false, there exist indices i and j with 0 <= i < j < len(numbers) such that numbers[i][0] = numbers[j][0].",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PhonePrefix.spec_10",
+    "negation": "AegisSpec.PhonePrefix.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever phone_prefix(numbers) returns r and r is false, there exist indices i and j with 0 <= i < len(numbers), 0 <= j < len(numbers), i != j, len(numbers[i]) < len(numbers[j]), and numbers[i] is a prefix of numbers[j]. Here prefix means len(numbers[i]) <= len(numbers[j]) and numbers[i][k] = numbers[j][k] for every 0 <= k < len(numbers[i]).",
+    "preconditions": "numbers is a slice of byte vectors satisfying the problem constraints: 2 <= len(numbers) <= 50; for every i with 0 <= i < len(numbers), 1 <= len(numbers[i]) <= 50; and every byte numbers[i][k] is an ASCII digit '0'..'9' (48 <= numbers[i][k] <= 57). No two entries are equal: for all i != j, numbers[i] != numbers[j]."
+  }
+]

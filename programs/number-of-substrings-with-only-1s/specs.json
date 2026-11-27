@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumSub.spec_1",
+    "negation": "AegisSpec.NumSub.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let C(s) be the number of pairs (i, j) such that 0 <= i <= j < len(s) and s[k] = 49 for every k with i <= k <= j. The function returns a result r and r is the unique integer satisfying 0 <= r < 1000000007 and C(s) - r is divisible by 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumSub.spec_2",
+    "negation": "AegisSpec.NumSub.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input s satisfying the preconditions, the function returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumSub.spec_3",
+    "negation": "AegisSpec.NumSub.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 0 <= r <= 1000000006.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumSub.spec_4",
+    "negation": "AegisSpec.NumSub.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumSub.spec_5",
+    "negation": "AegisSpec.NumSub.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is the unique integer satisfying 0 <= r < 1000000007 and n(n+1)/2 - r is divisible by 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 49 ('1'). Let n = len(s)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumSub.spec_6",
+    "negation": "AegisSpec.NumSub.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L_1, ..., L_m be the lengths of the maximal contiguous blocks of bytes equal to 49 in s, in left-to-right order; if no such block exists then m = 0. The function returns a result r such that r is the unique integer satisfying 0 <= r < 1000000007 and (sum_{t=1..m} L_t(L_t+1)/2) - r is divisible by 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumSub.spec_7",
+    "negation": "AegisSpec.NumSub.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each i with 0 <= i < len(s), define e_i = 0 if s[i] != 49, and otherwise let e_i be the largest l such that 1 <= l <= i+1 and s[k] = 49 for every k with i-l+1 <= k <= i. The function returns a result r such that r is the unique integer satisfying 0 <= r < 1000000007 and (sum_{i=0..len(s)-1} e_i) - r is divisible by 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumSub.spec_8",
+    "negation": "AegisSpec.NumSub.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte slice of length len(s) with rev(s)[i] = s[len(s)-1-i] for 0 <= i < len(s). For every valid input s, if r is the result returned for s and r_rev is the result returned for rev(s), then r = r_rev.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumSub.spec_9",
+    "negation": "AegisSpec.NumSub.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice of length len(s)-1 with t[i] = s[i] for 0 <= i < len(s)-1. The function returns a result r for s, the function returns a result r_t for t, and r = r_t.",
+    "preconditions": "1 <= len(s) <= 100000, for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1'), len(s) >= 2, and s[len(s)-1] = 48 ('0')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumSub.spec_10",
+    "negation": "AegisSpec.NumSub.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice of length len(s)-1 with t[i] = s[i+1] for 0 <= i < len(s)-1. The function returns a result r for s, the function returns a result r_t for t, and r = r_t.",
+    "preconditions": "1 <= len(s) <= 100000, for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1'), len(s) >= 2, and s[0] = 48 ('0')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumSub.spec_11",
+    "negation": "AegisSpec.NumSub.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer p with 0 < p < len(s)-1 and s[p] = 48 ('0'), let left be the slice of length p with left[i] = s[i] for 0 <= i < p, and let right be the slice of length len(s)-p-1 with right[i] = s[p+1+i] for 0 <= i < len(s)-p-1. Let r, r_L, r_R be the results returned for s, left, right respectively. Then r = (r_L + r_R) mod 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumSub.spec_12",
+    "negation": "AegisSpec.NumSub.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = the number of indices i with 0 <= i < len(s) and s[i] = 49 ('1').",
+    "preconditions": "1 <= len(s) <= 100000, for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1'), and for every i with 0 <= i < len(s)-1, it is not the case that s[i] = 49 and s[i+1] = 49."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumSub.spec_13",
+    "negation": "AegisSpec.NumSub.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C(s) be the number of pairs (i, j) such that 0 <= i <= j < len(s) and s[k] = 49 for every k with i <= k <= j. If len(s) <= 44720, then the function returns a result r and r = C(s) exactly.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.NumSub.spec_14",
+    "negation": "AegisSpec.NumSub.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, r <= len(s)(len(s)+1)/2.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), s[i] = 48 ('0') or s[i] = 49 ('1')."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CalPoints.spec_1",
+    "negation": "AegisSpec.CalPoints.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let R_0 be the empty sequence of scores. For i = 0, ..., len(operations)-1, let R_i be the record before operation i and define R_{i+1} as follows: if operations[i] encodes the integer x, append x to R_i; if operations[i] is \"C\", delete the last element of R_i; if operations[i] is \"D\", append 2 * last(R_i); if operations[i] is \"+\", append last(R_i) + second_last(R_i). Let R = R_len(operations). Whenever cal_points(operations) returns a result r, r is the sum of all elements of R, with the empty sum equal to 0. Here last(R) is R[len(R)-1] and second_last(R) is R[len(R)-2], both 0-indexed.",
+    "preconditions": "1 <= len(operations) <= 1000. For every i with 0 <= i < len(operations), the byte sequence operations[i] is either the one-byte ASCII encoding of \"C\", \"D\", or \"+\", or the ASCII encoding of a decimal integer token (an optional '-' followed by one or more digits) whose value x_i satisfies -30000 <= x_i <= 30000. Processing operations left to right, every \"C\" or \"D\" has at least one previous score, and every \"+\" has at least two previous scores. Every newly recorded score produced by an operation and the final sum fit in a 32-bit signed integer, i.e. in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CalPoints.spec_2",
+    "negation": "AegisSpec.CalPoints.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "cal_points(operations) returns a result r. It does not fail, panic, or overflow on inputs satisfying the preconditions.",
+    "preconditions": "The same constraints as in spec_1: 1 <= len(operations) <= 1000; each operation is an ASCII \"C\", \"D\", \"+\", or a decimal integer token in [-30000, 30000]; the operations are valid with respect to the record (enough previous scores for \"C\", \"D\", and \"+\"); every newly recorded score and the final sum fit in a 32-bit signed integer."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CalPoints.spec_3",
+    "negation": "AegisSpec.CalPoints.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever cal_points(operations) returns a result r, r satisfies -2^31 <= r <= 2^31-1.",
+    "preconditions": "The same constraints as in spec_1, including that the final sum and every newly recorded score fit in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CalPoints.spec_4",
+    "negation": "AegisSpec.CalPoints.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the final record R after processing all operations is empty, then whenever cal_points(operations) returns a result r, r = 0.",
+    "preconditions": "The same constraints as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CalPoints.spec_5",
+    "negation": "AegisSpec.CalPoints.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever cal_points(operations) returns a result r, r = x_0 + x_1 + ... + x_{len(operations)-1}.",
+    "preconditions": "1 <= len(operations) <= 1000. Every operations[i] is the ASCII encoding of a decimal integer x_i with -30000 <= x_i <= 30000; no operation is \"C\", \"D\", or \"+\"."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CalPoints.spec_6",
+    "negation": "AegisSpec.CalPoints.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rP be the result of cal_points(P), and let r be the result of cal_points(P followed by [s]). Whenever both calls return results, r = rP + x.",
+    "preconditions": "P is a valid nonempty operation sequence with 1 <= len(P) <= 999. s is the ASCII encoding of a decimal integer x with -30000 <= x <= 30000. The concatenated sequence P followed by [s] satisfies the S1 constraints, including all 32-bit bound promises. Record evolution for P uses the standard rules: integer token appends its value, \"D\" appends twice the last score, \"+\" appends the sum of the last two scores, and \"C\" deletes the last score."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CalPoints.spec_7",
+    "negation": "AegisSpec.CalPoints.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rP be the result of cal_points(P) and let last be the last element of R(P). Whenever both cal_points(P) and cal_points(P followed by [\"C\"]) return results, the latter result r satisfies r = rP - last.",
+    "preconditions": "P is a valid nonempty operation sequence, the final record R(P) after processing P is nonempty, and P followed by [\"C\"] satisfies the S1 constraints. Record evolution is the standard one."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CalPoints.spec_8",
+    "negation": "AegisSpec.CalPoints.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rP be the result of cal_points(P) and let last be the last element of R(P). Whenever both cal_points(P) and cal_points(P followed by [\"D\"]) return results, the latter result r satisfies r = rP + 2 * last.",
+    "preconditions": "P is a valid nonempty operation sequence, the final record R(P) after processing P is nonempty, and P followed by [\"D\"] satisfies the S1 constraints. Record evolution is the standard one."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CalPoints.spec_9",
+    "negation": "AegisSpec.CalPoints.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rP be the result of cal_points(P), let last be the last element of R(P), and let second_last be the second-last element of R(P). Whenever both cal_points(P) and cal_points(P followed by [\"+\"]) return results, the latter result r satisfies r = rP + last + second_last.",
+    "preconditions": "P is a valid nonempty operation sequence, the final record R(P) after processing P has at least two elements, and P followed by [\"+\"] satisfies the S1 constraints. Record evolution is the standard one."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CalPoints.spec_10",
+    "negation": "AegisSpec.CalPoints.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rP be the result of cal_points(P), and let r be the result of cal_points(P followed by [op, \"C\"]). Whenever both calls return results, r = rP.",
+    "preconditions": "P is a valid nonempty operation sequence. op is a valid score-inserting operation after P: either an integer token x in [-30000, 30000], or \"D\" when R(P) is nonempty, or \"+\" when R(P) has at least two elements. The sequence P followed by [op, \"C\"] satisfies the S1 constraints. Record evolution is the standard one."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CalPoints.spec_11",
+    "negation": "AegisSpec.CalPoints.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever cal_points(operations) returns a result r, r >= 0.",
+    "preconditions": "The same constraints as in spec_1, plus the additional restriction that every integer token appearing in operations is nonnegative."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CalPoints.spec_12",
+    "negation": "AegisSpec.CalPoints.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever cal_points(operations) returns a result r, r <= 0.",
+    "preconditions": "The same constraints as in spec_1, plus the additional restriction that every integer token appearing in operations is nonpositive."
+  }
+]

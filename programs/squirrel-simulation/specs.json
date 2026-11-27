@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDistance.spec_1",
+    "negation": "AegisSpec.MinDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nuts). For 0 <= i < n define D_i = |tree[0] - nuts[i][0]| + |tree[1] - nuts[i][1]| and S_i = |squirrel[0] - nuts[i][0]| + |squirrel[1] - nuts[i][1]|. Whenever min_distance returns a result r, r = 2 * (Σ_{i=0}^{n-1} D_i) + min_{0 <= i < n} (S_i - D_i).",
+    "preconditions": "height and width are integers with 1 <= height <= 100 and 1 <= width <= 100; len(tree)=2 and len(squirrel)=2; n=len(nuts) with 1 <= n <= 5000; len(nuts[i])=2 for every 0 <= i < n; every row coordinate in tree, squirrel, or nuts satisfies 0 <= row <= height; every column coordinate satisfies 0 <= col <= width."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDistance.spec_2",
+    "negation": "AegisSpec.MinDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, min_distance returns a result r (Result.ok r); it does not fail by overflow, out-of-bounds indexing, empty minimum, or panic.",
+    "preconditions": "Same as spec_1: 1 <= height,width <= 100; len(tree)=2; len(squirrel)=2; n=len(nuts) with 1 <= n <= 5000; each nuts[i] has length 2; all positions lie in the garden."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDistance.spec_3",
+    "negation": "AegisSpec.MinDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_distance returns a result r, r >= 0.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDistance.spec_4",
+    "negation": "AegisSpec.MinDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D_i = |tree[0] - nuts[i][0]| + |tree[1] - nuts[i][1]| for 0 <= i < n. Whenever min_distance returns a result r, r <= 2 * (Σ_{i=0}^{n-1} D_i) + (|squirrel[0] - tree[0]| + |squirrel[1] - tree[1]|).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDistance.spec_5",
+    "negation": "AegisSpec.MinDistance.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D_i = |tree[0] - nuts[i][0]| + |tree[1] - nuts[i][1]| for 0 <= i < n. Whenever min_distance returns a result r, r >= 2 * (Σ_{i=0}^{n-1} D_i) - max_{0 <= i < n} D_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDistance.spec_6",
+    "negation": "AegisSpec.MinDistance.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_distance returns a result r, r and (squirrel[0] + squirrel[1] - tree[0] - tree[1]) have the same parity.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDistance.spec_7",
+    "negation": "AegisSpec.MinDistance.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let π be any bijection of {0,...,n-1}, and let nutsπ be the slice with nutsπ[i] = nuts[π(i)]. Whenever a call on (height,width,tree,squirrel,nuts) returns r and a call on (height,width,tree,squirrel,nutsπ) returns r', we have r = r'.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDistance.spec_8",
+    "negation": "AegisSpec.MinDistance.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any integers dr and dc such that every shifted row coordinate tree[0]+dr, squirrel[0]+dr, nuts[i][0]+dr is still in [0,height] and every shifted column coordinate tree[1]+dc, squirrel[1]+dc, nuts[i][1]+dc is still in [0,width], let tree', squirrel', and nuts' be the shifted positions. Whenever the original call returns r and the shifted call with the same height and width returns r', we have r = r'.",
+    "preconditions": "Same as corrected S1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDistance.spec_9",
+    "negation": "AegisSpec.MinDistance.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let P^T = [P[1],P[0]] for a two-element position P. Whenever min_distance(height,width,tree,squirrel,nuts) returns r and min_distance(width,height, tree^T, squirrel^T, nuts^T) returns r', where nuts^T[i] = (nuts[i])^T, we have r = r'.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDistance.spec_10",
+    "negation": "AegisSpec.MinDistance.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let D_i = |tree[0] - nuts[i][0]| + |tree[1] - nuts[i][1]| and S_i = |squirrel[0] - nuts[i][0]| + |squirrel[1] - nuts[i][1]|. Whenever min_distance returns a result r, there exists an index j with 0 <= j < n such that r = S_j + D_j + Σ_{i=0, i≠j}^{n-1} 2*D_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDistance.spec_11",
+    "negation": "AegisSpec.MinDistance.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let D_i = |tree[0] - nuts[i][0]| + |tree[1] - nuts[i][1]| and S_i = |squirrel[0] - nuts[i][0]| + |squirrel[1] - nuts[i][1]|. Whenever min_distance returns a result r, for every index j with 0 <= j < n, r <= S_j + D_j + Σ_{i=0, i≠j}^{n-1} 2*D_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDistance.spec_12",
+    "negation": "AegisSpec.MinDistance.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let height' and width' be any integers with 1 <= height' <= 100 and 1 <= width' <= 100 such that all positions in tree, squirrel, and nuts also satisfy 0 <= row <= height' and 0 <= col <= width'. Whenever min_distance(height,width,tree,squirrel,nuts) returns r and min_distance(height',width',tree,squirrel,nuts) returns r', we have r = r'.",
+    "preconditions": "Same as corrected S1."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_1",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let V = {97, 101, 105, 111, 117} (the ASCII codes of 'a', 'e', 'i', 'o', 'u'). Whenever the function returns a result r, r is the maximum of r0 - l over all pairs (l, r0) such that 0 <= l <= r0 <= len(s) and, for every v in V, the number of indices k with l <= k < r0 and s[k] = v is even. Equivalently, r is the length of a longest contiguous substring of s in which each of the five vowels occurs an even number of times. The empty substring (l = r0, length 0) is allowed.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty string of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_2",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not overflow, panic, or access out of bounds.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_3",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_4",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, there exist indices l and r0 with 0 <= l <= r0 <= len(s), r0 - l = r, and for every v in V the number of indices k with l <= k < r0 and s[k] = v is even.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_5",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, for every pair (l, r0) with 0 <= l <= r0 <= len(s) and for every v in V the number of indices k with l <= k < r0 and s[k] = v is even, we have r0 - l <= r.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_6",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, if no byte of s belongs to V (that is, for every i with 0 <= i < len(s), s[i] not in V), then r = len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_7",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, if there are exactly two indices p and q with 0 <= p < q < len(s), s[p] in V, s[q] in V, s[p] != s[q], and s[i] not in V for every i with 0 <= i < len(s) such that i != p and i != q, then r = max(p, q - p - 1, len(s) - 1 - q).",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_8",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, if at least one byte of s belongs to V and, for every v in V, the number of indices i with 0 <= i < len(s) and s[i] = v is even, then r = len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_9",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let V = {97, 101, 105, 111, 117}. Whenever the function returns a result r, if there is exactly one index p with 0 <= p < len(s) and s[p] in V (so s[i] not in V for every i != p), then r = max(p, len(s) - 1 - p).",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_10",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let V = {97, 101, 105, 111, 117}. For every byte slice t with len(t) = len(s), 97 <= t[i] <= 122 for all i with 0 <= i < len(s), and such that for every i with 0 <= i < len(s): if s[i] in V then t[i] = s[i], and if s[i] not in V then t[i] not in V, whenever the function returns r on s and r_t on t, we have r = r_t.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindTheLongestSubstring.spec_11",
+    "negation": "AegisSpec.FindTheLongestSubstring.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte slice t of length len(s) defined by t[i] = s[len(s) - 1 - i] for every i with 0 <= i < len(s). Whenever the function returns r on s and r_rev on rev(s), we have r = r_rev.",
+    "preconditions": "len(s) >= 1, len(s) <= 500000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

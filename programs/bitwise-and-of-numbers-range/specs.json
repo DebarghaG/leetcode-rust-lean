@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_1",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique non-negative integer such that, for every integer b >= 0, bit_b(r) = 1 if and only if bit_b(x) = 1 for every integer x with left <= x <= right, where bit_b(y) = (y div 2^b) mod 2 for y >= 0. Equivalently, r is the bitwise AND of all integers in the inclusive range [left, right].",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_2",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every pair (left, right) satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_3",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= left, and therefore r <= right.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_4",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and left = right, r = left.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_5",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and there exists an integer k >= 0 such that left = 2^k and right < 2^(k+1), then r = left.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_6",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exists an integer k >= 0 such that r = (left div 2^k) * 2^k; that is, r is obtained from left by clearing all bits below some bit position.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_7",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is a bitwise subset of both endpoints: (r bitwise AND left) = r and (r bitwise AND right) = r.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_8",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r and left < right, let h be the largest bit position at which left and right differ, i.e. bit_h(left) != bit_h(right) and bit_b(left) = bit_b(right) for every b > h, where bit_b(y) = (y div 2^b) mod 2. Then bit_b(r) = bit_b(left) for every b > h, and bit_b(r) = 0 for every b <= h.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_9",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer m with left <= m < right, whenever the function returns r on (left, right), r1 on (left, m), and r2 on (m+1, right), it holds that r = r1 bitwise AND r2.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_10",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For all integers a and b with left <= a <= b <= right, whenever the function returns r on (left, right) and s on (a, b), it holds that (r bitwise AND s) = r; in particular r <= s.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RangeBitwiseAnd.spec_11",
+    "negation": "AegisSpec.RangeBitwiseAnd.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every bit position b >= 0, if bit_b(r) = 0 then there exists an integer x with left <= x <= right such that bit_b(x) = 0, where bit_b(y) = (y div 2^b) mod 2.",
+    "preconditions": "0 <= left <= right <= 2147483647."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumFourDivisors.spec_1",
+    "negation": "AegisSpec.SumFourDivisors.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let τ(n) be the number of positive divisors of n and σ(n) be their sum. The function sum_four_divisors(nums) returns a result r and r = Σ_{i=0}^{len(nums)-1} c(nums[i]), where c(n) = σ(n) if τ(n) = 4 and c(n) = 0 otherwise. The sum is over all indices, so equal values at different positions are counted separately.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumFourDivisors.spec_2",
+    "negation": "AegisSpec.SumFourDivisors.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function sum_four_divisors(nums) returns a result (it does not fail, overflow, or panic).",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumFourDivisors.spec_3",
+    "negation": "AegisSpec.SumFourDivisors.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_four_divisors(nums) returns r, we have 0 ≤ r.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumFourDivisors.spec_4",
+    "negation": "AegisSpec.SumFourDivisors.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_four_divisors(nums) returns r, r = 0 if and only if for every i with 0 ≤ i < len(nums), nums[i] has a number of positive divisors different from 4.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumFourDivisors.spec_5",
+    "negation": "AegisSpec.SumFourDivisors.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever sum_four_divisors(nums) returns r, for every i with 0 ≤ i < len(nums) such that nums[i] has exactly four positive divisors, σ(nums[i]) ≤ r, where σ(n) is the sum of the positive divisors of n.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumFourDivisors.spec_6",
+    "negation": "AegisSpec.SumFourDivisors.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_four_divisors(nums) returns r, then for every slice nums' with the same length and the same multiset of entries as nums, every result r' returned by sum_four_divisors(nums') satisfies r' = r.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumFourDivisors.spec_7",
+    "negation": "AegisSpec.SumFourDivisors.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Fix an index i with 0 ≤ i < len(nums) such that nums[i] does not have exactly four positive divisors. Let nums' be any slice satisfying the same preconditions with len(nums') = len(nums), nums'[j] = nums[j] for every j ≠ i, and nums'[i] also not having exactly four positive divisors. Whenever sum_four_divisors(nums) returns r and sum_four_divisors(nums') returns r', we have r' = r.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumFourDivisors.spec_8",
+    "negation": "AegisSpec.SumFourDivisors.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Fix an index i with 0 ≤ i < len(nums) such that nums[i] has exactly four positive divisors. Let nums' be any slice satisfying the same preconditions with len(nums') = len(nums), nums'[j] = nums[j] for every j ≠ i, and nums'[i] having exactly four positive divisors and the same divisor sum σ(nums'[i]) = σ(nums[i]). Whenever sum_four_divisors(nums) returns r and sum_four_divisors(nums') returns r', we have r' = r.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumFourDivisors.spec_9",
+    "negation": "AegisSpec.SumFourDivisors.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_four_divisors(nums) returns r, let V be the set of distinct values appearing in nums, and for each v in V let k_v be the number of indices i with nums[i] = v. Then r = Σ_{v in V} (if τ(v) = 4 then k_v · σ(v) else 0), where τ(v) is the number of positive divisors of v and σ(v) is their sum.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumFourDivisors.spec_10",
+    "negation": "AegisSpec.SumFourDivisors.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_four_divisors(a) returns r_a, sum_four_divisors(b) returns r_b, and sum_four_divisors(nums) returns r, we have r = r_a + r_b.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000. Let a and b be nonempty slices with nums = a ++ b."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumFourDivisors.spec_11",
+    "negation": "AegisSpec.SumFourDivisors.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_four_divisors(nums) returns r, we have r ≤ 2000020000.",
+    "preconditions": "1 ≤ len(nums) ≤ 10000 and for every i with 0 ≤ i < len(nums), 1 ≤ nums[i] ≤ 100000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_1",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(arr), let B be the list of length n*k with B[t] = arr[t mod n] for 0 <= t < n*k, and let S = max(0, max{ sum_{t=p}^{q} B[t] | 0 <= p <= q < n*k }). Let M = 1000000007. The function returns a result r such that 0 <= r < M and r is congruent to S modulo M; equivalently r = S mod M.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, and -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_2",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, and -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_3",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, and -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_4",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M1 = max(0, max{ sum_{i=p}^{q} arr[i] | 0 <= p <= q < len(arr) }). The function returns a result r with r = M1.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), and k = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_5",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), and arr[i] <= 0 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_6",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let T = sum_{i=0}^{len(arr)-1} arr[i]. The function returns a result r with r = (k * T) mod 1000000007.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), and arr[i] >= 0 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_7",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(arr), T = sum_{i=0}^{n-1} arr[i] (so T <= 0), M1 = max(0, max{ sum_{t=p}^{q} arr[t] | 0 <= p <= q < n }), Pref = max(0, max{ sum_{t=0}^{j} arr[t] | 0 <= j < n }), and Suf = max(0, max{ sum_{t=i}^{n-1} arr[t] | 0 <= i < n }). The function returns a result r with r = (max(M1, Pref + Suf) mod 1000000007).",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), k >= 2, and T <= 0 where T = sum_{i=0}^{len(arr)-1} arr[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_8",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(arr), T = sum_{i=0}^{n-1} arr[i] (so T > 0), Pref = max{ sum_{t=0}^{j} arr[t] | 0 <= j < n }, and Suf = max{ sum_{t=i}^{n-1} arr[t] | 0 <= i < n }. The function returns a result r with r = ((Suf + (k - 2) * T + Pref) mod 1000000007).",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), k >= 2, and T > 0 where T = sum_{i=0}^{len(arr)-1} arr[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_9",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let B be the list of length len(arr)*k with B[t] = arr[t mod len(arr)] for 0 <= t < len(arr)*k. Whenever the function returns a result r with 0 < r < 1000000007, there exists a nonempty contiguous subarray of B whose sum is positive and congruent to r modulo 1000000007.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, and -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KConcatenationMaxSum.spec_10",
+    "negation": "AegisSpec.KConcatenationMaxSum.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let B be the list of length len(arr)*k with B[t] = arr[t mod len(arr)] for 0 <= t < len(arr)*k. If the function returns r = 0, then there exists a nonempty contiguous subarray of B whose sum is a positive multiple of 1000000007.",
+    "preconditions": "len(arr) >= 1, len(arr) <= 100000, 1 <= k <= 100000, -10000 <= arr[i] <= 10000 for every i with 0 <= i < len(arr), and there exists i with 0 <= i < len(arr) and arr[i] > 0."
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountWinningSequences.spec_1",
+    "negation": "AegisSpec.CountWinningSequences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is the unique integer with 0 <= r < 1000000007 that is congruent modulo 1000000007 to the number N of sequences b of length n over the symbols {'F','W','E'} satisfying: (i) for every i with 0 <= i < n-1, b[i] != b[i+1]; and (ii) the number of indices i with beats(b[i], s[i]) is strictly greater than the number of indices i with beats(s[i], b[i]), where beats(x, y) holds exactly when (x = 'W' and y = 'F') or (x = 'E' and y = 'W') or (x = 'F' and y = 'E'). Thus r = N mod 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountWinningSequences.spec_2",
+    "negation": "AegisSpec.CountWinningSequences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r and does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountWinningSequences.spec_3",
+    "negation": "AegisSpec.CountWinningSequences.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r for such an s, the result satisfies 0 <= r < 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountWinningSequences.spec_4",
+    "negation": "AegisSpec.CountWinningSequences.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the unmodded number of winning Bob sequences described in spec_1. The function returns r = N, not merely N mod 1000000007; in other words, no modular reduction occurs for these lengths.",
+    "preconditions": "Let n = len(s). 1 <= n <= 29. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountWinningSequences.spec_5",
+    "negation": "AegisSpec.CountWinningSequences.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define rot(s) by rot(s)[i] = 'W' if s[i] = 'F', rot(s)[i] = 'E' if s[i] = 'W', and rot(s)[i] = 'F' if s[i] = 'E', for every 0 <= i < n. If r is the function's result on s and r' is its result on rot(s), then r = r'.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountWinningSequences.spec_6",
+    "negation": "AegisSpec.CountWinningSequences.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define rev(s)[i] = s[n-1-i] for every 0 <= i < n. If r is the function's result on s and r' is its result on rev(s), then r = r'.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000. For every i with 0 <= i < n, s[i] is the ASCII code of one of 'F' (70), 'W' (87), or 'E' (69)."
+  }
+]

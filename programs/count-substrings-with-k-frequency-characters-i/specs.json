@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_1",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result res, res equals the number of pairs (i,j) of integers such that 0 <= i <= j < len(s) and there exists a byte c with #{t | i <= t <= j and s[t] = c} >= k. Equivalently, res is the number of nonempty contiguous substrings s[i..j] (inclusive, 0-indexed) in which some character occurs at least k times within that substring.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_2",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result res and does not fail (no arithmetic overflow, index out of bounds, or panic) for every input satisfying the preconditions.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_3",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result res, res <= (len(s)-k+1)*(len(s)-k+2)/2.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_4",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result res, res = len(s)*(len(s)+1)/2.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with k = 1; note this already implies 1 <= k <= len(s)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_5",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result res, res = 1 if for all t with 0 <= t < len(s) we have s[t] = s[0], and res = 0 otherwise.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with k = len(s)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_6",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result res, res = (len(s)-k+1)*(len(s)-k+2)/2.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s); there exists a byte c such that s[t] = c for every 0 <= t < len(s)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_7",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result res, res = 0.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 2 <= k <= len(s); for all i,j with 0 <= i < j < len(s), s[i] != s[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_8",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result res, res > 0 if and only if there exists a byte c such that #{t | 0 <= t < len(s) and s[t] = c} >= k.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_9",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result res, if M >= k then res >= M - k + 1.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s). Let M = max over bytes c of #{t | 0 <= t < len(s) and s[t] = c}."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_10",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result res1 for the input (s,k1) and a result res2 for the input (s,k2), res2 <= res1.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k1 and k2 are 64-bit integers with 1 <= k1 <= k2 <= len(s)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_11",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result res for the input (s,k) and a result res' for the input (t,k), res = res'.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s). Let n = len(s) and let t be the byte string with len(t) = n and t[u] = s[n-1-u] for all 0 <= u < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_12",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let f(c) = #{t | 0 <= t < len(s) and s[t] = c} for each byte c. Whenever the function returns a result res, res >= sum over all bytes c of max(0, f(c) - k + 1).",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 3000; every byte s[t] for 0 <= t < len(s) is an ASCII lowercase letter (97 <= s[t] <= 122); k is a 64-bit integer with 1 <= k <= len(s)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumberOfSubstrings.spec_13",
+    "negation": "AegisSpec.NumberOfSubstrings.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result res for the input (s,k) and a result res' for the input (t,k), res <= res'.",
+    "preconditions": "len(s) and len(t) are integers with 1 <= len(s) <= len(t) <= 3000; every byte of s and t is an ASCII lowercase letter; k is a 64-bit integer with 1 <= k <= len(s); and t[u] = s[u] for all 0 <= u < len(s) (so s is a prefix of t)."
+  }
+]

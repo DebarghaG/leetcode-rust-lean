@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinPathCost.spec_1",
+    "negation": "AegisSpec.MinPathCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = min { sum_{k=0}^{m-1} grid[k][c_k] + sum_{k=0}^{m-2} moveCost[grid[k][c_k]][c_{k+1}] : for every k, 0 <= c_k < n }.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinPathCost.spec_2",
+    "negation": "AegisSpec.MinPathCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, out-of-bounds indexing, or panic).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinPathCost.spec_3",
+    "negation": "AegisSpec.MinPathCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every sequence of columns c_0,...,c_{m-1} with 0 <= c_k < n for all k, r <= sum_{k=0}^{m-1} grid[k][c_k] + sum_{k=0}^{m-2} moveCost[grid[k][c_k]][c_{k+1}].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinPathCost.spec_4",
+    "negation": "AegisSpec.MinPathCost.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists a sequence of columns c_0,...,c_{m-1} with 0 <= c_k < n for all k such that r = sum_{k=0}^{m-1} grid[k][c_k] + sum_{k=0}^{m-2} moveCost[grid[k][c_k]][c_{k+1}].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinPathCost.spec_5",
+    "negation": "AegisSpec.MinPathCost.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let mu = min_{0 <= v < m*n, 0 <= j < n} moveCost[v][j]. The function returns a result r, and r >= sum_{k=0}^{m-1} min_{0 <= j < n} grid[k][j] + (m-1)*mu.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinPathCost.spec_6",
+    "negation": "AegisSpec.MinPathCost.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of min_path_cost(grid, moveCost) and r' be the result of min_path_cost(grid', moveCost'). The function returns both results, and r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The original input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n. Let pi be any permutation of {0,1,...,n-1}. Define grid' by grid'[i][j] = grid[i][pi(j)] for all i,j and moveCost' by moveCost'[v][j] = moveCost[v][pi(j)] for all v,j."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinPathCost.spec_7",
+    "negation": "AegisSpec.MinPathCost.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_A be the result of min_path_cost(grid, A) and r_B be the result of min_path_cost(grid, B). The function returns both results, and r_A <= r_B.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid satisfies: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}. Let A and B be two moveCost arrays with len(A) = len(B) = m*n, every row of A and of B of length n, all entries in {1,2,...,100}, and A[v][j] <= B[v][j] for every 0 <= v < m*n and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinPathCost.spec_8",
+    "negation": "AegisSpec.MinPathCost.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 <= v < m*n, 0 <= j < n} moveCost[v][j]. The function returns a result r, and r <= sum_{k=0}^{m-1} min_{0 <= j < n} grid[k][j] + (m-1)*M.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies the problem constraints: 2 <= m <= 50, 2 <= n <= 50; every row of grid has length n; the m*n entries of grid are pairwise distinct and each lies in {0,1,...,m*n-1}; len(moveCost) = m*n; every row of moveCost has length n; and 1 <= moveCost[v][j] <= 100 for every 0 <= v < m*n and 0 <= j < n."
+  }
+]

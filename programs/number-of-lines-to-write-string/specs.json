@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfLines.spec_1",
+    "negation": "AegisSpec.NumberOfLines.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let w(c)=widths[c-97] for a lowercase byte c, and for 0<=l<=r<=len(s) let W(l,r)=sum_{t=l}^{r-1} w(s[t]). Define p_0=0. For each j with p_j<len(s), let p_{j+1} be the largest integer q such that p_j<q<=len(s) and W(p_j,q)<=100. Let k be the least integer with p_k=len(s). Then the function returns a result r with len(r)=2, r[0]=k, and r[1]=W(p_{k-1},len(s)).",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfLines.spec_2",
+    "negation": "AegisSpec.NumberOfLines.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfLines.spec_3",
+    "negation": "AegisSpec.NumberOfLines.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, len(r)=2.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfLines.spec_4",
+    "negation": "AegisSpec.NumberOfLines.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 1<=r[0]<=len(s).",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfLines.spec_5",
+    "negation": "AegisSpec.NumberOfLines.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 2<=r[1]<=100.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfLines.spec_6",
+    "negation": "AegisSpec.NumberOfLines.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, let T=sum_{t=0}^{len(s)-1} widths[s[t]-97]. Then r[0]=1 if and only if T<=100.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfLines.spec_7",
+    "negation": "AegisSpec.NumberOfLines.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, let w(c)=widths[c-97] and W(l,r)=sum_{t=l}^{r-1} w(s[t]). Then r[0] is the minimum integer m for which there exist indices 0=l_0<l_1<...<l_m=len(s) with W(l_j,l_{j+1})<=100 for every j with 0<=j<m.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfLines.spec_8",
+    "negation": "AegisSpec.NumberOfLines.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, let w(c)=widths[c-97] and W(l,r)=sum_{t=l}^{r-1} w(s[t]). There exists an index p with 0<=p<len(s) such that r[1]=W(p,len(s)) and the prefix s[0..p) can be partitioned into exactly r[0]-1 nonempty contiguous segments, each of width at most 100.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfLines.spec_9",
+    "negation": "AegisSpec.NumberOfLines.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions and r[0]>1, let w(c)=widths[c-97] and W(l,r)=sum_{t=l}^{r-1} w(s[t]). There exist indices q and p with 0<=q<p<len(s) such that W(q,p)<=100, W(q,p)+w(s[p])>100, r[1]=W(p,len(s)), and the prefix s[0..q) can be partitioned into exactly r[0]-2 nonempty contiguous segments, each of width at most 100.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfLines.spec_10",
+    "negation": "AegisSpec.NumberOfLines.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let widths' be any length-26 slice of i64 satisfying 2<=widths'[i]<=10 for every 0<=i<26 and widths'[i]=widths[i] whenever the letter with code i+97 occurs in s. If r and r' are the result vectors returned for (widths,s) and (widths',s) respectively, then r=r'.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfLines.spec_11",
+    "negation": "AegisSpec.NumberOfLines.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be any byte slice of lowercase letters with len(s')=len(s) and such that for every t with 0<=t<len(s), widths[s'[t]-97]=widths[s[t]-97]. If r and r' are the result vectors returned for (widths,s) and (widths,s') respectively, then r=r'.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfLines.spec_12",
+    "negation": "AegisSpec.NumberOfLines.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions and r[0]>1, let T=sum_{t=0}^{len(s)-1} widths[s[t]-97]. Then r[1]<T.",
+    "preconditions": "len(widths)=26; for every i with 0<=i<26, 2<=widths[i]<=10; 1<=len(s)<=1000; and every byte s[t] with 0<=t<len(s) is a lowercase English letter (97<=s[t]<=122)."
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanBeEqual.spec_1",
+    "negation": "AegisSpec.CanBeEqual.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = true if and only if both: (a) the two bytes s1[0] and s1[2] form the same multiset as s2[0] and s2[2], i.e. (s1[0] = s2[0] and s1[2] = s2[2]) or (s1[0] = s2[2] and s1[2] = s2[0]); and (b) the two bytes s1[1] and s1[3] form the same multiset as s2[1] and s2[3], i.e. (s1[1] = s2[1] and s1[3] = s2[3]) or (s1[1] = s2[3] and s1[3] = s2[1]).",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, and for every i with 0 <= i < 4, 97 <= s1[i] <= 122 and 97 <= s2[i] <= 122 (both are length-4 lowercase ASCII strings)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanBeEqual.spec_2",
+    "negation": "AegisSpec.CanBeEqual.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for these inputs.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, and for every i with 0 <= i < 4, 97 <= s1[i] <= 122 and 97 <= s2[i] <= 122 (both are length-4 lowercase ASCII strings)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanBeEqual.spec_3",
+    "negation": "AegisSpec.CanBeEqual.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of can_be_equal(s1, s2) and let r' be the result of can_be_equal(s2, s1). Then both calls return results and r = r'.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, and for every i with 0 <= i < 4, 97 <= s1[i] <= 122 and 97 <= s2[i] <= 122 (both are length-4 lowercase ASCII strings)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanBeEqual.spec_4",
+    "negation": "AegisSpec.CanBeEqual.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s1' be any length-4 lowercase byte string such that the multiset {s1'[0], s1'[2]} equals {s1[0], s1[2]} and the multiset {s1'[1], s1'[3]} equals {s1[1], s1[3]}; let s2' be any length-4 lowercase byte string with the analogous property relative to s2. Then can_be_equal(s1, s2) and can_be_equal(s1', s2') both return results and are equal.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, and for every i with 0 <= i < 4, 97 <= s1[i] <= 122 and 97 <= s2[i] <= 122 (both are length-4 lowercase ASCII strings)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanBeEqual.spec_5",
+    "negation": "AegisSpec.CanBeEqual.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns false.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, all bytes are lowercase ASCII, and the multisets {s1[0], s1[2]} and {s2[0], s2[2]} are not equal (equivalently, neither (s1[0] = s2[0] and s1[2] = s2[2]) nor (s1[0] = s2[2] and s1[2] = s2[0]) holds)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanBeEqual.spec_6",
+    "negation": "AegisSpec.CanBeEqual.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns true.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, all bytes are lowercase ASCII, and both parity-class conditions hold: the multisets {s1[0], s1[2]} and {s2[0], s2[2]} are equal, and the multisets {s1[1], s1[3]} and {s2[1], s2[3]} are equal."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanBeEqual.spec_7",
+    "negation": "AegisSpec.CanBeEqual.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true, there exists a length-4 lowercase byte string t such that the multiset {t[0], t[2]} equals both {s1[0], s1[2]} and {s2[0], s2[2]}, and the multiset {t[1], t[3]} equals both {s1[1], s1[3]} and {s2[1], s2[3]}.",
+    "preconditions": "len(s1) = 4 and len(s2) = 4, and for every i with 0 <= i < 4, 97 <= s1[i] <= 122 and 97 <= s2[i] <= 122 (both are length-4 lowercase ASCII strings)."
+  }
+]

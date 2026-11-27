@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_1",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that r = 100 - R, where R is the unique integer satisfying all of the following: (1) R is a multiple of 10; (2) |purchaseAmount - R| is minimal among all multiples of 10; (3) if purchaseAmount is exactly midway between two multiples of 10, then R is the larger of those two. Equivalently, R = 10 * floor((purchaseAmount + 5) / 10), with floor division on nonnegative integers, and r = 100 - R.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_2",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every purchaseAmount satisfying the precondition, the function returns a result r; in particular it does not fail with an overflow, panic, or out-of-bounds error.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_3",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the precondition, 0 <= r <= 100.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_4",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r on an input satisfying the precondition, the deducted amount 100 - r is a multiple of 10, i.e. (100 - r) mod 10 = 0 when residues are taken in {0,1,2,3,4,5,6,7,8,9}.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_5",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r_a on input a and r_b on input b, then r_a >= r_b.",
+    "preconditions": "0 <= a <= 100, 0 <= b <= 100, and a <= b."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_6",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the precondition, with R = 100 - r, we have |purchaseAmount - R| <= 5.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_7",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r on an input satisfying the precondition, r = 100 if and only if 0 <= purchaseAmount <= 4.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AccountBalanceAfterPurchase.spec_8",
+    "negation": "AegisSpec.AccountBalanceAfterPurchase.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on an input satisfying the precondition, r = 0 if and only if 95 <= purchaseAmount <= 100.",
+    "preconditions": "0 <= purchaseAmount <= 100, where purchaseAmount denotes the mathematical integer value of the I64 argument."
+  }
+]

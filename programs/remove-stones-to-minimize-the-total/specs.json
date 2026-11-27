@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinStoneSum.spec_1",
+    "negation": "AegisSpec.MinStoneSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the minimum, over all n-tuples (c_0, ..., c_{n-1}) of nonnegative integers satisfying c_0 + ... + c_{n-1} = k, of sum_{i=0}^{n-1} ceil(piles[i] / 2^{c_i}), where ceil(x / 2^c) is the least integer y >= 0 such that x <= y * 2^c (so ceil(x / 1) = x).",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinStoneSum.spec_2",
+    "negation": "AegisSpec.MinStoneSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail with overflow, out-of-bounds indexing, or panic on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinStoneSum.spec_3",
+    "negation": "AegisSpec.MinStoneSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= n.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinStoneSum.spec_4",
+    "negation": "AegisSpec.MinStoneSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{n-1} piles[i].",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinStoneSum.spec_5",
+    "negation": "AegisSpec.MinStoneSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (sum_{i=0}^{n-1} piles[i]) - max_{0 <= j < n} floor(piles[j] / 2).",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, k = 1, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinStoneSum.spec_6",
+    "negation": "AegisSpec.MinStoneSum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = ceil(piles[0] / 2^k), where ceil(x / 2^k) is the least integer y >= 0 such that x <= y * 2^k.",
+    "preconditions": "Let n = len(piles). The input satisfies n = 1, 1 <= k <= 100000, and 1 <= piles[0] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinStoneSum.spec_7",
+    "negation": "AegisSpec.MinStoneSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and piles[i] = 1 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinStoneSum.spec_8",
+    "negation": "AegisSpec.MinStoneSum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For each i let t_i be the least nonnegative integer with piles[i] <= 2^{t_i}. If k >= t_0 + ... + t_{n-1}, then whenever the function returns a result r, r = n.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinStoneSum.spec_9",
+    "negation": "AegisSpec.MinStoneSum.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (n - k) * p + k * ceil(p/2), where ceil(p/2) = p - floor(p/2).",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, k <= n, and there exists p with 1 <= p <= 10000 such that piles[i] = p for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinStoneSum.spec_10",
+    "negation": "AegisSpec.MinStoneSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call min_stone_sum(piles, k1) returns r1 and the call min_stone_sum(piles, k2) returns r2, then r2 <= r1.",
+    "preconditions": "Let n = len(piles). The slice satisfies 1 <= n <= 100000 and 1 <= piles[i] <= 10000 for every i with 0 <= i < n. The integers k1 and k2 satisfy 1 <= k1 <= k2 <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinStoneSum.spec_11",
+    "negation": "AegisSpec.MinStoneSum.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_stone_sum(piles, k) returns r and min_stone_sum(piles2, k) returns r2, then r <= r2.",
+    "preconditions": "Let piles and piles2 be two slices of the same length n. Both satisfy 1 <= n <= 100000 and 1 <= piles[i], piles2[i] <= 10000 for every i with 0 <= i < n, and piles[i] <= piles2[i] for every i. Let k satisfy 1 <= k <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinStoneSum.spec_12",
+    "negation": "AegisSpec.MinStoneSum.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every n-tuple (c_0, ..., c_{n-1}) of nonnegative integers with c_0 + ... + c_{n-1} = k, we have r <= sum_{i=0}^{n-1} ceil(piles[i] / 2^{c_i}), with ceil(x / 2^c) defined as the least integer y >= 0 such that x <= y * 2^c.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinStoneSum.spec_13",
+    "negation": "AegisSpec.MinStoneSum.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an n-tuple (c_0, ..., c_{n-1}) of nonnegative integers with c_0 + ... + c_{n-1} = k such that r = sum_{i=0}^{n-1} ceil(piles[i] / 2^{c_i}), with ceil(x / 2^c) defined as the least integer y >= 0 such that x <= y * 2^c.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinStoneSum.spec_14",
+    "negation": "AegisSpec.MinStoneSum.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{n-1} piles[i] if and only if piles[i] = 1 for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinStoneSum.spec_15",
+    "negation": "AegisSpec.MinStoneSum.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_stone_sum(piles, k) returns r and min_stone_sum(piles2, k) returns r2, then r = r2.",
+    "preconditions": "Let n = len(piles). The input satisfies 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= piles[i] <= 10000 for every i with 0 <= i < n. Let pi be any permutation of {0, ..., n-1}, and let piles2 be the slice of length n defined by piles2[i] = piles[pi(i)] for 0 <= i < n."
+  }
+]

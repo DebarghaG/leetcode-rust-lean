@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumRounds.spec_1",
+    "negation": "AegisSpec.MinimumRounds.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r, r is determined as follows. If there exists v in D with c(v) = 1, then r = -1. Otherwise r = sum over v in D of ceil(c(v)/3), where ceil(x/3) is the least integer q with 3*q >= x.",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumRounds.spec_2",
+    "negation": "AegisSpec.MinimumRounds.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every tasks satisfying the preconditions, minimum_rounds(tasks) returns Ok r for some i64 r; it never returns Err. In particular, no overflow, out-of-bounds access, or panic is used to signal the impossible case; that case is returned as Ok(-1).",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumRounds.spec_3",
+    "negation": "AegisSpec.MinimumRounds.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r, either r = -1 or 1 <= r <= 50000.",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumRounds.spec_4",
+    "negation": "AegisSpec.MinimumRounds.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r and r != -1, r >= |D|, where |D| is the number of distinct difficulty values occurring in tasks.",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumRounds.spec_5",
+    "negation": "AegisSpec.MinimumRounds.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r and r != -1, 2*r <= n = len(tasks).",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumRounds.spec_6",
+    "negation": "AegisSpec.MinimumRounds.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let M(tasks) be the multiset of positive integers {c(v) | v in D}. For any two slices tasks and tasks' satisfying the preconditions, if M(tasks) = M(tasks'), then whenever minimum_rounds(tasks) returns Ok r and minimum_rounds(tasks') returns Ok r', we have r = r'.",
+    "preconditions": "For each slice, let n = len(tasks), c(v) be the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}; the same definitions apply to tasks' with its own length and entries. Both tasks and tasks' satisfy the problem constraints: lengths between 1 and 100000 and all entries between 1 and 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumRounds.spec_7",
+    "negation": "AegisSpec.MinimumRounds.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r with r != -1, there exists a family of nonnegative integers (a_v, b_v) for v in D such that for every v in D, 2*a_v + 3*b_v = c(v), and r = sum over v in D of (a_v + b_v).",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumRounds.spec_8",
+    "negation": "AegisSpec.MinimumRounds.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_rounds(tasks) returns Ok r with r != -1, for every family of nonnegative integers (a_v, b_v) for v in D satisfying 2*a_v + 3*b_v = c(v) for every v in D, we have sum over v in D of (a_v + b_v) >= r.",
+    "preconditions": "tasks is an i64 slice satisfying the problem constraints: n = len(tasks), 1 <= n <= 100000, and 1 <= tasks[i] <= 1000000000 for every i with 0 <= i < n. For an integer v, c(v) is the number of indices i with 0 <= i < n and tasks[i] = v, and D = {tasks[i] | 0 <= i < n}."
+  }
+]

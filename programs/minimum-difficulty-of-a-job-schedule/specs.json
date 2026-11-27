@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDifficulty.spec_1",
+    "negation": "AegisSpec.MinDifficulty.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. If d > n, then r = -1. If d <= n, then r = min { T(c) : c is a d-partition of jobDifficulty }, where a d-partition is a sequence of indices c_0, c_1, ..., c_d with 0 = c_0 < c_1 < ... < c_d = n, and for such a partition T(c) = sum_{k=0}^{d-1} max { jobDifficulty[i] | c_k <= i < c_{k+1} }.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDifficulty.spec_2",
+    "negation": "AegisSpec.MinDifficulty.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, overflow, or access out-of-bounds).",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDifficulty.spec_3",
+    "negation": "AegisSpec.MinDifficulty.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = -1 if and only if d > len(jobDifficulty).",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDifficulty.spec_4",
+    "negation": "AegisSpec.MinDifficulty.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If d <= len(jobDifficulty), then the returned result r satisfies r >= max { jobDifficulty[i] | 0 <= i < len(jobDifficulty) }.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDifficulty.spec_5",
+    "negation": "AegisSpec.MinDifficulty.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If d <= len(jobDifficulty), then the returned result r satisfies r <= d * max { jobDifficulty[i] | 0 <= i < len(jobDifficulty) }.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDifficulty.spec_6",
+    "negation": "AegisSpec.MinDifficulty.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If d <= len(jobDifficulty), then the returned result r satisfies r <= sum_{i=0}^{n-1} jobDifficulty[i], where n = len(jobDifficulty).",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDifficulty.spec_7",
+    "negation": "AegisSpec.MinDifficulty.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer d with 1 <= d < len(jobDifficulty), if r_d is the result of min_difficulty(jobDifficulty, d) and r_{d+1} is the result of min_difficulty(jobDifficulty, d+1), then r_d <= r_{d+1}.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDifficulty.spec_8",
+    "negation": "AegisSpec.MinDifficulty.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If d <= len(jobDifficulty), then for every d-partition c of jobDifficulty (as defined in spec_1), the returned result r satisfies r <= T(c), where T(c) is the total difficulty of c.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDifficulty.spec_9",
+    "negation": "AegisSpec.MinDifficulty.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If d <= len(jobDifficulty), then there exists a d-partition c of jobDifficulty (as defined in spec_1) such that the returned result r equals T(c), the total difficulty of c.",
+    "preconditions": "Let n = len(jobDifficulty). The input satisfies 1 <= n <= 300, 1 <= d <= 10, and 0 <= jobDifficulty[i] <= 1000 for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDifficulty.spec_10",
+    "negation": "AegisSpec.MinDifficulty.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_a be the result of min_difficulty(a, d) and r_b be the result of min_difficulty(b, d). Then r_a <= r_b.",
+    "preconditions": "Let a and b be two slices of the same length n with 1 <= n <= 300, let 1 <= d <= 10, and assume 0 <= a[i] <= b[i] <= 1000 for every 0 <= i < n."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinValidStrings.spec_1",
+    "negation": "AegisSpec.MinValidStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a segment target[l..r) to be valid iff 0 <= l < r <= len(target) and there exists i with 0 <= i < len(words) such that r-l <= len(words[i]) and for every j with 0 <= j < r-l, target[l+j] = words[i][j]. Define a valid partition into k strings to be indices 0 = p_0 < p_1 < ... < p_k = len(target) such that every segment target[p_t..p_{t+1}) for 0 <= t < k is valid. The function returns a result r (it does not fail), and r = -1 if no valid partition exists; otherwise r is the least k >= 1 for which a valid partition into k strings exists.",
+    "preconditions": "Constraints hold: 1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 5000 and every byte of words[i] has ASCII code between 97 and 122; sum_{i=0}^{len(words)-1} len(words[i]) <= 100000; 1 <= len(target) <= 5000; every byte of target has ASCII code between 97 and 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinValidStrings.spec_2",
+    "negation": "AegisSpec.MinValidStrings.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= len(target).",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinValidStrings.spec_3",
+    "negation": "AegisSpec.MinValidStrings.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exist indices 0 = p_0 < p_1 < ... < p_r = len(target) such that for every t with 0 <= t < r, the segment target[p_t..p_{t+1}) is valid: p_t < p_{t+1}, and there exists i with 0 <= i < len(words) such that p_{t+1}-p_t <= len(words[i]) and target[p_t+j] = words[i][j] for every j with 0 <= j < p_{t+1}-p_t.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinValidStrings.spec_4",
+    "negation": "AegisSpec.MinValidStrings.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with r != -1, for every m >= 1 and every sequence of indices 0 = q_0 < q_1 < ... < q_m = len(target) such that each segment target[q_t..q_{t+1}) is a prefix of some word in words, we have r <= m.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinValidStrings.spec_5",
+    "negation": "AegisSpec.MinValidStrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 iff there do not exist k >= 1 and indices 0 = p_0 < p_1 < ... < p_k = len(target) such that every segment target[p_t..p_{t+1}) for 0 <= t < k is a prefix of some word in words.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinValidStrings.spec_6",
+    "negation": "AegisSpec.MinValidStrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 iff the whole target is a valid string, i.e., there exists i with 0 <= i < len(words) such that len(target) <= len(words[i]) and for every j with 0 <= j < len(target), target[j] = words[i][j].",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinValidStrings.spec_7",
+    "negation": "AegisSpec.MinValidStrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r != -1, there exists i with 0 <= i < len(words) such that words[i][0] = target[0].",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinValidStrings.spec_8",
+    "negation": "AegisSpec.MinValidStrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(target) = 1, then the function returns a result r with r = 1 if there exists i with 0 <= i < len(words) and words[i][0] = target[0], and r = -1 otherwise.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinValidStrings.spec_9",
+    "negation": "AegisSpec.MinValidStrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(words[i]) = 1 for every i with 0 <= i < len(words), then the function returns a result r with r = len(target) if for every p with 0 <= p < len(target) there exists i with 0 <= i < len(words) and words[i][0] = target[p], and r = -1 otherwise.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinValidStrings.spec_10",
+    "negation": "AegisSpec.MinValidStrings.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the maximum of len(words[i]) over all i with 0 <= i < len(words). Whenever the function returns a result r with r != -1, r >= ceil(len(target) / M).",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinValidStrings.spec_11",
+    "negation": "AegisSpec.MinValidStrings.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If for every p with 0 <= p < len(target) there exists i with 0 <= i < len(words) such that len(words[i]) >= 1 and words[i][0] = target[p], then the function returns a result r with r != -1 and r <= len(target).",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinValidStrings.spec_12",
+    "negation": "AegisSpec.MinValidStrings.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exist a byte value b and an index p with 0 <= p < len(target) such that target[p] = b, and no word in words contains byte b (that is, for every i with 0 <= i < len(words) and every j with 0 <= j < len(words[i]), words[i][j] != b), then the function returns r = -1.",
+    "preconditions": "Constraints hold as in spec_1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinValidStrings.spec_13",
+    "negation": "AegisSpec.MinValidStrings.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let words2 be any other list of byte strings satisfying the constraints stated in the preconditions such that for every i with 0 <= i < len(words) there exists j with 0 <= j < len(words2) and words2[j] = words[i]. If min_valid_strings words target returns r with r != -1, and min_valid_strings words2 target returns r2, then r2 != -1 and r2 <= r.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 5000 and every byte of words[i] has ASCII code between 97 and 122; sum_{i=0}^{len(words)-1} len(words[i]) <= 100000; 1 <= len(target) <= 5000; every byte of target has ASCII code between 97 and 122; words2 is a list of byte strings with 1 <= len(words2) <= 100, for every j with 0 <= j < len(words2), 1 <= len(words2[j]) <= 5000 and every byte of words2[j] has ASCII code between 97 and 122, and sum_{j=0}^{len(words2)-1} len(words2[j]) <= 100000; for every i with 0 <= i < len(words), there exists j with 0 <= j < len(words2) and words2[j] = words[i]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinValidStrings.spec_14",
+    "negation": "AegisSpec.MinValidStrings.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (words, target) and r2 on (words2, target), then r = r2.",
+    "preconditions": "Constraints hold for words and target. Let words2 be a permutation of words: len(words2) = len(words) and there is a bijection f from {0,...,len(words2)-1} to {0,...,len(words)-1} such that words2[j] = words[f(j)] for every j with 0 <= j < len(words2)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinValidStrings.spec_15",
+    "negation": "AegisSpec.MinValidStrings.spec_15_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail by arithmetic overflow or panic.",
+    "preconditions": "Constraints hold as in spec_1."
+  }
+]

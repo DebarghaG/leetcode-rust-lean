@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountUnguarded.spec_1",
+    "negation": "AegisSpec.CountUnguarded.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_unguarded(m,n,guards,walls) returns a result r, r is the number of pairs (i,j) with 0<=i<m and 0<=j<n such that (i,j) is not a guard position and not a wall position, and there is no guard g=(gr,gc) for which either (A) gr=i, j!=gc, and every cell (i,k) with min(gc,j)<k<max(gc,j) is neither a guard nor a wall, or (B) gc=j, i!=gr, and every cell (k,j) with min(gr,i)<k<max(gr,i) is neither a guard nor a wall. Conditions (A) and (B) say that g has an unobstructed cardinal-direction view of (i,j).",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountUnguarded.spec_2",
+    "negation": "AegisSpec.CountUnguarded.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, count_unguarded(m,n,guards,walls) returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountUnguarded.spec_3",
+    "negation": "AegisSpec.CountUnguarded.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_unguarded(m,n,guards,walls) returns a result r, r <= m*n - len(guards) - len(walls).",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountUnguarded.spec_4",
+    "negation": "AegisSpec.CountUnguarded.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let guards' be any list containing exactly the same position vectors as guards, each once, and let walls' be any list containing exactly the same position vectors as walls, each once. Whenever count_unguarded(m,n,guards,walls) returns r and count_unguarded(m,n,guards',walls') returns r', we have r=r'.",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountUnguarded.spec_5",
+    "negation": "AegisSpec.CountUnguarded.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let guardsT be obtained from guards by replacing each [a,b] with [b,a], and let wallsT be obtained from walls by replacing each [a,b] with [b,a]. Whenever count_unguarded(m,n,guards,walls) returns r and count_unguarded(n,m,guardsT,wallsT) returns r', we have r=r'.",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountUnguarded.spec_6",
+    "negation": "AegisSpec.CountUnguarded.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let guardsH be obtained from guards by replacing each [a,b] with [a,n-1-b], and let wallsH be obtained from walls by replacing each [a,b] with [a,n-1-b]. Whenever count_unguarded(m,n,guards,walls) returns r and count_unguarded(m,n,guardsH,wallsH) returns r', we have r=r'.",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountUnguarded.spec_7",
+    "negation": "AegisSpec.CountUnguarded.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_unguarded(m,n,guards,walls) returns r, let E = m*n - len(guards) - len(walls). Let V be the number of cells (i,j) with 0<=i<m and 0<=j<n that are neither a guard nor a wall and are seen by at least one guard, with seen meaning same row or column and no guard or wall strictly between. Then r + V = E.",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountUnguarded.spec_8",
+    "negation": "AegisSpec.CountUnguarded.spec_8_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever count_unguarded(m,n,guards,walls) returns r and count_unguarded(m,n,guards2,walls) returns r2, we have r2 <= r. Moreover, if p is not seen by any guard in guards, where a guard g=(gr,gc) sees (i,j) exactly when either (gr=i, j!=gc, and every cell (i,k) with min(gc,j)<k<max(gc,j) is neither a guard nor a wall) or (gc=j, i!=gr, and every cell (k,j) with min(gr,i)<k<max(gr,i) is neither a guard nor a wall), then r2 <= r-1.",
+    "preconditions": "m,n are integers with 1<=m,n<=100000 and 2<=m*n<=100000; guards and walls are slices of length-2 integer vectors; every guard and wall has row in [0,m) and column in [0,n); 1<=len(guards),len(walls)<=50000; 2<=len(guards)+len(walls)<=m*n; all positions appearing in guards or walls are pairwise distinct. Additionally, p=(pr,pc) is a cell with 0<=pr<m and 0<=pc<n that is neither a guard position nor a wall position, and guards2 is obtained by appending [pr,pc] to guards."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_1",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries), and for every i with 0 <= i < len(queries), r[i] is the minimum number of edges in a directed path from 0 to n-1 in the directed graph G_i whose vertices are {0,...,n-1} and whose edges are (x, x+1) for every 0 <= x < n-1 together with (queries[j][0], queries[j][1]) for every 0 <= j <= i. A path's length is its number of edges; the minimum exists because the initial chain 0->1->...->n-1 is always an edge path of length n-1.",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_2",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function call returns a result r (it does not panic, fail, overflow, or go out of bounds).",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_3",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), 1 <= r[i] <= n-1.",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_4",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < len(queries), r[i] <= r[i-1].",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_5",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and queries[0] = [u, v], it holds that r[0] = n - (v - u).",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_6",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), r[i] = 1 if and only if there exists j with 0 <= j <= i such that queries[j][0] = 0 and queries[j][1] = n-1.",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_7",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the two calls return results r and r', it holds that r[i] = r'[i] for every 0 <= i < k.",
+    "preconditions": "n >= 3; n <= 100000; both (n, queries) and (n, queries') satisfy: len >= 1, every query is [u,v] with 0 <= u < v < n, no repeated roads, and no indices i != j with u_i < u_j < v_i < v_j; and k is an integer with 0 <= k <= min(len(queries), len(queries')) such that queries[j] = queries'[j] for every 0 <= j < k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_8",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) there exists a sequence x_0, x_1, ..., x_{r[i]} of integers such that x_0 = 0, x_{r[i]} = n-1, 0 <= x_t < n for every t, and for every 0 <= t < r[i], either x_{t+1} = x_t + 1 or there exists j with 0 <= j <= i and (x_t, x_{t+1}) = (queries[j][0], queries[j][1]).",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_9",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) and every directed path from 0 to n-1 in the graph with edges (x, x+1) for 0 <= x < n-1 and (queries[j][0], queries[j][1]) for 0 <= j <= i, the number of edges in that path is at least r[i].",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_10",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), r[i] <= n - max_{0 <= j <= i} (queries[j][1] - queries[j][0]).",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_11",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < len(queries), if there exists j < i such that queries[j][0] <= queries[i][0] < queries[i][1] <= queries[j][1], then r[i] = r[i-1].",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ShortestDistanceAfterQueries.spec_12",
+    "negation": "AegisSpec.ShortestDistanceAfterQueries.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), if M_i = max(1, max_{0 <= j <= i} (queries[j][1] - queries[j][0])), then r[i] >= (n - 1 + M_i - 1) / M_i (integer ceiling division).",
+    "preconditions": "n >= 3; n <= 100000; len(queries) >= 1; len(queries) <= 100000; every queries[j] has length 2; writing queries[j] = [u_j, v_j], 0 <= u_j < v_j < n; no road [u,v] occurs twice among the queries; and there are no indices i != j with u_i < u_j < v_i < v_j."
+  }
+]

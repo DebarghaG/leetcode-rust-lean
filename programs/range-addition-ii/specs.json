@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxCount.spec_1",
+    "negation": "AegisSpec.MaxCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For 0 <= x < m and 0 <= y < n, let cnt(x,y) be the number of indices i with 0 <= i < len(ops) such that x < ops[i][0] and y < ops[i][1]. Let maxcnt be the maximum of cnt(x,y) over all 0 <= x < m and 0 <= y < n. The function returns a result r, and r is the number of pairs (x,y) with 0 <= x < m and 0 <= y < n such that cnt(x,y) = maxcnt.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxCount.spec_2",
+    "negation": "AegisSpec.MaxCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail due to arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxCount.spec_3",
+    "negation": "AegisSpec.MaxCount.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If len(ops) > 0, then the function returns a result r and r = (min over 0 <= i < len(ops) of ops[i][0]) * (min over 0 <= i < len(ops) of ops[i][1]).",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxCount.spec_4",
+    "negation": "AegisSpec.MaxCount.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= m * n.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxCount.spec_5",
+    "negation": "AegisSpec.MaxCount.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxCount.spec_6",
+    "negation": "AegisSpec.MaxCount.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For 0 <= x < m and 0 <= y < n, let cnt(x,y) be the number of indices i with 0 <= i < len(ops) such that x < ops[i][0] and y < ops[i][1]. Whenever the function returns a result r, for every such x,y we have cnt(x,y) <= cnt(0,0), and r is the number of pairs (x,y) with cnt(x,y) = cnt(0,0).",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxCount.spec_7",
+    "negation": "AegisSpec.MaxCount.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If len(ops) > 0, let A = min over 0 <= i < len(ops) of ops[i][0] and B = min over 0 <= i < len(ops) of ops[i][1]. The function returns a result r, and for every x,y with 0 <= x < m and 0 <= y < n, the value cnt(x,y), defined as the number of i with x < ops[i][0] and y < ops[i][1], equals the maximum final matrix value if and only if x < A and y < B. Consequently r = A * B.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxCount.spec_8",
+    "negation": "AegisSpec.MaxCount.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If ops2 is obtained from ops by appending the operation [m,n], then whenever the function returns r on (m,n,ops) and r2 on (m,n,ops2), r = r2.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxCount.spec_9",
+    "negation": "AegisSpec.MaxCount.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a,b be integers with 1 <= a <= m and 1 <= b <= n, and let ops2 be obtained from ops by appending the operation [a,b]. If the function returns r on (m,n,ops) and r2 on (m,n,ops2), then r2 <= r.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxCount.spec_10",
+    "negation": "AegisSpec.MaxCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If len(ops) > 0 and m2,n2 are integers with 1 <= m2 <= 40000 and 1 <= n2 <= 40000 such that 1 <= ops[i][0] <= m2 and 1 <= ops[i][1] <= n2 for every i with 0 <= i < len(ops), then whenever the function returns r on (m,n,ops) and r2 on (m2,n2,ops), r = r2.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxCount.spec_11",
+    "negation": "AegisSpec.MaxCount.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define ops_sw by ops_sw[i] = [ops[i][1], ops[i][0]] for every 0 <= i < len(ops). Whenever the function returns r on (m,n,ops) and r_sw on (n,m,ops_sw), r = r_sw.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxCount.spec_12",
+    "negation": "AegisSpec.MaxCount.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let ops_perm be any list of the same length whose entries are a permutation of the entries of ops. Whenever the function returns r on (m,n,ops) and r_perm on (m,n,ops_perm), r = r_perm.",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxCount.spec_13",
+    "negation": "AegisSpec.MaxCount.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = (if len(ops) = 0 then m * n else (min over 0 <= i < len(ops) of ops[i][0]) * (min over 0 <= i < len(ops) of ops[i][1])).",
+    "preconditions": "m and n are integers with 1 <= m <= 40000 and 1 <= n <= 40000; ops is a slice of vectors; len(ops) <= 10000; for every i with 0 <= i < len(ops), ops[i] has length 2, and 1 <= ops[i][0] <= m and 1 <= ops[i][1] <= n."
+  }
+]

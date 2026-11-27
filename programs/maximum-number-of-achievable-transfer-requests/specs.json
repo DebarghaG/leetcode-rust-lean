@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumRequests.spec_1",
+    "negation": "AegisSpec.MaximumRequests.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the maximum, over all subsets S of the index set {0, 1, ..., m-1} where m = len(requests), of the cardinality |S| subject to: for every building b with 0 <= b < n, the number of indices i in S with requests[i][0] = b equals the number of indices i in S with requests[i][1] = b. The empty subset is allowed. Indices in S are selected requests; they need not be contiguous, and duplicate request entries are distinct indices.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumRequests.spec_2",
+    "negation": "AegisSpec.MaximumRequests.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; under the preconditions it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumRequests.spec_3",
+    "negation": "AegisSpec.MaximumRequests.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= len(requests).",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumRequests.spec_4",
+    "negation": "AegisSpec.MaximumRequests.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a subset S of {0, 1, ..., m-1} such that |S| = r and, for every b with 0 <= b < n, the number of i in S with requests[i][0] = b equals the number of i in S with requests[i][1] = b.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumRequests.spec_5",
+    "negation": "AegisSpec.MaximumRequests.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every subset S of {0, 1, ..., m-1}, if for every b with 0 <= b < n the number of i in S with requests[i][0] = b equals the number of i in S with requests[i][1] = b, then |S| <= r.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumRequests.spec_6",
+    "negation": "AegisSpec.MaximumRequests.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= the number of indices i with 0 <= i < len(requests) and requests[i][0] = requests[i][1].",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumRequests.spec_7",
+    "negation": "AegisSpec.MaximumRequests.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 if requests[0][0] = requests[0][1], and r = 0 otherwise.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with m = 1. For i = 0, len(requests[i]) = 2, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumRequests.spec_8",
+    "negation": "AegisSpec.MaximumRequests.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n. There exist integers a and b with 0 <= a < n, 0 <= b < n, and a != b, such that for every i with 0 <= i < m, requests[i][0] = a and requests[i][1] = b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumRequests.spec_9",
+    "negation": "AegisSpec.MaximumRequests.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_requests n requests returns r and maximum_requests n requests' returns r', we have r' = r + 1.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 15. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n. Let b be an integer with 0 <= b < n. Let requests' be the slice of length m+1 such that requests'[i] = requests[i] for 0 <= i < m and requests'[m] is the vector [b, b]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumRequests.spec_10",
+    "negation": "AegisSpec.MaximumRequests.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_requests n requests returns r and maximum_requests n requests' returns r', we have r = r'.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests) and let len(requests') = m. We have 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2 and len(requests'[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n, 0 <= requests[i][1] < n, 0 <= requests'[i][0] < n, and 0 <= requests'[i][1] < n. There exists a permutation sigma of {0, 1, ..., m-1} such that for every i with 0 <= i < m, requests'[i][0] = requests[sigma(i)][0] and requests'[i][1] = requests[sigma(i)][1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumRequests.spec_11",
+    "negation": "AegisSpec.MaximumRequests.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(requests).",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n. For every b with 0 <= b < n, the number of i with requests[i][0] = b equals the number of i with requests[i][1] = b."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumRequests.spec_12",
+    "negation": "AegisSpec.MaximumRequests.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = C + 2 * min(A, B), where A is the number of indices i with requests[i][0] = 0 and requests[i][1] = 1, B is the number of indices i with requests[i][0] = 1 and requests[i][1] = 0, and C is the number of indices i with requests[i][0] = requests[i][1].",
+    "preconditions": "n is an i64 with n = 2. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2. For every i with 0 <= i < m, 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumRequests.spec_13",
+    "negation": "AegisSpec.MaximumRequests.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_requests n requests returns r and maximum_requests n requests' returns r', we have r <= r' <= r + 1.",
+    "preconditions": "n is an i64 with 1 <= n <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 15. For every i with 0 <= i < m, len(requests[i]) = 2 and 0 <= requests[i][0] < n and 0 <= requests[i][1] < n. Let a and b be integers with 0 <= a < n and 0 <= b < n. Let requests' be the slice of length m+1 such that requests'[i] = requests[i] for 0 <= i < m and requests'[m] is the vector [a, b]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumRequests.spec_14",
+    "negation": "AegisSpec.MaximumRequests.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_requests n requests returns r and maximum_requests n' requests returns r', we have r = r'.",
+    "preconditions": "n and n' are i64 values with 1 <= n <= n' <= 20. Let m = len(requests). requests is a slice with 1 <= m <= 16. For every i with 0 <= i < m, len(requests[i]) = 2 and 0 <= requests[i][0] < n and 0 <= requests[i][1] < n."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinMutation.spec_1",
+    "negation": "AegisSpec.MinMutation.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. Call a finite sequence (g_0,...,g_k) of byte strings a valid mutation sequence of length k from startGene to endGene if: g_0 = startGene and g_k = endGene; for every i with 0 <= i < k, g_i and g_{i+1} both have length 8 and there is exactly one index p with 0 <= p < 8 such that g_i[p] != g_{i+1}[p] (all other positions are equal); and for every i with 1 <= i <= k, there exists j with 0 <= j < len(bank) such that bank[j] equals g_i byte for byte. Then if some valid mutation sequence of length k with k >= 0 exists, r is the least such k; otherwise r = -1.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinMutation.spec_2",
+    "negation": "AegisSpec.MinMutation.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, overflow, or access out of bounds) for every input satisfying the preconditions.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinMutation.spec_3",
+    "negation": "AegisSpec.MinMutation.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, either r = -1, or 0 <= r <= len(bank).",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinMutation.spec_4",
+    "negation": "AegisSpec.MinMutation.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = 0 if and only if startGene = endGene (same bytes at all 8 positions).",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinMutation.spec_5",
+    "negation": "AegisSpec.MinMutation.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if r > 0 then endGene is present in bank: there exists j with 0 <= j < len(bank) such that bank[j] equals endGene byte for byte.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinMutation.spec_6",
+    "negation": "AegisSpec.MinMutation.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if endGene is not present in bank (there is no j with 0 <= j < len(bank) and bank[j] = endGene byte for byte), then r = 0 when startGene = endGene, and r = -1 when startGene != endGene.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinMutation.spec_7",
+    "negation": "AegisSpec.MinMutation.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = 1 if and only if startGene and endGene differ in exactly one position p with 0 <= p < 8 (all other positions are equal), and endGene is present in bank.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinMutation.spec_8",
+    "negation": "AegisSpec.MinMutation.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, if r > 0 then there exists an index j with 0 <= j < len(bank) such that startGene and bank[j] differ in exactly one of the 8 positions, and there exists a valid mutation sequence of length r - 1 from bank[j] to endGene using bank, meaning a sequence (h_0,...,h_{r-1}) with h_0 = bank[j], h_{r-1} = endGene, every consecutive pair differs in exactly one of the 8 positions, and every h_i with 1 <= i <= r - 1 is present in bank.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinMutation.spec_9",
+    "negation": "AegisSpec.MinMutation.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r with r >= 0, there exists a valid mutation sequence (g_0,...,g_r) of length r from startGene to endGene using bank such that g_0,g_1,...,g_r are pairwise distinct byte strings.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinMutation.spec_10",
+    "negation": "AegisSpec.MinMutation.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for (startGene,endGene,bank), the function returns r for (startGene,endGene,bank2) as well.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T'). Let bank2 be any slice of Vec<U8> satisfying the same length, alphabet, and at-most-10 preconditions, and such that for every 8-byte gene string g over {A,C,G,T}, g is present in bank exactly when g is present in bank2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinMutation.spec_11",
+    "negation": "AegisSpec.MinMutation.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for (startGene,endGene,bank), if startGene is present in bank, then for the bank2 obtained from bank by deleting every entry equal to startGene byte for byte, the function returns r for (startGene,endGene,bank2).",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinMutation.spec_12",
+    "negation": "AegisSpec.MinMutation.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 for (startGene,endGene,bank1) and r2 for (startGene,endGene,bank2), either r1 = -1, or (r2 >= 0 and r2 <= r1).",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, and every byte of startGene and endGene is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T'). Let bank1 and bank2 be slices of Vec<U8> both satisfying len <= 10, every entry has length 8 and uses only A,C,G,T, and suppose every gene string present in bank1 is also present in bank2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinMutation.spec_13",
+    "negation": "AegisSpec.MinMutation.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if startGene != endGene and there is no index j with 0 <= j < len(bank) such that startGene and bank[j] differ in exactly one of the 8 positions, then r = -1.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinMutation.spec_14",
+    "negation": "AegisSpec.MinMutation.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r with r > 0, bank contains at least r pairwise distinct byte strings: there exist indices j_1,...,j_r with 0 <= j_m < len(bank) such that bank[j_1],...,bank[j_r] are pairwise unequal as byte sequences.",
+    "preconditions": "len(startGene) = 8, len(endGene) = 8, len(bank) <= 10, and for every i with 0 <= i < len(bank), len(bank[i]) = 8. Every byte of startGene, endGene, and every bank[i] is one of 65 ('A'), 67 ('C'), 71 ('G'), 84 ('T')."
+  }
+]

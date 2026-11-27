@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_1",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = row*n + col, where (row, col) is obtained as follows. Start with row = 0 and col = 0. For i = 0, 1, ..., len(commands)-1 in order: if commands[i] is \"UP\", set row := row - 1; if commands[i] is \"DOWN\", set row := row + 1; if commands[i] is \"LEFT\", set col := col - 1; if commands[i] is \"RIGHT\", set col := col + 1. The arithmetic is ordinary integer arithmetic, with no modulo reduction and no boundary check.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands is a slice of byte vectors with 1 <= len(commands) <= 100. For every i with 0 <= i < len(commands), commands[i] is exactly the ASCII byte string \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\"."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_2",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular it does not fail, panic, or overflow.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands is a slice of byte vectors with 1 <= len(commands) <= 100. For every i with 0 <= i < len(commands), commands[i] is exactly the ASCII byte string \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\"."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_3",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r < n*n.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands is a slice of byte vectors with 1 <= len(commands) <= 100. For every i with 0 <= i < len(commands), commands[i] is exactly the ASCII byte string \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\". Let (row_k, col_k) be the position after the first k commands, defined by starting at (0,0) and applying UP=(row-1), DOWN=(row+1), LEFT=(col-1), RIGHT=(col+1). The problem's boundary promise holds: for every k with 0 <= k <= len(commands), 0 <= row_k < n and 0 <= col_k < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_4",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let D be the number of \"DOWN\" commands and U the number of \"UP\" commands. The function returns a result r and floor(r / n) = D - U, where / denotes integer division of the non-negative r by positive n.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands is a slice of byte vectors with 1 <= len(commands) <= 100. For every i with 0 <= i < len(commands), commands[i] is exactly the ASCII byte string \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\". Let (row_k, col_k) be the position after the first k commands, defined by starting at (0,0) and applying UP=(row-1), DOWN=(row+1), LEFT=(col-1), RIGHT=(col+1). The problem's boundary promise holds: for every k with 0 <= k <= len(commands), 0 <= row_k < n and 0 <= col_k < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_5",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let R be the number of \"RIGHT\" commands and L the number of \"LEFT\" commands. The function returns a result r and r mod n = R - L, where r mod n is the unique integer in [0, n-1] congruent to r modulo n.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands is a slice of byte vectors with 1 <= len(commands) <= 100. For every i with 0 <= i < len(commands), commands[i] is exactly the ASCII byte string \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\". Let (row_k, col_k) be the position after the first k commands, defined by starting at (0,0) and applying UP=(row-1), DOWN=(row+1), LEFT=(col-1), RIGHT=(col+1). The problem's boundary promise holds: for every k with 0 <= k <= len(commands), 0 <= row_k < n and 0 <= col_k < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FinalPositionOfSnake.spec_6",
+    "negation": "AegisSpec.FinalPositionOfSnake.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r for (n, commands) and a result r' for (n, commands'), and r = r'.",
+    "preconditions": "n is an integer with 2 <= n <= 10. commands and commands' are slices of byte vectors, each with 1 <= length <= 100. Every element of both slices is exactly \"UP\", \"RIGHT\", \"DOWN\", or \"LEFT\". commands' is a permutation of commands, i.e. a reordering of the same multiset of commands."
+  }
+]

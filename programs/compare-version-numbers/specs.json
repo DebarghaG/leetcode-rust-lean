@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CompareVersion.spec_1",
+    "negation": "AegisSpec.CompareVersion.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer in {-1, 0, 1} satisfying: if rev(version1,i) = rev(version2,i) for every i >= 0, then r = 0; otherwise, for the smallest i >= 0 with rev(version1,i) != rev(version2,i), r = -1 if rev(version1,i) < rev(version2,i), and r = 1 if rev(version1,i) > rev(version2,i).",
+    "preconditions": "version1 and version2 are byte strings representing valid version numbers: 1 <= len(version1), len(version2) <= 500; every byte is either an ASCII digit (48..57) or the dot byte (46); neither string begins or ends with '.'; and no two consecutive bytes are both '.'. Let split(s) be the list of maximal nonempty digit runs separated by dots, and n(s) = len(split(s)). For a digit string r, val(r) is its base-10 integer value (leading zeros allowed, so val('01') = 1). For i >= 0, define rev(s,i) = val(split(s)[i]) if i < n(s), and rev(s,i) = 0 otherwise. For every revision r in split(version1) or split(version2), val(r) <= 2^31 - 1 (so it fits in a 32-bit signed integer)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CompareVersion.spec_2",
+    "negation": "AegisSpec.CompareVersion.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail (no panic, overflow, or out-of-bounds).",
+    "preconditions": "version1 and version2 are byte strings representing valid version numbers: 1 <= len(version1), len(version2) <= 500; every byte is either an ASCII digit (48..57) or the dot byte (46); neither string begins or ends with '.'; and no two consecutive bytes are both '.'. Let split(s) be the list of maximal nonempty digit runs separated by dots, and n(s) = len(split(s)). For a digit string r, val(r) is its base-10 integer value (leading zeros allowed, so val('01') = 1). For i >= 0, define rev(s,i) = val(split(s)[i]) if i < n(s), and rev(s,i) = 0 otherwise. For every revision r in split(version1) or split(version2), val(r) <= 2^31 - 1 (so it fits in a 32-bit signed integer)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CompareVersion.spec_3",
+    "negation": "AegisSpec.CompareVersion.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (version1, version2) and r' on (version1', version2'), then r = r'.",
+    "preconditions": "version1 and version2 are byte strings representing valid version numbers: 1 <= len(version1), len(version2) <= 500; every byte is either an ASCII digit (48..57) or the dot byte (46); neither string begins or ends with '.'; and no two consecutive bytes are both '.'. Let split(s) be the list of maximal nonempty digit runs separated by dots, and n(s) = len(split(s)). For a digit string r, val(r) is its base-10 integer value (leading zeros allowed, so val('01') = 1). For i >= 0, define rev(s,i) = val(split(s)[i]) if i < n(s), and rev(s,i) = 0 otherwise. For every revision r in split(version1) or split(version2), val(r) <= 2^31 - 1 (so it fits in a 32-bit signed integer). Let version1' and version2' be byte strings satisfying the same validity constraints, with n(version1') = n(version1), n(version2') = n(version2), and for every i < n(version1), rev(version1',i) = rev(version1,i); for every i < n(version2), rev(version2',i) = rev(version2,i)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CompareVersion.spec_4",
+    "negation": "AegisSpec.CompareVersion.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (version1, version2) and r' on (version1, version2'), then r = r'.",
+    "preconditions": "version1 and version2 are byte strings representing valid version numbers: 1 <= len(version1), len(version2) <= 500; every byte is either an ASCII digit (48..57) or the dot byte (46); neither string begins or ends with '.'; and no two consecutive bytes are both '.'. Let split(s) be the list of maximal nonempty digit runs separated by dots, and n(s) = len(split(s)). For a digit string r, val(r) is its base-10 integer value (leading zeros allowed, so val('01') = 1). For i >= 0, define rev(s,i) = val(split(s)[i]) if i < n(s), and rev(s,i) = 0 otherwise. For every revision r in split(version1) or split(version2), val(r) <= 2^31 - 1 (so it fits in a 32-bit signed integer). Let k >= 0 be any integer such that len(version2) + 2k <= 500. Let version2' be the byte string obtained by appending k copies of the two-byte sequence [46, 48] ('.' and '0') to version2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CompareVersion.spec_5",
+    "negation": "AegisSpec.CompareVersion.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on (version1, version2) and r' on (version2, version1), then r' = -r.",
+    "preconditions": "version1 and version2 are byte strings representing valid version numbers: 1 <= len(version1), len(version2) <= 500; every byte is either an ASCII digit (48..57) or the dot byte (46); neither string begins or ends with '.'; and no two consecutive bytes are both '.'. Let split(s) be the list of maximal nonempty digit runs separated by dots, and n(s) = len(split(s)). For a digit string r, val(r) is its base-10 integer value (leading zeros allowed, so val('01') = 1). For i >= 0, define rev(s,i) = val(split(s)[i]) if i < n(s), and rev(s,i) = 0 otherwise. For every revision r in split(version1) or split(version2), val(r) <= 2^31 - 1 (so it fits in a 32-bit signed integer)."
+  }
+]

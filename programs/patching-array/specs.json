@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinPatches.spec_1",
+    "negation": "AegisSpec.MinPatches.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a finite list A of positive integers to cover [1,n] iff, for every integer x with 1 <= x <= n, there is a subset I of the index set {0,...,len(A)-1} such that the sum of A[i] over i in I equals x, with each index used at most once. Whenever the function returns a result r, r is the least integer k >= 0 for which there exists a finite list P of positive integers with len(P)=k such that nums followed by P covers [1,n]. Equivalently, such a P exists for k=r, and no list P' of positive integers with len(P') < r makes nums followed by P' cover [1,n].",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinPatches.spec_2",
+    "negation": "AegisSpec.MinPatches.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinPatches.spec_3",
+    "negation": "AegisSpec.MinPatches.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L(n) be the least integer k >= 0 such that 2^k - 1 >= n. Whenever the function returns a result r, 0 <= r <= L(n).",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinPatches.spec_4",
+    "negation": "AegisSpec.MinPatches.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define a list A of positive integers to cover [1,n] iff every integer x with 1 <= x <= n is the sum of some subset of the indices of A, each index used at most once. Whenever the function returns a result r, r = 0 if and only if nums itself covers [1,n].",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinPatches.spec_5",
+    "negation": "AegisSpec.MinPatches.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n=1, then whenever the function returns a result r, r = 0 if there exists an index i with nums[i]=1, and r = 1 otherwise.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinPatches.spec_6",
+    "negation": "AegisSpec.MinPatches.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums)=1 and nums[0]=1, then whenever the function returns a result r, r is the least integer k >= 0 such that 2^(k+1) - 1 >= n.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinPatches.spec_7",
+    "negation": "AegisSpec.MinPatches.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums)=0, or (len(nums)>0 and nums[0]>n), then whenever the function returns a result r, r is the least integer k >= 0 such that 2^k - 1 >= n.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinPatches.spec_8",
+    "negation": "AegisSpec.MinPatches.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the subsequence of nums consisting of exactly those entries nums[i] with nums[i] <= n. Whenever the calls min_patches(nums,n) and min_patches(nums',n) return results r and r', respectively, we have r = r'.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinPatches.spec_9",
+    "negation": "AegisSpec.MinPatches.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the calls min_patches(nums,n) and min_patches(nums',n) return results r and r', respectively, we have r' <= r.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1. Also nums' is another sorted slice satisfying the same constraints, and the multiset of entries of nums' contains the multiset of entries of nums."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinPatches.spec_10",
+    "negation": "AegisSpec.MinPatches.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the calls min_patches(nums,n1) and min_patches(nums,n2) return results r1 and r2, respectively, we have r1 <= r2.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n1,n2 are i64s with 1 <= n1 <= n2 <= 2^31 - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinPatches.spec_11",
+    "negation": "AegisSpec.MinPatches.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define a list A to cover [1,n] iff every integer x with 1 <= x <= n is the sum of some subset of the indices of A, each index used at most once. Whenever the function returns a result r, there exists a list P of positive integers such that len(P)=r, every element of P is at most n, and nums followed by P covers [1,n].",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinPatches.spec_12",
+    "negation": "AegisSpec.MinPatches.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose n=2. Let c1 be the number of indices i with nums[i]=1, and let c2 be the number of indices i with nums[i]=2. Whenever the function returns a result r, the following holds: if c1 >= 1 and (c1 >= 2 or c2 >= 1), then r=0; otherwise, if c1 >= 1 or c2 >= 1, then r=1; otherwise r=2.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinPatches.spec_13",
+    "negation": "AegisSpec.MinPatches.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L(n) be the least integer k >= 0 such that 2^k - 1 >= n. Whenever the function returns a result r, r <= L(n) - 1.",
+    "preconditions": "nums is a slice of i64 with 0 <= len(nums) <= 1000; nums is sorted in nondecreasing order; every element nums[i] satisfies 1 <= nums[i] <= 10^4; and n is an i64 with 1 <= n <= 2^31 - 1. Assume also that there exists an index i with nums[i]=1."
+  }
+]

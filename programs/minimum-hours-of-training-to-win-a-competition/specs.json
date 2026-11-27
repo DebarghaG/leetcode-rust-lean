@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_1",
+    "negation": "AegisSpec.MinNumberOfHours.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = HE + HX, where HE = max(0, (sum_{j=0}^{n-1} energy[j]) + 1 - initialEnergy) and HX = max(0, max_{0 <= i < n} (experience[i] + 1 - initialExperience - sum_{j=0}^{i-1} experience[j])). An empty sum (i = 0) is 0. All arithmetic and maxima/minima here are over mathematical integers, and r is the returned i64 interpreted as that integer.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_2",
+    "negation": "AegisSpec.MinNumberOfHours.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (there exists an i64 r such that the Lean result is ok r); it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_3",
+    "negation": "AegisSpec.MinNumberOfHours.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_4",
+    "negation": "AegisSpec.MinNumberOfHours.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (sum_{j=0}^{n-1} energy[j]) + max_{0 <= i < n} experience[i].",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_5",
+    "negation": "AegisSpec.MinNumberOfHours.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= max(0, (sum_{j=0}^{n-1} energy[j]) + 1 - initialEnergy).",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_6",
+    "negation": "AegisSpec.MinNumberOfHours.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= max(0, max_{0 <= i < n} (experience[i] + 1 - initialExperience - sum_{j=0}^{i-1} experience[j])). An empty sum (i = 0) is 0.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_7",
+    "negation": "AegisSpec.MinNumberOfHours.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist nonnegative integers a and b with a + b = r such that, after training a hours on energy and b hours on experience, every opponent can be defeated in order: for every i with 0 <= i < n, initialEnergy + a - sum_{j=0}^{i-1} energy[j] > energy[i] and initialExperience + b + sum_{j=0}^{i-1} experience[j] > experience[i]. Empty sums are 0.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_8",
+    "negation": "AegisSpec.MinNumberOfHours.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of nonnegative integers a and b such that initialEnergy + a - sum_{j=0}^{i-1} energy[j] > energy[i] and initialExperience + b + sum_{j=0}^{i-1} experience[j] > experience[i] for all i with 0 <= i < n, it holds that a + b >= r. Empty sums are 0.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_9",
+    "negation": "AegisSpec.MinNumberOfHours.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if both of the following hold: (1) initialEnergy > sum_{j=0}^{n-1} energy[j]; and (2) for every i with 0 <= i < n, initialExperience + sum_{j=0}^{i-1} experience[j] > experience[i]. Empty sums are 0.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_10",
+    "negation": "AegisSpec.MinNumberOfHours.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the call with (initialEnergy, initialExperience, energy, experience) returns r and the call with (initialEnergy, initialExperience, energy2, experience) returns r2, we have r = r2.",
+    "preconditions": "Let n = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= experience[i] <= 100. Let energy and energy2 be two slices of length n whose entries all lie between 1 and 100 and whose sums are equal."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_11",
+    "negation": "AegisSpec.MinNumberOfHours.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call with (initialEnergy, initialExperience, energy, experience) returns r and the call with (initialEnergy2, initialExperience, energy, experience) returns r2, we have r2 <= r.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100. Let initialEnergy and initialEnergy2 be integers with 1 <= initialEnergy <= initialEnergy2 <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_12",
+    "negation": "AegisSpec.MinNumberOfHours.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call with (initialEnergy, initialExperience, energy, experience) returns r and the call with (initialEnergy, initialExperience2, energy, experience) returns r2, we have r2 <= r.",
+    "preconditions": "Let n = len(energy) = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, and for every i with 0 <= i < n, 1 <= energy[i] <= 100 and 1 <= experience[i] <= 100. Let initialExperience and initialExperience2 be integers with 1 <= initialExperience <= initialExperience2 <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinNumberOfHours.spec_13",
+    "negation": "AegisSpec.MinNumberOfHours.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call with (initialEnergy, initialExperience, energy, experience) returns r and the call with (initialEnergy, initialExperience, energy2, experience) returns r2, we have r2 >= r.",
+    "preconditions": "Let n = len(experience). Assume 1 <= n <= 100, 1 <= initialEnergy <= 100, 1 <= initialExperience <= 100, and for every i with 0 <= i < n, 1 <= experience[i] <= 100. Let energy and energy2 be two slices of length n whose entries all lie between 1 and 100, and assume energy2[i] >= energy[i] for every i with 0 <= i < n."
+  }
+]

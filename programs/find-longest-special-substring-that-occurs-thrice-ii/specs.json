@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumLength.spec_1",
+    "negation": "AegisSpec.MaximumLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and the following holds. Define Occ(c,L), for a byte c and an integer L with 1 <= L <= len(s), as the number of indices i such that 0 <= i <= len(s)-L and s[i+k]=c for every k with 0 <= k < L. If there exist a byte c and an integer L with 1 <= L <= len(s) and Occ(c,L) >= 3, then r is the largest such L: r >= 1, Occ(c,r) >= 3 for at least one byte c, and for every byte c' and every integer L with r < L <= len(s), Occ(c',L) <= 2. If no such pair (c,L) exists, then r = -1.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s consists only of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumLength.spec_2",
+    "negation": "AegisSpec.MaximumLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, maximum_length(s) returns a result r; in particular, it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumLength.spec_3",
+    "negation": "AegisSpec.MaximumLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_length(s) returns a result r, either r = -1 or 1 <= r <= len(s).",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumLength.spec_4",
+    "negation": "AegisSpec.MaximumLength.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever maximum_length(s) returns a result r with r >= 1, there exists a byte c such that Occ(c,r) >= 3, where Occ(c,r) is the number of indices i with 0 <= i <= len(s)-r and s[i+k]=c for all k with 0 <= k < r.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumLength.spec_5",
+    "negation": "AegisSpec.MaximumLength.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_length(s) returns a result r with r >= 1, for every byte c and every integer L with r < L <= len(s), Occ(c,L) <= 2, where Occ(c,L) is the number of indices i with 0 <= i <= len(s)-L and s[i+k]=c for all k with 0 <= k < L.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumLength.spec_6",
+    "negation": "AegisSpec.MaximumLength.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_length(s) returns a result r, r = -1 if and only if for every byte c, the number of indices i with 0 <= i < len(s) and s[i]=c is at most 2.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumLength.spec_7",
+    "negation": "AegisSpec.MaximumLength.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result len(s)-2.",
+    "preconditions": "3 <= len(s) <= 500000, all bytes of s are lowercase ASCII letters (97 <= s[i] <= 122 for every 0 <= i < len(s)), and all bytes of s are equal (s[i]=s[0] for every i with 0 <= i < len(s))."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumLength.spec_8",
+    "negation": "AegisSpec.MaximumLength.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If s[0]=s[1] and s[1]=s[2], the function returns 1; otherwise it returns -1.",
+    "preconditions": "3 <= len(s) <= 500000, all bytes of s are lowercase ASCII letters, and len(s)=3."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumLength.spec_9",
+    "negation": "AegisSpec.MaximumLength.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the maximum length of a contiguous block of equal bytes in s, that is, M = max{ b-a+1 : 0 <= a <= b < len(s) and s[k]=s[a] for every k with a <= k <= b }. Whenever maximum_length(s) returns a result r with r >= 1, r <= M.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumLength.spec_10",
+    "negation": "AegisSpec.MaximumLength.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_length(s) returns a result r with r >= 1, there exists a byte c such that the number of indices i with 0 <= i < len(s) and s[i]=c is at least r+2.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumLength.spec_11",
+    "negation": "AegisSpec.MaximumLength.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_length(s) returns a and maximum_length(t) returns b, we have b >= a, treating -1 as an integer less than every positive result.",
+    "preconditions": "Both s and t satisfy: 3 <= len(s) <= 500000 and 3 <= len(t) <= 500000, all bytes of s and t are lowercase ASCII letters (97..122), len(s) <= len(t), and s[i]=t[i] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumLength.spec_12",
+    "negation": "AegisSpec.MaximumLength.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_length(s) returns a and maximum_length(t) returns b, we have a = b.",
+    "preconditions": "Both s and t satisfy: 3 <= len(s) <= 500000 and 3 <= len(t) <= 500000, all bytes of s and t are lowercase ASCII letters (97..122), len(s)=len(t), and t[i]=s[len(s)-1-i] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumLength.spec_13",
+    "negation": "AegisSpec.MaximumLength.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever maximum_length(s) returns a result r with r >= 1, for every integer L with 1 <= L <= r there exists a byte c such that Occ(c,L) >= 3, where Occ(c,L) is the number of indices i with 0 <= i <= len(s)-L and s[i+k]=c for all k with 0 <= k < L.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumLength.spec_14",
+    "negation": "AegisSpec.MaximumLength.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer R with R >= 3, if there exist a and b with 0 <= a <= b < len(s), b-a+1=R, and s[k]=s[a] for every k with a <= k <= b, then whenever maximum_length(s) returns a result r, we have r >= R-2.",
+    "preconditions": "3 <= len(s) <= 500000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

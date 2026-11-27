@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HitBricks.spec_1",
+    "negation": "AegisSpec.HitBricks.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let B = {(i,j) | 0 <= i < m, 0 <= j < n, grid[i][j] = 1}. For a set S of positions, define stable(S) as the union of all 4-connected components of S that contain at least one position in row 0 (i.e., with first coordinate 0). Let S_0 = stable(B). For k = 0,1,...,len(hits)-1, let h_k = (hits[k][0], hits[k][1]). Define T_k = S_k \\ {h_k} if h_k ∈ S_k, else T_k = S_k. Define S_{k+1} = stable(T_k). The function returns a result r such that len(r) = len(hits) and for every k with 0 <= k < len(hits), r[k] = |T_k| - |S_{k+1}|.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HitBricks.spec_2",
+    "negation": "AegisSpec.HitBricks.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and len(r) = len(hits).",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HitBricks.spec_3",
+    "negation": "AegisSpec.HitBricks.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, overflow, or go out of bounds).",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HitBricks.spec_4",
+    "negation": "AegisSpec.HitBricks.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every k with 0 <= k < len(hits), 0 <= r[k] <= |S_k| - (1 if h_k ∈ S_k else 0), where S_k and h_k are defined as in spec_1.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HitBricks.spec_5",
+    "negation": "AegisSpec.HitBricks.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k with 0 <= k < len(hits), |S_{k+1}| = |S_k| - (1 if h_k ∈ S_k else 0) - r[k], where S_k and h_k are defined as in spec_1.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HitBricks.spec_6",
+    "negation": "AegisSpec.HitBricks.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L = len(hits) and let D = sum_{k=0}^{L-1} (1 if h_k ∈ S_k else 0). Then sum_{k=0}^{L-1} r[k] = |S_0| - |S_L| - D, where S_k and h_k are defined as in spec_1.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HitBricks.spec_7",
+    "negation": "AegisSpec.HitBricks.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every k with 0 <= k < len(hits), if h_k ∈ S_k and h_k is the only position in S_k with row 0, then r[k] = |S_k| - 1, where S_k and h_k are defined as in spec_1.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HitBricks.spec_8",
+    "negation": "AegisSpec.HitBricks.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k with 0 <= k < len(hits), r[k] = 0 if and only if S_{k+1} = T_k, where T_k and S_k are defined as in spec_1.",
+    "preconditions": "grid is a non-empty slice of non-empty vectors of 64-bit integers, all rows have the same length n, with m = len(grid) and 1 <= m, n <= 200. Every entry of grid is 0 or 1. hits is a non-empty slice of vectors of 64-bit integers, each of length 2, with 1 <= len(hits) <= 40000. For every k with 0 <= k < len(hits), hits[k] = [x_k, y_k] with 0 <= x_k < m and 0 <= y_k < n. All pairs (x_k, y_k) are distinct."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and, with n = len(initial), m = len(target), and L defined as the largest natural number such that there exist indices i and j with 0 <= i, i + L <= n, 0 <= j, j + L <= m, and initial[i+t] = target[j+t] for every t with 0 <= t < L (the case L = 0 is allowed), the integer value of r is n + m - 2*L. Equivalently, r is the minimum number of single-character additions or removals at the beginning or end of initial needed to obtain target.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: no panic, out-of-bounds access, or 64-bit arithmetic overflow occurs.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer value of r satisfies |len(initial) - len(target)| <= r <= len(initial) + len(target).",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exists a natural number L with 0 <= L <= min(len(initial), len(target)) such that r = len(initial) + len(target) - 2*L; equivalently, len(initial) + len(target) - r is even and its half lies between 0 and min(len(initial), len(target)).",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if len(initial) = len(target) and initial[i] = target[i] for every i with 0 <= i < len(initial).",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(initial) + len(target) if and only if there is no byte value occurring in both initial and target, i.e. for every i with 0 <= i < len(initial) and every j with 0 <= j < len(target), initial[i] != target[j].",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = |len(initial) - len(target)| if and only if one of the two slices is a contiguous substring of the other: either there exists j with 0 <= j and j + len(target) <= len(initial) and initial[j+t] = target[t] for every t with 0 <= t < len(target), or there exists i with 0 <= i and i + len(initial) <= len(target) and target[i+t] = initial[t] for every t with 0 <= t < len(initial).",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every positive integer k and indices i and j such that 0 <= i, i + k <= len(initial), 0 <= j, j + k <= len(target), and initial[i+t] = target[j+t] for every t with 0 <= t < k, the integer value of r satisfies r <= len(initial) + len(target) - 2*k.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, letting L = (len(initial) + len(target) - r)/2 (which is a natural number for every returned r), there exist indices i and j such that 0 <= i, i + L <= len(initial), 0 <= j, j + L <= len(target), and initial[i+t] = target[j+t] for every t with 0 <= t < L.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, letting L = (len(initial) + len(target) - r)/2, there is no common contiguous substring of initial and target of length greater than L: for every positive integer k and indices i and j with 0 <= i, i + k <= len(initial), 0 <= j, j + k <= len(target), and initial[i+t] = target[j+t] for every t with 0 <= t < k, we have k <= L.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of strings satisfying the preconditions, if the function returns r on (initial, target), then when it is invoked on the swapped arguments (target, initial) it also returns r.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperations.spec_12",
+    "negation": "AegisSpec.MinOperations.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let revInitial be the slice of length len(initial) with revInitial[i] = initial[len(initial)-1-i] for 0 <= i < len(initial), and let revTarget be defined analogously from target. Whenever the function returns r on (initial, target), any invocation on (revInitial, revTarget) returns the same r.",
+    "preconditions": "1 <= len(initial) <= 1000 and 1 <= len(target) <= 1000; every byte of initial and target is an ASCII lowercase letter (code in 97..122 inclusive)."
+  }
+]

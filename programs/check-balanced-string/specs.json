@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsBalanced.spec_1",
+    "negation": "AegisSpec.IsBalanced.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let digit(i) = num[i] - 48 for 0 <= i < len(num). Let E be the sum of digit(i) over even indices i (0, 2, 4, ...) and O be the sum of digit(i) over odd indices i (1, 3, 5, ...). Whenever the function returns a result r, r = true if and only if E = O; if E != O then r = false.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), num[i] is an ASCII digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsBalanced.spec_2",
+    "negation": "AegisSpec.IsBalanced.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a Boolean result; it does not fail because of overflow, out-of-bounds access, or panic.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), num[i] is an ASCII digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsBalanced.spec_3",
+    "negation": "AegisSpec.IsBalanced.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let digit(i) = num[i] - 48. Suppose there is a digit value d with 0 <= d <= 9 such that digit(i) = d for every i with 0 <= i < len(num). Then the function returns a result r and r = true if and only if len(num) is even or d = 0; otherwise r = false.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), 48 <= num[i] <= 57."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsBalanced.spec_4",
+    "negation": "AegisSpec.IsBalanced.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let digit(i) = num[i] - 48 and let T be the sum of digit(i) over all i with 0 <= i < len(num). If T is odd, then the function returns a result r and r = false.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), 48 <= num[i] <= 57."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsBalanced.spec_5",
+    "negation": "AegisSpec.IsBalanced.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let digit(i) = num[i] - 48. The function returns a result r and r = true if and only if num[j] = 48 for every odd j with 0 <= j < len(num); otherwise r = false.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), 48 <= num[i] <= 57. Also, num[i] = 48 for every even i with 0 <= i < len(num)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsBalanced.spec_6",
+    "negation": "AegisSpec.IsBalanced.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, for every i with 0 <= i < len(num), 48 <= num[i] <= 57, len(num) is even, and for every k with 0 <= k < len(num)/2, num[2k] = num[2k+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsBalanced.spec_7",
+    "negation": "AegisSpec.IsBalanced.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let digit(i) = num[i] - 48 for 0 <= i < len(num). The function returns a result r and r = true if and only if digit(2m) = 0; otherwise r = false.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100 and len(num) = 2*m + 1 for some integer m >= 1, and for every i with 0 <= i < len(num), 48 <= num[i] <= 57. Also, for every k with 0 <= k < m, num[2k] = num[2k+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsBalanced.spec_8",
+    "negation": "AegisSpec.IsBalanced.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define rev(num) by len(rev(num)) = len(num) and rev(num)[i] = num[len(num)-1-i] for every i with 0 <= i < len(num). The call on num returns a result r, the call on rev(num) returns a result r_rev, and r = r_rev.",
+    "preconditions": "num is a slice of bytes with 2 <= len(num) <= 100, and for every i with 0 <= i < len(num), 48 <= num[i] <= 57."
+  }
+]

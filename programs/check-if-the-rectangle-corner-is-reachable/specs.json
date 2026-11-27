@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanReachCorner.spec_1",
+    "negation": "AegisSpec.CanReachCorner.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let X = xCorner and Y = yCorner. For each i, let (xi, yi, ri) = (circles[i][0], circles[i][1], circles[i][2]). Define the following predicates for a circle c = (x,y,r): touches_bottom(c) := (x <= X and y <= r) or (x > X and (x-X)^2 + y^2 <= r^2); touches_right(c) := (y <= Y and |x - X| <= r) or (y > Y and (x-X)^2 + (y-Y)^2 <= r^2); touches_left(c) := (y <= Y and x <= r) or (y > Y and x^2 + (y-Y)^2 <= r^2); touches_top(c) := (x <= X and |y - Y| <= r) or (x > X and (x-X)^2 + (y-Y)^2 <= r^2). Define circles i and j to be adjacent if (xi-xj)^2 + (yi-yj)^2 <= (ri+rj)^2. Let a component be a connected component of the graph on {0,...,n-1} with these edges. The function returns false if and only if there exists a component C such that (there exists i in C with touches_bottom(circles[i]) or touches_right(circles[i])) and (there exists j in C with touches_left(circles[j]) or touches_top(circles[j])). Otherwise, it returns true.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanReachCorner.spec_2",
+    "negation": "AegisSpec.CanReachCorner.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (i.e., it does not return an error or panic) for every input satisfying the preconditions.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanReachCorner.spec_3",
+    "negation": "AegisSpec.CanReachCorner.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an index i such that xi^2 + yi^2 <= ri^2, then the function returns false.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanReachCorner.spec_4",
+    "negation": "AegisSpec.CanReachCorner.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an index i such that (xi - xCorner)^2 + (yi - yCorner)^2 <= ri^2, then the function returns false.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanReachCorner.spec_5",
+    "negation": "AegisSpec.CanReachCorner.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If can_reach_corner(xCorner, yCorner, circles1) returns false, then can_reach_corner(xCorner, yCorner, circles2) returns false.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles1 and circles2 are slices of lengths n1, n2 with 1 <= n1, n2 <= 1000. Each entry satisfies the circle constraints 1 <= xi, yi, ri <= 10^9, and circles2 is obtained from circles1 by adding zero or more circles (as a multiset)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanReachCorner.spec_6",
+    "negation": "AegisSpec.CanReachCorner.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i, (max(xi - xCorner, 0))^2 + (max(yi - yCorner, 0))^2 > ri^2, then the function returns true.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanReachCorner.spec_7",
+    "negation": "AegisSpec.CanReachCorner.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i, circle i does not intersect A = bottom ∪ right (i.e., neither touches_bottom nor touches_right holds as defined in spec_1), then the function returns true.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanReachCorner.spec_8",
+    "negation": "AegisSpec.CanReachCorner.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i, circle i does not intersect B = left ∪ top (i.e., neither touches_left nor touches_top holds as defined in spec_1), then the function returns true.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanReachCorner.spec_9",
+    "negation": "AegisSpec.CanReachCorner.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the function returns true, then there exists a continuous path γ: [0,1] -> R^2 such that γ(0) = (0,0), γ(1) = (xCorner,yCorner), for all t in [0,1], γ(t) lies in the rectangle [0,xCorner]×[0,yCorner], for all t in [0,1] and all i, the distance from γ(t) to (xi,yi) is strictly greater than ri, and for all t in (0,1), γ(t) lies in the open rectangle (0,xCorner)×(0,yCorner).",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanReachCorner.spec_10",
+    "negation": "AegisSpec.CanReachCorner.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the function returns false, then there does not exist a continuous path γ: [0,1] -> R^2 satisfying the conditions in spec_9.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanReachCorner.spec_11",
+    "negation": "AegisSpec.CanReachCorner.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any permutation of the entries of circles, the function returns the same result.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanReachCorner.spec_12",
+    "negation": "AegisSpec.CanReachCorner.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If there exists a sequence of indices i1, i2, ..., ik such that circle i1 intersects A = bottom ∪ right, circle ik intersects B = left ∪ top, and for each 1 <= t < k, the closed disks of circles i_t and i_{t+1} intersect (i.e., (xi_t - xi_{t+1})^2 + (yi_t - yi_{t+1})^2 <= (ri_t + ri_{t+1})^2), then the function returns false.",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] is a vector of length 3 with entries xi, yi, ri such that 1 <= xi, yi, ri <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CanReachCorner.spec_13",
+    "negation": "AegisSpec.CanReachCorner.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "can_reach_corner(xCorner, yCorner, circles) = can_reach_corner(yCorner, xCorner, circles').",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 1 <= n <= 1000. Each circles[i] = [xi, yi, ri] has 1 <= xi, yi, ri <= 10^9. Let circles' be the slice with circles'[i] = [yi, xi, ri]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CanReachCorner.spec_14",
+    "negation": "AegisSpec.CanReachCorner.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "can_reach_corner(xCorner, yCorner, circles) = can_reach_corner(xCorner, yCorner, circles').",
+    "preconditions": "xCorner and yCorner are integers with 3 <= xCorner, yCorner <= 10^9. circles is a slice of length n with 2 <= n <= 1000. Each circles[i] = [xi, yi, ri] has 1 <= xi, yi, ri <= 10^9. There is an index i such that (max(xi - xCorner, 0))^2 + (max(yi - yCorner, 0))^2 > ri^2, so the closed disk of circle i does not meet the rectangle. Let circles' be circles with entry i removed."
+  }
+]

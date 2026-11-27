@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMinMoves.spec_1",
+    "negation": "AegisSpec.FindMinMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let T = sum_{i=0}^{n-1} machines[i]. The function returns a result r. If T is not divisible by n, then r = -1. If T is divisible by n, let a = T / n. A legal move from a configuration c (a sequence of n nonnegative integers) to a configuration c' is defined as follows: for each index i there is out_i in {0,1}; if out_i = 1 then c_i >= 1 and i chooses exactly one target neighbor i-1 or i+1 that exists in [0,n-1]; for each i, c'_i = c_i - out_i + in_i, where in_i is the number of indices j with out_j = 1 whose chosen target is i. Then r is the least integer t >= 0 for which there exists a sequence of configurations c^0, c^1, ..., c^t such that c^0 = machines, each step c^s to c^{s+1} (0 <= s < t) is a legal move, and c^t_i = a for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMinMoves.spec_2",
+    "negation": "AegisSpec.FindMinMoves.spec_2_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let T = sum_{i=0}^{n-1} machines[i]. The function returns a result r, and r = -1 if and only if T is not divisible by n.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMinMoves.spec_3",
+    "negation": "AegisSpec.FindMinMoves.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Let T = sum_{i=0}^{n-1} machines[i]. If T is divisible by n, then the function returns a result r and r >= 0.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMinMoves.spec_4",
+    "negation": "AegisSpec.FindMinMoves.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if machines[0] = machines[1] = ... = machines[n-1] (equivalently, for every i and j with 0 <= i < n and 0 <= j < n, machines[i] = machines[j]).",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMinMoves.spec_5",
+    "negation": "AegisSpec.FindMinMoves.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let avg = T / n. The function returns a result r, and for every k with 0 <= k < n-1, r >= | (sum_{i=0}^{k} machines[i]) - (k+1) * avg |.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000, for every i with 0 <= i < n, 0 <= machines[i] <= 100000, and the total T = sum_{i=0}^{n-1} machines[i] is divisible by n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMinMoves.spec_6",
+    "negation": "AegisSpec.FindMinMoves.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let avg = T / n. The function returns a result r, and for every i with 0 <= i < n, r >= max(0, machines[i] - avg).",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000, for every i with 0 <= i < n, 0 <= machines[i] <= 100000, and the total T = sum_{i=0}^{n-1} machines[i] is divisible by n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMinMoves.spec_7",
+    "negation": "AegisSpec.FindMinMoves.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let T = sum_{i=0}^{n-1} machines[i]. The function returns a result r. If T is not divisible by n, then r = -1. If T is divisible by n, let avg = T / n; then r = max( { max(0, machines[i] - avg) | 0 <= i < n } union { | (sum_{j=0}^{k} machines[j]) - (k+1) * avg | | 0 <= k < n } ).",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMinMoves.spec_8",
+    "negation": "AegisSpec.FindMinMoves.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let avg = T / n and let D = sum_{i=0}^{n-1} max(0, machines[i] - avg). The function returns a result r, and r <= D.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000, for every i with 0 <= i < n, 0 <= machines[i] <= 100000, and the total T = sum_{i=0}^{n-1} machines[i] is divisible by n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMinMoves.spec_9",
+    "negation": "AegisSpec.FindMinMoves.spec_9_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the stated preconditions, the function returns a result r (it does not fail, overflow, or panic).",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMinMoves.spec_10",
+    "negation": "AegisSpec.FindMinMoves.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(machines). The function returns a result r, and r = -1 if and only if for every integer a >= 0 there is no finite sequence of legal moves (as defined in spec_1) that starts from machines and ends at the configuration in which every machine has exactly a dresses.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000 and, for every i with 0 <= i < n, 0 <= machines[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindMinMoves.spec_11",
+    "negation": "AegisSpec.FindMinMoves.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let avg = T / n. The function returns a result r, and there exists a finite sequence of legal moves (as defined in spec_1) starting from machines and ending at the configuration in which every machine has exactly avg dresses; moreover, the sequence has exactly r moves.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000, for every i with 0 <= i < n, 0 <= machines[i] <= 100000, and the total T = sum_{i=0}^{n-1} machines[i] is divisible by n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindMinMoves.spec_12",
+    "negation": "AegisSpec.FindMinMoves.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let avg = T / n. The function returns a result r, and for every integer t with 0 <= t < r there is no finite sequence of t legal moves (as defined in spec_1) that starts from machines and ends at the configuration in which every machine has exactly avg dresses.",
+    "preconditions": "Let n = len(machines). Assume 1 <= n <= 10000, for every i with 0 <= i < n, 0 <= machines[i] <= 100000, and the total T = sum_{i=0}^{n-1} machines[i] is divisible by n."
+  }
+]

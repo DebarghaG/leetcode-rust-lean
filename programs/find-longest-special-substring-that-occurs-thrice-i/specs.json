@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumLength.spec_1",
+    "negation": "AegisSpec.MaximumLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every lowercase ASCII byte c (97 <= c <= 122) and integer L with 1 <= L <= len(s), define Occ(c,L) to be the number of indices p such that 0 <= p <= len(s)-L and s[p+t] = c for every t with 0 <= t < L. Let S = { L | 1 <= L <= len(s) and there exists a lowercase ASCII byte c with Occ(c,L) >= 3 }. The function returns a result r and: if S is nonempty, then r = max S; if S is empty, then r = -1. Occurrences are counted by distinct start indices p, so overlapping occurrences are allowed, and substrings are non-empty.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), the byte s[i] is an ASCII lowercase English letter, i.e. 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumLength.spec_2",
+    "negation": "AegisSpec.MaximumLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumLength.spec_3",
+    "negation": "AegisSpec.MaximumLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= len(s)-2.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumLength.spec_4",
+    "negation": "AegisSpec.MaximumLength.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exists a lowercase ASCII byte c (97 <= c <= 122) such that Occ(c,r) >= 3, where Occ(c,L) is the number of indices p with 0 <= p <= len(s)-L and s[p+t] = c for every t with 0 <= t < L. Equivalently, the all-c substring of length r occurs at least three times in s.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumLength.spec_5",
+    "negation": "AegisSpec.MaximumLength.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer L with 1 <= L <= len(s) and L > r, and for every lowercase ASCII byte c (97 <= c <= 122), Occ(c,L) < 3, where Occ(c,L) is the number of indices p with 0 <= p <= len(s)-L and s[p+t] = c for every t with 0 <= t < L. Thus no special substring longer than r occurs at least three times; when r = -1 this says no non-empty special substring occurs at least three times.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumLength.spec_6",
+    "negation": "AegisSpec.MaximumLength.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer L with 1 <= L <= len(s) and every lowercase ASCII byte c (97 <= c <= 122), if Occ(c,L) >= 3, where Occ(c,L) is the number of indices p with 0 <= p <= len(s)-L and s[p+t] = c for every t with 0 <= t < L, then r >= L. Equivalently, r is at least the length of every special substring that occurs at least three times.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumLength.spec_7",
+    "negation": "AegisSpec.MaximumLength.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r >= 1, for every integer L with 1 <= L <= r there exists a lowercase ASCII byte c (97 <= c <= 122) such that the all-c substring of length L occurs at least three times in s, i.e. Occ(c,L) >= 3 for the start-index count Occ.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumLength.spec_8",
+    "negation": "AegisSpec.MaximumLength.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if for every lowercase ASCII byte c (97 <= c <= 122), the number of indices i with 0 <= i < len(s) and s[i] = c is at most 2. Equivalently, the answer is -1 exactly when no character occurs three or more times in s.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumLength.spec_9",
+    "negation": "AegisSpec.MaximumLength.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 1, for every lowercase ASCII byte c (97 <= c <= 122) such that Occ(c,r) >= 3, where Occ(c,L) is the number of indices p with 0 <= p <= len(s)-L and s[p+t] = c for every t with 0 <= t < L, the number of indices i with 0 <= i < len(s) and s[i] = c is at least r+2.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumLength.spec_10",
+    "negation": "AegisSpec.MaximumLength.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every interval [a,b) with 0 <= a < b <= len(s), if b-a >= 3 and s[i] = s[a] for every i with a <= i < b, then r >= (b-a)-2.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumLength.spec_11",
+    "negation": "AegisSpec.MaximumLength.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if both of the following hold: (1) there exists a lowercase ASCII byte c (97 <= c <= 122) with at least three indices i such that s[i] = c; and (2) for every lowercase ASCII byte c (97 <= c <= 122), Occ(c,2) < 3, where Occ(c,2) is the number of indices p with 0 <= p <= len(s)-2 and s[p] = s[p+1] = c.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumLength.spec_12",
+    "negation": "AegisSpec.MaximumLength.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if all bytes of s are equal to each other, i.e. s[i] = s[0] for every i with 0 <= i < len(s), then r = len(s)-2.",
+    "preconditions": "3 <= len(s) <= 50 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

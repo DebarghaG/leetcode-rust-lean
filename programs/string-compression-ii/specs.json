@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_1",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let CL(t) be the run-length encoded length of a byte sequence t: CL(empty) = 0; otherwise split t into maximal contiguous runs of equal bytes, and for a run of length m contribute 1 if m = 1, and 1 + D(m) if m ≥ 2, where D(m) is the number of decimal digits of m; CL(t) is the sum over the runs. The function returns a result r and r = min { CL(t) | t is a subsequence of s obtained by deleting at most k bytes from s }. Equivalently, the minimum is over all t for which there are indices i_0 < i_1 < ... < i_{len(t)-1} in [0, len(s)) with t[j] = s[i_j] for all j, and len(t) ≥ len(s) - k; the empty sequence is allowed exactly when k = len(s).",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_2",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and k satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_3",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≤ len(s) - k.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_4",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if k = len(s).",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_5",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = CL(s), where CL(s) is computed from the maximal contiguous runs of equal bytes in s: a run of length 1 contributes 1, and a run of length m ≥ 2 contributes 1 + D(m), where D(m) is the number of decimal digits of m.",
+    "preconditions": "1 ≤ len(s) ≤ 100; k = 0; for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_6",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "1 ≤ len(s) ≤ 100; k = len(s) - 1; for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_7",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≤ CL(s), where CL(s) is the run-length encoded length of s: split s into maximal contiguous runs of equal bytes; a run of length 1 contributes 1, and a run of length m ≥ 2 contributes 1 + D(m), where D(m) is the number of decimal digits of m.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_8",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of the function on s and k, and let r' be the result on s and k'. Both calls return results and r ≥ r'.",
+    "preconditions": "1 ≤ len(s) ≤ 100; for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122); 0 ≤ k ≤ k' ≤ len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_9",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let CL(t) be the run-length encoded length of a byte sequence t as defined by maximal equal runs (run length m contributes 1 if m = 1 and 1 + D(m) if m ≥ 2, where D(m) is the number of decimal digits of m, and CL(empty) = 0). The function returns a result r and r = min { CL(t) | t is a subsequence of s with len(t) = len(s) - k }.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_10",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let m = len(s) - k. The function returns a result r and: r = 0 if m = 0; r = 1 if m = 1; and r = 1 + D(m) if m ≥ 2, where D(m) is the number of decimal digits of m.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122); there is a byte c such that s[i] = c for every i with 0 ≤ i < len(s)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_11",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of the function on s and k, and let r' be the result on s' and k. Both calls return results and r = r'.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122); f is a bijection of the set of lowercase English letters (ASCII 97 through 122) onto itself; s' is defined by s'[i] = f(s[i]) for every i with 0 ≤ i < len(s)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_12",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let CL(t) be the run-length encoded length of a byte sequence t as defined by maximal equal runs (run length m contributes 1 if m = 1 and 1 + D(m) if m ≥ 2, where D(m) is the number of decimal digits of m, and CL(empty) = 0). The function returns a result r and there exists a byte sequence t such that t is a subsequence of s obtained by deleting at most k bytes (there are indices i_0 < i_1 < ... < i_{len(t)-1} with t[j] = s[i_j] and len(t) ≥ len(s) - k) and CL(t) = r.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_13",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let CL(t) be the run-length encoded length of a byte sequence t as defined by maximal equal runs (run length m contributes 1 if m = 1 and 1 + D(m) if m ≥ 2, where D(m) is the number of decimal digits of m, and CL(empty) = 0). The function returns a result r and for every byte sequence t that is a subsequence of s obtained by deleting at most k bytes (there are indices i_0 < i_1 < ... < i_{len(t)-1} with t[j] = s[i_j] and len(t) ≥ len(s) - k), we have CL(t) ≥ r.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GetLengthOfOptimalCompression.spec_14",
+    "negation": "AegisSpec.GetLengthOfOptimalCompression.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte sequence of length len(s) with rev(s)[i] = s[len(s)-1-i]. Let r be the result of the function on s and k, and let r' be the result on rev(s) and k. Both calls return results and r = r'.",
+    "preconditions": "1 ≤ len(s) ≤ 100; 0 ≤ k ≤ len(s); for every i with 0 ≤ i < len(s), s[i] is the ASCII code of a lowercase English letter (97 ≤ s[i] ≤ 122)."
+  }
+]

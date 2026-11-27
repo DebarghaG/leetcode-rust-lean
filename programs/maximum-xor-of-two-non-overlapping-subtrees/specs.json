@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxXor.spec_1",
+    "negation": "AegisSpec.MaxXor.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S(v) be the sum of values[u] over all nodes u such that v lies on the unique path from root 0 to u. Call a pair (i,j) admissible when 0 <= i < j < n and the subtrees of i and j are disjoint. Whenever max_xor(n, edges, values) returns a result r, the following hold: (1) for every admissible pair (i,j), r >= S(i) XOR S(j); (2) if at least one admissible pair exists, then some admissible pair (i,j) satisfies r = S(i) XOR S(j); (3) if no admissible pair exists, then r = 0.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxXor.spec_2",
+    "negation": "AegisSpec.MaxXor.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call max_xor(n, edges, values) returns a result; it does not fail.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxXor.spec_3",
+    "negation": "AegisSpec.MaxXor.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S(v) be the sum of values[u] over all u such that v lies on the unique path from root 0 to u, and let M = max_{0 <= v < n} S(v). Let K be the least nonnegative integer such that M < 2^K. Whenever max_xor(n, edges, values) returns a result r, 0 <= r < 2^K.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxXor.spec_4",
+    "negation": "AegisSpec.MaxXor.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let S(v) be the sum of values[u] over all u such that v lies on the unique path from root 0 to u. Call a pair (i,j) admissible when 0 <= i < j < n and the subtrees of i and j are disjoint. Whenever max_xor(n, edges, values) returns a result r, r = 0 if and only if either no admissible pair exists, or for every admissible pair (i,j) we have S(i) = S(j).",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxXor.spec_5",
+    "negation": "AegisSpec.MaxXor.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let S(v) be the sum of values[u] over all u such that v lies on the unique path from root 0 to u. Whenever max_xor(n, edges, values) returns a result r, r is the maximum of S(i) XOR S(j) over all pairs 1 <= i < j < n whose subtrees are disjoint, with the convention that this maximum is 0 if there is no such pair.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxXor.spec_6",
+    "negation": "AegisSpec.MaxXor.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_xor(n, edges, values) returns a result r, if the rooted tree (root 0) is a chain, meaning every node has at most one child where a child is a neighbor farther from 0, then r = 0.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxXor.spec_7",
+    "negation": "AegisSpec.MaxXor.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_xor(n, edges, values) returns a result r, if every node 1,...,n-1 is adjacent to node 0, so the tree is a star centered at 0, then r is the maximum of values[i] XOR values[j] over all 1 <= i < j < n, with the convention that this maximum is 0 when n = 2 because there are no two leaves.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxXor.spec_8",
+    "negation": "AegisSpec.MaxXor.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_xor(n, edges, values) returns r and max_xor(n, edges', values) returns r', we have r = r'.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges). Also edges' is any slice of length n-1 obtained from edges by permuting its entries and independently swapping the two endpoints of any entries, so edges and edges' describe the same undirected tree, and (n, edges', values) also satisfies the same constraints."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxXor.spec_9",
+    "negation": "AegisSpec.MaxXor.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S(v) be the sum of values[u] over all u such that v lies on the unique path from root 0 to u, and let O be the bitwise OR of all S(v) for 0 <= v < n. Whenever max_xor(n, edges, values) returns a result r, r <= O.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxXor.spec_10",
+    "negation": "AegisSpec.MaxXor.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S(v) be the sum of values[u] over all u such that v lies on the unique path from root 0 to u. Call a pair (i,j) admissible when 0 <= i < j < n and the subtrees of i and j are disjoint. Whenever max_xor(n, edges, values) returns a result r, if there exists an admissible pair (i,j) with S(i) != S(j), then r > 0.",
+    "preconditions": "2 <= n <= 50000; len(edges) = n - 1; len(values) = n; each edges[k] is a vector of length 2, say [a,b], with 0 <= a,b < n; each values[i] satisfies 1 <= values[i] <= 10^9; and the undirected graph with vertices 0,...,n-1 and the edges in edges is a valid tree (connected and acyclic, with no self-loops or duplicate edges)."
+  }
+]

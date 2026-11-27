@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_1",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define InsertionSimilar(W1,W2) to hold iff either (a) n1 <= n2 and there exists an integer k with 0 <= k <= n1 such that for every i with 0 <= i < k, W1[i] = W2[i], and for every i with k <= i < n1, W1[i] = W2[i + (n2 - n1)]; or (b) n2 <= n1 and there exists an integer k with 0 <= k <= n2 such that for every i with 0 <= i < k, W2[i] = W1[i], and for every i with k <= i < n2, W2[i] = W1[i + (n1 - n2)]. The function returns a result r and r = true iff InsertionSimilar(W1,W2).",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order, with each block compared as a byte string; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Thus W1 and W2 are nonempty word sequences."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_2",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail, panic, or overflow on these inputs.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_3",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume W1 = W2 as sequences of words."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_4",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r12 be the result of are_sentences_similar(sentence1, sentence2) and r21 be the result of are_sentences_similar(sentence2, sentence1). The function returns results for both calls and r12 = r21.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order. Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_5",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r = true iff W1[0] = W2[0] or W1[0] = W2[n2 - 1].",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume n1 = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_6",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume W1[0] != W2[0] and W1[n1 - 1] != W2[n2 - 1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_7",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = true iff W1[i] = W2[i] for every i with 0 <= i < n1.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume n1 = n2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_8",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then W1[i] = W2[i + (n2 - n1)] for every i with 0 <= i < n1; equivalently, W1 is a suffix of W2.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume n1 < n2 and W1[0] != W2[0]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_9",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then W1[i] = W2[i] for every i with 0 <= i < n1; equivalently, W1 is a prefix of W2.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Assume n1 < n2 and W1[n1 - 1] != W2[n2 - 1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_10",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then either W1 is a subsequence of W2 or W2 is a subsequence of W1. Here W1 is a subsequence of W2 means there exist indices j_0 < j_1 < ... < j_{n1-1} with 0 <= j_i < n2 and W1[i] = W2[j_i] for all i with 0 <= i < n1; the other direction is defined analogously.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AreSentencesSimilar.spec_11",
+    "negation": "AegisSpec.AreSentencesSimilar.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = true iff p + q >= m.",
+    "preconditions": "Let words(s) be the sequence of maximal contiguous non-space blocks of the byte slice s, in left-to-right order; let W1=words(sentence1), W2=words(sentence2), n1=len(W1), n2=len(W2). Assume sentence1 and sentence2 are valid sentences: 1 <= len(sentence1) <= 100 and 1 <= len(sentence2) <= 100; every byte is an uppercase/lowercase English ASCII letter (65-90 or 97-122) or a space (32); the first and last bytes are not spaces; and no two consecutive bytes are spaces. Let S = W1 and L = W2 if n1 <= n2; otherwise let S = W2 and L = W1; let m = len(S). Let p be the greatest integer with 0 <= p <= m such that S[i] = L[i] for every i with 0 <= i < p, and let q be the greatest integer with 0 <= q <= m such that S[m - 1 - i] = L[len(L) - 1 - i] for every i with 0 <= i < q."
+  }
+]

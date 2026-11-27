@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveInterval.spec_1",
+    "negation": "AegisSpec.RemoveInterval.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever remove_interval returns a result r, r is exactly the following concatenation, in increasing i for i = 0,1,...,n-1, of piece lists P_i. If b <= s_i or a >= e_i, then P_i is the single interval [s_i,e_i]. Otherwise P_i is the concatenation of [s_i,a] (included exactly when s_i < a) followed by [b,e_i] (included exactly when b < e_i). Empty P_i contributes nothing. Every interval [u,v) is represented by the two-element vector [u,v]. Thus the represented set is the input set with toBeRemoved removed; additionally, if a = b lies strictly inside some input interval [s_i,e_i), that interval is split at a into [s_i,a) and [a,e_i), matching the stated empty-removal case.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1 (sorted disjoint half-open intervals). toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveInterval.spec_2",
+    "negation": "AegisSpec.RemoveInterval.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, remove_interval returns a result r and does not fail: it does not panic, index out of bounds, overflow, or otherwise abort.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveInterval.spec_3",
+    "negation": "AegisSpec.RemoveInterval.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever remove_interval returns a result r, for every j with 0 <= j < len(r), the vector r[j] has length exactly 2.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveInterval.spec_4",
+    "negation": "AegisSpec.RemoveInterval.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever remove_interval returns a result r, for every j with 0 <= j < len(r), r[j][0] < r[j][1]. Thus every returned interval [r[j][0], r[j][1]) is non-empty.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveInterval.spec_5",
+    "negation": "AegisSpec.RemoveInterval.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever remove_interval returns a result r, for every j with 0 <= j < len(r)-1, r[j][0] < r[j+1][0]. Thus the returned intervals are sorted by strictly increasing left endpoint.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveInterval.spec_6",
+    "negation": "AegisSpec.RemoveInterval.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever remove_interval returns a result r, for every j with 0 <= j < len(r)-1, r[j][1] <= r[j+1][0]. Thus adjacent returned half-open intervals do not overlap.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveInterval.spec_7",
+    "negation": "AegisSpec.RemoveInterval.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever remove_interval returns a result r, every real number represented by r is represented by an input interval and is not in toBeRemoved. Explicitly, for every j with 0 <= j < len(r) and every real x with r[j][0] <= x < r[j][1], there exists i with 0 <= i < n and s_i <= x < e_i, and also not (a <= x < b).",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveInterval.spec_8",
+    "negation": "AegisSpec.RemoveInterval.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever remove_interval returns a result r, every real number that is in some input interval but not in toBeRemoved is represented by r. Explicitly, for every real x such that (exists i with 0 <= i < n and s_i <= x < e_i) and not (a <= x < b), there exists j with 0 <= j < len(r) and r[j][0] <= x < r[j][1].",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveInterval.spec_9",
+    "negation": "AegisSpec.RemoveInterval.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever remove_interval returns a result r, every coordinate of every returned interval lies within the envelope of the input intervals. Explicitly, for every j with 0 <= j < len(r), intervals[0][0] <= r[j][0] and r[j][1] <= intervals[n-1][1].",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveInterval.spec_10",
+    "negation": "AegisSpec.RemoveInterval.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever remove_interval returns a result r, len(r) <= 2 * len(intervals).",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveInterval.spec_11",
+    "negation": "AegisSpec.RemoveInterval.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever remove_interval returns a result r, every endpoint of every returned interval is either an original input endpoint or an endpoint of toBeRemoved. Explicitly, for every j with 0 <= j < len(r), both numbers r[j][0] and r[j][1] belong to the finite set {s_i | 0 <= i < n} union {e_i | 0 <= i < n} union {a,b}.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RemoveInterval.spec_12",
+    "negation": "AegisSpec.RemoveInterval.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever remove_interval returns a result r, every input interval lying entirely before or entirely after the removed interval is returned unchanged. Explicitly, for every i with 0 <= i < n such that e_i <= a or s_i >= b, there exists j with 0 <= j < len(r) such that r[j][0] = s_i and r[j][1] = e_i.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RemoveInterval.spec_13",
+    "negation": "AegisSpec.RemoveInterval.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever remove_interval returns a result r, if a <= intervals[0][0] and intervals[n-1][1] <= b, then the result is empty: len(r) = 0.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.RemoveInterval.spec_14",
+    "negation": "AegisSpec.RemoveInterval.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever remove_interval returns a result r, if a < b and for every i with 0 <= i < n we have b <= s_i or a >= e_i, then r is exactly the input list: len(r) = n and for every i with 0 <= i < n, r[i][0] = s_i and r[i][1] = e_i.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.RemoveInterval.spec_15",
+    "negation": "AegisSpec.RemoveInterval.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever remove_interval returns a result r, every returned interval has one of three origins. For every j with 0 <= j < len(r), writing c = r[j][0] and d = r[j][1], there exists i with 0 <= i < n such that at least one of the following holds: (i) c = s_i, d = e_i, and (b <= s_i or a >= e_i); (ii) c = s_i, d = a, and s_i < a < e_i; (iii) c = b, d = e_i, and s_i < b < e_i.",
+    "preconditions": "Let n = len(intervals). intervals has n >= 1 elements; every intervals[i] has length exactly 2, and with s_i = intervals[i][0], e_i = intervals[i][1] we have -10^9 <= s_i < e_i <= 10^9 for 0 <= i < n, and e_i <= s_{i+1} for 0 <= i < n-1. toBeRemoved has length exactly 2; with a = toBeRemoved[0], b = toBeRemoved[1], we have a <= b."
+  }
+]

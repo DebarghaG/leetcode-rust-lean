@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_1",
+    "negation": "AegisSpec.PrevPermOpt1.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that len(r) = len(arr) and: (a) if there are indices 0 <= i < j < len(arr) with arr[i] > arr[j], then r is the lexicographically largest vector s with len(s)=len(arr) such that s is obtainable from arr by swapping two distinct positions and s <_lex arr; (b) if no such pair of indices exists (equivalently arr[0] <= arr[1] <= ... <= arr[len(arr)-1]), then r = arr. Here s <_lex arr means there is an index k with 0 <= k < len(arr) such that s[t]=arr[t] for every t with 0 <= t < k and s[k] < arr[k]. A vector s is obtainable from arr by swapping two distinct positions if there exist p and q with 0 <= p < q < len(arr) such that s[p]=arr[q], s[q]=arr[p], and s[t]=arr[t] for every t with 0 <= t < len(arr) and t not in {p,q}.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_2",
+    "negation": "AegisSpec.PrevPermOpt1.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_3",
+    "negation": "AegisSpec.PrevPermOpt1.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(arr).",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_4",
+    "negation": "AegisSpec.PrevPermOpt1.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is a permutation of arr: for every integer value v, the number of indices i with 0 <= i < len(arr) and arr[i] = v equals the number of indices i with 0 <= i < len(r) and r[i] = v.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_5",
+    "negation": "AegisSpec.PrevPermOpt1.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(r), we have 1 <= r[i] <= 10000.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_6",
+    "negation": "AegisSpec.PrevPermOpt1.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If arr is nondecreasing, meaning arr[0] <= arr[1] <= ... <= arr[len(arr)-1] (the condition is vacuous when len(arr)=1), then the function returns r with r = arr.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_7",
+    "negation": "AegisSpec.PrevPermOpt1.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices 0 <= i < j < len(arr) with arr[i] > arr[j], then the function returns r with r <_lex arr, where r <_lex arr means there is an index k with 0 <= k < len(arr) such that r[t]=arr[t] for every t with 0 <= t < k and r[k] < arr[k].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_8",
+    "negation": "AegisSpec.PrevPermOpt1.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices 0 <= i < j < len(arr) with arr[i] > arr[j], let i0 be the largest index with 0 <= i0 < len(arr)-1 and arr[i0] > arr[i0+1]. Then the function returns r such that r[k] = arr[k] for every k with 0 <= k < i0, and r[i0] < arr[i0].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_9",
+    "negation": "AegisSpec.PrevPermOpt1.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices 0 <= i < j < len(arr) with arr[i] > arr[j], let i0 be the largest index with 0 <= i0 < len(arr)-1 and arr[i0] > arr[i0+1], and let v be the largest value in the set { arr[j] | i0 < j < len(arr) and arr[j] < arr[i0] }. Then the function returns r with r[i0] = v. Equivalently, r[i0] < arr[i0], there exists j with i0 < j < len(arr) and arr[j] = r[i0], and for every j with i0 < j < len(arr) and arr[j] < arr[i0], we have arr[j] <= r[i0].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_10",
+    "negation": "AegisSpec.PrevPermOpt1.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices 0 <= i < j < len(arr) with arr[i] > arr[j], let i0 be the largest index with 0 <= i0 < len(arr)-1 and arr[i0] > arr[i0+1], let v be the largest value in { arr[j] | i0 < j < len(arr) and arr[j] < arr[i0] }, and let j0 be the smallest index with i0 < j0 < len(arr) and arr[j0] = v. Then the function returns r such that r[i0] = arr[j0], r[j0] = arr[i0], and r[k] = arr[k] for every k with 0 <= k < len(arr) and k not in {i0,j0}.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_11",
+    "negation": "AegisSpec.PrevPermOpt1.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every vector s with len(s)=len(arr) for which there exist p and q with 0 <= p < q < len(arr) such that s[p]=arr[q], s[q]=arr[p], and s[t]=arr[t] for every t not in {p,q}, and for which s <_lex arr (i.e. there is k with 0 <= k < len(arr), s[t]=arr[t] for all t<k, and s[k]<arr[k]), we have s <=_lex r, where s <=_lex r means either s=r or there is k with 0 <= k < len(arr), s[t]=r[t] for all t<k, and s[k]<r[k].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_12",
+    "negation": "AegisSpec.PrevPermOpt1.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = arr if and only if arr is nondecreasing, meaning arr[0] <= arr[1] <= ... <= arr[len(arr)-1].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_13",
+    "negation": "AegisSpec.PrevPermOpt1.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(arr) = 1, then the function returns r with len(r)=1 and r[0] = arr[0].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_14",
+    "negation": "AegisSpec.PrevPermOpt1.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(arr) >= 2 and arr[0] > arr[1] > ... > arr[len(arr)-1], then the function returns r such that r[k] = arr[k] for every k with 0 <= k < len(arr)-2, r[len(arr)-2] = arr[len(arr)-1], and r[len(arr)-1] = arr[len(arr)-2].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_15",
+    "negation": "AegisSpec.PrevPermOpt1.spec_15_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either r = arr or there exist indices p and q with 0 <= p < q < len(arr) such that r[p]=arr[q], r[q]=arr[p], and r[k]=arr[k] for every k with 0 <= k < len(arr) and k not in {p,q}.",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_16",
+    "negation": "AegisSpec.PrevPermOpt1.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r <=_lex arr, where r <=_lex arr means either r = arr or there is an index k with 0 <= k < len(arr) such that r[t]=arr[t] for every t with 0 <= t < k and r[k] < arr[k].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.PrevPermOpt1.spec_17",
+    "negation": "AegisSpec.PrevPermOpt1.spec_17_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices 0 <= i < j < len(arr) with arr[i] > arr[j], then the function returns r such that the set { k | 0 <= k < len(arr) and r[k] != arr[k] } has exactly two elements; writing them as p < q, we have r[p] = arr[q] < arr[p] and r[q] = arr[p] > arr[q].",
+    "preconditions": "1 <= len(arr) <= 10000 and for every index i with 0 <= i < len(arr), 1 <= arr[i] <= 10000."
+  }
+]

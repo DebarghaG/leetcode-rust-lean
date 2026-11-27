@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValid.spec_1",
+    "negation": "AegisSpec.IsValid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let isUpper(b) mean 65 <= b <= 90. A byte sequence t is a tag name iff 1 <= len(t) <= 9 and for every i with 0 <= i < len(t), isUpper(t[i]). Define valid content and valid closed tag mutually recursively as follows. A byte sequence c is a valid content iff there exist an integer k >= 0 and byte sequences p_1, ..., p_k such that c = p_1 ++ ... ++ p_k (with k = 0 meaning c is empty) and for each i in 1..k, p_i satisfies exactly one of: (a) p_i is a single byte b with b != 60; (b) p_i is a valid closed tag; (c) p_i is of the form `<![CDATA[` ++ d ++ `]]>` where d is any byte sequence that does not contain the contiguous subsequence `]]>` (i.e., there is no j with 0 <= j <= len(d)-3 such that d[j]=93, d[j+1]=93, d[j+2]=62). A byte sequence s is a valid closed tag iff there exist a tag name t and a byte sequence c such that s = `<` ++ t ++ `>` ++ c ++ `</` ++ t ++ `>` and c is a valid content. (Here `<`, `>`, `/`, `!`, `[`, `]` denote the single bytes 60, 62, 47, 33, 91, 93, and the 9-byte string `<![CDATA[` is 60,33,91,67,68,65,84,65,91; the 3-byte string `]]>` is 93,93,62.) Then the function returns a result r and r = true if and only if code is a valid closed tag.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValid.spec_2",
+    "negation": "AegisSpec.IsValid.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail).",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValid.spec_3",
+    "negation": "AegisSpec.IsValid.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, we have len(code) >= 7.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValid.spec_4",
+    "negation": "AegisSpec.IsValid.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r = true, code[0] = 60 and code[len(code)-1] = 62.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValid.spec_5",
+    "negation": "AegisSpec.IsValid.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If code[0] != 60, then whenever the function returns a result r, r = false.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsValid.spec_6",
+    "negation": "AegisSpec.IsValid.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If code[len(code)-1] != 62, then whenever the function returns a result r, r = false.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsValid.spec_7",
+    "negation": "AegisSpec.IsValid.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "The parameter code is the specific 18-byte sequence for the ASCII string `<A><B></C></B></A>`."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsValid.spec_8",
+    "negation": "AegisSpec.IsValid.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every tag name t (i.e., every byte sequence t with 1 <= len(t) <= 9 and every byte in 65..90), the function returns a result r and r = true for code = `<` ++ t ++ `></` ++ t ++ `>` (i.e., byte 60, then t, then byte 62, then byte 60, then byte 47, then t, then byte 62).",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsValid.spec_9",
+    "negation": "AegisSpec.IsValid.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be any tag name (1 <= len(t) <= 9 and every byte of t is in 65..90). Let c be any byte sequence that is a valid closed tag as defined in spec_1 and consists only of bytes from the allowed alphabet, and assume 2*len(t) + 5 + len(c) <= 500. Then the function returns a result r and r = true for code = `<` ++ t ++ `>` ++ c ++ `</` ++ t ++ `>`.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsValid.spec_10",
+    "negation": "AegisSpec.IsValid.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be any tag name (1 <= len(t) <= 9 and every byte of t is in 65..90). Let d be any byte sequence over the allowed alphabet that does not contain the contiguous three-byte subsequence `]]>` (93,93,62), and assume 2*len(t) + 17 + len(d) <= 500. Then the function returns a result r and r = true for code = `<` ++ t ++ `><![CDATA[` ++ d ++ `]]></` ++ t ++ `>`.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsValid.spec_11",
+    "negation": "AegisSpec.IsValid.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an index i with 0 <= i < len(code) such that code[i] = 60 and there is no index j with i < j < len(code) and code[j] = 62, then whenever the function returns a result r, r = false.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsValid.spec_12",
+    "negation": "AegisSpec.IsValid.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every byte sequence t of length 10 consisting only of uppercase letters (65..90), the function returns a result r and r = false for code = `<` ++ t ++ `></` ++ t ++ `>`.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsValid.spec_13",
+    "negation": "AegisSpec.IsValid.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every byte sequence t of length 1 consisting of the byte 97 ('a'), the function returns a result r and r = false for code = `<` ++ t ++ `></` ++ t ++ `>`.",
+    "preconditions": "code is a byte slice (slice of 8-bit unsigned integers) with 1 <= len(code) <= 500, and every byte of code is one of the following ASCII codes: 97-122 (a-z), 65-90 (A-Z), 48-57 (0-9), 60 ('<'), 62 ('>'), 47 ('/'), 33 ('!'), 91 ('['), 93 (']'), 46 ('.'), or 32 (' ')."
+  }
+]

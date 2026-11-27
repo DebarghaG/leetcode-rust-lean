@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_1",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Call an interval [l,r] closed when 0 <= l <= r < n and, for every p with l <= p <= r and every q with 0 <= q < n, if s[q] = s[p] then l <= q <= r. Call a set I of closed intervals separated when for any two distinct [l1,r1] and [l2,r2] in I, either r1 < l2 or r2 < l1. Let O be the unique separated set of closed intervals that has maximum cardinality and, among all such maximum-cardinality sets, has minimum sum of interval lengths (r-l+1). The function returns a result out such that every element of out is s[l..r] for exactly one interval [l,r] in O, and for every [l,r] in O the byte vector s[l..r] occurs exactly once as an element of out; the order of elements of out is arbitrary. Here s[l..r] is the byte vector of length r-l+1 whose k-th byte is s[l+k].",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_2",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result out and does not fail (no panic, out-of-bounds access, or 64-bit overflow).",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_3",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result out, for every i with 0 <= i < len(out), len(out[i]) >= 1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_4",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result out, for every i with 0 <= i < len(out) there exist integers l and r such that 0 <= l <= r < n, out[i] has length r-l+1, and for every k with 0 <= k < len(out[i]), out[i][k] = s[l+k]. Thus every returned byte vector is a contiguous substring of s.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_5",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result out, for every i with 0 <= i < len(out) there exist l and r with 0 <= l <= r < n such that out[i] = s[l..r] and [l,r] is closed: for every p with l <= p <= r and every q with 0 <= q < n, if s[q] = s[p] then l <= q <= r.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_6",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result out, there exist closed intervals [l_i,r_i] for every i with 0 <= i < len(out) such that out[i] = s[l_i..r_i], and for every distinct i,j with 0 <= i,j < len(out), either r_i < l_j or r_j < l_i. In particular, the returned substrings can be represented by pairwise non-overlapping intervals of s.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_7",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result out, for every element t of out there exists an interval [l,r] such that 0 <= l <= r < n, t = s[l..r], [l,r] is closed, and there is no nonempty closed interval [l',r'] with l <= l' <= r' <= r and (l',r') != (l,r). Thus every returned substring corresponds to an inclusion-minimal closed interval.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_8",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result out, for every interval [l,r] with 0 <= l <= r < n that is closed and has no proper nonempty closed subinterval, the byte vector s[l..r] occurs as an element of out.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_9",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result out, len(out) <= D, where D is the number of distinct byte values occurring in s, that is, D = |{s[i] | 0 <= i < n}|.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_10",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result out, the sum of the lengths of all elements of out is at most len(s): sum_{i=0}^{len(out)-1} len(out[i]) <= len(s).",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_11",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result out, for every set I of nonempty closed intervals of s such that any two distinct intervals in I are non-overlapping, the cardinality of I is at most len(out). Here closed means the interval contains all occurrences in s of every byte appearing in it, and non-overlapping means for distinct [l1,r1], [l2,r2] either r1 < l2 or r2 < l1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_12",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result out, for every set I of nonempty closed intervals of s that are pairwise non-overlapping and have cardinality exactly len(out), the inequality sum_{t in out} len(t) <= sum_{[l,r] in I} (r-l+1) holds.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_13",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result out, for every i with 0 <= i < len(out) there is exactly one interval [l,r] with 0 <= l <= r < n such that out[i] = s[l..r] and [l,r] is closed.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_14",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result out, len(out) = 1 and out[0] = s, the whole input byte array.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122). Additionally, all bytes of s are equal: s[i] = s[0] for every 0 <= i < n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_15",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result out, len(out) = len(s), and for every i with 0 <= i < len(s) the one-byte vector whose only byte is s[i] occurs exactly once as an element of out. Equivalently, out is a permutation of the list of all one-byte substrings of s.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122). Additionally, every byte value occurs at most once in s: for all i,j with 0 <= i,j < n, if s[i] = s[j] then i = j."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxNumOfSubstrings.spec_16",
+    "negation": "AegisSpec.MaxNumOfSubstrings.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result out, the one-byte vector whose only byte is c occurs exactly once as an element of out.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000, and for every i with 0 <= i < n, s[i] is an ASCII lowercase letter (97 <= s[i] <= 122). Additionally, there exist a byte value c and an index i with 0 <= i < n such that s[i] = c and for every j with 0 <= j < n, if s[j] = c then j = i."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxValue.spec_1",
+    "negation": "AegisSpec.MaxValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the maximum over all subsequences of nums of size 2k of the value (nums[i0] OR nums[i1] OR ... OR nums[i_{k-1}]) XOR (nums[i_k] OR nums[i_{k+1}] OR ... OR nums[i_{2k-1}]), where the subsequence is given by indices i0 < i1 < ... < i_{2k-1} with 0 <= i_j < len(nums).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxValue.spec_2",
+    "negation": "AegisSpec.MaxValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for all inputs satisfying the preconditions.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxValue.spec_3",
+    "negation": "AegisSpec.MaxValue.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every bit position b (0 <= b < 64), if the b-th bit of r is 1, then there exists an index i with 0 <= i < len(nums) such that the b-th bit of nums[i] is 1. Equivalently, r bitwise AND (bitwise NOT of the bitwise OR of all elements of nums) equals 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxValue.spec_4",
+    "negation": "AegisSpec.MaxValue.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every subsequence of nums of size 2k with indices i0 < i1 < ... < i_{2k-1}, the value (nums[i0] OR ... OR nums[i_{k-1}]) XOR (nums[i_k] OR ... OR nums[i_{2k-1}]) is less than or equal to r.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxValue.spec_5",
+    "negation": "AegisSpec.MaxValue.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a subsequence of nums of size 2k with indices i0 < i1 < ... < i_{2k-1} such that (nums[i0] OR ... OR nums[i_{k-1}]) XOR (nums[i_k] OR ... OR nums[i_{2k-1}]) = r.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxValue.spec_6",
+    "negation": "AegisSpec.MaxValue.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = max_{0 <= i < j < len(nums)} (nums[i] XOR nums[j]).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2 and k = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxValue.spec_7",
+    "negation": "AegisSpec.MaxValue.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (nums[0] OR nums[1] OR ... OR nums[k-1]) XOR (nums[k] OR nums[k+1] OR ... OR nums[2k-1]).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2 and len(nums) = 2*k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxValue.spec_8",
+    "negation": "AegisSpec.MaxValue.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2. There exists an integer c such that for every i with 0 <= i < len(nums), nums[i] = c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxValue.spec_9",
+    "negation": "AegisSpec.MaxValue.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for nums, the function max_value on the reversed slice rev (where rev has length len(nums) and rev[i] = nums[len(nums)-1-i] for all 0 <= i < len(nums)) with the same k returns the same result r.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxValue.spec_10",
+    "negation": "AegisSpec.MaxValue.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (nums[0] OR nums[1] OR ... OR nums[k-1]) XOR (nums[len(nums)-k] OR nums[len(nums)-k+1] OR ... OR nums[len(nums)-1]).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxValue.spec_11",
+    "negation": "AegisSpec.MaxValue.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (nums[0] OR nums[1] OR ... OR nums[k-1]) XOR (nums[k] OR nums[k+1] OR ... OR nums[2k-1]).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxValue.spec_12",
+    "negation": "AegisSpec.MaxValue.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums' be the slice of length len(nums)+1 with nums'[i] = nums[i] for 0 <= i < len(nums) and nums'[len(nums)] = x. Whenever max_value(nums, k) returns a result r, max_value(nums', k) returns a result r' and r' >= r.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) < 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2. x is an integer with 1 <= x < 27."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxValue.spec_13",
+    "negation": "AegisSpec.MaxValue.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r mod 2^b = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2. Let b >= 0 be an integer such that for every i with 0 <= i < len(nums), nums[i] mod 2^b = 0."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxValue.spec_14",
+    "negation": "AegisSpec.MaxValue.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is even (i.e., r mod 2 = 0).",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2. For every i with 0 <= i < len(nums), nums[i] is odd (i.e., nums[i] mod 2 = 1)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxValue.spec_15",
+    "negation": "AegisSpec.MaxValue.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 32.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxValue.spec_16",
+    "negation": "AegisSpec.MaxValue.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the b-th bit of r is 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 400, and for every i with 0 <= i < len(nums), 1 <= nums[i] < 27. k is an integer with 1 <= k <= len(nums)/2. Let b satisfy 0 <= b < 64, and suppose that for every i with 0 <= i < len(nums), the b-th bit of nums[i] is 1."
+  }
+]

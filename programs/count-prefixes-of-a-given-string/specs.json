@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPrefixes.spec_1",
+    "negation": "AegisSpec.CountPrefixes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of indices i with 0 <= i < len(words) such that words[i] is a prefix of s. A byte array w is a prefix of s iff len(w) <= len(s) and for every j with 0 <= j < len(w), w[j] = s[j]. Equivalently, r = #{ i | 0 <= i < len(words) and len(words[i]) <= len(s) and (for every j with 0 <= j < len(words[i]), words[i][j] = s[j]) }. Each index is counted separately, so duplicate strings in words are counted once per occurrence.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPrefixes.spec_2",
+    "negation": "AegisSpec.CountPrefixes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPrefixes.spec_3",
+    "negation": "AegisSpec.CountPrefixes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPrefixes.spec_4",
+    "negation": "AegisSpec.CountPrefixes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(words).",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPrefixes.spec_5",
+    "negation": "AegisSpec.CountPrefixes.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= the number of indices i with 0 <= i < len(words) and len(words[i]) <= len(s).",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPrefixes.spec_6",
+    "negation": "AegisSpec.CountPrefixes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(words) = 1, then whenever the function returns r, r = 1 when words[0] is a prefix of s, and r = 0 otherwise. Here words[0] is a prefix of s iff len(words[0]) <= len(s) and for every j with 0 <= j < len(words[0]), words[0][j] = s[j].",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPrefixes.spec_7",
+    "negation": "AegisSpec.CountPrefixes.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) = 1, then whenever the function returns r, r equals the number of indices i with 0 <= i < len(words), len(words[i]) = 1, and words[i][0] = s[0].",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPrefixes.spec_8",
+    "negation": "AegisSpec.CountPrefixes.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < len(words), len(words[i]) > len(s), then whenever the function returns r, r = 0.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPrefixes.spec_9",
+    "negation": "AegisSpec.CountPrefixes.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If every word is a prefix of s, meaning that for every i with 0 <= i < len(words), len(words[i]) <= len(s) and for every j with 0 <= j < len(words[i]), words[i][j] = s[j], then whenever the function returns r, r = len(words).",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPrefixes.spec_10",
+    "negation": "AegisSpec.CountPrefixes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, if k is the number of indices i with 0 <= i < len(words) and words[i] = s, then r >= k.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPrefixes.spec_11",
+    "negation": "AegisSpec.CountPrefixes.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index i with 0 <= i < len(words) and len(words) >= 2, let words' be the slice obtained by deleting the i-th entry of words. Whenever the function returns r on (words, s) and returns r' on (words', s), we have r' = r - 1 if words[i] is a prefix of s (that is, len(words[i]) <= len(s) and for every j with 0 <= j < len(words[i]), words[i][j] = s[j]), and r' = r otherwise.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPrefixes.spec_12",
+    "negation": "AegisSpec.CountPrefixes.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of the index set {0, ..., len(words)-1}, let words_pi be the slice of length len(words) with words_pi[i] = words[pi(i)] for every i with 0 <= i < len(words). Whenever the function returns r on (words, s) and returns r_pi on (words_pi, s), r = r_pi.",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountPrefixes.spec_13",
+    "negation": "AegisSpec.CountPrefixes.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each byte array x, let m(x) be the number of indices i with 0 <= i < len(words) and words[i] = x. Whenever the function returns r, r equals the sum of m(x) over all distinct byte arrays x that occur in words and are prefixes of s, where x is a prefix of s iff len(x) <= len(s) and for every j with 0 <= j < len(x), x[j] = s[j].",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountPrefixes.spec_14",
+    "negation": "AegisSpec.CountPrefixes.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < len(words), len(words[i]) = 1, then whenever the function returns r, r equals the number of indices i with 0 <= i < len(words) and words[i][0] = s[0].",
+    "preconditions": "words is a slice with 1 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; 1 <= len(s) <= 10; every byte of every words[i] and of s is an ASCII lowercase letter (97 <= byte <= 122)."
+  }
+]

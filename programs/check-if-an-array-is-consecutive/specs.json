@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsConsecutive.spec_1",
+    "negation": "AegisSpec.IsConsecutive.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums) and let mn be the minimum of nums, i.e. the integer x with x = nums[i] for some i, 0 <= i < n, and x <= nums[j] for all j, 0 <= j < n (such an x exists because n >= 1). Whenever the function returns a result r, r = true if and only if for every integer k with 0 <= k < n there is an index i with 0 <= i < n such that nums[i] = mn + k. In particular r = false exactly when some value mn + k with 0 <= k < n does not occur in nums.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsConsecutive.spec_2",
+    "negation": "AegisSpec.IsConsecutive.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail: no panic, no out-of-bounds access, no arithmetic overflow).",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsConsecutive.spec_3",
+    "negation": "AegisSpec.IsConsecutive.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, the entries of nums are pairwise distinct: for every i and j with 0 <= i < j < n, nums[i] != nums[j].",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsConsecutive.spec_4",
+    "negation": "AegisSpec.IsConsecutive.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, max(nums) - min(nums) = len(nums) - 1, i.e. max(nums) = min(nums) + n - 1.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsConsecutive.spec_5",
+    "negation": "AegisSpec.IsConsecutive.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, every entry lies in the interval [min(nums), min(nums) + n - 1]: for every i with 0 <= i < n, min(nums) <= nums[i] <= min(nums) + n - 1.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsConsecutive.spec_6",
+    "negation": "AegisSpec.IsConsecutive.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, the sum of all entries of nums equals n * min(nums) + n * (n - 1) / 2, where n = len(nums).",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsConsecutive.spec_7",
+    "negation": "AegisSpec.IsConsecutive.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the entries of nums are pairwise distinct (for every i, j with 0 <= i < j < n, nums[i] != nums[j]) and max(nums) - min(nums) = n - 1, then whenever the function returns a result r, r = true.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsConsecutive.spec_8",
+    "negation": "AegisSpec.IsConsecutive.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = false, at least one of the following two witnesses exists: (a) there are indices i, j with 0 <= i < j < n and nums[i] = nums[j]; or (b) max(nums) - min(nums) > n - 1.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsConsecutive.spec_9",
+    "negation": "AegisSpec.IsConsecutive.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_consecutive(nums) returns a result r and is_consecutive(nums2) returns a result r2, r = r2.",
+    "preconditions": "Both arrays satisfy the constraints: len(nums) >= 1, len(nums) <= 100000, all entries of nums in [0, 100000]; the same for nums2. Moreover nums2 is a permutation of nums: len(nums2) = len(nums) and for every integer v, the number of indices i with nums[i] = v equals the number of indices i with nums2[i] = v."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsConsecutive.spec_10",
+    "negation": "AegisSpec.IsConsecutive.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with r = true, for every integer v the number of indices i with 0 <= i < n and nums[i] = v equals 1 if min(nums) <= v <= min(nums) + n - 1, and equals 0 otherwise.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 100000."
+  }
+]

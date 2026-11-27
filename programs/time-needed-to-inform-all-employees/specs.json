@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumOfMinutes.spec_1",
+    "negation": "AegisSpec.NumOfMinutes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max { A(v) | 0 <= v < n }, where A(v) is defined as follows: if v = headID then A(v) = 0; otherwise form the unique list v, manager[v], manager[manager[v]], ..., headID obtained by repeatedly applying manager until headID is reached, and let A(v) be the sum of informTime[u] over all entries u of this list except the first entry v (i.e., the sum over all proper ancestors of v). Equivalently, A(v) is the minute at which employee v learns the news, and r is the maximum such minute.",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumOfMinutes.spec_2",
+    "negation": "AegisSpec.NumOfMinutes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, arithmetic overflow, or out-of-bounds access occurs).",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumOfMinutes.spec_3",
+    "negation": "AegisSpec.NumOfMinutes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= M, where M is the maximum of 0 and all values informTime[i] with 0 <= i < n such that employee i has at least one direct subordinate (i.e., there exists j with 0 <= j < n and manager[j] = i).",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumOfMinutes.spec_4",
+    "negation": "AegisSpec.NumOfMinutes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= S, where S is the sum of informTime[i] over all employees i with 0 <= i < n that have at least one direct subordinate (if there are none, S = 0).",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumOfMinutes.spec_5",
+    "negation": "AegisSpec.NumOfMinutes.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = max { A(v) | 0 <= v < n and v has no direct subordinate }, where A(v) is defined as follows: if v = headID then A(v) = 0; otherwise form the unique list v, manager[v], manager[manager[v]], ..., headID obtained by repeatedly applying manager until headID is reached, and let A(v) be the sum of informTime[u] over all entries u of this list except the first entry v; 'v has no direct subordinate' means there is no j with 0 <= j < n and manager[j] = v.",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumOfMinutes.spec_6",
+    "negation": "AegisSpec.NumOfMinutes.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation p of {0, ..., n-1} with p(headID) = headID, define manager' and informTime' by manager'[p(i)] = p(manager[i]) for every i with 0 <= i < n and i != headID, manager'[headID] = -1, and informTime'[p(i)] = informTime[i] for every i with 0 <= i < n. If the function called with (n, headID, manager, informTime) returns r, then the function called with (n, headID, manager', informTime') also returns r.",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumOfMinutes.spec_7",
+    "negation": "AegisSpec.NumOfMinutes.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if informTime[i] = 0 for every employee i with 0 <= i < n that has at least one direct subordinate.",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n and len(informTime) = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumOfMinutes.spec_8",
+    "negation": "AegisSpec.NumOfMinutes.spec_8_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If the function called with (n, headID, manager, informTime) returns r and the function called with (n, headID, manager, informTime') returns r', then r' <= r.",
+    "preconditions": "n is an integer with 1 <= n <= 100000; headID is an integer with 0 <= headID < n; len(manager) = n; len(informTime) = n and len(informTime') = n; manager[headID] = -1; for every i with 0 <= i < n and i != headID, 0 <= manager[i] < n; for every i with 0 <= i < n, 0 <= informTime[i] <= 1000 and 0 <= informTime'[i] <= informTime[i]; the directed graph with an edge manager[i] -> i for each i != headID is a tree rooted at headID (equivalently, starting from any employee and repeatedly taking manager reaches headID and no cycle occurs); and informTime[i] = 0 and informTime'[i] = 0 for every employee i with no direct subordinate (i.e., with no j such that 0 <= j < n and manager[j] = i)."
+  }
+]

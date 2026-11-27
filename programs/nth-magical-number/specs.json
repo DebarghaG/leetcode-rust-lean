@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_1",
+    "negation": "AegisSpec.NthMagicalNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let MOD = 1000000007. For an integer x >= 0, let C(x) be the number of positive integers k with 1 <= k <= x and (a divides k or b divides k). Let M be the unique positive integer such that C(M-1) < n <= C(M). Whenever the function returns a result r, r is the unique integer satisfying 0 <= r < MOD and r is congruent to M modulo MOD.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_2",
+    "negation": "AegisSpec.NthMagicalNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not panic, overflow, or otherwise fail for any inputs satisfying the preconditions.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_3",
+    "negation": "AegisSpec.NthMagicalNumber.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C(x) count the positive integers k with 1 <= k <= x and (a divides k or b divides k), and let M be the unique positive integer such that C(M-1) < n <= C(M). Whenever the function returns r, we have M >= n and r is congruent to M modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_4",
+    "negation": "AegisSpec.NthMagicalNumber.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C(x) count the positive integers k with 1 <= k <= x and (a divides k or b divides k), and let M be the unique positive integer such that C(M-1) < n <= C(M). Whenever the function returns r, we have M <= n * min(a,b) and r is congruent to M modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_5",
+    "negation": "AegisSpec.NthMagicalNumber.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1, then whenever the function returns r, r = min(a,b).",
+    "preconditions": "n = 1, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_6",
+    "negation": "AegisSpec.NthMagicalNumber.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If a = b, then whenever the function returns r, r is the unique integer satisfying 0 <= r < 1000000007 and r is congruent to n * a modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, 2 <= b <= 40000, and a = b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_7",
+    "negation": "AegisSpec.NthMagicalNumber.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If a < b and a divides b, then whenever the function returns r, r is the unique integer satisfying 0 <= r < 1000000007 and r is congruent to n * a modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a < b <= 40000, and a divides b."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_8",
+    "negation": "AegisSpec.NthMagicalNumber.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If b < a and b divides a, then whenever the function returns r, r is the unique integer satisfying 0 <= r < 1000000007 and r is congruent to n * b modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= b < a <= 40000, and b divides a."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_9",
+    "negation": "AegisSpec.NthMagicalNumber.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for inputs (n,a,b) and returns r' for inputs (n,b,a), then r = r'.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_10",
+    "negation": "AegisSpec.NthMagicalNumber.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let L = lcm(a,b) and q = L/a + L/b - 1. If the function returns r for n and returns r' for n + q with the same a and b, then r' is congruent to r + L modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, 2 <= b <= 40000, and n + q <= 1000000000, where L = lcm(a,b) and q = L/a + L/b - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_11",
+    "negation": "AegisSpec.NthMagicalNumber.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for inputs (n,a,b) and returns r' for inputs (n,c*a,c*b), then r' is congruent to c * r modulo 1000000007.",
+    "preconditions": "1 <= n <= 1000000000, c >= 1, 2 <= a <= 40000, 2 <= b <= 40000, 2 <= c*a <= 40000, and 2 <= c*b <= 40000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_12",
+    "negation": "AegisSpec.NthMagicalNumber.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let C(x) count the positive integers k with 1 <= k <= x and (a divides k or b divides k), and let M be the unique positive integer such that C(M-1) < n <= C(M). Whenever the function returns r, we have r = M.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, 2 <= b <= 40000, and n * min(a,b) < 1000000007."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NthMagicalNumber.spec_13",
+    "negation": "AegisSpec.NthMagicalNumber.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let C(x) count the positive integers k with 1 <= k <= x and (a divides k or b divides k), and let M be the unique positive integer such that C(M-1) < n <= C(M). Whenever the function returns r, r is congruent to M modulo 1000000007, M is divisible by a or by b, and C(M) = n.",
+    "preconditions": "1 <= n <= 1000000000, 2 <= a <= 40000, and 2 <= b <= 40000."
+  }
+]

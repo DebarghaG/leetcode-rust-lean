@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidPartition.spec_1",
+    "negation": "AegisSpec.ValidPartition.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. r = true if and only if there exist an integer k >= 1 and integers 0 = c_0 < c_1 < ... < c_k = n such that for every j with 0 <= j < k, the contiguous subarray nums[c_j .. c_{j+1}-1] is good, where a subarray nums[a .. b] is good exactly when either (b-a+1 = 2 and nums[a] = nums[b]), or (b-a+1 = 3 and nums[a] = nums[a+1] and nums[a+1] = nums[a+2]), or (b-a+1 = 3 and nums[a+1] = nums[a]+1 and nums[a+2] = nums[a+1]+1). If no such partition exists, r = false.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidPartition.spec_2",
+    "negation": "AegisSpec.ValidPartition.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail; no arithmetic overflow, out-of-bounds access, or panic occurs while producing r.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidPartition.spec_3",
+    "negation": "AegisSpec.ValidPartition.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if nums[0] = nums[1].",
+    "preconditions": "Let n = len(nums). n = 2, 1 <= nums[0] <= 1000000, and 1 <= nums[1] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidPartition.spec_4",
+    "negation": "AegisSpec.ValidPartition.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if either (nums[0] = nums[1] and nums[1] = nums[2]) or (nums[1] = nums[0]+1 and nums[2] = nums[1]+1).",
+    "preconditions": "Let n = len(nums). n = 3, and every element of nums is in [1,1000000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidPartition.spec_5",
+    "negation": "AegisSpec.ValidPartition.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000, every element of nums is in [1,1000000], and nums[i] = nums[0] for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidPartition.spec_6",
+    "negation": "AegisSpec.ValidPartition.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = false.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and every element of nums is in [1,1000000]. For every i with 0 <= i < n-1, nums[i] != nums[i+1]. For every i with 0 <= i < n-2, it is not the case that both nums[i+1] = nums[i]+1 and nums[i+2] = nums[i+1]+1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidPartition.spec_7",
+    "negation": "AegisSpec.ValidPartition.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r = true then either nums[0] = nums[1], or (n >= 3 and nums[1] = nums[0]+1 and nums[2] = nums[1]+1).",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and every element of nums is in [1,1000000]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidPartition.spec_8",
+    "negation": "AegisSpec.ValidPartition.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r = true then either nums[n-2] = nums[n-1], or (n >= 3 and nums[n-2] = nums[n-3]+1 and nums[n-1] = nums[n-2]+1).",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and every element of nums is in [1,1000000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidPartition.spec_9",
+    "negation": "AegisSpec.ValidPartition.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if there exists an index i with 0 < i < n such that the prefix nums[0 .. i-1] admits a valid partition and the suffix nums[i .. n-1] is a good block, then r = true.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and every element of nums is in [1,1000000]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidPartition.spec_10",
+    "negation": "AegisSpec.ValidPartition.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The calls valid_partition(nums) and valid_partition(shifted) both return results, and their Boolean results are equal.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and every element of nums is in [1,1000000]. Let c be an integer and let shifted be a slice of length n with shifted[i] = nums[i]+c for every i with 0 <= i < n. Assume each nums[i]+c is representable as a 64-bit integer and 1 <= shifted[i] <= 1000000 for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ValidPartition.spec_11",
+    "negation": "AegisSpec.ValidPartition.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = true if and only if n is divisible by 3.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000, every element of nums is in [1,1000000], and for every i with 0 <= i < n-1, nums[i+1] = nums[i]+1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ValidPartition.spec_12",
+    "negation": "AegisSpec.ValidPartition.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if nums[0] = nums[1] and nums[2] = nums[3].",
+    "preconditions": "Let n = len(nums). n = 4 and every element of nums is in [1,1000000]."
+  }
+]

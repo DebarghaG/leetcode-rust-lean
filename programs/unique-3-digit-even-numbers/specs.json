@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TotalNumbers.spec_1",
+    "negation": "AegisSpec.TotalNumbers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let occ(d, xs) be the number of indices i with 0 <= i < len(xs) and xs[i] = d. For an integer n with 100 <= n <= 999, let decocc(d, n) be the number of occurrences of digit d among the three decimal digits of n (hundreds, tens, ones). The function returns a result r and r equals the cardinality of the set {n | 100 <= n <= 999, n is even, and for every d in {0,...,9}, decocc(d,n) <= occ(d,digits)}.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TotalNumbers.spec_2",
+    "negation": "AegisSpec.TotalNumbers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such input, the function returns a result r; it does not panic, overflow, or go out of bounds.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TotalNumbers.spec_3",
+    "negation": "AegisSpec.TotalNumbers.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TotalNumbers.spec_4",
+    "negation": "AegisSpec.TotalNumbers.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 450.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TotalNumbers.spec_5",
+    "negation": "AegisSpec.TotalNumbers.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let count_d(xs) be the number of indices i with 0 <= i < len(xs) and xs[i] = d. If for every d in {0,...,9}, count_d(xs) = count_d(ys), then whenever total_numbers(xs) returns r_x and total_numbers(ys) returns r_y, r_x = r_y.",
+    "preconditions": "Both xs and ys satisfy 3 <= len(xs) <= 10, 3 <= len(ys) <= 10, and all their entries are in {0,...,9}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TotalNumbers.spec_6",
+    "negation": "AegisSpec.TotalNumbers.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let count_d(xs) be the number of indices i with 0 <= i < len(xs) and xs[i] = d. If for every d in {0,...,9}, min(count_d(xs), 3) = min(count_d(ys), 3), then whenever total_numbers(xs) returns r_x and total_numbers(ys) returns r_y, r_x = r_y.",
+    "preconditions": "Both xs and ys satisfy 3 <= len(xs) <= 10, 3 <= len(ys) <= 10, and all their entries are in {0,...,9}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TotalNumbers.spec_7",
+    "negation": "AegisSpec.TotalNumbers.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let digits' be the slice obtained from digits by appending one extra entry equal to d. Whenever total_numbers(digits) returns r and total_numbers(digits') returns r', we have r <= r'.",
+    "preconditions": "3 <= len(digits) <= 9, every entry of digits is in {0,...,9}, and d is an integer with 0 <= d <= 9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TotalNumbers.spec_8",
+    "negation": "AegisSpec.TotalNumbers.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if either no entry of digits is even, or no entry of digits is nonzero.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TotalNumbers.spec_9",
+    "negation": "AegisSpec.TotalNumbers.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every entry of digits is equal to the same digit d, then whenever the function returns a result r, r = 1 when d is in {2,4,6,8}, and r = 0 otherwise.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TotalNumbers.spec_10",
+    "negation": "AegisSpec.TotalNumbers.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let T be the number of ordered triples (i,j,k) of indices such that 0 <= i,j,k < len(digits), i, j, and k are pairwise distinct, digits[i] != 0, and digits[k] is even. Whenever the function returns a result r, r <= T.",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TotalNumbers.spec_11",
+    "negation": "AegisSpec.TotalNumbers.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let occ(d, xs) be the number of indices i with 0 <= i < len(xs) and xs[i] = d, and for 100 <= n <= 999 let decocc(d,n) be the number of occurrences of digit d among the decimal digits of n. Whenever the function returns a result r, if r > 0 then there exists an integer n such that 100 <= n <= 999, n is even, and for every d in {0,...,9}, decocc(d,n) <= occ(d,digits).",
+    "preconditions": "3 <= len(digits) <= 10, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TotalNumbers.spec_12",
+    "negation": "AegisSpec.TotalNumbers.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let occ(d, xs) be the number of indices i with 0 <= i < len(xs) and xs[i] = d, and for 100 <= n <= 999 let decocc(d,n) be the number of occurrences of digit d among the decimal digits of n. Whenever the function returns a result r, r equals the cardinality of the set {n | 100 <= n <= 999 and for every d in {0,...,9}, decocc(d,n) <= occ(d,digits)}.",
+    "preconditions": "3 <= len(digits) <= 10, every entry of digits is in {0,...,9}, and every entry of digits is even (i.e., each entry is in {0,2,4,6,8})."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.TotalNumbers.spec_13",
+    "negation": "AegisSpec.TotalNumbers.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the cardinality of the set of integers of the form 100*a + 10*b + c such that (a,b,c) is a reordering of the three entries digits[0], digits[1], digits[2], a != 0, and c is even.",
+    "preconditions": "3 <= len(digits) <= 10, len(digits) = 3, and for every i with 0 <= i < len(digits), 0 <= digits[i] <= 9."
+  }
+]

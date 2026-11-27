@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_1",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r is the number of pairs (i, j) of indices such that 0 <= i < j < len(time) and time[i] + time[j] is divisible by 60 (that is, there exists an integer k with time[i] + time[j] = 60 * k).",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_2",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns some result r; it does not panic, overflow, or access out of bounds.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_3",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_4",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (len(time) * (len(time) - 1)) / 2.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_5",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "len(time) = 1 and 1 <= time[0] <= 500."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_6",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1 if time[0] + time[1] is divisible by 60, and r = 0 otherwise.",
+    "preconditions": "len(time) = 2 and 1 <= time[0] <= 500 and 1 <= time[1] <= 500."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_7",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = (len(time) * (len(time) - 1)) / 2.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500 and time[i] is divisible by 60."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_8",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices i and j such that 0 <= i < j < len(time) and time[i] + time[j] is divisible by 60.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_9",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let q be the number of ordered pairs (i, j) with 0 <= i < len(time), 0 <= j < len(time), i != j, and time[i] + time[j] divisible by 60. If the function returns r, then q = 2 * r.",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_10",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For d = 0, ..., 59 let c[d] be the number of indices i with 0 <= i < len(time) and time[i] mod 60 = d. If the function returns r, then r = c[0]*(c[0]-1)/2 + c[30]*(c[30]-1)/2 + sum_{d=1}^{29} c[d]*c[60-d].",
+    "preconditions": "1 <= len(time) <= 60000 and for every i with 0 <= i < len(time), 1 <= time[i] <= 500."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_11",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same result on time and on time': it returns results r and r' with r = r'.",
+    "preconditions": "Let time and time' be two slices with len(time) = len(time') = n, 1 <= n <= 60000, and for every index k with 0 <= k < n, 1 <= time[k] <= 500 and 1 <= time'[k] <= 500. Suppose there is a bijection p from {0, ..., n-1} to itself such that time'[k] = time[p(k)] for every k."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumPairsDivisibleBy60.spec_12",
+    "negation": "AegisSpec.NumPairsDivisibleBy60.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If 2*v is divisible by 60, then the function returns r = (len(time) * (len(time) - 1)) / 2; otherwise it returns r = 0.",
+    "preconditions": "1 <= len(time) <= 60000 and there exists v with 1 <= v <= 500 such that for every i with 0 <= i < len(time), time[i] = v."
+  }
+]

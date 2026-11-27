@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SplitPainting.spec_1",
+    "negation": "AegisSpec.SplitPainting.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let painting be the returned list. For every point x define A(x) = { c_i : 0 <= i < n and s_i <= x < e_i } and mix(x) = sum_{c in A(x)} c. A point x is painted iff A(x) is nonempty, equivalently mix(x) > 0. Sort the rows of painting by increasing first coordinate; write them as (l_j, r_j, m_j) for 0 <= j < k, where k = len(painting). Then: (1) k >= 1; every original row has length 3, and for every j, l_j < r_j and m_j > 0. (2) For every point x, x lies in the union of the intervals [l_j, r_j) if and only if x is painted. (3) For every j, A(x) is constant over l_j <= x < r_j; write this set as A_j, and m_j = sum_{c in A_j} c. (4) The intervals [l_j, r_j) are pairwise disjoint; since they are sorted, r_j <= l_{j+1} for every 0 <= j < k-1. (5) k is the minimum possible number of half-open segments with integer endpoints that cover exactly the painted set and on each of which A(x) is constant; equivalently, each [l_j, r_j) is a maximal nonempty interval on which A(x) is constant inside the painted set, and for every j with r_j = l_{j+1}, A_j != A_{j+1}. Adjacent rows may have m_j = m_{j+1} when their active color sets differ.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SplitPainting.spec_2",
+    "negation": "AegisSpec.SplitPainting.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let painting be the returned list. Then painting is nonempty, every row of painting has length 3, and for every row (l, r, m) in painting, l < r and m > 0.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SplitPainting.spec_3",
+    "negation": "AegisSpec.SplitPainting.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let painting be the returned list. Let S = {s_i : 0 <= i < n} union {e_i : 0 <= i < n}. Let Lmin = min_{0 <= i < n} s_i and Rmax = max_{0 <= i < n} e_i. For every row (l, r, m) in painting, l is in S, r is in S, and Lmin <= l < r <= Rmax.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SplitPainting.spec_4",
+    "negation": "AegisSpec.SplitPainting.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let painting be the returned list. For every point x, x lies in at least one returned half-open interval [l, r) from painting if and only if there exists i with 0 <= i < n and s_i <= x < e_i.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SplitPainting.spec_5",
+    "negation": "AegisSpec.SplitPainting.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let painting be the returned list. For every row (l, r, m) in painting and every point x with l <= x < r, m = sum_{i: 0 <= i < n and s_i <= x < e_i} c_i.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SplitPainting.spec_6",
+    "negation": "AegisSpec.SplitPainting.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let painting be the returned list. For any two distinct rows (l, r, m) and (l', r', m') of painting, the half-open intervals [l, r) and [l', r') are disjoint. Equivalently, after sorting the rows by increasing l as (l_j, r_j, m_j) for 0 <= j < k, r_j <= l_{j+1} for every 0 <= j < k-1.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SplitPainting.spec_7",
+    "negation": "AegisSpec.SplitPainting.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let painting be the returned list. Sort its rows by increasing first coordinate as (l_j, r_j, m_j) for 0 <= j < k, and define A(x) = { c_i : 0 <= i < n and s_i <= x < e_i }. For every j with 0 <= j < k-1 and r_j = l_{j+1}, we have A(l_j) != A(l_{j+1}); equivalently, the set of active colors changes at their common endpoint. Thus no two adjacent output segments with the same active color set can be merged. Two adjacent segments may nevertheless have m_j = m_{j+1}, and they must still be kept separate when their active color sets differ.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SplitPainting.spec_8",
+    "negation": "AegisSpec.SplitPainting.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, the function returns a result; it does not fail by arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SplitPainting.spec_9",
+    "negation": "AegisSpec.SplitPainting.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let painting be the returned list. Considered as a set of rows ignoring order, painting is exactly { (s_0, e_0, c_0) }. Equivalently, after sorting, k = 1, l_0 = s_0, r_0 = e_0, and m_0 = c_0.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct. Also assume n = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SplitPainting.spec_10",
+    "negation": "AegisSpec.SplitPainting.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let painting be the returned list. Considered as a set of rows ignoring order, painting is exactly { (s_i, e_i, c_i) : 0 <= i < n }.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct. Also assume that for all i, j with 0 <= i < j < n, the intervals [s_i, e_i) and [s_j, e_j) do not overlap, i.e., e_i <= s_j or e_j <= s_i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SplitPainting.spec_11",
+    "negation": "AegisSpec.SplitPainting.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let painting be the returned list. Considered as a set of rows ignoring order, painting is exactly { (s, e, sum_{i=0}^{n-1} c_i) }. In particular, it has exactly one row.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct. Also assume there exist integers s and e such that for every i, s_i = s and e_i = e."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SplitPainting.spec_12",
+    "negation": "AegisSpec.SplitPainting.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let painting be the returned list. For every row (l, r, m) in painting, min_{0 <= i < n} c_i <= m <= sum_{i=0}^{n-1} c_i.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SplitPainting.spec_13",
+    "negation": "AegisSpec.SplitPainting.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let painting be the list returned for segments and painting' the list returned for segments'. Sort both lists by increasing first coordinate. Then the sorted lists are equal row by row.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct. Let segments' be another input with n' = len(segments'). Assume n' = n, len(segments'[i]) = 3 for every i, and writing s'_i, e'_i, c'_i for its entries, assume 0 <= s'_i < e'_i <= 100000, 1 <= c'_i <= 1000000000, and the c'_i are pairwise distinct. Also assume segments' is a permutation of the rows of segments."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SplitPainting.spec_14",
+    "negation": "AegisSpec.SplitPainting.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let painting be the returned list, sorted by increasing first coordinate as (l_j, r_j, m_j) for 0 <= j < k, and define A(x) = { c_i : 0 <= i < n and s_i <= x < e_i }. For every j, A(x) is constant on [l_j, r_j), and [l_j, r_j) is exactly a maximal nonempty interval contained in the painted set on which A(x) is constant: there is no point a < l_j such that [a, r_j) is contained in the painted set and A(x) is constant for all x with a <= x < r_j, and there is no point b > r_j such that [l_j, b) is contained in the painted set and A(x) is constant for all x with l_j <= x < b.",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.SplitPainting.spec_15",
+    "negation": "AegisSpec.SplitPainting.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let painting be the returned list and define mix(x) = sum_{i: 0 <= i < n and s_i <= x < e_i} c_i. For every point x in the painted set (that is, mix(x) > 0), there is exactly one row (l, r, m) of painting such that l <= x < r, and for this row m = mix(x).",
+    "preconditions": "Let n = len(segments). Assume 1 <= n <= 20000. For every i with 0 <= i < n, len(segments[i]) = 3. Write s_i = segments[i][0], e_i = segments[i][1], c_i = segments[i][2]. Assume 0 <= s_i < e_i <= 100000, 1 <= c_i <= 1000000000, and the c_i are pairwise distinct."
+  }
+]

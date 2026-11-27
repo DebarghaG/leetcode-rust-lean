@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindNthDigit.spec_1",
+    "negation": "AegisSpec.FindNthDigit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the nth digit (1-indexed) of the infinite concatenation C = dec(1) ++ dec(2) ++ dec(3) ++ ..., where dec(k) is the standard decimal representation of k with no leading zeros. Equivalently, C is the infinite sequence 123456789101112131415..., and r is the integer value, between 0 and 9, of the nth character of C.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 2147483647 (i.e. 2^31 - 1)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindNthDigit.spec_2",
+    "negation": "AegisSpec.FindNthDigit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n with 1 <= n <= 2147483647, the function returns a result r; it does not fail (no overflow, out-of-bounds, or panic).",
+    "preconditions": "n is an integer satisfying 1 <= n <= 2147483647 (i.e. 2^31 - 1)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindNthDigit.spec_3",
+    "negation": "AegisSpec.FindNthDigit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "0 <= r <= 9.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647, and the function returns a result r."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindNthDigit.spec_4",
+    "negation": "AegisSpec.FindNthDigit.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n.",
+    "preconditions": "n is an integer with 1 <= n <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindNthDigit.spec_5",
+    "negation": "AegisSpec.FindNthDigit.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 10 then the function returns 1; if n = 11 then the function returns 0.",
+    "preconditions": "n is 10 or 11."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindNthDigit.spec_6",
+    "negation": "AegisSpec.FindNthDigit.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a positive integer m >= 1 such that, with len(dec(k)) denoting the number of decimal digits of k and start(m) = 1 + sum_{k=1}^{m-1} len(dec(k)), we have start(m) <= n <= start(m) + len(dec(m)) - 1, and r is the (n - start(m) + 1)-th digit from the left (1-indexed) of dec(m).",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindNthDigit.spec_7",
+    "negation": "AegisSpec.FindNthDigit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L(d) = sum_{i=1}^{d-1} 9*10^{i-1}*i for d >= 1, so L(1) = 0. If d is the unique positive integer such that L(d) < n <= L(d) + 9*10^{d-1}*d, then the function returns a result r and r is the digit at position n - L(d) (1-indexed) of the concatenation of the decimal representations of 10^{d-1}, 10^{d-1}+1, ..., 10^d - 1.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindNthDigit.spec_8",
+    "negation": "AegisSpec.FindNthDigit.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let d be the unique positive integer with L(d) < n <= L(d) + 9*10^{d-1}*d, where L(d) = sum_{i=1}^{d-1} 9*10^{i-1}*i. Let q = n - L(d) - 1, let m = 10^{d-1} + (q div d), and let p = q mod d. Then r = (m div 10^{d-1-p}) mod 10.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindNthDigit.spec_9",
+    "negation": "AegisSpec.FindNthDigit.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is the most significant decimal digit of m; in particular 1 <= r <= 9.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647, and m is a positive integer such that n = 1 + sum_{k=1}^{m-1} len(dec(k)), where len(dec(k)) is the number of decimal digits of k (so n is the first position of dec(m) in C)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindNthDigit.spec_10",
+    "negation": "AegisSpec.FindNthDigit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = m mod 10.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647, and m is a positive integer such that n = sum_{k=1}^{m} len(dec(k)), where len(dec(k)) is the number of decimal digits of k (so n is the last position of dec(m) in C)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindNthDigit.spec_11",
+    "negation": "AegisSpec.FindNthDigit.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r = 0, the nth position of C is not one of the first nine positions; equivalently n >= 10.",
+    "preconditions": "n is an integer with 1 <= n <= 2147483647."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindNthDigit.spec_12",
+    "negation": "AegisSpec.FindNthDigit.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2.",
+    "preconditions": "n = 2147483647."
+  }
+]

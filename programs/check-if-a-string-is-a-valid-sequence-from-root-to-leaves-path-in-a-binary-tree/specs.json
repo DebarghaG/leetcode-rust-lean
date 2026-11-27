@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValidSequence.spec_1",
+    "negation": "AegisSpec.IsValidSequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever `is_valid_sequence(root, arr)` returns a result `r`, `r = true` if and only if there exists a root-to-leaf path in `root` whose sequence of node values equals `arr`. That is, there exists a sequence of nodes `n_0, n_1, ..., n_{k-1}` such that `k = len(arr)`, `n_0 = root`, `n_{k-1}` is a leaf (i.e., `n_{k-1} = Tree.Node(v, Tree.Null, Tree.Null)` for some integer `v`), for each `i` with `0 <= i < k-1`, `n_{i+1}` is a child of `n_i` (either the left or the right child), and for each `i` with `0 <= i < k`, the value of `n_i` equals `arr[i]`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValidSequence.spec_2",
+    "negation": "AegisSpec.IsValidSequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every tree `root` and every slice `arr` satisfying the preconditions, `is_valid_sequence(root, arr)` returns a result (i.e., it does not fail with overflow, out-of-bounds, or panic).",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValidSequence.spec_3",
+    "negation": "AegisSpec.IsValidSequence.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If `root = Tree.Null`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `root = Tree.Null`."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValidSequence.spec_4",
+    "negation": "AegisSpec.IsValidSequence.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If `root` is a single leaf node with value `v`, then `is_valid_sequence(root, arr)` returns `true` if and only if `len(arr) = 1` and `arr[0] = v`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `root = Tree.Node(v, Tree.Null, Tree.Null)` for some integer `v` with `0 <= v <= 9`."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValidSequence.spec_5",
+    "negation": "AegisSpec.IsValidSequence.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If `len(arr) = 1`, then `is_valid_sequence(root, arr)` returns `true` if and only if `root = Tree.Node(arr[0], Tree.Null, Tree.Null)`. That is, the root itself must be a leaf (no children) and its value must equal `arr[0]`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `len(arr) = 1`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsValidSequence.spec_6",
+    "negation": "AegisSpec.IsValidSequence.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let `height(root)` be defined by `height(Tree.Null) = 0` and `height(Tree.Node(_, l, r)) = 1 + max(height(l), height(r))`. If `len(arr) > height(root)`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsValidSequence.spec_7",
+    "negation": "AegisSpec.IsValidSequence.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let `min_depth(root)` be defined for a non-null tree as follows: if `root = Tree.Node(v, Tree.Null, Tree.Null)`, then `min_depth(root) = 1`; if exactly one child is non-null (say `Tree.Node(v, child, Tree.Null)` or `Tree.Node(v, Tree.Null, child)`), then `min_depth(root) = 1 + min_depth(child)`; if both children are non-null, then `min_depth(root) = 1 + min(min_depth(left), min_depth(right))`. If `len(arr) < min_depth(root)`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `root` is not `Tree.Null`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsValidSequence.spec_8",
+    "negation": "AegisSpec.IsValidSequence.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If `arr[0] != v`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `root = Tree.Node(v, _, _)` for some integer `v` with `0 <= v <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsValidSequence.spec_9",
+    "negation": "AegisSpec.IsValidSequence.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If `is_valid_sequence(root, arr)` returns `true`, then there exists a root-to-leaf path in `root` whose sequence of node values equals `arr`. That is, there exists a sequence of nodes `n_0, n_1, ..., n_{k-1}` such that `k = len(arr)`, `n_0 = root`, `n_{k-1}` is a leaf, for each `i` with `0 <= i < k-1`, `n_{i+1}` is a child of `n_i`, and for each `i` with `0 <= i < k`, the value of `n_i` equals `arr[i]`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsValidSequence.spec_10",
+    "negation": "AegisSpec.IsValidSequence.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Under the precondition that `root` is non-null and every node has at most one child, the tree has exactly one root-to-leaf path. Let that path's value sequence be `seq` (a list of length `k`, where `k` is the number of nodes on the path). Then `is_valid_sequence(root, arr)` returns `true` if and only if `arr` equals `seq` (i.e., `len(arr) = k` and for all `i` with `0 <= i < k`, `arr[i] = seq[i]`).",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive; `root != Tree.Null`; every node in `root` has at most one child (i.e., for every node `Tree.Node(_, l, r)`, either `l = Tree.Null` or `r = Tree.Null`)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsValidSequence.spec_11",
+    "negation": "AegisSpec.IsValidSequence.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If there is no root-to-leaf path in `root` of length exactly `len(arr)`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsValidSequence.spec_12",
+    "negation": "AegisSpec.IsValidSequence.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Under the precondition that all node values and all elements of `arr` are equal to the same digit `v`, `is_valid_sequence(root, arr)` returns `true` if and only if there exists a root-to-leaf path in `root` of length `len(arr)`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; there exists an integer `v` with `0 <= v <= 9` such that every node in `root` has value `v` and every element of `arr` equals `v`."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsValidSequence.spec_13",
+    "negation": "AegisSpec.IsValidSequence.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If `root` is a leaf and `len(arr) > 1`, then `is_valid_sequence(root, arr)` returns `false`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; `root = Tree.Node(v, Tree.Null, Tree.Null)` for some integer `v` with `0 <= v <= 9`; `len(arr) > 1`."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsValidSequence.spec_14",
+    "negation": "AegisSpec.IsValidSequence.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists a root-to-leaf path in `root` whose sequence of node values equals `arr`, then `is_valid_sequence(root, arr)` returns `true`.",
+    "preconditions": "`1 <= len(arr) <= 5000`; for all `i` with `0 <= i < len(arr)`, `0 <= arr[i] <= 9`; for every node in `root`, its value is between `0` and `9` inclusive."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumTastiness.spec_1",
+    "negation": "AegisSpec.MaximumTastiness.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(price). For any subset S of {0,1,...,n-1} with |S| = k, define tastiness(S) = min { |price[i] - price[j]| : i, j in S and i != j }. The function returns a result r such that r = max { tastiness(S) : S is a subset of {0,...,n-1} with |S| = k }.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumTastiness.spec_2",
+    "negation": "AegisSpec.MaximumTastiness.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumTastiness.spec_3",
+    "negation": "AegisSpec.MaximumTastiness.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 0.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumTastiness.spec_4",
+    "negation": "AegisSpec.MaximumTastiness.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= max_{0 <= i < len(price)} price[i] - min_{0 <= i < len(price)} price[i].",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumTastiness.spec_5",
+    "negation": "AegisSpec.MaximumTastiness.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a subset S of {0,1,...,len(price)-1} with |S| = k such that tastiness(S) = r, where tastiness(S) = min { |price[i] - price[j]| : i, j in S and i != j }.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumTastiness.spec_6",
+    "negation": "AegisSpec.MaximumTastiness.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every subset S of {0,1,...,len(price)-1} with |S| = k, tastiness(S) <= r, where tastiness(S) = min { |price[i] - price[j]| : i, j in S and i != j }.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumTastiness.spec_7",
+    "negation": "AegisSpec.MaximumTastiness.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every integer d >= 0, r >= d if and only if there exists a subset S of {0,1,...,len(price)-1} with |S| = k such that for all i, j in S with i != j, |price[i] - price[j]| >= d.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumTastiness.spec_8",
+    "negation": "AegisSpec.MaximumTastiness.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist indices i, j with 0 <= i < j < len(price) such that r = |price[i] - price[j]|.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumTastiness.spec_9",
+    "negation": "AegisSpec.MaximumTastiness.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and if k = 2, then r = max_{0 <= i < len(price)} price[i] - min_{0 <= i < len(price)} price[i].",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumTastiness.spec_10",
+    "negation": "AegisSpec.MaximumTastiness.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and if k = len(price), then r = min { |price[i] - price[j]| : 0 <= i < j < len(price) }.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumTastiness.spec_11",
+    "negation": "AegisSpec.MaximumTastiness.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if the number of distinct values among price[0], ..., price[len(price)-1] is less than k.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumTastiness.spec_12",
+    "negation": "AegisSpec.MaximumTastiness.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let s be the nondecreasing rearrangement of price, i.e., s[0] <= s[1] <= ... <= s[len(price)-1] and the multiset {s[0], ..., s[len(price)-1]} equals the multiset {price[0], ..., price[len(price)-1]}. The function returns a result r and r = max { min_{t=1}^{k-1} (s[i_{t+1}] - s[i_t]) : 0 <= i_1 < i_2 < ... < i_k < len(price) }.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumTastiness.spec_13",
+    "negation": "AegisSpec.MaximumTastiness.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r. For every permutation pi of the index set {0,1,...,len(price)-1}, let q be the array with q[i] = price[pi(i)] for 0 <= i < len(price). Then the maximum tastiness for q (with the same k) is also r.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumTastiness.spec_14",
+    "negation": "AegisSpec.MaximumTastiness.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r. For every integer c such that 1 <= price[i] + c <= 1000000000 for all i with 0 <= i < len(price), let q be the array with q[i] = price[i] + c. Then the maximum tastiness for q (with the same k) is also r.",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumTastiness.spec_15",
+    "negation": "AegisSpec.MaximumTastiness.spec_15_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Let r1 be the result of the function on input (price, k1) and r2 the result on input (price, k2). Then r1 >= r2.",
+    "preconditions": "len(price) >= 2; 2 <= k1 <= k2 <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaximumTastiness.spec_16",
+    "negation": "AegisSpec.MaximumTastiness.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and (k - 1) * r <= max_{0 <= i < len(price)} price[i] - min_{0 <= i < len(price)} price[i].",
+    "preconditions": "len(price) >= 2; 2 <= k <= len(price); len(price) <= 100000; for every i with 0 <= i < len(price), 1 <= price[i] <= 1000000000."
+  }
+]

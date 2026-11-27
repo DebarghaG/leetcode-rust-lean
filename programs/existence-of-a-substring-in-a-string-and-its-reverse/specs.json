@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_1",
+    "negation": "AegisSpec.IsSubstringPresent.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if there exist indices i and j such that 0 <= i < len(s)-1, 0 <= j < len(s)-1, s[i] = s[j+1], and s[i+1] = s[j]. Equivalently, r = true if and only if some contiguous length-2 substring of s equals the reverse of some contiguous length-2 substring of s, i.e. occurs in the reverse of s; r = false otherwise.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty lowercase ASCII string of at most 100 bytes)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_2",
+    "negation": "AegisSpec.IsSubstringPresent.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r and does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_3",
+    "negation": "AegisSpec.IsSubstringPresent.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = false.",
+    "preconditions": "len(s) = 1, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_4",
+    "negation": "AegisSpec.IsSubstringPresent.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if s[0] = s[1].",
+    "preconditions": "len(s) = 2, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_5",
+    "negation": "AegisSpec.IsSubstringPresent.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if s[0] = s[1] or s[1] = s[2] or s[0] = s[2]. Equivalently, for length 3 the answer is true exactly when the three bytes are not pairwise distinct.",
+    "preconditions": "len(s) = 3, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_6",
+    "negation": "AegisSpec.IsSubstringPresent.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and there exists an index i with 0 <= i < len(s)-1 and s[i] = s[i+1], we have r = true.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_7",
+    "negation": "AegisSpec.IsSubstringPresent.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = true.",
+    "preconditions": "len(s) >= 2, len(s) <= 100, for every i with 0 <= i < len(s), 97 <= s[i] <= 122, and for every k with 0 <= k < len(s), s[k] = s[len(s)-1-k] (s is equal to its reverse)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_8",
+    "negation": "AegisSpec.IsSubstringPresent.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte slice of length len(s) with rev(s)[k] = s[len(s)-1-k] for every k with 0 <= k < len(s). Whenever the function returns r on input s and returns r' on input rev(s), we have r = r'.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_9",
+    "negation": "AegisSpec.IsSubstringPresent.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r = true, there exist indices p and q with 0 <= p < q < len(s) and s[p] = s[q]; that is, at least one byte value occurs at least twice in s.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_10",
+    "negation": "AegisSpec.IsSubstringPresent.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r = true, there exist indices i and j with 0 <= i < len(s)-1 and 0 <= j < len(s)-1 such that s[i] = s[j+1] and s[i+1] = s[j]. Thus the contiguous length-2 substring s[i], s[i+1] occurs in the reverse of s as the reversed pair s[j], s[j+1].",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_11",
+    "negation": "AegisSpec.IsSubstringPresent.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and there exists an index i with 0 <= i < len(s)-2 and s[i] = s[i+2], we have r = true.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_12",
+    "negation": "AegisSpec.IsSubstringPresent.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r = true, len(s) >= 2.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 100, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsSubstringPresent.spec_13",
+    "negation": "AegisSpec.IsSubstringPresent.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r = true on input s and returns r' on input t, we have r' = true.",
+    "preconditions": "s and t are byte slices, each with length between 1 and 100 inclusive and each consisting only of bytes in the range 97 through 122. Moreover s occurs contiguously in t: there exists an offset k with 0 <= k, k + len(s) <= len(t), and for every i with 0 <= i < len(s), t[k+i] = s[i]."
+  }
+]

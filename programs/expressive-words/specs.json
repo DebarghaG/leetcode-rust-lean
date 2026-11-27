@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ExpressiveWords.spec_1",
+    "negation": "AegisSpec.ExpressiveWords.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). The returned value r equals the number of indices i with 0 <= i < len(words) such that words[i] is stretchy to s, where: a group of a nonempty byte string x is a maximal contiguous block of equal bytes (maximal means it cannot be extended left or right without including a different byte), listed from left to right and represented by its byte and its length; and a word w is stretchy to s iff w and s have the same number of groups, the k-th group of w has the same byte as the k-th group of s for every group index k, and, writing d_k for the length of the k-th group of w and c_k for the length of the k-th group of s, one has d_k <= c_k and (d_k = c_k or c_k >= 3).",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ExpressiveWords.spec_2",
+    "negation": "AegisSpec.ExpressiveWords.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, expressive_words(s, words) returns a result r (a Result.ok value); it does not overflow, index out of bounds, panic, or otherwise fail.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ExpressiveWords.spec_3",
+    "negation": "AegisSpec.ExpressiveWords.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever expressive_words(s, words) returns a result r, 0 <= r <= len(words).",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ExpressiveWords.spec_4",
+    "negation": "AegisSpec.ExpressiveWords.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever expressive_words(s, words) returns a result r, if for every i with 0 <= i < len(words), len(words[i]) > len(s), then r = 0.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ExpressiveWords.spec_5",
+    "negation": "AegisSpec.ExpressiveWords.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever expressive_words(s, words) returns a result r, r = 0 if and only if there is no index i with 0 <= i < len(words) such that words[i] is stretchy to s (stretchy is the group condition defined in spec_1); equivalently, r > 0 if and only if such a stretchy index exists.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ExpressiveWords.spec_6",
+    "negation": "AegisSpec.ExpressiveWords.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever expressive_words(s, words) returns a result r, r = len(words) if and only if for every i with 0 <= i < len(words), words[i] is stretchy to s (using the group condition defined in spec_1).",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ExpressiveWords.spec_7",
+    "negation": "AegisSpec.ExpressiveWords.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever expressive_words(s, words1) returns r1 and expressive_words(s, words2) returns r2, if words1 and words2 have the same multiset of query byte strings (for every byte string w, the number of i with 0 <= i < len(words1) and words1[i] = w equals the number of j with 0 <= j < len(words2) and words2[j] = w), then r1 = r2.",
+    "preconditions": "len(s) >= 1; len(words1) >= 1; len(words2) >= 1; len(s) <= 100; len(words1) <= 100; len(words2) <= 100; every word in words1 or words2 has length between 1 and 100; every byte of s and of every word in words1 or words2 is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ExpressiveWords.spec_8",
+    "negation": "AegisSpec.ExpressiveWords.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever expressive_words(s, A) returns rA and expressive_words(s, B) returns rB, if A is a subsequence of B (B can be obtained from A by inserting zero or more query words, preserving order), then rA <= rB.",
+    "preconditions": "len(s) >= 1; len(A) >= 1; len(B) >= 1; len(s) <= 100; len(A) <= 100; len(B) <= 100; every word in A or B has length between 1 and 100; every byte of s and of every word in A or B is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ExpressiveWords.spec_9",
+    "negation": "AegisSpec.ExpressiveWords.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever expressive_words(s, words) returns r and expressive_words(s, words') returns r', r' = r + 1 if w is stretchy to s (using the group condition defined in spec_1), and r' = r if w is not stretchy to s.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 99; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122); w is a byte string with 1 <= len(w) <= 100 and lowercase bytes; words' is the list obtained from words by appending w as a new last element (so len(words') = len(words) + 1 <= 100)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ExpressiveWords.spec_10",
+    "negation": "AegisSpec.ExpressiveWords.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever expressive_words(s, words) returns a result r, if every maximal contiguous group of equal bytes in s has length 1 or 2, then r equals the number of indices i with 0 <= i < len(words) such that words[i] equals s byte-for-byte.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ExpressiveWords.spec_11",
+    "negation": "AegisSpec.ExpressiveWords.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever expressive_words(s, words) returns a result r, r is at least the number of indices i with 0 <= i < len(words) such that words[i] equals s byte-for-byte.",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ExpressiveWords.spec_12",
+    "negation": "AegisSpec.ExpressiveWords.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever expressive_words(s, words) returns a result r, r is at most the number of indices i with 0 <= i < len(words) such that len(words[i]) <= len(s).",
+    "preconditions": "len(s) >= 1; len(words) >= 1; for every i with 0 <= i < len(words), len(words[i]) >= 1; len(s) <= 100; len(words) <= 100; for every i with 0 <= i < len(words), len(words[i]) <= 100; every byte of s and of every words[i] is a lowercase ASCII letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ExpressiveWords.spec_13",
+    "negation": "AegisSpec.ExpressiveWords.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever expressive_words(s, A) returns rA, expressive_words(s, B) returns rB, and expressive_words(s, A ++ B) returns rAB, one has rAB = rA + rB.",
+    "preconditions": "len(s) >= 1; len(A) >= 1; len(B) >= 1; len(s) <= 100; len(A) <= 100; len(B) <= 100; len(A) + len(B) <= 100; every word in A or B has length between 1 and 100; every byte of s and of every word in A or B is a lowercase ASCII letter (97 <= byte <= 122)."
+  }
+]

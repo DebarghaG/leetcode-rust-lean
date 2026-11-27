@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let W(sentence) = (w_0, ..., w_{m-1}) be the words of sentence in order, obtained by splitting at the single spaces. For a consecutive group of words, its row length is the sum of the lengths of its words plus one less than the number of words in the group (the spaces between them). A valid partition P is a partition of W(sentence) into consecutive nonempty groups whose row lengths are all at most k. For such a P with rows G_0, ..., G_{q-1} and row lengths L_0, ..., L_{q-1}, its total cost is C(P) = sum_{t=0}^{q-2} (k - L_t)^2, i.e. the last row G_{q-1} is not charged; if q=1 the sum is 0. Whenever the function returns a result r, r is the minimum of C(P) over all valid partitions P.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail by overflow, out-of-bounds, or panic) for every input (sentence, k) satisfying the preconditions.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let W(sentence) be the word list, and define a valid partition P to be a partition of W(sentence) into consecutive nonempty groups whose row lengths are all at most k, where row length is the sum of the word lengths in the group plus the number of spaces between those words. Define C(P) as the sum of (k - row length)^2 over all rows of P except the last row (empty sum 0 if P has one row). Whenever the function returns a result r, there exists a valid partition P of W(sentence) such that C(P) = r.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let W(sentence) be the word list, and define a valid partition P to be a partition of W(sentence) into consecutive nonempty groups whose row lengths are all at most k, where row length is the sum of the word lengths in the group plus the number of spaces between those words. Define C(P) as the sum of (k - row length)^2 over all rows of P except the last row (empty sum 0 if P has one row). Whenever the function returns a result r, for every valid partition P of W(sentence), C(P) >= r.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let W(sentence) be the word list, and define a valid partition P and its total cost C(P) as in spec_1: consecutive nonempty groups of words with every row length at most k, and C(P) is the sum of (k - row length)^2 over all rows except the last. Whenever the function returns a result r, r = 0 if and only if there exists a valid partition P of W(sentence) such that every row of P except the last one has length exactly k (the last row still must have length at most k).",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let W(sentence1) = (w_0, ..., w_{m-1}) and W(sentence2) = (v_0, ..., v_{n-1}) be the word lists obtained by splitting at spaces. If m = n and |w_i| = |v_i| for every i with 0 <= i < m, then whenever the function returns r on (sentence1, k) and q on (sentence2, k), r = q.",
+    "preconditions": "Both (sentence1, k) and (sentence2, k) satisfy the same sentence constraints: for each sentence, its length is between 1 and 5000 inclusive; 1 <= k <= 5000; bytes are lowercase English letters or spaces; there is no leading or trailing space; no two adjacent spaces occur; and every word length is at most k. The same integer k is used for both calls."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let W(sentence) = (w_0, ..., w_{m-1}) be the word list and let Lmin = min_{0 <= i < m} |w_i| (this minimum is over a nonempty list). Whenever the function returns a result r, r <= (m - 1) * (k - Lmin)^2.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; and every maximal contiguous non-space block (word) has length at most k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if |w_0| + |w_1| + 1 <= k then r = 0, and if |w_0| + |w_1| + 1 > k then r = (k - |w_0|)^2.",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; every word length is at most k; and the word list W(sentence) has exactly two words w_0, w_1 (equivalently, sentence contains exactly one space)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{m-2} (k - |w_i|)^2 (this sum is 0 when m=1).",
+    "preconditions": "len(sentence) is between 1 and 5000 inclusive; 1 <= k <= 5000; every byte of sentence is either a lowercase English letter (ASCII 97 through 122) or a space (ASCII 32); sentence[0] and sentence[len(sentence)-1] are not spaces; no two adjacent bytes are spaces; every word length is at most k; let W(sentence) = (w_0, ..., w_{m-1}); and for every i with 0 <= i < m-1, |w_i| + |w_{i+1}| + 1 > k."
+  }
+]

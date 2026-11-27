@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountVowels.spec_1",
+    "negation": "AegisSpec.CountVowels.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and the integer value represented by r is exactly Σ_{i=0}^{n-1} Σ_{j=i}^{n-1} Σ_{k=i}^{j} I(word[k] is a vowel), where I(P) = 1 if P holds and 0 otherwise. A byte is a vowel exactly when it is 97 ('a'), 101 ('e'), 105 ('i'), 111 ('o'), or 117 ('u'). Equivalently, this is the sum, over every non-empty contiguous substring word[i..j] with 0 <= i <= j < n, of the number of vowels in that substring.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= word[i] <= 122 (word[i] is a lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountVowels.spec_2",
+    "negation": "AegisSpec.CountVowels.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the preconditions, count_vowels(word) returns a result r (it does not fail, panic, go out of bounds, or overflow the 64-bit result).",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter (97 <= word[i] <= 122 for 0 <= i < n)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountVowels.spec_3",
+    "negation": "AegisSpec.CountVowels.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_vowels(word) returns a result r, the integer value represented by r is non-negative: 0 <= r.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountVowels.spec_4",
+    "negation": "AegisSpec.CountVowels.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_vowels(word) returns a result r, the integer value represented by r is at most n*(n+1)*(n+2)/6.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountVowels.spec_5",
+    "negation": "AegisSpec.CountVowels.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever count_vowels(word) returns a result r, the integer value represented by r equals Σ_{k=0}^{n-1} c_k*(k+1)*(n-k), where c_k = 1 if word[k] is a vowel ('a', 'e', 'i', 'o', or 'u'), and c_k = 0 otherwise.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountVowels.spec_6",
+    "negation": "AegisSpec.CountVowels.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_vowels(word) returns r and count_vowels(rev) returns r_rev, the integer values represented by r and r_rev are equal.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter. Let rev be the byte array of length n defined by rev[i] = word[n-1-i] for 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountVowels.spec_7",
+    "negation": "AegisSpec.CountVowels.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_vowels(word) returns r_word and count_vowels(v) returns r_v, the integer values represented by r_word and r_v are equal.",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and both word and v are byte slices of length n whose bytes are lowercase English letters. For every i with 0 <= i < n, word[i] is a vowel if and only if v[i] is a vowel."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountVowels.spec_8",
+    "negation": "AegisSpec.CountVowels.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_vowels(word) returns r and count_vowels(word2) returns r2, the integer value represented by r2 equals the integer value represented by r plus (p+1)*(n-p).",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, every byte of word is a lowercase English letter, and p is an index with 0 <= p < n such that word[p] is not a vowel. Let word2 be a byte slice of length n such that word2[p] is a vowel, word2[i] = word[i] for every i != p, and every byte of word2 is a lowercase English letter."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountVowels.spec_9",
+    "negation": "AegisSpec.CountVowels.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_vowels(word) returns a result r, the integer value represented by r equals n*(n+1)*(n+2)/6 if and only if every byte word[i] with 0 <= i < n is a vowel ('a', 'e', 'i', 'o', or 'u').",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountVowels.spec_10",
+    "negation": "AegisSpec.CountVowels.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_vowels(word) returns a result r, the integer value represented by r equals 0 if and only if every byte word[i] with 0 <= i < n is not a vowel ('a', 'e', 'i', 'o', or 'u').",
+    "preconditions": "Let n = len(word). 1 <= n <= 100000, and every byte of word is a lowercase English letter."
+  }
+]

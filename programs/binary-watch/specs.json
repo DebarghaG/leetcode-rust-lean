@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_1",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let pc4(h) be the number of set bits in the 4-bit binary representation of h, let pc6(m) be the number of set bits in the 6-bit binary representation of m, and let fmt(h,m) be the ASCII byte vector for hour h and minute m: the decimal representation of h with no leading zeros, then the byte ':' (ASCII 58), then the two decimal digits of m, using a leading zero when m < 10. Whenever the function returns a result r, r is a duplicate-free list whose elements, in some order, are exactly the byte vectors fmt(h,m) for all pairs (h,m) with 0 <= h < 12, 0 <= m < 60, and pc4(h)+pc6(m)=turnedOn. Equivalently, for every byte vector s, s occurs in r if and only if there exist such h,m with s=fmt(h,m), and no byte vector occurs twice in r.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_2",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every turnedOn satisfying the precondition, the function returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_3",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every index i with 0 <= i < len(r), the byte vector r[i] has length 4 or 5, contains exactly one colon byte (ASCII 58) at index len(r[i])-3, and every other byte is an ASCII decimal digit (byte value 48 through 57). Thus the two bytes after the colon are the minute field and the one or two bytes before it are the hour field.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_4",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every index i with 0 <= i < len(r), if r[i] is in the required colon format, let h be the nonnegative integer represented by the bytes of r[i] before the colon. Then 0 <= h <= 11, and the hour field is the usual decimal representation of h with no leading zero: h=0 is the single byte '0', for 1 <= h <= 9 the hour field is one digit, and for h=10 or h=11 it is the two bytes '10' or '11'.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_5",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every index i with 0 <= i < len(r), if r[i] is in the required colon format, let m be the nonnegative integer represented by the two bytes after the colon. Then 0 <= m <= 59, the minute field always consists of exactly two decimal digits, and when m < 10 its first digit is '0' (so minute 2 is written as '02', not '2').",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_6",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every index i with 0 <= i < len(r), if h and m are the hour and minute parsed from r[i] as above, then pc4(h)+pc6(m)=turnedOn, where pc4(h) is the number of set bits in the 4-bit representation of h and pc6(m) is the number of set bits in the 6-bit representation of m. Thus every returned time has exactly turnedOn LEDs on.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_7",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every pair of integers h,m with 0 <= h < 12, 0 <= m < 60, and pc4(h)+pc6(m)=turnedOn, there exists an index i with 0 <= i < len(r) such that r[i] is exactly the ASCII byte vector fmt(h,m), where fmt(h,m) is the hour written without leading zero, then ':', then the two-digit minute with a leading zero when m < 10. Thus every possible time with exactly turnedOn LEDs on is present in the result.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_8",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r under this precondition, r has length 1, and r[0] is the four-byte ASCII vector for '0:00' (bytes '0', ':', '0', '0').",
+    "preconditions": "0 <= turnedOn <= 10 and turnedOn = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_9",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r under this precondition, r is empty: len(r)=0.",
+    "preconditions": "0 <= turnedOn <= 10 and (turnedOn = 9 or turnedOn = 10)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_10",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r under this precondition, r has length 8, and its elements are exactly the eight ASCII byte vectors for the times 7:31, 7:47, 7:55, 7:59, 11:31, 11:47, 11:55, and 11:59, in any order.",
+    "preconditions": "0 <= turnedOn <= 10 and turnedOn = 8."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_11",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_t be any result returned by the function for input turnedOn=t, and let r_u be any result returned by the function for input turnedOn=u. Then no byte vector occurs in both r_t and r_u; equivalently, the sets of formatted times for two different LED counts are disjoint.",
+    "preconditions": "0 <= t <= 10, 0 <= u <= 10, and t != u."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_12",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) equals the number of pairs (h,m) with 0 <= h < 12, 0 <= m < 60, and pc4(h)+pc6(m)=turnedOn, where pc4(h) is the number of set bits in the 4-bit representation of h and pc6(m) is the number of set bits in the 6-bit representation of m.",
+    "preconditions": "0 <= turnedOn <= 10."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ReadBinaryWatch.spec_13",
+    "negation": "AegisSpec.ReadBinaryWatch.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is empty: len(r)=0.",
+    "preconditions": "turnedOn = 11 (provided example test; outside the stated LeetCode constraint 0 <= turnedOn <= 10)."
+  }
+]

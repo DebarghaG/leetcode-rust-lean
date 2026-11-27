@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PyramidTransition.spec_1",
+    "negation": "AegisSpec.PyramidTransition.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Let n = len(bottom). Then r = true if and only if there exist byte arrays R_0, R_1, ..., R_{n-1} such that R_0 = bottom, len(R_k) = n-k for every k with 0 <= k < n, and for every k with 0 <= k < n-1 and every i with 0 <= i < n-k-1, there exists p in allowed with p[0]=R_k[i], p[1]=R_k[i+1], and p[2]=R_{k+1}[i]. Equivalently, r = false if and only if no such sequence of rows exists.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PyramidTransition.spec_2",
+    "negation": "AegisSpec.PyramidTransition.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PyramidTransition.spec_3",
+    "negation": "AegisSpec.PyramidTransition.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If there exists an index i with 0 <= i < len(bottom)-1 such that no p in allowed satisfies p[0]=bottom[i] and p[1]=bottom[i+1], then the function returns false.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PyramidTransition.spec_4",
+    "negation": "AegisSpec.PyramidTransition.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let allowed2 be a superset of allowed as sets of triples, satisfying the stated constraints. If pyramid_transition bottom allowed returns true, then pyramid_transition bottom allowed2 returns true.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) and len(allowed2) are between 0 and 216 inclusive; every element of allowed and allowed2 has length 3; every byte in bottom and in every element of allowed and allowed2 is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed and of allowed2 are pairwise distinct; every element of allowed also occurs in allowed2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PyramidTransition.spec_5",
+    "negation": "AegisSpec.PyramidTransition.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any allowed' obtained by reordering the elements of allowed (same length and same multiset of triples), pyramid_transition bottom allowed' returns the same Bool result as pyramid_transition bottom allowed.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct; allowed' is any permutation of the elements of allowed."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PyramidTransition.spec_6",
+    "negation": "AegisSpec.PyramidTransition.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be any bijection of the six ASCII codes 'A'..'F'. Let bottom' be obtained from bottom by replacing every byte b with pi(b), and let allowed' be obtained from allowed by replacing every byte b in every p with pi(b), preserving order. Then pyramid_transition bottom' allowed' returns the same Bool result as pyramid_transition bottom allowed.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct; pi is any bijection from {65,66,67,68,69,70} to itself; bottom' and allowed' are the bytewise pi-images of bottom and allowed."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PyramidTransition.spec_7",
+    "negation": "AegisSpec.PyramidTransition.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns true, there exists a valid pyramid witness R_0,...,R_{n-1} with n=len(bottom), R_0=bottom, len(R_k)=n-k for every k with 0 <= k < n, and for every k with 0 <= k < n-1 and every i with 0 <= i < n-k-1, the triple [R_k[i], R_k[i+1], R_{k+1}[i]] is an allowed pattern. Consequently the witness has exactly n rows and exactly n*(n-1)/2 triangular patterns.",
+    "preconditions": "len(bottom) is between 2 and 6 inclusive; len(allowed) is between 0 and 216 inclusive; every element p of allowed has len(p)=3; every byte in bottom and in every p in allowed is one of the ASCII codes 65,66,67,68,69,70 ('A'..'F'); the elements of allowed are pairwise distinct."
+  }
+]

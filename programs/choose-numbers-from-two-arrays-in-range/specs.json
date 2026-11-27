@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubranges.spec_1",
+    "negation": "AegisSpec.CountSubranges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For each pair (l,r) with 0 <= l <= r < n, let C(l,r) be the number of subsets S of {l,l+1,...,r} such that sum_{i in S} (nums1[i] + nums2[i]) = sum_{i=l}^{r} nums2[i]. Let B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} C(l,r). The function returns a result r, interpreted as an integer, and r = B mod M, i.e. r is the unique integer with 0 <= r < M and r congruent to B modulo M. Equivalently, S is the set of indices where nums1 is chosen and its complement in [l,r] is where nums2 is chosen; two choices on the same range are counted separately.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubranges.spec_2",
+    "negation": "AegisSpec.CountSubranges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums1 and nums2 satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or access out of bounds.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubranges.spec_3",
+    "negation": "AegisSpec.CountSubranges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an allowed input, 0 <= r < M, where M = 1000000007. In particular, the returned I64 value is within its representable range.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubranges.spec_4",
+    "negation": "AegisSpec.CountSubranges.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1, then the function returns r = (if nums1[0] = 0 then 1 else 0) + (if nums2[0] = 0 then 1 else 0).",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubranges.spec_5",
+    "negation": "AegisSpec.CountSubranges.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums1[i] = 0 and nums2[i] = 0 for every i with 0 <= i < n, then the function returns r = (2^(n+2) - 2n - 4) mod M, with M = 1000000007.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubranges.spec_6",
+    "negation": "AegisSpec.CountSubranges.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums2[i] = 0 for every i with 0 <= i < n, then let z(l,r) = #{i : l <= i <= r and nums1[i] = 0} for each range [l,r]. Set B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} 2^(z(l,r)). The function returns r = B mod M, where M = 1000000007.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubranges.spec_7",
+    "negation": "AegisSpec.CountSubranges.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums1[i] = 0 for every i with 0 <= i < n, then let z2(l,r) = #{i : l <= i <= r and nums2[i] = 0}. Set B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} 2^(z2(l,r)). The function returns r = B mod M, where M = 1000000007.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubranges.spec_8",
+    "negation": "AegisSpec.CountSubranges.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every allowed input, let r be the result of count_subranges(nums1, nums2) and let s be the result of count_subranges(nums2, nums1). Both calls return results, and r = s.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubranges.spec_9",
+    "negation": "AegisSpec.CountSubranges.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If n <= 27, then let B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} C(l,r), where C(l,r) is the number of subsets S of {l,l+1,...,r} satisfying sum_{i in S}(nums1[i]+nums2[i]) = sum_{i=l}^{r} nums2[i]. Then B < M = 1000000007, and the function returns r = B (not merely B mod M).",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubranges.spec_10",
+    "negation": "AegisSpec.CountSubranges.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 2, write a0=nums1[0], a1=nums1[1], b0=nums2[0], b1=nums2[1], and for a proposition P let [P] be 1 if P is true and 0 otherwise. Then the function returns r = [a0=0] + [b0=0] + [a1=0] + [b1=0] + [b0=0 and b1=0] + [a0=b1] + [a1=b0] + [a0=0 and a1=0].",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubranges.spec_11",
+    "negation": "AegisSpec.CountSubranges.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exist integers c,d with 0 <= c <= 100 and 0 <= d <= 100 such that nums1[i] = c and nums2[i] = d for every i, then for each m = 1,...,n let C_m = sum_{k=0}^{m} binom(m,k) * [k(c+d) = m d], where binom(m,k) is the binomial coefficient and [P] is 1 if P is true and 0 otherwise. Set B = sum_{m=1}^{n} (n-m+1) C_m. The function returns r = B mod M, where M = 1000000007.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountSubranges.spec_12",
+    "negation": "AegisSpec.CountSubranges.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every allowed input, let B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} C(l,r), where C(l,r) is the number of subsets S of {l,l+1,...,r} satisfying sum_{i in S}(nums1[i]+nums2[i]) = sum_{i=l}^{r} nums2[i]. Then B <= 2^(n+2) - 2n - 4, the total number of (nonempty range, selection) pairs. Consequently the returned value is the residue modulo M of an integer in this range.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountSubranges.spec_13",
+    "negation": "AegisSpec.CountSubranges.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every allowed input, let B = sum_{l=0}^{n-1} sum_{r=l}^{n-1} C(l,r), where C(l,r) is the number of subsets S of {l,l+1,...,r} satisfying sum_{i in S}(nums1[i]+nums2[i]) = sum_{i=l}^{r} nums2[i]. Let Z = #{i : 0 <= i < n and nums1[i]=0} + #{i : 0 <= i < n and nums2[i]=0}. Then B >= Z. The returned value is B mod M, where M = 1000000007.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountSubranges.spec_14",
+    "negation": "AegisSpec.CountSubranges.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every allowed input, let nums1' and nums2' be the reversals of nums1 and nums2, so nums1'[j] = nums1[n-1-j] and nums2'[j] = nums2[n-1-j] for 0 <= j < n. Then both count_subranges(nums1, nums2) and count_subranges(nums1', nums2') return results, and the two results are equal.",
+    "preconditions": "len(nums1) = len(nums2) = n, 1 <= n <= 100, and for every i with 0 <= i < n, 0 <= nums1[i] <= 100 and 0 <= nums2[i] <= 100."
+  }
+]

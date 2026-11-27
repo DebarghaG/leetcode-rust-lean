@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WaysToDistribute.spec_1",
+    "negation": "AegisSpec.WaysToDistribute.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1,000,000,007. Let S(n,k) be the number of partitions of the set {1,2,...,n} into exactly k nonempty, pairwise disjoint, unordered parts whose union is {1,2,...,n}. The function returns a result r such that 0 <= r < M and r ≡ S(n,k) (mod M); equivalently, r is the least nonnegative representative of S(n,k) modulo M.",
+    "preconditions": "n and k are Std.I64 values with 1 <= k <= n <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WaysToDistribute.spec_2",
+    "negation": "AegisSpec.WaysToDistribute.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n,k satisfying the preconditions, the function returns a result and does not fail (no overflow, out-of-bounds, panic, or other failure).",
+    "preconditions": "n and k are Std.I64 values with 1 <= k <= n <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WaysToDistribute.spec_3",
+    "negation": "AegisSpec.WaysToDistribute.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such n,k, if ways_to_distribute(n,k) returns r, ways_to_distribute(n-1,k) returns r1, and ways_to_distribute(n-1,k-1) returns r2, then r ≡ k*r1 + r2 (mod 1,000,000,007).",
+    "preconditions": "n and k are Std.I64 values with 2 <= k < n <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WaysToDistribute.spec_4",
+    "negation": "AegisSpec.WaysToDistribute.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every n satisfying the precondition, if for each j with 1 <= j <= n the call ways_to_distribute(n,j) returns a result r_j, then the sum of r_j over 1 <= j <= n is congruent modulo 1,000,000,007 to B(n), where B(n) is the number of partitions of {1,...,n} into any number (from 1 through n) of nonempty unordered parts.",
+    "preconditions": "n is a Std.I64 value with 1 <= n <= 1000."
+  }
+]

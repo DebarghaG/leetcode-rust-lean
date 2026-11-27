@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_1",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever `is_rectangle_overlap rec1 rec2` returns a result r, r is true if and only if `rec1[0] < rec2[2]` and `rec2[0] < rec1[2]` and `rec1[1] < rec2[3]` and `rec2[1] < rec1[3]`. Equivalently, r is true if and only if the open x-interval `(rec1[0], rec1[2])` overlaps `(rec2[0], rec2[2])` with positive length and the open y-interval `(rec1[1], rec1[3])` overlaps `(rec2[1], rec2[3])` with positive length; touching only at an edge or corner gives r = false.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_2",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call `is_rectangle_overlap rec1 rec2` returns a result (a Bool); it does not fail, panic, or go out of bounds.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_3",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r12 be the result of `is_rectangle_overlap rec1 rec2` and r21 be the result of `is_rectangle_overlap rec2 rec1`. Whenever both calls return results, r12 = r21.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_4",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define length-4 slices rec1' and rec2' by rec1'[0] = rec1[0] + dx, rec1'[1] = rec1[1] + dy, rec1'[2] = rec1[2] + dx, rec1'[3] = rec1[3] + dy, and similarly rec2'[i] = rec2[i] + dx for i = 0,2 and rec2'[i] = rec2[i] + dy for i = 1,3. Whenever `is_rectangle_overlap rec1 rec2` returns r and `is_rectangle_overlap rec1' rec2'` returns r', we have r = r'.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]. Additionally, dx and dy are integers such that all shifted coordinates defined in the statement lie in [-10^9, 10^9]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_5",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define length-4 slices rec1' and rec2' by rec1'[i] = k*rec1[i] and rec2'[i] = k*rec2[i] for i = 0,1,2,3. Whenever `is_rectangle_overlap rec1 rec2` returns r and `is_rectangle_overlap rec1' rec2'` returns r', we have r = r'.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]. Additionally, k is a positive integer such that -10^9 <= k*rec1[i] <= 10^9 and -10^9 <= k*rec2[i] <= 10^9 for every i with 0 <= i < 4."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_6",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define length-4 slices rec1' and rec2' by rec1' = [-rec1[2], rec1[1], -rec1[0], rec1[3]] and rec2' = [-rec2[2], rec2[1], -rec2[0], rec2[3]]. Whenever `is_rectangle_overlap rec1 rec2` returns r and `is_rectangle_overlap rec1' rec2'` returns r', we have r = r'.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_7",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define length-4 slices rec1' and rec2' by rec1' = [rec1[1], rec1[0], rec1[3], rec1[2]] and rec2' = [rec2[1], rec2[0], rec2[3], rec2[2]]. Whenever `is_rectangle_overlap rec1 rec2` returns r and `is_rectangle_overlap rec1' rec2'` returns r', we have r = r'.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_8",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If `rec1[2] <= rec2[0]` or `rec2[2] <= rec1[0]`, then whenever `is_rectangle_overlap rec1 rec2` returns r, r = false.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_9",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If `rec1[3] <= rec2[1]` or `rec2[3] <= rec1[1]`, then whenever `is_rectangle_overlap rec1 rec2` returns r, r = false.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_10",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If either (a) `rec2[0] <= rec1[0]` and `rec1[2] <= rec2[2]` and `rec2[1] <= rec1[1]` and `rec1[3] <= rec2[3]`, or (b) `rec1[0] <= rec2[0]` and `rec2[2] <= rec1[2]` and `rec1[1] <= rec2[1]` and `rec2[3] <= rec1[3]`, then whenever `is_rectangle_overlap rec1 rec2` returns r, r = true.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_11",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of `is_rectangle_overlap rec1 rec2` and let r' be the result of `is_rectangle_overlap rec1 rec2'`. Whenever both calls return results, if r = true then r' = true.",
+    "preconditions": "len(rec1) = 4, len(rec2) = 4, and len(rec2') = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9, -10^9 <= rec2[i] <= 10^9, and -10^9 <= rec2'[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3], rec2'[0] < rec2'[2], rec2'[1] < rec2'[3]; and rec2'[0] <= rec2[0], rec2'[1] <= rec2[1], rec2'[2] >= rec2[2], rec2'[3] >= rec2[3]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_12",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of `is_rectangle_overlap rec1 rec2` and let r' be the result of `is_rectangle_overlap rec1' rec2'`. Whenever both calls return results, if r = false then r' = false.",
+    "preconditions": "len(rec1) = 4, len(rec2) = 4, len(rec1') = 4, and len(rec2') = 4; for every i with 0 <= i < 4, all four coordinate arrays lie in [-10^9, 10^9]; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3], rec1'[0] < rec1'[2], rec1'[1] < rec1'[3], rec2'[0] < rec2'[2], rec2'[1] < rec2'[3]; rec1[0] <= rec1'[0], rec1'[2] <= rec1[2], rec1[1] <= rec1'[1], rec1'[3] <= rec1[3]; and rec2[0] <= rec2'[0], rec2'[2] <= rec2[2], rec2[1] <= rec2'[1], rec2'[3] <= rec2[3]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_13",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If `is_rectangle_overlap rec1 rec2` returns r and r = true, then the four strict inequalities `rec1[0] < rec2[2]`, `rec2[0] < rec1[2]`, `rec1[1] < rec2[3]`, and `rec2[1] < rec1[3]` all hold. Consequently the open intersection rectangle `(max(rec1[0], rec2[0]), min(rec1[2], rec2[2])) × (max(rec1[1], rec2[1]), min(rec1[3], rec2[3]))` is nonempty.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsRectangleOverlap.spec_14",
+    "negation": "AegisSpec.IsRectangleOverlap.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If `is_rectangle_overlap rec1 rec2` returns r and r = false, then at least one of the four separation inequalities holds: `rec1[2] <= rec2[0]`, `rec2[2] <= rec1[0]`, `rec1[3] <= rec2[1]`, or `rec2[3] <= rec1[1]`.",
+    "preconditions": "len(rec1) = 4 and len(rec2) = 4; for every i with 0 <= i < 4, -10^9 <= rec1[i] <= 10^9 and -10^9 <= rec2[i] <= 10^9; rec1[0] < rec1[2], rec1[1] < rec1[3], rec2[0] < rec2[2], rec2[1] < rec2[3]."
+  }
+]

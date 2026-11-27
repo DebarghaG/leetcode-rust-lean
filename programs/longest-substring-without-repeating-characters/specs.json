@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_1",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r equals the greatest length u - l of a contiguous segment s[l..u) such that 0 <= l <= u <= len(s) and the bytes in that segment are pairwise distinct: for every i, j with l <= i < j < u, s[i] != s[j]. Equivalently, r is the length of a repeat-free contiguous substring of s, and no repeat-free contiguous substring of s is longer. The empty segment is allowed, so len(s) = 0 forces r = 0.",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_2",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result of the form Ok r for some i64 r; in particular, it does not fail, panic, or overflow on any input satisfying the precondition.",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_3",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, 0 <= r <= len(s).",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_4",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r = 0.",
+    "preconditions": "len(s) = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_5",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r = 1.",
+    "preconditions": "len(s) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_6",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r >= 1.",
+    "preconditions": "1 <= len(s) <= 50000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_7",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r = len(s).",
+    "preconditions": "0 <= len(s) <= 50000 and for every i, j with 0 <= i < j < len(s), s[i] != s[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_8",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, there exists an index l such that 0 <= l <= len(s), l + r <= len(s), and the segment s[l..l+r) is repeat-free, i.e. for every i, j with l <= i < j < l+r, s[i] != s[j].",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_9",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, for every l, u with 0 <= l <= u <= len(s), if the segment s[l..u) is repeat-free (for every i, j with l <= i < j < u, s[i] != s[j]), then u - l <= r.",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_10",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r is at most the number of distinct byte values occurring in s: r <= |{ s[i] | 0 <= i < len(s) }|.",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_11",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r = 0 if and only if len(s) = 0.",
+    "preconditions": "0 <= len(s) <= 50000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_12",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns Ok r on input s and returns Ok r' on input t, then interpreting r and r' as integers, r = r'.",
+    "preconditions": "0 <= len(s) <= 50000 and 0 <= len(t) <= 50000 and len(t) = len(s) and for every i, j with 0 <= i < len(s) and 0 <= j < len(s), s[i] = s[j] if and only if t[i] = t[j]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LengthOfLongestSubstring.spec_13",
+    "negation": "AegisSpec.LengthOfLongestSubstring.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Ok r, interpreting r as an integer, r < len(s).",
+    "preconditions": "0 <= len(s) <= 50000 and there exist i, j with 0 <= i < j < len(s) and s[i] = s[j]."
+  }
+]

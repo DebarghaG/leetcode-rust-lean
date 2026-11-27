@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BestClosingTime.spec_1",
+    "negation": "AegisSpec.BestClosingTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (i.e., it does not fail) such that 0 <= r <= n, where n = len(customers). Define penalty(j) for integer j with 0 <= j <= n as the number of indices i with 0 <= i < j and customers[i] = 'N' plus the number of indices i with j <= i < n and customers[i] = 'Y'. Then: (1) for every j with 0 <= j <= n, penalty(r) <= penalty(j); and (2) for every j with 0 <= j < r, penalty(j) > penalty(r). In other words, r is the smallest integer in [0, n] that minimizes penalty.",
+    "preconditions": "len(customers) >= 1, len(customers) <= 100000, and for every i with 0 <= i < len(customers), customers[i] is the ASCII byte for 'Y' (89) or 'N' (78)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BestClosingTime.spec_2",
+    "negation": "AegisSpec.BestClosingTime.spec_2_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0.",
+    "preconditions": "len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < len(customers), customers[i] is the ASCII byte for 'Y' (89) or 'N' (78), and for every i with 0 <= i < len(customers), customers[i] = 'N'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BestClosingTime.spec_3",
+    "negation": "AegisSpec.BestClosingTime.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = n.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78), and for every i with 0 <= i < n, customers[i] = 'Y'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BestClosingTime.spec_4",
+    "negation": "AegisSpec.BestClosingTime.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78), and there is exactly one index k with 0 <= k < n such that customers[k] = 'Y', and that index k is 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BestClosingTime.spec_5",
+    "negation": "AegisSpec.BestClosingTime.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= L.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78). Let L be the number of leading 'Y's: L = 0 if customers[0] = 'N', otherwise L is the largest integer with 0 <= L <= n such that for all i with 0 <= i < L, customers[i] = 'Y', and either L = n or customers[L] = 'N'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BestClosingTime.spec_6",
+    "negation": "AegisSpec.BestClosingTime.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r <= M.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78). Let M = max({i+1 : 0 <= i < n and customers[i] = 'Y'} ∪ {0}). Equivalently, M = n - T, where T is the number of trailing 'N's (the largest T with 0 <= T <= n such that for all i with n-T <= i < n, customers[i] = 'N', and either T = n or customers[n-T-1] = 'Y')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BestClosingTime.spec_7",
+    "negation": "AegisSpec.BestClosingTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r > 0.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78). Let totalY be the number of indices i with 0 <= i < n and customers[i] = 'Y', and totalN be the number of indices i with 0 <= i < n and customers[i] = 'N'. Assume totalY > totalN."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BestClosingTime.spec_8",
+    "negation": "AegisSpec.BestClosingTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r < n.",
+    "preconditions": "Let n = len(customers). len(customers) >= 1, len(customers) <= 100000, for every i with 0 <= i < n, customers[i] is the ASCII byte for 'Y' (89) or 'N' (78). Let totalY be the number of indices i with 0 <= i < n and customers[i] = 'Y', and totalN be the number of indices i with 0 <= i < n and customers[i] = 'N'. Assume totalY < totalN."
+  }
+]

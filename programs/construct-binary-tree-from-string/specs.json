@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Str2tree.spec_1",
+    "negation": "AegisSpec.Str2tree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r = ok T where T is the unique tree encoded by s according to the recursive rules: (1) if s is empty, T = Null; (2) if s = n with no parentheses, T = Node(n, Null, Null); (3) if s = n(g1), T = Node(n, T1, Null) where T1 is the tree encoded by g1; (4) if s = n(g1)(g2), T = Node(n, T1, T2) where T1 and T2 are the trees encoded by g1 and g2 respectively. Here n denotes the integer value of the literal.",
+    "preconditions": "s is a byte slice representing a string of ASCII characters from the set {'0'-'9', '-', '(', ')'}. The string is a valid serialization of a binary tree: either s is empty, or s has the form n, n(g1), or n(g1)(g2), where n is an optional '-' followed by one or more decimal digits (the integer value has absolute value at most 2^30), and g1, g2 are themselves valid serializations (possibly empty). The length of s is at most 30000. The parentheses are balanced and the decomposition is unique."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Str2tree.spec_2",
+    "negation": "AegisSpec.Str2tree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (i.e., it does not fail, panic, or overflow) for every valid s.",
+    "preconditions": "Same as spec_1: s is a valid tree string (length ≤ 30000, all numbers have absolute value ≤ 2^30, and s conforms to the grammar in spec_1)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Str2tree.spec_3",
+    "negation": "AegisSpec.Str2tree.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums(s) be the list of integers appearing in s from left to right, where each integer is the maximal substring consisting of an optional '-' followed by one or more decimal digits. Then the preorder traversal (root, then left subtree, then right subtree) of the returned tree T (from r = ok T) yields exactly nums(s).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Str2tree.spec_4",
+    "negation": "AegisSpec.Str2tree.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The number of nodes in the returned tree T (from r = ok T) equals the number of integer literals in s.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Str2tree.spec_5",
+    "negation": "AegisSpec.Str2tree.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Every node value in the returned tree T (from r = ok T) equals the integer value of some integer literal occurring in s. Consequently, its absolute value is at most 2^30 and it fits in the i64 range.",
+    "preconditions": "Same as spec_1: s is a valid serialization of a binary tree, with length at most 30000 and every integer literal having absolute value at most 2^30."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Str2tree.spec_6",
+    "negation": "AegisSpec.Str2tree.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The root value of the returned tree T (from r = ok T) equals the integer value of the longest prefix of s that is an integer literal (an optional '-' followed by one or more decimal digits).",
+    "preconditions": "Same as spec_1 and s is non-empty."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Str2tree.spec_7",
+    "negation": "AegisSpec.Str2tree.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = ok (Node(n, Null, Null)) where n is the integer value of s.",
+    "preconditions": "s is a non-empty valid tree string that contains no '(' or ')' characters."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Str2tree.spec_8",
+    "negation": "AegisSpec.Str2tree.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every maximal integer literal in s that begins with '-', the corresponding node in the returned tree T (from r = ok T) has the integer value of that literal. In particular, if the first integer literal in s has a leading '-' and its value is nonzero, then the root value is negative.",
+    "preconditions": "Same as spec_1: s is a valid serialization of a binary tree, with length at most 30000 and every integer literal having absolute value at most 2^30."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Str2tree.spec_9",
+    "negation": "AegisSpec.Str2tree.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let v be the integer value of n. The function returns r = ok (Node(v, T1, Null)), where T1 is the tree encoded by g (possibly Null when g is empty).",
+    "preconditions": "s is a valid tree string of the form n(g), where n is an integer literal and g is a valid tree string (possibly empty). That is, there is exactly one top-level parenthesized group after the initial integer. The length of s is at most 30000 and every literal has absolute value at most 2^30."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Str2tree.spec_10",
+    "negation": "AegisSpec.Str2tree.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let v be the integer value of n. The function returns r = ok (Node(v, T1, T2)), where T1 is the tree encoded by g1 and T2 is the tree encoded by g2 (each may be Null when the corresponding group is empty).",
+    "preconditions": "s is a valid tree string of the form n(g1)(g2), where n is an integer literal and g1, g2 are valid tree strings (possibly empty). That is, there are exactly two top-level parenthesized groups after the initial integer. The length of s is at most 30000 and every literal has absolute value at most 2^30."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Str2tree.spec_11",
+    "negation": "AegisSpec.Str2tree.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever a parenthesized group in s is empty, the corresponding child subtree in the returned tree T (from r = ok T) is Null. More generally, the empty string encodes the Null tree, so any empty child group yields a Null child.",
+    "preconditions": "Same as spec_1. Additionally, s contains a parenthesized group that is empty, i.e., the substring \"()\" appears as a child group."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Str2tree.spec_12",
+    "negation": "AegisSpec.Str2tree.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every node in the returned tree T (from r = ok T), its left child (if present) corresponds to the first parenthesized group immediately following the node's integer literal in s, and its right child (if present) corresponds to the second parenthesized group. If a group is missing, the corresponding child is Null.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Str2tree.spec_13",
+    "negation": "AegisSpec.Str2tree.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every node in the returned tree T (from r = ok T), the depth of the node (root at depth 0) equals the number of unmatched opening parentheses '(' that appear before the node's integer literal in s. Equivalently, the tree's nesting structure matches the parenthesis nesting in s.",
+    "preconditions": "Same as spec_1."
+  }
+]

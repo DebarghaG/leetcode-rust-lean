@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_1",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "A valid unique split of s is a sequence of indices 0 = i0 < i1 < ... < ik = len(s) with k >= 1 such that the k nonempty contiguous pieces s[i0..i1), s[i1..i2), ..., s[i(k-1)..ik) are pairwise distinct byte strings (two pieces are equal exactly when they have the same length and the same bytes at every corresponding position). The function returns a result r and r is the maximum k for which such a valid unique split of s exists. Equivalently, r is the largest number of pairwise distinct nonempty contiguous substrings into which s can be partitioned, in order, with concatenation exactly s.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_2",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; in particular it does not panic, go out of bounds, or overflow.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_3",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 1 <= r <= len(s).",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_4",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a valid unique split of s into exactly r pieces: there are indices 0 = i0 < i1 < ... < ir = len(s) such that the r nonempty contiguous pieces s[i0..i1), ..., s[i(r-1)..ir) are pairwise distinct.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_5",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, for every valid unique split of s into k pieces (a partition into k pairwise distinct nonempty contiguous substrings whose concatenation is s), k <= r. Thus no partition of s into more than r pairwise distinct nonempty contiguous substrings exists.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_6",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = len(s) if and only if the bytes of s are pairwise distinct: for all i,j with 0 <= i < j < len(s), s[i] != s[j].",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_7",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is the largest integer k with k*(k+1)/2 <= len(s).",
+    "preconditions": "len(s) is between 1 and 16 inclusive, for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122), and for every i with 0 <= i < len(s), s[i] = s[0]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_8",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let revs be the byte string of length len(s) with revs[i] = s[len(s)-1-i] for 0 <= i < len(s). The function returns a result r, and r is also the maximum number of pieces in a valid unique split of revs (a partition into pairwise distinct nonempty contiguous substrings whose concatenation is revs).",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_9",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every injective map f from the set of byte values occurring in s to the lowercase English letter bytes, let t be the byte string with len(t) = len(s) and t[i] = f(s[i]) for 0 <= i < len(s). The function returns a result r for s, and r is also the maximum number of pieces in a valid unique split of t (a partition into pairwise distinct nonempty contiguous substrings whose concatenation is t).",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_10",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s) and let k be the largest integer with k*(k+1)/2 <= n. The function returns a result r and r >= k.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_11",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and the condition r >= 2 holds if and only if either len(s) >= 3, or len(s) = 2 and s[0] != s[1].",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxUniqueSplit.spec_12",
+    "negation": "AegisSpec.MaxUniqueSplit.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d be the number of distinct byte values occurring in s. The function returns a result r and r >= d.",
+    "preconditions": "len(s) is between 1 and 16 inclusive, and for every i with 0 <= i < len(s), s[i] is a lowercase English letter byte (97 <= s[i] <= 122)."
+  }
+]

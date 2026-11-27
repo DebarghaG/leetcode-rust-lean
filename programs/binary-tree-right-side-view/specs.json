@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RightSideView.spec_1",
+    "negation": "AegisSpec.RightSideView.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let H be the set of depths d ≥ 0 for which root has at least one node at depth d (the root, when present, has depth 0; a child of a depth-d node has depth d+1). For nodes at the same depth, order them left-to-right by their root-to-node paths, where at the first differing step a left-child step is before a right-child step. Whenever right_side_view returns a result r, len(r) = |H|, and for every d with 0 ≤ d < len(r), r[d] is the value of the unique node at depth d that is rightmost at that depth, i.e. no node at depth d is to the right of it.",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RightSideView.spec_2",
+    "negation": "AegisSpec.RightSideView.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, right_side_view returns a result r and does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RightSideView.spec_3",
+    "negation": "AegisSpec.RightSideView.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever right_side_view returns a result r, len(r) equals the number of nonnegative depths d at which root has at least one node. Equivalently, if root is Null then len(r) = 0, and if root is not Null then len(r) = 1 + max{d ≥ 0 | root has a node at depth d}, where depth 0 is the root.",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RightSideView.spec_4",
+    "negation": "AegisSpec.RightSideView.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever right_side_view returns a result r, len(r) ≥ 1 and r[0] is the value stored at the root node of root.",
+    "preconditions": "root is not Null, root has at most 100 nodes, and every node value in root satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RightSideView.spec_5",
+    "negation": "AegisSpec.RightSideView.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever right_side_view returns a result r, for every i with 0 ≤ i < len(r), there exists a node n at depth i of root such that the value of n is r[i] and no node at depth i of root is strictly to the right of n. Nodes at the same depth are ordered left-to-right by their root-to-node paths: at the first step where two paths differ, a left-child step is to the left of a right-child step.",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RightSideView.spec_6",
+    "negation": "AegisSpec.RightSideView.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever right_side_view returns a result r, for every i with 0 ≤ i < len(r), -100 ≤ r[i] ≤ 100.",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RightSideView.spec_7",
+    "negation": "AegisSpec.RightSideView.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever right_side_view returns a result r, len(r) is at most the number of Node constructors in root; in particular len(r) ≤ 100.",
+    "preconditions": "root is a Tree with at most 100 Node constructors, and every node value v satisfies -100 ≤ v ≤ 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RightSideView.spec_8",
+    "negation": "AegisSpec.RightSideView.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever right_side_view returns a result r, len(r) ≥ 2, and r[1] = w, the value stored at the root of the right subtree of root.",
+    "preconditions": "root = Node(v, L, Node(w, A, B)) for some value v, value w, and trees L, A, B; all node values are in [-100,100] and root has at most 100 nodes."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RightSideView.spec_9",
+    "negation": "AegisSpec.RightSideView.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever right_side_view returns a result r, len(r) ≥ 2 and r[1] = w, the value stored at the root of the left subtree of root.",
+    "preconditions": "root = Node(v, Node(w, A, B), Null) for some value v, value w, and trees A, B; all node values are in [-100,100] and root has at most 100 nodes."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RightSideView.spec_10",
+    "negation": "AegisSpec.RightSideView.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever right_side_view returns a result r, len(r) equals the number of nodes in root, and for every i with 0 ≤ i < len(r), r[i] is the value of the unique node at depth i in root. Thus r lists the values along the unique root-to-leaf path from top to bottom, and r is empty when root is Null.",
+    "preconditions": "Every node in root has at most one non-Null child (so root is either Null or a single downward path); every node value is in [-100,100]; root has at most 100 nodes."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RightSideView.spec_11",
+    "negation": "AegisSpec.RightSideView.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever right_side_view returns a result r, for every depth d ≥ 1 with d < len(r), consider depth d-1 measured from the root of a subtree. If R has at least one node at depth d-1, then r[d] is the value of the rightmost node at depth d-1 in R, using the same left-to-right path order inside R; otherwise L has at least one node at depth d-1 and r[d] is the value of the rightmost node at depth d-1 in L.",
+    "preconditions": "root = Node(v, L, R) for some value v and trees L, R; every node value is in [-100,100]; root has at most 100 nodes."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RightSideView.spec_12",
+    "negation": "AegisSpec.RightSideView.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let h be the height of the nonempty perfect tree root. Whenever right_side_view returns a result r, len(r) = h+1, and for every d with 0 ≤ d ≤ h, r[d] is the value of the node reached from the root by taking the right child exactly d times.",
+    "preconditions": "root is a nonempty perfect binary tree of height h for some h ≥ 0: root is not Null, every node at depth < h has two non-Null children, every node at depth h is a leaf, and there are no nodes at depth > h. Every node value is in [-100,100], and root has at most 100 nodes."
+  }
+]

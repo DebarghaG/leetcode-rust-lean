@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_1",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if abbr matches word as follows. Decompose abbr left to right into tokens: each lowercase byte (97..122) is a one-byte letter token, and each maximal non-empty contiguous run of digit bytes is one number token whose value n is the decimal value of that run. Start at p = 0 and process the tokens in order. For a letter token c, require p < len(word) and word[p] = c, then set p := p + 1. For a number token whose first byte is d0 and whose value is n, require d0 != 48, n > 0, p + n <= len(word), then set p := p + n. After all tokens are processed, require p = len(word). If all these requirements hold, r = true; otherwise r = false.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous run of bytes in abbr that are between 48 and 57 inclusive, interpreted as a decimal numeral, has value at most 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_2",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail).",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous run of bytes in abbr that are between 48 and 57 inclusive, interpreted as a decimal numeral, has value at most 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_3",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = false.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1; and abbr contains at least one maximal non-empty contiguous run of digit bytes whose first byte is 48."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_4",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if len(word) = len(abbr) and for every i with 0 <= i < len(word), word[i] = abbr[i].",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), 97 <= abbr[i] <= 122; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_5",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let n be the decimal value of abbr, which is its single maximal digit run. Then r = true if and only if abbr[0] != 48 and n = len(word).",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), 48 <= abbr[i] <= 57; and the decimal value of abbr is at most 2^31 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_6",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then len(word) = L + sum_{d in D} value(d), where L is the number of lowercase bytes in abbr, D is the set of all maximal non-empty contiguous digit runs of abbr, and value(d) is the decimal value of d.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_7",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then for every byte c of abbr with 97 <= c <= 122, if p(c) is the number of lowercase bytes of abbr occurring before this c plus the sum of the decimal values of all maximal digit runs of abbr that end before this c, then p(c) < len(word) and word[p(c)] = c.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_8",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if there is a prefix of abbr ending exactly after a token (after a lowercase byte or after a complete maximal digit run) whose expanded length is strictly greater than len(word), then r = false. The expanded length of such a prefix is the number of lowercase bytes in it plus the sum of the decimal values of the complete digit runs in it.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1; and every maximal non-empty contiguous digit run of abbr has first byte not 48."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_9",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for (word, abbr) and r = true, the following holds. Let d be any maximal non-empty contiguous digit run of abbr with decimal value n, and let p be the expanded length of the prefix of abbr that ends just before d (the number of lowercase bytes before d plus the sum of values of digit runs before d). Then for every k with 0 <= k < n and every byte b with 97 <= b <= 122, if word' is obtained from word by replacing word[p+k] with b, then whenever the function returns a result r' for (word', abbr), r' = true.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_10",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1; every maximal non-empty contiguous digit run of abbr has first byte not 48; if L is the number of lowercase bytes in abbr and D is the set of maximal digit runs of abbr, then len(word) = L + sum_{d in D} value(d); and for every lowercase byte c of abbr, p(c) < len(word) and word[p(c)] = c, where p(c) is the number of lowercase bytes of abbr before c plus the sum of the decimal values of all maximal digit runs of abbr that end before c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_11",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = true if and only if either (a) len(abbr) = 1 and abbr[0] = word[0], or (b) abbr is a valid decimal numeral with no leading zero whose value is 1.",
+    "preconditions": "len(word) = 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ValidWordAbbreviation.spec_12",
+    "negation": "AegisSpec.ValidWordAbbreviation.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if the number of lowercase bytes in abbr is strictly greater than len(word), then r = false.",
+    "preconditions": "len(word) >= 1; len(word) <= 20; for every i with 0 <= i < len(word), 97 <= word[i] <= 122; len(abbr) >= 1; len(abbr) <= 10; for every i with 0 <= i < len(abbr), either 97 <= abbr[i] <= 122 or 48 <= abbr[i] <= 57; and every maximal non-empty contiguous digit run in abbr has value at most 2^31 - 1."
+  }
+]

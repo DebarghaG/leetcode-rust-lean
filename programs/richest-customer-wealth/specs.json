@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumWealth.spec_1",
+    "negation": "AegisSpec.MaximumWealth.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let wealth(i) = sum_{j=0}^{len(accounts[i])-1} accounts[i][j] for 0 <= i < len(accounts). Whenever maximum_wealth(accounts) returns a result r, r = max { wealth(i) | 0 <= i < len(accounts) }.",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumWealth.spec_2",
+    "negation": "AegisSpec.MaximumWealth.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every accounts satisfying the preconditions, maximum_wealth(accounts) returns a result r; it does not fail, overflow, or go out of bounds.",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumWealth.spec_3",
+    "negation": "AegisSpec.MaximumWealth.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let wealth(i) = sum_{j=0}^{len(accounts[i])-1} accounts[i][j] for 0 <= i < len(accounts). Whenever maximum_wealth(accounts) returns a result r, for every i with 0 <= i < len(accounts), r >= wealth(i).",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumWealth.spec_4",
+    "negation": "AegisSpec.MaximumWealth.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_wealth(accounts) returns a result r, r <= sum_{i=0}^{len(accounts)-1} sum_{j=0}^{len(accounts[i])-1} accounts[i][j].",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumWealth.spec_5",
+    "negation": "AegisSpec.MaximumWealth.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_wealth(accounts) returns a result r, r <= 100 * max_{0 <= i < len(accounts)} len(accounts[i]).",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumWealth.spec_6",
+    "negation": "AegisSpec.MaximumWealth.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_wealth(accounts) returns a result r, r > 0.",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumWealth.spec_7",
+    "negation": "AegisSpec.MaximumWealth.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let wealth(i) = sum_{j=0}^{len(accounts[i])-1} accounts[i][j] for 0 <= i < len(accounts). Whenever maximum_wealth(accounts) returns a result r, there exists an index i with 0 <= i < len(accounts) such that r = wealth(i).",
+    "preconditions": "1 <= len(accounts) <= 50; for every i with 0 <= i < len(accounts), 1 <= len(accounts[i]) <= 50; for every i and j with 0 <= i < len(accounts) and 0 <= j < len(accounts[i]), 1 <= accounts[i][j] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumWealth.spec_8",
+    "negation": "AegisSpec.MaximumWealth.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If accounts' is a permutation of the rows of accounts, meaning there is a bijection p from {0, ..., len(accounts')-1} to {0, ..., len(accounts)-1} such that accounts'[i] = accounts[p(i)] for every i with 0 <= i < len(accounts'), and maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r = r'.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that 1 <= len(accounts) <= 50, 1 <= len(accounts') <= 50, every row of either list has length between 1 and 50, and every entry of either list is between 1 and 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumWealth.spec_9",
+    "negation": "AegisSpec.MaximumWealth.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If accounts[i][j] <= accounts'[i][j] for every i with 0 <= i < len(accounts) and every j with 0 <= j < len(accounts[i]), and maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r <= r'.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that 1 <= len(accounts) = len(accounts') <= 50, for every i with 0 <= i < len(accounts), len(accounts[i]) = len(accounts'[i]) and 1 <= len(accounts[i]) <= 50, and every entry of either list is between 1 and 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumWealth.spec_10",
+    "negation": "AegisSpec.MaximumWealth.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If accounts' is obtained from accounts by appending one additional row that equals some existing row of accounts, meaning len(accounts') = len(accounts) + 1 and there exists k with 0 <= k < len(accounts) such that accounts'[len(accounts)] = accounts[k] and accounts'[i] = accounts[i] for every i with 0 <= i < len(accounts), and maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r = r'.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that 1 <= len(accounts) <= 50, 1 <= len(accounts') <= 50, every row of either list has length between 1 and 50, and every entry of either list is between 1 and 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumWealth.spec_11",
+    "negation": "AegisSpec.MaximumWealth.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let wealth(i) = sum_{j=0}^{len(accounts[i])-1} accounts[i][j] and wealth'(i) = sum_{j=0}^{len(accounts'[i])-1} accounts'[i][j]. If wealth(i) = wealth'(i) for every i with 0 <= i < len(accounts), and maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r = r'.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that 1 <= len(accounts) = len(accounts') <= 50, every row of either list has length between 1 and 50, every entry of either list is between 1 and 100, and for every i with 0 <= i < len(accounts), sum_{j=0}^{len(accounts[i])-1} accounts[i][j] = sum_{j=0}^{len(accounts'[i])-1} accounts'[i][j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumWealth.spec_12",
+    "negation": "AegisSpec.MaximumWealth.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r' >= r.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that accounts' is obtained from accounts by appending one extra row: 1 <= len(accounts) <= 49, len(accounts') = len(accounts) + 1, accounts'[i] = accounts[i] for every i with 0 <= i < len(accounts), every row of either list has length between 1 and 50, and every entry of either list is between 1 and 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumWealth.spec_13",
+    "negation": "AegisSpec.MaximumWealth.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If maximum_wealth(accounts) returns r and maximum_wealth(accounts') returns r', then r = r'.",
+    "preconditions": "For every pair of account lists accounts and accounts' such that accounts' is obtained from accounts by appending one extra row w = accounts'[len(accounts)]: 1 <= len(accounts) <= 49, len(accounts') = len(accounts) + 1, accounts'[i] = accounts[i] for every i with 0 <= i < len(accounts), every row of either list has length between 1 and 50, every entry of either list is between 1 and 100, and sum_{j=0}^{len(w)-1} w[j] <= max_{0 <= i < len(accounts)} sum_{j=0}^{len(accounts[i])-1} accounts[i][j]."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetOrder.spec_1",
+    "negation": "AegisSpec.GetOrder.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let r be the returned vector. Define a sequence o and times t_k as follows. Set t_0 = 0. For k = 0,1,...,n-1, let R_k be the set of labels i with 0 <= i < n that do not occur among o[0],...,o[k-1]. Let a_k = t_k if there exists i in R_k with e_i <= t_k; otherwise let a_k = min_{i in R_k} e_i. Let o[k] be the unique i in R_k with e_i <= a_k such that for every j in R_k with e_j <= a_k, either p_i < p_j, or p_i = p_j and i <= j. Set t_{k+1} = a_k + p_{o[k]}. Then len(r) = n and r[k] = o[k] for every k with 0 <= k < n. Thus r is exactly the order in which the CPU processes the tasks, including idle jumps to the next enqueue time when no remaining task is available.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetOrder.spec_2",
+    "negation": "AegisSpec.GetOrder.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: no panic, no out-of-bounds access, and no arithmetic overflow occurs.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetOrder.spec_3",
+    "negation": "AegisSpec.GetOrder.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = n.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetOrder.spec_4",
+    "negation": "AegisSpec.GetOrder.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k < len(r), 0 <= r[k] < n.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetOrder.spec_5",
+    "negation": "AegisSpec.GetOrder.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the entries of r are pairwise distinct: for all k,l with 0 <= k < len(r) and 0 <= l < len(r), if r[k] = r[l], then k = l.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetOrder.spec_6",
+    "negation": "AegisSpec.GetOrder.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every label from 0 to n-1 occurs in r: for every i with 0 <= i < n, there exists k with 0 <= k < len(r) and r[k] = i.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetOrder.spec_7",
+    "negation": "AegisSpec.GetOrder.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r that is a permutation of 0..n-1, define s_0 = min_{0<=i<n} e_i and, for 0 <= k < n-1, s_{k+1} = max(s_k + p_{r[k]}, e_{r[k+1]}). Then for every k with 0 <= k < n, s_k >= e_{r[k]}. In particular, s_0 = e_{r[0]} = min_i e_i, so the first processed task has the minimum enqueue time.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetOrder.spec_8",
+    "negation": "AegisSpec.GetOrder.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r that is a permutation of 0..n-1, define s_0 = min_i e_i and s_{k+1} = max(s_k + p_{r[k]}, e_{r[k+1]}) for 0 <= k < n-1. For 0 <= k <= n let R_k = {i | 0 <= i < n and i does not occur among r[0],...,r[k-1]}. Then for every k with 0 <= k < n, r[k] is in R_k, e_{r[k]} <= s_k, and for every j in R_k with e_j <= s_k, either p_{r[k]} < p_j, or p_{r[k]} = p_j and r[k] <= j.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetOrder.spec_9",
+    "negation": "AegisSpec.GetOrder.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r that is a permutation of 0..n-1, define s_0 = min_i e_i, f_k = s_k + p_{r[k]}, and s_{k+1} = max(f_k, e_{r[k+1]}) for 0 <= k < n-1. For 0 <= k < n let R_{k+1} = {i | 0 <= i < n and i does not occur among r[0],...,r[k]}. Then for every k with 0 <= k < n-1: if there exists j in R_{k+1} with e_j <= f_k, then s_{k+1} = f_k; if no j in R_{k+1} has e_j <= f_k, then s_{k+1} = e_{r[k+1]} and e_{r[k+1]} > f_k.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetOrder.spec_10",
+    "negation": "AegisSpec.GetOrder.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for any two distinct labels i,j with 0 <= i,j < n, if e_i <= e_j and (p_i < p_j or (p_i = p_j and i < j)), then i occurs before j in r: there exist u,v with 0 <= u < v < len(r), r[u] = i, and r[v] = j.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetOrder.spec_11",
+    "negation": "AegisSpec.GetOrder.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for any two distinct labels i,j with 0 <= i,j < n, if i occurs before j in r and e_i > e_j, then p_i < p_j or (p_i = p_j and i < j).",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetOrder.spec_12",
+    "negation": "AegisSpec.GetOrder.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r that is a permutation of 0..n-1, define s_0 = min_i e_i and s_{k+1} = max(s_k + p_{r[k]}, e_{r[k+1]}) for 0 <= k < n-1. For any two distinct labels i,j with 0 <= i,j < n, if e_i > e_j and (p_i < p_j or (p_i = p_j and i < j)), and if j occurs before i in r, then the start time of j is strictly less than e_i: if r[v] = j, then s_v < e_i.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetOrder.spec_13",
+    "negation": "AegisSpec.GetOrder.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r with r[k] = k for every k with 0 <= k < n; that is, r = [0,1,...,n-1].",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n. Additionally assume e_0 <= e_1 <= ... <= e_{n-1} and p_0 <= p_1 <= ... <= p_{n-1}."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GetOrder.spec_14",
+    "negation": "AegisSpec.GetOrder.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let tasks' be the input array with tasks'[i][0] = e_i + c and tasks'[i][1] = p_i for all i. Then get_order(tasks') = get_order(tasks): adding the same constant c to every enqueue time leaves the returned processing order unchanged.",
+    "preconditions": "Let n = len(tasks). For every i with 0 <= i < n, len(tasks[i]) = 2; write e_i = tasks[i][0] and p_i = tasks[i][1]. Assume 1 <= n <= 100000 and 1 <= e_i, p_i <= 1000000000 for every i with 0 <= i < n. Let c be an integer with c >= 0 and (max_{0<=i<n} e_i) + c <= 1000000000."
+  }
+]

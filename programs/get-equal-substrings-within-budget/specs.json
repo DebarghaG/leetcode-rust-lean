@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EqualSubstring.spec_1",
+    "negation": "AegisSpec.EqualSubstring.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n=len(s). For 0<=i<n define c(i)=|ascii(s[i])-ascii(t[i])|, and for 0<=a<=b<=n define C(a,b)=sum_{i=a}^{b-1} c(i), with C(a,a)=0. The function returns a result r such that r is the greatest integer k with 0<=k<=n for which there exists an integer a with 0<=a<=n-k and C(a,a+k)<=maxCost. Equivalently, r is the maximum length of a contiguous substring of s whose total cost to become the corresponding substring of t is at most maxCost; if no positive length is affordable, r=0 (the empty substring has cost 0).",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EqualSubstring.spec_2",
+    "negation": "AegisSpec.EqualSubstring.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EqualSubstring.spec_3",
+    "negation": "AegisSpec.EqualSubstring.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s).",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EqualSubstring.spec_4",
+    "negation": "AegisSpec.EqualSubstring.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n=len(s). The returned value r equals the length of the longest contiguous block of indices i for which s[i]=t[i]; explicitly, r is the greatest integer k with 0<=k<=n such that there exists an integer a with 0<=a<=n-k and s[i]=t[i] for every i satisfying a<=i<a+k.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; maxCost=0; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EqualSubstring.spec_5",
+    "negation": "AegisSpec.EqualSubstring.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = len(s).",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122); for every i with 0<=i<len(s), s[i]=t[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EqualSubstring.spec_6",
+    "negation": "AegisSpec.EqualSubstring.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r=0 if and only if for every i with 0<=i<len(s), |ascii(s[i])-ascii(t[i])| > maxCost.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EqualSubstring.spec_7",
+    "negation": "AegisSpec.EqualSubstring.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n=len(s) and let C = sum_{i=0}^{n-1} |ascii(s[i])-ascii(t[i])|. The function returns a result r, and r=n if and only if C <= maxCost.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EqualSubstring.spec_8",
+    "negation": "AegisSpec.EqualSubstring.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c = |ascii(s[0])-ascii(t[0])|. The function returns r=1 if c<=maxCost, and returns r=0 otherwise.",
+    "preconditions": "len(t)=len(s); len(s)=1; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EqualSubstring.spec_9",
+    "negation": "AegisSpec.EqualSubstring.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r>0, there exists an integer a such that 0<=a<=len(s)-r and sum_{i=a}^{a+r-1} |ascii(s[i])-ascii(t[i])| <= maxCost.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EqualSubstring.spec_10",
+    "negation": "AegisSpec.EqualSubstring.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer k with r<k<=len(s) and every integer a with 0<=a<=len(s)-k, we have sum_{i=a}^{a+k-1} |ascii(s[i])-ascii(t[i])| > maxCost.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EqualSubstring.spec_11",
+    "negation": "AegisSpec.EqualSubstring.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any valid inputs s,t,maxCost, let r be the result returned by equal_substring(s,t,maxCost) and let r' be the result returned by equal_substring(t,s,maxCost). Both calls return results and r=r'.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; 0<=maxCost<=10^6; every byte of s and t is an ASCII lowercase letter (code in 97..122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.EqualSubstring.spec_12",
+    "negation": "AegisSpec.EqualSubstring.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result returned by equal_substring(s,t,m1) and let r2 be the result returned by equal_substring(s,t,m2). Both calls return results and r1<=r2.",
+    "preconditions": "len(t)=len(s); 1<=len(s)<=10^5; every byte of s and t is an ASCII lowercase letter (code in 97..122); 0<=m1<=m2<=10^6."
+  }
+]

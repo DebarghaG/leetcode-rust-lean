@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_1",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, len(out) = m and for every i with 0 <= i < m the following holds. Let ones(s) = #{j | 0 <= j < n and s[j] = 49}. Call a pair (a,b) an i-trade-block if l_i < a <= b < r_i, s[j] = 49 for every j with a <= j <= b, s[a-1] = 48, and s[b+1] = 48. For an i-trade-block (a,b), let L_i(a,b) = max { L >= 0 | a - L >= l_i and s[a-h] = 48 for every h with 1 <= h <= L } and R_i(a,b) = max { R >= 0 | b + R <= r_i and s[b+h] = 48 for every h with 1 <= h <= R }. Let G_i = max( {0} union { L_i(a,b) + R_i(a,b) | (a,b) is an i-trade-block } ). Then out[i] = ones(s) + G_i.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_2",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function max_active_sections_after_trade(s, queries) returns a result out. Under these preconditions it does not fail due to integer overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_3",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for every i with 0 <= i < m, out[i] >= ones(s), where ones(s) = #{j | 0 <= j < n and s[j] = 49}.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_4",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for every i with 0 <= i < m, out[i] <= ones(s) + z_i, where ones(s) = #{j | 0 <= j < n and s[j] = 49} and z_i = #{j | l_i <= j <= r_i and s[j] = 48}.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_5",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for every i with 0 <= i < m, if there is no pair (a,b) such that l_i < a <= b < r_i, s[j] = 49 for all j with a <= j <= b, s[a-1] = 48, and s[b+1] = 48, then out[i] = ones(s), where ones(s) = #{j | 0 <= j < n and s[j] = 49}.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_6",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for every i with 0 <= i < m and every pair (a,b) satisfying l_i < a <= b < r_i, s[j] = 49 for all j with a <= j <= b, s[a-1] = 48, and s[b+1] = 48, we have out[i] >= ones(s) + L + R, where ones(s) = #{j | 0 <= j < n and s[j] = 49}, L = max { L0 >= 0 | a - L0 >= l_i and s[a-h] = 48 for every h with 1 <= h <= L0 }, and R = max { R0 >= 0 | b + R0 <= r_i and s[b+h] = 48 for every h with 1 <= h <= R0 }.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_7",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for every i with 0 <= i < m, either out[i] = ones(s), or there exists an i-trade-block (a,b) such that out[i] = ones(s) + L_i(a,b) + R_i(a,b). Here ones(s) = #{j | 0 <= j < n and s[j] = 49}; an i-trade-block is a pair (a,b) with l_i < a <= b < r_i, s[j] = 49 for all a <= j <= b, s[a-1] = 48, and s[b+1] = 48; L_i(a,b) = max { L >= 0 | a - L >= l_i and s[a-h] = 48 for all 1 <= h <= L }; and R_i(a,b) = max { R >= 0 | b + R <= r_i and s[b+h] = 48 for all 1 <= h <= R }.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_8",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns a result out, for all i and k with 0 <= i < m and 0 <= k < m, if l_i <= l_k and r_k <= r_i, then out[i] >= out[k].",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxActiveSectionsAfterTrade.spec_9",
+    "negation": "AegisSpec.MaxActiveSectionsAfterTrade.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_active_sections_after_trade(s, queries) returns out and max_active_sections_after_trade(s, queries2) returns out2, if queries2 is a permutation of queries, i.e. there exists a bijection pi on {0,...,m-1} such that queries2[i] = queries[pi(i)] for every i, then len(out2) = m and out2[i] = out[pi(i)] for every i with 0 <= i < m.",
+    "preconditions": "Let n = len(s) and m = len(queries). Assume 1 <= n <= 100000. For every j with 0 <= j < n, s[j] is the ASCII byte for '0' (48) or '1' (49). Assume 1 <= m <= 100000. For every i with 0 <= i < m, len(queries[i]) = 2; write l_i = queries[i][0] and r_i = queries[i][1] as integers, and assume 0 <= l_i <= r_i < n. Let queries2 be another Slice of Vec I64 with len(queries2) = m, and assume every queries2[i] has length 2 with entries between 0 and n-1 and first entry <= second entry."
+  }
+]

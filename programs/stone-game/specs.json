@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGame.spec_1",
+    "negation": "AegisSpec.StoneGame.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns Result.ok true. Let n = len(piles). For 0 <= l <= r < n, define D(l, r) by: D(l, r) = 0 if l > r; D(l, r) = piles[l] if l = r; and D(l, r) = max(piles[l] - D(l+1, r), piles[r] - D(l, r-1)) if l < r. Then D(0, n-1) is the final score difference (Alice minus Bob) under optimal play, and D(0, n-1) > 0; hence Alice ends with strictly more stones than Bob, so the returned Boolean true is correct.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGame.spec_2",
+    "negation": "AegisSpec.StoneGame.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail on the input: there exists a Boolean b such that the result is Result.ok b. In particular, no panic, out-of-bounds access, or 64-bit arithmetic overflow occurs.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGame.spec_3",
+    "negation": "AegisSpec.StoneGame.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns Result.ok true, Alice has a winning strategy from the initial row: there exists a rule selecting one of the two end piles on each of Alice's turns such that, for every legal sequence of Bob's choices, Alice's final stone total is strictly greater than Bob's.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGame.spec_4",
+    "negation": "AegisSpec.StoneGame.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Result.ok true, at least one of Alice's two possible first moves is winning: either taking piles[0] gives final score difference piles[0] - D(1, n-1) > 0, or taking piles[n-1] gives final score difference piles[n-1] - D(0, n-2) > 0, where D(l, r) is the optimal current-player score difference from the interval piles[l..r] and D(l, r) = 0 when l > r.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StoneGame.spec_5",
+    "negation": "AegisSpec.StoneGame.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let S = sum_{i=0}^{n-1} piles[i], E = sum of piles[i] over even i with 0 <= i < n, and O = sum of piles[i] over odd i with 0 <= i < n. Whenever the function returns Result.ok true, Alice has a strategy that can collect exactly all even-indexed piles or exactly all odd-indexed piles; since S is odd, one of E and O is strictly greater than S/2, so choosing that parity class is a winning strategy for Alice.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StoneGame.spec_6",
+    "negation": "AegisSpec.StoneGame.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n = len(piles) with rev[i] = piles[n-1-i] for 0 <= i < n. If the function returns Result.ok b on piles and Result.ok b' on rev, then b = b'. Thus the Boolean answer is invariant under reversing the row.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StoneGame.spec_7",
+    "negation": "AegisSpec.StoneGame.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q be defined by q[i] = piles[i] + c for 0 <= i < n. If the function returns Result.ok b on piles and Result.ok b' on q, then b = b'. Thus adding the same integer to every pile, while keeping all piles in [1, 500], does not change the winner.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd; c is an integer such that 1 <= piles[i] + c <= 500 for every i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StoneGame.spec_8",
+    "negation": "AegisSpec.StoneGame.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q be defined by q[i] = k*piles[i] for 0 <= i < n. If the function returns Result.ok b on piles and Result.ok b' on q, then b = b'. Thus multiplying every pile by the same positive odd factor, while keeping all piles in [1, 500], does not change the winner.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd; k is a positive odd integer such that 1 <= k*piles[i] <= 500 for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StoneGame.spec_9",
+    "negation": "AegisSpec.StoneGame.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Result.ok true, let A be Alice's final stone total under optimal play and S = sum(piles). Then S/2 < A <= S. Equivalently, the optimal score difference D = 2*A - S satisfies 0 < D <= S.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StoneGame.spec_10",
+    "negation": "AegisSpec.StoneGame.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Result.ok true, Bob has no winning strategy: there is no rule for Bob's choices such that, against every legal Alice strategy, Bob's final stone total is strictly greater than Alice's.",
+    "preconditions": "len(piles) is even; 2 <= len(piles) <= 500; for every i with 0 <= i < len(piles), 1 <= piles[i] <= 500; the sum S = sum_{i=0}^{len(piles)-1} piles[i] is odd."
+  }
+]

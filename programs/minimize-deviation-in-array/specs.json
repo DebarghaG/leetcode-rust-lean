@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDeviation.spec_1",
+    "negation": "AegisSpec.MinimumDeviation.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = min { (max_{0 <= i < n} y_i) - (min_{0 <= i < n} y_i) | y_0,...,y_{n-1} are positive integers and Reach(nums[i], y_i) for every i }, where Reach(x,y) is defined as follows. Write x = m * 2^k with m odd and k >= 0, and put e = max(k,1). Then Reach(x,y) holds exactly when y = m * 2^j for some integer j with 0 <= j <= e.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDeviation.spec_2",
+    "negation": "AegisSpec.MinimumDeviation.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r on every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDeviation.spec_3",
+    "negation": "AegisSpec.MinimumDeviation.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDeviation.spec_4",
+    "negation": "AegisSpec.MinimumDeviation.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (max_{0 <= i < n} nums[i]) - (min_{0 <= i < n} nums[i]).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDeviation.spec_5",
+    "negation": "AegisSpec.MinimumDeviation.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For a positive integer x, let oddpart(x) be x divided by the largest power of 2 dividing x. Whenever the function returns a result r, r <= (max_{0 <= i < n} oddpart(nums[i])) - (min_{0 <= i < n} oddpart(nums[i])).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDeviation.spec_6",
+    "negation": "AegisSpec.MinimumDeviation.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For each i, let m_i = oddpart(nums[i]) and let E_i = max(v2(nums[i]), 1), where v2(x) is the exponent of 2 in the factorization of x. Define L_i = m_i and U_i = m_i * 2^{E_i}. Whenever the function returns a result r, r >= (max_{0 <= i < n} L_i) - (min_{0 <= i < n} U_i).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDeviation.spec_7",
+    "negation": "AegisSpec.MinimumDeviation.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of indices i,j with 0 <= i < j < n, let delta(i,j) = min { |a-b| : a is reachable from nums[i] and b is reachable from nums[j] }. Here a is reachable from x exactly when, writing x = m * 2^k with m odd, a = m * 2^t for some integer t with 0 <= t <= max(k,1). Whenever the function returns a result r, r >= delta(i,j).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDeviation.spec_8",
+    "negation": "AegisSpec.MinimumDeviation.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist positive integers y_0,...,y_{n-1} such that Reach(nums[i], y_i) for every i and (max_{0 <= i < n} y_i) - (min_{0 <= i < n} y_i) = r. Here Reach(x,y) means: if x = m * 2^k with m odd, then y = m * 2^j for some integer j with 0 <= j <= max(k,1).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDeviation.spec_9",
+    "negation": "AegisSpec.MinimumDeviation.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every choice of positive integers y_0,...,y_{n-1} such that Reach(nums[i], y_i) for every i, one has r <= (max_{0 <= i < n} y_i) - (min_{0 <= i < n} y_i). Here Reach(x,y) means: if x = m * 2^k with m odd, then y = m * 2^j for some integer j with 0 <= j <= max(k,1).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDeviation.spec_10",
+    "negation": "AegisSpec.MinimumDeviation.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For a positive integer x, let oddpart(x) be x divided by the largest power of 2 dividing x. Whenever the function returns a result r, r = 0 if and only if oddpart(nums[i]) = oddpart(nums[j]) for every pair of indices i,j with 0 <= i < n and 0 <= j < n.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumDeviation.spec_11",
+    "negation": "AegisSpec.MinimumDeviation.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of integers A and B with A <= B, if for every i with 0 <= i < n there exists a positive integer y_i reachable from nums[i] with A <= y_i <= B, then r <= B - A. Here reachable is as follows: if x = m * 2^k with m odd, the reachable values from x are m * 2^j for 0 <= j <= max(k,1).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumDeviation.spec_12",
+    "negation": "AegisSpec.MinimumDeviation.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 2 <= k <= n, define D_k as the minimum, over all choices of positive integers y_0,...,y_{k-1} such that y_i is reachable from nums[i] for each 0 <= i < k, of (max_{0 <= i < k} y_i) - (min_{0 <= i < k} y_i). Here reachable is as follows: if nums[i] = m * 2^t with m odd, the reachable values from nums[i] are m * 2^j for 0 <= j <= max(t,1). Then r >= D_k.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumDeviation.spec_13",
+    "negation": "AegisSpec.MinimumDeviation.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nonempty subset I of {0,...,n-1}, let D_I be the minimum, over all choices of positive integers y_i with Reach(nums[i], y_i) for each i in I, of (max_{i in I} y_i) - (min_{i in I} y_i), where Reach(x,y) means: if x = m * 2^k with m odd, then y = m * 2^j for some integer j with 0 <= j <= max(k,1). Whenever the function returns a result r, r >= D_I.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumDeviation.spec_14",
+    "negation": "AegisSpec.MinimumDeviation.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = min { B - A | A and B are integers with A <= B and, for every i with 0 <= i < n, there exists a positive integer y_i reachable from nums[i] with A <= y_i <= B }. Here y is reachable from x exactly when, writing x = m * 2^k with m odd, y = m * 2^j for some integer j with 0 <= j <= max(k,1).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 50000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  }
+]

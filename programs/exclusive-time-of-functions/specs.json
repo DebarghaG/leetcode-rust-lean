@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ExclusiveTime.spec_1",
+    "negation": "AegisSpec.ExclusiveTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever exclusive_time(n, logs) returns a result r, len(r) = n (n viewed as a natural number), and for every i with 0 <= i < n, r[i] = E_i, where E_i is the exclusive time of function i: the number of integer time units t for which function i is the current function (top of the call stack) during unit t when the logs are processed in order. Processing a start event at timestamp t pushes its call before unit t is counted, so that call is current for unit t; processing an end event at timestamp t counts unit t for the call being ended and then pops it; a call with start s and matching end e is active on the integer units s, s+1, ..., e inclusive, and while a nested call is active on its inclusive interval its parent is not current.",
+    "preconditions": "n is an integer with 1 <= n <= 100 (viewed as a natural number), and logs is a list of L byte strings with 1 <= L <= 500. Each string has the format '<function_id>:<start|end>:<timestamp>' in ASCII, where <function_id> and <timestamp> are decimal numerals, 0 <= function_id < n, and 0 <= timestamp <= 1000000000. The logs are in chronological order: timestamps are nondecreasing; for equal timestamps, every 'start' event at that timestamp precedes every 'end' event at that timestamp, so a start and an end with the same timestamp can only be the start and matching end of the same call. No two start events have the same timestamp and no two end events have the same timestamp. Processing the events in this order with a stack (push on start, pop on end) is valid: no pop occurs on an empty stack, every end names the function currently on top, the stack is empty after the last log, and every start has a matching later end in the list, so calls are properly nested."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ExclusiveTime.spec_2",
+    "negation": "AegisSpec.ExclusiveTime.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every i with 0 <= i < n, 0 <= r[i] <= 1000000001.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ExclusiveTime.spec_3",
+    "negation": "AegisSpec.ExclusiveTime.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever exclusive_time(n, logs) returns r, the sum sum_{i=0}^{n-1} r[i] equals the number of integer time units t during the execution described by logs for which the call stack is nonempty; equivalently, it equals the total number of time units covered by all top-level calls (calls with no parent call).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ExclusiveTime.spec_4",
+    "negation": "AegisSpec.ExclusiveTime.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every i with 0 <= i < n, r[i] = 0 if and only if no log entry in logs has function_id i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ExclusiveTime.spec_5",
+    "negation": "AegisSpec.ExclusiveTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every i with 0 <= i < n, r[i] is at least the number of start logs in logs whose function_id is i (that is, at least the number of calls of function i).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ExclusiveTime.spec_6",
+    "negation": "AegisSpec.ExclusiveTime.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every i with 0 <= i < n, r[i] is at most the sum over all calls c of function i of (e(c) - s(c) + 1), where s(c) and e(c) are the start and matching end timestamps of that call.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ExclusiveTime.spec_7",
+    "negation": "AegisSpec.ExclusiveTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every log entry in logs has the same function_id f, then whenever exclusive_time(n, logs) returns r, r[f] equals the sum over all top-level calls of f of (e(c) - s(c) + 1), and r[j] = 0 for every j with 0 <= j < n and j != f.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ExclusiveTime.spec_8",
+    "negation": "AegisSpec.ExclusiveTime.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the call stack never contains more than one call at a time (equivalently, every start is matched by an end before any other start occurs), then whenever exclusive_time(n, logs) returns r, for every i with 0 <= i < n, r[i] equals the sum over all calls of function i of (e(c) - s(c) + 1), where s(c) and e(c) are the call's start and matching end timestamps.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ExclusiveTime.spec_9",
+    "negation": "AegisSpec.ExclusiveTime.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of {0,...,n-1}, let logs_pi be obtained from logs by replacing the function_id x in every log entry by pi(x). Whenever exclusive_time(n, logs) returns r and exclusive_time(n, logs_pi) returns r_pi, for every i with 0 <= i < n, r_pi[pi(i)] = r[i].",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ExclusiveTime.spec_10",
+    "negation": "AegisSpec.ExclusiveTime.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that adding c to every timestamp in logs leaves all timestamps in [0, 1000000000], let logs_c be the resulting log list. Whenever exclusive_time(n, logs) returns r and exclusive_time(n, logs_c) returns r_c, for every i with 0 <= i < n, r_c[i] = r[i].",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ExclusiveTime.spec_11",
+    "negation": "AegisSpec.ExclusiveTime.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, exclusive_time(n, logs) returns a result r; in particular it does not fail, panic, or overflow.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ExclusiveTime.spec_12",
+    "negation": "AegisSpec.ExclusiveTime.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every function i let C_i be the set of calls of i (start logs for i paired with their matching end logs by the stack). For each c in C_i let s(c) and e(c) be its start and end timestamps, and let w(c) be the number of integer timestamps t with s(c) <= t <= e(c) at which the currently executing call (the call object on top of the stack) is c. Then r[i] = sum_{c in C_i} w(c), and for every c in C_i, 1 <= w(c) <= e(c) - s(c) + 1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ExclusiveTime.spec_13",
+    "negation": "AegisSpec.ExclusiveTime.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever exclusive_time(n, logs) returns r, if min_t and max_t are respectively the minimum and maximum timestamps appearing in logs, then for every i with 0 <= i < n, r[i] <= max_t - min_t + 1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ExclusiveTime.spec_14",
+    "negation": "AegisSpec.ExclusiveTime.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever exclusive_time(n, logs) returns r, for every call c of a function i with start s(c), matching end e(c), and immediate child calls c_1,...,c_k (the calls whose start logs lie between c's start and end and whose parent call is c), the exclusive contribution of c is (e(c)-s(c)+1) - sum_{j=1}^k (e(c_j)-s(c_j)+1); consequently r[i] is the sum of these contributions over all calls c of i.",
+    "preconditions": "Same as spec_1."
+  }
+]

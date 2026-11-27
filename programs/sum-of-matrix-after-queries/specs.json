@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_1",
+    "negation": "AegisSpec.MatrixSumQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result res and res = sum_{r=0}^{n-1} sum_{c=0}^{n-1} final(r,c), where for each cell (r,c), final(r,c) is defined as follows. Let a_r be the largest index i with 0 <= i < len(queries) such that t_i = 0 and idx_i = r, or -1 if no such i exists. Let b_c be the largest index i with 0 <= i < len(queries) such that t_i = 1 and idx_i = c, or -1 if no such i exists. If a_r = -1 and b_c = -1, then final(r,c) = 0. Otherwise final(r,c) = v_{max(a_r, b_c)}.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_2",
+    "negation": "AegisSpec.MatrixSumQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result res (it does not fail, overflow, or panic).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_3",
+    "negation": "AegisSpec.MatrixSumQueries.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res >= 0.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_4",
+    "negation": "AegisSpec.MatrixSumQueries.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res <= n * n * M, where M = max_{0 <= i < len(queries)} v_i (the maximum value appearing in any query).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_5",
+    "negation": "AegisSpec.MatrixSumQueries.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = v_{len(queries)-1} (the val of the last query).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4 and n = 1. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_6",
+    "negation": "AegisSpec.MatrixSumQueries.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = n * v_0.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) = 1. For i=0, writing queries[0] = [t_0, idx_0, v_0], we have t_0 ∈ {0,1}, 0 <= idx_0 < n, and 0 <= v_0 <= 10^5. All values are i64."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_7",
+    "negation": "AegisSpec.MatrixSumQueries.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result res and res >= n * v_{len(queries)-1}.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_8",
+    "negation": "AegisSpec.MatrixSumQueries.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let S = { i | 0 <= i < len(queries) and for all j with i < j < len(queries), it is not the case that (t_j = t_i and idx_j = idx_i) }. Let Q' be the subsequence of queries consisting of queries[i] for i in S, in increasing order of i. Then matrix_sum_queries(n, queries) = matrix_sum_queries(n, Q').",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_9",
+    "negation": "AegisSpec.MatrixSumQueries.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any index i with 0 <= i < len(queries), if there exists j with i < j < len(queries) such that t_j = t_i and idx_j = idx_i, then for any integer v' with 0 <= v' <= 10^5, let Q' be the sequence obtained from queries by replacing v_i with v'. Then matrix_sum_queries(n, Q') = matrix_sum_queries(n, queries).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_10",
+    "negation": "AegisSpec.MatrixSumQueries.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let Q' be the sequence defined by Q'[i] = [1 - t_i, idx_i, v_i] for all i. Then matrix_sum_queries(n, Q') = matrix_sum_queries(n, queries).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_11",
+    "negation": "AegisSpec.MatrixSumQueries.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let res = matrix_sum_queries(n, queries). For any integer k >= 0 such that k * v_i <= 10^5 for all i and k * res <= 2^63 - 1, let Q' be the sequence obtained by replacing every v_i with k * v_i. Then matrix_sum_queries(n, Q') = k * res.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_12",
+    "negation": "AegisSpec.MatrixSumQueries.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any index i with 0 <= i < len(queries) and any integer v' with v_i <= v' <= 10^5, let Q' be the sequence obtained from queries by replacing v_i with v'. Then matrix_sum_queries(n, Q') >= matrix_sum_queries(n, queries).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MatrixSumQueries.spec_13",
+    "negation": "AegisSpec.MatrixSumQueries.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result res and res = n * sum_{r=0}^{n-1} L(r), where for each row r, L(r) = v_{i} for the largest index i with idx_i = r (if such i exists), and L(r) = 0 if no query has idx_i = r.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. queries is a slice of vectors, each of length 3, with len(queries) between 1 and 5*10^4. For every i with 0 <= i < len(queries), writing queries[i] = [t_i, idx_i, v_i], we have t_i ∈ {0,1}, 0 <= idx_i < n, and 0 <= v_i <= 10^5. All values are i64. Additionally, every query has type 0: for all i, t_i = 0."
+  }
+]

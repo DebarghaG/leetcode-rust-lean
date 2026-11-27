@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestLine.spec_1",
+    "negation": "AegisSpec.LongestLine.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the maximum of the set {0} union {k | k >= 1 and there exist a direction O in {horizontal, vertical, diagonal, anti-diagonal} and a starting cell (i0,j0) such that the k cells (i0 + di(O)*t, j0 + dj(O)*t) for t = 0,...,k-1 are all within bounds and have value 1}, where (di(O),dj(O)) is (0,1) for horizontal, (1,0) for vertical, (1,1) for diagonal, and (1,-1) for anti-diagonal. Equivalently, r is the length of the longest line of consecutive 1s in mat among horizontal, vertical, diagonal, and anti-diagonal lines.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestLine.spec_2",
+    "negation": "AegisSpec.LongestLine.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every mat satisfying the preconditions, the function does not fail; it returns a result r of type i64.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestLine.spec_3",
+    "negation": "AegisSpec.LongestLine.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= max(m,n).",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestLine.spec_4",
+    "negation": "AegisSpec.LongestLine.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if mat[i][j] = 0 for every i,j with 0 <= i < m and 0 <= j < n.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestLine.spec_5",
+    "negation": "AegisSpec.LongestLine.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if mat[i][j] = 1 for every i,j with 0 <= i < m and 0 <= j < n, then r = max(m,n).",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestLine.spec_6",
+    "negation": "AegisSpec.LongestLine.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if m = 1 then r = max({0} union {b - a + 1 | 0 <= a <= b < n and mat[0][t] = 1 for every t with a <= t <= b}).",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestLine.spec_7",
+    "negation": "AegisSpec.LongestLine.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if n = 1 then r = max({0} union {b - a + 1 | 0 <= a <= b < m and mat[t][0] = 1 for every t with a <= t <= b}).",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestLine.spec_8",
+    "negation": "AegisSpec.LongestLine.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist a direction O in {horizontal, vertical, diagonal, anti-diagonal}, a starting cell (i0,j0), and cells (i0 + di(O)*t, j0 + dj(O)*t) for t = 0,...,r-1 that all lie within mat and have value 1, where the direction increments (di(O),dj(O)) are (0,1), (1,0), (1,1), and (1,-1) respectively.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestLine.spec_9",
+    "negation": "AegisSpec.LongestLine.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every direction O in {horizontal, vertical, diagonal, anti-diagonal}, every starting cell (i0,j0), and every k >= 1 such that the k cells (i0 + di(O)*t, j0 + dj(O)*t) for t = 0,...,k-1 are within bounds and have value 1, we have k <= r, where the direction increments (di(O),dj(O)) are (0,1), (1,0), (1,1), and (1,-1) respectively.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestLine.spec_10",
+    "negation": "AegisSpec.LongestLine.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r <= the number of pairs (i,j) with 0 <= i < m and 0 <= j < n such that mat[i][j] = 1.",
+    "preconditions": "mat is a nonempty rectangular binary matrix: let m = len(mat) and n = len(mat[0]); m >= 1, n >= 1, every row of mat has length n, m*n <= 10000, and for every i,j with 0 <= i < m and 0 <= j < n, mat[i][j] is either 0 or 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestLine.spec_11",
+    "negation": "AegisSpec.LongestLine.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "longest_line(A) <= longest_line(B). That is, flipping 0-entries to 1 can never decrease the answer.",
+    "preconditions": "A and B are nonempty rectangular binary matrices of the same dimensions m x n (satisfying the constraints), and A[i][j] <= B[i][j] for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestLine.spec_12",
+    "negation": "AegisSpec.LongestLine.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "longest_line(mat) = longest_line(matT). Transposing swaps horizontal with vertical and preserves both diagonal directions, so the set of achievable line lengths is unchanged.",
+    "preconditions": "mat is a nonempty rectangular binary matrix, and matT is its n x m transpose (matT[j][i] = mat[i][j])."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestLine.spec_13",
+    "negation": "AegisSpec.LongestLine.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "longest_line(mat) = longest_line(matR). A 180-degree rotation maps each allowed direction to the same line read in reverse, so no line length changes.",
+    "preconditions": "mat is a nonempty rectangular binary matrix, and matR is mat rotated 180 degrees (matR[i][j] = mat[m-1-i][n-1-j])."
+  }
+]

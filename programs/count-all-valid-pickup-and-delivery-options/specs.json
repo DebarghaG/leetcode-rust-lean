@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountOrders.spec_1",
+    "negation": "AegisSpec.CountOrders.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 10^9 + 7. Let C(n) be the number of ordered sequences of length 2n containing each of the 2n distinct symbols P_1,...,P_n,D_1,...,D_n exactly once, such that for every i with 1 <= i <= n, P_i appears before D_i. The function returns a result r, and the integer value of r is C(n) mod M, the unique integer in [0, M-1] congruent to C(n) modulo M.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountOrders.spec_2",
+    "negation": "AegisSpec.CountOrders.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n with 1 <= n <= 500, count_orders(n) returns a result r; in particular, it does not fail, panic, or overflow.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountOrders.spec_3",
+    "negation": "AegisSpec.CountOrders.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every n with 1 <= n <= 500, if count_orders(n) returns r, then 0 <= r <= 10^9 + 6.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountOrders.spec_4",
+    "negation": "AegisSpec.CountOrders.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every n with 1 <= n <= 500, if count_orders(n) returns r, then r = (product from i=1 to n of i*(2*i-1)) mod M, where M = 10^9 + 7, the product is taken in ordinary integers, and x mod M denotes the least nonnegative residue.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountOrders.spec_5",
+    "negation": "AegisSpec.CountOrders.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every n with 1 <= n <= 500, if count_orders(n) returns r, then r = (((2*n)! / (2^n)) mod M), where M = 10^9 + 7, ! denotes integer factorial, and the division is exact in the integers.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountOrders.spec_6",
+    "negation": "AegisSpec.CountOrders.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every n with 1 <= n <= 500, if count_orders(n) returns r, then r = (n! * (1*3*5*...*(2*n-1))) mod M, where M = 10^9 + 7 and the odd product has exactly n factors.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n <= 500."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountOrders.spec_7",
+    "negation": "AegisSpec.CountOrders.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_n be the integer result of count_orders(n) and r_{n+1} the integer result of count_orders(n+1), both of which are returned. Then r_{n+1} = (r_n * (n+1) * (2*n+1)) mod M, where M = 10^9 + 7.",
+    "preconditions": "The I64 argument n, interpreted as an ordinary integer, satisfies 1 <= n < 500."
+  }
+]

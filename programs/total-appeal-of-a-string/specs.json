@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AppealSum.spec_1",
+    "negation": "AegisSpec.AppealSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s), and let T(s) = Σ over all pairs (i,j) with 0 ≤ i ≤ j < n of |{ s[k] | i ≤ k ≤ j }|. The function returns a result r and r = T(s).",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122 (s consists of lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AppealSum.spec_2",
+    "negation": "AegisSpec.AppealSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such s, appeal_sum(s) returns a result r (the call does not fail, panic, go out of bounds, or overflow), and 1 ≤ r ≤ 130001300000. The upper bound is 26 · 100000 · 100001 / 2, which is less than 2^63 - 1, so the returned I64 value cannot overflow.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AppealSum.spec_3",
+    "negation": "AegisSpec.AppealSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever appeal_sum(s) returns a result r, r ≥ N, where n = len(s) and N = n(n+1)/2 is the number of nonempty contiguous substrings of s. This holds because every nonempty substring has appeal at least 1.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AppealSum.spec_4",
+    "negation": "AegisSpec.AppealSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever appeal_sum(s) returns a result r, r ≤ d · N, where n = len(s), N = n(n+1)/2, and d = |{ s[i] | 0 ≤ i < n }| is the number of distinct bytes in s. Each substring has at most d distinct bytes.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AppealSum.spec_5",
+    "negation": "AegisSpec.AppealSum.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever appeal_sum(s) returns a result r, r ≥ N + d - 1, where n = len(s), N = n(n+1)/2, and d = |{ s[i] | 0 ≤ i < n }|. The whole string contributes d distinct bytes and each of the other N-1 nonempty substrings contributes at least 1.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AppealSum.spec_6",
+    "negation": "AegisSpec.AppealSum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever appeal_sum(s) returns a result r, r = 1.",
+    "preconditions": "len(s) = 1 and 97 ≤ s[0] ≤ 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AppealSum.spec_7",
+    "negation": "AegisSpec.AppealSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever appeal_sum(s) returns a result r, if s[0] = s[1] then r = 3, and if s[0] ≠ s[1] then r = 4.",
+    "preconditions": "len(s) = 2 and for every i with 0 ≤ i < 2, 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AppealSum.spec_8",
+    "negation": "AegisSpec.AppealSum.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever appeal_sum(s) returns a result r, r = N if and only if s[0] = s[1] = ... = s[n-1], where n = len(s) and N = n(n+1)/2.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AppealSum.spec_9",
+    "negation": "AegisSpec.AppealSum.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever appeal_sum(s) returns a result r, r = n(n+1)(n+2)/6 if and only if for every pair i,j with 0 ≤ i < j < n, s[i] ≠ s[j], where n = len(s).",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 26, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AppealSum.spec_10",
+    "negation": "AegisSpec.AppealSum.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever appeal_sum(s) returns a result r, r ≤ n(n+1)(n+2)/6, where n = len(s). A substring of length L has appeal at most L, and the sum of the lengths of all nonempty substrings is n(n+1)(n+2)/6.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AppealSum.spec_11",
+    "negation": "AegisSpec.AppealSum.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever appeal_sum(s) returns a result r, r = Σ_{c=97}^{122} Σ_{p : 0 ≤ p < n and s[p] = c} (p - prev_c(p)) · (n - p), where n = len(s) and prev_c(p) is the largest index q < p with s[q] = c, or -1 if no such q exists.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AppealSum.spec_12",
+    "negation": "AegisSpec.AppealSum.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever appeal_sum(s) returns r_s and appeal_sum(t) returns r_t, r_s = r_t.",
+    "preconditions": "len(s) = len(t) = n with 1 ≤ n ≤ 100000, all bytes of s and t satisfy 97 ≤ byte ≤ 122, and for every i with 0 ≤ i < n, t[i] = s[n-1-i]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.AppealSum.spec_13",
+    "negation": "AegisSpec.AppealSum.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever appeal_sum(s) returns r_s and appeal_sum(t) returns r_t, r_s ≤ r_t; moreover, if len(s) < len(t), then r_s < r_t.",
+    "preconditions": "len(s) ≥ 1, len(s) ≤ 100000, len(t) ≥ 1, len(t) ≤ 100000, for every i with 0 ≤ i < len(s), 97 ≤ s[i] ≤ 122, for every i with 0 ≤ i < len(t), 97 ≤ t[i] ≤ 122, and s occurs as a contiguous substring of t: there exists k with 0 ≤ k and k + len(s) ≤ len(t) such that for every i with 0 ≤ i < len(s), t[k+i] = s[i]."
+  }
+]

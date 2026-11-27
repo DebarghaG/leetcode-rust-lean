@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_1",
+    "negation": "AegisSpec.FindNumberOfLis.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of longest increasing subsequences of nums. An increasing subsequence of nums is a sequence of indices i_0 < i_1 < ... < i_{k-1} with 0 <= i_0 and i_{k-1} < len(nums) such that nums[i_0] < nums[i_1] < ... < nums[i_{k-1}]. A longest increasing subsequence (LIS) is an increasing subsequence of maximum length. The answer is the number of such index sequences of maximum length.",
+    "preconditions": "The input nums is a slice of i64 satisfying: 1 <= len(nums) <= 2000; for every i with 0 <= i < len(nums), -10^6 <= nums[i] <= 10^6; and the number of longest increasing subsequences of nums is at most 2147483647."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_2",
+    "negation": "AegisSpec.FindNumberOfLis.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_3",
+    "negation": "AegisSpec.FindNumberOfLis.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(nums).",
+    "preconditions": "Same as spec_1, and additionally for all i, j with 0 <= i < j < len(nums), nums[i] >= nums[j] (i.e., nums is non-increasing)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_4",
+    "negation": "AegisSpec.FindNumberOfLis.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = the product, over all distinct values v that appear in nums, of the number of times v appears in nums.",
+    "preconditions": "Same as spec_1, and additionally for all i, j with 0 <= i < j < len(nums), nums[i] <= nums[j] (i.e., nums is non-decreasing)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_5",
+    "negation": "AegisSpec.FindNumberOfLis.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on nums and a result r' on nums', r = r'.",
+    "preconditions": "Same as spec_1. Let nums' be any slice of i64 of the same length as nums such that for all i, j with 0 <= i, j < len(nums), nums[i] < nums[j] iff nums'[i] < nums'[j] and nums[i] = nums[j] iff nums'[i] = nums'[j]. Assume nums' also satisfies the input constraints: 1 <= len(nums') <= 2000 and for every i, -10^6 <= nums'[i] <= 10^6, and the number of LIS of nums' fits in 32-bit."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_6",
+    "negation": "AegisSpec.FindNumberOfLis.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r equals the number of paths of maximum length in the directed acyclic graph G with vertex set {0, 1, ..., len(nums)-1} and a directed edge from i to j if and only if i < j and nums[i] < nums[j]. A path is a sequence of vertices v_0, v_1, ..., v_{k-1} with an edge from v_t to v_{t+1} for each 0 <= t < k-1. The length of a path is the number of vertices k. The answer is the number of paths of maximum length.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_7",
+    "negation": "AegisSpec.FindNumberOfLis.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let L_i be the maximum length of an increasing subsequence of nums ending at index i (i.e., whose last index is i), and let C_i be the number of such subsequences of length L_i, for each i with 0 <= i < len(nums). Let L = max_{0 <= i < len(nums)} L_i. Then r = sum_{i: L_i = L} C_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_8",
+    "negation": "AegisSpec.FindNumberOfLis.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let L be the maximum length of an increasing subsequence of nums. Then r <= C(len(nums), L), where C(n, L) is the binomial coefficient (the number of subsets of {0, ..., n-1} of size L).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindNumberOfLis.spec_9",
+    "negation": "AegisSpec.FindNumberOfLis.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there exists a pair of indices i, j with 0 <= i < j < len(nums), nums[i] = a, and nums[j] = b, then r equals the number of such pairs (i, j). Otherwise (i.e., there is no such pair), r = len(nums).",
+    "preconditions": "Same as spec_1, and additionally nums contains exactly two distinct values. Let a and b be these two values with a < b."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumOperations.spec_1",
+    "negation": "AegisSpec.MinimumOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the minimum of the set of all values C(A) = #{i | 0 <= i < n and nums[i] != A[i]}, where A ranges over all length-n arrays of positive 64-bit integers (1 <= A[i] <= 2^63-1) that are alternating: for every i with 2 <= i < n, A[i-2] = A[i], and for every i with 1 <= i < n, A[i-1] != A[i]. The set is nonempty because such arrays A exist.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumOperations.spec_2",
+    "negation": "AegisSpec.MinimumOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail by overflow, out-of-bounds access, or panic) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumOperations.spec_3",
+    "negation": "AegisSpec.MinimumOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= n - 1.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumOperations.spec_4",
+    "negation": "AegisSpec.MinimumOperations.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(nums). n = 1 and 1 <= nums[0] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumOperations.spec_5",
+    "negation": "AegisSpec.MinimumOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if nums[0] != nums[1], and r = 1 if nums[0] = nums[1].",
+    "preconditions": "Let n = len(nums). n = 2 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumOperations.spec_6",
+    "negation": "AegisSpec.MinimumOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if nums itself is alternating, meaning (for every i with 2 <= i < n, nums[i-2] = nums[i]) and (for every i with 1 <= i < n, nums[i-1] != nums[i]).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumOperations.spec_7",
+    "negation": "AegisSpec.MinimumOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(e, o), where e = #{i | 0 <= i < n and i mod 2 = 0} and o = #{i | 0 <= i < n and i mod 2 = 1}. Equivalently e = ceil(n/2) and o = floor(n/2).",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums[i] <= 100000, and for all i with 0 <= i < n, nums[i] = nums[0]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumOperations.spec_8",
+    "negation": "AegisSpec.MinimumOperations.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist positive 64-bit integers x and y with x != y such that r = n - (E(x) + O(y)), where E(x) = #{i | 0 <= i < n and i mod 2 = 0 and nums[i] = x} and O(y) = #{i | 0 <= i < n and i mod 2 = 1 and nums[i] = y}.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumOperations.spec_9",
+    "negation": "AegisSpec.MinimumOperations.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of positive 64-bit integers x and y with x != y, r <= n - (E(x) + O(y)), where E(x) = #{i | 0 <= i < n and i mod 2 = 0 and nums[i] = x} and O(y) = #{i | 0 <= i < n and i mod 2 = 1 and nums[i] = y}.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumOperations.spec_10",
+    "negation": "AegisSpec.MinimumOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= n - (mE + mO), where mE = max { E(x) | x is a positive 64-bit integer } and mO = max { O(y) | y is a positive 64-bit integer }, with E(x) = #{i | 0 <= i < n and i mod 2 = 0 and nums[i] = x} and O(y) = #{i | 0 <= i < n and i mod 2 = 1 and nums[i] = y}. If there are no odd indices, mO = 0.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumOperations.spec_11",
+    "negation": "AegisSpec.MinimumOperations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r <= n - max(mE, mO), where mE and mO are the maximum even-index and odd-index frequencies as defined in spec_10.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumOperations.spec_12",
+    "negation": "AegisSpec.MinimumOperations.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on nums and r2 on nums2, r = r2.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let nums2 be any length-n array satisfying the same value bounds and having, for every positive 64-bit integer x, the same count of x on even indices as nums and the same count of x on odd indices as nums."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumOperations.spec_13",
+    "negation": "AegisSpec.MinimumOperations.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on nums and rrev on rev, r = rrev.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000. Let rev be the length-n array with rev[i] = nums[n-1-i] for 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumOperations.spec_14",
+    "negation": "AegisSpec.MinimumOperations.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let E(x) = #{i | 0 <= i < n and i mod 2 = 0 and nums[i] = x} and O(y) = #{i | 0 <= i < n and i mod 2 = 1 and nums[i] = y}, for positive 64-bit integers x and y. Let mE = max { E(x) | x is a positive 64-bit integer } and mO = max { O(y) | y is a positive 64-bit integer }. Whenever the function returns a result r, if there exist positive 64-bit integers x and y with x != y such that E(x) = mE and O(y) = mO, then r = n - (mE + mO).",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumOperations.spec_15",
+    "negation": "AegisSpec.MinimumOperations.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let E(x) = #{i | 0 <= i < n and i mod 2 = 0 and nums[i] = x} and O(y) = #{i | 0 <= i < n and i mod 2 = 1 and nums[i] = y}, for positive 64-bit integers x and y. Let mE = max { E(x) | x is a positive 64-bit integer } and mO = max { O(y) | y is a positive 64-bit integer }. Suppose there is a positive 64-bit integer v such that E(v) = mE, O(v) = mO, and for every positive 64-bit integer x with x != v, E(x) < mE and O(x) < mO. Let E2 = max { E(x) | x is a positive 64-bit integer and x != v } and O2 = max { O(x) | x is a positive 64-bit integer and x != v }, with the maximum of an empty set taken as 0. Whenever the function returns a result r, r = n - max(mE + O2, mO + E2).",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000 and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  }
+]

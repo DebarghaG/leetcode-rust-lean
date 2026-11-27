@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubarrays.spec_1",
+    "negation": "AegisSpec.CountSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = max { nums[j] | 0 <= j < n }. The function returns a result res and res equals the number of pairs of integers (L,R) such that 0 <= L <= R < n and the number of indices i with L <= i <= R and nums[i] = M is at least k. In other words, res is the number of nonempty contiguous subarrays of nums in which the global maximum M occurs at least k times.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubarrays.spec_2",
+    "negation": "AegisSpec.CountSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubarrays.spec_3",
+    "negation": "AegisSpec.CountSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let res be the returned result. Then 0 <= res <= n*(n+1)/2.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubarrays.spec_4",
+    "negation": "AegisSpec.CountSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max { nums[j] | 0 <= j < n } and let c be the number of indices i with 0 <= i < n and nums[i] = M. Let first be the smallest index i with nums[i] = M and last be the largest index i with nums[i] = M. If c >= k, then the returned result res satisfies res >= (first+1)*(n-last).",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubarrays.spec_5",
+    "negation": "AegisSpec.CountSubarrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose nums[i] = nums[0] for every i with 0 <= i < n. Let res be the returned result. If k <= n, then res = (n-k+1)*(n-k+2)/2; if k > n, then res = 0.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubarrays.spec_6",
+    "negation": "AegisSpec.CountSubarrays.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the sequence of length n with rev[i] = nums[n-1-i] for every i with 0 <= i < n, and let M' = max { rev[j] | 0 <= j < n }. The returned result res equals the number of pairs (L,R) with 0 <= L <= R < n such that the number of indices i with L <= i <= R and rev[i] = M' is at least k.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubarrays.spec_7",
+    "negation": "AegisSpec.CountSubarrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let M = max { nums[j] | 0 <= j < n }. For every sequence nums2 of length n such that nums2[i] = M whenever nums[i] = M and 1 <= nums2[i] < M whenever nums[i] < M, the number of pairs (L,R) with 0 <= L <= R < n for which the number of indices i with L <= i <= R and nums2[i] = M is at least k is exactly the returned result res.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubarrays.spec_8",
+    "negation": "AegisSpec.CountSubarrays.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = max { nums[j] | 0 <= j < n }. For every positive integer t, let A(t) be the number of pairs (L,R) with 0 <= L <= R < n such that the number of indices i with L <= i <= R and nums[i] = M is at least t. Let res be the returned result. Then for every t with 1 <= t <= k, res <= A(t); and for every t with k <= t <= 100000, res >= A(t).",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubarrays.spec_9",
+    "negation": "AegisSpec.CountSubarrays.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = max { nums[j] | 0 <= j < n }. Let p_0 < p_1 < ... < p_{c-1} be all indices with nums[p_j] = M. Set p_{-1} = -1 and p_c = n. The returned result res equals the sum, over all integer pairs (a,b) with 0 <= a <= b < c and b-a+1 >= k, of (p_a - p_{a-1}) * (p_{b+1} - p_b). If no such pair exists, the sum is 0.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubarrays.spec_10",
+    "negation": "AegisSpec.CountSubarrays.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let M = max { nums[j] | 0 <= j < n } and let c be the number of indices i with 0 <= i < n and nums[i] = M. The returned result is positive if and only if c >= k. Equivalently, there exists a counted subarray if and only if the whole array contains M at least k times.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubarrays.spec_11",
+    "negation": "AegisSpec.CountSubarrays.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume k = 1. Let M = max { nums[j] | 0 <= j < n }. Let g_1, ..., g_s be the lengths of all maximal contiguous blocks of indices i with nums[i] != M, including blocks before the first occurrence of M, between consecutive occurrences of M, and after the last occurrence of M; zero-length blocks are omitted. Then the returned result res satisfies res = n*(n+1)/2 - sum_{j=1}^s g_j*(g_j+1)/2.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000; and 1 <= k <= 100000."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PrefixCount.spec_1",
+    "negation": "AegisSpec.PrefixCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and the integer value of r equals the number of indices j with 0 <= j < len(words) such that words[j] starts with pref, where a word w starts with pref iff len(pref) <= len(w) and for every i with 0 <= i < len(pref), w[i] = pref[i].",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PrefixCount.spec_2",
+    "negation": "AegisSpec.PrefixCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result: it does not panic, overflow, fail an arithmetic check, or read outside the bounds of words, words[j], or pref.",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PrefixCount.spec_3",
+    "negation": "AegisSpec.PrefixCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and 0 <= the integer value of r <= len(words).",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PrefixCount.spec_4",
+    "negation": "AegisSpec.PrefixCount.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and the integer value of r > 0 if and only if there exists an index j with 0 <= j < len(words) such that len(pref) <= len(words[j]) and words[j][i] = pref[i] for every i with 0 <= i < len(pref).",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PrefixCount.spec_5",
+    "negation": "AegisSpec.PrefixCount.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and the integer value of r = len(words) if and only if for every j with 0 <= j < len(words), len(pref) <= len(words[j]) and words[j][i] = pref[i] for every i with 0 <= i < len(pref).",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PrefixCount.spec_6",
+    "negation": "AegisSpec.PrefixCount.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(words) = 1, then the function returns a result r, and the integer value of r = 1 if len(pref) <= len(words[0]) and words[0][i] = pref[i] for every i with 0 <= i < len(pref), and the integer value of r = 0 otherwise.",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PrefixCount.spec_7",
+    "negation": "AegisSpec.PrefixCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such p and q, if p is a prefix of q (len(p) <= len(q) and p[i] = q[i] for every i with 0 <= i < len(p)), then prefix_count(words,p) returns a result rp, prefix_count(words,q) returns a result rq, and the integer value of rq <= the integer value of rp.",
+    "preconditions": "words satisfies the problem constraints: len(words) is between 1 and 100 inclusive, every words[j] has length between 1 and 100 inclusive and consists of lowercase English letters. Byte arrays p and q each have length between 1 and 100 inclusive and consist of lowercase English letters."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PrefixCount.spec_8",
+    "negation": "AegisSpec.PrefixCount.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If W2 is a permutation of W1, meaning len(W2) = len(W1) and there is a bijection f from {0,...,len(W1)-1} to {0,...,len(W2)-1} such that W2[f(j)] is byte-for-byte equal to W1[j] for every j with 0 <= j < len(W1), then prefix_count(W1,pref) returns a result r1, prefix_count(W2,pref) returns a result r2, and the integer values of r1 and r2 are equal.",
+    "preconditions": "Word lists W1 and W2 each satisfy the problem word-list constraints: their lengths are between 1 and 100 inclusive, and every W1[j] and W2[k] has length between 1 and 100 inclusive and consists of lowercase English letters. pref has length between 1 and 100 inclusive and consists of lowercase English letters."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PrefixCount.spec_9",
+    "negation": "AegisSpec.PrefixCount.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If len(W1) = len(W2) and for every j with 0 <= j < len(W1), W1[j] starts with pref exactly when W2[j] starts with pref (where a word w starts with pref iff len(pref) <= len(w) and w[i] = pref[i] for every i with 0 <= i < len(pref)), then prefix_count(W1,pref) returns a result r1, prefix_count(W2,pref) returns a result r2, and the integer values of r1 and r2 are equal.",
+    "preconditions": "Word lists W1 and W2 each satisfy the problem word-list constraints: their lengths are between 1 and 100 inclusive, and every W1[j] and W2[k] has length between 1 and 100 inclusive and consists of lowercase English letters. pref has length between 1 and 100 inclusive and consists of lowercase English letters."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PrefixCount.spec_10",
+    "negation": "AegisSpec.PrefixCount.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and the integer value of r <= the number of indices j with 0 <= j < len(words) for which len(words[j]) >= len(pref).",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PrefixCount.spec_11",
+    "negation": "AegisSpec.PrefixCount.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(pref) = 1, then the function returns a result r, and the integer value of r equals the number of indices j with 0 <= j < len(words) such that words[j][0] = pref[0].",
+    "preconditions": "len(words) is between 1 and 100 inclusive; for every j with 0 <= j < len(words), len(words[j]) is between 1 and 100 inclusive; len(pref) is between 1 and 100 inclusive; every byte of every words[j] and of pref is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PrefixCount.spec_12",
+    "negation": "AegisSpec.PrefixCount.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If W2 is obtained from W1 by deleting zero or more entries (equivalently, there are indices 0 <= i_0 < i_1 < ... < i_{len(W2)-1} < len(W1) such that W2[k] is byte-for-byte equal to W1[i_k] for every k with 0 <= k < len(W2)), then prefix_count(W1,pref) returns a result r1, prefix_count(W2,pref) returns a result r2, and the integer value of r2 <= the integer value of r1.",
+    "preconditions": "Word lists W1 and W2 each satisfy the problem word-list constraints: their lengths are between 1 and 100 inclusive, and every word in either list has length between 1 and 100 inclusive and consists of lowercase English letters. pref has length between 1 and 100 inclusive and consists of lowercase English letters."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PrefixCount.spec_13",
+    "negation": "AegisSpec.PrefixCount.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let b be 1 if len(pref) <= len(w) and w[i] = pref[i] for every i with 0 <= i < len(pref), and let b be 0 otherwise. Then prefix_count(W ++ [w], pref) returns a result r, prefix_count(W, pref) returns a result r0, and the integer value of r = the integer value of r0 + b.",
+    "preconditions": "W is a word list with 1 <= len(W) <= 99, and every W[j] has length between 1 and 100 inclusive and consists of lowercase English letters. w is a byte array of length between 1 and 100 inclusive consisting of lowercase English letters. pref has length between 1 and 100 inclusive and consists of lowercase English letters. Consequently W ++ [w] also satisfies the problem word-list constraints."
+  }
+]

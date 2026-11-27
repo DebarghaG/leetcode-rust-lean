@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_1",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every i with 0 <= i < len(nums), define X_i = sum_{j=0}^{i} nums[j] * 2^(i-j). Whenever prefixes_div_by5 nums returns a result r, it holds that len(r) = len(nums) and, for every i with 0 <= i < len(nums), r[i] = true if and only if there exists an integer q with X_i = 5*q.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_2",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, the call prefixes_div_by5 nums returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_3",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever prefixes_div_by5 nums returns a result r, for every i and k with 0 <= i, 1 <= k, and i+k < len(nums), if nums[j] = 0 for every j with i < j <= i+k, then r[i+k] = r[i].",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_4",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever prefixes_div_by5 nums returns a result r, if nums[j] = 1 for every j with 0 <= j < len(nums), then for every i with 0 <= i < len(nums), r[i] = true if and only if (i+1) mod 4 = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_5",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever prefixes_div_by5 nums returns a result r, for every i with 0 <= i and i+1 < len(nums), if r[i] = true, then r[i+1] = true if and only if nums[i+1] = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PrefixesDivBy5.spec_6",
+    "negation": "AegisSpec.PrefixesDivBy5.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i < len(nums), define X_i = sum_{j=0}^{i} nums[j] * 2^(i-j), and let rem_i be the unique integer with 0 <= rem_i < 5 and X_i congruent to rem_i modulo 5. Whenever prefixes_div_by5 nums returns a result r, it holds that rem_0 = nums[0], that rem_{i+1} = (2*rem_i + nums[i+1]) mod 5 for every i with 0 <= i and i+1 < len(nums), and that r[i] = true if and only if rem_i = 0 for every i with 0 <= i < len(nums).",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100000 and, for every j with 0 <= j < len(nums), nums[j] = 0 or nums[j] = 1."
+  }
+]

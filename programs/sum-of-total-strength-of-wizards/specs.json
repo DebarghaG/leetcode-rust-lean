@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TotalStrength.spec_1",
+    "negation": "AegisSpec.TotalStrength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007 and n = len(strength). Define T(strength) = sum over all pairs (l,r) with 0 <= l <= r < n of (min_{l <= k <= r} strength[k]) * (sum_{k=l}^{r} strength[k]). The function returns a result r (it does not fail) such that 0 <= r < M and r ≡ T(strength) (mod M); equivalently, r is the least nonnegative remainder of T(strength) modulo M.",
+    "preconditions": "strength is a slice of 64-bit integers with 1 <= len(strength) <= 100000, and for every i with 0 <= i < len(strength), 1 <= strength[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TotalStrength.spec_2",
+    "negation": "AegisSpec.TotalStrength.spec_2_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007 and a = strength[0]. The function returns a result r and r = (a * a) mod M, where mod M denotes the least nonnegative remainder.",
+    "preconditions": "strength is a slice of 64-bit integers with len(strength) = 1 and 1 <= strength[0] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TotalStrength.spec_3",
+    "negation": "AegisSpec.TotalStrength.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007, a = strength[0], and b = strength[1]. The function returns a result r and r = (a*a + b*b + min(a,b)*(a+b)) mod M, where mod M denotes the least nonnegative remainder.",
+    "preconditions": "strength is a slice of 64-bit integers with len(strength) = 2, 1 <= strength[0] <= 1000000000, and 1 <= strength[1] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TotalStrength.spec_4",
+    "negation": "AegisSpec.TotalStrength.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. The function returns a result r and r = (x*x * (n*(n+1)*(n+2)/6)) mod M, where the division by 6 is exact integer division; equivalently, r = (x^2 * C(n+2,3)) mod M.",
+    "preconditions": "strength is a slice of 64-bit integers with n = len(strength), 1 <= n <= 100000, and there is an integer x with 1 <= x <= 1000000000 such that strength[i] = x for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TotalStrength.spec_5",
+    "negation": "AegisSpec.TotalStrength.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(strength) and define rev by rev[i] = strength[n-1-i] for 0 <= i < n. Let r be the result returned by the function on strength and r_rev the result returned on rev. The function returns both results, and r = r_rev.",
+    "preconditions": "strength is a slice of 64-bit integers with 1 <= len(strength) <= 100000 and, for every i with 0 <= i < len(strength), 1 <= strength[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TotalStrength.spec_6",
+    "negation": "AegisSpec.TotalStrength.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007 and define scaled[i] = c * strength[i]. Let r be the result returned by the function on strength and r_c the result returned on scaled. The function returns both results, and r_c ≡ c^2 * r (mod M); equivalently, r_c = (c^2 * r) mod M using the least nonnegative remainder.",
+    "preconditions": "strength is a slice of 64-bit integers with 1 <= len(strength) <= 100000 and, for every i with 0 <= i < len(strength), 1 <= strength[i] <= 1000000000. Also c is an integer with c >= 1 and c*strength[i] <= 1000000000 for every i with 0 <= i < len(strength)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TotalStrength.spec_7",
+    "negation": "AegisSpec.TotalStrength.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = 44.",
+    "preconditions": "len(strength) = 4, strength[0] = 1, strength[1] = 3, strength[2] = 1, strength[3] = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TotalStrength.spec_8",
+    "negation": "AegisSpec.TotalStrength.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = 213.",
+    "preconditions": "len(strength) = 3, strength[0] = 5, strength[1] = 4, strength[2] = 6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TotalStrength.spec_9",
+    "negation": "AegisSpec.TotalStrength.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = 196.",
+    "preconditions": "len(strength) = 2, strength[0] = 1000000000, strength[1] = 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TotalStrength.spec_10",
+    "negation": "AegisSpec.TotalStrength.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = 490.",
+    "preconditions": "len(strength) = 3 and strength[0] = strength[1] = strength[2] = 1000000000."
+  }
+]

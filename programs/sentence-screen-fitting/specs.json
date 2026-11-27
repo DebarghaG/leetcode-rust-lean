@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WordsTyping.spec_1",
+    "negation": "AegisSpec.WordsTyping.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(sentence). For every j >= 0 let W_j = sentence[j mod n] (0-indexed). Let T be the number of words placed by the canonical row-major filling of the infinite sequence W_0, W_1, ... on the rows x cols screen: W_0 starts at row 0, column 0; after a word, the next word is placed on the same row after exactly one empty cell iff that word plus the separating cell fits within the remaining columns of that row, otherwise it is placed at column 0 of the next row; filling stops before the first word that has length > cols or that would need a row with index >= rows. The function returns r = floor(T / n) using integer division, i.e. r is the number of complete copies of sentence contained in this maximal placed prefix.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WordsTyping.spec_2",
+    "negation": "AegisSpec.WordsTyping.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result: there exists an integer r such that the call evaluates to Result.ok r. It does not fail by overflow, division by zero, out-of-bounds indexing, or panic.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WordsTyping.spec_3",
+    "negation": "AegisSpec.WordsTyping.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(sentence) and q = floor((cols+1)/2). Whenever the function returns r, 0 <= r <= floor(rows * q / n).",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WordsTyping.spec_4",
+    "negation": "AegisSpec.WordsTyping.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L = sum_{i=0}^{len(sentence)-1} len(sentence[i]). Whenever the function returns r, r * L <= rows * cols.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WordsTyping.spec_5",
+    "negation": "AegisSpec.WordsTyping.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists i with 0 <= i < len(sentence) and len(sentence[i]) > cols, then the function returns r and r = 0.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WordsTyping.spec_6",
+    "negation": "AegisSpec.WordsTyping.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(sentence) > rows * cols, then the function returns r and r = 0.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WordsTyping.spec_7",
+    "negation": "AegisSpec.WordsTyping.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(sentence) and q = floor((cols+1)/2). The function returns r = floor(rows * q / n).",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a byte array of length exactly 1 consisting of a lowercase ASCII letter; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WordsTyping.spec_8",
+    "negation": "AegisSpec.WordsTyping.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let L = len(sentence[0]). The function returns r = rows * floor((cols+1)/(L+1)).",
+    "preconditions": "1 <= len(sentence) <= 100; len(sentence) = 1; sentence[0] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WordsTyping.spec_9",
+    "negation": "AegisSpec.WordsTyping.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(sentence). The function returns r = floor(rows/n) if every word has length 1, and returns r = 0 if some word has length > 1.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; rows >= 1; cols = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WordsTyping.spec_10",
+    "negation": "AegisSpec.WordsTyping.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(sentence) and W = (sum_{i=0}^{n-1} len(sentence[i])) + (n-1). If W <= cols, then the function returns r and r >= rows.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.WordsTyping.spec_11",
+    "negation": "AegisSpec.WordsTyping.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(sentence) and let r be the returned value. The first r*n words W_0,...,W_{r*n-1} of the infinite periodic word sequence W_j = sentence[j mod n] can be placed on the screen by the row-major filling rule: start at top-left; keep a word on the current row iff it fits after one separating space, otherwise move it to column 0 of the next row. Equivalently, at least r complete copies of sentence fit in order.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.WordsTyping.spec_12",
+    "negation": "AegisSpec.WordsTyping.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(sentence) and let r be the returned value. The first (r+1)*n words of the infinite periodic word sequence W_j = sentence[j mod n] cannot all be placed by the same row-major filling rule; equivalently, r+1 complete copies of sentence cannot be fitted in order by row-major filling on this screen.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.WordsTyping.spec_13",
+    "negation": "AegisSpec.WordsTyping.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the value returned by words_typing(sentence, rows, cols) and let r' be the value returned by words_typing(sentence', rows, cols). Then r = r'.",
+    "preconditions": "sentence and sentence' are lists of byte vectors satisfying 1 <= len(sentence) = len(sentence') <= 100, and for every i with 0 <= i < len(sentence), len(sentence[i]) = len(sentence'[i]), with all words nonempty, of length at most 10, and lowercase ASCII; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.WordsTyping.spec_14",
+    "negation": "AegisSpec.WordsTyping.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the value returned by words_typing(sentence, rows, cols). For every integer R with 1 <= R <= rows, the call words_typing(sentence, R, cols) returns a value r_R and r_R <= r.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.WordsTyping.spec_15",
+    "negation": "AegisSpec.WordsTyping.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the value returned by words_typing(sentence, rows, cols). For every integer C with 1 <= C <= cols, the call words_typing(sentence, rows, C) returns a value r_C and r_C <= r.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.WordsTyping.spec_16",
+    "negation": "AegisSpec.WordsTyping.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(sentence). The function returns r = 0 if and only if the first n words W_0,...,W_{n-1} of the infinite periodic sequence W_j = sentence[j mod n] cannot all be placed by the canonical row-major filling on the rows x cols screen; equivalently, if and only if either some sentence[i] has length > cols or placing W_0,...,W_{n-1} would require a row with index >= rows.",
+    "preconditions": "1 <= len(sentence) <= 100; for every i with 0 <= i < len(sentence), sentence[i] is a nonempty byte array of length at most 10 consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.WordsTyping.spec_17",
+    "negation": "AegisSpec.WordsTyping.spec_17_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(sentence) and k = floor((cols+1)/(L+1)). The function returns r = floor(rows * k / n).",
+    "preconditions": "1 <= len(sentence) <= 100; there exists an integer L with 1 <= L <= 10 such that for every i with 0 <= i < len(sentence), sentence[i] is a byte array of length exactly L consisting of lowercase ASCII letters; 1 <= rows, cols <= 20000."
+  }
+]

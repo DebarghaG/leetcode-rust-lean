@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CreateSortedArray.spec_1",
+    "negation": "AegisSpec.CreateSortedArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(instructions). For each i with 0 <= i < n, let L_i be the number of indices j with 0 <= j < i and instructions[j] < instructions[i], and let G_i be the number of indices j with 0 <= j < i and instructions[j] > instructions[i]. The function returns a result r, and r = (sum_{i=0}^{n-1} min(L_i, G_i)) mod 1000000007, where the modulo result is the unique integer in [0, 1000000006] congruent to the sum modulo 1000000007.",
+    "preconditions": "1 <= len(instructions) <= 100000, and for every i with 0 <= i < len(instructions), 1 <= instructions[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CreateSortedArray.spec_2",
+    "negation": "AegisSpec.CreateSortedArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by arithmetic overflow, panic, or out-of-bounds access.",
+    "preconditions": "1 <= len(instructions) <= 100000, and for every i with 0 <= i < len(instructions), 1 <= instructions[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CreateSortedArray.spec_3",
+    "negation": "AegisSpec.CreateSortedArray.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= 1000000006.",
+    "preconditions": "1 <= len(instructions) <= 100000, and for every i with 0 <= i < len(instructions), 1 <= instructions[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CreateSortedArray.spec_4",
+    "negation": "AegisSpec.CreateSortedArray.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "len(instructions) = 1 and 1 <= instructions[0] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CreateSortedArray.spec_5",
+    "negation": "AegisSpec.CreateSortedArray.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and r = 1 exactly when instructions[2] is strictly between instructions[0] and instructions[1], meaning (instructions[0] < instructions[2] and instructions[2] < instructions[1]) or (instructions[1] < instructions[2] and instructions[2] < instructions[0]); otherwise r = 0.",
+    "preconditions": "len(instructions) = 3, and 1 <= instructions[0], instructions[1], instructions[2] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CreateSortedArray.spec_6",
+    "negation": "AegisSpec.CreateSortedArray.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever create_sorted_array(A) returns rA and create_sorted_array(B) returns rB, we have rA = rB.",
+    "preconditions": "Let A be a slice with 1 <= len(A) <= 99999 and 1 <= A[j] <= 100000 for every j. Let x be an integer with 1 <= x <= 100000 such that either x <= A[j] for every j, or x >= A[j] for every j. Let B be the slice obtained by appending x to A, so len(B) = len(A) + 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CreateSortedArray.spec_7",
+    "negation": "AegisSpec.CreateSortedArray.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(instructions), and let T = sum_{i=0}^{n-1} min(L_i, G_i), with L_i and G_i defined as in spec_1. The function returns r with r = T mod 1000000007, and moreover T <= floor(((n-1)^2)/4).",
+    "preconditions": "1 <= len(instructions) <= 100000, and for every i with 0 <= i < len(instructions), 1 <= instructions[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CreateSortedArray.spec_8",
+    "negation": "AegisSpec.CreateSortedArray.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(instructions), and let T = sum_{i=0}^{n-1} min(L_i, G_i), with L_i and G_i defined as in spec_1. The function returns r with r = T mod 1000000007. Also, T = 0 if and only if for every i with 0 <= i < n, either (for every j with 0 <= j < i, instructions[j] <= instructions[i]) or (for every j with 0 <= j < i, instructions[j] >= instructions[i]).",
+    "preconditions": "1 <= len(instructions) <= 100000, and for every i with 0 <= i < len(instructions), 1 <= instructions[i] <= 100000."
+  }
+]

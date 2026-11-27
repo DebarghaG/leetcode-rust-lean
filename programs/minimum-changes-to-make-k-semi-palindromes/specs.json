@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumChanges.spec_1",
+    "negation": "AegisSpec.MinimumChanges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the minimum over all k-partitions 0=a0<a1<...<ak=n with a_i-a_{i-1}≥2 for i=1..k of Σ_{i=1}^k cost(s[a_{i-1}..a_i]). Here, for a byte string v of length m≥2, cost(v)=min_{d|m,1≤d<m} ch(v,d), where for such d and each 0≤j<d, L_j=#{t≥0 : j+t d<m}, and ch(v,d) is the number of pairs (j,t) with 0≤j<d, 0≤t<floor(L_j/2), and v[j+t d]≠v[j+(L_j-1-t)d]. All indices are 0-based and s[a..b] is the half-open substring s[a],s[a+1],...,s[b-1].",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumChanges.spec_2",
+    "negation": "AegisSpec.MinimumChanges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or produce a failure value.",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumChanges.spec_3",
+    "negation": "AegisSpec.MinimumChanges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 ≤ r ≤ floor(n/2), where n=len(s).",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumChanges.spec_4",
+    "negation": "AegisSpec.MinimumChanges.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a k-partition 0=a0<a1<...<ak=n of s with a_i-a_{i-1}≥2 for all i=1..k such that Σ_{i=1}^k cost(s[a_{i-1}..a_i]) = r, where cost(v) is the minimum number of single-letter changes needed to make v semi-palindromic (v is semi-palindromic if for some divisor d with 1≤d<len(v), in each residue class modulo d the characters of v read in increasing index order form a palindrome).",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumChanges.spec_5",
+    "negation": "AegisSpec.MinimumChanges.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every k-partition 0=a0<a1<...<ak=n of s with a_i-a_{i-1}≥2 for all i=1..k, one has Σ_{i=1}^k cost(s[a_{i-1}..a_i]) ≥ r, where cost(v) is the minimum number of single-letter changes needed to make v semi-palindromic (v is semi-palindromic if for some divisor d with 1≤d<len(v), in each residue class modulo d the characters of v read in increasing index order form a palindrome).",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumChanges.spec_6",
+    "negation": "AegisSpec.MinimumChanges.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r=0 if and only if there exists a k-partition 0=a0<a1<...<ak=n of s with a_i-a_{i-1}≥2 for all i=1..k such that every part s[a_{i-1}..a_i] is already semi-palindromic, where semi-palindromic means that for some divisor d with 1≤d<len(part), in each residue class modulo d the characters of the part read in increasing index order form a palindrome.",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumChanges.spec_7",
+    "negation": "AegisSpec.MinimumChanges.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = min_{d|n,1≤d<n} ch(s,d), where for each such d and each 0≤j<d, L_j=#{t≥0:j+t d<n}, and ch(s,d) is the number of pairs (j,t) with 0≤j<d, 0≤t<floor(L_j/2), and s[j+t d]≠s[j+(L_j-1-t)d].",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; k=1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumChanges.spec_8",
+    "negation": "AegisSpec.MinimumChanges.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = #{i : 0≤i<k and s[2i]≠s[2i+1]}.",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; n is even; k=n/2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumChanges.spec_9",
+    "negation": "AegisSpec.MinimumChanges.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If s[i]=s[0] for every 0≤i<n, then the function returns a result r and r=0.",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumChanges.spec_10",
+    "negation": "AegisSpec.MinimumChanges.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r on (s,k) and the function returns the same result r on (t,k), where t is the byte string of length n with t[i]=s[n-1-i] for 0≤i<n.",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumChanges.spec_11",
+    "negation": "AegisSpec.MinimumChanges.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let f be any bijection from the set of lowercase ASCII bytes {97,...,122} to itself, and let t be the byte string with t[i]=f(s[i]) for all i. Then the function returns a result r on (s,k) and returns the same result r on (t,k).",
+    "preconditions": "Let n = len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumChanges.spec_12",
+    "negation": "AegisSpec.MinimumChanges.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns result r on (s,k) and result r' on (t,k), |r-r'|≤1.",
+    "preconditions": "Let n=len(s). s and t are byte strings of length n, all bytes in 97..122, 2≤n≤200, and 1≤k≤n/2 using integer division. The strings differ in at most one position: the set {i : s[i]≠t[i]} has size at most 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumChanges.spec_13",
+    "negation": "AegisSpec.MinimumChanges.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = min_{0≤p<k} C_p, where C_p = Σ_{j=0}^{p-1} diff2(s[2j],s[2j+1]) + diff3(s[2p],s[2p+2]) + Σ_{j=p+1}^{k-1} diff2(s[2j+1],s[2j+2]), with diff2(a,b)=0 if a=b and 1 otherwise, and diff3(a,c)=0 if a=c and 1 otherwise.",
+    "preconditions": "Let n=len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); n is odd; 2≤n≤200; k=(n-1)/2 using integer division."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumChanges.spec_14",
+    "negation": "AegisSpec.MinimumChanges.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≤ (Σ_{j=0}^{k-2} diff2(s[2j],s[2j+1])) + cost(s[2(k-1)..n]), where diff2(a,b)=0 if a=b and 1 otherwise, and cost(v) is the minimum number of single-letter changes needed to make v semi-palindromic; the last part has length n-2(k-1) and is at least 2 because k≤n/2.",
+    "preconditions": "Let n=len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; 1 ≤ k ≤ n/2 using integer division; k is interpreted as the natural number equal to its i64 value."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumChanges.spec_15",
+    "negation": "AegisSpec.MinimumChanges.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = min_{2≤p≤n-2} (cost(s[0..p]) + cost(s[p..n])), where cost(v) is the minimum number of single-letter changes needed to make v semi-palindromic (v is semi-palindromic if for some divisor d with 1≤d<len(v), in each residue class modulo d the characters of v read in increasing index order form a palindrome).",
+    "preconditions": "Let n=len(s). s is a slice of bytes; every byte is a lowercase English ASCII letter (97 ≤ s[i] ≤ 122 for 0 ≤ i < n); 2 ≤ n ≤ 200; k=2 (so n ≥ 4)."
+  }
+]

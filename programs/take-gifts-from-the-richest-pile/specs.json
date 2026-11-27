@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PickGifts.spec_1",
+    "negation": "AegisSpec.PickGifts.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the total number of gifts after k seconds of the following process. Start with the multiset S_0 consisting of the entries gifts[0],...,gifts[len(gifts)-1]. For each t from 0 to k-1, form S_{t+1} by choosing an occurrence x of the maximum element of S_t, deleting that occurrence, and inserting floor_sqrt(x). If several occurrences tie for the maximum, any choice gives the same multiset. Then r is the sum of the elements of S_k.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PickGifts.spec_2",
+    "negation": "AegisSpec.PickGifts.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns some result: it does not overflow, go out of bounds, or panic.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PickGifts.spec_3",
+    "negation": "AegisSpec.PickGifts.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= gifts[0] + ... + gifts[len(gifts)-1].",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PickGifts.spec_4",
+    "negation": "AegisSpec.PickGifts.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= len(gifts).",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PickGifts.spec_5",
+    "negation": "AegisSpec.PickGifts.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, the function returns a result r and r = (sum of all entries of gifts) - M + floor_sqrt(M), where M is the maximum entry of gifts.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PickGifts.spec_6",
+    "negation": "AegisSpec.PickGifts.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every entry of gifts is 1, then the function returns a result r and r = len(gifts).",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PickGifts.spec_7",
+    "negation": "AegisSpec.PickGifts.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k >= 5*len(gifts), then the function returns a result r and r = len(gifts).",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PickGifts.spec_8",
+    "negation": "AegisSpec.PickGifts.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice gifts' of the same length that is a permutation of gifts, meaning the two slices have the same multiset of entries, the calls pick_gifts(gifts,k) and pick_gifts(gifts',k) both return results r and r', and r = r'.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PickGifts.spec_9",
+    "negation": "AegisSpec.PickGifts.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k1 and k2 with 1 <= k1 <= k2 <= 10^3, the calls pick_gifts(gifts,k1) and pick_gifts(gifts,k2) both return results r1 and r2, and r1 >= r2.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PickGifts.spec_10",
+    "negation": "AegisSpec.PickGifts.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If M = max(gifts) > 1, then the function returns a result r and r < gifts[0] + ... + gifts[len(gifts)-1].",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PickGifts.spec_11",
+    "negation": "AegisSpec.PickGifts.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(gifts) = 1, let x_0 = gifts[0] and x_{t+1} = floor_sqrt(x_t) for t >= 0. The function returns r = x_k.",
+    "preconditions": "len(gifts) = 1; 1 <= gifts[0] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PickGifts.spec_12",
+    "negation": "AegisSpec.PickGifts.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and there exist non-negative integers c_0,...,c_{len(gifts)-1} such that c_0 + ... + c_{len(gifts)-1} = k and r = sum_{i=0}^{len(gifts)-1} F(c_i, gifts[i]).",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x, and F(0,x)=x, F(t+1,x)=floor_sqrt(F(t,x))."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PickGifts.spec_13",
+    "negation": "AegisSpec.PickGifts.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the maximum entry of gifts. For every k satisfying the preconditions, the function returns a result r and r <= (sum of all entries of gifts) - M + floor_sqrt(M).",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k <= 10^3. Here floor_sqrt(x) denotes the greatest integer s with s >= 0 and s*s <= x."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PickGifts.spec_14",
+    "negation": "AegisSpec.PickGifts.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "For every k with 1 <= k < 10^3, if pick_gifts(gifts,k) returns r_k and pick_gifts(gifts,k+1) returns r_{k+1}, then r_k > len(gifts) implies r_{k+1} < r_k.",
+    "preconditions": "len(gifts) is between 1 and 10^3 inclusive; for every i with 0 <= i < len(gifts), 1 <= gifts[i] <= 10^9; 1 <= k < 10^3."
+  }
+]

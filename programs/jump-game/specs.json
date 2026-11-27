@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanJump.spec_1",
+    "negation": "AegisSpec.CanJump.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_jump nums returns a result r, r is true if and only if there exist a natural number k >= 0 and indices i_0, ..., i_k such that i_0 = 0, i_k = n-1, every i_t satisfies 0 <= i_t < n, and for every t with 0 <= t < k, i_t < i_{t+1} and i_{t+1} - i_t <= nums[i_t]. Equivalently, r is false exactly when no such sequence exists. For n=1 the empty sequence with k=0 and i_0=0 is such a sequence, so the condition is true.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanJump.spec_2",
+    "negation": "AegisSpec.CanJump.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the call can_jump nums returns a Boolean result r; it does not fail by panic, arithmetic overflow, or out-of-bounds slice access.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanJump.spec_3",
+    "negation": "AegisSpec.CanJump.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_jump nums returns a result r, r = false.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000. nums[0] = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanJump.spec_4",
+    "negation": "AegisSpec.CanJump.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_jump nums returns a result r, r = true.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000. nums[0] >= n-1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanJump.spec_5",
+    "negation": "AegisSpec.CanJump.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever can_jump nums returns r and can_jump nums2 returns r2, r = r2.",
+    "preconditions": "Let n = len(nums). Let nums2 be any slice with len(nums2) = n. 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000 and 0 <= nums2[i] <= 100000. For every i with 0 <= i < n-1, nums[i] = nums2[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanJump.spec_6",
+    "negation": "AegisSpec.CanJump.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_jump nums returns r and can_jump nums2 returns r2, if r = true then r2 = true.",
+    "preconditions": "Let n = len(nums). Let nums2 be any slice with len(nums2) = n. 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000 and 0 <= nums2[i] <= 100000. For every i with 0 <= i < n, nums[i] <= nums2[i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanJump.spec_7",
+    "negation": "AegisSpec.CanJump.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever can_jump nums returns r and r = true, then for every p with 0 <= p < n there exist k >= 0 and indices i_0, ..., i_k such that i_0 = 0, i_k = p, every i_t satisfies 0 <= i_t < n, for every t with 0 <= t < k we have i_t < i_{t+1} and i_{t+1} - i_t <= nums[i_t].",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanJump.spec_8",
+    "negation": "AegisSpec.CanJump.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_jump nums returns r and r = false, there exists an index b with 0 <= b < n-1 such that b is reachable from 0 (meaning there exist k >= 0 and indices i_0, ..., i_k with i_0 = 0, i_k = b, every i_t in [0,n), i_t < i_{t+1} for all t < k, and i_{t+1} - i_t <= nums[i_t] for all t < k), and for every j with 0 <= j <= b we have j + nums[j] <= b. In particular nums[b] = 0.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanJump.spec_9",
+    "negation": "AegisSpec.CanJump.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_jump nums returns r and r = true, then for every index i with 1 <= i < n-1 and nums[i] = 0, there exists an index j with 0 <= j < i such that j + nums[j] >= i+1.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanJump.spec_10",
+    "negation": "AegisSpec.CanJump.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_jump nums returns r and r = true, there exists an index j with 0 <= j < n-1 such that j is reachable from 0 (meaning there exist k >= 0 and indices i_0, ..., i_k with i_0 = 0, i_k = j, every i_t in [0,n), i_t < i_{t+1} for all t < k, and i_{t+1} - i_t <= nums[i_t] for all t < k) and j + nums[j] >= n-1.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanJump.spec_11",
+    "negation": "AegisSpec.CanJump.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_jump nums returns r and r = true, there exist k >= 0 and indices i_0, ..., i_k such that i_0 = 0, i_k = n-1, every i_t satisfies 0 <= i_t < n, for every t with 0 <= t < k we have i_t < i_{t+1} and i_{t+1} - i_t <= nums[i_t], and k <= n-1. Moreover, if n > 1 then k >= 1.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10000. For every i with 0 <= i < n, as an integer, 0 <= nums[i] <= 100000."
+  }
+]

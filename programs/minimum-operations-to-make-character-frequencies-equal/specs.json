@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MakeStringGood.spec_1",
+    "negation": "AegisSpec.MakeStringGood.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever make_string_good returns a result r on an input s satisfying the preconditions, r is the smallest nonnegative integer for which there exist a nonempty string t over the lowercase English letters and a sequence of exactly r allowed operations that transforms s into t. An allowed operation is: delete one character; insert one lowercase English letter at any position; or replace one occurrence of a letter c by c+1, for c from 'a' through 'y'. The target t is good, meaning there is an integer k > 0 such that for every lowercase letter c, the number of occurrences of c in t is either 0 or k.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MakeStringGood.spec_2",
+    "negation": "AegisSpec.MakeStringGood.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, make_string_good returns a result r; it does not panic, go out of bounds, overflow, or otherwise fail.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MakeStringGood.spec_3",
+    "negation": "AegisSpec.MakeStringGood.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever make_string_good returns a result r on such an s, r = 0 if and only if s is good, meaning there exists an integer k > 0 such that for every lowercase letter c, occ_s(c) is either 0 or k.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z'). Let occ_s(c) be the number of indices i with 0 <= i < len(s) and s[i] equal to c."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MakeStringGood.spec_4",
+    "negation": "AegisSpec.MakeStringGood.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever make_string_good returns r1 on s1 and r2 on s2, we have r1 = r2. In particular, permuting the characters of s does not change the result.",
+    "preconditions": "3 <= len(s1), len(s2) <= 20000, every character of s1 and s2 is a lowercase English letter, and for every lowercase letter c, the number of occurrences of c in s1 equals the number of occurrences of c in s2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MakeStringGood.spec_5",
+    "negation": "AegisSpec.MakeStringGood.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever make_string_good returns a result r on such an s, there exist a nonempty good string t over the lowercase English letters and a sequence of exactly r allowed operations that transforms s into t, where allowed operations are delete one character, insert one lowercase English letter, and replace one occurrence of c by c+1 for c from 'a' through 'y'.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MakeStringGood.spec_6",
+    "negation": "AegisSpec.MakeStringGood.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever make_string_good returns a result r on such an s, for every nonempty good string t over the lowercase English letters and every sequence of q allowed operations that transforms s into t, where allowed operations are delete one character, insert one lowercase English letter, and replace one occurrence of c by c+1 for c from 'a' through 'y', we have r <= q.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MakeStringGood.spec_7",
+    "negation": "AegisSpec.MakeStringGood.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever make_string_good returns a result r on such an s, for every lowercase letter c with occ_s(c) > 0, we have r <= len(s) - occ_s(c).",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z'). Let occ_s(c) be the number of occurrences of c in s."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MakeStringGood.spec_8",
+    "negation": "AegisSpec.MakeStringGood.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever make_string_good returns a result r on such an s, for every integer k with 1 <= k <= len(s), we have r <= sum over lowercase letters c with occ_s(c) > 0 of |occ_s(c) - k|.",
+    "preconditions": "3 <= len(s) <= 20000 and for every i with 0 <= i < len(s), s[i] is a lowercase English letter ('a' through 'z'). Let occ_s(c) be the number of occurrences of c in s."
+  }
+]

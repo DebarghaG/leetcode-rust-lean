@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTime.spec_1",
+    "negation": "AegisSpec.MinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let D = m+n-2. A valid start-to-target walk of length L is a finite sequence of cells p_0,...,p_L with p_0=(0,0), p_L=(m-1,n-1), such that for every t with 0 <= t < L, p_t and p_{t+1} are adjacent in the four cardinal directions (they differ by 1 in exactly one coordinate and agree in the other), and for every t with 0 <= t <= L, grid[p_t.row][p_t.col] <= t. The function returns a result r (it does not fail) and: if at least one valid start-to-target walk exists, then r is the least L >= 0 for which a valid start-to-target walk of length L exists; equivalently, r >= 0, a valid start-to-target walk of length r exists, and no valid start-to-target walk of length less than r exists. If no valid start-to-target walk exists, then r = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTime.spec_2",
+    "negation": "AegisSpec.MinimumTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no overflow, out-of-bounds access, panic, or other Lean failure). The value r may be -1 or a nonnegative integer.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTime.spec_3",
+    "negation": "AegisSpec.MinimumTime.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let r be the result returned by the function. Then r = -1 if and only if grid[0][1] > 1 and grid[1][0] > 1. Equivalently, the bottom-right cell is unreachable exactly when neither of the two cells adjacent to the start can be entered at time 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTime.spec_4",
+    "negation": "AegisSpec.MinimumTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r >= 0 then r >= (m-1)+(n-1) = m+n-2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTime.spec_5",
+    "negation": "AegisSpec.MinimumTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r >= 0 then r >= grid[m-1][n-1].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTime.spec_6",
+    "negation": "AegisSpec.MinimumTime.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, if r >= 0 then r mod 2 = (m+n-2) mod 2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTime.spec_7",
+    "negation": "AegisSpec.MinimumTime.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max{ grid[i][j] : 0 <= i < m and 0 <= j < n }. Whenever the function returns a result r, if r >= 0 then r <= M + (m+n-2).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTime.spec_8",
+    "negation": "AegisSpec.MinimumTime.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r >= 0 then there exists a valid start-to-target walk of length r, where a valid walk is as in spec_1: p_0=(0,0), p_r=(m-1,n-1), consecutive cells are adjacent in the four cardinal directions, and grid[p_t.row][p_t.col] <= t for every t with 0 <= t <= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTime.spec_9",
+    "negation": "AegisSpec.MinimumTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r >= 0 then for every valid start-to-target walk of length L (defined as in spec_1), L >= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumTime.spec_10",
+    "negation": "AegisSpec.MinimumTime.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if r = -1 then no valid start-to-target walk (defined as in spec_1) exists.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumTime.spec_11",
+    "negation": "AegisSpec.MinimumTime.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let D = m+n-2. Whenever the function returns a result r, r = D if and only if there exists a valid start-to-target walk of length D (valid walk as defined in spec_1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input satisfies: m >= 2, n >= 2, m*n <= 100000; every row of grid has length n; for every i,j with 0 <= i < m and 0 <= j < n, 0 <= grid[i][j] <= 100000; and grid[0][0] = 0."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumTime.spec_12",
+    "negation": "AegisSpec.MinimumTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rA be the result of minimum_time(A) and rB be the result of minimum_time(B). If rB >= 0, then rA >= 0 and rA <= rB. Equivalently, lowering cell thresholds cannot increase the minimum arrival time, and if the higher-threshold grid is reachable then the lower-threshold grid is also reachable.",
+    "preconditions": "Let A and B be two inputs each satisfying the preconditions of spec_1 with the same row count m and column count n: m >= 2, n >= 2, m*n <= 100000; all rows have length n; all entries are between 0 and 100000; A[0][0]=0 and B[0][0]=0; and A[i][j] <= B[i][j] for every 0 <= i < m and 0 <= j < n."
+  }
+]

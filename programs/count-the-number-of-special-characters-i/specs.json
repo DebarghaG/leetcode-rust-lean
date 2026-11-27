@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_1",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever number_of_special_chars(word) returns a result r, r is exactly the number of integers c with 0 <= c <= 25 such that there exists i with 0 <= i < len(word) and word[i] = 97 + c, and there exists j with 0 <= j < len(word) and word[j] = 65 + c. Equivalently, r is the number of English letters (with c = 0 meaning a or A, ..., c = 25 meaning z or Z) for which both the lowercase byte and the uppercase byte occur somewhere in word.",
+    "preconditions": "len(word) >= 1 and for every i with 0 <= i < len(word), word[i] is an ASCII code in 65..90 (uppercase English letters) or in 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_2",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the preconditions, number_of_special_chars(word) returns a result r; evaluation does not panic, access an out-of-bounds index, or overflow.",
+    "preconditions": "len(word) >= 1 and for every i with 0 <= i < len(word), word[i] is an ASCII code in 65..90 or in 97..122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_3",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever number_of_special_chars(word) returns a result r, 0 <= r <= 26.",
+    "preconditions": "len(word) >= 1 and for every i with 0 <= i < len(word), word[i] is an ASCII code in 65..90 or in 97..122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_4",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every c with 0 <= c <= 25, byte 97 + c occurs in u if and only if byte 97 + c occurs in v, and byte 65 + c occurs in u if and only if byte 65 + c occurs in v, then whenever number_of_special_chars(u) returns r_u and number_of_special_chars(v) returns r_v, r_u = r_v. Here byte b occurs in a slice w means there exists i with 0 <= i < len(w) and w[i] = b.",
+    "preconditions": "u and v are byte slices, each of length at least 1, and every byte of each slice is an ASCII code in 65..90 or in 97..122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_5",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever number_of_special_chars(word) returns r and number_of_special_chars(word2) returns r2, let c be the letter index such that b = 97 + c if b is lowercase, or b = 65 + c if b is uppercase, and let opposite be 65 + c in the first case or 97 + c in the second case. Then: if b occurs in word, r2 = r; if b does not occur in word and opposite occurs in word, r2 = r + 1; if b does not occur in word and opposite does not occur in word, r2 = r.",
+    "preconditions": "word is a byte slice with len(word) >= 1 and every byte in 65..90 or 97..122. Let word2 be the byte slice of length len(word) + 1 defined by word2[i] = word[i] for 0 <= i < len(word) and word2[len(word)] = b, where b is an ASCII lowercase or uppercase English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSpecialChars.spec_6",
+    "negation": "AegisSpec.NumberOfSpecialChars.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever number_of_special_chars(word) returns a result r, r is at most the number of distinct c with 0 <= c <= 25 for which byte 97 + c occurs in word, and r is at most the number of distinct c with 0 <= c <= 25 for which byte 65 + c occurs in word. A letter index c is counted once in each of these two numbers even if its byte occurs many times.",
+    "preconditions": "len(word) >= 1 and for every i with 0 <= i < len(word), word[i] is an ASCII code in 65..90 or in 97..122."
+  }
+]

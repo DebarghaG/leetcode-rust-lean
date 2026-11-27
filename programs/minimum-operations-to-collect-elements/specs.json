@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that 0 <= r <= n and: (1) the suffix of length r contains every required value, i.e. for every v with 1 <= v <= k there exists i with n - r <= i < n and nums[i] = v; (2) no shorter suffix contains all required values, i.e. for every t with 0 <= t < r there exists v with 1 <= v <= k such that for every i with n - t <= i < n, nums[i] != v. Equivalently, r is exactly the minimum number of operations (successive removals of the last element) needed to have 1, 2, ..., k in the collection.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with 1 <= r <= n.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the suffix of length r contains every v with 1 <= v <= k: for every v with 1 <= v <= k there exists i with n - r <= i < n and nums[i] = v.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every t with 0 <= t < r the suffix of length t is missing at least one required value: there exists v with 1 <= v <= k such that for every i with n - t <= i < n, nums[i] != v.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let s = n - r. Then s is a valid index (0 <= s < n), nums[s] is a required value (1 <= nums[s] <= k), and this value does not occur after s: for every i with s < i < n, nums[i] != nums[s].",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every v with 1 <= v <= k, let L(v) be the largest index i with nums[i] = v (it exists by the guarantee). Then r >= n - L(v).",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let m = min { L(v) | 1 <= v <= k }, where L(v) is the largest index i with nums[i] = v. Then r <= n - m.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if k = 1 and nums[n - 1] = 1.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n if and only if nums[0] is a required value (1 <= nums[0] <= k) and it occurs nowhere else: for every i with 0 < i < n, nums[i] != nums[0].",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < n - r, if nums[i] is a required value (1 <= nums[i] <= k), then nums[i] occurs again later: there exists j with i < j < n and nums[j] = nums[i].",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: no panic, out-of-bounds access, or arithmetic overflow occurs.",
+    "preconditions": "Let n = len(nums). n >= 1, n <= 50, 1 <= k <= n, for every i with 0 <= i < n we have 1 <= nums[i] <= n, and for every v with 1 <= v <= k there exists i with 0 <= i < n and nums[i] = v."
+  }
+]

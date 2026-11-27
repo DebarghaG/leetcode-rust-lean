@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_1",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(room) and n = len(room[0]). Define directions 0 = right, 1 = down, 2 = left, 3 = up, with unit vectors (dr(0),dc(0)) = (0,1), (dr(1),dc(1)) = (1,0), (dr(2),dc(2)) = (0,-1), (dr(3),dc(3)) = (-1,0). A state is a triple (r,c,d) with 0 <= r < m, 0 <= c < n, and d in {0,1,2,3}. Define the transition function T(r,c,d) as follows: let r' = r + dr(d) and c' = c + dc(d). If 0 <= r' < m and 0 <= c' < n and room[r'][c'] = 0, then T(r,c,d) = (r',c',d); otherwise T(r,c,d) = (r,c,(d+1) mod 4). Define the state sequence s_0 = (0,0,0) and s_{t+1} = T(s_t) for t >= 0. Define the set of cleaned cells Visited = { (r,c) | there exists t >= 0 and d in {0,1,2,3} such that s_t = (r,c,d) }. Then the function returns a result r and r = |Visited| (the number of distinct cells in Visited).",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_2",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, overflow, or fail).",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_3",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r >= 1.",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_4",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r is at most the number of cells (r,c) with 0 <= r < m and 0 <= c < n and room[r][c] = 0.",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_5",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let k be the smallest integer with 1 <= k < n and room[0][k] = 1, if such k exists; otherwise let k = n. Then the function returns k.",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300; m = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_6",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let k be the smallest integer with 1 <= k < m and room[k][0] = 1, if such k exists; otherwise let k = m. Then the function returns k.",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300; n = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_7",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 1 if and only if (n = 1 or (n > 1 and room[0][1] = 1)) and (m = 1 or (m > 1 and room[1][0] = 1)).",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_8",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns (if m = 1 or n = 1 then m*n else 2*m + 2*n - 4).",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300; for all r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfCleanRooms.spec_9",
+    "negation": "AegisSpec.NumberOfCleanRooms.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the largest integer such that 0 <= k < n and for all j with 0 <= j <= k, room[0][j] = 0. Then the returned value r satisfies r >= k + 1.",
+    "preconditions": "room is a non-empty rectangular matrix: let m = len(room), n = len(room[0]); m >= 1, n >= 1; for every r with 0 <= r < m, len(room[r]) = n; for every r,c with 0 <= r < m and 0 <= c < n, room[r][c] = 0 or room[r][c] = 1; room[0][0] = 0; m <= 300 and n <= 300."
+  }
+]

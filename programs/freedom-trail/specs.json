@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindRotateSteps.spec_1",
+    "negation": "AegisSpec.FindRotateSteps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(ring) and m = len(key). For 0 <= a,b < n let dist(a,b) = min(|a-b|, n - |a-b|). The function returns a result r, and r is the minimum, over all sequences p_0,...,p_(m-1) of indices with 0 <= p_i < n and ring[p_i] = key[i] for every i, of the value m + dist(0,p_0) + sum_{i=1}^{m-1} dist(p_(i-1),p_i). The term m counts the m button presses; each dist term counts rotations between successive aligned positions; the initial aligned position is index 0.",
+    "preconditions": "1 <= len(ring) <= 100, 1 <= len(key) <= 100, every byte of ring and key is an ASCII lower-case letter (97..122), and for every i with 0 <= i < len(key) there exists p with 0 <= p < len(ring) and ring[p] = key[i] (so key is spellable)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindRotateSteps.spec_2",
+    "negation": "AegisSpec.FindRotateSteps.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every ring and key satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access an index out of bounds.",
+    "preconditions": "1 <= len(ring) <= 100, 1 <= len(key) <= 100, every byte of ring and key is an ASCII lower-case letter (97..122), and for every i with 0 <= i < len(key) there exists p with 0 <= p < len(ring) and ring[p] = key[i]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindRotateSteps.spec_3",
+    "negation": "AegisSpec.FindRotateSteps.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(ring), m = len(key), and dist(a,b) = min(|a-b|, n - |a-b|) for 0 <= a,b < n. Whenever the function returns a result r, for every sequence q_0,...,q_(m-1) of indices with 0 <= q_i < n and ring[q_i] = key[i] for every i, we have r <= m + dist(0,q_0) + sum_{i=1}^{m-1} dist(q_(i-1),q_i).",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, every byte of ring and key is an ASCII lower-case letter (97..122), and for every i with 0 <= i < len(key) there exists p with 0 <= p < len(ring) and ring[p] = key[i]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindRotateSteps.spec_4",
+    "negation": "AegisSpec.FindRotateSteps.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(ring), m = len(key), dist(a,b) = min(|a-b|, n - |a-b|) for 0 <= a,b < n, and Pos(i) = {p | 0 <= p < n and ring[p] = key[i]}. Whenever the function returns a result r, r >= m + min_{p in Pos(0)} dist(0,p) + sum_{i=1}^{m-1} min_{a in Pos(i-1), b in Pos(i)} dist(a,b).",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, every byte of ring and key is an ASCII lower-case letter (97..122), and for every i with 0 <= i < len(key) there exists p with 0 <= p < len(ring) and ring[p] = key[i]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindRotateSteps.spec_5",
+    "negation": "AegisSpec.FindRotateSteps.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(key) + min_{p | 0 <= p < len(ring) and ring[p] = c} dist(0,p), where dist(a,b) = min(|a-b|, len(ring) - |a-b|).",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, every byte of ring and key is an ASCII lower-case letter (97..122), every key character equals one byte c, and c occurs in ring."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindRotateSteps.spec_6",
+    "negation": "AegisSpec.FindRotateSteps.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result for (ring,key1) and r2 the result for (ring,key2). Whenever both functions return, r1 <= r2.",
+    "preconditions": "len(ring) >= 1; key1 and key2 are nonempty spellable keys for the same ring; every byte of ring, key1, and key2 is an ASCII lower-case letter; key1 is a subsequence of key2, meaning len(key1) <= len(key2) and there exist indices 0 <= j_0 < j_1 < ... < j_(len(key1)-1) < len(key2) with key1[t] = key2[j_t] for all t."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindRotateSteps.spec_7",
+    "negation": "AegisSpec.FindRotateSteps.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result for (ring,key) and r' the result for (ring,key'). Whenever both functions return, r' <= r + 1 + floor(len(ring)/2).",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, key' is key with one extra byte c appended so len(key') = len(key)+1, key'[i] = key[i] for 0 <= i < len(key), and key'[len(key)] = c; ring, key, and key' use ASCII lower-case letters; key and key' are spellable."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindRotateSteps.spec_8",
+    "negation": "AegisSpec.FindRotateSteps.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns results for both (ring,key) and (ring',key'), the two results are equal.",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, every byte of ring and key is an ASCII lower-case letter, key is spellable from ring, and f is an injective mapping from the 26 lower-case letters to lower-case letters. ring' and key' are obtained by ring'[i] = f(ring[i]) and key'[j] = f(key[j])."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindRotateSteps.spec_9",
+    "negation": "AegisSpec.FindRotateSteps.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(ring), m = len(key), and dist(a,b) = min(|a-b|, n - |a-b|). Whenever the function returns a result r, there exists a sequence p_0,...,p_(m-1) of indices with 0 <= p_i < n and ring[p_i] = key[i] for every i such that r = m + dist(0,p_0) + sum_{i=1}^{m-1} dist(p_(i-1),p_i).",
+    "preconditions": "len(ring) >= 1, len(key) >= 1, every byte of ring and key is an ASCII lower-case letter (97..122), and for every i with 0 <= i < len(key) there exists p with 0 <= p < len(ring) and ring[p] = key[i]."
+  }
+]

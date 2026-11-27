@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxCount.spec_1",
+    "negation": "AegisSpec.MaxCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) } (a set, so duplicates are ignored). Let A = { x | 1 <= x <= n and x not in B }. Let m = |A| and let a_1 < a_2 < ... < a_m be the elements of A in increasing order. For k = 0, ..., m define S(k) = a_1 + ... + a_k, with S(0) = 0. Whenever the function returns a result r, r = max { k | 0 <= k <= m and S(k) <= maxSum }.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic; the size bounds keep all sums mentioned below within 64-bit range. r denotes the returned mathematical integer."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxCount.spec_2",
+    "negation": "AegisSpec.MaxCount.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) } and let A = { x | 1 <= x <= n and x not in B }. Let m = |A|. Whenever the function returns a result r, 0 <= r <= m.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxCount.spec_3",
+    "negation": "AegisSpec.MaxCount.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r; it does not panic, go out of bounds, or overflow.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxCount.spec_4",
+    "negation": "AegisSpec.MaxCount.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) }. Whenever the function returns a result r, there exist r distinct integers x_1, ..., x_r such that for every j with 1 <= j <= r, 1 <= x_j <= n and x_j not in B, and x_1 + ... + x_r <= maxSum. For r = 0 the empty selection is allowed and has sum 0.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxCount.spec_5",
+    "negation": "AegisSpec.MaxCount.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) } and A = { x | 1 <= x <= n and x not in B }. Let m = |A|. Whenever the function returns a result r, for every integer k with r < k <= m and every choice of k distinct integers y_1, ..., y_k from A, we have y_1 + ... + y_k > maxSum. Equivalently, no selection of more than r allowed integers has sum at most maxSum.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxCount.spec_6",
+    "negation": "AegisSpec.MaxCount.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) }. Whenever the function returns a result r, r = 0 if and only if there is no integer x such that 1 <= x <= n, x not in B, and x <= maxSum. In other words, r = 0 exactly when every allowed integer in [1,n] is strictly greater than maxSum, including the case where there are no allowed integers.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxCount.spec_7",
+    "negation": "AegisSpec.MaxCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) }, A = { x | 1 <= x <= n and x not in B }, m = |A|, and T = sum_{x in A} x, with T = 0 when A is empty. Whenever the function returns a result r, r = m if and only if T <= maxSum.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxCount.spec_8",
+    "negation": "AegisSpec.MaxCount.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume len(banned) = 0. Whenever the function returns a result r, r is the unique integer such that 0 <= r <= n, r(r+1)/2 <= maxSum, and either r = n or (r+1)(r+2)/2 > maxSum.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; len(banned) = 0; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxCount.spec_9",
+    "negation": "AegisSpec.MaxCount.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume n = 1. Whenever the function returns a result r, r = 1 if there is no index i with 0 <= i < len(banned) and banned[i] = 1; otherwise r = 0.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; n = 1; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxCount.spec_10",
+    "negation": "AegisSpec.MaxCount.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r(r+1)/2 <= maxSum.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxCount.spec_11",
+    "negation": "AegisSpec.MaxCount.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let B = { banned[i] | 0 <= i < len(banned) }. Whenever the function returns a result r, for every integer k with 0 <= k < r, there exist k distinct integers y_1, ..., y_k such that for every j with 1 <= j <= k, 1 <= y_j <= n and y_j not in B, and y_1 + ... + y_k <= maxSum. For k = 0 the empty selection is allowed and has sum 0.",
+    "preconditions": "banned is a slice of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxCount.spec_12",
+    "negation": "AegisSpec.MaxCount.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the call max_count(banned, n, maxSum) returns r and the call max_count(banned', n, maxSum) returns r', we have r' = r.",
+    "preconditions": "banned and banned' are slices of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 0 <= len(banned') <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n; for every i with 0 <= i < len(banned'), 1 <= banned'[i] <= n; for every integer v, v occurs in banned' if and only if v occurs in banned. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxCount.spec_13",
+    "negation": "AegisSpec.MaxCount.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call max_count(banned, n, maxSum) returns r and the call max_count(banned, n', maxSum) returns r', we have r' >= r.",
+    "preconditions": "banned is a slice of 64-bit integers; n, n', and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= n' <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxCount.spec_14",
+    "negation": "AegisSpec.MaxCount.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call max_count(banned, n, maxSum) returns r and the call max_count(banned, n, maxSum') returns r', we have r' >= r.",
+    "preconditions": "banned is a slice of 64-bit integers; n, maxSum, and maxSum' are 64-bit integers; 0 <= len(banned) <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= maxSum' <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n. Duplicates in banned are allowed and treated as the same forbidden value. All arithmetic in the statement is mathematical integer arithmetic."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxCount.spec_15",
+    "negation": "AegisSpec.MaxCount.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call max_count(banned, n, maxSum) returns r and the call max_count(banned', n, maxSum) returns r', we have r' >= r.",
+    "preconditions": "banned and banned' are slices of 64-bit integers; n and maxSum are 64-bit integers; 0 <= len(banned) <= 100000; 0 <= len(banned') <= 100000; 1 <= n <= 1000000000; 1 <= maxSum <= 1000000000000000; for every i with 0 <= i < len(banned), 1 <= banned[i] <= n; for every i with 0 <= i < len(banned'), 1 <= banned'[i] <= n; for every integer v, if v occurs in banned' then v occurs in banned (the forbidden set of banned' is a subset of that of banned). All arithmetic in the statement is mathematical integer arithmetic."
+  }
+]

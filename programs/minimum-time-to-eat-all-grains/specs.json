@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTime.spec_1",
+    "negation": "AegisSpec.MinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the least nonnegative integer t for which there exists an assignment A from grain indices to hen indices such that, for every hen index i, the time needed by hen i to eat exactly the grains assigned to it is at most t. For a hen i, let S_i = { grains[j] | 0 <= j < len(grains) and A(j) = i }; if S_i is empty its time is 0, otherwise its time is (max S_i - min S_i) + min(|hens[i] - min S_i|, |hens[i] - max S_i|). Equivalently, r = min over all such assignments A of the maximum, over all hen indices i, of these hen times.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTime.spec_2",
+    "negation": "AegisSpec.MinimumTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, index out of bounds, or overflow.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTime.spec_3",
+    "negation": "AegisSpec.MinimumTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 1500000000.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTime.spec_4",
+    "negation": "AegisSpec.MinimumTime.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every grain index j with 0 <= j < len(grains) there exists a hen index i with 0 <= i < len(hens) such that hens[i] = grains[j].",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTime.spec_5",
+    "negation": "AegisSpec.MinimumTime.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume len(hens) = 1. Let h = hens[0], a = min_{0 <= j < len(grains)} grains[j], and b = max_{0 <= j < len(grains)} grains[j]. Whenever the function returns a result r, r = (b - a) + min(|h - a|, |h - b|).",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; len(hens) = 1; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTime.spec_6",
+    "negation": "AegisSpec.MinimumTime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume all grains are at the same position p. Whenever the function returns a result r, r = min_{0 <= i < len(hens)} |hens[i] - p|.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; there exists an integer p such that grains[j] = p for every j with 0 <= j < len(grains); for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; 0 <= p <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTime.spec_7",
+    "negation": "AegisSpec.MinimumTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every grain index j with 0 <= j < len(grains), r >= min_{0 <= i < len(hens)} |hens[i] - grains[j]|.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTime.spec_8",
+    "negation": "AegisSpec.MinimumTime.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an assignment A from grain indices to hen indices such that the maximum over hen indices i of the time for hen i to eat the grains assigned to it equals r. The time for hen i is 0 if no grain is assigned to i; otherwise it is (max S_i - min S_i) + min(|hens[i] - min S_i|, |hens[i] - max S_i|), where S_i = { grains[j] | A(j) = i }.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTime.spec_9",
+    "negation": "AegisSpec.MinimumTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every assignment A from grain indices to hen indices, the maximum over hen indices i of the time for hen i to eat the grains assigned to it is at least r. The time for hen i is 0 if no grain is assigned to i; otherwise it is (max S_i - min S_i) + min(|hens[i] - min S_i|, |hens[i] - max S_i|), where S_i = { grains[j] | A(j) = i }.",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumTime.spec_10",
+    "negation": "AegisSpec.MinimumTime.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let a = min_{0 <= j < len(grains)} grains[j] and b = max_{0 <= j < len(grains)} grains[j]. Then r <= min_{0 <= i < len(hens)} ((b - a) + min(|hens[i] - a|, |hens[i] - b|)).",
+    "preconditions": "1 <= len(hens), len(grains) <= 20000; for every i with 0 <= i < len(hens), 0 <= hens[i] <= 1000000000; for every j with 0 <= j < len(grains), 0 <= grains[j] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumTime.spec_11",
+    "negation": "AegisSpec.MinimumTime.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens', grains'), and there are bijections pi on {0,...,len(hens)-1} and sigma on {0,...,len(grains)-1} such that len(hens') = len(hens), len(grains') = len(grains), hens'[k] = hens[pi(k)] for all k, and grains'[k] = grains[sigma(k)] for all k, then r = r'.",
+    "preconditions": "Both (hens, grains) and (hens', grains') satisfy the common constraints: 1 <= len(hens), len(grains), len(hens'), len(grains') <= 20000; all positions are in [0,1000000000]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumTime.spec_12",
+    "negation": "AegisSpec.MinimumTime.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens'', grains'') with hens''[i] = hens[i] + c for all i and grains''[j] = grains[j] + c for all j, then r = r'.",
+    "preconditions": "Both original and shifted inputs satisfy the common constraints: positions remain in [0,1000000000]. There is an integer c such that 0 <= hens[i] + c <= 1000000000 for all i and 0 <= grains[j] + c <= 1000000000 for all j."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumTime.spec_13",
+    "negation": "AegisSpec.MinimumTime.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens'', grains'') with hens''[i] = k * hens[i] for all i and grains''[j] = k * grains[j] for all j, then r' = k * r.",
+    "preconditions": "Both original and scaled inputs satisfy the common constraints: positions remain in [0,1000000000]. There is a positive integer k such that 0 <= k * hens[i] <= 1000000000 for all i and 0 <= k * grains[j] <= 1000000000 for all j."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumTime.spec_14",
+    "negation": "AegisSpec.MinimumTime.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens', grains), then r' <= r.",
+    "preconditions": "Both (hens, grains) and (hens', grains) satisfy the common constraints. The multiset of positions in hens' contains the multiset of positions in hens: len(hens') >= len(hens) and there is an injective map from hen indices to indices of hens' preserving positions."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumTime.spec_15",
+    "negation": "AegisSpec.MinimumTime.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens, grains'), then r' >= r.",
+    "preconditions": "Both (hens, grains) and (hens, grains') satisfy the common constraints. The multiset of positions in grains' contains the multiset of positions in grains: len(grains') >= len(grains) and there is an injective map from grain indices to indices of grains' preserving positions."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinimumTime.spec_16",
+    "negation": "AegisSpec.MinimumTime.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens, grains'), then r = r'.",
+    "preconditions": "Both (hens, grains) and (hens, grains') satisfy the common constraints. len(grains) >= 2, and there are indices j0, i0 with 0 <= j0 < len(grains), 0 <= i0 < len(hens), and grains[j0] = hens[i0]. grains' is obtained from grains by deleting index j0."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MinimumTime.spec_17",
+    "negation": "AegisSpec.MinimumTime.spec_17_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (hens, grains) and returns r' on (hens', grains'), then r = r'.",
+    "preconditions": "Both (hens, grains) and (hens', grains') satisfy the common constraints: 1 <= len(hens), len(grains), len(hens'), len(grains') <= 20000; all positions in [0,1000000000]. Either len(hens') = len(hens) - 1 and there exist indices i0, i1 with i0 != i1, hens[i0] = hens[i1], and hens' is obtained from hens by deleting index i0; or len(grains') = len(grains) - 1 and there exist indices j0, j1 with j0 != j1, grains[j0] = grains[j1], and grains' is obtained from grains by deleting index j0."
+  }
+]

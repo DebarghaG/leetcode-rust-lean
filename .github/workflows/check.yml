@@ -1,0 +1,14 @@
+name: check
+on:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Check the proofs, specifications and programs this pull request changes
+        run: python3 tools/check.py changed --base origin/${{ github.base_ref }}

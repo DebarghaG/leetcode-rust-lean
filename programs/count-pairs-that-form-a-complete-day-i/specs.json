@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_1",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of pairs (i,j) of indices such that 0 <= i < j < n and hours[i] + hours[j] is an exact multiple of 24 (equivalently, (hours[i] + hours[j]) mod 24 = 0; the sum is the exact integer sum, which does not overflow under these preconditions).",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_2",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or go out of bounds on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_3",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and 0 <= r <= n*(n-1)/2.",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_4",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and r = 0 if and only if there do not exist indices i, j with 0 <= i < j < n and (hours[i] + hours[j]) mod 24 = 0.",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_5",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For t = 0,1,...,23, let c_t be the number of indices i with 0 <= i < n and hours[i] mod 24 = t, where the remainder is taken in {0,...,23}. The function returns a result r, and r = C(c_0,2) + C(c_12,2) + sum_{a=1}^{11} c_a * c_{24-a}, where C(x,2) = x*(x-1)/2.",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_6",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each i with 0 <= i < n, let d_i be the number of indices j with 0 <= j < n, j != i, and (hours[i] + hours[j]) mod 24 = 0. The function returns a result r, and r = (1/2) * sum_{i=0}^{n-1} d_i.",
+    "preconditions": "Let n = len(hours). The array satisfies 1 <= n <= 100 and 1 <= hours[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_7",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r for hours and a result r' for hours', and r = r'.",
+    "preconditions": "Let hours and hours' be two arrays satisfying the input constraints, with n = len(hours) = len(hours'). Assume hours' is a permutation of hours: there exists a bijection pi from {0,...,n-1} to {0,...,n-1} such that hours'[i] = hours[pi(i)] for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_8",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_old be the result returned for old and r_new the result returned for hours. Then r_new = r_old + d, where d is the number of indices i with 0 <= i < n and (old[i] + h) mod 24 = 0.",
+    "preconditions": "Let old be an array satisfying the input constraints with len(old) = n, and let h be an integer with 1 <= h <= 10^9. Let hours be the array of length n+1 with hours[i] = old[i] for 0 <= i < n and hours[n] = h; assume n+1 <= 100, so hours also satisfies the input constraints."
+  }
+]

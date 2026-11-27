@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_1",
+    "negation": "AegisSpec.ReorderLogFiles.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever reorder_log_files returns a result r, it satisfies the following. Let n = len(logs). For a log x, let id(x) be the byte string before its first space and body(x) be the byte string after its first space. Let L be the number of indices i with 0 <= i < n such that logs[i] is a letter-log. Then len(r) = n; the multiset of entries r[0],...,r[L-1] is exactly the multiset of all letter-logs in logs; for every k with 0 <= k < L, r[k] is a letter-log; for every k with L <= k < n, r[k] is a digit-log; for all i,j with 0 <= i < j < L, either body(r[i]) <_lex body(r[j]), or body(r[i]) = body(r[j]) and id(r[i]) <=_lex id(r[j]); and the sequence r[L],...,r[n-1] is exactly the sequence of digit-logs of logs in their original order, i.e. logs[j] for j in increasing order such that logs[j] is a digit-log. Here <_lex and <=_lex denote standard byte-wise lexicographic order.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_2",
+    "negation": "AegisSpec.ReorderLogFiles.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r and does not fail: there is no panic, out-of-bounds access, arithmetic overflow, or error result.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_3",
+    "negation": "AegisSpec.ReorderLogFiles.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever reorder_log_files returns a result r, len(r) = len(logs).",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_4",
+    "negation": "AegisSpec.ReorderLogFiles.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever reorder_log_files returns a result r, for every byte-vector x, the number of indices i with 0 <= i < len(r) and r[i] = x equals the number of indices j with 0 <= j < len(logs) and logs[j] = x. Equivalently, r is a permutation of logs as a multiset.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_5",
+    "negation": "AegisSpec.ReorderLogFiles.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever reorder_log_files returns a result r, let L be the number of letter-logs in logs. Then len(r) = len(logs), and for every index i: if 0 <= i < L then r[i] is a letter-log; if L <= i < len(r) then r[i] is a digit-log.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_6",
+    "negation": "AegisSpec.ReorderLogFiles.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever reorder_log_files returns a result r, let L be the number of letter-logs in logs. For every byte-vector x that is a letter-log, the number of indices i with 0 <= i < L and r[i] = x equals the number of indices j with 0 <= j < len(logs) and logs[j] = x.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_7",
+    "negation": "AegisSpec.ReorderLogFiles.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever reorder_log_files returns a result r, let D be the list of digit-logs of logs in their original order: D = [logs[j] for j in increasing order with 0 <= j < len(logs) and logs[j] is a digit-log]. Let L be the number of letter-logs in logs. Then len(r) = len(logs) and for every k with 0 <= k < len(D), r[L + k] = D[k].",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_8",
+    "negation": "AegisSpec.ReorderLogFiles.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever reorder_log_files returns a result r, let L be the number of letter-logs in logs. For all i,j with 0 <= i < j < L, body(r[i]) <=_lex body(r[j]), where body(x) is the byte string after the first space of x and <=_lex is standard byte-wise lexicographic order.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReorderLogFiles.spec_9",
+    "negation": "AegisSpec.ReorderLogFiles.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever reorder_log_files returns a result r, let L be the number of letter-logs in logs. For all i,j with 0 <= i < j < L, if body(r[i]) = body(r[j]), then id(r[i]) <=_lex id(r[j]), where body(x) is the byte string after the first space of x, id(x) is the byte string before the first space of x, and <=_lex is standard byte-wise lexicographic order.",
+    "preconditions": "logs is a non-empty slice of byte-vector strings with 1 <= len(logs) <= 100; each log has length between 3 and 100; each log consists of an identifier followed by a single space and at least one word, with tokens separated by single spaces; for each log, every non-identifier word consists entirely of lowercase English letters (a-z) or entirely of digits (0-9), and all non-identifier words of that log are of the same kind. Thus each log is either a letter-log or a digit-log."
+  }
+]

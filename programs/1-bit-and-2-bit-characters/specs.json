@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_1",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Let k be the unique integer with 0 <= k <= n-1 such that bits[j] = 1 for every j with n-1-k <= j <= n-2, and either n-1-k = 0 or bits[n-2-k] = 0; this k is the length of the maximal contiguous suffix of 1s immediately before the final 0. Then r = true if and only if k is even. Equivalently, in the unique decomposition of the whole array into contiguous blocks each equal to [0], [1,0], or [1,1], r = true exactly when the final block is the one-bit block [0] at index n-1, and r = false exactly when the final block is the two-bit block [1,0] at indices n-2 and n-1.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_2",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no panic, overflow, out-of-bounds access, or other failure) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_3",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. n = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_4",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns false.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. n >= 2, bits[n-2] = 1, and (n = 2 or bits[n-3] = 0)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_5",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if n is odd.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. For every i with 0 <= i < n-1, bits[i] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_6",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the slice bits[1..n) (indices 1 through n-1). The value returned by the function on bits equals the value returned by the function on s.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. n >= 2 and bits[0] = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_7",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the slice bits[2..n) (indices 2 through n-1). The value returned by the function on bits equals the value returned by the function on s.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. n >= 3 and bits[0] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_8",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For each c in {[1,0], [1,1]}, let bits' be the concatenation c ++ bits, so len(bits') = n+2, bits'[0] = 1, bits'[1] = c[1], and bits'[i+2] = bits[i] for 0 <= i < n. The value returned by the function on bits' equals the value returned by the function on bits.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0. n <= 998."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_9",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns false, n >= 2, bits[n-2] = 1, and in the unique decomposition of bits into blocks [0], [1,0], [1,1], the final block is the two-bit block [1,0] occupying indices n-2 and n-1.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsOneBitCharacter.spec_10",
+    "negation": "AegisSpec.IsOneBitCharacter.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true, in the unique decomposition of bits into blocks [0], [1,0], [1,1], the final block is the one-bit block [0] occupying index n-1.",
+    "preconditions": "Let n = len(bits). 1 <= n <= 1000. For every i with 0 <= i < n, bits[i] is either 0 or 1. bits[n-1] = 0."
+  }
+]

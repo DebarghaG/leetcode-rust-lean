@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfPower.spec_1",
+    "negation": "AegisSpec.SumOfPower.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever sum_of_power(nums) returns a result r, r is the least non-negative residue modulo MOD = 1000000007 of Total(nums), where Total(nums) is defined as follows. For each subset S of the index set {0,1,...,n-1} with S nonempty, let maxval(S) = max { nums[i] | i in S } and minval(S) = min { nums[i] | i in S }, and let power(S) = maxval(S) * maxval(S) * minval(S). Then Total(nums) is the sum of power(S) over all nonempty subsets S. Each subset S is counted once, and subsets are sets of indices, so two equal values at different indices correspond to different subsets.",
+    "preconditions": "Let n = len(nums). n is an integer with 1 <= n <= 100000, and for every i with 0 <= i < n, nums[i] is an integer with 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfPower.spec_2",
+    "negation": "AegisSpec.SumOfPower.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, sum_of_power(nums) returns a successful result: there exists an i64 value r such that sum_of_power(nums) returns r. It does not overflow, go out of bounds, panic, or otherwise fail.",
+    "preconditions": "Let n = len(nums). n is an integer with 1 <= n <= 100000, and for every i with 0 <= i < n, nums[i] is an integer with 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfPower.spec_3",
+    "negation": "AegisSpec.SumOfPower.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_of_power(nums) returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "Let n = len(nums). n is an integer with 1 <= n <= 100000, and for every i with 0 <= i < n, nums[i] is an integer with 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfPower.spec_4",
+    "negation": "AegisSpec.SumOfPower.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_of_power(nums) returns a result r, r = (((2^n - 1) mod 1000000007) * ((v * v * v) mod 1000000007)) mod 1000000007. Here 2^n - 1 is the exact integer count of nonempty subsets of the n indices, and the final modulo returns the least non-negative residue.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and there exists an integer v with 1 <= v <= 1000000000 such that nums[i] = v for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfPower.spec_5",
+    "negation": "AegisSpec.SumOfPower.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_of_power(nums) returns a result r, r = (a * a * a + b * b * b + max(a, b) * max(a, b) * min(a, b)) mod 1000000007, where the final modulo returns the least non-negative residue.",
+    "preconditions": "len(nums) = 2. Let a = nums[0] and b = nums[1]. We have 1 <= a <= 1000000000 and 1 <= b <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfPower.spec_6",
+    "negation": "AegisSpec.SumOfPower.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_of_power(nums) returns a result r and sum_of_power(nums2) returns a result r2, we have r = r2.",
+    "preconditions": "Let nums and nums2 be two valid input arrays of the same length n: 1 <= n <= 100000, and every entry of each array is between 1 and 1000000000. Suppose there is a bijection sigma on {0,1,...,n-1} such that nums2[j] = nums[sigma(j)] for every j with 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfPower.spec_7",
+    "negation": "AegisSpec.SumOfPower.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_of_power(nums) returns a result r and sum_of_power(nums2) returns a result r2, r2 = (c^3 * r) mod 1000000007, where c^3 and c^3 * r are exact integers and the final modulo returns the least non-negative residue.",
+    "preconditions": "Let nums be a valid input array of length n. Let c be a positive integer. Let nums2 be the length-n array defined by nums2[i] = c * nums[i] for every i with 0 <= i < n. Assume nums2 is also a valid input: 1 <= n <= 100000 and 1 <= nums2[i] <= 1000000000 for every i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOfPower.spec_8",
+    "negation": "AegisSpec.SumOfPower.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_of_power(nums) returns r and sum_of_power(nums2) returns r2, r2 = (r + (B mod 1000000007)) mod 1000000007, where B = v * v * v + the sum, over all nonempty subsets S of {0,1,...,n-1}, of (max(v, max { nums[i] | i in S })) * (max(v, max { nums[i] | i in S })) * min(v, min { nums[i] | i in S }), and the final modulo returns the least non-negative residue.",
+    "preconditions": "Let nums be a valid input array of length n with 1 <= n <= 100000. Let v be an integer with 1 <= v <= 1000000000, and assume n + 1 <= 100000. Let nums2 be the length-(n+1) array defined by nums2[i] = nums[i] for 0 <= i < n and nums2[n] = v."
+  }
+]

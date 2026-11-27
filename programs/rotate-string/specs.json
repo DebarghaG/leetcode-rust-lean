@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RotateString.spec_1",
+    "negation": "AegisSpec.RotateString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever rotate_string s goal returns a result r, r = true if and only if len(s) = len(goal) and there exists an integer k with 0 <= k < len(s) such that for every integer i with 0 <= i < len(s), goal[i] = s[(i + k) mod len(s)]. Here s[j] denotes the byte at 0-based index j, and (i + k) mod len(s) is the remainder in [0, len(s)).",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RotateString.spec_2",
+    "negation": "AegisSpec.RotateString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and goal satisfying the preconditions, rotate_string s goal returns a result (it does not fail, panic, overflow, or perform an out-of-bounds access).",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RotateString.spec_3",
+    "negation": "AegisSpec.RotateString.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever rotate_string s goal returns a result r with r = true, then for every byte b with 0 <= b <= 255, the number of indices i with 0 <= i < len(s) and s[i] = b equals the number of indices j with 0 <= j < len(goal) and goal[j] = b.",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RotateString.spec_4",
+    "negation": "AegisSpec.RotateString.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever rotate_string s goal returns a result r with r = true, let n = len(s). Then for every pair of bytes (a,b) with 0 <= a <= 255 and 0 <= b <= 255, the number of indices i with 0 <= i < n such that s[i] = a and s[(i + 1) mod n] = b equals the number of indices j with 0 <= j < n such that goal[j] = a and goal[(j + 1) mod n] = b.",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RotateString.spec_5",
+    "negation": "AegisSpec.RotateString.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s and goal satisfying the preconditions, rotate_string s goal and rotate_string goal s both return results, and the two returned booleans are equal.",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RotateString.spec_6",
+    "negation": "AegisSpec.RotateString.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer k with 0 <= k < len(s), let s' be the slice of length len(s) defined by s'[i] = s[(i + k) mod len(s)] for every integer i with 0 <= i < len(s). Then rotate_string s' goal and rotate_string s goal both return results, and their returned booleans are equal.",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RotateString.spec_7",
+    "negation": "AegisSpec.RotateString.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer k with 0 <= k < len(goal), let goal' be the slice of length len(goal) defined by goal'[i] = goal[(i + k) mod len(goal)] for every integer i with 0 <= i < len(goal). Then rotate_string s goal' and rotate_string s goal both return results, and their returned booleans are equal.",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RotateString.spec_8",
+    "negation": "AegisSpec.RotateString.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever rotate_string s goal returns a result r with r = true, we have len(s) = len(goal), and there exists an integer k with 0 <= k < len(s) such that for every integer i with 0 <= i < len(goal), goal[i] = (s ++ s)[k + i]. Here s ++ s is the concatenation of s with itself, indexed from 0, and the index k + i is less than 2 * len(s).",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RotateString.spec_9",
+    "negation": "AegisSpec.RotateString.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever rotate_string s goal returns a result r with r = false and len(s) = len(goal), then for every integer k with 0 <= k < len(s), there exists an integer i with 0 <= i < len(s) such that goal[i] != s[(i + k) mod len(s)].",
+    "preconditions": "len(s) >= 1, len(goal) >= 1, len(s) <= 100, len(goal) <= 100, and every byte of s and of goal is a lowercase English letter (ASCII code between 97 and 122 inclusive)."
+  }
+]

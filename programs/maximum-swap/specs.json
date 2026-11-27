@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumSwap.spec_1",
+    "negation": "AegisSpec.MaximumSwap.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let d_0, d_1, ..., d_{k-1} be the decimal digits of num, most significant first (so k >= 1, num = sum_{m=0}^{k-1} d_m * 10^{k-1-m}, and if num > 0 then d_0 != 0; for num = 0 take k = 1 and d_0 = 0). For 0 <= i <= j < k, let swap(num,i,j) be the integer value of the digit string obtained from d_0,...,d_{k-1} by exchanging d_i and d_j (if i=j this is the unchanged string; a leading zero created by the exchange is ignored in the integer value). The function returns a result r and r = max{ swap(num,i,j) : 0 <= i <= j < k }.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumSwap.spec_2",
+    "negation": "AegisSpec.MaximumSwap.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns some result r; it does not fail (no overflow, panic, or out-of-bounds error).",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumSwap.spec_3",
+    "negation": "AegisSpec.MaximumSwap.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r >= num.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumSwap.spec_4",
+    "negation": "AegisSpec.MaximumSwap.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the number of decimal digits of num. The function returns a result r with 0 <= r <= 10^k - 1.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumSwap.spec_5",
+    "negation": "AegisSpec.MaximumSwap.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and if num > 0, then r has exactly the same number k of decimal digits as num, i.e. 10^(k-1) <= r <= 10^k - 1.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumSwap.spec_6",
+    "negation": "AegisSpec.MaximumSwap.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and for every digit a with 0 <= a <= 9, the number of occurrences of a in the decimal representation of r equals the number of occurrences of a in the decimal representation of num.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumSwap.spec_7",
+    "negation": "AegisSpec.MaximumSwap.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let k be the number of decimal digits of num. The function returns a result r, and there exist indices i and j with 0 <= i <= j < k such that r equals the value obtained by exchanging the i-th and j-th decimal digits of num (most significant digit index 0; i=j means no exchange; leading zeros in the exchanged string are ignored as usual).",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumSwap.spec_8",
+    "negation": "AegisSpec.MaximumSwap.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of decimal digits of num. The function returns a result r, and for every pair of indices i and j with 0 <= i <= j < k, the value obtained from num by exchanging its i-th and j-th decimal digits (most significant digit index 0; i=j means no exchange; leading zeros in the exchanged string are ignored) is at most r.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumSwap.spec_9",
+    "negation": "AegisSpec.MaximumSwap.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r > num if and only if there exist indices i and j with 0 <= i < j < k such that exchanging the i-th and j-th decimal digits of num (most significant digit index 0) gives a value strictly greater than num; here k is the number of decimal digits of num.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumSwap.spec_10",
+    "negation": "AegisSpec.MaximumSwap.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if the decimal digits d_0,...,d_{k-1} of num (most significant first) satisfy d_0 >= d_1 >= ... >= d_{k-1}, then r = num.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumSwap.spec_11",
+    "negation": "AegisSpec.MaximumSwap.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if the decimal digits d_0,...,d_{k-1} of num (most significant first) satisfy d_0 < d_1 < ... < d_{k-1}, then r equals the value obtained by exchanging d_0 and d_{k-1} (for k=1 this exchange leaves num unchanged).",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumSwap.spec_12",
+    "negation": "AegisSpec.MaximumSwap.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and if num > 0 and d_0,...,d_{k-1} are the decimal digits of num (most significant first), then the most significant decimal digit of r is max{d_0,...,d_{k-1}}.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumSwap.spec_13",
+    "negation": "AegisSpec.MaximumSwap.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let k be the number of decimal digits of num. The function returns a result r, and if num > 0, then the decimal representations of num and r, both written with exactly k digits, are either identical or differ in exactly two positions i < j; in the latter case the i-th digit of r equals the j-th digit of num and the j-th digit of r equals the i-th digit of num (indices from 0 at the most significant digit).",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumSwap.spec_14",
+    "negation": "AegisSpec.MaximumSwap.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d_0,...,d_{k-1} be the decimal digits of num (most significant first), and let M = max{d_0,...,d_{k-1}}. The function returns a result r, and if num > 0 and d_0 < M, and j is the largest index with d_j = M, then r is obtained by exchanging d_0 and d_j.",
+    "preconditions": "0 <= num <= 999999999."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumSwap.spec_15",
+    "negation": "AegisSpec.MaximumSwap.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let d_0,...,d_{k-1} be the decimal digits of num (most significant first). If no pair i<j with d_i < d_j exists, then the function returns r = num. Otherwise let i be the smallest index for which some j>i has d_i < d_j; let M = max{d_j : i < j < k}; and let j be the largest index with i < j < k and d_j = M. Then the function returns r obtained from num by exchanging d_i and d_j.",
+    "preconditions": "0 <= num <= 999999999."
+  }
+]

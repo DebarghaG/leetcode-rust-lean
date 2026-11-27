@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AssignBikes.spec_1",
+    "negation": "AegisSpec.AssignBikes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, let n = len(workers), m = len(bikes), and for 0 <= i < n and 0 <= j < m define D(i,j) = |workers[i][0] - bikes[j][0]| + |workers[i][1] - bikes[j][1]|. Start with U = {0,...,n-1} and V = {0,...,m-1}. For k = 0,1,...,n-1, choose the unique pair (i_k,j_k) in U x V for which the triple (D(i_k,j_k), i_k, j_k) is lexicographically smallest among all pairs in U x V; set r[i_k] = j_k; then remove i_k from U and j_k from V. The returned array r has exactly these entries, indexed by worker index (0-based).",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] is a vector of length 2; every coordinate is an integer with 0 <= coordinate <= 1000; the worker points workers[0],...,workers[n-1] are pairwise distinct and the bike points bikes[0],...,bikes[m-1] are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AssignBikes.spec_2",
+    "negation": "AegisSpec.AssignBikes.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, len(r) = len(workers).",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AssignBikes.spec_3",
+    "negation": "AegisSpec.AssignBikes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, for every i with 0 <= i < len(workers), we have 0 <= r[i] < len(bikes).",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AssignBikes.spec_4",
+    "negation": "AegisSpec.AssignBikes.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, for all i,k with 0 <= i < k < len(workers), we have r[i] != r[k].",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AssignBikes.spec_5",
+    "negation": "AegisSpec.AssignBikes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, the set of values occurring in r is exactly {0,1,...,m-1}, where m = len(bikes); equivalently r is a permutation of all bike indices.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct. Assume additionally n = m."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AssignBikes.spec_6",
+    "negation": "AegisSpec.AssignBikes.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define D(i,j) = |workers[i][0] - bikes[j][0]| + |workers[i][1] - bikes[j][1]|. Let (i0,j0) be the unique pair with 0 <= i0 < len(workers) and 0 <= j0 < len(bikes) that lexicographically minimizes (D(i0,j0), i0, j0) over all worker-bike pairs. Whenever assign_bikes(workers, bikes) returns a result r, r[i0] = j0.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AssignBikes.spec_7",
+    "negation": "AegisSpec.AssignBikes.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, for every worker i with 0 <= i < len(workers) and every bike k with 0 <= k < len(bikes) such that k is not equal to r[t] for any t with 0 <= t < len(workers), we have D(i,r[i]) <= D(i,k), where D(i,j) = |workers[i][0] - bikes[j][0]| + |workers[i][1] - bikes[j][1]|.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AssignBikes.spec_8",
+    "negation": "AegisSpec.AssignBikes.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever assign_bikes(workers, bikes) returns a result r, for every worker i with 0 <= i < len(workers) and every bike k with 0 <= k < len(bikes) such that k is not equal to r[t] for any t with 0 <= t < len(workers), if D(i,r[i]) = D(i,k), then r[i] < k, where D(i,j) = |workers[i][0] - bikes[j][0]| + |workers[i][1] - bikes[j][1]|.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AssignBikes.spec_9",
+    "negation": "AegisSpec.AssignBikes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever assign_bikes(workers, bikes) returns r and assign_bikes(workers', bikes') returns r', we have r = r'.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] has length 2; every coordinate is in [0,1000]; worker positions are pairwise distinct and bike positions are pairwise distinct. Let a,b be integers and define workers'[i][0] = workers[i][0]+a, workers'[i][1] = workers[i][1]+b, bikes'[j][0] = bikes[j][0]+a, bikes'[j][1] = bikes[j][1]+b; assume workers' and bikes' also satisfy the same preconditions."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AssignBikes.spec_10",
+    "negation": "AegisSpec.AssignBikes.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every workers and bikes satisfying the preconditions, assign_bikes(workers, bikes) returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] is a vector of length 2; every coordinate is an integer with 0 <= coordinate <= 1000; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AssignBikes.spec_11",
+    "negation": "AegisSpec.AssignBikes.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define D(i,j) = |workers[i][0] - bikes[j][0]| + |workers[i][1] - bikes[j][1]|, and let i_0,...,i_{n-1} be the worker indices in the order selected by the greedy process of spec_1. Whenever assign_bikes(workers, bikes) returns a result r, for every worker i and every bike k such that r[t] = k for some t != i, if the pair (D(i,k), k) is lexicographically smaller than (D(i,r[i]), r[i]), then t occurs before i in the selection order.",
+    "preconditions": "Let n = len(workers) and m = len(bikes). Assume 1 <= n <= m <= 1000; every workers[i] and bikes[j] is a vector of length 2; every coordinate is an integer with 0 <= coordinate <= 1000; worker positions are pairwise distinct and bike positions are pairwise distinct."
+  }
+]

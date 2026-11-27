@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinTime.spec_1",
+    "negation": "AegisSpec.MinTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_time(skill, mana) returns a result r, r equals the minimum over all nonnegative real start times t_0,...,t_{m-1} of t_{m-1} + (sum_{k=0}^{n-1} skill[k])*mana[m-1], subject to the condition that for every j with 0≤j<m-1 and every i with 0≤i<n: t_{j+1} + (sum_{k=0}^{i-1} skill[k])*mana[j+1] ≥ t_j + (sum_{k=0}^{i} skill[k])*mana[j], with an empty sum equal to 0.",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinTime.spec_2",
+    "negation": "AegisSpec.MinTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every skill and mana satisfying the preconditions, min_time(skill, mana) returns a result (Result.ok r for some 64-bit integer r); it does not fail by arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinTime.spec_3",
+    "negation": "AegisSpec.MinTime.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P_i = sum_{k=0}^{i} skill[k] for 0≤i<n, and Q_i = sum_{k=0}^{i-1} skill[k] for 0≤i<n (so Q_0=0). Define S_0=0 and, for each j with 0≤j<m-1, S_{j+1} = S_j + max_{0≤i<n} (P_i*mana[j] - Q_i*mana[j+1]). Whenever min_time(skill, mana) returns r, r = S_{m-1} + P_{n-1}*mana[m-1]. Moreover, the start times t_j = S_j are feasible for the problem and attain this value.",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinTime.spec_4",
+    "negation": "AegisSpec.MinTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_time(skill, mana) returns r, r ≥ (sum_{i=0}^{n-1} skill[i]) * (max_{0≤j<m} mana[j]).",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinTime.spec_5",
+    "negation": "AegisSpec.MinTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_time(skill, mana) returns r, r ≥ (max_{0≤i<n} skill[i]) * (sum_{j=0}^{m-1} mana[j]).",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinTime.spec_6",
+    "negation": "AegisSpec.MinTime.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_time(skill, mana) returns r, r ≤ (sum_{i=0}^{n-1} skill[i]) * (sum_{j=0}^{m-1} mana[j]).",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinTime.spec_7",
+    "negation": "AegisSpec.MinTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_time(skill, mana) returns r, r = skill[0] * (sum_{j=0}^{m-1} mana[j]).",
+    "preconditions": "len(skill)=n=1, len(mana)=m, 1≤m≤5000, and 1≤skill[0]≤5000; for every j with 0≤j<m, 1≤mana[j]≤5000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinTime.spec_8",
+    "negation": "AegisSpec.MinTime.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_time(skill, mana) returns r, r = d * ((sum_{i=0}^{n-1} skill[i]) + (m-1) * (max_{0≤i<n} skill[i])).",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m≤5000, and for every i with 0≤i<n, 1≤skill[i]≤5000; there exists an integer d with 1≤d≤5000 such that mana[j]=d for every 0≤j<m."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinTime.spec_9",
+    "negation": "AegisSpec.MinTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_time(skill, mana) returns r and min_time(skill2, mana) returns r2, r ≤ r2.",
+    "preconditions": "skill and skill2 have length n with 1≤n≤5000 and entries in [1,5000], and skill[i] ≤ skill2[i] for every 0≤i<n. mana has length m with 1≤m≤5000 and entries in [1,5000]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinTime.spec_10",
+    "negation": "AegisSpec.MinTime.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_time(skill, mana) returns r and min_time(skill, mana2) returns r2, r2 ≥ r + skill[n-1]*d.",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m<5000, and all skill and mana entries are in [1,5000]. Also d is an integer with 1≤d≤5000, and mana2 has length m+1 with mana2[j]=mana[j] for 0≤j<m and mana2[m]=d."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinTime.spec_11",
+    "negation": "AegisSpec.MinTime.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_time(skill, mana) returns r and min_time(skill, mana2) returns r2, r2 ≥ r + skill[0]*d.",
+    "preconditions": "len(skill)=n, len(mana)=m, 1≤n≤5000, 1≤m<5000, and all skill and mana entries are in [1,5000]. Also d is an integer with 1≤d≤5000, and mana2 has length m+1 with mana2[0]=d and mana2[j+1]=mana[j] for 0≤j<m."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinTime.spec_12",
+    "negation": "AegisSpec.MinTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_time(skill, mana) returns r and min_time(skill, mana2) returns r2, r <= r2.",
+    "preconditions": "skill has length n with 1<=n<=5000 and 1<=skill[i]<=5000 for all i. Both mana and mana2 have length m with 1<=m<=5000 and entries in [1,5000]. For every 0<=j<m-1, mana[j]=mana2[j], and mana[m-1]<=mana2[m-1]."
+  }
+]

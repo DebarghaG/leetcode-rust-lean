@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_1",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_possible_to_cut_path(grid) returns a Boolean r, r = true if and only if there exists an m-by-n matrix H such that: either H = grid, or H is obtained from grid by changing exactly one cell (i,j) with 0 <= i < m, 0 <= j < n, (i,j) != (0,0), (i,j) != (m-1,n-1), by setting H[i][j] = 1 - grid[i][j] and H[a][b] = grid[a][b] for all other cells; and H has no down/right 1-path from (0,0) to (m-1,n-1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The input grid is a nonempty rectangular matrix: every row of grid has length n, 1 <= m, 1 <= n, and m*n <= 100000. Every entry grid[i][j] is 0 or 1. Also grid[0][0] = 1 and grid[m-1][n-1] = 1. A down/right 1-path in an m-by-n matrix X is a finite sequence ((r_0,c_0),...,(r_k,c_k)) such that (r_0,c_0) = (0,0), (r_k,c_k) = (m-1,n-1), for each t < k either (r_{t+1},c_{t+1}) = (r_t+1,c_t) or (r_{t+1},c_{t+1}) = (r_t,c_t+1), and X[r_t][c_t] = 1 for every t."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_2",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call is_possible_to_cut_path(grid) does not fail: it returns some Boolean result, with no overflow, out-of-bounds indexing, or panic, for every input satisfying the preconditions.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_3",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns true if and only if there exists a cell (i,j) with 0 <= i < m, 0 <= j < n, (i,j) != (0,0), (i,j) != (m-1,n-1), and grid[i][j] = 1, such that the matrix H with H[i][j] = 0 and H[a][b] = grid[a][b] for all (a,b) != (i,j) has no down/right 1-path from (0,0) to (m-1,n-1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. A down/right 1-path is a sequence of cells from (0,0) to (m-1,n-1) whose steps are only to (r+1,c) or (r,c+1) and whose every visited cell has value 1. Additionally, grid itself has a down/right 1-path from (0,0) to (m-1,n-1)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_4",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever is_possible_to_cut_path(grid) returns false, the original grid has a down/right 1-path from (0,0) to (m-1,n-1); equivalently, if the original matrix is disconnected, the function cannot return false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. A down/right 1-path is a sequence of cells from (0,0) to (m-1,n-1) whose steps are only to (r+1,c) or (r,c+1) and whose every visited cell has value 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_5",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_possible_to_cut_path(grid) returns false, for every cell (i,j) with 0 <= i < m, 0 <= j < n, (i,j) != (0,0), (i,j) != (m-1,n-1), the matrix obtained from grid by setting that cell to 1 - grid[i][j] and leaving all other cells unchanged still has a down/right 1-path from (0,0) to (m-1,n-1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. A down/right 1-path is a sequence of cells from (0,0) to (m-1,n-1) whose steps are only to (r+1,c) or (r,c+1) and whose every visited cell has value 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_6",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever is_possible_to_cut_path(grid) returns true, there exists a cell (i,j) with 0 <= i < m, 0 <= j < n, (i,j) != (0,0), (i,j) != (m-1,n-1), and grid[i][j] = 1 such that every down/right 1-path from (0,0) to (m-1,n-1) in grid contains the cell (i,j).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. A down/right 1-path is a sequence of cells from (0,0) to (m-1,n-1) whose steps are only to (r+1,c) or (r,c+1) and whose every visited cell has value 1. Additionally, grid itself has a down/right 1-path from (0,0) to (m-1,n-1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_7",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. Additionally, m*n <= 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_8",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. Additionally, either (m = 1 and n >= 3) or (n = 1 and m >= 3)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_9",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if grid[0][1] = 0 or grid[1][0] = 0.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, m = 2, n = 2, every entry is 0 or 1, and grid[0][0] = grid[1][1] = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_10",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let T be the n-by-m transpose matrix defined by T[j][i] = grid[i][j] for 0 <= i < m and 0 <= j < n. Then is_possible_to_cut_path(grid) returns the same Boolean value as is_possible_to_cut_path(T).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_11",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let R be the m-by-n matrix defined by R[i][j] = grid[m-1-i][n-1-j] for 0 <= i < m and 0 <= j < n. Then is_possible_to_cut_path(grid) returns the same Boolean value as is_possible_to_cut_path(R).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_12",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever is_possible_to_cut_path(G) returns true, is_possible_to_cut_path(G') also returns true.",
+    "preconditions": "Let G and G' be two matrices satisfying all of the input preconditions with the same dimensions m-by-n, where m = len(G), n = len(G[0]), every row has length n, 1 <= m, 1 <= n, m*n <= 100000, all entries are 0 or 1, and G[0][0] = G[m-1][n-1] = G'[0][0] = G'[m-1][n-1] = 1. Suppose G'[i][j] <= G[i][j] for every 0 <= i < m and 0 <= j < n, so G' is obtained from G by changing some non-endpoint 1-cells to 0."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsPossibleToCutPath.spec_13",
+    "negation": "AegisSpec.IsPossibleToCutPath.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns false if and only if there exist two down/right 1-paths in grid from (0,0) to (m-1,n-1) that are internally vertex-disjoint.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Every row of grid has length n, 1 <= m, 1 <= n, m*n <= 100000, every entry is 0 or 1, and grid[0][0] = grid[m-1][n-1] = 1. A down/right 1-path is a sequence of cells from (0,0) to (m-1,n-1) whose steps are only to (r+1,c) or (r,c+1) and whose every visited cell has value 1. Additionally, grid itself has a down/right 1-path from (0,0) to (m-1,n-1) and m*n >= 3. Two down/right 1-paths are internally vertex-disjoint if they have no cell in common except (0,0) and (m-1,n-1)."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_1",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). A sequence ys of length n is a rearrangement of nums when len(ys)=n and, for every integer v, the number of indices i with ys[i]=v equals the number of indices i with nums[i]=v; two rearrangements are considered the same when they agree at every index. Call ys squareful when for every i with 0 <= i < n-1 the sum ys[i]+ys[i+1] is a perfect square, where an integer s is a perfect square iff there exists an integer k >= 0 with k*k = s. The function returns a result r, and r is the number of distinct squareful rearrangements of nums.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^9. These are the problem constraints."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_2",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or access an out-of-bounds index.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_3",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r satisfies 0 <= r <= n! / (product over all values v occurring in nums of c_v!), where n = len(nums) and c_v is the number of occurrences of v in nums.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_4",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1.",
+    "preconditions": "nums is a slice of 64-bit integers with len(nums)=1 and 0 <= nums[0] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_5",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r determined as follows: if nums[0]=nums[1], then r=1 when 2*nums[0] is a perfect square and r=0 otherwise; if nums[0] != nums[1], then r=2 when nums[0]+nums[1] is a perfect square and r=0 otherwise.",
+    "preconditions": "nums is a slice of 64-bit integers with len(nums)=2 and, for i=0,1, 0 <= nums[i] <= 10^9. A perfect square means an integer s for which there exists an integer k >= 0 with k*k = s."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_6",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1 when 2*x is a perfect square, and r = 0 otherwise.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 12, and there is an integer x with 0 <= x <= 10^9 such that nums[i]=x for every i with 0 <= i < len(nums). A perfect square means an integer s for which there exists an integer k >= 0 with k*k = s."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_7",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 12, 0 <= nums[i] <= 10^9 for all i, and there exists an index i with 0 <= i < len(nums) such that for every j with 0 <= j < len(nums) and j != i, nums[i]+nums[j] is not a perfect square, where perfect square means an integer s with some integer k >= 0 satisfying k*k = s."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_8",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exists a sequence ys of length len(nums) that is a rearrangement of nums (same multiset of entries) and satisfies: for every i with 0 <= i < len(nums)-1, ys[i]+ys[i+1] is a perfect square.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^9. A perfect square means an integer s for which there exists an integer k >= 0 with k*k = s."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_9",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input nums and returns r' on input nums', we have r = r'.",
+    "preconditions": "nums and nums' are slices of 64-bit integers, both satisfy 1 <= length <= 12 and all entries are between 0 and 10^9, and nums' is a rearrangement of nums, meaning len(nums')=len(nums) and for every integer v the number of occurrences of v in nums' equals the number of occurrences of v in nums."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_10",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = n! / (product over all values v occurring in nums of c_v!), where n = len(nums) and c_v is the number of occurrences of v in nums.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and 0 <= nums[i] <= 10^9 for all i. For every pair of indices i,j with 0 <= i < j < len(nums), nums[i]+nums[j] is a perfect square, where perfect square means an integer s with some integer k >= 0 satisfying k*k = s."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_11",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, r mod 2 equals P mod 2, where P is the number of distinct squareful rearrangements ys of nums such that ys[i] = ys[len(nums)-1-i] for every i with 0 <= i < len(nums); squareful means that for every i with 0 <= i < len(nums)-1, ys[i]+ys[i+1] is a perfect square.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 12 and 0 <= nums[i] <= 10^9 for all i. A perfect square means an integer s with some integer k >= 0 satisfying k*k = s."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumSquarefulPerms.spec_12",
+    "negation": "AegisSpec.NumSquarefulPerms.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 2 <= len(nums) <= 12 and 0 <= nums[i] <= 10^9 for every i. Let G be the undirected graph on indices {0,...,len(nums)-1} with an edge between distinct i and j exactly when nums[i]+nums[j] is a perfect square, where perfect square means s=t*t for some integer t>=0. Assume G is disconnected."
+  }
+]

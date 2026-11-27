@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestDistance.spec_1",
+    "negation": "AegisSpec.ShortestDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever shortest_distance(grid) returns a result r, r is characterized as follows. For an empty cell p=(i,j) with grid[i][j]=0 and a building cell q, let dist_grid(p,q) be the least k >= 1 such that there is a sequence p=p_0,p_1,...,p_k=q of cells where each consecutive pair is side-adjacent (differs by 1 in exactly one coordinate) and p_0,...,p_{k-1} all have grid value 0; if no such k exists, dist_grid(p,q) is undefined. Call an empty cell p a valid house if dist_grid(p,q) is defined for every building q. For a valid house p, define total_distance(p) = sum over all building cells q of dist_grid(p,q). Then r is the minimum of total_distance(p) over all valid houses p, if at least one valid house exists; otherwise r = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestDistance.spec_2",
+    "negation": "AegisSpec.ShortestDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access outside the grid for any input satisfying the preconditions.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestDistance.spec_3",
+    "negation": "AegisSpec.ShortestDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever shortest_distance(grid) returns a result r with r != -1, we have r >= B, where B is the number of cells with value 1 in grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestDistance.spec_4",
+    "negation": "AegisSpec.ShortestDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever shortest_distance(grid) returns a result r with r != -1, we have r <= B * (m * n - 1), where B is the number of cells with value 1 in grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestDistance.spec_5",
+    "negation": "AegisSpec.ShortestDistance.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever shortest_distance(grid) returns a result r with r != -1, there exists a cell p=(i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j]=0 such that for every building cell q, the shortest legal side-adjacent path from p to q whose cells before q are all empty exists, and r is the sum of those path lengths over all building cells q.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestDistance.spec_6",
+    "negation": "AegisSpec.ShortestDistance.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever shortest_distance(grid) returns a result r with r != -1, for every empty cell p=(i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j]=0 such that for every building cell q there exists a legal side-adjacent path from p to q whose cells before q are all empty, let dist_grid(p,q) be the least k >= 1 for which there is a sequence p=p_0,...,p_k=q of grid cells with each consecutive pair side-adjacent and p_0,...,p_{k-1} all having grid value 0. Then the sum over all building cells q of dist_grid(p,q) is at least r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestDistance.spec_7",
+    "negation": "AegisSpec.ShortestDistance.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever shortest_distance(grid) returns a result r, r = -1 if and only if there is no empty cell p=(i,j) from which every building cell q is reachable by a legal side-adjacent path whose cells before q are all empty.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestDistance.spec_8",
+    "negation": "AegisSpec.ShortestDistance.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever shortest_distance(grid) returns a result r, r = 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; there is exactly one cell b=(r,c) with grid[r][c] = 1; and there exists an empty cell side-adjacent to b (a cell differing from b by 1 in exactly one coordinate)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestDistance.spec_9",
+    "negation": "AegisSpec.ShortestDistance.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be the n by m grid defined by gridT[j][i] = grid[i][j]. Whenever shortest_distance(grid) returns r and shortest_distance(gridT) returns rT, we have r = rT.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestDistance.spec_10",
+    "negation": "AegisSpec.ShortestDistance.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridR be the m by n grid defined by gridR[i][j] = grid[m-1-i][j]. Whenever shortest_distance(grid) returns r and shortest_distance(gridR) returns rR, we have r = rR.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). We assume 1 <= m,n <= 50; for every i with 0 <= i < m, len(grid[i]) = n; for every i,j with 0 <= i < m and 0 <= j < n, grid[i][j] is 0, 1, or 2; and there is at least one cell (i,j) with grid[i][j] = 1."
+  }
+]

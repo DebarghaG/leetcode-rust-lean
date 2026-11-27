@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinMoves.spec_1",
+    "negation": "AegisSpec.MinMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the least non-negative integer m for which there exists a sequence of exactly m moves starting from 1 and ending at target, where each move is either an increment (replace the current value x by x + 1) or a double (replace x by 2 * x), and at most maxDoubles of the m moves are doubles.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinMoves.spec_2",
+    "negation": "AegisSpec.MinMoves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail: for every target and maxDoubles satisfying the preconditions, min_moves target maxDoubles returns a result (some Std.I64 value), not a panic/overflow/out-of-bounds failure.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinMoves.spec_3",
+    "negation": "AegisSpec.MinMoves.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_moves target maxDoubles returns a result r, r >= 0.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinMoves.spec_4",
+    "negation": "AegisSpec.MinMoves.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_moves target maxDoubles returns a result r, r <= target - 1.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinMoves.spec_5",
+    "negation": "AegisSpec.MinMoves.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let pc(n) be the number of 1-bits in the binary expansion of n (n >= 1), and let floor_log2(n) be the unique integer k with 2^k <= n < 2^(k+1). Whenever min_moves target maxDoubles returns a result r, r >= floor_log2(target) + pc(target) - 1.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinMoves.spec_6",
+    "negation": "AegisSpec.MinMoves.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_moves target maxDoubles returns a result r, there exists a sequence of exactly r moves from 1 to target, each move being an increment or a double, in which the number of double moves is at most maxDoubles.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinMoves.spec_7",
+    "negation": "AegisSpec.MinMoves.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_moves target maxDoubles returns a result r, every sequence of moves from 1 to target in which each move is an increment or a double and the number of double moves is at most maxDoubles has length at least r.",
+    "preconditions": "target and maxDoubles are integers with 1 <= target <= 1000000000 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinMoves.spec_8",
+    "negation": "AegisSpec.MinMoves.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = 0.",
+    "preconditions": "target = 1 and 0 <= maxDoubles <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinMoves.spec_9",
+    "negation": "AegisSpec.MinMoves.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = target - 1.",
+    "preconditions": "1 <= target <= 1000000000 and maxDoubles = 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinMoves.spec_10",
+    "negation": "AegisSpec.MinMoves.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = ceil(target / 2), i.e., r is the least integer m such that 2*m >= target.",
+    "preconditions": "2 <= target <= 1000000000 and maxDoubles = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinMoves.spec_11",
+    "negation": "AegisSpec.MinMoves.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_moves target maxDoubles1 returns r1 and min_moves target maxDoubles2 returns r2, then r2 <= r1.",
+    "preconditions": "1 <= target <= 1000000000 and 0 <= maxDoubles1 <= maxDoubles2 <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinMoves.spec_12",
+    "negation": "AegisSpec.MinMoves.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let pc(n) be the number of 1-bits in the binary expansion of n. Whenever min_moves target maxDoubles returns a result r, r = floor_log2(target) + pc(target) - 1.",
+    "preconditions": "1 <= target <= 1000000000, 0 <= maxDoubles <= 100, and maxDoubles >= max(0, floor_log2(target) - 1), where floor_log2(n) is the unique k with 2^k <= n < 2^(k+1)."
+  }
+]

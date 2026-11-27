@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindTilt.spec_1",
+    "negation": "AegisSpec.FindTilt.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define subtree_sum(t) by subtree_sum(Null) = 0 and subtree_sum(Node(v,l,r)) = v + subtree_sum(l) + subtree_sum(r). Define tilt(t) by tilt(Null) = 0 and tilt(Node(v,l,r)) = |subtree_sum(l) - subtree_sum(r)|. Define total_tilt(t) by total_tilt(Null) = 0 and total_tilt(Node(v,l,r)) = tilt(Node(v,l,r)) + total_tilt(l) + total_tilt(r); equivalently, total_tilt(t) is the sum of tilt(u) over all nodes u of t. Then find_tilt(root) returns a result ans and ans = total_tilt(root).",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindTilt.spec_2",
+    "negation": "AegisSpec.FindTilt.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists an i64 ans such that find_tilt(root) returns ans; the call does not fail by arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindTilt.spec_3",
+    "negation": "AegisSpec.FindTilt.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_tilt(root) returns an i64 ans, 0 <= ans.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindTilt.spec_4",
+    "negation": "AegisSpec.FindTilt.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n be the number of nodes in root. Whenever find_tilt(root) returns an i64 ans, ans <= 2000 * n * n.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindTilt.spec_5",
+    "negation": "AegisSpec.FindTilt.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If root = Null, then find_tilt(root) returns 0.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindTilt.spec_6",
+    "negation": "AegisSpec.FindTilt.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If root = Node(v, Null, Null) and -1000 <= v <= 1000, then find_tilt(root) returns 0.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindTilt.spec_7",
+    "negation": "AegisSpec.FindTilt.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If root = Node(v, Node(c, Null, Null), Null) or root = Node(v, Null, Node(c, Null, Null)), then find_tilt(root) returns |c|.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindTilt.spec_8",
+    "negation": "AegisSpec.FindTilt.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every root of the form Node(v,l,r), whenever find_tilt(root) returns an i64 ans, ans >= |subtree_sum(l) - subtree_sum(r)|, where subtree_sum(l) is the sum of all node values in l (with subtree_sum(Null)=0).",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindTilt.spec_9",
+    "negation": "AegisSpec.FindTilt.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every root of the form Node(v,l,r), whenever find_tilt(root) returns an i64 ans, ans = |subtree_sum(l) - subtree_sum(r)| + total_tilt(l) + total_tilt(r), where subtree_sum(Null)=0 and subtree_sum(Node(x,a,b))=x+subtree_sum(a)+subtree_sum(b), and total_tilt is the sum of tilts over all nodes as defined in spec_1.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindTilt.spec_10",
+    "negation": "AegisSpec.FindTilt.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define mirror(t) by mirror(Null)=Null and mirror(Node(v,l,r))=Node(v,mirror(r),mirror(l)). Then find_tilt(root) and find_tilt(mirror(root)) both return results, and those two results are equal.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindTilt.spec_11",
+    "negation": "AegisSpec.FindTilt.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define negate(t) by negate(Null)=Null and negate(Node(v,l,r))=Node(-v,negate(l),negate(r)). Then find_tilt(root) and find_tilt(negate(root)) both return results, and those two results are equal.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindTilt.spec_12",
+    "negation": "AegisSpec.FindTilt.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If root = Node(v,l,r) and root' = Node(v',l,r) where v' is any integer with -1000 <= v' <= 1000, then find_tilt(root) and find_tilt(root') both return results, and those two results are equal.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindTilt.spec_13",
+    "negation": "AegisSpec.FindTilt.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If every node value in root is 0, then find_tilt(root) returns 0.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindTilt.spec_14",
+    "negation": "AegisSpec.FindTilt.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If root = Null, then find_tilt(root) returns 0. If root is nonempty, every node of root has at most one child, and every node value in root is nonnegative, then letting depth(root)=0 and depth(c)=depth(u)+1 for every child c of a node u, find_tilt(root) returns the sum over all nodes x of root of (value(x) * depth(x)).",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.FindTilt.spec_15",
+    "negation": "AegisSpec.FindTilt.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If root = Node(v, Node(a, Null, Null), Node(b, Null, Null)), then find_tilt(root) returns |a - b|.",
+    "preconditions": "Every node value v in root satisfies -1000 <= v <= 1000, and the number of nodes (Node constructors) in root is at most 10000; the tree may be empty."
+  }
+]

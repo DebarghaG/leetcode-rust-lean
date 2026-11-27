@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_1",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every byte list text satisfying the preconditions, let s be a byte list. Say s is a contiguous substring of text if there exist integers i,j with 0 <= i <= j <= len(text), len(s)=j-i, and s[k]=text[i+k] for every k with 0 <= k < len(s). Say a byte list s is an echo if len(s) is even, len(s)>=2, and s[k]=s[len(s)/2+k] for every k with 0 <= k < len(s)/2. The function returns Ok r, and r equals the cardinality of the set of byte lists s such that s is a contiguous substring of text and s is an echo; two byte lists are identified in this set exactly when they have the same length and the same byte at every index, so each echo substring string is counted once regardless of how many times it occurs, and no other string is counted.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code (97 <= text[i] <= 122 for every i with 0 <= i < len(text))."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_2",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every text satisfying the preconditions, the function returns a result r; it does not panic, access out of bounds, or overflow while computing the returned i64.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code (97 <= text[i] <= 122 for every i with 0 <= i < len(text))."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_3",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n=len(text). Whenever the function returns a result r, 0 <= r <= M, where M = sum over L=1..floor(n/2) of (n-2L+1), with an empty sum when n<2. Here M is the total number of even-length contiguous index intervals [i,i+2L) in text.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_4",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r=0.",
+    "preconditions": "len(text)=0; the lowercase-byte condition is vacuous."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_5",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and: r=1 if text[0]=text[1], and r=0 if text[0]!=text[1].",
+    "preconditions": "len(text)=2 and both bytes are lowercase ASCII letters."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_6",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and: r=1 if text[0]=text[1] or text[1]=text[2], and r=0 otherwise.",
+    "preconditions": "len(text)=3 and all bytes are lowercase ASCII letters."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_7",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n=len(text). The function returns a result r and r = floor(n/2) (integer division n div 2).",
+    "preconditions": "Let n=len(text). We have 1 <= n <= 2000, and there is a byte c with 97 <= c <= 122 such that text[i]=c for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_8",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r>0 if and only if there exist integers i,L such that L>=1, 0<=i, i+2L<=len(text), and text[i+k]=text[i+L+k] for every k with 0<=k<L.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_9",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let B be the set of bytes c for which there exists i with 0 <= i and i+1 < len(text) and text[i]=text[i+1]=c. Whenever the function returns a result r, r >= the number of elements of B.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_10",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(text) be the byte list of length len(text) defined by rev(text)[i]=text[len(text)-1-i] for 0<=i<len(text). The function returns a result r, and if r_rev is the result of distinct_echo_substrings on rev(text), then r = r_rev.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_11",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of integers i,j with 0 <= i <= j <= len(text), let u be the contiguous byte list with len(u)=j-i and u[k]=text[i+k] for 0<=k<j-i. Define a distinct echo substring of u to be a non-empty byte list s that is a contiguous substring of u and equals a+a for some non-empty byte list a, counted once by content. The function returns r and r is at least the number of distinct echo substrings of u. Equivalently, every distinct echo substring of u is also a distinct echo substring of text.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_12",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let B be the set of bytes c for which there exists i with 0 <= i <= 2 and text[i]=text[i+1]=c, and let |B| be its cardinality. The function returns a result r and r = |B| + (1 if text[0]=text[2] and text[1]=text[3], else 0).",
+    "preconditions": "len(text)=4 and all bytes are lowercase ASCII letters."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_13",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every bijection f from the 26 lowercase ASCII codes to themselves, let f(text) be the byte list with f(text)[i]=f(text[i]) for 0<=i<len(text). If r_f is the result of distinct_echo_substrings on f(text), then the function returns r and r = r_f.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.DistinctEchoSubstrings.spec_14",
+    "negation": "AegisSpec.DistinctEchoSubstrings.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define an echo occurrence in text to be a pair (i,L) such that L>=1, 0<=i, i+2L<=len(text), and text[i+k]=text[i+L+k] for every 0<=k<L. Define two such occurrences (i,L) and (j,L') to be equivalent when L=L' and text[i+k]=text[j+k] for every 0<=k<2L. The function returns r and r equals the number of equivalence classes of echo occurrences under this relation.",
+    "preconditions": "0 <= len(text) <= 2000 and every byte of text is an ASCII lowercase letter code."
+  }
+]

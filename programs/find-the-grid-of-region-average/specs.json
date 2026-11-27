@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ResultGrid.spec_1",
+    "negation": "AegisSpec.ResultGrid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and both of the following hold: (1) len(r) = m and for every 0 <= i < m, len(r[i]) = n. (2) For every 0 <= i < m and 0 <= j < n, if R(i,j) is empty then r[i][j] = image[i][j]; if R(i,j) is nonempty and k = |R(i,j)|, then r[i][j] = floor( (sum_{(a,b) in R(i,j)} A(a,b)) / k ).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. For a pixel (i,j), let R(i,j) be the set of pairs (a,b) such that S(a,b) is valid and a <= i <= a+2 and b <= j <= b+2. For a valid S(a,b), let A(a,b) = floor( (sum_{u=a}^{a+2} sum_{v=b}^{b+2} image[u][v]) / 9 )."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ResultGrid.spec_2",
+    "negation": "AegisSpec.ResultGrid.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ResultGrid.spec_3",
+    "negation": "AegisSpec.ResultGrid.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = m and for every 0 <= i < m, len(r[i]) = n.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ResultGrid.spec_4",
+    "negation": "AegisSpec.ResultGrid.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, 0 <= r[i][j] <= 255.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ResultGrid.spec_5",
+    "negation": "AegisSpec.ResultGrid.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, if R(i,j) is empty then r[i][j] = image[i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. For a pixel (i,j), let R(i,j) be the set of pairs (a,b) such that S(a,b) is valid and a <= i <= a+2 and b <= j <= b+2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ResultGrid.spec_6",
+    "negation": "AegisSpec.ResultGrid.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, if R(i,j) has exactly one element (a,b), then r[i][j] = A(a,b).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. For a pixel (i,j), let R(i,j) be the set of pairs (a,b) such that S(a,b) is valid and a <= i <= a+2 and b <= j <= b+2. For a valid S(a,b), let A(a,b) = floor( (sum_{u=a}^{a+2} sum_{v=b}^{b+2} image[u][v]) / 9 )."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ResultGrid.spec_7",
+    "negation": "AegisSpec.ResultGrid.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, if k = |R(i,j)| >= 2, then r[i][j] = floor( (sum_{(a,b) in R(i,j)} A(a,b)) / k ).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. For a pixel (i,j), let R(i,j) be the set of pairs (a,b) such that S(a,b) is valid and a <= i <= a+2 and b <= j <= b+2. For a valid S(a,b), let A(a,b) = floor( (sum_{u=a}^{a+2} sum_{v=b}^{b+2} image[u][v]) / 9 )."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ResultGrid.spec_8",
+    "negation": "AegisSpec.ResultGrid.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n with R(i,j) nonempty, let lo(i,j) = min{A(a,b) | (a,b) in R(i,j)} and hi(i,j) = max{A(a,b) | (a,b) in R(i,j)}. Then lo(i,j) <= r[i][j] <= hi(i,j).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. For a pixel (i,j), let R(i,j) be the set of pairs (a,b) such that S(a,b) is valid and a <= i <= a+2 and b <= j <= b+2. For a valid S(a,b), let A(a,b) = floor( (sum_{u=a}^{a+2} sum_{v=b}^{b+2} image[u][v]) / 9 )."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ResultGrid.spec_9",
+    "negation": "AegisSpec.ResultGrid.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, r[i][j] = image[i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. For 0 <= a <= m-3 and 0 <= b <= n-3, let S(a,b) be the 3 by 3 subgrid consisting of pixels (i,j) with a <= i <= a+2 and b <= j <= b+2. Call S(a,b) valid when for every two pixels (x,y) and (u,v) in S(a,b) with |x-u| + |y-v| = 1, we have |image[x][y] - image[u][v]| <= threshold. Assume additionally that for every 0 <= a <= m-3 and 0 <= b <= n-3, S(a,b) is not valid (equivalently, no valid 3 by 3 subgrid exists)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ResultGrid.spec_10",
+    "negation": "AegisSpec.ResultGrid.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, r[i][j] = v.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. Assume there is an integer v with 0 <= v <= 255 such that image[i][j] = v for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ResultGrid.spec_11",
+    "negation": "AegisSpec.ResultGrid.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, r[i][j] = r[i][n-1-j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. Assume image[i][j] = image[i][n-1-j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ResultGrid.spec_12",
+    "negation": "AegisSpec.ResultGrid.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, r[i][j] = r[m-1-i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. Assume image[i][j] = image[m-1-i][j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ResultGrid.spec_13",
+    "negation": "AegisSpec.ResultGrid.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < n and 0 <= j < n, r[i][j] = r[j][i].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and 0 <= threshold <= 255. Assume m = n and image[i][j] = image[j][i] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ResultGrid.spec_14",
+    "negation": "AegisSpec.ResultGrid.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, let C(i,j) be the set of all pairs (a,b) with 0 <= a <= m-3, 0 <= b <= n-3, a <= i <= a+2, and b <= j <= b+2. Then C(i,j) is nonempty and r[i][j] = floor( (sum_{(a,b) in C(i,j)} floor( (sum_{u=a}^{a+2} sum_{v=b}^{b+2} image[u][v]) / 9 )) / |C(i,j)| ).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and threshold = 255."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.ResultGrid.spec_15",
+    "negation": "AegisSpec.ResultGrid.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every 0 <= i < m and 0 <= j < n, let C0(i,j) be the set of pairs (a,b) with 0 <= a <= m-3, 0 <= b <= n-3, a <= i <= a+2, b <= j <= b+2, and image[x][y] is the same for all x in [a,a+2] and y in [b,b+2]. If C0(i,j) is empty then r[i][j] = image[i][j]; otherwise r[i][j] = floor( (sum_{(a,b) in C0(i,j)} v(a,b)) / |C0(i,j)| ), where v(a,b) is that common value.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). Assume len(image) = m with 3 <= m <= 500, every row of image has length n with 3 <= n <= 500, every entry satisfies 0 <= image[i][j] <= 255 for 0 <= i < m and 0 <= j < n, and threshold = 0."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCostIi.spec_1",
+    "negation": "AegisSpec.MinCostIi.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_cost_ii(costs) returns a result r, r is the minimum over all colorings c of length n with 0 <= c[i] < k for every 0 <= i < n and c[i] != c[i+1] for every 0 <= i < n-1, of the total cost sum_{i=0}^{n-1} costs[i][c[i]]; that is, r <= sum_{i=0}^{n-1} costs[i][c[i]] for every such coloring c, and r = sum_{i=0}^{n-1} costs[i][c*[i]] for at least one such coloring c*.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCostIi.spec_2",
+    "negation": "AegisSpec.MinCostIi.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function min_cost_ii(costs) returns a result r; it does not fail, panic, overflow, or access costs out of bounds for any input satisfying the preconditions.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCostIi.spec_3",
+    "negation": "AegisSpec.MinCostIi.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_cost_ii(costs) returns a result r, there exists a coloring c of length n with 0 <= c[i] < k for every 0 <= i < n and c[i] != c[i+1] for every 0 <= i < n-1, such that r = sum_{i=0}^{n-1} costs[i][c[i]].",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCostIi.spec_4",
+    "negation": "AegisSpec.MinCostIi.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_cost_ii(costs) returns a result r, for every coloring c of length n with 0 <= c[i] < k for every 0 <= i < n and c[i] != c[i+1] for every 0 <= i < n-1, we have r <= sum_{i=0}^{n-1} costs[i][c[i]].",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCostIi.spec_5",
+    "negation": "AegisSpec.MinCostIi.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_cost_ii(costs) returns a result r, r >= sum_{i=0}^{n-1} (min_{0 <= j < k} costs[i][j]).",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCostIi.spec_6",
+    "negation": "AegisSpec.MinCostIi.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_cost_ii(costs) returns a result r, r <= sum_{i=0}^{n-1} (max_{0 <= j < k} costs[i][j]).",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCostIi.spec_7",
+    "negation": "AegisSpec.MinCostIi.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be a permutation of {0,1,...,k-1}. Define costs_pi with the same dimensions by costs_pi[i][j] = costs[i][pi(j)] for every 0 <= i < n and 0 <= j < k. Whenever min_cost_ii(costs) returns r and min_cost_ii(costs_pi) returns r_pi, we have r_pi = r.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCostIi.spec_8",
+    "negation": "AegisSpec.MinCostIi.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define costs_rev by costs_rev[i][j] = costs[n-1-i][j] for every 0 <= i < n and 0 <= j < k. Whenever min_cost_ii(costs) returns r and min_cost_ii(costs_rev) returns r_rev, we have r_rev = r.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCostIi.spec_9",
+    "negation": "AegisSpec.MinCostIi.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_cost_ii(costs) returns r and min_cost_ii(costs2) returns r2, we have r2 = r + d.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k. Let costs2 be another matrix with len(costs2) = n, len(costs2[i]) = k for every 0 <= i < n, and 1 <= costs2[i][j] <= 20 for every 0 <= i < n and 0 <= j < k. Fix an index i0 with 0 <= i0 < n, and suppose there is an integer d such that costs2[i0][j] = costs[i0][j] + d for every 0 <= j < k, and costs2[i][j] = costs[i][j] for every i != i0 and every 0 <= j < k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCostIi.spec_10",
+    "negation": "AegisSpec.MinCostIi.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_cost_ii(costs) returns r and min_cost_ii(costs2) returns r2, we have r2 >= r.",
+    "preconditions": "Let n = len(costs) and k = len(costs[0]). Assume 1 <= n <= 100, 2 <= k <= 20, len(costs[i]) = k for every 0 <= i < n, and 1 <= costs[i][j] <= 20 for every 0 <= i < n and 0 <= j < k. Let costs2 be another matrix with len(costs2) = n, len(costs2[i]) = k for every 0 <= i < n, 1 <= costs2[i][j] <= 20 for every 0 <= i < n and 0 <= j < k, and costs2[i][j] >= costs[i][j] for every 0 <= i < n and 0 <= j < k."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinSwaps.spec_1",
+    "negation": "AegisSpec.MinSwaps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let z = #{i | 0 <= i < n and s[i] = 48} and o = n - z. For p in {0,1}, define the alternating string T_p of length n by: T_0[i] = 48 if i is even and T_0[i] = 49 if i is odd; T_1[i] = 49 if i is even and T_1[i] = 48 if i is odd. Call p feasible when #{i | 0 <= i < n and T_p[i] = 48} = z. Let D_p = #{i | 0 <= i < n and s[i] != T_p[i]} for feasible p. The function returns a result r and: (a) if no p is feasible, then r = -1; (b) if some p is feasible, then r = min{ D_p/2 | p is feasible }, where D_p/2 is the integer value (D_p is even for every feasible p).",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'). All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinSwaps.spec_2",
+    "negation": "AegisSpec.MinSwaps.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e. min_swaps(s) = Result.ok r); in particular it does not panic, access out of bounds, or overflow for any input satisfying the preconditions.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinSwaps.spec_3",
+    "negation": "AegisSpec.MinSwaps.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if no alternating byte string t of length n has the same number of occurrences of byte 48 ('0') as s. Equivalently, r = -1 if and only if |z - o| > 1, where z = #{i | 0 <= i < n and s[i] = 48} and o = n - z.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinSwaps.spec_4",
+    "negation": "AegisSpec.MinSwaps.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r != -1 then 0 <= r <= floor(n/2). In particular, since n <= 1000, every nonnegative result is at most 500.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinSwaps.spec_5",
+    "negation": "AegisSpec.MinSwaps.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r >= 0, for every alternating byte string t of length n such that #{i | 0 <= i < n and t[i] = 48} = z, the Hamming distance D(s,t) = #{i | 0 <= i < n and s[i] != t[i]} satisfies D(s,t) >= 2*r.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49. Let z = #{i | 0 <= i < n and s[i] = 48}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinSwaps.spec_6",
+    "negation": "AegisSpec.MinSwaps.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists an alternating byte string t of length n such that #{i | 0 <= i < n and t[i] = 48} = z and D(s,t) = #{i | 0 <= i < n and s[i] != t[i]} = 2*r.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49. Let z = #{i | 0 <= i < n and s[i] = 48}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinSwaps.spec_7",
+    "negation": "AegisSpec.MinSwaps.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < n-1, s[i] != s[i+1] (that is, s itself is already alternating).",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinSwaps.spec_8",
+    "negation": "AegisSpec.MinSwaps.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = #{i | 0 <= i < n, i is even, and s[i] = 49}, the number of 0-based even positions containing '1'.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49. Also assume n is odd and z = (n+1)/2, where z = #{i | 0 <= i < n and s[i] = 48}; equivalently, s has one more '0' than '1'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinSwaps.spec_9",
+    "negation": "AegisSpec.MinSwaps.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = #{i | 0 <= i < n, i is even, and s[i] = 48}, the number of 0-based even positions containing '0'.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49. Also assume n is odd and o = (n+1)/2, where o = #{i | 0 <= i < n and s[i] = 49}; equivalently, s has one more '1' than '0'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinSwaps.spec_10",
+    "negation": "AegisSpec.MinSwaps.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(E1, E0), where E1 = #{i | 0 <= i < n, i is even, and s[i] = 49} and E0 = #{i | 0 <= i < n, i is even, and s[i] = 48}.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49. Also assume n is even and z = n/2, where z = #{i | 0 <= i < n and s[i] = 48}; equivalently, s has equally many '0's and '1's."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinSwaps.spec_11",
+    "negation": "AegisSpec.MinSwaps.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let complement(s) be the byte string of length n with complement(s)[i] = 49 if s[i] = 48, and complement(s)[i] = 48 if s[i] = 49. If min_swaps(s) returns r and min_swaps(complement(s)) returns r', then r = r'.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinSwaps.spec_12",
+    "negation": "AegisSpec.MinSwaps.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte string of length n with rev(s)[i] = s[n-1-i] for 0 <= i < n. If min_swaps(s) returns r and min_swaps(rev(s)) returns r', then r = r'.",
+    "preconditions": "Let n = len(s). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, s[i] is either 48 or 49."
+  }
+]

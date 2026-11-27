@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValidBst.spec_1",
+    "negation": "AegisSpec.IsValidBst.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define ValidBST(t) for every finite Tree t by: ValidBST(Null) is true; ValidBST(Node(v,L,R)) is true exactly when ValidBST(L) and ValidBST(R), every key occurring in L is < v, and every key occurring in R is > v. The function returns a result r : Bool (it does not fail), and r = true if and only if ValidBST(root) is true; equivalently, r = false if and only if ValidBST(root) is false.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValidBst.spec_2",
+    "negation": "AegisSpec.IsValidBst.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call is_valid_bst root returns a result (an Ok Bool value) rather than failing.",
+    "preconditions": "None beyond root being a finite Tree; root may be Null, may have any number of Node occurrences, and keys may be any i64 values."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValidBst.spec_3",
+    "negation": "AegisSpec.IsValidBst.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, for every node occurrence u with key v, every node occurrence in the left subtree of u has key < v, and every node occurrence in the right subtree of u has key > v. Here the left subtree of u is the entire tree rooted at u's left child, including all descendants; if u has no such child the condition is vacuous.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValidBst.spec_4",
+    "negation": "AegisSpec.IsValidBst.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns false, there exist two distinct node occurrences u and v such that either v lies in the left subtree of u and key(v) >= key(u), or v lies in the right subtree of u and key(v) <= key(u).",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValidBst.spec_5",
+    "negation": "AegisSpec.IsValidBst.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there are two distinct node occurrences in root with equal keys, then the function returns false.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsValidBst.spec_6",
+    "negation": "AegisSpec.IsValidBst.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, the in-order traversal of root is strictly increasing. The in-order traversal is the sequence formed by recursively listing the left subtree, then the node key, then the right subtree, with Null contributing no elements; strictly increasing means for every index i with 0 <= i < len(sequence) - 1, sequence[i] < sequence[i+1].",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsValidBst.spec_7",
+    "negation": "AegisSpec.IsValidBst.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns true, for every node occurrence u with key v: if the left subtree of u is nonempty, then the maximum key among all node occurrences in that left subtree is < v; if the right subtree of u is nonempty, then the minimum key among all node occurrences in that right subtree is > v.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsValidBst.spec_8",
+    "negation": "AegisSpec.IsValidBst.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, for every node occurrence u, every key in the left subtree of u is strictly less than every key in the right subtree of u. If either subtree is empty, this condition is vacuous.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsValidBst.spec_9",
+    "negation": "AegisSpec.IsValidBst.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define mirror_neg(root) recursively by mirror_neg(Null) = Null and mirror_neg(Node(v,L,R)) = Node(-v, mirror_neg(R), mirror_neg(L)). The function returns a Bool for root and for mirror_neg(root), and these two Bool results are equal.",
+    "preconditions": "root is a finite Tree whose keys are all in [-2147483648, 2147483647]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsValidBst.spec_10",
+    "negation": "AegisSpec.IsValidBst.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let shift_c(root) be the tree with the same shape as root in which every node key v is replaced by v + c. The function returns Ok r for root and Ok r' for shift_c(root) (it does not fail), and r = r'.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]; c is an integer such that for every key v occurring in root, v + c is an integer in [-2147483648, 2147483647]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsValidBst.spec_11",
+    "negation": "AegisSpec.IsValidBst.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns Ok r (it does not fail), and r = true if and only if the in-order traversal of root is strictly increasing. The in-order traversal and strict increase are as defined in spec_6: recursively list the left subtree, then the node key, then the right subtree, with Null contributing no elements; strictly increasing means every adjacent pair in the sequence satisfies sequence[i] < sequence[i+1].",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsValidBst.spec_12",
+    "negation": "AegisSpec.IsValidBst.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist two distinct node occurrences u and v such that either v lies in the left subtree of u and key(v) >= key(u), or v lies in the right subtree of u and key(v) <= key(u), then the function returns false (and does not fail). Equivalently, together with spec_4, the function returns false if and only if such a violating ancestor-descendant pair exists.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10000; every node key is an integer in [-2147483648, 2147483647]. In particular root is not Null."
+  }
+]

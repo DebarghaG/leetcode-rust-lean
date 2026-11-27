@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_1",
+    "negation": "AegisSpec.SuccessfulPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = n and for every i with 0 <= i < n, r[i] is the number of indices j with 0 <= j < m such that spells[i] * potions[j] >= success, where the product is taken over the integers (under the preconditions it fits in i64 and does not overflow).",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_2",
+    "negation": "AegisSpec.SuccessfulPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, overflow, panic, go out of bounds, or fail allocation.",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_3",
+    "negation": "AegisSpec.SuccessfulPairs.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all i and k with 0 <= i < n and 0 <= k < n, if spells[i] <= spells[k] then r[i] <= r[k].",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_4",
+    "negation": "AegisSpec.SuccessfulPairs.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, sum_{i=0}^{n-1} r[i] equals the number of ordered pairs (i,j) with 0 <= i < n, 0 <= j < m, and spells[i] * potions[j] >= success.",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_5",
+    "negation": "AegisSpec.SuccessfulPairs.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever successful_pairs(spells, potions, success) returns a result r and successful_pairs(spells, potions', success) returns a result r', we have r = r', that is, for every i with 0 <= i < n, r[i] = r'[i].",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000. Let potions' be any slice of i64 with len(potions') = m and 1 <= potions'[j] <= 100000 for every j with 0 <= j < m, such that potions' is a permutation of potions: there exists a bijection pi from {0,1,...,m-1} to itself with potions'[j] = potions[pi(j)] for every j with 0 <= j < m."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_6",
+    "negation": "AegisSpec.SuccessfulPairs.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever successful_pairs(spells, potions, success) returns a result r and successful_pairs(spells, potions', success) returns a result r', then for every i with 0 <= i < n, r[i] <= r'[i].",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000. Let potions' be any slice of i64 with len(potions') = m, 1 <= potions'[j] <= 100000 for every j with 0 <= j < m, and potions[j] <= potions'[j] for every j with 0 <= j < m."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_7",
+    "negation": "AegisSpec.SuccessfulPairs.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever successful_pairs(spells, potions, success) returns a result r and successful_pairs(spells, potions, success') returns a result r', then for every i with 0 <= i < n, r'[i] <= r[i].",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000. Let success' be an i64 with success <= success' <= 10000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_8",
+    "negation": "AegisSpec.SuccessfulPairs.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n there exists an integer T_i such that 1 <= T_i <= success, spells[i] * (T_i - 1) < success <= spells[i] * T_i, and r[i] is the number of indices j with 0 <= j < m and potions[j] >= T_i.",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SuccessfulPairs.spec_9",
+    "negation": "AegisSpec.SuccessfulPairs.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever successful_pairs(spells, potions, success) returns a result r and successful_pairs(spells', potions, success) returns a result r', we have r[i0] = r'[i0].",
+    "preconditions": "Let n = len(spells) and m = len(potions). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n we have 1 <= spells[i] <= 100000, for every j with 0 <= j < m we have 1 <= potions[j] <= 100000, and 1 <= success <= 10000000000. Let i0 be any index with 0 <= i0 < n. Let spells' be any slice of i64 with len(spells') = n and 1 <= spells'[i] <= 100000 for every i with 0 <= i < n, such that spells'[i0] = spells[i0]."
+  }
+]

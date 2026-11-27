@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGameIx.spec_1",
+    "negation": "AegisSpec.StoneGameIx.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let c0, c1, c2 be the numbers of indices i with stones[i] mod 3 = 0, 1, 2 respectively, using mathematical remainder so c0 + c1 + c2 = len(stones). Whenever stone_game_ix(stones) returns a result r (a Bool), r = true exactly when either (A) c0 is even and c1 > 0 and c2 > 0, or (B) c0 is odd and |c1 - c2| > 2. In every other successful return, r = false.",
+    "preconditions": "The input satisfies the problem constraints: stones is a slice of 64-bit integers with 1 <= len(stones) <= 100000 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGameIx.spec_2",
+    "negation": "AegisSpec.StoneGameIx.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "stone_game_ix(stones) does not fail: for every input satisfying the constraints it returns a Result.ok value, with no arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(stones) <= 100000 and, for every i with 0 <= i < len(stones), 1 <= stones[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGameIx.spec_3",
+    "negation": "AegisSpec.StoneGameIx.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever stone_game_ix(stones) returns r and stone_game_ix(stones') returns r', we have r = r'.",
+    "preconditions": "stones and stones' are both valid inputs as in the problem constraints (1 <= length <= 100000 and values in 1..10000), and stones' is a permutation of stones: same length and same multiset of values."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGameIx.spec_4",
+    "negation": "AegisSpec.StoneGameIx.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever stone_game_ix(stones) returns a result r, r = true, and Alice has a winning strategy in the stone-removal game whose first move is: if c1 <= c2, remove a stone whose value is congruent to 1 modulo 3; if c2 < c1, remove a stone whose value is congruent to 2 modulo 3. When c1 = c2, removing either a residue-1 or a residue-2 stone works as the first move.",
+    "preconditions": "The input satisfies the constraints. Let c0, c1, c2 be the counts of entries with residues 0, 1, 2 modulo 3, with c0 even, c1 > 0, and c2 > 0."
+  }
+]

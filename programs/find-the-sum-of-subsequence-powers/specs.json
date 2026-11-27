@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfPowers.spec_1",
+    "negation": "AegisSpec.SumOfPowers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever sum_of_powers(nums, k) returns a result r, r is the unique integer such that 0 <= r < 1000000007 and r ≡ S (mod 1000000007), where S = sum over all subsets I of {0,1,...,n-1} with |I| = k of min{ |nums[i] - nums[j]| : i, j ∈ I, i ≠ j }.",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfPowers.spec_2",
+    "negation": "AegisSpec.SumOfPowers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For all nums and k satisfying the preconditions, sum_of_powers(nums, k) returns a result r (i.e., it does not fail).",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfPowers.spec_3",
+    "negation": "AegisSpec.SumOfPowers.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "sum_of_powers(nums1, k) and sum_of_powers(nums2, k) either both fail, or both return the same result r.",
+    "preconditions": "nums1 and nums2 are slices of i64 with equal length n, 2 <= n <= 50. They are permutations of each other: there exists a bijection π : {0,...,n-1} -> {0,...,n-1} such that nums1[i] = nums2[π(i)] for all i. k is an i64 with 2 <= k <= n. All elements of both slices are in [-100000000, 100000000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfPowers.spec_4",
+    "negation": "AegisSpec.SumOfPowers.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "When k = n, the result r (if returned) satisfies r ≡ min{ |nums[i] - nums[j]| : 0 <= i < j < n } (mod 1000000007) and 0 <= r < 1000000007.",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n. Additionally, k = n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfPowers.spec_5",
+    "negation": "AegisSpec.SumOfPowers.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The result r (if returned) satisfies r ≡ sum_{0 <= i < j < n} |nums[i] - nums[j]| (mod 1000000007) and 0 <= r < 1000000007.",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n. Additionally, k = 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfPowers.spec_6",
+    "negation": "AegisSpec.SumOfPowers.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "sum_of_powers(nums, k) and sum_of_powers(nums', k) either both fail, or both return the same result r.",
+    "preconditions": "nums is a slice of i64, n = len(nums), 2 <= n <= 50. k is an i64 with 2 <= k <= n. All nums[i] in [-100000000, 100000000]. Let c be an integer such that -100000000 <= nums[i] + c <= 100000000 for all i. Let nums' be the slice defined by nums'[i] = nums[i] + c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfPowers.spec_7",
+    "negation": "AegisSpec.SumOfPowers.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The result r (if returned) is 0.",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n. Additionally, the number of distinct values in nums is less than k."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOfPowers.spec_8",
+    "negation": "AegisSpec.SumOfPowers.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If both calls return results, then r' ≡ c * r (mod 1000000007).",
+    "preconditions": "nums is a slice of i64, n = len(nums), 2 <= n <= 50. k is an i64 with 2 <= k <= n. All nums[i] in [-100000000, 100000000]. Let c be a positive integer such that c * nums[i] is within [-100000000, 100000000] for all i. Let nums' be the slice defined by nums'[i] = c * nums[i]. Let r be the result for nums (if it returns) and r' be the result for nums' (if it returns)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumOfPowers.spec_9",
+    "negation": "AegisSpec.SumOfPowers.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The result r (if returned) satisfies r ≡ sum_{i=0}^{n-1} min{ |nums[a] - nums[b]| : 0 <= a < b < n, a ≠ i, b ≠ i } (mod 1000000007) and 0 <= r < 1000000007.",
+    "preconditions": "nums is a slice of i64, k is an i64. Let n = len(nums). Assume 2 <= n <= 50, 2 <= k <= n, and -100000000 <= nums[i] <= 100000000 for all 0 <= i < n. Additionally, k = n - 1 (which implies n >= 3)."
+  }
+]

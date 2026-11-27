@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_1",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let W be the infinite sequence of integer coordinate pairs (row, column) defined as follows. W[0] = (rStart, cStart). For j = 1, 2, 3, ..., let L_j = floor((j+1)/2), so L_1, L_2, L_3, ... = 1, 1, 2, 2, 3, 3, ...; and let the direction of segment j be east if j mod 4 = 1, south if j mod 4 = 2, west if j mod 4 = 3, and north if j mod 4 = 0, where east = (0,+1), south = (+1,0), west = (0,-1), north = (-1,0). Starting from the end of W after the previous segments, append L_j new positions by repeatedly adding the unit vector of that direction. Then, whenever the function returns a result r, r is exactly the finite list of all W[n] with n >= 0 and 0 <= first(W[n]) < rows and 0 <= second(W[n]) < cols, in increasing order of n; each r[i] is the two-element vector [row, column] for the corresponding pair.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_2",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular it does not fail because of arithmetic overflow, out-of-bounds indexing, or a panic.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_3",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = rows * cols (the mathematical product) and, for every i with 0 <= i < len(r), len(r[i]) = 2.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_4",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), writing r[i] = [a, b], we have 0 <= a < rows and 0 <= b < cols.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_5",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) >= 1 and r[0] = [rStart, cStart].",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_6",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for all indices i and j with 0 <= i < j < len(r), r[i] != r[j] (the two coordinate pairs are different).",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_7",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every row a and column b with 0 <= a < rows and 0 <= b < cols, there is exactly one index i with 0 <= i < len(r) such that r[i] = [a, b].",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_8",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if cStart + 1 < cols, then len(r) >= 2 and r[1] = [rStart, cStart + 1].",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_9",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if cStart + 1 < cols and rStart + 1 < rows, then len(r) >= 3 and r[2] = [rStart + 1, cStart + 1].",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_10",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if rows = 1, then len(r) = cols and, for every i with 0 <= i < cols, r[i] = [0, x_i], where x_0, x_1, ..., x_{cols-1} is the list obtained from the infinite sequence cStart, cStart+1, cStart-1, cStart+2, cStart-2, cStart+3, cStart-3, ... by deleting every term that is not in the range 0 <= x < cols, keeping the remaining terms in their original order.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SpiralMatrixIii.spec_11",
+    "negation": "AegisSpec.SpiralMatrixIii.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if cols = 1, then len(r) = rows and, for every i with 0 <= i < rows, r[i] = [x_i, 0], where x_0, x_1, ..., x_{rows-1} is the list obtained from the infinite sequence rStart, rStart+1, rStart-1, rStart+2, rStart-2, rStart+3, rStart-3, ... by deleting every term that is not in the range 0 <= x < rows, keeping the remaining terms in their original order.",
+    "preconditions": "rows, cols, rStart, cStart are the values of the four I64 parameters, and 1 <= rows <= 100, 1 <= cols <= 100, 0 <= rStart < rows, 0 <= cStart < cols."
+  }
+]

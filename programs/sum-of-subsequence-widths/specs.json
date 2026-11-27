@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_1",
+    "negation": "AegisSpec.SumSubseqWidths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever sum_subseq_widths(nums) returns a result r, r = T(nums) mod M, i.e. r is the unique integer in [0, M-1] congruent to T(nums) modulo M.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for every i with 0 <= i < n. Let M = 1000000007. For a non-empty set S of indices with 0 <= i < n, define width(S) = max_{i in S} nums[i] - min_{i in S} nums[i]. Let T(nums) be the sum of width(S) over all non-empty subsets S of {0,...,n-1}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_2",
+    "negation": "AegisSpec.SumSubseqWidths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call sum_subseq_widths(nums) returns a result r; it does not fail (no panic, out-of-bounds, overflow, or other failure).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_3",
+    "negation": "AegisSpec.SumSubseqWidths.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_subseq_widths(nums1) returns r1 and sum_subseq_widths(nums2) returns r2, r1 = r2.",
+    "preconditions": "Let nums1 and nums2 be slices of equal length n with 1 <= n <= 100000 and all entries in [1,100000]. Assume that for every integer v, the number of indices i with nums1[i]=v equals the number with nums2[i]=v (equivalently, nums2 is a permutation or rearrangement of nums1)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_4",
+    "negation": "AegisSpec.SumSubseqWidths.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_subseq_widths(nums) returns r and sum_subseq_widths(nums') returns r', we have r = r'.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for all i. Let k be an integer such that 1 <= nums[i] + k <= 100000 for every i. Define nums' by nums'[i] = nums[i] + k for 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_5",
+    "negation": "AegisSpec.SumSubseqWidths.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_subseq_widths(nums) returns r and sum_subseq_widths(nums') returns r', we have r' = (c * r) mod M.",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for all i. Let c be a positive integer such that 1 <= c * nums[i] <= 100000 for every i. Define nums' by nums'[i] = c * nums[i] for 0 <= i < n. Let M = 1000000007."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumSubseqWidths.spec_6",
+    "negation": "AegisSpec.SumSubseqWidths.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_subseq_widths(nums) returns a result r, r is congruent modulo M to the sum from i = 0 to n-1 of b[i] * (2^i - 2^(n-1-i)).",
+    "preconditions": "Let n = len(nums), with 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for all i. Let b be any sequence of length n that is a nondecreasing rearrangement of nums, so b[0] <= b[1] <= ... <= b[n-1] and the multiset of b equals the multiset of nums. Let M = 1000000007. All powers 2^k below are mathematical integers."
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsMatch.spec_1",
+    "negation": "AegisSpec.IsMatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_match(s,p) returns a result r, r is true if and only if p wildcard-matches s, where p wildcard-matches s means: letting m = len(p), there exist integers a_0, ..., a_m such that a_0 = 0, a_m = len(s), 0 = a_0 <= a_1 <= ... <= a_m, and for every j with 0 <= j < m: if p[j] = '*' then a_{j+1} >= a_j; if p[j] = '?' then a_{j+1} = a_j + 1; and if p[j] is a lowercase letter then a_{j+1} = a_j + 1 and s[a_j] = p[j].",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsMatch.spec_2",
+    "negation": "AegisSpec.IsMatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and p satisfying the preconditions, is_match(s,p) returns a result r (either true or false) and does not fail.",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsMatch.spec_3",
+    "negation": "AegisSpec.IsMatch.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i <= len(p), let q be the byte sequence of length len(p)+1 obtained by inserting '*' at position i: q[t] = p[t] for 0 <= t < i, q[i] = '*', and q[t] = p[t-1] for i < t < len(q). Whenever is_match(s,p) returns true, is_match(s,q) returns a result r_q and r_q is true.",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 1999; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsMatch.spec_4",
+    "negation": "AegisSpec.IsMatch.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every j with 0 <= j < len(p) such that p[j] is not '*', let q be p with q[j] = '*' and q[t] = p[t] for t != j. Whenever is_match(s,p) returns true, is_match(s,q) returns a result r_q and r_q is true.",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsMatch.spec_5",
+    "negation": "AegisSpec.IsMatch.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every j with 0 <= j < len(p) such that p[j] is a lowercase letter, let q be p with q[j] = '?' and q[t] = p[t] for t != j. Whenever is_match(s,p) returns true, is_match(s,q) returns a result r_q and r_q is true.",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsMatch.spec_6",
+    "negation": "AegisSpec.IsMatch.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every j with 0 <= j < len(p)-1 such that p[j] = '*' and p[j+1] = '*', let q be the byte sequence of length len(p)-1 obtained by deleting p[j+1]: q[t] = p[t] for 0 <= t <= j, and q[t] = p[t+1] for j < t < len(q). Whenever is_match(s,p) returns a result r and is_match(s,q) returns a result r_q, r = r_q.",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsMatch.spec_7",
+    "negation": "AegisSpec.IsMatch.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every j with 0 <= j < len(p) such that p[j] = '*', whenever is_match(s,p) returns a result r, r is true if and only if there exist integers a and b with 0 <= a <= b <= len(s) such that p[0:j] wildcard-matches s[0:a] and p[j+1:len(p)] wildcard-matches s[b:len(s)]. Here, for any pattern q and string t, 'q wildcard-matches t' means: letting m = len(q), there exist integers c_0, ..., c_m such that c_0 = 0, c_m = len(t), 0 = c_0 <= c_1 <= ... <= c_m, and for every k with 0 <= k < m: if q[k] = '*' then c_{k+1} >= c_k; if q[k] = '?' then c_{k+1} = c_k + 1; and if q[k] is a lowercase letter then c_{k+1} = c_k + 1 and t[c_k] = q[k].",
+    "preconditions": "0 <= len(s) <= 2000 and 0 <= len(p) <= 2000; every byte of s is a lowercase English letter (ASCII code 97 through 122 inclusive); every byte of p is either a lowercase English letter or '?' (ASCII 63) or '*' (ASCII 42)."
+  }
+]

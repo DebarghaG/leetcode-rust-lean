@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_1",
+    "negation": "AegisSpec.MinimumKeypresses.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cnt(c) be the number of indices i with 0 <= i < len(s) and s[i] = c, for c in {'a',...,'z'}. Let f1 >= f2 >= ... >= f26 be the 26 numbers cnt('a'),...,cnt('z') sorted in non-increasing order. The function returns a result r (it does not fail), and r = (f1 + ... + f9) + 2*(f10 + ... + f18) + 3*(f19 + ... + f26).",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (s[i] is a lowercase ASCII letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_2",
+    "negation": "AegisSpec.MinimumKeypresses.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail, overflow, or panic.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_3",
+    "negation": "AegisSpec.MinimumKeypresses.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let cnt(c) be the number of indices i with 0 <= i < len(s) and s[i] = c, for c in {'a',...,'z'}. Let T be the sum of the nine largest values among {cnt('a'),...,cnt('z')}. Whenever the function returns a result r, r >= 2*len(s) - T.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_4",
+    "negation": "AegisSpec.MinimumKeypresses.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let cnt(c) be the number of indices i with 0 <= i < len(s) and s[i] = c, for c in {'a',...,'z'}. Let T be the sum of the nine largest values among {cnt('a'),...,cnt('z')}. Whenever the function returns a result r, r <= 3*len(s) - 2*T.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_5",
+    "negation": "AegisSpec.MinimumKeypresses.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(s).",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let cnt(c) be the number of indices i with s[i] = c, and let d be the number of c in {'a',...,'z'} with cnt(c) > 0. Assume d <= 9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_6",
+    "negation": "AegisSpec.MinimumKeypresses.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m be the minimum of cnt(c) over those 10 letters c with cnt(c) > 0 (equivalently, m is the 10th largest of the 26 frequencies). The function returns a result r and r = len(s) + m.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let cnt(c) be the number of indices i with s[i] = c, and assume exactly 10 lowercase letters c have cnt(c) > 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_7",
+    "negation": "AegisSpec.MinimumKeypresses.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r >= len(s) + 25.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let cnt(c) be the number of indices i with s[i] = c, and assume cnt(c) >= 1 for every c in {'a',...,'z'}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_8",
+    "negation": "AegisSpec.MinimumKeypresses.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the value the function returns on s. If cnt_t(c) = cnt_s(c) for every c in {'a',...,'z'}, then the value the function returns on t is also r.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let cnt_s(c) be the number of occurrences of c in s. Let t be any slice satisfying the same length and alphabet constraints, and let cnt_t(c) be the number of occurrences of c in t."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_9",
+    "negation": "AegisSpec.MinimumKeypresses.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let a valid keypad setup be a partition of the 26 lowercase letters into at most 9 ordered lists (the buttons), each list of length at most 3, where the p-th letter of a list (1 <= p <= length) is typed by p presses. The function returns a result r, and there exists a valid keypad setup such that the total number of presses needed to type s under that setup is exactly r.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_10",
+    "negation": "AegisSpec.MinimumKeypresses.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a valid keypad setup be a partition of the 26 lowercase letters into at most 9 ordered lists (the buttons), each list of length at most 3, where the p-th letter of a list (1 <= p <= length) is typed by p presses. The function returns a result r, and for every valid keypad setup, the total number of presses needed to type s under that setup is at least r.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_11",
+    "negation": "AegisSpec.MinimumKeypresses.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let T be the sum of the nine largest values among {cnt('a'),...,cnt('z')}. Whenever the function returns a result r, r > 2*len(s) - T.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let cnt(c) be the number of indices i with s[i] = c, and assume the number d of c in {'a',...,'z'} with cnt(c) > 0 is at least 19."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumKeypresses.spec_12",
+    "negation": "AegisSpec.MinimumKeypresses.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r on s and a result r' on s', and r + 1 <= r' <= r + 3.",
+    "preconditions": "1 <= len(s) < 100000; for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let c be any byte with 97 <= c <= 122, and let s' be the slice obtained by appending c to s, so len(s') = len(s) + 1."
+  }
+]

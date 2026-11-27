@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestPerimeter.spec_1",
+    "negation": "AegisSpec.LargestPerimeter.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let P be the set of all integers p for which there exist indices i, j, k with 0 <= i < j < k < len(nums), p = nums[i] + nums[j] + nums[k], and the three strict triangle inequalities nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i] hold. If P is nonempty, r is the maximum element of P. If P is empty, r = 0.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestPerimeter.spec_2",
+    "negation": "AegisSpec.LargestPerimeter.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail by overflow, panic, or out-of-bounds access.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestPerimeter.spec_3",
+    "negation": "AegisSpec.LargestPerimeter.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices i, j, k with 0 <= i < j < k < len(nums) such that r = nums[i] + nums[j] + nums[k] and nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i].",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestPerimeter.spec_4",
+    "negation": "AegisSpec.LargestPerimeter.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there do not exist indices i, j, k with 0 <= i < j < k < len(nums) satisfying nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i].",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestPerimeter.spec_5",
+    "negation": "AegisSpec.LargestPerimeter.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every choice of indices i, j, k with 0 <= i < j < k < len(nums) that satisfies nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i], we have nums[i] + nums[j] + nums[k] <= r.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestPerimeter.spec_6",
+    "negation": "AegisSpec.LargestPerimeter.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 3000000.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestPerimeter.spec_7",
+    "negation": "AegisSpec.LargestPerimeter.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any slice nums' such that len(nums') = len(nums) and nums' is a permutation of nums (the same multiset of entries, possibly in a different order), if largest_perimeter(nums) returns r and largest_perimeter(nums') returns r', then r = r'.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestPerimeter.spec_8",
+    "negation": "AegisSpec.LargestPerimeter.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c be a positive integer, and let nums' be a slice with len(nums') = len(nums), nums'[i] = c * nums[i] for every i with 0 <= i < len(nums), and 1 <= nums'[i] <= 1000000 for every i with 0 <= i < len(nums'). If largest_perimeter(nums) returns r and largest_perimeter(nums') returns r', then r' = c * r.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestPerimeter.spec_9",
+    "negation": "AegisSpec.LargestPerimeter.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exist indices i, j, k with 0 <= i < j < k < len(nums) such that for every index h with 0 <= h < len(nums) and h not in {i, j, k}, nums[h] <= min(nums[i], nums[j], nums[k]), and nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i], then whenever the function returns a result r, r = nums[i] + nums[j] + nums[k].",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestPerimeter.spec_10",
+    "negation": "AegisSpec.LargestPerimeter.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let b be the entries of nums sorted in nondecreasing order. Let Q be the set of all integers q for which there exists an index i with 0 <= i < len(nums)-2, q = b[i] + b[i+1] + b[i+2], and b[i] + b[i+1] > b[i+2]. Whenever the function returns a result r, if Q is nonempty then r is the maximum element of Q; if Q is empty then r = 0.",
+    "preconditions": "len(nums) >= 3, len(nums) <= 10000, and for every index i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  }
+]

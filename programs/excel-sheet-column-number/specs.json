@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TitleToNumber.spec_1",
+    "negation": "AegisSpec.TitleToNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = sum_{i=0}^{n-1} (columnTitle[i] - 64) * 26^{n-1-i}, with 26^0 = 1. This is the usual Excel column number: A = 1, B = 2, ..., Z = 26, AA = 27, AB = 28, etc.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90 (so columnTitle[i] is an uppercase ASCII letter); and the Excel column number of columnTitle, as defined in the statement, is at most 2,147,483,647."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TitleToNumber.spec_2",
+    "negation": "AegisSpec.TitleToNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (an I64 value) and does not fail: it does not panic, overflow, or access memory out of bounds.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TitleToNumber.spec_3",
+    "negation": "AegisSpec.TitleToNumber.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (26^n - 1)/25, where the division is exact.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TitleToNumber.spec_4",
+    "negation": "AegisSpec.TitleToNumber.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 26*(26^n - 1)/25.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TitleToNumber.spec_5",
+    "negation": "AegisSpec.TitleToNumber.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the non-negative remainder of r modulo 26 equals the non-negative remainder of (columnTitle[n-1] - 64) modulo 26.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TitleToNumber.spec_6",
+    "negation": "AegisSpec.TitleToNumber.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (columnTitle[0] - 64) * 26^{n-1} + (26^{n-1} - 1)/25.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TitleToNumber.spec_7",
+    "negation": "AegisSpec.TitleToNumber.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (columnTitle[0] - 64) * 26^{n-1} + 26*(26^{n-1} - 1)/25.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TitleToNumber.spec_8",
+    "negation": "AegisSpec.TitleToNumber.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any byte slice t satisfying the same preconditions (len(t)=n, all bytes in 65..90, and Excel column number at most 2,147,483,647) and any index i with 0 <= i < n, if t[j] = columnTitle[j] for every j with 0 <= j < n and j != i, then whenever title_to_number(columnTitle) returns r and title_to_number(t) returns r_t, we have r_t = r + (t[i] - columnTitle[i]) * 26^{n-1-i}.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TitleToNumber.spec_9",
+    "negation": "AegisSpec.TitleToNumber.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any byte slice t satisfying the same preconditions (len(t)=n, all bytes in 65..90, and Excel column number at most 2,147,483,647), if columnTitle is lexicographically smaller than t (there is an index j with 0 <= j < n such that columnTitle[j] < t[j] and columnTitle[k] = t[k] for all 0 <= k < j), then whenever title_to_number(columnTitle) returns r and title_to_number(t) returns r_t, we have r < r_t.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TitleToNumber.spec_10",
+    "negation": "AegisSpec.TitleToNumber.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any byte slice t satisfying the same preconditions (all bytes in 65..90 and Excel column number at most 2,147,483,647), if len(t) = n + 1 (which requires n <= 6), then whenever title_to_number(columnTitle) returns r and title_to_number(t) returns r_t, we have r < r_t.",
+    "preconditions": "Let n = len(columnTitle). Assume 1 <= n <= 7; for every i with 0 <= i < n, 65 <= columnTitle[i] <= 90; and the Excel column number of columnTitle is at most 2,147,483,647."
+  }
+]

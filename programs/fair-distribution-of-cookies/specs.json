@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DistributeCookies.spec_1",
+    "negation": "AegisSpec.DistributeCookies.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the minimum, over all functions f from {0, 1, ..., len(cookies)-1} to {0, 1, ..., k-1}, of max_{c=0}^{k-1} (sum of cookies[i] over all i in {0, ..., len(cookies)-1} with f(i) = c). A function f is a distribution: it assigns each bag i to child f(i); a child c with no assigned bags has total 0.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DistributeCookies.spec_2",
+    "negation": "AegisSpec.DistributeCookies.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, the function returns a result (it does not fail, panic, or overflow).",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DistributeCookies.spec_3",
+    "negation": "AegisSpec.DistributeCookies.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= max_{0 <= i < len(cookies)} cookies[i].",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DistributeCookies.spec_4",
+    "negation": "AegisSpec.DistributeCookies.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let total = sum_{i=0}^{len(cookies)-1} cookies[i] and maxc = max_{0 <= i < len(cookies)} cookies[i]. Whenever the function returns a result r, r <= max(maxc, total - maxc).",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DistributeCookies.spec_5",
+    "negation": "AegisSpec.DistributeCookies.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a function f from {0, ..., len(cookies)-1} to {0, ..., k-1} such that for every child c in {0, ..., k-1}, the sum of cookies[i] over all i with f(i) = c is at most r, and at least one child has sum exactly r.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DistributeCookies.spec_6",
+    "negation": "AegisSpec.DistributeCookies.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every function f from {0, ..., len(cookies)-1} to {0, ..., k-1}, the maximum over c in {0, ..., k-1} of the sum of cookies[i] over all i with f(i) = c is at least r.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DistributeCookies.spec_7",
+    "negation": "AegisSpec.DistributeCookies.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exists a subset S of {0, ..., len(cookies)-1} such that sum_{i in S} cookies[i] = r.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DistributeCookies.spec_8",
+    "negation": "AegisSpec.DistributeCookies.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = max_{0 <= i < len(cookies)} cookies[i].",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; k = len(cookies)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DistributeCookies.spec_9",
+    "negation": "AegisSpec.DistributeCookies.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a and b be the two smallest values among cookies, counted with multiplicity (if n = len(cookies) and s[0] <= s[1] <= ... <= s[n-1] is the sorted list of cookies, then a = s[0] and b = s[1]). Let maxc = max_{0 <= i < n} cookies[i]. Whenever the function returns a result r, r = max(maxc, a + b).",
+    "preconditions": "3 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; k = len(cookies) - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DistributeCookies.spec_10",
+    "negation": "AegisSpec.DistributeCookies.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = v * ceil(len(cookies) / k), where ceil(len(cookies) / k) is the smallest integer m such that m * k >= len(cookies).",
+    "preconditions": "2 <= len(cookies) <= 8; there exists v with 1 <= v <= 100000 such that cookies[i] = v for every i with 0 <= i < len(cookies); 2 <= k <= len(cookies)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DistributeCookies.spec_11",
+    "negation": "AegisSpec.DistributeCookies.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = maxc.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies); let maxc = max_{0 <= i < len(cookies)} cookies[i] and total = sum_{i=0}^{len(cookies)-1} cookies[i]; assume maxc >= total - maxc."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.DistributeCookies.spec_12",
+    "negation": "AegisSpec.DistributeCookies.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on input (cookies, k) and a result r' on input (cookies', k), we have r = r'.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies); pi is a permutation of {0, ..., len(cookies)-1}; cookies' is defined by cookies'[i] = cookies[pi(i)] for every i."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.DistributeCookies.spec_13",
+    "negation": "AegisSpec.DistributeCookies.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on input (cookies, k) and r' on input (cookies', k), we have r <= r'.",
+    "preconditions": "Let n = len(cookies) = len(cookies'). 2 <= n <= 8; for every i with 0 <= i < n, 1 <= cookies[i] <= 100000 and 1 <= cookies'[i] <= 100000; cookies[i] <= cookies'[i] for every i with 0 <= i < n; 2 <= k <= n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.DistributeCookies.spec_14",
+    "negation": "AegisSpec.DistributeCookies.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on input (cookies, k1) and r2 on input (cookies, k2), we have r2 <= r1.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k1 <= k2 <= len(cookies)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.DistributeCookies.spec_15",
+    "negation": "AegisSpec.DistributeCookies.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input (cookies, k) and r' on input (cookies', k), we have r' = c * r.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies); c is a positive integer; define cookies'[i] = c * cookies[i] for every i; assume 1 <= cookies'[i] <= 100000 for every i."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.DistributeCookies.spec_16",
+    "negation": "AegisSpec.DistributeCookies.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let total = sum_{i=0}^{len(cookies)-1} cookies[i]. Whenever the function returns a result r, r >= ceil(total / k), where ceil(total / k) is the smallest integer m such that m * k >= total.",
+    "preconditions": "2 <= len(cookies) <= 8; for every i with 0 <= i < len(cookies), 1 <= cookies[i] <= 100000; 2 <= k <= len(cookies)."
+  }
+]

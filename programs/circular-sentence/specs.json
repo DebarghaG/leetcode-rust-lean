@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsCircularSentence.spec_1",
+    "negation": "AegisSpec.IsCircularSentence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n be the number of maximal contiguous non-space blocks (words) in sentence, ordered left to right, and for 0 <= j < n let f(j) be the index of the first byte and l(j) the index of the last byte of the j-th block. The function returns a result r (not failure) and r = true if and only if for every j with 0 <= j < n, sentence[l(j)] = sentence[f((j+1) mod n)]. In particular, the last byte of each word equals the first byte of the next word, with the last word wrapping to the first; for n = 1 this is the condition sentence[l(0)] = sentence[f(0)].",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsCircularSentence.spec_2",
+    "negation": "AegisSpec.IsCircularSentence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (not failure).",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsCircularSentence.spec_3",
+    "negation": "AegisSpec.IsCircularSentence.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then sentence[0] = sentence[len(sentence)-1].",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsCircularSentence.spec_4",
+    "negation": "AegisSpec.IsCircularSentence.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then for every index i with 0 < i < len(sentence)-1 and sentence[i] = 32, sentence[i-1] = sentence[i+1].",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsCircularSentence.spec_5",
+    "negation": "AegisSpec.IsCircularSentence.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, if sentence[0] = sentence[len(sentence)-1] and for every index i with 0 < i < len(sentence)-1 and sentence[i] = 32 we have sentence[i-1] = sentence[i+1], then r = true.",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsCircularSentence.spec_6",
+    "negation": "AegisSpec.IsCircularSentence.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r = false then either sentence[0] != sentence[len(sentence)-1] or there exists an index i with 0 < i < len(sentence)-1 and sentence[i] = 32 and sentence[i-1] != sentence[i+1].",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsCircularSentence.spec_7",
+    "negation": "AegisSpec.IsCircularSentence.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if there exists a byte c such that for every maximal contiguous non-space block (word) in sentence, its first byte and its last byte are both equal to c, then r = true.",
+    "preconditions": "len(sentence) is between 1 and 500 inclusive; every byte of sentence is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); sentence[0] != 32 and sentence[len(sentence)-1] != 32; there are no two consecutive space bytes (for every i with 0 <= i < len(sentence)-1, not (sentence[i] = 32 and sentence[i+1] = 32))."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsCircularSentence.spec_8",
+    "negation": "AegisSpec.IsCircularSentence.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any byte slices s and t satisfying the preconditions, let n_s and n_t be their numbers of maximal contiguous non-space blocks (words). If n_s = n_t = n and for every j with 0 <= j < n the first byte of the j-th word of s equals the first byte of the j-th word of t and the last byte of the j-th word of s equals the last byte of the j-th word of t, then whenever is_circular_sentence(s) returns r_s and is_circular_sentence(t) returns r_t, r_s = r_t.",
+    "preconditions": "Both s and t are byte slices satisfying the valid-sentence preconditions: 1 <= len(s) <= 500 and 1 <= len(t) <= 500; every byte of s and t is either the space byte 32, an uppercase ASCII letter (65..90), or a lowercase ASCII letter (97..122); s[0] != 32, s[len(s)-1] != 32, t[0] != 32, t[len(t)-1] != 32; there are no two consecutive space bytes in s or in t."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDeletions.spec_1",
+    "negation": "AegisSpec.MinDeletions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define, for every byte value c in 0..255, freq(c) = the number of indices i with 0 <= i < len(s) and s[i] = c. Call a function k from byte values to natural numbers feasible if (i) k(c) <= freq(c) for every c, and (ii) for all distinct byte values c1, c2 with k(c1) > 0 and k(c2) > 0, k(c1) != k(c2). Let M = max{ sum_{c=0}^{255} k(c) | k feasible }. The function returns a result r and r = len(s) - M.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDeletions.spec_2",
+    "negation": "AegisSpec.MinDeletions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every s satisfying the preconditions.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDeletions.spec_3",
+    "negation": "AegisSpec.MinDeletions.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s) - 1.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDeletions.spec_4",
+    "negation": "AegisSpec.MinDeletions.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for all distinct byte values c1, c2 with freq(c1) > 0 and freq(c2) > 0, freq(c1) != freq(c2), where freq is defined as in spec_1.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDeletions.spec_5",
+    "negation": "AegisSpec.MinDeletions.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, where freq(c) is defined as in S1 (the number of indices i with 0 <= i < len(s) and s[i] = c), if every byte value c with freq(c) > 0 has freq(c) = 1, then r = len(s) - 1.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDeletions.spec_6",
+    "negation": "AegisSpec.MinDeletions.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, where freq(c) is defined as in spec_1, if there are exactly two byte values c1 and c2 with freq(c1) > 0 and freq(c2) > 0 and freq(c1) = freq(c2), then r = 1.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDeletions.spec_7",
+    "negation": "AegisSpec.MinDeletions.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, where freq(c) is defined as in spec_1, if there is exactly one byte value c0 with freq(c0) >= 2, every other byte value with positive frequency has frequency 1, and the number m of byte values with positive frequency is at least 2, then r = m - 2.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDeletions.spec_8",
+    "negation": "AegisSpec.MinDeletions.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a feasible k (as defined in spec_1) such that sum_{c=0}^{255} k(c) = len(s) - r.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDeletions.spec_9",
+    "negation": "AegisSpec.MinDeletions.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every feasible k (as defined in spec_1), sum_{c=0}^{255} k(c) <= len(s) - r.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDeletions.spec_10",
+    "negation": "AegisSpec.MinDeletions.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let m be the number of byte values c with freq(c) > 0, and let d be the number of distinct positive integers v for which there exists a byte value c with freq(c) = v (where freq is defined as in spec_1). Then r >= m - d.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDeletions.spec_11",
+    "negation": "AegisSpec.MinDeletions.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let m be the number of byte values c with freq(c) > 0, let fmax = max_{c} freq(c), and let t = min(m, fmax) (where freq is defined as in spec_1). Then r >= len(s) - (fmax + (fmax - 1) + ... + (fmax - t + 1)), where the sum contains exactly t terms.",
+    "preconditions": "1 <= len(s) <= 100000; for every index i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e., 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDeletions.spec_12",
+    "negation": "AegisSpec.MinDeletions.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_deletions returns r on s and r' on t, we have r = r'. Equivalently, the answer depends only on the multiset of character frequencies, not on the order of characters.",
+    "preconditions": "1 <= len(s) <= 100000 and 1 <= len(t) <= 100000; all bytes of s and t are ASCII lowercase letters; and for every byte value c in 0..255, the frequency of c in s equals the frequency of c in t."
+  }
+]

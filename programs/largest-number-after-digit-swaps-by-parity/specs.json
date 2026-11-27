@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestInteger.spec_1",
+    "negation": "AegisSpec.LargestInteger.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let d[0..n-1] be the decimal digits of num from most significant to least, where n = len(digits(num)) and d[0] != 0. Whenever largest_integer returns a result r, r has exactly n decimal digits; let e[0..n-1] be its decimal digits from most significant to least. For each parity p in {0,1}, let i_0 < i_1 < ... < i_{m-1} be all indices with d[i_j] mod 2 = p. Then e[i_0],...,e[i_{m-1}] is exactly the list of all digits d[k] with d[k] mod 2 = p, sorted in non-increasing order. Equivalently, e[i_0] >= e[i_1] >= ... >= e[i_{m-1}], and the multiset {e[i_0],...,e[i_{m-1}]} equals the multiset {d[k] | 0 <= k < n and d[k] mod 2 = p}. Equivalently, r is the largest integer obtainable from num by any sequence of swaps of two digits having the same parity.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestInteger.spec_2",
+    "negation": "AegisSpec.LargestInteger.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every num with 1 <= num <= 1,000,000,000, largest_integer num returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestInteger.spec_3",
+    "negation": "AegisSpec.LargestInteger.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_integer returns a result r, r <= 1,000,000,000.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestInteger.spec_4",
+    "negation": "AegisSpec.LargestInteger.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_integer returns a result r, r >= num.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestInteger.spec_5",
+    "negation": "AegisSpec.LargestInteger.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever largest_integer returns a result r, len(digits(r)) = len(digits(num)), where digits(x) denotes the decimal digits of a positive integer x, most significant first and with no leading zero. Equivalently, if n = len(digits(num)), then 10^(n-1) <= r < 10^n.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestInteger.spec_6",
+    "negation": "AegisSpec.LargestInteger.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let d[0..n-1] be the decimal digits of num from most significant to least. Whenever largest_integer returns a result r, r has exactly n decimal digits; let e[0..n-1] be its decimal digits from most significant to least. Then for every i with 0 <= i < n, e[i] mod 2 = d[i] mod 2.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestInteger.spec_7",
+    "negation": "AegisSpec.LargestInteger.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_integer returns a result r, the multiset of decimal digits of r equals the multiset of decimal digits of num. Equivalently, for every digit v in {0,1,...,9}, the number of occurrences of v in the decimal representation of r equals the number of occurrences of v in the decimal representation of num.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestInteger.spec_8",
+    "negation": "AegisSpec.LargestInteger.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let d[0..n-1] and e[0..n-1] be the decimal digits from most significant to least of num and of the returned r, respectively (r has exactly n digits). For every pair of indices i < j such that d[i] is odd and d[j] is odd, we have e[i] >= e[j].",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestInteger.spec_9",
+    "negation": "AegisSpec.LargestInteger.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let d[0..n-1] and e[0..n-1] be the decimal digits from most significant to least of num and of the returned r, respectively (r has exactly n digits). For every pair of indices i < j such that d[i] is even and d[j] is even, we have e[i] >= e[j].",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestInteger.spec_10",
+    "negation": "AegisSpec.LargestInteger.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every decimal digit of num has the same parity (all are even or all are odd), then whenever largest_integer returns a result r, the decimal digits of r, read from most significant to least, are exactly the decimal digits of num sorted in non-increasing order.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestInteger.spec_11",
+    "negation": "AegisSpec.LargestInteger.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Suppose the decimal digits d[0..n-1] of num already satisfy the condition that for every i < j with d[i] mod 2 = d[j] mod 2, d[i] >= d[j]. Then whenever largest_integer returns a result r, r = num.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LargestInteger.spec_12",
+    "negation": "AegisSpec.LargestInteger.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_integer num returns a result r, the value r satisfies 1 <= r <= 1,000,000,000, and largest_integer r returns the result r.",
+    "preconditions": "1 <= num <= 1,000,000,000."
+  }
+]

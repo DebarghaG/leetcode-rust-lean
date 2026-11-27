@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCost.spec_1",
+    "negation": "AegisSpec.MinCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is computed as follows. For each maximal contiguous block of equal colors, i.e. each interval [a,b] with 0 <= a <= b < n such that for every i with a <= i < b, colors[i] = colors[i+1], and also a = 0 or colors[a-1] != colors[a], and b = n-1 or colors[b+1] != colors[b], let S(a,b) = sum_{i=a}^{b} neededTime[i] and M(a,b) = max_{a <= i <= b} neededTime[i]. Then r = sum over all such intervals [a,b] of (S(a,b) - M(a,b)).",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCost.spec_2",
+    "negation": "AegisSpec.MinCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no arithmetic overflow, no out-of-bounds access, and no panic).",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCost.spec_3",
+    "negation": "AegisSpec.MinCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= sum_{i=0}^{n-1} neededTime[i].",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCost.spec_4",
+    "negation": "AegisSpec.MinCost.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < n-1, colors[i] != colors[i+1].",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCost.spec_5",
+    "negation": "AegisSpec.MinCost.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set R of indices with 0 <= i < n such that (1) sum_{i in R} neededTime[i] = r, and (2) after removing exactly the balloons with indices in R, the remaining balloons, read in increasing index order, have no two consecutive balloons of the same color. Formally, for the increasing list K of indices not in R, for every j with 0 <= j < len(K)-1, colors[K[j]] != colors[K[j+1]].",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCost.spec_6",
+    "negation": "AegisSpec.MinCost.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every set R of indices with 0 <= i < n such that after removing exactly the balloons with indices in R the remaining balloons have no two consecutive balloons of the same color (formally, for the increasing list K of indices not in R, for every j with 0 <= j < len(K)-1, colors[K[j]] != colors[K[j+1]]), it holds that sum_{i in R} neededTime[i] >= r.",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCost.spec_7",
+    "negation": "AegisSpec.MinCost.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of the function on (colors, neededTime) equals the result of the function on (colors2, neededTime).",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122). Let colors2 be any byte array of length n such that colors2[i] is an ASCII lowercase letter for every i with 0 <= i < n, and for every i with 0 <= i < n-1, colors[i] = colors[i+1] if and only if colors2[i] = colors2[i+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCost.spec_8",
+    "negation": "AegisSpec.MinCost.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of the function on (colors, neededTime) equals the result of the function on (colors, neededTime2).",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122). Let neededTime2 be another integer array of length n satisfying 1 <= neededTime2[i] <= 10000 for every i with 0 <= i < n, such that for every maximal equal-color block B of colors (an interval [a,b] as defined in the main specification), the multiset of values {neededTime[i] : i in B} equals the multiset {neededTime2[i] : i in B}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCost.spec_9",
+    "negation": "AegisSpec.MinCost.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (sum_{i=0}^{n-1} neededTime[i]) - (max_{0 <= i < n} neededTime[i]).",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCost.spec_10",
+    "negation": "AegisSpec.MinCost.spec_10_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If r is the result of the function on (colors, neededTime) and r2 is the result on (colors, neededTime2), then r2 <= r.",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122). Let neededTime2 be another integer array of length n satisfying 1 <= neededTime2[i] <= 10000 for every i, and neededTime2[i] <= neededTime[i] for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCost.spec_11",
+    "negation": "AegisSpec.MinCost.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For each maximal equal-color block [a,b], choose an index m in [a,b] with neededTime[m] = max_{a <= i <= b} neededTime[i], and let R be the set of all indices in such blocks except the chosen m. Then sum_{i in R} neededTime[i] = r, and removing exactly the balloons in R makes the rope colorful.",
+    "preconditions": "Let n = len(colors). len(colors) = len(neededTime) = n; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= neededTime[i] <= 10000 and colors[i] is an ASCII lowercase letter (97 <= colors[i] <= 122)."
+  }
+]

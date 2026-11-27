@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_1",
+    "negation": "AegisSpec.BalancedStringSplit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define, for 0 <= i <= n, bal(i) to be the number of bytes 82 ('R') in s[0:i] minus the number of bytes 76 ('L') in s[0:i]. Whenever balanced_string_split(s) returns a result r, we have r = #{ i | 1 <= i <= n and bal(i) = 0 }.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_2",
+    "negation": "AegisSpec.BalancedStringSplit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call balanced_string_split(s) returns a result r (an I64 value); it does not fail, panic, overflow, or access outside the slice.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_3",
+    "negation": "AegisSpec.BalancedStringSplit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever balanced_string_split(s) returns a result r, we have r <= n / 2, where division is integer division by 2.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_4",
+    "negation": "AegisSpec.BalancedStringSplit.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever balanced_string_split(s) returns a result r, we have 1 <= r.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_5",
+    "negation": "AegisSpec.BalancedStringSplit.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever balanced_string_split(s) returns a result r, we have r = n / 2 if and only if for every j with 0 <= j < n / 2, the two-byte substring s[2*j : 2*j+2] contains exactly one 'L' and one 'R'.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_6",
+    "negation": "AegisSpec.BalancedStringSplit.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever balanced_string_split(s) returns a result r, we have r = 1 if and only if for every i with 0 < i < n, the prefix s[0:i] does not contain equal numbers of 'L' and 'R'.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_7",
+    "negation": "AegisSpec.BalancedStringSplit.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever balanced_string_split(s) returns a result r, there exist integers p_0, p_1, ..., p_r such that 0 = p_0 < p_1 < ... < p_r = n and, for every t with 1 <= t <= r, the substring s[p_{t-1}:p_t] is non-empty and contains equal numbers of 'L' and 'R'.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_8",
+    "negation": "AegisSpec.BalancedStringSplit.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever balanced_string_split(s) returns a result r, for every integer k >= 1 and every sequence 0 = q_0 < q_1 < ... < q_k = n such that each substring s[q_{t-1}:q_t] for 1 <= t <= k contains equal numbers of 'L' and 'R', we have k <= r.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_9",
+    "negation": "AegisSpec.BalancedStringSplit.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever balanced_string_split(s) returns a result r, for every sequence 0 = p_0 < p_1 < ... < p_r = n such that each substring s[p_{t-1}:p_t] for 1 <= t <= r is balanced, the set of internal cut positions { p_1, ..., p_{r-1} } equals { i | 0 < i < n and the prefix s[0:i] contains equal numbers of 'L' and 'R' }.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_10",
+    "negation": "AegisSpec.BalancedStringSplit.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte slice of length n defined by t[i] = 82 ('R') if s[i] = 76 ('L'), and t[i] = 76 ('L') if s[i] = 82 ('R'). Whenever the calls balanced_string_split(s) and balanced_string_split(t) return r_s and r_t, we have r_s = r_t.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_11",
+    "negation": "AegisSpec.BalancedStringSplit.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte slice of length n defined by t[i] = s[n-1-i] for 0 <= i < n. Whenever the calls balanced_string_split(s) and balanced_string_split(t) return r_s and r_t, we have r_s = r_t.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BalancedStringSplit.spec_12",
+    "negation": "AegisSpec.BalancedStringSplit.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a = s[0:m] and b = s[m:n]. Whenever the calls balanced_string_split(s), balanced_string_split(a), and balanced_string_split(b) return r, r_a, and r_b, we have r = r_a + r_b.",
+    "preconditions": "Let n = len(s). Assume 2 <= n <= 1000, each byte s[i] for 0 <= i < n is either 76 ('L') or 82 ('R'), and the number of 'L' bytes in s equals the number of 'R' bytes in s. Let m be an integer with 0 < m < n such that both slices s[0:m] and s[m:n] contain equal numbers of 'L' and 'R'."
+  }
+]

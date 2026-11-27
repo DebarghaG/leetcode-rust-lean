@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanSortArray.spec_1",
+    "negation": "AegisSpec.CanSortArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let pc(x) be the number of 1-bits in the binary representation of x. The function returns a result r (it does not fail), and r = true if and only if for every pair of indices i, j with 0 <= i < j < len(nums) and pc(nums[i]) != pc(nums[j]), we have nums[i] <= nums[j].",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (i.e. 2^8). The bound is read as 2^8 rather than the literal text '28' because the examples contain 30 and 31."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanSortArray.spec_2",
+    "negation": "AegisSpec.CanSortArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every slice nums satisfying the preconditions, can_sort_array returns some result r; it does not fail (no panic, arithmetic overflow, or out-of-bounds access).",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanSortArray.spec_3",
+    "negation": "AegisSpec.CanSortArray.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let pc(x) be the number of 1-bits in x. A maximal same-bit block of nums is a maximal contiguous interval [l,r] of indices on which pc(nums[i]) is constant. Whenever can_sort_array returns a result r, r = true if and only if for every pair of consecutive such blocks B (left) and C (right), max_{i in B} nums[i] <= min_{j in C} nums[j].",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanSortArray.spec_4",
+    "negation": "AegisSpec.CanSortArray.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let a maximal same-bit block of nums be a maximal contiguous interval [l,r] on which pc(nums[i]) is constant. Whenever can_sort_array returns a result r, r = true if and only if there exists an array b of length len(nums) such that (1) for every maximal same-bit block B, the multiset {b[i] : i in B} equals the multiset {nums[i] : i in B}, and (2) b[0] <= b[1] <= ... <= b[len(nums)-1].",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanSortArray.spec_5",
+    "negation": "AegisSpec.CanSortArray.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let pc(x) be the number of 1-bits in x. Whenever can_sort_array returns a result r, r = false if and only if there exist indices i, j with 0 <= i < j < len(nums), pc(nums[i]) != pc(nums[j]), and nums[i] > nums[j].",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanSortArray.spec_6",
+    "negation": "AegisSpec.CanSortArray.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let pc(x) be the number of 1-bits in x. Whenever can_sort_array returns a result r, if pc(nums[0]) = pc(nums[1]) = ... = pc(nums[len(nums)-1]), then r = true.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanSortArray.spec_7",
+    "negation": "AegisSpec.CanSortArray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_sort_array returns a result r, if nums is nondecreasing (nums[0] <= nums[1] <= ... <= nums[len(nums)-1]), then r = true.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanSortArray.spec_8",
+    "negation": "AegisSpec.CanSortArray.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let pc(x) be the number of 1-bits in x. Whenever can_sort_array returns a result r, if the values pc(nums[0]), ..., pc(nums[len(nums)-1]) are pairwise distinct, then r = true if and only if nums is nondecreasing.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanSortArray.spec_9",
+    "negation": "AegisSpec.CanSortArray.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any two arrays nums and nums' both satisfying the preconditions and having the same length, if nums' is obtained from nums by permuting, for each maximal same-bit block B of nums, the values nums[i] (i in B) arbitrarily among the positions in B, then can_sort_array(nums) returns r, can_sort_array(nums') returns r', and r = r'.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanSortArray.spec_10",
+    "negation": "AegisSpec.CanSortArray.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let pc(x) be the number of 1-bits in x. For any two arrays nums and nums' both satisfying the preconditions and having the same length, suppose that for every i with 0 <= i < len(nums), pc(nums[i]) = pc(nums'[i]), and that for every maximal same-bit block B (the same index interval in both arrays), min_{i in B} nums[i] = min_{i in B} nums'[i] and max_{i in B} nums[i] = max_{i in B} nums'[i]. Then can_sort_array(nums) returns r, can_sort_array(nums') returns r', and r = r'.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanSortArray.spec_11",
+    "negation": "AegisSpec.CanSortArray.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_sort_array returns true, there exists a finite sequence of operations, each swapping two adjacent elements of the current array that have the same number of set bits, that transforms nums into a nondecreasing array.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanSortArray.spec_12",
+    "negation": "AegisSpec.CanSortArray.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_sort_array returns false, no finite sequence of operations, each swapping two adjacent elements of the current array that have the same number of set bits, transforms nums into a nondecreasing array.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 256 (2^8)."
+  }
+]

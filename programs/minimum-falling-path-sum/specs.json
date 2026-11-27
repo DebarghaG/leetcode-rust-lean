@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_1",
+    "negation": "AegisSpec.MinFallingPathSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the least possible sum of a falling path: r = min { sum_{i=0}^{n-1} matrix[i][c_i] : c_0,...,c_{n-1} are column indices with 0 <= c_i < n for all i and |c_{i+1} - c_i| <= 1 for all 0 <= i < n-1 }. Equivalently, every falling path has sum at least r, and some falling path has sum exactly r.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_2",
+    "negation": "AegisSpec.MinFallingPathSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every matrix satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_3",
+    "negation": "AegisSpec.MinFallingPathSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, with n = len(matrix), we have r >= -100 * n.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_4",
+    "negation": "AegisSpec.MinFallingPathSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, with n = len(matrix), we have r <= 100 * n.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_5",
+    "negation": "AegisSpec.MinFallingPathSum.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every falling path c_0,...,c_{n-1} (where 0 <= c_i < n for all i and |c_{i+1}-c_i| <= 1 for all 0 <= i < n-1), we have r <= sum_{i=0}^{n-1} matrix[i][c_i].",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_6",
+    "negation": "AegisSpec.MinFallingPathSum.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a falling path c_0,...,c_{n-1} (where 0 <= c_i < n for all i and |c_{i+1}-c_i| <= 1 for all 0 <= i < n-1) such that r = sum_{i=0}^{n-1} matrix[i][c_i].",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_7",
+    "negation": "AegisSpec.MinFallingPathSum.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let row_min(i) = min { matrix[i][j] : 0 <= j < n } and row_max(i) = max { matrix[i][j] : 0 <= j < n } for each 0 <= i < n; then sum_{i=0}^{n-1} row_min(i) <= r <= sum_{i=0}^{n-1} row_max(i).",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_8",
+    "negation": "AegisSpec.MinFallingPathSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let matrix' be defined by matrix'[i][j] = matrix[i][j] + c for all i,j. If the function returns r on matrix and returns r' on matrix', then r' = r + n * c.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100; and c is an integer such that -100 <= matrix[i][j] + c <= 100 for all i,j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFallingPathSum.spec_9",
+    "negation": "AegisSpec.MinFallingPathSum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let matrix' be defined by matrix'[i][j] = c * matrix[i][j] for all i,j. If the function returns r on matrix and returns r' on matrix', then r' = c * r.",
+    "preconditions": "Let n = len(matrix). The matrix is a non-empty square slice: 1 <= n <= 100; for every i with 0 <= i < n, len(matrix[i]) = n; for every i,j with 0 <= i < n and 0 <= j < n, -100 <= matrix[i][j] <= 100; and c is a nonnegative integer such that -100 <= c * matrix[i][j] <= 100 for all i,j."
+  }
+]

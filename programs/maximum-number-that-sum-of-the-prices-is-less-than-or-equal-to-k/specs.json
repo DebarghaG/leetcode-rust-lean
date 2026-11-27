@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_1",
+    "negation": "AegisSpec.FindMaximumNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let price_x(n) be the number of 1-bits of n at 1-based bit positions x, 2x, 3x, ... from the least significant bit, and let A_x(n) = sum_{i=1}^n price_x(i), with A_x(0) = 0. The function returns a result r such that r >= 0, A_x(r) <= k, and A_x(m) > k for every integer m > r. Equivalently, r is the greatest cheap number, i.e. the greatest nonnegative n with A_x(n) <= k.",
+    "preconditions": "k and x are Std.I64 values with 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_2",
+    "negation": "AegisSpec.FindMaximumNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every k and x satisfying the preconditions, the call find_maximum_number(k, x) returns a result r; it does not fail, panic, or report signed 64-bit overflow.",
+    "preconditions": "k and x are Std.I64 values with 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_3",
+    "negation": "AegisSpec.FindMaximumNumber.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, with A_x defined as the accumulated price using bit positions x, 2x, 3x, ..., the next integer is not cheap: A_x(r+1) > k.",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_4",
+    "negation": "AegisSpec.FindMaximumNumber.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, every integer n with 0 <= n <= r is cheap: A_x(n) <= k.",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_5",
+    "negation": "AegisSpec.FindMaximumNumber.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, every cheap integer is at most r: for every integer n >= 0, if A_x(n) <= k then n <= r.",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_6",
+    "negation": "AegisSpec.FindMaximumNumber.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r >= 2^(x-1).",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_7",
+    "negation": "AegisSpec.FindMaximumNumber.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r <= floor(k / 2^(x-1)) * 2^x + (2^x - 1).",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_8",
+    "negation": "AegisSpec.FindMaximumNumber.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions, the function returns r = 2^(x-1).",
+    "preconditions": "k = 1 and 1 <= x <= 8."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_9",
+    "negation": "AegisSpec.FindMaximumNumber.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_maximum_number(k1, x) returns r1 and find_maximum_number(k2, x) returns r2, we have r1 <= r2.",
+    "preconditions": "x satisfies 1 <= x <= 8, and k1, k2 satisfy 1 <= k1 <= k2 <= 10^15."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMaximumNumber.spec_10",
+    "negation": "AegisSpec.FindMaximumNumber.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r+1 is the least nonnegative integer n such that A_x(n) > k.",
+    "preconditions": "k and x satisfy 1 <= k <= 10^15 and 1 <= x <= 8."
+  }
+]

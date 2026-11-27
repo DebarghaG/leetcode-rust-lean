@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FullJustify.spec_1",
+    "negation": "AegisSpec.FullJustify.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(words). The function returns a result r and there exist an integer m >= 1 and indices 0 = p_0 < p_1 < ... < p_m = n such that len(r) = m and for every t with 0 <= t < m, writing k = p_{t+1} - p_t and S = sum_{j=p_t}^{p_{t+1}-1} len(words[j]), the following hold. (a) r[t] is exactly the byte array obtained from words[p_t], words[p_t+1], ..., words[p_{t+1}-1] by inserting g_d >= 1 space bytes (byte 32) between words[p_t+d] and words[p_t+d+1] for each d with 0 <= d < k-1, and then h >= 0 trailing space bytes after the last word, with no other bytes. (b) If t < m-1 and k >= 2, then S + (k-1) <= maxWidth, G = maxWidth - S, q = floor(G/(k-1)), rem = G mod (k-1), g_d = q+1 for 0 <= d < rem, g_d = q for rem <= d < k-1, and h = 0. (c) If t = m-1 or k = 1, then g_d = 1 for every d with 0 <= d < k-1, and h = max(0, maxWidth - (S + (k-1))). (d) For every t with k >= 2, S + (k-1) <= maxWidth. (e) If t < m-1, then S + (k-1) + 1 + len(words[p_{t+1}]) > maxWidth.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FullJustify.spec_2",
+    "negation": "AegisSpec.FullJustify.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, overflow, or out-of-bounds) on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FullJustify.spec_3",
+    "negation": "AegisSpec.FullJustify.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) >= 1 and for every i with 0 <= i < len(r), len(r[i]) >= 1 (there is at least one line and no empty line).",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FullJustify.spec_4",
+    "negation": "AegisSpec.FullJustify.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), let k_i be the number of input words that form line r[i] (the contiguous block from which r[i] is constructed). If k_i = 1 and the single word has length greater than maxWidth, then len(r[i]) equals that word's length; in every other case (including k_i >= 2, or k_i = 1 with word length <= maxWidth), len(r[i]) = maxWidth.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FullJustify.spec_5",
+    "negation": "AegisSpec.FullJustify.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, if from each line r[i] all space bytes (32) are deleted and the resulting byte arrays are concatenated in increasing line order, the resulting byte array equals the concatenation words[0] ++ words[1] ++ ... ++ words[n-1].",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FullJustify.spec_6",
+    "negation": "AegisSpec.FullJustify.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), r[i][0] is not the space byte 32; that is, no output line begins with a space.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FullJustify.spec_7",
+    "negation": "AegisSpec.FullJustify.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let t = len(r)-1 be the last line. If the last line is formed from k >= 2 input words, then between each pair of consecutive words on that line there is exactly one space byte, and any additional space bytes occur only as a trailing suffix after the last word; equivalently, no two words on the last line are separated by more than one space.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FullJustify.spec_8",
+    "negation": "AegisSpec.FullJustify.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every non-last line t with t < len(r)-1 that is formed from k >= 2 input words, let S be the sum of the lengths of those k words and let G = maxWidth - S. Then G >= k-1, and if the k-1 gaps between consecutive words are listed from left to right, the first (G mod (k-1)) gaps contain floor(G/(k-1))+1 space bytes and the remaining gaps contain floor(G/(k-1)) space bytes; there are no trailing spaces on this line.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FullJustify.spec_9",
+    "negation": "AegisSpec.FullJustify.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every line t that is formed from exactly one input word w (whether or not it is the last line), r[t] is w followed by exactly max(0, maxWidth - len(w)) space bytes and then ends; there are no other bytes. Consequently, if len(w) <= maxWidth then len(r[t]) = maxWidth, and if len(w) > maxWidth then r[t] = w.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FullJustify.spec_10",
+    "negation": "AegisSpec.FullJustify.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every t with 0 <= t < len(r)-1, let B_t be the contiguous nonempty block of input words forming line t, and let j be the index of the first word of line t+1 (so words[j] immediately follows the last word of B_t). Then (sum of lengths of words in B_t) + (|B_t| - 1) + 1 + len(words[j]) > maxWidth. That is, adding the next word to line t with one separating space would exceed maxWidth even before any extra justification spaces.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FullJustify.spec_11",
+    "negation": "AegisSpec.FullJustify.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every line t formed from k >= 2 input words, the sum of the lengths of those k words plus (k-1) is at most maxWidth. Equivalently, every multiword line could fit with exactly one space between adjacent words.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FullJustify.spec_12",
+    "negation": "AegisSpec.FullJustify.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every byte of every line r[i] is either the space byte 32 or one of the bytes of the input words; moreover, the subsequence of non-space bytes of r[i] is exactly the concatenation of the input words that form that line, in their original order and without modification.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FullJustify.spec_13",
+    "negation": "AegisSpec.FullJustify.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let L = len(r). For every integer M with 1 <= M < L and every strictly increasing sequence 0 = q_0 < q_1 < ... < q_M = n, there exists s with 0 <= s < M such that (sum_{j=q_s}^{q_{s+1}-1} len(words[j])) + (q_{s+1}-q_s-1) > maxWidth. Equivalently, no partition of the words into fewer than L consecutive nonempty lines can have every line's minimum width (word lengths plus one space per gap) at most maxWidth.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32). Additionally, for every i with 0 <= i < n, len(words[i]) <= maxWidth."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FullJustify.spec_14",
+    "negation": "AegisSpec.FullJustify.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, let B_0, ..., B_{L-1} be the contiguous blocks of input words that form the lines of r in order, where L = len(r). Then B_0 starts with words[0]; for every t with 0 <= t < L-1, B_{t+1} starts with the word immediately after the last word of B_t; B_{L-1} ends with words[n-1]; and every B_t is nonempty. Thus the lines partition words into consecutive nonempty blocks covering every input word exactly once in order.",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.FullJustify.spec_15",
+    "negation": "AegisSpec.FullJustify.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, under the additional guarantee that every input word has length at most maxWidth, the total number of space bytes (byte 32) in all lines of r is exactly len(r) * maxWidth - sum_{i=0}^{n-1} len(words[i]).",
+    "preconditions": "Let n = len(words). 1 <= n <= 300; 1 <= maxWidth <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100 and every byte of words[i] is an ASCII non-space byte (not 32). Additionally, for every i with 0 <= i < n, len(words[i]) <= maxWidth."
+  }
+]

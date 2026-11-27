@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxRunTime.spec_1",
+    "negation": "AegisSpec.MaxRunTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is the greatest integer T such that T >= 0 and n*T <= sum_{i=0}^{len(batteries)-1} min(batteries[i], T).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxRunTime.spec_2",
+    "negation": "AegisSpec.MaxRunTime.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r and n*r <= sum_{i=0}^{len(batteries)-1} batteries[i]; equivalently, r <= floor((sum_{i=0}^{len(batteries)-1} batteries[i]) / n).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxRunTime.spec_3",
+    "negation": "AegisSpec.MaxRunTime.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxRunTime.spec_4",
+    "negation": "AegisSpec.MaxRunTime.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a schedule that runs all n computers simultaneously for the full interval of r minutes starting at time 0; in that schedule every computer is powered at every moment, every computer uses at most one battery at any moment, every battery i is used for at most batteries[i] minutes in total, and no battery is used by two different computers at the same moment.",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxRunTime.spec_5",
+    "negation": "AegisSpec.MaxRunTime.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer T with T > r, there is no schedule that runs all n computers simultaneously for T minutes under the rules that every computer uses at most one battery at any moment, every battery i is used for at most batteries[i] minutes in total, and no battery is used by two different computers at the same moment.",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxRunTime.spec_6",
+    "negation": "AegisSpec.MaxRunTime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and n = 1, r = sum_{i=0}^{len(batteries)-1} batteries[i].",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxRunTime.spec_7",
+    "negation": "AegisSpec.MaxRunTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and n = len(batteries), r = min_{0 <= i < len(batteries)} batteries[i].",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxRunTime.spec_8",
+    "negation": "AegisSpec.MaxRunTime.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r and there exists an integer c such that batteries[i] = c for every i with 0 <= i < len(batteries), we have r = floor((len(batteries) * c) / n).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxRunTime.spec_9",
+    "negation": "AegisSpec.MaxRunTime.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and n = 2, r = min(floor((sum_{i=0}^{len(batteries)-1} batteries[i]) / 2), (sum_{i=0}^{len(batteries)-1} batteries[i]) - max_{0 <= i < len(batteries)} batteries[i]).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxRunTime.spec_10",
+    "negation": "AegisSpec.MaxRunTime.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call max_run_time(n1, batteries) returns r1 and the call max_run_time(n2, batteries) returns r2, then r2 <= r1.",
+    "preconditions": "batteries is a list with 1 <= len(batteries) <= 100000 and 1 <= batteries[i] <= 1000000000 for every 0 <= i < len(batteries); n1 and n2 are integers with 1 <= n1 <= n2 <= len(batteries)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxRunTime.spec_11",
+    "negation": "AegisSpec.MaxRunTime.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_run_time(n, batteries) returns r and max_run_time(n, batteries2) returns r2, then r <= r2.",
+    "preconditions": "batteries and batteries2 are lists of the same length m with 1 <= n <= m <= 100000, and for every i with 0 <= i < m, 1 <= batteries[i] <= batteries2[i] <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxRunTime.spec_12",
+    "negation": "AegisSpec.MaxRunTime.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_run_time(n, batteries) returns r and max_run_time(n, batteries2) returns r2, then r = r2.",
+    "preconditions": "batteries and batteries2 are lists of the same length m with 1 <= n <= m <= 100000 and all entries in the range 1..1000000000; batteries2 is a permutation of batteries (the same multiset of values)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxRunTime.spec_13",
+    "negation": "AegisSpec.MaxRunTime.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every integer T with 0 <= T <= r, n*T <= sum_{i=0}^{len(batteries)-1} min(batteries[i], T).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxRunTime.spec_14",
+    "negation": "AegisSpec.MaxRunTime.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, n*(r+1) > sum_{i=0}^{len(batteries)-1} min(batteries[i], r+1).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxRunTime.spec_15",
+    "negation": "AegisSpec.MaxRunTime.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= min_{0 <= i < len(batteries)} batteries[i].",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), batteries[i] is an integer with 1 <= batteries[i] <= 1000000000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxRunTime.spec_16",
+    "negation": "AegisSpec.MaxRunTime.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r = floor(S/n).",
+    "preconditions": "n is an integer with 1 <= n <= len(batteries) <= 100000, and for every i with 0 <= i < len(batteries), 1 <= batteries[i] <= 1000000000. Let S = sum_{i=0}^{len(batteries)-1} batteries[i] and M = max_{0 <= i < len(batteries)} batteries[i], and assume M <= floor(S/n)."
+  }
+]

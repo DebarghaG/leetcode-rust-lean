@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestPathLength.spec_1",
+    "negation": "AegisSpec.ShortestPathLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r is the least L >= 0 for which there exists a sequence v_0, ..., v_L of integers such that: (1) 0 <= v_t < n for every t in [0,L]; (2) for every t with 0 <= t < L, v_{t+1} occurs in graph[v_t]; and (3) for every u in [0,n), there is some t in [0,L] with v_t = u. Equivalently, r is the number of edges in a shortest walk of graph that visits every node, with arbitrary start and end and with repetitions of nodes and edges allowed.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestPathLength.spec_2",
+    "negation": "AegisSpec.ShortestPathLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (Ok r) for every graph satisfying the preconditions; in particular it does not fail because of arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestPathLength.spec_3",
+    "negation": "AegisSpec.ShortestPathLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= n - 1.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestPathLength.spec_4",
+    "negation": "AegisSpec.ShortestPathLength.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2*(n - 1).",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestPathLength.spec_5",
+    "negation": "AegisSpec.ShortestPathLength.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = n - 1 if and only if there exists a sequence w_0, ..., w_{n-1} of nodes such that the values w_0, ..., w_{n-1} are pairwise distinct and, for every t with 0 <= t < n-1, w_{t+1} occurs in graph[w_t].",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestPathLength.spec_6",
+    "negation": "AegisSpec.ShortestPathLength.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for graph and r' for graph', then r' <= r.",
+    "preconditions": "Let n = len(graph) = len(graph'). Both graph and graph' satisfy the problem constraints: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n and len(graph'[i]) < n, every integer occurring in either adjacency list is in [0,n) and is not equal to its own index; adjacency is symmetric in each graph; each graph is connected. Moreover, for every i,j in [0,n), if j occurs in graph[i] then j occurs in graph'[i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestPathLength.spec_7",
+    "negation": "AegisSpec.ShortestPathLength.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for graph and r' for graph', then r = r'.",
+    "preconditions": "Let n = len(graph) = len(graph'). Both graph and graph' satisfy the problem constraints: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n and len(graph'[i]) < n, every integer occurring in either adjacency list is in [0,n) and is not equal to its own index; adjacency is symmetric in each graph; each graph is connected. Moreover, for every i,j in [0,n), j occurs in graph[i] iff j occurs in graph'[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestPathLength.spec_8",
+    "negation": "AegisSpec.ShortestPathLength.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 2*(n - 1) - d.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected. Additionally, graph is a tree: the number of unordered pairs {a,b} with 0 <= a < b < n and b occurs in graph[a] is exactly n-1. Let d be the maximum, over all a,b in [0,n), of the number of edges in the unique simple path from a to b in this tree, with d=0 when n=1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestPathLength.spec_9",
+    "negation": "AegisSpec.ShortestPathLength.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a sequence v_0, ..., v_r such that 0 <= v_t < n for all t in [0,r], v_{t+1} occurs in graph[v_t] for all t with 0 <= t < r, and every node u in [0,n) occurs among v_0, ..., v_r.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestPathLength.spec_10",
+    "negation": "AegisSpec.ShortestPathLength.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every L with 0 <= L < r and every sequence v_0, ..., v_L satisfying 0 <= v_t < n for all t in [0,L] and v_{t+1} occurs in graph[v_t] for all t with 0 <= t < L, there is some node u in [0,n) that does not occur among v_0, ..., v_L.",
+    "preconditions": "Let n = len(graph). Assume: 1 <= n <= 12; for every i with 0 <= i < n, len(graph[i]) < n, and every integer x occurring in graph[i] satisfies 0 <= x < n and x != i; for every i,j with 0 <= i,j < n, j occurs in graph[i] iff i occurs in graph[j]; and the graph is connected, i.e. for every a,b in [0,n) there is a sequence a = u_0, u_1, ..., u_m = b (m >= 0) such that for every t < m, u_{t+1} occurs in graph[u_t]."
+  }
+]

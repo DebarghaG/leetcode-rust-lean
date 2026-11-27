@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_1",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Write Q_i = (queens[i][0], queens[i][1]) and K = (king[0], king[1]). The function returns a result r, and the entries of r are exactly the coordinates Q_i, for 0 <= i < len(queens), such that Q_i can directly attack K. Specifically, Q_i can directly attack K iff Q_i != K, Q_i is aligned with K (Q_i[0] = K[0], or Q_i[1] = K[1], or |Q_i[0]-K[0]| = |Q_i[1]-K[1]|), and no Q_j with 0 <= j < len(queens) and j != i lies strictly between Q_i and K on the line segment joining them. Thus every attacking Q_i occurs in r exactly once, no other coordinate occurs in r, every entry of r has length 2, and the order of entries of r is arbitrary.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_2",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_3",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every t with 0 <= t < len(r) and len(r[t]) = 2, there exists i with 0 <= i < len(queens) such that (r[t][0], r[t][1]) = (queens[i][0], queens[i][1]).",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_4",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every returned coordinate is aligned with the king: for every t with 0 <= t < len(r) and len(r[t]) = 2, either r[t][0] = king[0], or r[t][1] = king[1], or |r[t][0] - king[0]| = |r[t][1] - king[1]|.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_5",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every t with 0 <= t < len(r) and len(r[t]) = 2, writing q = (r[t][0], r[t][1]) and K = (king[0], king[1]), no input queen lies strictly between q and K: there is no j with 0 <= j < len(queens) such that Q_j = (queens[j][0], queens[j][1]) is different from q and Q_j = q + u*(K - q) for some real u with 0 < u < 1.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_6",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, every queen that can directly attack the king appears in r. Formally, for every i with 0 <= i < len(queens), writing Q_i = (queens[i][0], queens[i][1]) and K = (king[0], king[1]), if Q_i != K, Q_i is aligned with K (Q_i[0] = K[0], or Q_i[1] = K[1], or |Q_i[0]-K[0]| = |Q_i[1]-K[1]|), and no Q_j with 0 <= j < len(queens), j != i, lies strictly between Q_i and K, then there exists t with 0 <= t < len(r), len(r[t]) = 2, and (r[t][0], r[t][1]) = Q_i.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_7",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, no coordinate occurs more than once in r: for all t and u with 0 <= t < u < len(r), if len(r[t]) = 2 and len(r[u]) = 2, then (r[t][0], r[t][1]) != (r[u][0], r[u][1]).",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_8",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every entry of r has length exactly 2: for every t with 0 <= t < len(r), len(r[t]) = 2.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_9",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every returned coordinate is a board square: for every t with 0 <= t < len(r) and len(r[t]) = 2, 0 <= r[t][0] < 8 and 0 <= r[t][1] < 8.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_10",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) <= len(queens).",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_11",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, at most one returned queen lies in each of the eight directions from the king. Equivalently, for any two distinct returned coordinates q1 and q2 from entries of r having length 2, with K = (king[0], king[1]), the vectors q1 - K and q2 - K are not positive scalar multiples of one another.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_12",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, every aligned queen that is not returned is blocked by some other queen. Formally, for every i with 0 <= i < len(queens), writing Q_i = (queens[i][0], queens[i][1]) and K = (king[0], king[1]), if Q_i != K, Q_i is aligned with K, and Q_i does not occur in r (there is no t with 0 <= t < len(r), len(r[t]) = 2, and (r[t][0], r[t][1]) = Q_i), then there exists j with 0 <= j < len(queens), j != i, such that Q_j = Q_i + u*(K - Q_i) for some real u with 0 < u < 1.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_13",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for input (queens, king) and a result r' for input (queens', king), where queens' is any permutation of the list queens and the same king is used, the sets of coordinates occurring in r and r' are equal: for every pair (a,b), (a,b) occurs as an entry of length 2 in r if and only if (a,b) occurs as an entry of length 2 in r'.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_14",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for input (queens, king) and a result r' for input (queens^T, king^T), where for every i queens^T[i] = [queens[i][1], queens[i][0]] and king^T = [king[1], king[0]], the set of coordinates in r' is exactly the set of transposes of the coordinates in r: for every pair (a,b), (a,b) occurs as an entry of length 2 in r' if and only if (b,a) occurs as an entry of length 2 in r.",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.QueensAttacktheKing.spec_15",
+    "negation": "AegisSpec.QueensAttacktheKing.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, no returned coordinate is the king's square: for every t with 0 <= t < len(r) and len(r[t]) = 2, (r[t][0], r[t][1]) != (king[0], king[1]).",
+    "preconditions": "len(queens) >= 1 and len(queens) < 64; len(king) = 2; for every i with 0 <= i < len(queens), len(queens[i]) = 2; for every i with 0 <= i < len(queens), 0 <= queens[i][0] < 8 and 0 <= queens[i][1] < 8; 0 <= king[0] < 8 and 0 <= king[1] < 8; the positions (queens[i][0], queens[i][1]) for 0 <= i < len(queens) are pairwise distinct, and none of them equals (king[0], king[1])."
+  }
+]

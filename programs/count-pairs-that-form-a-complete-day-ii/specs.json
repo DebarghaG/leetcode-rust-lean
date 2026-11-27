@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_1",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let N = len(hours). The function returns a result r and r is exactly the number of index pairs (i,j) such that 0 <= i < j < N and there exists an integer k with hours[i] + hours[j] = 24*k.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_2",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_3",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let N = len(hours). The function returns a result r and 0 <= r <= N*(N-1)/2.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_4",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result r = 0.",
+    "preconditions": "hours is a slice of 64-bit integers with len(hours) = 1, and 1 <= hours[0] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_5",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if there exists an integer k with hours[0] + hours[1] = 24*k, and r = 0 otherwise.",
+    "preconditions": "hours is a slice of 64-bit integers with len(hours) = 2, and 1 <= hours[0] <= 1000000000, 1 <= hours[1] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_6",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let N = len(hours). The function returns a result R, and R = N*(N-1)/2 if 2*a is divisible by 24, and R = 0 otherwise.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000. Suppose there is an integer a with 0 <= a < 24 such that hours[i] mod 24 = a for every i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_7",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let N = len(hours). The function returns a result r, and r = 0 if and only if for every pair (i,j) with 0 <= i < j < N, there is no integer k with hours[i] + hours[j] = 24*k.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_8",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let N = len(hours). For each a with 0 <= a < 24, let c_a be the number of indices i with 0 <= i < N and hours[i] mod 24 = a. The function returns a result R, and R = c_0*(c_0-1)/2 + c_12*(c_12-1)/2 + sum_{a=1}^{11} c_a*c_{24-a}.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_9",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on hours and r' on hours', then r = r'.",
+    "preconditions": "hours and hours' are slices of 64-bit integers, each satisfying 1 <= len <= 500000 and 1 <= value <= 1000000000 for every element. They have equal length, and hours' is a permutation of hours: there is a bijection p on indices with hours'[i] = hours[p(i)] for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_10",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N = len(hours), let x = hours[N-1], and let prefix be the slice consisting of the first N-1 entries of hours. If the function returns r on hours and rp on prefix, then r = rp + M, where M is the number of indices j with 0 <= j < N-1 and hours[j] + x divisible by 24 (that is, there exists an integer k with hours[j] + x = 24*k).",
+    "preconditions": "hours is a slice of 64-bit integers with 2 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountCompleteDayPairs.spec_11",
+    "negation": "AegisSpec.CountCompleteDayPairs.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let N = len(hours). The function returns a result r, and r = N*(N-1)/2 if and only if for every pair (i,j) with 0 <= i < j < N, there exists an integer k with hours[i] + hours[j] = 24*k.",
+    "preconditions": "hours is a slice of 64-bit integers with 1 <= len(hours) <= 500000, and for every i with 0 <= i < len(hours), 1 <= hours[i] <= 1000000000."
+  }
+]

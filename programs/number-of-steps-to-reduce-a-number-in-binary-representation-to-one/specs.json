@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumSteps.spec_1",
+    "negation": "AegisSpec.NumSteps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let N(s) = sum_{i=0}^{len(s)-1} (s[i]-48) * 2^{len(s)-1-i}. Let T(1)=1, T(x)=x/2 for even x>1, and T(x)=x+1 for odd x>1. Let steps(s) be the least t >= 0 such that T^t(N(s)) = 1. Whenever the function returns a result r, r = steps(s).",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumSteps.spec_2",
+    "negation": "AegisSpec.NumSteps.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every valid s; equivalently, the Result is Ok, not Err, and no overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumSteps.spec_3",
+    "negation": "AegisSpec.NumSteps.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2*len(s).",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumSteps.spec_4",
+    "negation": "AegisSpec.NumSteps.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(s)-1 <= r.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumSteps.spec_5",
+    "negation": "AegisSpec.NumSteps.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if len(s) >= 2 and s[0]=49 and s[i]=48 for every i with 1 <= i < len(s), then r = len(s)-1.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumSteps.spec_6",
+    "negation": "AegisSpec.NumSteps.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(s) >= 2 and s[i]=49 for every i with 0 <= i < len(s), then r = len(s)+1.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumSteps.spec_7",
+    "negation": "AegisSpec.NumSteps.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if len(s) > 1 and s[len(s)-1] = 48, then r = 1 + steps(u), where u is the prefix consisting of s[0],...,s[len(s)-2], N(u)=sum_{i=0}^{len(u)-1}(u[i]-48)*2^{len(u)-1-i}, and steps(u) is the least t >= 0 such that T^t(N(u))=1 with T(1)=1, T(x)=x/2 for even x>1, and T(x)=x+1 for odd x>1.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumSteps.spec_8",
+    "negation": "AegisSpec.NumSteps.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if len(s) > 1 and s[len(s)-1] = 49, then r = 1 + stepsInt(N(s)+1), where N(s)=sum_{i=0}^{len(s)-1}(s[i]-48)*2^{len(s)-1-i} and stepsInt(x) for an integer x >= 1 is the least t >= 0 such that T^t(x)=1, with T(1)=1, T(x)=x/2 for even x>1, and T(x)=x+1 for odd x>1.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumSteps.spec_9",
+    "negation": "AegisSpec.NumSteps.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and r > 0, if N(s)=sum_{i=0}^{len(s)-1}(s[i]-48)*2^{len(s)-1-i}, x_0=N(s), and x_{k+1}=T(x_k) for k=0,...,r-1 with T(1)=1, T(x)=x/2 for even x>1, and T(x)=x+1 for odd x>1, then x_{r-1}=2.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumSteps.spec_10",
+    "negation": "AegisSpec.NumSteps.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if len(s) = 1.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumSteps.spec_11",
+    "negation": "AegisSpec.NumSteps.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, if N(s)=sum_{i=0}^{len(s)-1}(s[i]-48)*2^{len(s)-1-i}, x_0=N(s), and x_{k+1}=T(x_k) with T(1)=1, T(x)=x/2 for even x>1, and T(x)=x+1 for odd x>1, then for every integer k with 0 <= k <= r-2 and x_k > 1, we have x_{k+2} < x_k.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), s[i] is 48 or 49 (ASCII '0' or '1'); and s[0] = 49 (ASCII '1')."
+  }
+]

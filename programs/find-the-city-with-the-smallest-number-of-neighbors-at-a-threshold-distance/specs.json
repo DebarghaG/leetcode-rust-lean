@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindTheCity.spec_1",
+    "negation": "AegisSpec.FindTheCity.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let d(u,v) be the minimum total weight of a finite path from city u to city v in the undirected weighted graph given by edges, with d(u,v)=infinity if no path exists. Let count(c) = |{ j : 0 <= j < n, j != c, d(c,j) <= distanceThreshold }|. The function returns a result r and 0 <= r < n, and for every city c with 0 <= c < n, count(r) <= count(c); moreover, for every city c with count(c)=count(r), c <= r. Equivalently, r is the greatest-indexed city among all cities whose count is minimal.",
+    "preconditions": "n and distanceThreshold are i64 values with 2 <= n <= 100 and 1 <= distanceThreshold <= 10000. edges is a slice of i64 vectors of length m with 1 <= m <= n*(n-1)/2. Each edges[k] has length 3 and equals [a,b,w] with 0 <= a < b < n and 1 <= w <= 10000. All unordered pairs {a,b} occurring in edges are distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindTheCity.spec_2",
+    "negation": "AegisSpec.FindTheCity.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (it does not fail, panic, overflow, or index out of bounds) on every input satisfying the preconditions.",
+    "preconditions": "n and distanceThreshold are i64 values with 2 <= n <= 100 and 1 <= distanceThreshold <= 10000. edges is a slice of i64 vectors of length m with 1 <= m <= n*(n-1)/2. Each edges[k] has length 3 and equals [a,b,w] with 0 <= a < b < n and 1 <= w <= 10000. All unordered pairs {a,b} occurring in edges are distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindTheCity.spec_3",
+    "negation": "AegisSpec.FindTheCity.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let count and count' be the counts defined from edges and edges' respectively as in spec_1. Whenever the function returns r on (n, edges, distanceThreshold) and r' on (n, edges', distanceThreshold), we have r = r'.",
+    "preconditions": "Both (n, edges, distanceThreshold) and (n, edges', distanceThreshold) satisfy the constraints listed in spec_1, and edges' is a permutation of edges (the same multiset of three-element vectors)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindTheCity.spec_4",
+    "negation": "AegisSpec.FindTheCity.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, count(r)=0 and for every city c with 0 <= c < n and count(c)=0, we have c <= r. Thus r is the greatest city with no other city at distance at most distanceThreshold.",
+    "preconditions": "The input satisfies the constraints listed in spec_1. Additionally, at least one city c with 0 <= c < n has count(c)=0, where count is defined from edges and distanceThreshold as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindTheCity.spec_5",
+    "negation": "AegisSpec.FindTheCity.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For each city c with 0 <= c < n, let degT(c) be the number of cities b with 0 <= b < n, b != c, such that edges contains an edge between c and b whose weight is at most distanceThreshold (i.e. [c,b,w] with w <= distanceThreshold if c < b, or [b,c,w] with w <= distanceThreshold if b < c). Whenever the function returns a result r, r is the greatest-indexed city minimizing degT: for every city c with 0 <= c < n, degT(r) <= degT(c), and for every city c with degT(c)=degT(r), c <= r.",
+    "preconditions": "The input satisfies the constraints listed in spec_1. Additionally, for every edge [a,b,w] appearing in edges, 2*w > distanceThreshold."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindTheCity.spec_6",
+    "negation": "AegisSpec.FindTheCity.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (n, edges, distanceThreshold) and r' on (n, edges, distanceThreshold'), we have r = r'.",
+    "preconditions": "Both (n, edges, distanceThreshold) and (n, edges, distanceThreshold') satisfy the constraints listed in S1 (so 1 <= distanceThreshold, distanceThreshold' <= 10000), with the same n and the same edge slice. Let d be the shortest-path distance defined from edges as in spec_1. For every pair of cities u,v with 0 <= u < n and 0 <= v < n, d(u,v) <= distanceThreshold if and only if d(u,v) <= distanceThreshold'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindTheCity.spec_7",
+    "negation": "AegisSpec.FindTheCity.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = c.",
+    "preconditions": "The input satisfies the constraints listed in spec_1. Additionally, there exists a city c with 0 <= c < n such that for every city d with 0 <= d < n and d != c, count(c) < count(d), where count is defined from edges and distanceThreshold as in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindTheCity.spec_8",
+    "negation": "AegisSpec.FindTheCity.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = d.",
+    "preconditions": "The input satisfies the constraints listed in spec_1. Additionally, there exist two cities c and d with 0 <= c < d < n such that count(c)=count(d), and for every city e with 0 <= e < n and e not in {c,d}, count(c) < count(e), where count is defined as in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindTheCity.spec_9",
+    "negation": "AegisSpec.FindTheCity.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = n-1.",
+    "preconditions": "The input satisfies the constraints listed in spec_1. Additionally, city n-1 has minimum count: for every city c with 0 <= c < n, count(n-1) <= count(c), where count is defined from edges and distanceThreshold as in spec_1."
+  }
+]

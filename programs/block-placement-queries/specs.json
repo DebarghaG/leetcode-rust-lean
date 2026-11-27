@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetResults.spec_1",
+    "negation": "AegisSpec.GetResults.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) such that: (1) r has exactly one boolean entry for each type-2 row of queries, in the order in which those type-2 rows occur; (2) for every 0-based k, if the k-th type-2 row is queries[j] = [2,x,sz] and O = { y | there is t < j with queries[t] = [1,y] }, then r[k] = true if and only if there exists a real number a with 0 <= a, a+sz <= x, and for all y in O, not (a < y < a+sz). Equivalently, the closed interval [a,a+sz] lies in [0,x] and has no obstacle in its strict interior; touching an obstacle or an endpoint is allowed.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetResults.spec_2",
+    "negation": "AegisSpec.GetResults.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) is exactly the number of indices i with queries[i][0] = 2, i.e. the number of type-2 rows in queries.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetResults.spec_3",
+    "negation": "AegisSpec.GetResults.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetResults.spec_4",
+    "negation": "AegisSpec.GetResults.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, for every 0-based k whose type-2 row is [2,x,sz] with prior obstacle set O, if r[k] = true then there exist real numbers a and b such that b-a = sz, 0 <= a, b <= x, and no y in O satisfies a < y < b.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetResults.spec_5",
+    "negation": "AegisSpec.GetResults.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, for every 0-based k whose type-2 row is [2,x,sz] with prior obstacle set O, if r[k] = false then for every real a with 0 <= a and a+sz <= x there exists y in O such that a < y < a+sz.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetResults.spec_6",
+    "negation": "AegisSpec.GetResults.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, let k < l be two type-2 occurrences such that the k-th type-2 row is [2,x,sz1], the l-th type-2 row is [2,x,sz2], no type-1 row occurs strictly between these two rows, and sz1 <= sz2. Then r[l] = true implies r[k] = true.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetResults.spec_7",
+    "negation": "AegisSpec.GetResults.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, let k < l be two type-2 occurrences such that the k-th row is [2,x1,sz], the l-th row is [2,x2,sz], no type-1 row occurs strictly between these two rows, and x1 <= x2. Then r[k] = true implies r[l] = true.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetResults.spec_8",
+    "negation": "AegisSpec.GetResults.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, let k < l be two type-2 occurrences whose rows are [2,x,sz] and [2,x,sz] respectively, with the same x and the same sz. Then r[l] = true implies r[k] = true.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetResults.spec_9",
+    "negation": "AegisSpec.GetResults.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k be a 0-based type-2 occurrence at row j of queries, and let r be the result returned for queries. For every well-formed input queries2 that agrees with queries on all rows t with 0 <= t <= j and in which the k-th type-2 occurrence is also at row j, the k-th entry of the result returned for queries2 equals r[k].",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists. Additionally, any second input queries2 mentioned in the statement is well-formed in the same sense."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetResults.spec_10",
+    "negation": "AegisSpec.GetResults.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k be a 0-based type-2 occurrence of queries with row [2,x,sz], and let O be the set of type-1 positions occurring before it. For every well-formed input queries2 and every 0-based type-2 occurrence k2 of queries2 with row [2,x,sz] such that the set of type-1 positions occurring before k2 in queries2 is also O, the k2-th boolean result for queries2 equals the k-th boolean result for queries.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists. Additionally, any second input queries2 mentioned in the statement is well-formed in the same sense."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetResults.spec_11",
+    "negation": "AegisSpec.GetResults.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, for every 0-based k whose type-2 row is [2,x,sz], prior obstacles at positions y with y > x have no effect on r[k]: r[k] is unchanged if all such prior type-1 rows are deleted before that query, keeping all other rows and the same type-2 occurrence k.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetResults.spec_12",
+    "negation": "AegisSpec.GetResults.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, for every 0-based k whose type-2 row is [2,x,sz], a prior obstacle exactly at position x has no effect on r[k]: r[k] is unchanged if all prior type-1 rows at position x are deleted before that query, keeping all other rows and the same type-2 occurrence k.",
+    "preconditions": "queries is a well-formed block-placement input: 1 <= len(queries) <= 150000; every row is either [1,y] with exactly two entries or [2,x,sz] with exactly three entries; every y, x, and sz is an integer satisfying 1 <= value <= min(50000, 3*len(queries)); all type-1 positions y are pairwise distinct; and at least one type-2 row exists."
+  }
+]

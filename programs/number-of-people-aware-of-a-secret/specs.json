@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_1",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 10^9 + 7. Define the integer sequence new: Z -> Z by: new(d) = 0 for d < 1; new(1) = 1; and for d >= 2, new(d) = sum_{k = max(1, d - forget + 1)}^{d - delay} new(k), where the sum is 0 if max(1, d - forget + 1) > d - delay. Let aware = sum_{d = max(1, n - forget + 1)}^{n} new(d). Then the function returns a result r such that 0 <= r < M and r ≡ aware (mod M).",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_2",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that 0 <= r < 10^9 + 7.",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_3",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_4",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that r = 2 if (n - 1) mod delay = 0, and r = 1 otherwise. (Here mod is the non-negative remainder; for delay = 1, (n - 1) mod 1 = 0.)",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n, and forget = delay + 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_5",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that r ≡ 2^{n-1} (mod 10^9+7) and 0 <= r < 10^9+7.",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n, and delay = 1 and forget = n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_6",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let new: Z -> Z be the sequence defined in spec_1. Then new(1) = 1, new(2) = 1, and for all d >= 3, new(d) = new(d-1) + new(d-2). Moreover, the function returns a result r such that 0 <= r < 10^9+7 and r ≡ sum_{d = max(1, n-2)}^{n} new(d) (mod 10^9+7).",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n, and delay = 1 and forget = 3."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_7",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a sequence new: Z -> Z satisfying the recurrence in spec_1 such that new(1) = 1, new(d) = 0 for all d with 2 <= d <= delay, and new(delay + 1) = 1. (And the function returns r as defined in spec_1.)",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_8",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let M = 10^9+7. Define new_mod: Z -> Z by new_mod(d) = 0 for d < 1; new_mod(1) = 1; and for d >= 2, new_mod(d) = (sum_{k = max(1, d - forget + 1)}^{d - delay} new_mod(k)) mod M, where the sum is 0 if the lower bound exceeds the upper bound. Then the function returns a result r such that r = (sum_{d = max(1, n - forget + 1)}^{n} new_mod(d)) mod M.",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_9",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let new: Z -> Z be the sequence defined in spec_1. Let total_discovered = sum_{d=1}^{n} new(d) and total_forgotten = sum_{d=1}^{max(0, n - forget)} new(d). Then the function returns a result r such that 0 <= r < 10^9+7 and r ≡ total_discovered - total_forgotten (mod 10^9+7).",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_10",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let aware be the integer defined in spec_1. Then aware >= 1. Equivalently, there exists an integer A with A >= 1 such that A = aware and the function returns r with 0 <= r < 10^9+7 and r ≡ A (mod 10^9+7).",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_11",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let new: Z -> Z be the sequence defined in spec_1. Then for all integers d with d >= delay + 1, new(d) >= new(d - delay). The function returns r as defined in spec_1.",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PeopleAwareOfSecret.spec_12",
+    "negation": "AegisSpec.PeopleAwareOfSecret.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let aware be the integer defined in spec_1. The function returns r = 0 if and only if 10^9+7 divides aware.",
+    "preconditions": "n, delay, forget are integers satisfying 2 <= n <= 1000, 1 <= delay < forget <= n."
+  }
+]

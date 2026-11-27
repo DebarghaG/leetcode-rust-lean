@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_1",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the least nonnegative integer k for which there exists a sequence of exactly k operations, starting from nums, that produces an array a with len(a)=len(nums) and with all prefix sums nonnegative: for every i with 0 <= i < len(nums), sum_{j=0}^{i} a[j] >= 0. An operation chooses any current index p with 0 <= p < len(current), removes the element current[p], and appends that same value to the end of the array. The case k=0 is allowed, so if nums already has all prefix sums nonnegative then r=0. The quantification is over all operation sequences and all resulting arrays; no particular final ordering of moved elements is required.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; and sum_{i=0}^{len(nums)-1} nums[i] >= 0 (the problem's promise that the array can be made prefix-sum non-negative). All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_2",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by panic, out-of-bounds access, or arithmetic overflow on any input satisfying the preconditions.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; and sum_{i=0}^{len(nums)-1} nums[i] >= 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_3",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (the number of indices i with 0 <= i < len(nums) and nums[i] < 0).",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; and sum_{i=0}^{len(nums)-1} nums[i] >= 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_4",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let L be the maximum length of a subsequence of nums (indices i_1 < i_2 < ... < i_L, not necessarily contiguous, with 0 <= L <= len(nums)) such that for every t with 1 <= t <= L, sum_{s=1}^{t} nums[i_s] >= 0. The empty subsequence is allowed and has all prefix sums nonnegative vacuously. Then r = len(nums) - L.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; and sum_{i=0}^{len(nums)-1} nums[i] >= 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_5",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array of length len(nums)+1 with nums'[i]=nums[i] for 0 <= i < len(nums) and nums'[len(nums)]=x. Whenever the function returns r for nums and r' for nums', r' = r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; sum_{i=0}^{len(nums)-1} nums[i] >= 0; len(nums) < 100000; x is an integer with -10^9 <= x <= 10^9 and sum_{i=0}^{len(nums)-1} nums[i] + x >= 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_6",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums' be the array with nums'[i]=y and nums'[j]=nums[j] for every j != i. Whenever the function returns r for nums and r' for nums', r' <= r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; sum_{i=0}^{len(nums)-1} nums[i] >= 0; i is an index with 0 <= i < len(nums); y is an integer with nums[i] <= y <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_7",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums' be the array of length len(nums)+1 with nums'[0]=x and nums'[i+1]=nums[i] for 0 <= i < len(nums). Whenever the function returns r for nums and r' for nums', r' <= r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; sum_{i=0}^{len(nums)-1} nums[i] >= 0; len(nums) < 100000; x is an integer with 0 <= x <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_8",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array with nums'[i] = c * nums[i] for every i with 0 <= i < len(nums). Whenever the function returns r for nums and r' for nums', r' = r.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; sum_{i=0}^{len(nums)-1} nums[i] >= 0; c is a positive integer and for every i with 0 <= i < len(nums), -10^9 <= c * nums[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MakePrefSumNonNegative.spec_9",
+    "negation": "AegisSpec.MakePrefSumNonNegative.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r is the smallest cardinality of a set M of indices with M subset of {0,1,...,len(nums)-1} such that: (a) for every i in M, nums[i] < 0; and (b) for every i with 0 <= i < len(nums), the sum of nums[j] over all j with 0 <= j <= i and j not in M is >= 0 (an empty sum is 0). Equivalently, if one deletes (or moves to the end) exactly the negative elements indexed by M, the remaining elements in their original order have all their prefix sums nonnegative, and r is the minimum number of negative elements for which this holds.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9; and sum_{i=0}^{len(nums)-1} nums[i] >= 0."
+  }
+]

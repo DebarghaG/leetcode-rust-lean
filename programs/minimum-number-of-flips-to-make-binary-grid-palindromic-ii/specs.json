@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFlips.spec_1",
+    "negation": "AegisSpec.MinFlips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a 0/1 matrix T of size m by n, call T admissible when (1) every row of T is palindromic, meaning T[i][j] = T[i][n-1-j] for all 0 <= i < m and 0 <= j < n, (2) every column of T is palindromic, meaning T[i][j] = T[m-1-i][j] for all 0 <= i < m and 0 <= j < n, and (3) the total number of 1 entries of T is divisible by 4. Let C(T) be the number of positions (i,j) with T[i][j] != grid[i][j]. The function returns a result r and r = min { C(T) : T is admissible }. The minimum is over a nonempty set because the all-zero matrix is admissible.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFlips.spec_2",
+    "negation": "AegisSpec.MinFlips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a Result value r, not an error: no valid input causes a panic, out-of-bounds access, division by zero, or signed 64-bit overflow.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFlips.spec_3",
+    "negation": "AegisSpec.MinFlips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned value. Then 0 <= r <= m*n.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFlips.spec_4",
+    "negation": "AegisSpec.MinFlips.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let r be the returned value. Then r = 0 if and only if the given grid itself is row-palindromic and column-palindromic and the total number of 1 entries in grid is divisible by 4.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFlips.spec_5",
+    "negation": "AegisSpec.MinFlips.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let ones = #{ (i,j) : 0 <= i < m, 0 <= j < n, grid[i][j] = 1 } and let r be the returned value. Then r <= ones.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFlips.spec_6",
+    "negation": "AegisSpec.MinFlips.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let ones be the number of 1 entries in grid, let zeros = m*n - ones, and let r be the returned value. Then r <= zeros.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000. Assume 4 divides m*n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFlips.spec_7",
+    "negation": "AegisSpec.MinFlips.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let ones be the number of 1 entries in grid and let r be the returned value. Then r = ones.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000. Assume m*n <= 3."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFlips.spec_8",
+    "negation": "AegisSpec.MinFlips.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let ones be the number of 1 entries in grid and let r be the returned value. Then r = min(ones, 4 - ones).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, m*n <= 200000, and additionally m = n = 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFlips.spec_9",
+    "negation": "AegisSpec.MinFlips.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let r be the returned value. Then r = min { C(T) : T is a 0/1 m by n matrix whose every row and every column is palindromic }, where C(T)=#{ (i,j) : T[i][j] != grid[i][j] }. The divisibility-by-4 condition is automatic for every row/column-palindromic T when m and n are both even, so no admissible target is excluded by it.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000. Assume m and n are both even."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinFlips.spec_10",
+    "negation": "AegisSpec.MinFlips.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridR be the m by n matrix defined by gridR[i][j] = grid[m-1-i][j]. Let r = min_flips(grid) and rR = min_flips(gridR) be the returned values. Then r = rR.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinFlips.spec_11",
+    "negation": "AegisSpec.MinFlips.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridC be the m by n matrix defined by gridC[i][j] = grid[i][n-1-j]. Let r = min_flips(grid) and rC = min_flips(gridC) be the returned values. Then r = rC.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinFlips.spec_12",
+    "negation": "AegisSpec.MinFlips.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let gridT be the n by m matrix defined by gridT[j][i] = grid[i][j]. Let r = min_flips(grid) and rT = min_flips(gridT) be the returned values. Then r = rT.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinFlips.spec_13",
+    "negation": "AegisSpec.MinFlips.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridX be defined by gridX[i][j] = 1 - grid[i][j] for all i,j. Let r = min_flips(grid) and rX = min_flips(gridX) be the returned values. Then r = rX.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000. Assume 4 divides m*n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinFlips.spec_14",
+    "negation": "AegisSpec.MinFlips.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rg = min_flips(g) and rh = min_flips(h) be the returned values. Then |rg - rh| <= H(g,h), where H(g,h) = #{ (i,j) : g[i][j] != h[i][j] }.",
+    "preconditions": "Let m >= 1 and n >= 1 with m*n <= 200000. Let g and h be any two valid m by n binary matrices, so every entry is 0 or 1."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinFlips.spec_15",
+    "negation": "AegisSpec.MinFlips.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the returned value. There exists a 0/1 m by n matrix T such that every row and every column of T is palindromic, the total number of 1 entries of T is divisible by 4, and exactly r positions (i,j) satisfy T[i][j] != grid[i][j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The grid is valid: m >= 1, n >= 1, every row grid[i] has length n, every entry grid[i][j] is 0 or 1, and m*n <= 200000."
+  }
+]

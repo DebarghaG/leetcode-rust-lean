@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindLuSlength.spec_1",
+    "negation": "AegisSpec.FindLuSlength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = -1 exactly when a and b are equal byte strings, meaning len(a) = len(b) and a[i] = b[i] for every i with 0 <= i < len(a). When a and b are not equal byte strings, r = max(len(a), len(b)), i.e. r = len(a) if len(a) >= len(b) and r = len(b) if len(a) < len(b).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindLuSlength.spec_2",
+    "negation": "AegisSpec.FindLuSlength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every pair a,b satisfying the preconditions; it does not fail (no arithmetic overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindLuSlength.spec_3",
+    "negation": "AegisSpec.FindLuSlength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and -1 <= r <= max(len(a), len(b)); in particular, -1 <= r <= 100.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindLuSlength.spec_4",
+    "negation": "AegisSpec.FindLuSlength.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r is either -1 or exactly max(len(a), len(b)); no other value is possible.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindLuSlength.spec_5",
+    "negation": "AegisSpec.FindLuSlength.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Swapping the two arguments does not change the answer: the result returned for (a,b) equals the result returned for (b,a).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindLuSlength.spec_6",
+    "negation": "AegisSpec.FindLuSlength.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c and d be byte arrays satisfying the same constraints as a and b (1 <= len(c), len(d) <= 100 and all bytes in 97..122). If len(c) = len(a), len(d) = len(b), and (c and d are equal byte strings exactly when a and b are equal byte strings), then the result returned for (c,d) equals the result returned for (a,b).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindLuSlength.spec_7",
+    "negation": "AegisSpec.FindLuSlength.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define s to be a subsequence of t iff there exist indices 0 <= i_1 < ... < i_k < len(t) with k = len(s) and t[i_j] = s[j] for every 1 <= j <= k. The function returns a result r and, whenever a and b are not equal byte strings, taking s = a if len(a) >= len(b) and s = b otherwise, we have len(s) = r and s is a subsequence of exactly one of a and b (it is a subsequence of its source and not of the other).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100, len(b) <= 100; for every i with 0 <= i < len(a), 97 <= a[i] <= 122; for every i with 0 <= i < len(b), 97 <= b[i] <= 122."
+  }
+]

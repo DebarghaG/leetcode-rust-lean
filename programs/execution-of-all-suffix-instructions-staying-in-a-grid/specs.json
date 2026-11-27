@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_1",
+    "negation": "AegisSpec.ExecuteInstructions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = len(s), and for every i with 0 <= i < len(s), r[i] is the largest integer k with 0 <= k <= len(s)-i such that, if the robot starts at (startPos[0], startPos[1]) and executes s[i], s[i+1], ..., s[i+k-1] in order (L: column-1, R: column+1, U: row-1, D: row+1), then after each of these k instructions its cell (row, col) satisfies 0 <= row < n and 0 <= col < n. The case k=0 is vacuously true.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_2",
+    "negation": "AegisSpec.ExecuteInstructions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r; it does not fail, overflow, panic, or access an out-of-bounds index.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_3",
+    "negation": "AegisSpec.ExecuteInstructions.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(s).",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_4",
+    "negation": "AegisSpec.ExecuteInstructions.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), 0 <= r[i].",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_5",
+    "negation": "AegisSpec.ExecuteInstructions.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), r[i] <= len(s)-i.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_6",
+    "negation": "AegisSpec.ExecuteInstructions.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), r[i] = 0 if and only if the move from (startPos[0], startPos[1]) in direction s[i] has resulting row < 0 or >= n or resulting column < 0 or >= n.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_7",
+    "negation": "AegisSpec.ExecuteInstructions.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), r[i] = len(s)-i if and only if executing s[i], s[i+1], ..., s[len(s)-1] in order from (startPos[0], startPos[1]) keeps the robot inside the grid after every one of these instructions, i.e. after each step 0 <= row < n and 0 <= col < n.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_8",
+    "negation": "AegisSpec.ExecuteInstructions.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), let k = r[i]. Then for every t with 1 <= t <= k, the cell reached by starting at (startPos[0], startPos[1]) and executing s[i], s[i+1], ..., s[i+t-1] in order satisfies 0 <= row < n and 0 <= col < n.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_9",
+    "negation": "AegisSpec.ExecuteInstructions.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(s), let k = r[i]. If i+k < len(s), then executing the one further instruction s[i+k] from the cell reached after the first k instructions from start index i would leave the grid, i.e. its resulting row is < 0 or >= n or its resulting column is < 0 or >= n.",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ExecuteInstructions.spec_10",
+    "negation": "AegisSpec.ExecuteInstructions.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r[i] = 0 for every i with 0 <= i < len(s) if and only if for every i with 0 <= i < len(s), moving one step from (startPos[0], startPos[1]) in direction s[i] leaves the grid (resulting row < 0 or >= n or resulting column < 0 or >= n).",
+    "preconditions": "Let m = len(s). n satisfies 1 <= n <= 500. startPos has length 2 and 0 <= startPos[0] < n and 0 <= startPos[1] < n. m satisfies 1 <= m <= 500. For every j with 0 <= j < m, s[j] is the ASCII byte for one of 'L', 'R', 'U', 'D'."
+  }
+]

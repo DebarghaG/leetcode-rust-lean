@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxDistance.spec_1",
+    "negation": "AegisSpec.MaxDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(grid). A pair (i,j) is a land cell if 0 <= i < n, 0 <= j < n, and grid[i][j] = 1; it is a water cell if 0 <= i < n, 0 <= j < n, and grid[i][j] = 0. Whenever the function returns a result r, the following holds. If there is no land cell or no water cell, then r = -1. Otherwise, r = max over all water cells (i,j) of min over all land cells (i',j') of (|i - i'| + |j - j'|).",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxDistance.spec_2",
+    "negation": "AegisSpec.MaxDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r: the Lean Result is Ok r rather than an error, and no overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxDistance.spec_3",
+    "negation": "AegisSpec.MaxDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxDistance.spec_4",
+    "negation": "AegisSpec.MaxDistance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2 * n - 2, where n = len(grid).",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxDistance.spec_5",
+    "negation": "AegisSpec.MaxDistance.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if (there is no land cell or there is no water cell). Equivalently, r = -1 if and only if either (for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0) or (for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 1).",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxDistance.spec_6",
+    "negation": "AegisSpec.MaxDistance.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 0, for every water cell (i,j) with 0 <= i < n, 0 <= j < n, and grid[i][j] = 0, there exists a land cell (i',j') with 0 <= i' < n, 0 <= j' < n, and grid[i'][j'] = 1, such that |i - i'| + |j - j'| <= r.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxDistance.spec_7",
+    "negation": "AegisSpec.MaxDistance.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be defined by gridT[i][j] = grid[j][i] for 0 <= i < n and 0 <= j < n. Whenever the function returns a result r on input grid and a result rT on input gridT, r = rT.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxDistance.spec_8",
+    "negation": "AegisSpec.MaxDistance.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridH be defined by gridH[i][j] = grid[i][n - 1 - j] for 0 <= i < n and 0 <= j < n. Whenever the function returns a result r on input grid and a result rH on input gridH, r = rH.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxDistance.spec_9",
+    "negation": "AegisSpec.MaxDistance.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridV be defined by gridV[i][j] = grid[n - 1 - i][j] for 0 <= i < n and 0 <= j < n. Whenever the function returns a result r on input grid and a result rV on input gridV, r = rV.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxDistance.spec_10",
+    "negation": "AegisSpec.MaxDistance.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns a result r on input g and a result r' on input g', then r' <= r.",
+    "preconditions": "For two grids g and g' both satisfying the standard preconditions: let n = len(g); 1 <= n <= 100; for every i with 0 <= i < n, len(g[i]) = n and len(g'[i]) = n; for every i, j with 0 <= i < n and 0 <= j < n, g[i][j] and g'[i][j] are each 0 or 1; for every i, j with 0 <= i < n and 0 <= j < n, g[i][j] <= g'[i][j]; and there exists i, j with 0 <= i < n and 0 <= j < n such that g[i][j] = 1. All indices are 0-based."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxDistance.spec_11",
+    "negation": "AegisSpec.MaxDistance.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists a water cell (i,j) with 0 <= i < n, 0 <= j < n, and grid[i][j] = 0, such that the minimum over all land cells (i',j') with 0 <= i' < n, 0 <= j' < n, and grid[i'][j'] = 1, of (|i - i'| + |j - j'|) equals r.",
+    "preconditions": "Let n = len(grid). The grid satisfies: 1 <= n <= 100; for every i with 0 <= i < n, len(grid[i]) = n; and for every i, j with 0 <= i < n and 0 <= j < n, grid[i][j] = 0 or grid[i][j] = 1. All indices are 0-based."
+  }
+]

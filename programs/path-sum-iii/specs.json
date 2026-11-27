@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PathSum.spec_1",
+    "negation": "AegisSpec.PathSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of ordered pairs (u, v) of nodes of root such that v is in the subtree rooted at u and the sum of the values of the nodes on the unique downward path from u to v equals targetSum. A downward path is nonempty (u = v is allowed and gives the one-node path), and different node positions are counted separately even if their value sequences coincide.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PathSum.spec_2",
+    "negation": "AegisSpec.PathSum.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= N*(N+1)/2, where N is the number of nodes in root. Moreover, r is at most the number P of ordered ancestor-descendant pairs (u, v) with v in the subtree rooted at u, including u = v; note that P <= N*(N+1)/2, and P can be strictly smaller depending on the shape of root.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PathSum.spec_3",
+    "negation": "AegisSpec.PathSum.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "root = Null and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PathSum.spec_4",
+    "negation": "AegisSpec.PathSum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if v = targetSum, and r = 0 otherwise.",
+    "preconditions": "root = Node(v, Null, Null), -10^9 <= v <= 10^9, and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PathSum.spec_5",
+    "negation": "AegisSpec.PathSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the total number of nonempty downward paths in root, i.e. the number of ordered ancestor-descendant pairs (u, v) with v in the subtree rooted at u, including u = v.",
+    "preconditions": "Every node of root has value 0, targetSum = 0, and root has at most 1000 nodes."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PathSum.spec_6",
+    "negation": "AegisSpec.PathSum.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r >= Z, where Z is the number of nodes of root whose value is 0.",
+    "preconditions": "targetSum = 0; root has at most 1000 nodes; and every node value v satisfies -10^9 <= v <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PathSum.spec_7",
+    "negation": "AegisSpec.PathSum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(root) be the binary tree obtained from root by recursively exchanging the left and right children at every node. Whenever the function returns a result r for (root, targetSum) and a result r' for (mirror(root), targetSum), we have r = r'.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PathSum.spec_8",
+    "negation": "AegisSpec.PathSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let neg(root) be the tree obtained from root by replacing every node value v by -v. Whenever the function returns a result r for (root, targetSum) and a result r' for (neg(root), -targetSum), we have r = r'.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PathSum.spec_9",
+    "negation": "AegisSpec.PathSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= R, where R is the number of nodes v of root such that the unique downward path from the root of root to v has sum targetSum, including v = root itself.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PathSum.spec_10",
+    "negation": "AegisSpec.PathSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let T' = Node(c, root, Null). Define q = 0 if root = Null; otherwise let q be the number of nodes v of root, including the root of root, such that the unique downward path in root from the root of root to v has sum targetSum - c. Whenever the function returns a result r for (root, targetSum) and a result r' for (T', targetSum), we have r' = r + q + (1 if c = targetSum else 0).",
+    "preconditions": "root is a finite binary tree with at most 999 nodes; every node value v satisfies -10^9 <= v <= 10^9; -1000 <= targetSum <= 1000; and -10^9 <= c <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PathSum.spec_11",
+    "negation": "AegisSpec.PathSum.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r: it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "root is a finite binary tree with at most 1000 nodes; every node value v satisfies -10^9 <= v <= 10^9; and -1000 <= targetSum <= 1000."
+  }
+]

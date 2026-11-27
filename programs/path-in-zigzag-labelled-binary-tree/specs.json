@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_1",
+    "negation": "AegisSpec.PathInZigZagTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let row(v) be the unique positive integer d with 2^(d-1) <= v < 2^d, and let pos(v) be the 0-based index of v from the left in its row: pos(v) = v - 2^(row(v)-1) when row(v) is odd, and pos(v) = 2^row(v) - 1 - v when row(v) is even. Let d = row(label) and p = pos(label). Whenever path_in_zig_zag_tree(label) returns a result r, len(r) = d and for every i with 0 <= i < d, r[i] = (2^i + floor(p / 2^(d-1-i))) if i+1 is odd, and r[i] = (2^(i+1) - 1 - floor(p / 2^(d-1-i))) if i+1 is even.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_2",
+    "negation": "AegisSpec.PathInZigZagTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every i64 label with 1 <= label <= 10^6, path_in_zig_zag_tree(label) returns a result r; in particular, the computation does not fail by arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_3",
+    "negation": "AegisSpec.PathInZigZagTree.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let row(label) be the unique positive integer d with 2^(d-1) <= label < 2^d. Whenever path_in_zig_zag_tree(label) returns a result r, len(r) = row(label).",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_4",
+    "negation": "AegisSpec.PathInZigZagTree.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever path_in_zig_zag_tree(label) returns a result r, len(r) >= 1 and r[0] = 1.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_5",
+    "negation": "AegisSpec.PathInZigZagTree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever path_in_zig_zag_tree(label) returns a result r, len(r) >= 1 and r[len(r)-1] = label.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_6",
+    "negation": "AegisSpec.PathInZigZagTree.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let row(v) be the unique positive integer d with 2^(d-1) <= v < 2^d. Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r), row(r[i]) = i+1.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_7",
+    "negation": "AegisSpec.PathInZigZagTree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let row(v) be the unique positive integer d with 2^(d-1) <= v < 2^d, and let pos(v) = v - 2^(row(v)-1) if row(v) is odd and pos(v) = 2^row(v) - 1 - v if row(v) is even, giving the 0-based left-to-right position of v in its row. Let d = row(label) and p = pos(label). Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < d, r has an i-th element and pos(r[i]) = floor(p / 2^(d-1-i)).",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_8",
+    "negation": "AegisSpec.PathInZigZagTree.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define row(v) as the unique positive integer e with 2^(e-1) <= v < 2^e, and pos(v) = v - 2^(row(v)-1) if row(v) is odd and pos(v) = 2^row(v) - 1 - v if row(v) is even. For v > 1, define parent(v) as the label in row row(v)-1 at 0-based position floor(pos(v)/2); explicitly, parent(v) = 2^(row(v)-2) + floor(pos(v)/2) if row(v)-1 is odd, and parent(v) = 2^(row(v)-1) - 1 - floor(pos(v)/2) if row(v)-1 is even. Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r)-1, r[i] = parent(r[i+1]).",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_9",
+    "negation": "AegisSpec.PathInZigZagTree.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r)-1, r[i] < r[i+1].",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_10",
+    "negation": "AegisSpec.PathInZigZagTree.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r), 1 <= r[i] <= label.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_11",
+    "negation": "AegisSpec.PathInZigZagTree.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define row(v) as the unique positive integer e with 2^(e-1) <= v < 2^e, and pos(v) = v - 2^(row(v)-1) if row(v) is odd and pos(v) = 2^row(v) - 1 - v if row(v) is even. For v > 1, let parent(v) be the label in row row(v)-1 at 0-based position floor(pos(v)/2). Let iter(v,0)=v and iter(v,k+1)=parent(iter(v,k)). Let d = row(label). Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r), r[i] = iter(label, d-1-i).",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PathInZigZagTree.spec_12",
+    "negation": "AegisSpec.PathInZigZagTree.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever path_in_zig_zag_tree(label) returns a result r, for every i with 0 <= i < len(r), 2^i <= r[i] <= 2^(i+1) - 1.",
+    "preconditions": "label is an i64 with 1 <= label <= 10^6."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindrome.spec_1",
+    "negation": "AegisSpec.LongestPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Using the following definitions, the function returns a result r and r is the exact maximum. For a byte string x of length n, x is a palindrome iff for every q with 0 <= q < n, x[q] = x[n-1-q] (so empty and length-one strings are palindromes). For indices 0 <= i <= j <= len(s), s[i..j] denotes the contiguous substring of s of length j-i whose p-th byte, for 0 <= p < j-i, is s[i+p]; s[i..i] is empty. Similarly t[k..l] for 0 <= k <= l <= len(t). Then r is the greatest integer m for which there exist 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t) such that the concatenation s[i..j] ++ t[k..l] is a palindrome and m = (j-i)+(l-k).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindrome.spec_2",
+    "negation": "AegisSpec.LongestPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and t satisfying the preconditions, the function terminates successfully and returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindrome.spec_3",
+    "negation": "AegisSpec.LongestPalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(s) + len(t).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindrome.spec_4",
+    "negation": "AegisSpec.LongestPalindrome.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindrome.spec_5",
+    "negation": "AegisSpec.LongestPalindrome.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t) such that s[i..j] ++ t[k..l] is a palindrome and (j-i)+(l-k) = r.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindrome.spec_6",
+    "negation": "AegisSpec.LongestPalindrome.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every choice of indices 0 <= i <= j <= len(s) and 0 <= k <= l <= len(t), if s[i..j] ++ t[k..l] is a palindrome, then (j-i)+(l-k) <= r.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindrome.spec_7",
+    "negation": "AegisSpec.LongestPalindrome.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= max(LPS(s), LPS(t)), where for a byte slice x, LPS(x) is the greatest length of a contiguous substring of x that is a palindrome (equivalently, the greatest (j-i) with 0 <= i <= j <= len(x) and x[i..j] a palindrome; empty substrings are allowed, so LPS(x) >= 0).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindrome.spec_8",
+    "negation": "AegisSpec.LongestPalindrome.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2 if s[0] = t[0], and r = 1 otherwise.",
+    "preconditions": "len(s) = 1, len(t) = 1, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindrome.spec_9",
+    "negation": "AegisSpec.LongestPalindrome.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s) + len(t).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, every byte of s and every byte of t is one of the lowercase English letters 97 through 122, and there exists a byte c such that for every i with 0 <= i < len(s), s[i] = c, and for every j with 0 <= j < len(t), t[j] = c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindrome.spec_10",
+    "negation": "AegisSpec.LongestPalindrome.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = max(len(s), len(t)).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, every byte of s and every byte of t is one of the lowercase English letters 97 through 122, and there exist bytes a and b with a != b such that for every i with 0 <= i < len(s), s[i] = a, and for every j with 0 <= j < len(t), t[j] = b."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindrome.spec_11",
+    "negation": "AegisSpec.LongestPalindrome.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, every byte of s and every byte of t is one of the lowercase English letters 97 through 122, and all bytes occurring in s and t are pairwise distinct: for every 0 <= i < len(s) and 0 <= j < len(t), s[i] != t[j]; for every 0 <= i < i' < len(s), s[i] != s[i']; and for every 0 <= j < j' < len(t), t[j] != t[j']."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindrome.spec_12",
+    "negation": "AegisSpec.LongestPalindrome.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(x) denote the byte slice obtained by reversing x. Whenever the function returns r on inputs (s,t), the function on inputs (rev(t), rev(s)) (which also satisfies the preconditions) returns the same value r; equivalently, r(s,t) = r(rev(t), rev(s)).",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindrome.spec_13",
+    "negation": "AegisSpec.LongestPalindrome.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = len(s) + len(t) if and only if the full concatenation s[0..len(s)] ++ t[0..len(t)] (i.e., s followed by t) is a palindrome.",
+    "preconditions": "len(s) >= 1, len(t) >= 1, len(s) <= 1000, len(t) <= 1000, and every byte of s and every byte of t is one of the lowercase English letters 97 through 122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestPalindrome.spec_14",
+    "negation": "AegisSpec.LongestPalindrome.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any such s,t,s',t', whenever the function returns r on (s,t) and r' on (s',t'), r <= r'.",
+    "preconditions": "s,t,s',t' all satisfy the same constraints: lengths between 1 and 1000, and all bytes are lowercase English letters 97 through 122. Moreover, s occurs as a contiguous substring of s', and t occurs as a contiguous substring of t'."
+  }
+]

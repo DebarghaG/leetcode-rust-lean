@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfWays.spec_1",
+    "negation": "AegisSpec.NumberOfWays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = numPeople and M = 1000000007. A handshake arrangement is a set of n/2 unordered pairs {a,b} with a,b in {1,...,n}, a != b, such that every i in {1,...,n} occurs in exactly one pair. Two pairs {a,b} and {c,d} cross if, when the numbers 1,2,...,n are placed in cyclic order around a circle, the endpoints alternate; equivalently, after choosing the clockwise direction from a to b, exactly one of c,d lies in the open arc from a to b. Let Count(n) be the number of handshake arrangements with no crossing pair. The function returns a result r such that r is the unique integer with 0 <= r < M and r congruent to Count(n) modulo M.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfWays.spec_2",
+    "negation": "AegisSpec.NumberOfWays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every numPeople satisfying the preconditions, the call number_of_ways(numPeople) returns a result r; it does not fail, panic, go out of bounds, or overflow. No particular value of r is claimed by this specification.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfWays.spec_3",
+    "negation": "AegisSpec.NumberOfWays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every numPeople satisfying the preconditions, whenever number_of_ways(numPeople) returns a result r, the integer value of r satisfies 0 <= r < 1000000007.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfWays.spec_4",
+    "negation": "AegisSpec.NumberOfWays.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every numPeople satisfying the preconditions, whenever number_of_ways(numPeople) returns a result r, r is congruent modulo 1000000007 to C_{numPeople/2}, where C_0 = 1 and C_{k+1} = sum_{i=0}^{k} C_i * C_{k-i} for k >= 0.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfWays.spec_5",
+    "negation": "AegisSpec.NumberOfWays.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k = numPeople/2 and M = 1000000007. Whenever number_of_ways(numPeople) returns a result r, r is congruent modulo M to binom(numPeople,k) * (k+1)^{-1}, where binom is the ordinary binomial coefficient and (k+1)^{-1} is the multiplicative inverse of k+1 modulo M; this inverse exists because 0 < k+1 <= 501 < M.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfWays.spec_6",
+    "negation": "AegisSpec.NumberOfWays.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k = numPeople/2. Whenever number_of_ways(numPeople) returns r and number_of_ways(numPeople-2) returns r_prev, the congruence (k+1) * r is congruent modulo 1000000007 to (4*k - 2) * r_prev.",
+    "preconditions": "numPeople is an even integer satisfying 4 <= numPeople <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfWays.spec_7",
+    "negation": "AegisSpec.NumberOfWays.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever number_of_ways(numPeople) returns a result r, r equals C_{numPeople/2} as an ordinary integer, not merely modulo 1000000007.",
+    "preconditions": "numPeople is an even integer satisfying 2 <= numPeople <= 36."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfWays.spec_8",
+    "negation": "AegisSpec.NumberOfWays.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every numPeople satisfying the preconditions, whenever number_of_ways(numPeople) returns a result r, the integer value of r satisfies r != 0. Equivalently, with k = numPeople/2, the residue C_k mod 1000000007 is nonzero because 2k < 1000000007 and k+1 < 1000000007, so C_k ≡ binom(2k,k) * (k+1)^{-1} is a product of nonzero residues modulo the prime 1000000007.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfWays.spec_9",
+    "negation": "AegisSpec.NumberOfWays.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k = numPeople/2, and let D_k be the number of Dyck paths from (0,0) to (2k,0) using steps (1,1) and (1,-1) that never go below the horizontal axis. Whenever number_of_ways(numPeople) returns a result r, r is congruent modulo 1000000007 to D_k.",
+    "preconditions": "numPeople is an integer satisfying 2 <= numPeople <= 1000 and numPeople is even."
+  }
+]

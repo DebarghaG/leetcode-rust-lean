@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum, over all integer sequences s_0, s_1, ..., s_{k-1} satisfying s_0 = 0, 0 < s_1 < s_2 < ... < s_{k-1} <= n - 1, and s_{k-1} - s_1 <= dist, of the sum nums[s_0] + nums[s_1] + ... + nums[s_{k-1}]. For k = 2 the distance condition is s_1 - s_1 = 0 <= dist, which holds under the preconditions.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, minimum_cost does not fail: it returns a result r.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= nums[0] + (k - 1) * m, where m is the minimum of nums[1], nums[2], ..., nums[n-1].",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= nums[0] + nums[1] + nums[2] + ... + nums[k-1].",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist integers s_0, s_1, ..., s_{k-1} such that s_0 = 0, 0 < s_1 < s_2 < ... < s_{k-1} <= n - 1, s_{k-1} - s_1 <= dist, and r = nums[s_0] + nums[s_1] + ... + nums[s_{k-1}].",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer sequence t_0, t_1, ..., t_{k-1} satisfying t_0 = 0, 0 < t_1 < t_2 < ... < t_{k-1} <= n - 1, and t_{k-1} - t_1 <= dist, we have r <= nums[t_0] + nums[t_1] + ... + nums[t_{k-1}].",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = nums[0] + nums[1] + ... + nums[n-1].",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. k = n and dist >= n - 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = nums[0] + (the sum of the k-1 smallest values in the multiset {nums[1], nums[2], ..., nums[n-1]}), where the k-1 smallest values are taken with multiplicity from the distinct indices 1 through n-1.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. 3 <= k <= n and dist >= n - 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = nums[0] + min { nums[s] + nums[s+1] + ... + nums[s+k-2] | 1 <= s <= n - k + 1 }.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. 3 <= k <= n and dist = k - 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCost.spec_10",
+    "negation": "AegisSpec.MinimumCost.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = nums[0] + min { nums[i] | 1 <= i <= n - 1 }.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. k = 2 and dist >= 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumCost.spec_11",
+    "negation": "AegisSpec.MinimumCost.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = nums[0] + min { nums[i] + nums[j] | 1 <= i < j <= n - 1 and j - i <= dist }.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. k = 3 and dist >= 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumCost.spec_12",
+    "negation": "AegisSpec.MinimumCost.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If minimum_cost(nums, k, dist1) returns r1 and minimum_cost(nums, k, dist2) returns r2, then r2 <= r1.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. 3 <= k <= n. Let dist1 and dist2 be integers with k - 2 <= dist1 <= dist2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumCost.spec_13",
+    "negation": "AegisSpec.MinimumCost.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If minimum_cost(nums, k1, dist) returns r1 and minimum_cost(nums, k2, dist) returns r2, then r1 <= r2.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Let k1 and k2 be integers with 3 <= k1 <= k2 <= n. Let dist be an integer with k2 - 2 <= dist."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumCost.spec_14",
+    "negation": "AegisSpec.MinimumCost.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r = k * c.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. There is an integer c with 1 <= c <= 1000000000 such that nums[i] = c for all i with 0 <= i < n. 3 <= k <= n and k - 2 <= dist."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumCost.spec_15",
+    "negation": "AegisSpec.MinimumCost.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If minimum_cost(nums, k, dist) returns r and minimum_cost(nums2, k, dist) returns r2, then r <= r2.",
+    "preconditions": "Let n = len(nums). 3 <= n <= 100000. For every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Let nums2 be another array of length n with 1 <= nums2[i] <= 1000000000 for every i with 0 <= i < n. Suppose nums[i] <= nums2[i] for every i with 0 <= i < n. Let k and dist satisfy either (k = 2 and dist >= 1) or (3 <= k <= n and k - 2 <= dist)."
+  }
+]

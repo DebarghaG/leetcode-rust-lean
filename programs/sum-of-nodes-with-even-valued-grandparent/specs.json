@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_1",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let s be the mathematical integer represented by the returned I64 r. The function returns a result r, and s is the sum, over all node occurrences x in root that have a grandparent g whose value is even (g.value mod 2 = 0), of x.value. Here the grandparent of x is the parent of the parent of x, so x must be at depth at least 2 when the depth of the root is 0; if x has no grandparent it is not included. If no node occurrence has an even-valued grandparent, s = 0. Node occurrences are counted individually, even when their values coincide.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_2",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, the function returns a result r (Result.ok of some I64); it does not fail, panic, or overflow.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_3",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the mathematical integer s represented by r satisfies s >= 0.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_4",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the mathematical integer s represented by r is at most the sum of the values of all node occurrences in root.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_5",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and the mathematical integer s represented by r is 0.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, every node value v satisfies 1 <= v <= 100, and every node occurrence in root has depth at most 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_6",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the mathematical integer s represented by r equals the sum of the values of all node occurrences in root whose depth is at least 2.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, every node occurrence has a value v with 1 <= v <= 100, and every node occurrence has an even value (v mod 2 = 0)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_7",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if the mathematical integer s represented by r is nonzero, then there exists at least one node occurrence x in root that has a grandparent g with even value.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_8",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every node occurrence x in root that has a grandparent g with even value, the mathematical integer s represented by r satisfies s >= x.value.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, and for every node occurrence in root its stored value v is an integer with 1 <= v <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_9",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the mathematical integer s represented by r is at least the sum of the values of all node occurrences in root whose depth is exactly 2.",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, every node value v satisfies 1 <= v <= 100, and root = Node(v, L, R) with v even (v mod 2 = 0)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_10",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the mathematical integer s represented by r equals A(L) + A(R) + (if v is even then C(L) + C(R) else 0), where for any tree T, A(T) is the sum of the values of all node occurrences in T that have an even-valued grandparent located inside T (with T considered as a separate tree and A(Null) = 0), and C(T) is the sum of the values of the immediate children of the root of T (with C(Null) = 0).",
+    "preconditions": "root is a finite non-empty binary tree with at most 10,000 node occurrences, every node value v satisfies 1 <= v <= 100, and root = Node(v, L, R)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_11",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for root and a result r2 for root2, the mathematical integers s and s2 represented by r and r2 satisfy s2 = s + D, where D is the sum of the values of all node occurrences in root whose depth is exactly 2.",
+    "preconditions": "root = Node(v, L, R) and root2 = Node(v2, L, R) are finite non-empty binary trees with at most 10,000 node occurrences, every node occurrence in both trees has value w with 1 <= w <= 100, v is odd (v mod 2 = 1), and v2 is even (v2 mod 2 = 0)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SumEvenGrandparent.spec_12",
+    "negation": "AegisSpec.SumEvenGrandparent.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for root and a result r2 for root2, the mathematical integers s and s2 represented by r and r2 are equal.",
+    "preconditions": "root and root2 are finite non-empty binary trees with at most 10,000 node occurrences, every node occurrence in both trees has value w with 1 <= w <= 100, and root2 is obtained from root by recursively swapping the left and right subtrees at every node while keeping all stored values the same."
+  }
+]

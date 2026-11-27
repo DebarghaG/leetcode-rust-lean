@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DeleteString.spec_1",
+    "negation": "AegisSpec.DeleteString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the maximum, over all deletion plans of s, of the plan's number of operations. A deletion plan of s is a sequence 0 = p_0 < p_1 < ... < p_k = n with k >= 1 such that for every t with 0 <= t <= k-2, setting j = p_{t+1} - p_t, we have 1 <= j, 2*j <= n - p_t, and s[p_t + a] = s[p_t + j + a] for every a with 0 <= a < j; the plan's number of operations is k.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122 (each byte is an ASCII lowercase letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DeleteString.spec_2",
+    "negation": "AegisSpec.DeleteString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no arithmetic overflow, no out-of-bounds access, no panic) for every input satisfying the preconditions.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DeleteString.spec_3",
+    "negation": "AegisSpec.DeleteString.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= n.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DeleteString.spec_4",
+    "negation": "AegisSpec.DeleteString.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n if and only if all bytes of s are equal, i.e. s[0] = s[1] = ... = s[n-1].",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DeleteString.spec_5",
+    "negation": "AegisSpec.DeleteString.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if there is no integer j such that 1 <= j, 2*j <= n, and s[a] = s[j + a] for every a with 0 <= a < j.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DeleteString.spec_6",
+    "negation": "AegisSpec.DeleteString.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there is a sequence 0 = p_0 < p_1 < ... < p_r = n such that for every t with 0 <= t <= r-2, setting j = p_{t+1} - p_t, we have 1 <= j, 2*j <= n - p_t, and s[p_t + a] = s[p_t + j + a] for every a with 0 <= a < j; that is, s can be deleted in exactly r legal operations.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DeleteString.spec_7",
+    "negation": "AegisSpec.DeleteString.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every sequence 0 = p_0 < p_1 < ... < p_k = n with k >= 1 such that for every t with 0 <= t <= k-2, setting j = p_{t+1} - p_t, one has 1 <= j, 2*j <= n - p_t, and s[p_t + a] = s[p_t + j + a] for all a with 0 <= a < j, satisfies k <= r.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DeleteString.spec_8",
+    "negation": "AegisSpec.DeleteString.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any byte slice t of length n whose bytes are all in 97..122 and which has the same equality pattern as s (for all a, b with 0 <= a < n and 0 <= b < n, s[a] = s[b] if and only if t[a] = t[b]), if the function returns r_s on s and r_t on t, then r_s = r_t.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DeleteString.spec_9",
+    "negation": "AegisSpec.DeleteString.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r >= 2, there exists an integer j such that 1 <= j, 2*j <= n, s[a] = s[j + a] for every a with 0 <= a < j, and r = 1 + G(j), where for 0 <= j <= n, G(j) denotes the maximum number of operations over all deletion plans of the suffix s[j..n-1] (regarded as a byte string of length n-j), with G(n) = 0.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DeleteString.spec_10",
+    "negation": "AegisSpec.DeleteString.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer j such that 1 <= j, 2*j <= n, and s[a] = s[j + a] for every a with 0 <= a < j, we have r >= 1 + G(j), where for 0 <= j <= n, G(j) denotes the maximum number of operations over all deletion plans of the suffix s[j..n-1] (regarded as a byte string of length n-j), with G(n) = 0.",
+    "preconditions": "n = len(s); 1 <= n <= 4000; for every t with 0 <= t < n, 97 <= s[t] <= 122."
+  }
+]

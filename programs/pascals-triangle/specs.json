@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Generate.spec_1",
+    "negation": "AegisSpec.Generate.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that: (a) len(r) = numRows; (b) for every i with 0 <= i < numRows, len(r[i]) = i + 1; (c) for every i with 0 <= i < numRows and every j with 0 <= j <= i, r[i][j] = C(i, j), where C(i, j) = i! / (j! * (i - j)!) for 0 <= j <= i, with 0! = 1 and m! = m * (m - 1)! for m >= 1. Thus r is exactly the first numRows rows of Pascal's triangle.",
+    "preconditions": "numRows is an i64 with 1 <= numRows <= 30."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Generate.spec_2",
+    "negation": "AegisSpec.Generate.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r such that len(r) = numRows; that is, the returned vector has exactly numRows rows.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Generate.spec_3",
+    "negation": "AegisSpec.Generate.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows, len(r[i]) = i + 1; that is, row i has exactly i + 1 entries.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Generate.spec_4",
+    "negation": "AegisSpec.Generate.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows, r[i][0] = 1; that is, every row begins with 1.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Generate.spec_5",
+    "negation": "AegisSpec.Generate.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows, r[i][i] = 1; that is, every row ends with 1.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Generate.spec_6",
+    "negation": "AegisSpec.Generate.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that for every i with 1 <= i < numRows and every j with 1 <= j < i, r[i][j] = r[i - 1][j - 1] + r[i - 1][j].",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Generate.spec_7",
+    "negation": "AegisSpec.Generate.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows and every j with 0 <= j <= i, r[i][j] = r[i][i - j].",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Generate.spec_8",
+    "negation": "AegisSpec.Generate.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows and every j with 0 <= j <= i, 1 <= r[i][j] <= C(i, floor(i/2)), where C(i, k) = i! / (k! * (i - k)!) and floor(i/2) is the integer division of i by 2. Since C(i, floor(i/2)) <= 77558760 < 2^63 - 1, no entry overflows i64.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Generate.spec_9",
+    "negation": "AegisSpec.Generate.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows, the sum of all entries of row i satisfies sum_{j=0}^{i} r[i][j] = 2^i.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Generate.spec_10",
+    "negation": "AegisSpec.Generate.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows, sum_{j=0}^{i} (-1)^j * r[i][j] equals 1 when i = 0 and equals 0 when i >= 1.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Generate.spec_11",
+    "negation": "AegisSpec.Generate.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every numRows with 1 <= numRows <= 30, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Generate.spec_12",
+    "negation": "AegisSpec.Generate.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r such that for every i with 1 <= i < numRows, r[i][1] = i.",
+    "preconditions": "1 <= numRows <= 30."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Generate.spec_13",
+    "negation": "AegisSpec.Generate.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r such that for every i with 0 <= i < numRows there exists an integer m with 0 <= m <= i for which r[i][j] <= r[i][j + 1] for every j with 0 <= j < m, and r[i][j] >= r[i][j + 1] for every j with m <= j < i; that is, each row is nondecreasing up to a peak and nonincreasing afterward.",
+    "preconditions": "1 <= numRows <= 30."
+  }
+]

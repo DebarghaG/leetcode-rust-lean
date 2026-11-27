@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_score(nums) returns a result r, r is the maximum, over all valid hopping sequences p = (p_0, p_1, ..., p_m) with m >= 1, p_0 = 0, p_m = n - 1, and p_{k-1} < p_k for every k with 1 <= k <= m, of the score Σ_{k=1}^m (p_k - p_{k-1}) * nums[p_k].",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, max_score(nums) returns Ok(r) for some i64 value r; it does not return an error, panic, overflow, or index out of bounds.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_score(nums) returns r, there exists at least one valid hopping sequence p = (p_0, ..., p_m) with m >= 1, p_0 = 0, p_m = n - 1, and p_{k-1} < p_k for every 1 <= k <= m, such that Σ_{k=1}^m (p_k - p_{k-1}) * nums[p_k] = r.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_score(nums) returns r, r <= (n - 1) * max{ nums[i] | 1 <= i < n }.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_score(nums) returns r, r >= Σ_{i=1}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_score(nums) returns r, for every i with 0 <= i < n, r >= i * nums[i] + (n - 1 - i) * nums[n - 1].",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_score(nums) returns r and max_score(nums') returns r', we have r = r'.",
+    "preconditions": "Let n = len(nums) = len(nums'). Both slices satisfy 2 <= n <= 100000 and all their entries lie in [1,100000]. They agree at every index i with 1 <= i < n; the values nums[0] and nums'[0] may differ."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_score(nums) returns r and max_score(nums') returns r', we have r' >= r.",
+    "preconditions": "Let n = len(nums) = len(nums'). Both slices satisfy 2 <= n <= 100000 and all their entries lie in [1,100000]. There is an index j with 1 <= j < n such that nums'[j] >= nums[j], and nums'[i] = nums[i] for every i with 0 <= i < n and i ≠ j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_score(nums) returns r and max_score(nums') returns r', we have r' = r + (n - 1) * c.",
+    "preconditions": "Let n = len(nums) = len(nums'). Both slices satisfy 2 <= n <= 100000 and all their entries lie in [1,100000]. There is an integer c such that nums'[i] = nums[i] + c for every i with 1 <= i < n, and nums'[0] = nums[0]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_score(nums) returns r and max_score(nums') returns r', we have r' = c * r.",
+    "preconditions": "Let n = len(nums) = len(nums'). Both slices satisfy 2 <= n <= 100000 and all their entries lie in [1,100000]. There is an integer c >= 1 such that nums'[i] = c * nums[i] for every i with 1 <= i < n, and nums'[0] = nums[0]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScore.spec_11",
+    "negation": "AegisSpec.MaxScore.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_score(nums) returns r, r = Σ_{i=1}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). The slice satisfies 2 <= n <= 100000 and all entries lie in [1,100000]. For every i with 1 <= i < n - 1, nums[i] >= nums[i + 1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxScore.spec_12",
+    "negation": "AegisSpec.MaxScore.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_score(nums) returns r, r = (n - 1) * nums[n - 1].",
+    "preconditions": "Let n = len(nums). The slice satisfies 2 <= n <= 100000 and all entries lie in [1,100000]. For every i with 1 <= i < n, nums[i] <= nums[n - 1]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxScore.spec_13",
+    "negation": "AegisSpec.MaxScore.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever max_score(nums) returns Ok(r), r = sum_{i=1}^{n-1} max{ nums[j] | i <= j < n }.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  }
+]

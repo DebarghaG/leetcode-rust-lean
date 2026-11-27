@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfArrays.spec_1",
+    "negation": "AegisSpec.NumberOfArrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever number_of_arrays(differences, lower, upper) returns a result r, r is exactly the number C of sequences h of n+1 integers such that: (1) for every i with 0 <= i < n, h[i+1] - h[i] = differences[i]; and (2) for every j with 0 <= j <= n, lower <= h[j] <= upper.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfArrays.spec_2",
+    "negation": "AegisSpec.NumberOfArrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, number_of_arrays(differences, lower, upper) returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfArrays.spec_3",
+    "negation": "AegisSpec.NumberOfArrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever number_of_arrays(differences, lower, upper) returns a result r, 0 <= r <= upper - lower + 1.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfArrays.spec_4",
+    "negation": "AegisSpec.NumberOfArrays.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let P[0]=0 and P[i+1]=P[i]+differences[i] for every i with 0 <= i < n. Let mn = min_{0 <= i <= n} P[i] and mx = max_{0 <= i <= n} P[i]. Whenever number_of_arrays(differences, lower, upper) returns a result r, r = max(0, (upper - lower + 1) - (mx - mn)).",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfArrays.spec_5",
+    "negation": "AegisSpec.NumberOfArrays.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If number_of_arrays(differences, lower_1, upper_1) returns r_1 and number_of_arrays(differences, lower_2, upper_2) returns r_2, then r_1 = r_2.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; for k=1,2, -100000 <= lower_k <= upper_k <= 100000; and upper_1 - lower_1 = upper_2 - lower_2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfArrays.spec_6",
+    "negation": "AegisSpec.NumberOfArrays.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If number_of_arrays(differences, lower, upper) returns r and number_of_arrays(neg_differences, lower, upper) returns r', then r = r'.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000. Let neg_differences be the array of length n with neg_differences[i] = -differences[i] for 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfArrays.spec_7",
+    "negation": "AegisSpec.NumberOfArrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If number_of_arrays(differences, lower, upper) returns r and number_of_arrays(rev_differences, lower, upper) returns r', then r = r'.",
+    "preconditions": "Let n = len(differences). Assume 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= differences[i] <= 100000; and -100000 <= lower <= upper <= 100000. Let rev_differences be the array of length n with rev_differences[i] = differences[n-1-i] for 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfArrays.spec_8",
+    "negation": "AegisSpec.NumberOfArrays.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If number_of_arrays(differences1, lower, upper) returns r1 and number_of_arrays(differences2, lower, upper) returns r2, then r1 = r2.",
+    "preconditions": "Let n1 = len(differences1) and n2 = len(differences2). Assume 1 <= n1 <= 100000, 1 <= n2 <= 100000; for every i with 0 <= i < n1, -100000 <= differences1[i] <= 100000; for every i with 0 <= i < n2, -100000 <= differences2[i] <= 100000; and -100000 <= lower <= upper <= 100000. Define P1[0]=0 and P1[i+1]=P1[i]+differences1[i] for 0<=i<n1; define P2[0]=0 and P2[i+1]=P2[i]+differences2[i] for 0<=i<n2. Let mn1=min P1, mx1=max P1, mn2=min P2, mx2=max P2. Assume mn1 = mn2 and mx1 = mx2."
+  }
+]

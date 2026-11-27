@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SortArray.spec_1",
+    "negation": "AegisSpec.SortArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For each v with 0 <= v < n, let pos(v) be the unique index i with 0 <= i < n and nums[i] = v. Define target A by tau_A(i) = i for 0 <= i < n, and target B by tau_B(i) = i+1 for 0 <= i < n-1 and tau_B(n-1) = 0. For T in {A,B}, define the permutation sigma_T on {0,...,n-1} by sigma_T(v) = tau_T(pos(v)). For any permutation sigma of {0,...,n-1}, let C0 be the cycle of sigma containing 0, and define cost(sigma) = (|C0|-1) + the sum over all cycles C of sigma with C != C0 and |C| >= 2 of (|C|+1). Whenever sort_array(nums) returns r, r = min(cost(sigma_A), cost(sigma_B)).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SortArray.spec_2",
+    "negation": "AegisSpec.SortArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "sort_array(nums) returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SortArray.spec_3",
+    "negation": "AegisSpec.SortArray.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sort_array(nums) returns r, 0 <= r.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SortArray.spec_4",
+    "negation": "AegisSpec.SortArray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sort_array(nums) returns r, r <= floor((3*n - 3)/2).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SortArray.spec_5",
+    "negation": "AegisSpec.SortArray.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sort_array(nums) returns r, r = 0 if and only if either (i) nums[0] = 0 and for every i with 1 <= i < n, nums[i] = i, or (ii) nums[n-1] = 0 and for every i with 0 <= i < n-1, nums[i] = i+1.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SortArray.spec_6",
+    "negation": "AegisSpec.SortArray.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever sort_array(nums) returns r, there exists a sequence of arrays nums_0, nums_1, ..., nums_r, each of length n, such that nums_0 = nums, nums_r is either target A (nums_r[i] = i for all 0 <= i < n) or target B (nums_r[i] = i+1 for 0 <= i < n-1 and nums_r[n-1] = 0), and for every t with 0 <= t < r, nums_{t+1} is obtained from nums_t by choosing indices p,q with nums_t[p] = 0 and nums_t[q] != 0 and swapping the entries at p and q.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SortArray.spec_7",
+    "negation": "AegisSpec.SortArray.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sort_array(nums) returns r, for every k with 0 <= k < r there is no sequence of arrays nums_0, ..., nums_k, each of length n, such that nums_0 = nums, nums_k is target A or target B as defined in spec_6, and each step swaps 0 with a nonzero entry.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SortArray.spec_8",
+    "negation": "AegisSpec.SortArray.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sort_array(nums) returns r and n = 3, r <= 2.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SortArray.spec_9",
+    "negation": "AegisSpec.SortArray.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sort_array(nums) returns r and n = 4, r <= 3.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SortArray.spec_10",
+    "negation": "AegisSpec.SortArray.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let F(nums) be the array of length n defined by F(nums)[i] = 0 if nums[n-1-i] = 0, and F(nums)[i] = n - nums[n-1-i] otherwise, for 0 <= i < n. Whenever sort_array(nums) returns r and sort_array(F(nums)) returns r', we have r' = r.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SortArray.spec_11",
+    "negation": "AegisSpec.SortArray.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sort_array(nums) returns r with r > 0, there exist indices p,q with 0 <= p,q < n, nums[p] = 0, and nums[q] != 0 such that, if nums' is obtained from nums by swapping the entries at p and q, then the minimum number of legal moves needed to transform nums' into target A or target B is exactly r-1. Here 'minimum number of legal moves' means the least k for which there is a sequence nums'_0, ..., nums'_k with nums'_0 = nums', nums'_k equal to target A or target B, and each step swapping 0 with a nonzero entry.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SortArray.spec_12",
+    "negation": "AegisSpec.SortArray.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sort_array(nums) returns r with r > 0, for every p,q with 0 <= p,q < n, nums[p] = 0, and nums[q] != 0, if nums' is obtained from nums by swapping the entries at p and q, then the minimum number of legal moves needed to transform nums' into target A or target B is at least r-1. Here 'minimum number of legal moves' has the same meaning as in spec_11.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= nums[i] < n; and for every i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  }
+]

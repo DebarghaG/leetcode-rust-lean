@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPairs.spec_1",
+    "negation": "AegisSpec.CountPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(deliciousness). Let C be the number of pairs of indices (i,j) with 0 <= i < j < n such that deliciousness[i] + deliciousness[j] = 2^k for some integer k >= 0 (equivalently, the sum is one of 1, 2, 4, 8, ...). The function returns a result r with r = C mod 1000000007 and 0 <= r < 1000000007, and the call does not fail.",
+    "preconditions": "1 <= len(deliciousness) <= 100000; for every index i with 0 <= i < len(deliciousness), 0 <= deliciousness[i] <= 1048576 (= 2^20)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPairs.spec_2",
+    "negation": "AegisSpec.CountPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every slice deliciousness satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "1 <= len(deliciousness) <= 100000; for every index i with 0 <= i < len(deliciousness), 0 <= deliciousness[i] <= 1048576 (= 2^20)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPairs.spec_3",
+    "negation": "AegisSpec.CountPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 0 <= r < 1000000007.",
+    "preconditions": "1 <= len(deliciousness) <= 100000; for every index i with 0 <= i < len(deliciousness), 0 <= deliciousness[i] <= 1048576 (= 2^20)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPairs.spec_4",
+    "negation": "AegisSpec.CountPairs.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by count_pairs(deliciousness) and s be the result returned by count_pairs(other). Then r = s.",
+    "preconditions": "deliciousness and other are slices, each satisfying 1 <= len <= 100000 and entries in [0, 1048576]; other is a permutation of deliciousness (same length and same multiset of entries)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPairs.spec_5",
+    "negation": "AegisSpec.CountPairs.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of indices i with 0 <= i < len(p) such that p[i] + x = 2^t for some integer t >= 0. Let r_p be the result of count_pairs(p) and r_x be the result of count_pairs(xs). Then r_x and r_p + k have the same residue modulo 1000000007.",
+    "preconditions": "p is a slice with 1 <= len(p) <= 99999 and 0 <= p[i] <= 1048576 for every 0 <= i < len(p); x is an integer with 0 <= x <= 1048576. Let xs be the slice p followed by the single element x, so len(xs) = len(p)+1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPairs.spec_6",
+    "negation": "AegisSpec.CountPairs.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a nonzero result r (r != 0), there exist indices i,j with 0 <= i < j < len(deliciousness) such that deliciousness[i] + deliciousness[j] = 2^k for some integer k >= 0.",
+    "preconditions": "1 <= len(deliciousness) <= 100000; for every index i with 0 <= i < len(deliciousness), 0 <= deliciousness[i] <= 1048576 (= 2^20)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPairs.spec_7",
+    "negation": "AegisSpec.CountPairs.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= min(len(deliciousness) * (len(deliciousness) - 1) / 2, 1000000006), where the division is exact integer division of the product of consecutive nonnegative integers.",
+    "preconditions": "1 <= len(deliciousness) <= 100000; for every index i with 0 <= i < len(deliciousness), 0 <= deliciousness[i] <= 1048576 (= 2^20)."
+  }
+]

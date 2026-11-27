@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_1",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r on an admissible input, r equals the minimum total cost over all feasible plans. A feasible plan chooses a set W of house indices in {0,...,n-1} at which wells are built and a set E of pipe indices in {0,...,len(pipes)-1} to lay. Its cost is (sum_{w in W} wells[w]) + (sum_{j in E} pipes[j][2]). Pipe j connects houses pipes[j][0]-1 and pipes[j][1]-1, converting the input's 1-based house labels to 0-based indices. Every house h in {0,...,n-1} must be connected by selected pipes in E to at least one house in W; a house in W is connected to itself. The minimum is over all such feasible plans. Since n >= 2, at least one well is always required; the empty well set is not feasible.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000. Multiple pipes between the same two houses are allowed."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_2",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r on every admissible input; it does not fail due to integer overflow, panic, out-of-bounds access, or any other runtime error.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_3",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= sum_{i=0}^{n-1} wells[i].",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_4",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= min_{0 <= i < n} wells[i].",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_5",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever n = 2 and the function returns a result r, let m = min_{0 <= j < len(pipes)} pipes[j][2]. Then r = min(wells[0] + wells[1], min(wells[0], wells[1]) + m).",
+    "preconditions": "2 <= n <= 10000; n = 2; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_6",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever all well costs are 0 and the function returns a result r, r = 0.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, wells[i] = 0; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_7",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever every pipe cost is 0 and the function returns a result r, let G be the undirected graph with vertex set {0,...,n-1} and, for each 0 <= j < len(pipes), an edge between pipes[j][0]-1 and pipes[j][1]-1. If C_1,...,C_k are the connected components of G, each a subset of {0,...,n-1}, then r = sum_{t=1}^{k} min_{i in C_t} wells[i].",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and pipes[j][2] = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_8",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and every pipe cost satisfies pipes[j][2] >= max_{0 <= i < n} wells[i], we have r = sum_{i=0}^{n-1} wells[i].",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_9",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (n,wells,pipes) and r' on (n,wells,pipes'), we have r' = r.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000. Also pipes' has the same length as pipes and satisfies the same pipe constraints, and there is a bijection π on {0,...,len(pipes)-1} such that pipes'[j] = pipes[π(j)] for every j."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_10",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (n,wells,pipes) and r' on (n,wells,pipes'), we have r' <= r.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000. Also len(pipes) < 10000, e is a vector of length 3 with 1 <= e[0] <= n, 1 <= e[1] <= n, e[0] != e[1], and 0 <= e[2] <= 100000, and pipes' is pipes with e appended."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_11",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (n,wells,pipes) and r' on (n,wells',pipes), we have r' <= r.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000. Also len(wells') = n and for every i, 0 <= wells'[i] <= wells[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_12",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist sets W ⊆ {0,...,n-1} and E ⊆ {0,...,len(pipes)-1} such that: (i) (W,E) is feasible in the sense of spec_1; (ii) its cost equals r; (iii) the undirected graph on {0,...,n-1} with edge set E is a forest, containing no cycle; and (iv) every connected component of this forest contains exactly one house from W.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_13",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (n,wells,pipes) and r' on (n,wells',pipes'), we have r' = r.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000. Also σ is a permutation of {0,...,n-1}; wells'[i] = wells[σ(i)] for 0 <= i < n; and pipes'[j] = [σ(pipes[j][0]-1)+1, σ(pipes[j][1]-1)+1, pipes[j][2]] for 0 <= j < len(pipes)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinCostToSupplyWater.spec_14",
+    "negation": "AegisSpec.MinCostToSupplyWater.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r on an admissible input, let G be the undirected graph with vertex set {0,1,...,n} (where 0 is a dummy node and the houses are 1,...,n) and edge set consisting of, for each house i in {1,...,n}, an edge between 0 and i with cost wells[i-1], and for each pipe index j, an edge between pipes[j][0] and pipes[j][1] with cost pipes[j][2]. Then r equals the minimum total weight of a spanning tree of G.",
+    "preconditions": "2 <= n <= 10000; len(wells) = n; for every i with 0 <= i < n, 0 <= wells[i] <= 100000; 1 <= len(pipes) <= 10000; for every j with 0 <= j < len(pipes), len(pipes[j]) = 3, 1 <= pipes[j][0] <= n, 1 <= pipes[j][1] <= n, pipes[j][0] != pipes[j][1], and 0 <= pipes[j][2] <= 100000."
+  }
+]

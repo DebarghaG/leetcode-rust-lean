@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumPrefixScores.spec_1",
+    "negation": "AegisSpec.SumPrefixScores.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = n and for every i with 0 <= i < n, r[i] = sum_{k=1}^{len(words[i])} score(i,k), where score(i,k) is the number of indices j with 0 <= j < n such that k <= len(words[j]) and for every t with 0 <= t < k, words[i][t] = words[j][t].",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumPrefixScores.spec_2",
+    "negation": "AegisSpec.SumPrefixScores.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for every words satisfying the preconditions.",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumPrefixScores.spec_3",
+    "negation": "AegisSpec.SumPrefixScores.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i,j with 0 <= i,j < n, if words[i] is a prefix of words[j] (len(words[i]) <= len(words[j]) and words[i][t] = words[j][t] for all 0 <= t < len(words[i])), then r[j] - r[i] >= len(words[j]) - len(words[i]).",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumPrefixScores.spec_4",
+    "negation": "AegisSpec.SumPrefixScores.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] = sum_{j=0}^{n-1} lcp(words[i], words[j]), where for byte strings x,y, lcp(x,y) is the largest L with 0 <= L <= min(len(x),len(y)) such that x[t] = y[t] for every t with 0 <= t < L.",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumPrefixScores.spec_5",
+    "negation": "AegisSpec.SumPrefixScores.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] <= len(words[i]) * C_i, where C_i is the number of j with 0 <= j < n and words[j][0] = words[i][0].",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumPrefixScores.spec_6",
+    "negation": "AegisSpec.SumPrefixScores.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] >= C_i + len(words[i]) - 1, where C_i is the number of j with 0 <= j < n and words[j][0] = words[i][0].",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumPrefixScores.spec_7",
+    "negation": "AegisSpec.SumPrefixScores.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] = len(words[i]) if and only if for every j with 0 <= j < n and j != i, words[j][0] != words[i][0].",
+    "preconditions": "words is a slice of byte vectors; let n = len(words). 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 1000; every byte of every words[i] is a lowercase English letter (ASCII 97..122)."
+  }
+]

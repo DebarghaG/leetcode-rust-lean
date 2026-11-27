@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxDifference.spec_1",
+    "negation": "AegisSpec.MaxDifference.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r viewed as a mathematical integer is the maximum of the set { cnt(s,c) - cnt(s,d) | 97 <= c <= 122, cnt(s,c) is odd, 97 <= d <= 122, cnt(s,d) > 0, cnt(s,d) is even }.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; there exists a byte c with 97 <= c <= 122 and cnt(s,c) odd; and there exists a byte d with 97 <= d <= 122, cnt(s,d) > 0, and cnt(s,d) even."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxDifference.spec_2",
+    "negation": "AegisSpec.MaxDifference.spec_2_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exist bytes c and d with 97 <= c <= 122 and 97 <= d <= 122 such that cnt(s,c) is odd, cnt(s,d) > 0 and cnt(s,d) is even, and r = cnt(s,c) - cnt(s,d).",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxDifference.spec_3",
+    "negation": "AegisSpec.MaxDifference.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every byte c with 97 <= c <= 122 and cnt(s,c) odd, and for every byte d with 97 <= d <= 122, cnt(s,d) > 0, and cnt(s,d) even, we have cnt(s,c) - cnt(s,d) <= r.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxDifference.spec_4",
+    "negation": "AegisSpec.MaxDifference.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = O - E, where O = max { cnt(s,c) | 97 <= c <= 122 and cnt(s,c) is odd } and E = min { cnt(s,d) | 97 <= d <= 122, cnt(s,d) > 0, and cnt(s,d) is even }.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxDifference.spec_5",
+    "negation": "AegisSpec.MaxDifference.spec_5_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such s, evaluation of max_difference(s) returns a result r; it does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxDifference.spec_6",
+    "negation": "AegisSpec.MaxDifference.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r <= 95.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxDifference.spec_7",
+    "negation": "AegisSpec.MaxDifference.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= -97.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxDifference.spec_8",
+    "negation": "AegisSpec.MaxDifference.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and r is odd as a mathematical integer: there exists an integer k such that r = 2*k + 1.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxDifference.spec_9",
+    "negation": "AegisSpec.MaxDifference.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_difference(s) returns r and max_difference(t) returns r_t, we have r_t = r.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume s satisfies 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt. Let t be any byte slice satisfying the same assumptions and satisfying cnt(t,c) = cnt(s,c) for every byte c with 97 <= c <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxDifference.spec_10",
+    "negation": "AegisSpec.MaxDifference.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every byte c with 97 <= c <= 122 and cnt(s,c) odd, and every byte d with 97 <= d <= 122, cnt(s,d) > 0, and cnt(s,d) even, if r = cnt(s,c) - cnt(s,d), then cnt(s,c) = O and cnt(s,d) = E.",
+    "preconditions": "Let cnt(s,x) be the number of indices i with 0 <= i < len(s) and s[i] = x. Assume 3 <= len(s) <= 100; all bytes of s are in 97..122; some letter has odd cnt; and some letter has positive even cnt. Define O = max { cnt(s,c) | 97 <= c <= 122 and cnt(s,c) is odd } and E = min { cnt(s,d) | 97 <= d <= 122, cnt(s,d) > 0, and cnt(s,d) is even }."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanPartition.spec_1",
+    "negation": "AegisSpec.CanPartition.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_partition(nums) returns a result r, r = true if and only if there exist sets A and B of indices from {0, 1, ..., len(nums)-1} such that A intersect B is empty, A union B = {0, 1, ..., len(nums)-1}, and sum_{i in A} nums[i] = sum_{i in B} nums[i] (all sums exact integers).",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanPartition.spec_2",
+    "negation": "AegisSpec.CanPartition.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "can_partition(nums) returns a result r (a Bool) and does not fail; in particular, no i64 overflow or panic occurs.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanPartition.spec_3",
+    "negation": "AegisSpec.CanPartition.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_partition(nums) returns a result r, if T = sum_{i=0}^{len(nums)-1} nums[i] is odd, then r = false.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanPartition.spec_4",
+    "negation": "AegisSpec.CanPartition.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_partition(nums) returns a result r, if r = true then for every i with 0 <= i < len(nums) we have 2 * nums[i] <= T, where T = sum_{j=0}^{len(nums)-1} nums[j].",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanPartition.spec_5",
+    "negation": "AegisSpec.CanPartition.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_partition(nums) returns a result r, if there exists an index i with 0 <= i < len(nums) and 2 * nums[i] = T, where T = sum_{j=0}^{len(nums)-1} nums[j], then r = true.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanPartition.spec_6",
+    "negation": "AegisSpec.CanPartition.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_partition(nums) returns a result r, r = false.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; additionally len(nums) = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanPartition.spec_7",
+    "negation": "AegisSpec.CanPartition.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_partition(nums) returns a result r, r = true if and only if nums[0] = nums[1].",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; additionally len(nums) = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanPartition.spec_8",
+    "negation": "AegisSpec.CanPartition.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_partition(nums) returns a result r, r = true if and only if there exists i with 0 <= i < 3 and 2 * nums[i] = T, where T = nums[0] + nums[1] + nums[2].",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; additionally len(nums) = 3."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanPartition.spec_9",
+    "negation": "AegisSpec.CanPartition.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever can_partition(nums) returns a result r, r = true if and only if len(nums) is even.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; additionally there exists a positive integer c such that nums[i] = c for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanPartition.spec_10",
+    "negation": "AegisSpec.CanPartition.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If can_partition(nums) returns a result r and can_partition(perm) returns a result r', then r = r'.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; perm is any slice satisfying the same constraints that is a permutation of nums (same multiset of values, possibly different order)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanPartition.spec_11",
+    "negation": "AegisSpec.CanPartition.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums2 be the slice with nums2[i] = nums[i] / d for 0 <= i < len(nums). If can_partition(nums) returns a result r and can_partition(nums2) returns a result r', then r = r'.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; d is a positive integer such that d divides nums[i] for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanPartition.spec_12",
+    "negation": "AegisSpec.CanPartition.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums2 be the slice with nums2[i] = c * nums[i] for 0 <= i < len(nums). If can_partition(nums) returns a result r and can_partition(nums2) returns a result r', then r = r'.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 200 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100; c is a positive integer such that c * nums[i] <= 100 for every i with 0 <= i < len(nums)."
+  }
+]

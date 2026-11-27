@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_1",
+    "negation": "AegisSpec.MinBitwiseArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, the vector r has length len(nums), and for every index i with 0 <= i < len(nums), r[i] is the least nonnegative integer x such that `x | (x + 1) = nums[i]`, where `|` is 64-bit bitwise OR; if no such nonnegative integer exists, then r[i] = -1.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_2",
+    "negation": "AegisSpec.MinBitwiseArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "`min_bitwise_array(nums)` returns `Ok r` for some vector r; it does not fail, overflow, panic, or access out of bounds on these inputs.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_3",
+    "negation": "AegisSpec.MinBitwiseArray.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, `len(r) = len(nums)`; the output has exactly one entry for each input entry and no extra entries.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_4",
+    "negation": "AegisSpec.MinBitwiseArray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums), `-1 <= r[i] < nums[i]`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_5",
+    "negation": "AegisSpec.MinBitwiseArray.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums), `r[i] = -1` if and only if `nums[i] = 2`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_6",
+    "negation": "AegisSpec.MinBitwiseArray.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `nums[i] != 2`, the returned value is a witness: `r[i] | (r[i] + 1) = nums[i]`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_7",
+    "negation": "AegisSpec.MinBitwiseArray.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `r[i] = -1`, there is no 64-bit integer x with `0 <= x` such that `x | (x + 1) = nums[i]`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_8",
+    "negation": "AegisSpec.MinBitwiseArray.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `nums[i] != 2`, for every 64-bit integer x with `0 <= x < r[i]`, `x | (x + 1) != nums[i]`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_9",
+    "negation": "AegisSpec.MinBitwiseArray.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `nums[i] != 2`, let t_i be the positive integer such that `2^{t_i}` divides `nums[i] + 1` but `2^{t_i + 1}` does not divide `nums[i] + 1` (equivalently, t_i is the number of trailing 1 bits in the binary representation of nums[i]); then `r[i] = nums[i] - 2^{t_i - 1}`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_10",
+    "negation": "AegisSpec.MinBitwiseArray.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `nums[i] != 2`, `r[i] mod 2 = 0` if and only if `nums[i] mod 4 = 1`; equivalently, for odd prime nums[i], r[i] is even exactly when nums[i] is congruent to 1 modulo 4, and r[i] is odd exactly when nums[i] is congruent to 3 modulo 4.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_11",
+    "negation": "AegisSpec.MinBitwiseArray.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for all indices i and j with 0 <= i < len(nums) and 0 <= j < len(nums), if `nums[i] = nums[j]`, then `r[i] = r[j]`.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinBitwiseArray.spec_12",
+    "negation": "AegisSpec.MinBitwiseArray.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `min_bitwise_array(nums)` returns `Ok r`, for every index i with 0 <= i < len(nums) and `nums[i] != 2`, let t_i be as in spec_9. In the 64-bit binary representations of r[i] and nums[i], all bit positions except position `t_i - 1` agree; at position `t_i - 1`, nums[i] has bit 1 and r[i] has bit 0.",
+    "preconditions": "nums is a slice of 64-bit integers with 1 <= len(nums) <= 100, and for every index i with 0 <= i < len(nums), nums[i] is a prime integer and 2 <= nums[i] <= 10^9."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCut.spec_1",
+    "negation": "AegisSpec.MinCut.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r (viewed as a mathematical integer) is the least integer c for which there exist indices 0 = p_0 < p_1 < ... < p_{c+1} = n such that, for every j with 0 <= j <= c, the substring s[p_j .. p_{j+1}) is a palindrome. Here a substring s[l..r) with 0 <= l < r <= n is a palindrome exactly when s[l+t] = s[r-1-t] for every t with 0 <= t < r-l. Equivalently, r is the minimum number of cuts over all partitions of s into contiguous nonempty substrings each of which is a palindrome, where a partition into m substrings uses m-1 cuts.",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive (the ASCII code of a lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCut.spec_2",
+    "negation": "AegisSpec.MinCut.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCut.spec_3",
+    "negation": "AegisSpec.MinCut.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and 0 <= r <= len(s) - 1, with r and len(s)-1 interpreted as mathematical integers.",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCut.spec_4",
+    "negation": "AegisSpec.MinCut.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = 0 if and only if the whole string s is a palindrome, that is, if and only if s[t] = s[len(s)-1-t] for every t with 0 <= t < len(s).",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCut.spec_5",
+    "negation": "AegisSpec.MinCut.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r, with r = 0 if s[0] = s[1], and r = 1 if s[0] != s[1].",
+    "preconditions": "len(s) = 2, and s[0] and s[1] are between 97 and 122 inclusive."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCut.spec_6",
+    "negation": "AegisSpec.MinCut.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r; write c for r viewed as a nonnegative integer (so this also asserts r >= 0). There exist indices 0 = p_0 < p_1 < ... < p_{c+1} = len(s) such that every substring s[p_j .. p_{j+1}) for 0 <= j <= c is a palindrome, where palindrome means s[l+t] = s[r-1-t] for all 0 <= t < r-l.",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCut.spec_7",
+    "negation": "AegisSpec.MinCut.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and for every integer m >= 1 and every sequence of indices 0 = p_0 < p_1 < ... < p_m = len(s) such that every substring s[p_j .. p_{j+1}) for 0 <= j < m is a palindrome, we have m - 1 >= r.",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCut.spec_8",
+    "negation": "AegisSpec.MinCut.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte slice of the same length as s defined by t[i] = s[len(s)-1-i] for every i with 0 <= i < len(s). The function returns r on input s and returns r' on input t, and r = r'.",
+    "preconditions": "len(s) is an integer n with 1 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCut.spec_9",
+    "negation": "AegisSpec.MinCut.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r on input s and returns r' on input t, and r = r'.",
+    "preconditions": "len(s) = len(t) = n with 1 <= n <= 2000; every byte of s and t is between 97 and 122 inclusive; and for every i and j with 0 <= i < n and 0 <= j < n, s[i] = s[j] if and only if t[i] = t[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCut.spec_10",
+    "negation": "AegisSpec.MinCut.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be the byte slice of length n+1 with t[i] = s[i] for 0 <= i < n and t[n] = b. The function returns r on input s and r_t on input t, and r_t <= r + 1.",
+    "preconditions": "s has length n with 1 <= n <= 2000 and all its bytes are between 97 and 122 inclusive; b is an integer with 97 <= b <= 122; and n + 1 <= 2000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCut.spec_11",
+    "negation": "AegisSpec.MinCut.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r <= len(s) - 2 if and only if there exist indices l and u with 0 <= l < u <= len(s), u - l >= 2, such that the substring s[l..u) is a palindrome, that is, s[l+t] = s[u-1-t] for every t with 0 <= t < u-l.",
+    "preconditions": "len(s) is an integer n with 2 <= n <= 2000, and for every i with 0 <= i < n, s[i] is between 97 and 122 inclusive."
+  }
+]

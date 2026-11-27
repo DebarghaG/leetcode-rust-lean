@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_1",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and, with m = len(queries) and n = len(nums), len(r) = m and for every i with 0 <= i < m, r[i] = Σ_{j=0}^{n-1} (if A^(i+1)[j] is even then A^(i+1)[j] else 0), where A^(0) = nums, for 0 <= k < m the array A^(k+1) of length n is defined by A^(k+1)[j] = A^(k)[j] + (if j = queries[k][1] then queries[k][0] else 0) for every 0 <= j < n, and an integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_2",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; under the preconditions it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_3",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_4",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), define for every j with 0 <= j < len(nums) the total increment S_j = Σ_{k=0}^{len(queries)-1} (if queries[k][1] = j then queries[k][0] else 0). Then r[len(queries)-1] = Σ_{j=0}^{len(nums)-1} (if nums[j] + S_j is even then nums[j] + S_j else 0), where an integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_5",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), let A^(0) = nums and for 0 <= k < len(queries) let A^(k+1) be obtained from A^(k) by adding queries[k][0] to position queries[k][1]. Let E_0 = Σ_{j=0}^{len(nums)-1} (if A^(0)[j] is even then A^(0)[j] else 0). For every i with 0 <= i < len(queries), put b = A^(i)[queries[i][1]] and c = b + queries[i][0]. Then r[i] = (if i = 0 then E_0 else r[i-1]) + (if c is even then c else 0) - (if b is even then b else 0), where an integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_6",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), for every i with 0 <= i < len(queries), r[i] is even (there exists an integer t with r[i] = 2*t).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_7",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), for every i with 0 <= i < len(queries) such that queries[i][0] = 0: if i = 0 then r[0] = Σ_{j=0}^{len(nums)-1} (if nums[j] is even then nums[j] else 0), and if i > 0 then r[i] = r[i-1]. Here an integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_8",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), let A^(0) = nums and for 0 <= k < len(queries) let A^(k+1) be obtained from A^(k) by adding queries[k][0] to position queries[k][1]. For every i with 0 <= i < len(queries), if every entry of A^(i+1) is odd (not even), then r[i] = 0. An integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_9",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), let A^(0) = nums and for 0 <= k < len(queries) let A^(k+1) be obtained from A^(k) by adding queries[k][0] to position queries[k][1]. For every i with 0 <= i < len(queries), if every entry of A^(i+1) is even, then r[i] = Σ_{j=0}^{len(nums)-1} A^(i+1)[j], where an integer x is even iff x = 2*t for some integer t.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_10",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), for every i with 0 <= i < len(queries), r[i] = (Σ_{j=0}^{len(nums)-1} nums[j]) + Σ_{k=0}^{i} queries[k][0].",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums); for every j with 0 <= j < len(nums), nums[j] is even (nums[j] = 2*t for some integer t); for every k with 0 <= k < len(queries), queries[k][0] is even (queries[k][0] = 2*t for some integer t)"
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_11",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), for every i with 0 <= i < len(queries), let x = nums[0] + Σ_{k=0}^{i} queries[k][0]. Then r[i] = x if x is even, and r[i] = 0 if x is odd (an integer y is even iff y = 2*t for some integer t).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums); len(nums) = 1"
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SumEvenAfterQueries.spec_12",
+    "negation": "AegisSpec.SumEvenAfterQueries.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with len(r) = len(queries), for every i with 0 <= i < len(queries), |r[i]| <= len(nums) * (10000 + len(queries) * 10000).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 10000; len(queries) >= 1; len(queries) <= 10000; for every j with 0 <= j < len(nums), -10000 <= nums[j] <= 10000; for every k with 0 <= k < len(queries), len(queries[k]) = 2; for every k with 0 <= k < len(queries), -10000 <= queries[k][0] <= 10000; for every k with 0 <= k < len(queries), 0 <= queries[k][1] < len(nums)"
+  }
+]

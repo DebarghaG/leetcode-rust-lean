@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FirstUniqChar.spec_1",
+    "negation": "AegisSpec.FirstUniqChar.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, the following holds. If there exists an index i with 0 <= i < len(s) such that s[i] occurs exactly once in s (meaning: for every j with 0 <= j < len(s), s[j] = s[i] if and only if j = i), then r is the smallest such index: 0 <= r < len(s), s[r] occurs exactly once in s, and for every k with 0 <= k < r, s[k] occurs at least twice in s (meaning: there exists j with 0 <= j < len(s), j != k, and s[j] = s[k]). Otherwise (no index in s has a byte occurring exactly once), r = -1.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so every byte is a lowercase ASCII letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FirstUniqChar.spec_2",
+    "negation": "AegisSpec.FirstUniqChar.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid s, first_uniq_char(s) returns a successful result r; in particular it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FirstUniqChar.spec_3",
+    "negation": "AegisSpec.FirstUniqChar.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, either r = -1 or 0 <= r < len(s).",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FirstUniqChar.spec_4",
+    "negation": "AegisSpec.FirstUniqChar.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and 0 <= r < len(s), the byte s[r] occurs exactly once in s; that is, for every j with 0 <= j < len(s), s[j] = s[r] if and only if j = r.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FirstUniqChar.spec_5",
+    "negation": "AegisSpec.FirstUniqChar.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and 0 <= r < len(s), for every i with 0 <= i < r, the byte s[i] occurs at least twice in s; that is, there exists j with 0 <= j < len(s), j != i, and s[j] = s[i].",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FirstUniqChar.spec_6",
+    "negation": "AegisSpec.FirstUniqChar.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, r = -1 if and only if for every i with 0 <= i < len(s), the byte s[i] occurs at least twice in s; that is, there exists j with 0 <= j < len(s), j != i, and s[j] = s[i].",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FirstUniqChar.spec_7",
+    "negation": "AegisSpec.FirstUniqChar.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and 0 <= r < len(s), for every i with 0 <= i < len(s), if s[i] occurs exactly once in s (for every j with 0 <= j < len(s), s[j] = s[i] if and only if j = i), then r <= i.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FirstUniqChar.spec_8",
+    "negation": "AegisSpec.FirstUniqChar.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and len(s) = 1, r = 0.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FirstUniqChar.spec_9",
+    "negation": "AegisSpec.FirstUniqChar.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, if len(s) > 1 and s[i] = s[0] for every i with 0 <= i < len(s), then r = -1.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FirstUniqChar.spec_10",
+    "negation": "AegisSpec.FirstUniqChar.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and len(s) = 2, then if s[0] = s[1] we have r = -1, and if s[0] != s[1] we have r = 0.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FirstUniqChar.spec_11",
+    "negation": "AegisSpec.FirstUniqChar.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, if s[0] occurs exactly once in s (for every j with 0 <= j < len(s), s[j] = s[0] if and only if j = 0), then r = 0.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FirstUniqChar.spec_12",
+    "negation": "AegisSpec.FirstUniqChar.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, if for every i and j with 0 <= i < j < len(s) we have s[i] != s[j], then r = 0.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FirstUniqChar.spec_13",
+    "negation": "AegisSpec.FirstUniqChar.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r, if r = -1 then len(s) >= 2.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FirstUniqChar.spec_14",
+    "negation": "AegisSpec.FirstUniqChar.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever first_uniq_char(s) returns a successful result r and first_uniq_char(t) returns a successful result r', we have r = r'.",
+    "preconditions": "1 <= len(s) <= 100000 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Also f is a bijection of the set {97, ..., 122} onto itself, and t is a slice with len(t) = len(s) and t[i] = f(s[i]) for every i with 0 <= i < len(s)."
+  }
+]

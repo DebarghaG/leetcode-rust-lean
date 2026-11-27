@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSum.spec_1",
+    "negation": "AegisSpec.MaxSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a valid path be any sequence obtained by choosing nums1 or nums2 as the starting array, traversing that array from index 0 to the right, and at any value that occurs in both arrays optionally switching to the other array at that value, counting each value in the path once (in particular a switch value is counted only once); the traversal must continue to the end of the array on which it finishes. Let M be the maximum, over all valid paths, of the sum of the values in the path, each value counted once. Then max_sum nums1 nums2 returns a result r and r = M mod 1000000007, where the exact integer M is computed before the modulo reduction. Moreover M <= 2 * 100000 * 10000000 = 2 * 10^12, so M fits in i64.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; and 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSum.spec_2",
+    "negation": "AegisSpec.MaxSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums1 and nums2 satisfying the preconditions, max_sum nums1 nums2 returns a result r; it does not panic, fail, or overflow. In particular, the exact maximum score M is at most 2 * 10^12 < 2^63, and the final residue is less than 1000000007.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; and 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSum.spec_3",
+    "negation": "AegisSpec.MaxSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_sum nums1 nums2 returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; and 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSum.spec_4",
+    "negation": "AegisSpec.MaxSum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "max_sum nums1 nums2 returns a result r and r = max(Σ_{i=0}^{len(nums1)-1} nums1[i], Σ_{i=0}^{len(nums2)-1} nums2[i]) mod 1000000007.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i; and nums1 and nums2 have no value in common."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSum.spec_5",
+    "negation": "AegisSpec.MaxSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let P1 = Σ_{x in nums1, x <= c} x, P2 = Σ_{x in nums2, x <= c} x, S1 = Σ_{x in nums1, x > c} x, and S2 = Σ_{x in nums2, x > c} x. Then max_sum nums1 nums2 returns a result r and r = (max(P1, P2) + max(S1, spec_2)) mod 1000000007.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i; and exactly one integer c occurs in both nums1 and nums2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSum.spec_6",
+    "negation": "AegisSpec.MaxSum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A be nums2 if every value of nums1 occurs in nums2; otherwise let A be nums1. Then max_sum nums1 nums2 returns a result r and r = (Σ_{i=0}^{len(A)-1} A[i]) mod 1000000007.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i; and either every value of nums1 occurs in nums2, or every value of nums2 occurs in nums1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSum.spec_7",
+    "negation": "AegisSpec.MaxSum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every nums1 and nums2 satisfying the preconditions, if max_sum nums1 nums2 returns r and max_sum nums2 nums1 returns s, then r = s.",
+    "preconditions": "nums1 and nums2 are nonempty strictly increasing arrays of integers; 1 <= len(nums1), len(nums2) <= 100000; and 1 <= nums1[i], nums2[i] <= 10000000 for every valid index i."
+  }
+]

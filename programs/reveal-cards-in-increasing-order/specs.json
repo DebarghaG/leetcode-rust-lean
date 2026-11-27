@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_1",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let s be the sequence obtained by sorting all entries of deck in nondecreasing order. Then len(r) = len(deck) and RevealSeq(r) = s, where for any sequence a, RevealSeq(a) is defined by: RevealSeq([])=[]; RevealSeq([x])=[x]; and for m=len(a)>=2, RevealSeq(a) = [a[0]] concatenated with RevealSeq([a[2], a[3], ..., a[m-1], a[1]]). Equivalently, for every k with 0 <= k < len(deck), the k-th card revealed by the process starting from initial deck r (0-indexed) is the k-th smallest entry of deck.",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_2",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, overflow, or access outside the input or output bounds) for every input satisfying the preconditions.",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_3",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r is a permutation of deck: for every integer v, the number of indices i with 0 <= i < len(r) and r[i] = v equals the number of indices j with 0 <= j < len(deck) and deck[j] = v. In particular, because the deck entries are distinct, each value deck[j] occurs exactly once in r and no other value occurs.",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_4",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let q be the sequence obtained by applying the reveal process to r (repeatedly: record the first element, remove it, and if elements remain move the new first element to the end). Then q is strictly increasing: for every k with 0 <= k and k+1 < len(q), q[k] < q[k+1].",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_5",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is a permutation of deck; the reveal process applied to r (repeatedly: record the first element, remove it, and if elements remain move the new first element to the end) yields exactly the nondecreasing sorted list s of deck entries; and for every sequence r' with len(r') = len(deck) that is a permutation of deck and whose reveal process yields s, we have r' = r.",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DeckRevealedIncreasing.spec_6",
+    "negation": "AegisSpec.DeckRevealedIncreasing.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(deck). Let P_n be the sequence of positions produced by running the same move-to-bottom process on the list [0,1,...,n-1]: start with the queue [0,1,...,n-1]; repeatedly record the first element of the queue and remove it, and if the queue is nonempty then move its new first element to the end; P_n is the recorded sequence of length n. Let s be the nondecreasing sorted list of deck entries. Whenever the function returns a result r, len(r) = n and for every k with 0 <= k < n, r[P_n[k]] = s[k].",
+    "preconditions": "1 <= len(deck) <= 1000; every deck[i] is an integer with 1 <= deck[i] <= 1000000; and all entries of deck are pairwise distinct (for all i,j with 0 <= i < j < len(deck), deck[i] != deck[j])."
+  }
+]

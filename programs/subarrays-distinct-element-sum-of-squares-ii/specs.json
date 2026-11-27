@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumCounts.spec_1",
+    "negation": "AegisSpec.SumCounts.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For 0 <= i <= j < n, let D(i,j) be the number of distinct values in the contiguous subarray nums[i], nums[i+1], ..., nums[j]. Let T = sum_{i=0}^{n-1} sum_{j=i}^{n-1} D(i,j)^2. Whenever sum_counts(nums) returns a result r, r is the unique integer such that 0 <= r < M and r ≡ T (mod M).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumCounts.spec_2",
+    "negation": "AegisSpec.SumCounts.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "sum_counts(nums) returns a result r; in particular, execution does not fail by panic, out-of-bounds access, or 64-bit integer overflow.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumCounts.spec_3",
+    "negation": "AegisSpec.SumCounts.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "sum_counts(nums) returns a result r and r = 1.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums[i] <= 100000, and n = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumCounts.spec_4",
+    "negation": "AegisSpec.SumCounts.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "sum_counts(nums) returns a result r, and r = 3 if nums[0] = nums[1], while r = 6 if nums[0] != nums[1].",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums[i] <= 100000, and n = 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumCounts.spec_5",
+    "negation": "AegisSpec.SumCounts.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "sum_counts(nums) returns a result r and r = ((n * (n + 1)) / 2) mod 1000000007.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums[i] <= 100000, and for all i,j with 0 <= i < n and 0 <= j < n, nums[i] = nums[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumCounts.spec_6",
+    "negation": "AegisSpec.SumCounts.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "sum_counts(nums) returns a result r and r = (sum_{l=1}^{n} (n - l + 1) * l * l) mod 1000000007.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums[i] <= 100000, and for all i,j with 0 <= i < j < n, nums[i] != nums[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumCounts.spec_7",
+    "negation": "AegisSpec.SumCounts.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_counts(nums) returns r and sum_counts(other) returns r_other, r = r_other.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= nums[i] <= 100000 for every 0 <= i < n, and let other be any slice of length n with 1 <= other[i] <= 100000 for every 0 <= i < n such that for all i,j with 0 <= i < n and 0 <= j < n, nums[i] = nums[j] iff other[i] = other[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumCounts.spec_8",
+    "negation": "AegisSpec.SumCounts.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_counts(nums) returns a result r, r = (T(A) + sum_{i=0}^{m} (d_i + 1)^2) mod 1000000007.",
+    "preconditions": "Let n = len(nums) and m = n - 1. Assume 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for every 0 <= i < n. Let A be the prefix of nums of length m, so A[i] = nums[i] for 0 <= i < m, and let x = nums[m]. Assume x != A[i] for every 0 <= i < m. For 0 <= i <= m define d_i as the number of distinct values in A[i], A[i+1], ..., A[m-1] when i < m, and d_m = 0 for the empty suffix. Let T(A) be the sum over all nonempty contiguous subarrays of A of the square of their distinct count, with T(A) = 0 if m = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumCounts.spec_9",
+    "negation": "AegisSpec.SumCounts.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sum_counts(nums) returns a result r, r = (T(A) + sum_{i=0}^{m-1} d_i^2 + 1) mod 1000000007.",
+    "preconditions": "Let n = len(nums), m = n - 1, and assume n >= 2. Assume 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for every 0 <= i < n. Let A be the prefix of nums of length m, so A[i] = nums[i] for 0 <= i < m. Assume nums[m] = nums[m-1]. For 0 <= i < m define d_i as the number of distinct values in A[i], A[i+1], ..., A[m-1]. Let T(A) be the sum over all nonempty contiguous subarrays of A of the square of their distinct count."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumCounts.spec_10",
+    "negation": "AegisSpec.SumCounts.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_counts(nums) returns a result r, r = T(rev) mod 1000000007.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for every 0 <= i < n. Let rev be the slice of length n defined by rev[i] = nums[n - 1 - i] for 0 <= i < n. Let T(rev) be the sum over all 0 <= i <= j < n of the square of the number of distinct values in rev[i], rev[i+1], ..., rev[j]."
+  }
+]

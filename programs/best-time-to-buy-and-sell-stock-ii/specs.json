@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_profit(prices) returns a result r, r = sum over i from 1 to len(prices)-1 of max(prices[i] - prices[i-1], 0). When len(prices)=1 this is the empty sum and equals 0.",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every prices satisfying the preconditions, max_profit(prices) returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, 0 <= r <= 10000 * (len(prices) - 1).",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_profit(prices) returns a result r, r = 0 if and only if for every i with 0 <= i < len(prices)-1, prices[i+1] <= prices[i].",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, r = prices[len(prices)-1] - prices[0].",
+    "preconditions": "1 <= len(prices) <= 30000; for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000; and for every i with 0 <= i < len(prices)-1, prices[i] <= prices[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_profit(prices) returns r and max_profit(prices2) returns r2, we have r = r2.",
+    "preconditions": "1 <= len(prices) <= 30000; for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000. Let c be an integer and let prices2 be the array of the same length with prices2[i] = prices[i] + c for every i. Assume that for every i, 0 <= prices2[i] <= 10000, so prices2 also satisfies the problem constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_profit(prices) returns r and max_profit(prices2) returns r2, we have r2 = k * r.",
+    "preconditions": "1 <= len(prices) <= 30000; for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000. Let k be a nonnegative integer and let prices2 be the array of the same length with prices2[i] = k * prices[i] for every i. Assume that for every i, 0 <= prices2[i] <= 10000, so prices2 also satisfies the problem constraints."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, for every b and s with 0 <= b <= s < len(prices), prices[s] - prices[b] <= r.",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_profit(prices) returns a result r, there exists a finite sequence of pairs (b_j, s_j) for j = 0, ..., m-1 with m >= 0 such that for every j, 0 <= b_j <= s_j < len(prices), for every j with 0 <= j < m-1 we have s_j <= b_{j+1}, and sum over j of (prices[s_j] - prices[b_j]) = r. The empty sequence m=0 has profit 0.",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, for every finite sequence of pairs (b_j, s_j) for j = 0, ..., m-1 with m >= 0 satisfying for every j 0 <= b_j <= s_j < len(prices) and for every j with 0 <= j < m-1 s_j <= b_{j+1}, the total profit sum over j of (prices[s_j] - prices[b_j]) is at most r.",
+    "preconditions": "1 <= len(prices) <= 30000 and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 10000."
+  }
+]

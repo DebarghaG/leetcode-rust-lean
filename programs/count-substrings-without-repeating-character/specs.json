@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_1",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever number_of_special_substrings(s) returns a result r, r interpreted as an integer equals the number of pairs of integers (i, j) such that 0 <= i <= j < len(s) and, for all a and b with i <= a < b <= j, s[a] != s[b]. Equivalently, r is the number of non-empty contiguous substrings s[i..j] of s that contain no repeated byte; these are exactly the special substrings counted by the problem.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_2",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call number_of_special_substrings(s) returns a successful result; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_3",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r >= len(s). In particular, each of the len(s) one-character substrings s[i..i] is a special substring, so the answer is at least the number of such substrings.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_4",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r <= len(s)*(len(s)+1)/2, which is the total number of non-empty contiguous substrings of s.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_5",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r <= 26*len(s) - 325.",
+    "preconditions": "s is a byte slice; 26 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_6",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r = 1.",
+    "preconditions": "s is a byte slice; len(s) = 1; s[0] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_7",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever number_of_special_substrings(s) returns r, if s[0] = s[1] then r = 2, and if s[0] != s[1] then r = 3.",
+    "preconditions": "s is a byte slice; len(s) = 2; s[0] and s[1] are ASCII codes of lowercase English letters."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_8",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r = len(s).",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter; for all i and j with 0 <= i < len(s) and 0 <= j < len(s), s[i] = s[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_9",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever number_of_special_substrings(s) returns r, we have r = len(s)*(len(s)+1)/2.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter; for all i and j with 0 <= i < j < len(s), s[i] != s[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_10",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever number_of_special_substrings(s) returns r and number_of_special_substrings(t) returns r', we have r = r'.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter. Let n = len(s), and let t be the byte slice of length n defined by t[i] = s[n-1-i] for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_11",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever number_of_special_substrings(s) returns r, number_of_special_substrings(x) returns rx, and number_of_special_substrings(y) returns ry, we have r >= rx + ry.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; all entries of s are ASCII codes of lowercase English letters; x and y are byte slices with 1 <= len(x), 1 <= len(y), and s = x ++ y."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_12",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever number_of_special_substrings(s) returns r and number_of_special_substrings(t) returns rt, we have rt >= r + 1.",
+    "preconditions": "s is a byte slice; 1 <= len(s) < 100000; all entries of s are ASCII codes of lowercase English letters; c is the ASCII code of a lowercase English letter; t is the byte slice of length len(s)+1 such that t[i] = s[i] for 0 <= i < len(s) and t[len(s)] = c."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_13",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever number_of_special_substrings(s) returns r, define for each j with 0 <= j < len(s): last(j) = max({-1} U { p | 0 <= p < j and s[p] = s[j] }); L(0) = 0; for j > 0, L(j) = max(L(j-1), last(j)+1). Then r = sum_{j=0}^{len(s)-1} (j - L(j) + 1). Equivalently, exactly j - L(j) + 1 special substrings end at j.",
+    "preconditions": "s is a byte slice; 1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.NumberOfSpecialSubstrings.spec_14",
+    "negation": "AegisSpec.NumberOfSpecialSubstrings.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever number_of_special_substrings(s) returns r and number_of_special_substrings(t) returns rt, we have rt <= r.",
+    "preconditions": "s and t are byte slices; 1 <= len(t) <= len(s) <= 100000; all entries of s and t are ASCII codes of lowercase English letters; there exists a with 0 <= a and a + len(t) <= len(s) such that for every i with 0 <= i < len(t), t[i] = s[a+i]."
+  }
+]

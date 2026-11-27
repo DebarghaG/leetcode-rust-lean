@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AddOneRow.spec_1",
+    "negation": "AegisSpec.AddOneRow.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the tree obtained from root by the following unique transformation. If depth = 1, then r = Node(val, root, Null). If depth > 1, let S be the set of nodes of root at depth depth-1 (root depth 1; S is empty when depth-1 > height(root), where height(Null)=0 and height(Node(_,l,r))=1+max(height(l),height(r))). For every cur in S, let L and R be cur's left and right children in root. The transformation leaves every node not in S and every edge not incident from a node in S unchanged, and replaces cur's left child by Node(val, L, Null) and cur's right child by Node(val, Null, R). Thus each cur in S keeps its value and original depth, gets two new children of value val, the new left child has right child Null and left subtree L, and the new right child has left child Null and right subtree R. If S is empty, r = root.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth. (No upper bound on depth is assumed; depth may exceed height(root)+1.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AddOneRow.spec_2",
+    "negation": "AegisSpec.AddOneRow.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root, val and depth satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AddOneRow.spec_3",
+    "negation": "AegisSpec.AddOneRow.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let size(t) be the number of Node constructors in t (size(Null)=0 and size(Node(_,l,r))=1+size(l)+size(r)). If depth = 1 then size(r) = size(root)+1. If depth > 1 then size(r) = size(root) + 2*c, where c is the number of nodes of root at depth depth-1 (c=0 if depth-1 > height(root)).",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AddOneRow.spec_4",
+    "negation": "AegisSpec.AddOneRow.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, let H = height(root), where height(Null)=0 and height(Node(_,l,r))=1+max(height(l),height(r)). If depth = 1 or (depth > 1 and depth <= H+1), then height(r) = H+1. If depth > H+1, then height(r) = H.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AddOneRow.spec_5",
+    "negation": "AegisSpec.AddOneRow.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for a tree t let N_t(k) be the number of nodes of t at depth k (root depth 1; N_t(k)=0 for k<1 or k>height(t)). If depth = 1, then N_r(1)=1 and N_r(k)=N_root(k-1) for every integer k >= 2. If depth > 1, then N_r(k)=N_root(k) for every 1 <= k < depth, N_r(depth)=2*N_root(depth-1), and N_r(k)=N_root(k-1) for every k > depth.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AddOneRow.spec_6",
+    "negation": "AegisSpec.AddOneRow.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. If depth = 1, the root of r has value val. If depth > 1, every node of r at depth depth (root depth 1) has value val; if there are no such nodes this is vacuous.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AddOneRow.spec_7",
+    "negation": "AegisSpec.AddOneRow.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and depth > 1, for every node cur of root at depth depth-1, let L be cur's left child in root (L may be Null). Let cur' be the node of r reached from the root by the same sequence of left/right child steps as cur. Then cur' exists, has the same value as cur, and cur' has left child Node(val, L, Null). Equivalently, the new left child has value val, its left subtree is exactly L, and its right child is Null.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AddOneRow.spec_8",
+    "negation": "AegisSpec.AddOneRow.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and depth > 1, for every node cur of root at depth depth-1, let R be cur's right child in root (R may be Null). Let cur' be the node of r reached from the root by the same sequence of left/right child steps as cur. Then cur' exists, has the same value as cur, and cur' has right child Node(val, Null, R). Equivalently, the new right child has value val, its left child is Null, and its right subtree is exactly R.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AddOneRow.spec_9",
+    "negation": "AegisSpec.AddOneRow.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r and depth > 2, for every node cur of root at depth k with 1 <= k <= depth-2, let cur' be the node of r reached from the root by the same sequence of left/right child steps as cur. Then cur' exists and has the same value as cur. Also, if cur has a left child cL in root, then the left child of cur' in r is the node reached by the same step sequence as cL; if cur has no left child, neither does cur'. The same holds for the right child.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AddOneRow.spec_10",
+    "negation": "AegisSpec.AddOneRow.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer v, let count(t,v) be the number of nodes of t with stored value v. If depth = 1 then count(r,v) = count(root,v) + (1 if v = val else 0). If depth > 1 and c is the number of nodes of root at depth depth-1, then count(r,v) = count(root,v) + (2*c if v = val else 0).",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AddOneRow.spec_11",
+    "negation": "AegisSpec.AddOneRow.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and depth > 1, for every node x of root at depth k >= depth, x appears in r at depth k+1 with the same value. More precisely, let cur be the ancestor of x at depth depth-1, and write the path from cur to x as s0,s1,...,s_{k-depth}, where each s_i is L or R. Then the path from cur to x in r is s0,s0,s1,...,s_{k-depth}: the first step goes to the new val child, the second step goes back to the original child subtree, and the remaining steps are unchanged. All parent-child links inside the original subtrees below the new row are unchanged.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AddOneRow.spec_12",
+    "negation": "AegisSpec.AddOneRow.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and depth > 1, let c be the number of nodes of root at depth depth-1. If c > 0, then r has exactly 2*c nodes at depth depth, all of value val; in particular r contains at least two distinct nodes with value val at depth depth.",
+    "preconditions": "root is not Null; every stored value of a node in root is in [-100,100]; -100000 <= val <= 100000; 1 <= depth."
+  }
+]

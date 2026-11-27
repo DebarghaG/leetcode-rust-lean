@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.QueryResults.spec_1",
+    "negation": "AegisSpec.QueryResults.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever query_results(limit, queries) returns a result r, len(r) = n, and for every i with 0 <= i < n, r[i] equals the number of distinct colors c for which there exists a ball label x with 0 <= x <= limit whose color after the first i+1 queries is c. For a prefix of j+1 queries with 0 <= j < n, the color of ball x after that prefix is defined as follows: if some query index k with 0 <= k <= j has queries[k][0] = x, take the largest such k; then ball x has color queries[k][1]; if no such k exists, ball x is uncolored. Uncolored balls do not contribute a color.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.QueryResults.spec_2",
+    "negation": "AegisSpec.QueryResults.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "query_results(limit, queries) returns a result r; it does not fail, overflow, read out of bounds, or panic.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.QueryResults.spec_3",
+    "negation": "AegisSpec.QueryResults.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, 1 <= r[i] <= i+1.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.QueryResults.spec_4",
+    "negation": "AegisSpec.QueryResults.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, if queries[j][0] = queries[0][0] for every j with 0 <= j <= i, then r[i] = 1.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.QueryResults.spec_5",
+    "negation": "AegisSpec.QueryResults.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, if queries[j][1] = queries[0][1] for every j with 0 <= j <= i, then r[i] = 1.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.QueryResults.spec_6",
+    "negation": "AegisSpec.QueryResults.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, r[i] <= |{ queries[j][1] | 0 <= j <= i }|, i.e. r[i] is at most the number of distinct colors appearing as the second component in the first i+1 queries.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.QueryResults.spec_7",
+    "negation": "AegisSpec.QueryResults.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, r[i] <= |{ queries[j][0] | 0 <= j <= i }|, i.e. r[i] is at most the number of distinct ball labels mentioned in the first i+1 queries.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.QueryResults.spec_8",
+    "negation": "AegisSpec.QueryResults.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 1 <= i < n, -1 <= r[i] - r[i-1] <= 1.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.QueryResults.spec_9",
+    "negation": "AegisSpec.QueryResults.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 1 <= i < n, let x = queries[i][0] and y = queries[i][1]. Consider the state after the first i queries, i.e. the prefix ending at index i-1. Define old_unique to be true iff ball x has a color c in that state with c != y and no ball z with z != x has color c in that state. Define new_absent to be true iff no ball z with 0 <= z <= limit has color y in that state. Then r[i] = r[i-1] + (1 if new_absent else 0) - (1 if old_unique else 0).",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.QueryResults.spec_10",
+    "negation": "AegisSpec.QueryResults.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for any I64 limit' with 1 <= limit' <= 10^9 and 0 <= queries[j][0] <= limit' for all 0 <= j < n, if query_results(limit', queries) returns r', then r' = r.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.QueryResults.spec_11",
+    "negation": "AegisSpec.QueryResults.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let C = { queries[j][1] | 0 <= j < n }. Suppose f is a function from C to I64 that is injective on C and satisfies 1 <= f(c) <= 10^9 for every c in C. Let queries' be a slice of Vec I64 with len(queries') = n such that for every j with 0 <= j < n, len(queries'[j]) = 2, queries'[j][0] = queries[j][0], and queries'[j][1] = f(queries[j][1]). Whenever query_results(limit, queries) returns r and query_results(limit, queries') returns r', we have r' = r.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.QueryResults.spec_12",
+    "negation": "AegisSpec.QueryResults.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, there exists a set X of exactly r[i] ball labels in [0, limit] such that every ball in X is colored after the first i+1 queries and the colors of the balls in X are pairwise distinct; and every set Y of ball labels in [0, limit] such that every ball in Y is colored after the first i+1 queries and the colors of the balls in Y are pairwise distinct has |Y| <= r[i].",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.QueryResults.spec_13",
+    "negation": "AegisSpec.QueryResults.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever query_results(limit, queries) returns a result r, for every i with 0 <= i < n, if queries[j][0] != queries[k][0] for all 0 <= k < j <= i, then r[i] = |{ queries[j][1] | 0 <= j <= i }|, i.e. r[i] equals the number of distinct colors among the first i+1 queries.",
+    "preconditions": "limit is an I64 with 1 <= limit <= 10^9; queries is a slice of Vec I64; let n = len(queries); 1 <= n <= 10^5; for every i with 0 <= i < n, len(queries[i]) = 2, 0 <= queries[i][0] <= limit, and 1 <= queries[i][1] <= 10^9."
+  }
+]

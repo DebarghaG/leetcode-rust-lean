@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveStones.spec_1",
+    "negation": "AegisSpec.RemoveStones.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(stones). On the index set I = {i | 0 <= i < n}, define i ~ j to mean i != j and (stones[i][0] = stones[j][0] or stones[i][1] = stones[j][1]). Let connected be the reflexive-transitive closure of ~ on I, and let c be the number of equivalence classes of connected (equivalently, the number of connected components of the undirected graph on I whose edges are the pairs with i ~ j). The function returns a result r and r = n - c.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveStones.spec_2",
+    "negation": "AegisSpec.RemoveStones.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function remove_stones returns a result r on every input satisfying the preconditions; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveStones.spec_3",
+    "negation": "AegisSpec.RemoveStones.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= len(stones) - 1.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveStones.spec_4",
+    "negation": "AegisSpec.RemoveStones.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let R be the number of distinct values in the set {stones[i][0] | 0 <= i < len(stones)}. The function returns a result r and r >= len(stones) - R.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveStones.spec_5",
+    "negation": "AegisSpec.RemoveStones.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let C be the number of distinct values in the set {stones[i][1] | 0 <= i < len(stones)}. The function returns a result r and r >= len(stones) - C.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveStones.spec_6",
+    "negation": "AegisSpec.RemoveStones.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let I be the number of indices i with 0 <= i < len(stones) such that for every j with 0 <= j < len(stones) and j != i, stones[j][0] != stones[i][0] and stones[j][1] != stones[i][1]. The function returns a result r and r <= len(stones) - I.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveStones.spec_7",
+    "negation": "AegisSpec.RemoveStones.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r. Let m be the nonnegative integer equal to r. There exists a sequence i_1, ..., i_m of distinct indices from {0, ..., len(stones)-1} (empty when m=0) such that for every t with 1 <= t <= m, putting S_t = {i_1, ..., i_{t-1}}, there is an index j with 0 <= j < len(stones), j != i_t, and j not in S_t, satisfying stones[i_t][0] = stones[j][0] or stones[i_t][1] = stones[j][1]. Thus r stones can legally be removed in that order.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveStones.spec_8",
+    "negation": "AegisSpec.RemoveStones.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. For every m >= 0 and every sequence i_1, ..., i_m of distinct indices from {0, ..., len(stones)-1} that is legal in the following sense: for each t with 1 <= t <= m, before removing i_t there is an index j with 0 <= j < len(stones), j != i_t, and j not in {i_1, ..., i_{t-1}} such that stones[i_t][0] = stones[j][0] or stones[i_t][1] = stones[j][1]; we have m <= r.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveStones.spec_9",
+    "negation": "AegisSpec.RemoveStones.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let swapped be the list of length len(stones) with swapped[i] = [stones[i][1], stones[i][0]] for every i with 0 <= i < len(stones). The function returns a result r, and the same function remove_stones applied to swapped also returns the same result r.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveStones.spec_10",
+    "negation": "AegisSpec.RemoveStones.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation p of the index set {0, ..., len(stones)-1}, let permuted be the list of length len(stones) with permuted[i] = stones[p(i)] for 0 <= i < len(stones). The function returns a result r, and the same function remove_stones applied to permuted also returns the same result r.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveStones.spec_11",
+    "negation": "AegisSpec.RemoveStones.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if for every i,j with 0 <= i < j < len(stones), stones[i][0] != stones[j][0] and stones[i][1] != stones[j][1] (equivalently, no two stones share a row or a column).",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RemoveStones.spec_12",
+    "negation": "AegisSpec.RemoveStones.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = len(stones) - 1 if and only if all stones lie in a single connected component: for every i with 0 <= i < len(stones), there exist m >= 0 and indices k_0, ..., k_m in {0, ..., len(stones)-1} such that k_0 = i, k_m = 0, and for every t with 0 <= t < m, stones[k_t][0] = stones[k_{t+1}][0] or stones[k_t][1] = stones[k_{t+1}][1].",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; and for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RemoveStones.spec_13",
+    "negation": "AegisSpec.RemoveStones.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let transformed be the list of length len(stones) with transformed[i] = [f(stones[i][0]), g(stones[i][1])] for every i with 0 <= i < len(stones). The function returns a result r, and the same function remove_stones applied to transformed also returns the same result r.",
+    "preconditions": "len(stones) >= 1 and len(stones) <= 1000; for every i with 0 <= i < len(stones), len(stones[i]) = 2, 0 <= stones[i][0] <= 10000, and 0 <= stones[i][1] <= 10000; for every i,j with 0 <= i < j < len(stones), it is not the case that stones[i][0] = stones[j][0] and stones[i][1] = stones[j][1]; and f and g are permutations of {0, 1, ..., 10000}."
+  }
+]

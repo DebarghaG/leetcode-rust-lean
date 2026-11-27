@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasSameDigits.spec_1",
+    "negation": "AegisSpec.HasSameDigits.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let d(i) = s[i] - 48 for 0 ≤ i < n. Define sequences a_0, a_1, ..., a_{n-2} recursively: a_0 is the sequence (d(0), d(1), ..., d(n-1)); for each k with 0 ≤ k < n-2, a_{k+1} is the sequence of length n-k-1 defined by a_{k+1}[i] = (a_k[i] + a_k[i+1]) mod 10 for 0 ≤ i < n-k-1. Let A = a_{n-2}[0] and B = a_{n-2}[1]. Then the function returns a result r and r = true if and only if A = B.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasSameDigits.spec_2",
+    "negation": "AegisSpec.HasSameDigits.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not panic, overflow, or fail) for every input satisfying the preconditions.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasSameDigits.spec_3",
+    "negation": "AegisSpec.HasSameDigits.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true if and only if s[0] = s[2].",
+    "preconditions": "len(s) = 3 and s consists of ASCII digits (48 ≤ s[i] ≤ 57 for 0 ≤ i < 3)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasSameDigits.spec_4",
+    "negation": "AegisSpec.HasSameDigits.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d(i) = s[i] - 48 for 0 ≤ i < 4. The function returns a result r and r = true if and only if (d(0)+d(1)) mod 10 = (d(2)+d(3)) mod 10.",
+    "preconditions": "len(s) = 4 and s consists of ASCII digits (48 ≤ s[i] ≤ 57 for 0 ≤ i < 4)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasSameDigits.spec_5",
+    "negation": "AegisSpec.HasSameDigits.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every i with 0 ≤ i < n, t[i] = s[n-1-i]. Let r_s be the result of the function on s and r_t the result on t. Then r_s = r_t.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57). Also let t be a slice of the same length n satisfying the same digit precondition."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasSameDigits.spec_6",
+    "negation": "AegisSpec.HasSameDigits.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define t by t[i] = 48 + ((s[i] - 48 + c) mod 10) for 0 ≤ i < n. Let r_s be the result of the function on s and r_t the result on t. Then r_s = r_t.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57). Let c be an integer with 0 ≤ c ≤ 9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HasSameDigits.spec_7",
+    "negation": "AegisSpec.HasSameDigits.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define t by t[i] = 48 + (((s[i] - 48) * k) mod 10) for 0 ≤ i < n. Let r_s be the result of the function on s and r_t the result on t. Then r_s = r_t.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57). Let k ∈ {1,3,7,9}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HasSameDigits.spec_8",
+    "negation": "AegisSpec.HasSameDigits.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define t by t[i] = 48 + (9 - (s[i] - 48)) for 0 ≤ i < n (i.e., each digit d is replaced by 9-d). Let r_s be the result of the function on s and r_t the result on t. Then r_s = r_t.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HasSameDigits.spec_9",
+    "negation": "AegisSpec.HasSameDigits.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "len(s) = n, 3 ≤ n ≤ 100, for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57), and for every i with 0 ≤ i < n, s[i] = s[n-1-i] (s is a palindrome)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HasSameDigits.spec_10",
+    "negation": "AegisSpec.HasSameDigits.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let d(i) = s[i] - 48 for 0 ≤ i < n. Define t to be the slice of length n-1 by t[i] = 48 + ((d(i) + d(i+1)) mod 10) for 0 ≤ i < n-1. Let r_s be the result of the function on s and r_t the result on t. Then r_s = r_t.",
+    "preconditions": "len(s) = n, 4 ≤ n ≤ 100, and for every i with 0 ≤ i < n, s[i] is an ASCII digit (48 ≤ s[i] ≤ 57)."
+  }
+]

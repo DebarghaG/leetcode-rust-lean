@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestAwesome.spec_1",
+    "negation": "AegisSpec.LongestAwesome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For 0 <= i < j <= n, call the contiguous substring s[i..j) awesome if, among the ten digit counts #{k | i <= k < j and s[k] = 48+d} for d = 0,1,...,9, at most one count is odd. The function returns a result r (it does not fail) such that: (1) there exist indices i,j with 0 <= i < j <= n, j-i = r, and s[i..j) awesome; and (2) for every i',j' with 0 <= i' < j' <= n and s[i'..j') awesome, j'-i' <= r. Thus r is exactly the maximum length of a non-empty contiguous awesome substring of s.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), the byte s[i] is an ASCII decimal digit, i.e. 48 <= s[i] <= 57."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestAwesome.spec_2",
+    "negation": "AegisSpec.LongestAwesome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns some i64 value r and does not fail: no panic, no out-of-bounds slice access on s, and no i64 arithmetic overflow occurs during the computation.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestAwesome.spec_3",
+    "negation": "AegisSpec.LongestAwesome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r >= 1. In particular, the longest awesome substring has positive length because every one-character substring is awesome.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestAwesome.spec_4",
+    "negation": "AegisSpec.LongestAwesome.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r <= len(s). No substring can be longer than the whole string.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestAwesome.spec_5",
+    "negation": "AegisSpec.LongestAwesome.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices l,u with 0 <= l < u <= len(s), u-l = r, and the substring s[l..u) is awesome: among the ten counts #{k | l <= k < u and s[k] = 48+d} for d = 0,1,...,9, at most one count is odd. Hence the returned length is realized by an actual non-empty contiguous substring.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestAwesome.spec_6",
+    "negation": "AegisSpec.LongestAwesome.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of indices l,u with 0 <= l < u <= len(s) such that s[l..u) is awesome, we have u-l <= r. Here awesome means that among the ten digit counts #{k | l <= k < u and s[k] = 48+d} for d = 0,1,...,9, at most one count is odd.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestAwesome.spec_7",
+    "negation": "AegisSpec.LongestAwesome.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s) if and only if the whole string s is awesome, i.e. among the ten full-string digit counts #{k | 0 <= k < len(s) and s[k] = 48+d} for d = 0,1,...,9, at most one count is odd. Equivalently, r = len(s) exactly when the characters of s can be permuted into a palindrome.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestAwesome.spec_8",
+    "negation": "AegisSpec.LongestAwesome.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(s) = 1 then r = 1.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestAwesome.spec_9",
+    "negation": "AegisSpec.LongestAwesome.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if all bytes of s are equal (s[0] = s[1] = ... = s[len(s)-1]), then r = len(s).",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestAwesome.spec_10",
+    "negation": "AegisSpec.LongestAwesome.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if s[i] != s[j] for every pair of indices with 0 <= i < j < len(s), then r = 1.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestAwesome.spec_11",
+    "negation": "AegisSpec.LongestAwesome.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if s is a palindrome (s[i] = s[len(s)-1-i] for every 0 <= i < len(s)), then r = len(s).",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestAwesome.spec_12",
+    "negation": "AegisSpec.LongestAwesome.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(s) = 2 then: r = 2 when s[0] = s[1], and r = 1 when s[0] != s[1].",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestAwesome.spec_13",
+    "negation": "AegisSpec.LongestAwesome.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(s) = 3 then: r = 3 if s[0] = s[1] or s[0] = s[2] or s[1] = s[2] (i.e. not all three bytes are distinct), and r = 1 if all three bytes are pairwise distinct.",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestAwesome.spec_14",
+    "negation": "AegisSpec.LongestAwesome.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s satisfying the preconditions, the function returns the same i64 result on s and on the reversed slice rev(s) defined by rev(s)[i] = s[len(s)-1-i] for 0 <= i < len(s); that is, longest_awesome(s) = longest_awesome(rev(s)).",
+    "preconditions": "1 <= len(s) <= 100000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  }
+]

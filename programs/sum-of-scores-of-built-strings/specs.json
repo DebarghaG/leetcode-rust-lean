@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumScores.spec_1",
+    "negation": "AegisSpec.SumScores.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For each k with 1 <= k <= n, let u_k be the suffix of s of length k, defined by u_k[t] = s[n-k+t] for every t with 0 <= t < k. Let score(k) be the largest integer L with 0 <= L <= k such that for every t with 0 <= t < L, u_k[t] = s[t]. Whenever the function returns a result r, r = sum_{k=1}^{n} score(k).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumScores.spec_2",
+    "negation": "AegisSpec.SumScores.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r (it does not fail; in particular, no arithmetic overflow, out-of-bounds access, or panic occurs).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumScores.spec_3",
+    "negation": "AegisSpec.SumScores.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). Whenever the function returns a result r, n <= r <= n*(n+1)/2.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumScores.spec_4",
+    "negation": "AegisSpec.SumScores.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r = n*(n+1)/2 if and only if every byte of s is equal to s[0] (that is, for every i with 0 <= i < n, s[i] = s[0]).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumScores.spec_5",
+    "negation": "AegisSpec.SumScores.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r = n if and only if for every i with 1 <= i < n, s[i] != s[0].",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumScores.spec_6",
+    "negation": "AegisSpec.SumScores.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s) and let C be the number of indices i with 1 <= i < n and s[i] = s[0]. Whenever the function returns a result r, r >= n + C.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumScores.spec_7",
+    "negation": "AegisSpec.SumScores.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r <= n + sum_{j=1}^{n-1} (if s[j] = s[0] then n-j else 0).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumScores.spec_8",
+    "negation": "AegisSpec.SumScores.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). For each j with 0 <= j < n, let L_j be the largest integer L with 0 <= L <= n-j such that for every t with 0 <= t < L, s[j+t] = s[t]. Whenever the function returns a result r, r = n + sum_{j=1}^{n-1} L_j. Moreover, for every j with 1 <= j < n, L_j = 0 if and only if s[j] != s[0], and if s[j] = s[0] then 1 <= L_j <= n-j.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumScores.spec_9",
+    "negation": "AegisSpec.SumScores.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(s). Whenever the function returns a result r, there exist integers L_j for 0 <= j < n such that r = sum_{j=0}^{n-1} L_j and for each j: (1) 0 <= L_j <= n-j; (2) for every t with 0 <= t < L_j, s[j+t] = s[t]; (3) if L_j < n-j then s[j+L_j] != s[L_j]. Each L_j is the LCP length of s[j..n] with s.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumScores.spec_10",
+    "negation": "AegisSpec.SumScores.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s and every t satisfying the same length and lowercase-letter constraints, if len(t) = len(s) and there exists a bijection f from the set {97,...,122} to itself such that t[i] = f(s[i]) for every i with 0 <= i < len(s), then whenever the function returns r_s on s and r_t on t, r_s = r_t.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty list of lowercase English ASCII letters)."
+  }
+]

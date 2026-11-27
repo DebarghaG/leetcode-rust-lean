@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_1",
+    "negation": "AegisSpec.MaxGoodNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P be the set of all triples (i0,i1,i2) that are permutations of (0,1,2). For a positive integer v, let bitlen(v) be the unique k >= 1 such that 2^(k-1) <= v < 2^k. For positive integers a,b,c define concat(a,b,c) = a * 2^(bitlen(b)+bitlen(c)) + b * 2^bitlen(c) + c. The function returns a result r and r = max_{(i0,i1,i2) in P} concat(nums[i0], nums[i1], nums[i2]).",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_2",
+    "negation": "AegisSpec.MaxGoodNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, out-of-bounds, or panic).",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_3",
+    "negation": "AegisSpec.MaxGoodNumber.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, there exists a permutation (i0,i1,i2) of (0,1,2) such that r = nums[i0] * 2^(bitlen(nums[i1])+bitlen(nums[i2])) + nums[i1] * 2^bitlen(nums[i2]) + nums[i2], where bitlen(v) is the unique k >= 1 with 2^(k-1) <= v < 2^k.",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_4",
+    "negation": "AegisSpec.MaxGoodNumber.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, for every permutation (i0,i1,i2) of (0,1,2), nums[i0] * 2^(bitlen(nums[i1])+bitlen(nums[i2])) + nums[i1] * 2^bitlen(nums[i2]) + nums[i2] <= r, where bitlen(v) is the unique k >= 1 with 2^(k-1) <= v < 2^k.",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_5",
+    "negation": "AegisSpec.MaxGoodNumber.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, r <= 2097151 (equivalently r <= 2^21 - 1).",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_6",
+    "negation": "AegisSpec.MaxGoodNumber.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, r > nums[0], r > nums[1], and r > nums[2].",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_7",
+    "negation": "AegisSpec.MaxGoodNumber.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, bitlen(r) = bitlen(nums[0]) + bitlen(nums[1]) + bitlen(nums[2]), where bitlen(v) is the unique k >= 1 with 2^(k-1) <= v < 2^k.",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_8",
+    "negation": "AegisSpec.MaxGoodNumber.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on an input nums satisfying the preconditions, then for every permutation (j0,j1,j2) of (0,1,2), any slice xs with len(xs)=3 and xs[0]=nums[j0], xs[1]=nums[j1], xs[2]=nums[j2] also satisfies the preconditions, and the function on xs returns a result r' with r' = r.",
+    "preconditions": "len(nums) = 3 and 1 <= nums[0] <= 127 and 1 <= nums[1] <= 127 and 1 <= nums[2] <= 127."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_9",
+    "negation": "AegisSpec.MaxGoodNumber.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on nums and r' on xs, if nums[0] <= xs[0], nums[1] <= xs[1], and nums[2] <= xs[2], then r <= r'.",
+    "preconditions": "nums and xs are slices with len(nums)=len(xs)=3, and 1 <= nums[i] <= 127 and 1 <= xs[i] <= 127 for i=0,1,2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxGoodNumber.spec_10",
+    "negation": "AegisSpec.MaxGoodNumber.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r on such an input, if (a,b,c) is a permutation of (nums[0],nums[1],nums[2]) with a >= b >= c, then r = a * 2^(2L) + b * 2^L + c.",
+    "preconditions": "len(nums)=3, 1 <= nums[i] <= 127 for i=0,1,2, and there is L >= 1 such that bitlen(nums[0])=bitlen(nums[1])=bitlen(nums[2])=L, where bitlen(v) is the unique k >= 1 with 2^(k-1) <= v < 2^k."
+  }
+]

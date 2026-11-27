@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumReplacement.spec_1",
+    "negation": "AegisSpec.MinimumReplacement.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). Call an array b[0..m-1] a valid sorted expansion of nums when: (1) b is a finite nondecreasing sequence of positive integers; (2) there are indices 0 = p_0 < p_1 < ... < p_n = m such that for every i with 0 <= i < n, the sum of b[p_i], b[p_i+1], ..., b[p_{i+1}-1] equals nums[i]. The operation count of this expansion is m - n. Under the preconditions, minimum_replacement(nums) returns a result r, and r is equal to the minimum operation count over all valid sorted expansions of nums.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumReplacement.spec_2",
+    "negation": "AegisSpec.MinimumReplacement.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, minimum_replacement(nums) returns a result (it does not fail, overflow, or panic).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumReplacement.spec_3",
+    "negation": "AegisSpec.MinimumReplacement.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_replacement(nums) returns a result r under the preconditions, r >= 0.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies n >= 1 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumReplacement.spec_4",
+    "negation": "AegisSpec.MinimumReplacement.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_replacement(nums) returns a result r under the preconditions, r <= sum_{i=0}^{n-2} (nums[i] - 1), where n = len(nums) and the sum is 0 when n = 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies n >= 1 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumReplacement.spec_5",
+    "negation": "AegisSpec.MinimumReplacement.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under the preconditions, let r be the returned value. Then r = 0 if and only if for every i with 0 <= i < n-1, nums[i] <= nums[i+1].",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumReplacement.spec_6",
+    "negation": "AegisSpec.MinimumReplacement.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under the preconditions, let r be the returned value. Then r = ceil(nums[0] / nums[1]) - 1, where ceil(a/b) is the least integer q with a <= q*b.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies n = 2 and 1 <= nums[i] <= 10^9 for i = 0,1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumReplacement.spec_7",
+    "negation": "AegisSpec.MinimumReplacement.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the slice obtained by appending v_0, ..., v_{k-1} to nums. Under the preconditions, minimum_replacement(nums') and minimum_replacement(nums) return results r' and r, and r' = r.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n. Let k >= 1 with n + k <= 10^5, and let v_0, ..., v_{k-1} be integers satisfying nums[n-1] <= v_0 <= v_1 <= ... <= v_{k-1} <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumReplacement.spec_8",
+    "negation": "AegisSpec.MinimumReplacement.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_replacement(nums) returns a result r under the preconditions, r >= sum_{i=0}^{n-2} (ceil(nums[i] / nums[n-1]) - 1), where ceil(a/b) is the least integer q with a <= q*b, and the sum is 0 when n = 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies n >= 1 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumReplacement.spec_9",
+    "negation": "AegisSpec.MinimumReplacement.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Under the preconditions, let r be the returned value. There exists a finite sequence of exactly r valid replacement operations that transforms nums into a nondecreasing array.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumReplacement.spec_10",
+    "negation": "AegisSpec.MinimumReplacement.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let A be the slice P followed by a, and let B be the slice P followed by b. Under the preconditions, minimum_replacement(A) and minimum_replacement(B) return results r_A and r_B, and r_A >= r_B.",
+    "preconditions": "Let P be a finite sequence of integers with 0 <= len(P) and len(P)+1 <= 10^5, and 1 <= P[j] <= 10^9 for every j with 0 <= j < len(P). Let a and b be integers with 1 <= a <= b <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumReplacement.spec_11",
+    "negation": "AegisSpec.MinimumReplacement.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Under the preconditions, let r be the returned value. Every nondecreasing array obtainable from nums by any finite sequence of valid replacement operations has length at least r + len(nums).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumReplacement.spec_12",
+    "negation": "AegisSpec.MinimumReplacement.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let U_{n-1} = nums[n-1] and k_{n-1} = 1. For i = n-2, n-3, ..., 0, define k_i = ceil(nums[i] / U_{i+1}) and U_i = floor(nums[i] / k_i), where ceil(a/b) is the least integer q with a <= q*b and floor(a/b) is the greatest integer q with q*b <= a. Then with r = minimum_replacement(nums), r = sum_{i=0}^{n-1} (k_i - 1).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumReplacement.spec_13",
+    "negation": "AegisSpec.MinimumReplacement.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Under the preconditions, there exists an optimal valid sorted expansion of nums, i.e. one with operation count r, in which the block corresponding to nums[n-1] consists of the single element nums[n-1]. Equivalently, the last original element is never split in some optimal solution.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9 for every i with 0 <= i < n."
+  }
+]

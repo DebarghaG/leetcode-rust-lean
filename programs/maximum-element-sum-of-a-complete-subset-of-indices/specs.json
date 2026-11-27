@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumSum.spec_1",
+    "negation": "AegisSpec.MaximumSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (i.e., it does not fail) and r equals the maximum value of sum_{i in S} nums[i-1] over all non-empty subsets S of {1,2,...,n} such that for every i,j in S, the product i*j is a perfect square (i.e., there exists an integer k >= 0 with i*j = k^2).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumSum.spec_2",
+    "negation": "AegisSpec.MaximumSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input nums satisfying the preconditions, the function returns a result (i.e., it does not return an error or panic).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumSum.spec_3",
+    "negation": "AegisSpec.MaximumSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The result r satisfies r >= max_{0 <= i < n} nums[i].",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumSum.spec_4",
+    "negation": "AegisSpec.MaximumSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The result r satisfies r <= sum_{0 <= i < n} nums[i].",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumSum.spec_5",
+    "negation": "AegisSpec.MaximumSum.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a non-empty subset S of {1,2,...,n} such that (a) for every i,j in S, i*j is a perfect square, and (b) r = sum_{i in S} nums[i-1].",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumSum.spec_6",
+    "negation": "AegisSpec.MaximumSum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every non-empty subset S of {1,2,...,n} such that for every i,j in S, i*j is a perfect square, it holds that sum_{i in S} nums[i-1] <= r.",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumSum.spec_7",
+    "negation": "AegisSpec.MaximumSum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let sf(k) denote the squarefree part of a positive integer k (the product of primes with odd exponent in the prime factorization of k, or equivalently the unique squarefree d such that k/d is a perfect square). Then r = max_{d} ( sum over all i with 1 <= i <= n and sf(i)=d of nums[i-1] ), where the maximum is over all positive integers d for which the set {i | 1 <= i <= n and sf(i)=d} is non-empty.",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumSum.spec_8",
+    "negation": "AegisSpec.MaximumSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If nums[i] <= nums'[i] for all 0 <= i < n, then maximum_sum(nums) <= maximum_sum(nums').",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Let nums' be another array of length n such that for every i with 0 <= i < n, 1 <= nums'[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumSum.spec_9",
+    "negation": "AegisSpec.MaximumSum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any positive integer c such that 1 <= c * nums[i] <= 1000000000 for all 0 <= i < n, let nums' be the array defined by nums'[i] = c * nums[i] for 0 <= i < n. Then maximum_sum(nums') = c * maximum_sum(nums).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumSum.spec_10",
+    "negation": "AegisSpec.MaximumSum.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "r = nums[0].",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Additionally, n = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumSum.spec_11",
+    "negation": "AegisSpec.MaximumSum.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "r = max(nums[0], nums[1]).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Additionally, n = 2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumSum.spec_12",
+    "negation": "AegisSpec.MaximumSum.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "r = max(nums[0], nums[1], nums[2]).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Additionally, n = 3."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumSum.spec_13",
+    "negation": "AegisSpec.MaximumSum.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "r = max(nums[0] + nums[3], nums[1], nums[2]).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Additionally, n = 4."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumSum.spec_14",
+    "negation": "AegisSpec.MaximumSum.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "r >= sum over all i with 1 <= i <= n and i is a perfect square of nums[i-1].",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumSum.spec_15",
+    "negation": "AegisSpec.MaximumSum.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any integer v with 1 <= v <= 1000000000, let nums' be the array of length n+1 obtained by appending v to nums, so nums'[i] = nums[i] for 0 <= i < n and nums'[n] = v. Let S_new = {i | 1 <= i <= n and sf(i) = sf(n+1)}, where sf(k) is the squarefree part of k as defined in spec_7. Then maximum_sum(nums') = max( maximum_sum(nums), v + sum over all i in S_new of nums[i-1] ).",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 9999 (equivalently n+1 <= 10000) and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaximumSum.spec_16",
+    "negation": "AegisSpec.MaximumSum.spec_16_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "r = v * max_{d} ( |{i | 1 <= i <= n and sf(i)=d}| ), where sf(k) is the squarefree part of k as defined in spec_7.",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000. Additionally, there exists an integer v such that nums[i] = v for all 0 <= i < n."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaximumSum.spec_17",
+    "negation": "AegisSpec.MaximumSum.spec_17_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every positive squarefree integer d, r >= sum over all i with 1 <= i <= n and sf(i) = d of nums[i-1], where sf(k) is the squarefree part of k as defined in spec_7.",
+    "preconditions": "Let n = len(nums). We assume 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  }
+]

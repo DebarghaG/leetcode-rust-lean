@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KClosest.spec_1",
+    "negation": "AegisSpec.KClosest.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever k_closest(points, k) returns a result r, there exists a set S of indices with 0 <= i < len(points) and |S| = k such that r is a permutation of the list [points[i] | i in S] (same multiset of two-coordinate vectors, in any order), and for every i in S and every j with 0 <= j < len(points) and j not in S, dist2(points[i]) <= dist2(points[j]), where dist2(p) = p[0]*p[0] + p[1]*p[1].",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KClosest.spec_2",
+    "negation": "AegisSpec.KClosest.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every points and k satisfying the preconditions, the evaluation of k_closest(points, k) returns a result r (there is no overflow, out-of-bounds access, or panic).",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KClosest.spec_3",
+    "negation": "AegisSpec.KClosest.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever k_closest(points, k) returns r, len(r) = k.",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KClosest.spec_4",
+    "negation": "AegisSpec.KClosest.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever k_closest(points, k) returns r, for every j with 0 <= j < len(r), len(r[j]) = 2.",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KClosest.spec_5",
+    "negation": "AegisSpec.KClosest.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever k_closest(points, k) returns r, for every j with 0 <= j < len(r), there exists i with 0 <= i < len(points) such that r[j][0] = points[i][0] and r[j][1] = points[i][1].",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KClosest.spec_6",
+    "negation": "AegisSpec.KClosest.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_closest(points, k) returns r, for every two-coordinate vector p, the number of indices j with 0 <= j < len(r) and r[j][0] = p[0] and r[j][1] = p[1] is at most the number of indices i with 0 <= i < len(points) and points[i][0] = p[0] and points[i][1] = p[1].",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KClosest.spec_7",
+    "negation": "AegisSpec.KClosest.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever k_closest(points, k) returns r, for every j with 0 <= j < len(r), -10000 <= r[j][0] <= 10000 and -10000 <= r[j][1] <= 10000.",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KClosest.spec_8",
+    "negation": "AegisSpec.KClosest.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever k_closest(points, k) returns r, let s be a nondecreasing list of length len(points) whose multiset of entries is {dist2(points[i]) | 0 <= i < len(points)}, where dist2(p) = p[0]*p[0] + p[1]*p[1]. Then the multiset {dist2(r[j]) | 0 <= j < len(r)} equals the multiset {s[0], s[1], ..., s[k-1]}.",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KClosest.spec_9",
+    "negation": "AegisSpec.KClosest.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_closest(points, k) returns r, there exists j with 0 <= j < len(r) such that r[j][0] = 0 and r[j][1] = 0.",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000; there exists i with 0 <= i < len(points) such that points[i][0] = 0 and points[i][1] = 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KClosest.spec_10",
+    "negation": "AegisSpec.KClosest.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever k_closest(points, k) returns r and k_closest(points', k) returns r', r is a permutation of r' (same multiset of two-coordinate vectors).",
+    "preconditions": "1 <= k <= len(points) <= 10000; for every i with 0 <= i < len(points), len(points[i]) = 2 and -10000 <= points[i][0] <= 10000 and -10000 <= points[i][1] <= 10000; 1 <= k <= len(points') <= 10000; for every i with 0 <= i < len(points'), len(points'[i]) = 2 and -10000 <= points'[i][0] <= 10000 and -10000 <= points'[i][1] <= 10000; points' is a permutation of points (same multiset of two-coordinate vectors); the k closest points for points are unique up to order, meaning there is exactly one multiset of k point vectors obtainable by selecting k occurrences from points such that every selected occurrence has dist2 no greater than every omitted occurrence, where dist2(p)=p[0]*p[0]+p[1]*p[1]."
+  }
+]

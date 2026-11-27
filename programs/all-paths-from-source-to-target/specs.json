@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_1",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is exactly the collection of all paths from node 0 to node n-1 in graph, with each path listed once and in arbitrary order. A sequence p is such a path when len(p) >= 1, p[0] = 0, p[len(p)-1] = n-1, every p[k] with 0 <= k < len(p) satisfies 0 <= p[k] < n, and for every k with 0 <= k < len(p)-1, p[k+1] is one of the entries of graph[p[k]]. Exactly means: (1) every element r[a] with 0 <= a < len(r) is such a path; (2) every such path p equals r[a] for some a with 0 <= a < len(r), with the same length and the same entries at every index; and (3) no two distinct indices a,b with 0 <= a < b < len(r) give equal sequences r[a] and r[b]. No condition is imposed on the order of the elements of r.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_2",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r and does not fail: no arithmetic overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_3",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every returned path starts at the source: for every a with 0 <= a < len(r), len(r[a]) >= 1 and r[a][0] = 0.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_4",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every returned path ends at the target: for every a with 0 <= a < len(r), len(r[a]) >= 1 and r[a][len(r[a])-1] = n-1.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_5",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every consecutive pair in every returned path is a directed edge: for every a with 0 <= a < len(r) and every k with 0 <= k < len(r[a])-1, r[a][k] is in the range [0,n-1] and r[a][k+1] is one of the entries of graph[r[a][k]] (that is, there exists j with 0 <= j < len(graph[r[a][k]]) such that graph[r[a][k]][j] = r[a][k+1]).",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_6",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every node label in every returned path is a valid node: for every a with 0 <= a < len(r) and every k with 0 <= k < len(r[a]), 0 <= r[a][k] < n.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_7",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every returned path has at least two nodes: for every a with 0 <= a < len(r), len(r[a]) >= 2.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_8",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every returned path has at most n nodes: for every a with 0 <= a < len(r), len(r[a]) <= n.",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_9",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every returned path is simple: for every a with 0 <= a < len(r) and all k,l with 0 <= k < l < len(r[a]), r[a][k] != r[a][l].",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_10",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the result contains no duplicate paths: for all a,b with 0 <= a < b < len(r), the sequences r[a] and r[b] are not equal, meaning either len(r[a]) != len(r[b]) or there exists k with 0 <= k < len(r[a]) such that r[a][k] != r[b][k].",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_11",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every path from 0 to n-1 occurs in r. Here a sequence p is a path from 0 to n-1 when len(p) >= 1, p[0] = 0, p[len(p)-1] = n-1, every p[k] with 0 <= k < len(p) satisfies 0 <= p[k] < n, and every p[k+1] with 0 <= k < len(p)-1 is one of the entries of graph[p[k]]. For every such p, there exists an index a with 0 <= a < len(r) such that len(r[a]) = len(p) and r[a][k] = p[k] for all 0 <= k < len(p).",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AllPathsSourceTarget.spec_12",
+    "negation": "AegisSpec.AllPathsSourceTarget.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 0 if and only if there does not exist a sequence p such that len(p) >= 1, p[0] = 0, p[len(p)-1] = n-1, every p[k] with 0 <= k < len(p) satisfies 0 <= p[k] < n, and every p[k+1] with 0 <= k < len(p)-1 is one of the entries of graph[p[k]].",
+    "preconditions": "Let n = len(graph). Assume: 2 <= n <= 15; for every i with 0 <= i < n and every entry v of graph[i], 0 <= v < n and v != i; for every i with 0 <= i < n, the entries of graph[i] are pairwise distinct; the directed graph on nodes 0,...,n-1 with an edge i -> graph[i][j] for each 0 <= i < n and 0 <= j < len(graph[i]) is acyclic (equivalently, no nonempty directed cycle exists)."
+  }
+]

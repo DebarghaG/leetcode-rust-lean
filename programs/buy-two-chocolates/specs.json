@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BuyChoco.spec_1",
+    "negation": "AegisSpec.BuyChoco.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(prices), and let s be the minimum of prices[i] + prices[j] over all integer pairs (i, j) with 0 <= i < j < n. The function returns a result r and r = (if s <= money then money - s else money).",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BuyChoco.spec_2",
+    "negation": "AegisSpec.BuyChoco.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail due to overflow, out-of-bounds access, panic, or any other reason.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BuyChoco.spec_3",
+    "negation": "AegisSpec.BuyChoco.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= money.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BuyChoco.spec_4",
+    "negation": "AegisSpec.BuyChoco.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r and there exist indices i, j with 0 <= i < j < n and prices[i] + prices[j] <= money, then 0 <= r <= money - 2, and in particular r < money.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BuyChoco.spec_5",
+    "negation": "AegisSpec.BuyChoco.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, the equality r = money holds if and only if for every pair of indices i, j with 0 <= i < j < n, prices[i] + prices[j] > money.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BuyChoco.spec_6",
+    "negation": "AegisSpec.BuyChoco.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r < money, there exist indices i, j with 0 <= i < j < n such that prices[i] + prices[j] = money - r.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BuyChoco.spec_7",
+    "negation": "AegisSpec.BuyChoco.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every pair of indices i, j with 0 <= i < j < n satisfies prices[i] + prices[j] >= money - r.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BuyChoco.spec_8",
+    "negation": "AegisSpec.BuyChoco.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exist indices i, j with 0 <= i < j < n such that prices[i] + prices[j] = money, and for every pair of indices a, b with 0 <= a < b < n, prices[a] + prices[b] >= money.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BuyChoco.spec_9",
+    "negation": "AegisSpec.BuyChoco.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (prices, money) and returns r' on (prices', money), r = r'.",
+    "preconditions": "prices and prices' are slices of 64-bit integers of the same length n with 2 <= n <= 50; every entry of prices and of prices' is between 1 and 100; prices' is a reordering (permutation) of the entries of prices; money is a 64-bit integer with 1 <= money <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BuyChoco.spec_10",
+    "negation": "AegisSpec.BuyChoco.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (prices, money) and returns r' on (prices', money), r' <= r.",
+    "preconditions": "prices and prices' are slices of 64-bit integers of the same length n with 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100 and 1 <= prices'[i] <= 100; for every i with 0 <= i < n, prices'[i] >= prices[i]; money is a 64-bit integer with 1 <= money <= 100; each of prices and prices' has at least one pair of distinct indices whose sum is at most money."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BuyChoco.spec_11",
+    "negation": "AegisSpec.BuyChoco.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the minimum of prices[i] + prices[j] over all 0 <= i < j < n. If s <= money1, and the function returns r1 on (prices, money1) and r2 on (prices, money2), then r2 = r1 + d.",
+    "preconditions": "prices is a slice of 64-bit integers with n = len(prices) satisfying 2 <= n <= 50; for every i with 0 <= i < n, 1 <= prices[i] <= 100; money1 and money2 are 64-bit integers with 1 <= money1 <= money2 <= 100, and d = money2 - money1."
+  }
+]

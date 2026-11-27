@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_1",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following hold. Every row of r has length 3; write its rows as r[k] = [l_k, r_k, a_k] for 0 <= k < len(r), and require l_k < r_k. For an integer x, let C(x) be the number of indices i with start_i <= x < end_i, and let S(x) be the sum of height_i over those i; when C(x) > 0 set A(x) = floor(S(x)/C(x)) using integer division truncating toward zero. Then (1) for every integer x, the number of k with l_k <= x < r_k is 1 if C(x) > 0 and is 0 if C(x) = 0; (2) for every k and every integer x with l_k <= x < r_k, C(x) > 0 and a_k = A(x); (3) for any two distinct rows p and q, if r_p = l_q or r_q = l_p then a_p != a_q. Equivalently, r is exactly the collection of maximal contiguous constant-average segments of the covered part of the street, with empty gaps excluded, and is therefore a minimum-size representation.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_2",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail: there is no arithmetic overflow, out-of-bounds access, division by zero, or panic).",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_3",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every row [l, r, a] of r is maximal on both sides. Define C(x) as the number of buildings i with start_i <= x < end_i, and for covered x define A(x) = floor(S(x)/C(x)), where S(x) is the sum of height_i over buildings covering x. Then if C(l-1) > 0 we have A(l-1) != a, and if C(r) > 0 we have A(r) != a.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_4",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every row [l, r, a] of r, the left endpoint l is equal to start_i or end_i for some building i, and the right endpoint r is equal to start_i or end_i for some building i. Thus every endpoint belongs to the set {start_i, end_i | 0 <= i < n}.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_5",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every row [l, r, a] of r, 1 <= a <= max_{0 <= i < n} height_i. In particular, a is positive and does not exceed the tallest building height.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_6",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every row [l, r, a] of r, min_{0 <= i < n} start_i <= l < r <= max_{0 <= i < n} end_i.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_7",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let C(x) and A(x) be as follows: C(x) is the number of buildings i with start_i <= x < end_i, and for C(x) > 0, A(x) = floor(S(x)/C(x)) with S(x) the sum of height_i over buildings covering x. Let K be the number of intervals [a, b) with integer a < b such that: (i) C(x) > 0 for every integer x with a <= x < b; (ii) A(x) has the same value c for every such x; (iii) either C(a-1) = 0 or A(a-1) != c; (iv) either C(b) = 0 or A(b) != c. Then len(r) = K, so r has the minimum possible number of segments.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AverageHeightOfBuildings.spec_8",
+    "negation": "AegisSpec.AverageHeightOfBuildings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any permutation pi of the indices {0,...,n-1}, let buildings_pi be the list whose k-th entry is buildings[pi(k)]. Whenever the function returns r on buildings and r' on buildings_pi, the multiset of triples (l, r, a) appearing as rows of r equals the multiset of triples appearing as rows of r'. Thus the answer depends only on the multiset of buildings, not on their order in the input.",
+    "preconditions": "Let n = len(buildings). For every i with 0 <= i < n, buildings[i] has length 3; write start_i = buildings[i][0], end_i = buildings[i][1], height_i = buildings[i][2]. Assume 1 <= n <= 100000, 0 <= start_i < end_i <= 100000000, and 1 <= height_i <= 100000."
+  }
+]

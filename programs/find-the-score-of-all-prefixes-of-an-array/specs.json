@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindPrefixScore.spec_1",
+    "negation": "AegisSpec.FindPrefixScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and len(r) = n. For every i with 0 <= i < n, let M_i = max(nums[0], nums[1], ..., nums[i]); then r[i] = sum_{k=0}^{i} (nums[k] + M_k). In words, r[i] is the score of the prefix nums[0..i]: the sum over k <= i of nums[k] plus the maximum of nums[0..k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindPrefixScore.spec_2",
+    "negation": "AegisSpec.FindPrefixScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail with overflow, out-of-bounds, or panic on any input satisfying the preconditions.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindPrefixScore.spec_3",
+    "negation": "AegisSpec.FindPrefixScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] >= 2 * sum_{k=0}^{i} nums[k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindPrefixScore.spec_4",
+    "negation": "AegisSpec.FindPrefixScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, letting M_i = max(nums[0], ..., nums[i]), r[i] <= 2 * (i + 1) * M_i.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindPrefixScore.spec_5",
+    "negation": "AegisSpec.FindPrefixScore.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < n, letting M_i = max(nums[0], ..., nums[i]), r[i] = r[i-1] + nums[i] + M_i.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindPrefixScore.spec_6",
+    "negation": "AegisSpec.FindPrefixScore.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < n, r[i] >= r[i-1] + 2.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindPrefixScore.spec_7",
+    "negation": "AegisSpec.FindPrefixScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and nums is nondecreasing (nums[j-1] <= nums[j] for every 1 <= j < n), for every i with 0 <= i < n, r[i] = 2 * sum_{k=0}^{i} nums[k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindPrefixScore.spec_8",
+    "negation": "AegisSpec.FindPrefixScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if nums[0] is a maximum of the prefix nums[0..i] (that is, nums[j] <= nums[0] for every 0 <= j <= i), then r[i] = (i + 1) * nums[0] + sum_{k=0}^{i} nums[k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindPrefixScore.spec_9",
+    "negation": "AegisSpec.FindPrefixScore.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every i with 0 <= i < n and every array nums2 of length n2 with i < n2 <= 100000 and 1 <= nums2[j] <= 1000000000 for all 0 <= j < n2, if nums2[j] = nums[j] for every 0 <= j <= i, then whenever the call on nums returns r and the call on nums2 returns r2, r[i] = r2[i].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindPrefixScore.spec_10",
+    "negation": "AegisSpec.FindPrefixScore.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n there exist indices p_0, p_1, ..., p_i such that 0 <= p_k <= k for every 0 <= k <= i, nums[p_k] = max(nums[0], ..., nums[k]), and r[i] = sum_{k=0}^{i} (nums[k] + nums[p_k]).",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000."
+  }
+]

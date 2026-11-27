@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BackspaceCompare.spec_1",
+    "negation": "AegisSpec.BackspaceCompare.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever `backspace_compare s t` returns a result `r`, `r = true` if and only if `red(s) = red(t)`, where `red(x)` is the byte sequence obtained by scanning x from left to right with an initially empty stack: for each byte c, append c if c != '#'; if c = '#', delete the last byte of the stack when the stack is nonempty and do nothing when it is empty. Byte-sequence equality means equal length and equal byte at every index. Equivalently, whenever a result is returned, it is `false` exactly when `red(s)` and `red(t)` differ.",
+    "preconditions": "s and t are byte slices such that every byte of s and t is either a lowercase ASCII letter 'a'..'z' or the byte '#'. Their lengths are at most 200, the problem's upper bound; empty slices are allowed, as in the provided examples."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BackspaceCompare.spec_2",
+    "negation": "AegisSpec.BackspaceCompare.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every admissible s and t, `backspace_compare s t` returns a result, either `Bool.true` or `Bool.false`. It does not fail, panic, or go out of bounds, including when s or t is empty, consists only of '#', or has length 200.",
+    "preconditions": "s and t are byte slices such that every byte of s and t is either a lowercase ASCII letter 'a'..'z' or the byte '#'. Their lengths are at most 200; empty slices are allowed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BackspaceCompare.spec_3",
+    "negation": "AegisSpec.BackspaceCompare.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every admissible s and t, if `backspace_compare s t` returns r and `backspace_compare t s` returns r', then r = r'. That is, the comparison is symmetric in its two arguments.",
+    "preconditions": "s and t are admissible: all bytes are lowercase ASCII letters or '#', and their lengths are at most 200."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BackspaceCompare.spec_4",
+    "negation": "AegisSpec.BackspaceCompare.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever `backspace_compare s t` returns r and `backspace_compare red(s) red(t)` returns r', we have r = r'. Replacing either input text by its fully backspace-reduced text does not change the Boolean answer.",
+    "preconditions": "s and t are admissible; `red(s)` and `red(t)` are the byte slices obtained by backspace reduction as defined in spec_1. These reduced slices contain only lowercase letters."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BackspaceCompare.spec_5",
+    "negation": "AegisSpec.BackspaceCompare.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such k, whenever `backspace_compare s t` returns r and `backspace_compare ('#'^k ++ s) t` returns r', we have r = r'. The analogous equality holds when t is replaced by `'#'^k ++ t`. Leading '#' characters, which backspace an empty text, do not affect the answer.",
+    "preconditions": "s and t are admissible, and k is a nonnegative integer such that the constructed slices still have length at most 200. Let `#'^k ++ s` mean k copies of the byte '#' followed by s."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BackspaceCompare.spec_6",
+    "negation": "AegisSpec.BackspaceCompare.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every admissible s, `backspace_compare s s` returns true.",
+    "preconditions": "s is an admissible byte slice with every byte either a lowercase ASCII letter or '#', and len(s) <= 200."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BackspaceCompare.spec_7",
+    "negation": "AegisSpec.BackspaceCompare.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If `backspace_compare s t` returns true and `backspace_compare t u` returns true, then `backspace_compare s u` returns true.",
+    "preconditions": "s, t, and u are admissible byte slices; every byte is a lowercase ASCII letter or '#', and every length is at most 200."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BackspaceCompare.spec_8",
+    "negation": "AegisSpec.BackspaceCompare.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "`backspace_compare s t` returns true.",
+    "preconditions": "s and t are admissible, and every byte of s and every byte of t is '#'. Empty slices qualify vacuously."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BackspaceCompare.spec_9",
+    "negation": "AegisSpec.BackspaceCompare.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "`backspace_compare s t` returns true if and only if len(s) = len(t) and for every i with 0 <= i < len(s), s[i] = t[i].",
+    "preconditions": "s and t are admissible, and neither s nor t contains the byte '#'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BackspaceCompare.spec_10",
+    "negation": "AegisSpec.BackspaceCompare.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever `backspace_compare s t` returns r, r = true if and only if `red(t) = s` as byte sequences.",
+    "preconditions": "s and t are admissible, and s contains no byte '#'. Let `red(t)` be the backspace reduction of t as defined in spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BackspaceCompare.spec_11",
+    "negation": "AegisSpec.BackspaceCompare.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "`backspace_compare s t` returns true if and only if for every suffix s[i..len(s)-1] with 0 <= i <= len(s), the number of '#' bytes in that suffix is at least the number of lowercase-letter bytes in that suffix. The empty suffix at i = len(s) has both counts zero.",
+    "preconditions": "s and t are admissible, and `red(t)` is the empty byte sequence. For example, t may be the empty slice or a slice consisting only of '#' bytes."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BackspaceCompare.spec_12",
+    "negation": "AegisSpec.BackspaceCompare.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever `backspace_compare s t` returns r, r = true if and only if `red(t)` equals the byte slice obtained from u by deleting its last min(k, len(u)) bytes, i.e. the prefix of u of length max(0, len(u) - k).",
+    "preconditions": "u is a byte slice consisting only of lowercase ASCII letters, k is a nonnegative integer, and s = u followed by k copies of '#' has length at most 200. t is any admissible slice."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BackspaceCompare.spec_13",
+    "negation": "AegisSpec.BackspaceCompare.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "`backspace_compare s t` returns false.",
+    "preconditions": "u is any admissible byte slice, c is a lowercase ASCII letter byte, s = u followed by c, and t = u followed by c and then '#'. Both constructed slices have length at most 200."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BackspaceCompare.spec_14",
+    "negation": "AegisSpec.BackspaceCompare.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If `backspace_compare s t` returns true, then there exists an integer m such that 0 <= m <= len(s), 0 <= m <= len(t), len(red(s)) = m, and len(red(t)) = m. In particular, the two surviving texts have equal length.",
+    "preconditions": "s and t are admissible byte slices, each of length at most 200."
+  }
+]

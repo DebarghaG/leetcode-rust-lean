@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumOfStrings.spec_1",
+    "negation": "AegisSpec.NumOfStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r equals the number of indices i with 0 <= i < len(patterns) such that patterns[i] occurs in word, where a byte sequence p occurs in word iff there exists an integer k with 0 <= k <= len(word) - len(p) and for every j with 0 <= j < len(p), p[j] = word[k+j]. Patterns are counted with multiplicity: if the same byte sequence appears at several indices in patterns, each such index contributes 1 to r.",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumOfStrings.spec_2",
+    "negation": "AegisSpec.NumOfStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, overflow, panic, or get stuck) for every input satisfying the preconditions.",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumOfStrings.spec_3",
+    "negation": "AegisSpec.NumOfStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, it holds that 0 <= r <= len(patterns).",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumOfStrings.spec_4",
+    "negation": "AegisSpec.NumOfStrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, it holds that r = 0.",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122]). Moreover, for every i with 0 <= i < len(patterns), len(patterns[i]) > len(word)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumOfStrings.spec_5",
+    "negation": "AegisSpec.NumOfStrings.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If num_of_strings(patterns, word) returns r and num_of_strings(patterns', word) returns r', then r = r'.",
+    "preconditions": "patterns and patterns' are slices of Vec U8, word is a slice of U8. Both (patterns, word) and (patterns', word) satisfy the common preconditions: 1 <= len(patterns) = len(patterns') = m <= 100, 1 <= len(word) <= 100, for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100 and 1 <= len(patterns'[i]) <= 100, and every byte of every patterns[i], patterns'[i], and word is an ASCII lowercase English letter (code in [97,122]). Moreover, there exists a bijection pi on {0,...,m-1} such that patterns'[i] = patterns[pi(i)] for every i with 0 <= i < m."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumOfStrings.spec_6",
+    "negation": "AegisSpec.NumOfStrings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If num_of_strings(patterns1, word) returns r1 and num_of_strings(patterns2, word) returns r2, then r1 <= r2.",
+    "preconditions": "patterns1 and patterns2 are slices of Vec U8, word is a slice of U8. Both (patterns1, word) and (patterns2, word) satisfy the common preconditions: 1 <= len(patterns1) <= 100, 1 <= len(patterns2) <= 100, 1 <= len(word) <= 100, for every i, 1 <= len(patterns1[i]) <= 100 and 1 <= len(patterns2[i]) <= 100, and every byte is an ASCII lowercase English letter (code in [97,122]). Moreover, patterns1 is a sub-multiset of patterns2: for every byte string p, the number of indices i with patterns1[i] = p is at most the number of indices i with patterns2[i] = p."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumOfStrings.spec_7",
+    "negation": "AegisSpec.NumOfStrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If num_of_strings(patterns, word1) returns r1 and num_of_strings(patterns, word2) returns r2, then r1 <= r2.",
+    "preconditions": "patterns is a slice of Vec U8, word1 and word2 are slices of U8. Both (patterns, word1) and (patterns, word2) satisfy the common preconditions: 1 <= len(patterns) <= 100, 1 <= len(word1) <= 100, 1 <= len(word2) <= 100, for every i, 1 <= len(patterns[i]) <= 100, and every byte is an ASCII lowercase English letter (code in [97,122]). Moreover, word1 is a contiguous substring of word2: there exists an integer k with 0 <= k <= len(word2) - len(word1) such that word1[j] = word2[k+j] for every j with 0 <= j < len(word1)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumOfStrings.spec_8",
+    "negation": "AegisSpec.NumOfStrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If num_of_strings(patterns, word) returns r, num_of_strings(patterns1, word) returns r1, and num_of_strings(patterns2, word) returns r2, then r = r1 + r2.",
+    "preconditions": "patterns, patterns1, patterns2 are slices of Vec U8, word is a slice of U8. Both (patterns, word), (patterns1, word), and (patterns2, word) satisfy the common preconditions: 1 <= len(patterns) <= 100, 1 <= len(patterns1) <= 100, 1 <= len(patterns2) <= 100, 1 <= len(word) <= 100, for every i, 1 <= len(patterns[i]) <= 100, 1 <= len(patterns1[i]) <= 100, 1 <= len(patterns2[i]) <= 100, and every byte is an ASCII lowercase English letter (code in [97,122]). Moreover, patterns is the concatenation of patterns1 and patterns2: len(patterns) = len(patterns1) + len(patterns2), and for every i with 0 <= i < len(patterns1), patterns[i] = patterns1[i], and for every i with 0 <= i < len(patterns2), patterns[len(patterns1) + i] = patterns2[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumOfStrings.spec_9",
+    "negation": "AegisSpec.NumOfStrings.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exists an index i with 0 <= i < len(patterns) such that patterns[i] occurs in word (using the definition of occurs from spec_1: there exists k with 0 <= k <= len(word) - len(patterns[i]) and patterns[i][j] = word[k+j] for every j with 0 <= j < len(patterns[i])).",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumOfStrings.spec_10",
+    "negation": "AegisSpec.NumOfStrings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = 0, for every index i with 0 <= i < len(patterns), patterns[i] does not occur in word (i.e., there is no integer k with 0 <= k <= len(word) - len(patterns[i]) such that patterns[i][j] = word[k+j] for every j with 0 <= j < len(patterns[i])).",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumOfStrings.spec_11",
+    "negation": "AegisSpec.NumOfStrings.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the number of indices i with 0 <= i < len(patterns) such that there exists an integer k with 0 <= k < len(word) and patterns[i][0] = word[k].",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122]). Moreover, for every i with 0 <= i < len(patterns), len(patterns[i]) = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumOfStrings.spec_12",
+    "negation": "AegisSpec.NumOfStrings.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If num_of_strings(patterns, word) returns r and num_of_strings(patterns', word') returns r', then r = r'.",
+    "preconditions": "patterns and patterns' are slices of Vec U8, word and word' are slices of U8. Both (patterns, word) and (patterns', word') satisfy the common preconditions: 1 <= len(patterns) = len(patterns') = m <= 100, 1 <= len(word) = len(word') = n <= 100, for every i with 0 <= i < m, 1 <= len(patterns[i]) = len(patterns'[i]) <= 100, and every byte is an ASCII lowercase English letter (code in [97,122]). Moreover, for every i with 0 <= i < m, len(patterns[i]) = len(patterns'[i]) and patterns'[i][j] = patterns[i][len(patterns[i])-1-j] for every j with 0 <= j < len(patterns[i]); and for every j with 0 <= j < n, word'[j] = word[n-1-j]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumOfStrings.spec_13",
+    "negation": "AegisSpec.NumOfStrings.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For any byte string p, let m_p be the number of indices i with 0 <= i < len(patterns) such that patterns[i] = p. If p occurs in word (i.e., there exists k with 0 <= k <= len(word) - len(p) and p[j] = word[k+j] for every j with 0 <= j < len(p)), then whenever the function returns a result r, it holds that r >= m_p.",
+    "preconditions": "patterns is a slice of Vec U8 and word is a slice of U8. Let m = len(patterns) and n = len(word). We have 1 <= m <= 100, 1 <= n <= 100, and for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100. Every byte of every patterns[i] and of word is an ASCII lowercase English letter (code in [97,122])."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.NumOfStrings.spec_14",
+    "negation": "AegisSpec.NumOfStrings.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If num_of_strings(patterns, word) returns r and num_of_strings(patterns', word) returns r', then r <= r'.",
+    "preconditions": "patterns and patterns' are slices of Vec U8, word is a slice of U8. Both (patterns, word) and (patterns', word) satisfy the common preconditions: 1 <= len(patterns) = len(patterns') = m <= 100, 1 <= len(word) <= 100, for every i with 0 <= i < m, 1 <= len(patterns[i]) <= 100 and 1 <= len(patterns'[i]) <= 100, and every byte is an ASCII lowercase English letter (code in [97,122]). Moreover, for every i with 0 <= i < m, patterns'[i] is a contiguous substring of patterns[i]: there exists k_i with 0 <= k_i <= len(patterns[i]) - len(patterns'[i]) such that patterns'[i][j] = patterns[i][k_i + j] for every j with 0 <= j < len(patterns'[i])."
+  }
+]

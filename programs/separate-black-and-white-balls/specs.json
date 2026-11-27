@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumSteps.spec_1",
+    "negation": "AegisSpec.MinimumSteps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = sum over all i with 0 <= i < n and s[i] = 49 of (the number of j with i < j < n and s[j] = 48). Equivalently, r is the number of pairs (i,j) with 0 <= i < j < n, s[i] = 49, and s[j] = 48.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumSteps.spec_2",
+    "negation": "AegisSpec.MinimumSteps.spec_2_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let k be the number of i with 0 <= i < n and s[i] = 49. If r is the returned result, then there exists a sequence of exactly r adjacent swaps of entries of s that transforms s into a sequence t of length n with t[i] = 48 for 0 <= i < n-k and t[i] = 49 for n-k <= i < n.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumSteps.spec_3",
+    "negation": "AegisSpec.MinimumSteps.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the number of i with 0 <= i < n and s[i] = 49. The function returns a result r, and r <= k * (n - k).",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumSteps.spec_4",
+    "negation": "AegisSpec.MinimumSteps.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if there do not exist indices i,j with 0 <= i < j < n, s[i] = 49, and s[j] = 48. Equivalently, r = 0 exactly when every 48 in s occurs before every 49 in s.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumSteps.spec_5",
+    "negation": "AegisSpec.MinimumSteps.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of i with 0 <= i < n and s[i] = 49. The function returns a result r, and r = k * (n - k) if and only if s[i] = 49 for every i with 0 <= i < k and s[i] = 48 for every i with k <= i < n.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumSteps.spec_6",
+    "negation": "AegisSpec.MinimumSteps.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of i with 0 <= i < n and s[i] = 49. For each j with 0 <= j < k, let p_j be the unique index such that s[p_j] = 49 and exactly j indices i with 0 <= i < p_j satisfy s[i] = 49. The function returns a result r, and r = sum_{j=0}^{k-1} (n - k + j - p_j).",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumSteps.spec_7",
+    "negation": "AegisSpec.MinimumSteps.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let c be the sequence of length n with c[i] = 97 - s[i] for every i with 0 <= i < n, and let k be the number of i with s[i] = 49. The function returns results r for s and r_c for c, and r + r_c = k * (n - k).",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumSteps.spec_8",
+    "negation": "AegisSpec.MinimumSteps.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the sequence of length n with t[i] = 97 - s[n-1-i] for every i with 0 <= i < n. The function returns results r for s and r_t for t, and r = r_t.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumSteps.spec_9",
+    "negation": "AegisSpec.MinimumSteps.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the sequence of length n+1 with s'[0] = 48 and s'[i+1] = s[i] for every i with 0 <= i < n. The function returns results r for s and r' for s', and r' = r.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n < 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumSteps.spec_10",
+    "negation": "AegisSpec.MinimumSteps.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the sequence of length n+1 with s'[i] = s[i] for every i with 0 <= i < n and s'[n] = 49. The function returns results r for s and r' for s', and r' = r.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n < 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumSteps.spec_11",
+    "negation": "AegisSpec.MinimumSteps.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let z be the number of i with 0 <= i < n and s[i] = 48. Let s' be the sequence of length n+1 with s'[0] = 49 and s'[i+1] = s[i] for every i with 0 <= i < n. The function returns results r for s and r' for s', and r' = r + z.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n < 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumSteps.spec_12",
+    "negation": "AegisSpec.MinimumSteps.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of i with 0 <= i < n and s[i] = 49. Let s' be the sequence of length n+1 with s'[i] = s[i] for every i with 0 <= i < n and s'[n] = 48. The function returns results r for s and r' for s', and r' = r + k.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n < 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumSteps.spec_13",
+    "negation": "AegisSpec.MinimumSteps.spec_13_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not fail, overflow, or access an index out of bounds.",
+    "preconditions": "The slice s has length n = len(s) with 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (the byte '0') or 49 (the byte '1')."
+  }
+]

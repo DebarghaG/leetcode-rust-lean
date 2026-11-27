@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPaths.spec_1",
+    "negation": "AegisSpec.CountPaths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. A path in grid is a finite sequence of cells ((r_0,c_0),...,(r_k,c_k)) with k >= 0 such that 0 <= r_t < m and 0 <= c_t < n for all t, and for every t < k the cells (r_t,c_t) and (r_{t+1},c_{t+1}) are adjacent in one of the four directions, i.e. |r_{t+1}-r_t| + |c_{t+1}-c_t| = 1. Such a path is strictly increasing if grid[r_0][c_0] < grid[r_1][c_1] < ... < grid[r_k][c_k]. Let C(grid) be the number of strictly increasing paths (including all paths of length 1, i.e. k=0), with each cell sequence counted separately. The function returns a result r and r = C(grid) mod M, where mod denotes the unique remainder in {0,...,M-1}.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPaths.spec_2",
+    "negation": "AegisSpec.CountPaths.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_paths(grid) returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPaths.spec_3",
+    "negation": "AegisSpec.CountPaths.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (there exists an i64 r such that count_paths(grid) = Result.ok r); it does not fail, panic, or signal arithmetic overflow or out-of-bounds on any input satisfying the precondition.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPaths.spec_4",
+    "negation": "AegisSpec.CountPaths.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = m * n.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Assume additionally that all entries of grid are equal: there is an integer c with grid[i][j] = c for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPaths.spec_5",
+    "negation": "AegisSpec.CountPaths.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n * (n + 1) / 2.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Assume m = 1 and for every j with 0 <= j < n-1, grid[0][j] < grid[0][j+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPaths.spec_6",
+    "negation": "AegisSpec.CountPaths.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = m * (m + 1) / 2.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Assume n = 1 and for every i with 0 <= i < m-1, grid[i][0] < grid[i+1][0]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPaths.spec_7",
+    "negation": "AegisSpec.CountPaths.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "count_paths(grid) returns a result r, count_paths(grid') returns a result r', and r = r'.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Let f be any function from integers to integers that is strictly increasing (for all integers x < y, f(x) < f(y)). Let grid' be an m x n grid with grid'[i][j] = f(grid[i][j]) for all i,j, and assume grid' also satisfies the same problem constraints (in particular its entries lie in [1,100000])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPaths.spec_8",
+    "negation": "AegisSpec.CountPaths.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "count_paths(grid) returns a result r, count_paths(T) returns a result r_T, and r = r_T.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Let T be the n x m grid defined by T[j][i] = grid[i][j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPaths.spec_9",
+    "negation": "AegisSpec.CountPaths.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "count_paths(grid) returns a result r, count_paths(R) returns a result r_R, and r = r_R.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Let R be the m x n grid defined by R[i][j] = grid[m-1-i][j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPaths.spec_10",
+    "negation": "AegisSpec.CountPaths.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "count_paths(grid) returns a result r, count_paths(Cg) returns a result r_Cg, and r = r_Cg.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Let Cg be the m x n grid defined by Cg[i][j] = grid[i][n-1-j] for 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPaths.spec_11",
+    "negation": "AegisSpec.CountPaths.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let C(grid) be the actual number of strictly increasing paths (finite adjacent cell sequences with strictly increasing values, as in spec_1). The function returns a result r with r = C(grid) mod 1000000007, and C(grid) >= m*n + 1.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000. Assume there exist adjacent cells (i,j) and (i',j') with |i-i'| + |j-j'| = 1 and grid[i][j] != grid[i'][j']."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPaths.spec_12",
+    "negation": "AegisSpec.CountPaths.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. For each cell (r,c) with 0 <= r < m and 0 <= c < n, let D(r,c) be the number of strictly increasing paths (as in spec_1) whose first cell is (r,c). Then D(r,c) = 1 + sum over all (r',c') with 0 <= r' < m, 0 <= c' < n, |r'-r| + |c'-c| = 1, and grid[r][c] < grid[r'][c'], of D(r',c'). Let C(grid) be the total number of strictly increasing paths as in spec_1; then C(grid) = sum over all cells (r,c) of D(r,c). The function returns a result r with r = C(grid) mod M.",
+    "preconditions": "grid is a nonempty rectangular matrix (all rows have the same length n): m = len(grid), n = len(grid[0]), 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 100000."
+  }
+]

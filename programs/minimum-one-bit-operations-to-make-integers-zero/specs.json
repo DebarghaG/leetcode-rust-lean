@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_1",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever minimum_one_bit_operations n returns a result r, r is the minimum possible number of operations to transform n into 0, where an operation on a nonnegative integer x is either: (O0) flip bit 0 of x; or (O1) for some i >= 1, if bit_{i-1}(x) = 1 and bit_j(x) = 0 for every j with 0 <= j <= i-2, flip bit i of x. Here bit_j(x) = floor(x / 2^j) mod 2, and flipping bit i means replacing x by x + 2^i when bit_i(x)=0 and by x - 2^i when bit_i(x)=1. The minimum is over all finite sequences x_0, x_1, ..., x_L of nonnegative integers with x_0 = n, x_L = 0, and each consecutive pair related by O0 or O1.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000. The symbol r denotes a returned I64 value, also regarded as a mathematical integer."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_2",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n with 0 <= n <= 1,000,000,000, the call minimum_one_bit_operations n returns a result: there exists an I64 value r such that the call evaluates to an ok result r and does not fail.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_3",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever minimum_one_bit_operations n returns r, r = n XOR floor(n/2) XOR floor(n/4) XOR floor(n/8) XOR ..., where only finitely many terms are nonzero (all terms floor(n/2^k) with 2^k > n are zero) and XOR denotes bitwise exclusive-or of nonnegative integers.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_4",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_one_bit_operations n returns r, r is nonnegative and n = r XOR floor(r/2), where XOR denotes bitwise exclusive-or of nonnegative integers and floor is integer division.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_5",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_one_bit_operations n returns r, 0 <= r < 2^30 = 1,073,741,824.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_6",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever minimum_one_bit_operations n returns r, 2^k <= r < 2^{k+1}.",
+    "preconditions": "n is the I64 argument, regarded mathematically, with 0 < n <= 1,000,000,000. Let k be the unique integer such that 2^k <= n < 2^{k+1}. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_7",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_one_bit_operations n returns r, r = 2^{k+1} - 1.",
+    "preconditions": "There is an integer k with 0 <= k <= 29 and n = 2^k. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_8",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_one_bit_operations n returns r, r = floor(2^{k+1} / 3).",
+    "preconditions": "There is an integer k with 1 <= k <= 29 and n = 2^k - 1. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_9",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_one_bit_operations n returns r, r is odd exactly when the binary expansion of n contains an odd number of 1-bits.",
+    "preconditions": "n is the I64 argument, regarded as a mathematical integer, and 0 <= n <= 1,000,000,000. The symbol r denotes a returned I64 value, regarded mathematically."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumOneBitOperations.spec_10",
+    "negation": "AegisSpec.MinimumOneBitOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such n, if minimum_one_bit_operations n returns r and minimum_one_bit_operations (floor(n/2)) returns r', then r and r' are nonnegative and r = n XOR r', where XOR is bitwise exclusive-or.",
+    "preconditions": "n is the I64 argument, regarded mathematically, with 0 <= n <= 1,000,000,000. The values r and r' denote returned I64 values, regarded mathematically."
+  }
+]

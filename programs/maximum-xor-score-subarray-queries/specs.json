@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_1",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result ans, len(ans) = q and for every j with 0 <= j < q, letting l_j = queries[j][0] and r_j = queries[j][1], ans[j] = max { X(s,t) | l_j <= s <= t <= r_j }, where X(s,t) is the final single value obtained from nums[s..t] by repeatedly replacing a sequence b[0..m-1] with (b[0] XOR b[1], ..., b[m-2] XOR b[m-1]) while m > 1. Equivalently, X(s,t) is the XOR of nums[s+k] over all k in 0..t-s for which the binomial coefficient C(t-s,k) is odd.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_2",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums and queries satisfying the preconditions, the function returns a result ans; it does not fail because of arithmetic overflow, out-of-bounds indexing, or a panic.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_3",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns ans, len(ans) = len(queries), and the entries are indexed 0..q-1 in the same order as queries, so ans[j] is the answer corresponding to queries[j].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_4",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, ans[j] >= 0.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_5",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q and every bit position b with 0 <= b < 63, if bit b of ans[j] is 1, then there exists an index t with queries[j][0] <= t <= queries[j][1] such that bit b of nums[t] is 1. Equivalently, ans[j] is a bitwise submask of the bitwise OR of nums[queries[j][0]], ..., nums[queries[j][1]].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_6",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, ans[j] >= max { nums[t] | queries[j][0] <= t <= queries[j][1] }.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_7",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q and every t with queries[j][0] <= t < queries[j][1], ans[j] >= (nums[t] XOR nums[t+1]).",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_8",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, ans[j] is at least the XOR score of the entire queried interval nums[queries[j][0]..queries[j][1]], where the XOR score is defined by the repeated simultaneous XOR-and-remove-last operation.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_9",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q there exist indices s,t with queries[j][0] <= s <= t <= queries[j][1] such that the XOR score of nums[s..t] equals ans[j].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_10",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, if queries[j][0] = queries[j][1], then ans[j] = nums[queries[j][0]].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_11",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ans, for every i,j with 0 <= i < q and 0 <= j < q, if queries[j][0] <= queries[i][0] <= queries[i][1] <= queries[j][1], then ans[i] <= ans[j].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_12",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns ans for (nums, queries) and returns ans' for (nums, queries'), then for every index j that is valid for both lists, if queries[j] = queries'[j] (same two endpoints), then ans[j] = ans'[j].",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 2000 and every nums[i] with 0 <= i < n is a nonnegative 64-bit integer. Let queries and queries' be two query lists, each of length at least 1 and at most 100000, such that for every entry [l,r] in either list, len([l,r]) = 2 and 0 <= l <= r < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_13",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns ans for (nums, queries) and returns ans' for (nums, queries'), for every j with 0 <= j < q, ans'[pi(j)] = ans[j].",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and every query is a valid pair 0 <= l <= r < n. Let pi be a permutation of {0,...,q-1}, and let queries' be the valid query list of length q with queries'[pi(j)] = queries[j] for all 0 <= j < q."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_14",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, if there is an integer x such that nums[t] = x for every t with queries[j][0] <= t <= queries[j][1], then ans[j] = x.",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumSubarrayXor.spec_15",
+    "negation": "AegisSpec.MaximumSubarrayXor.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, for every j with 0 <= j < q, if queries[j][1] = queries[j][0] + 1, then ans[j] = max(nums[queries[j][0]], nums[queries[j][1]], nums[queries[j][0]] XOR nums[queries[j][1]]).",
+    "preconditions": "Let n = len(nums) and q = len(queries). Assume n >= 1, q >= 1, n <= 2000, q <= 100000, every nums[i] with 0 <= i < n is a nonnegative 64-bit integer, and for every j with 0 <= j < q, len(queries[j]) = 2 with 0 <= queries[j][0] <= queries[j][1] < n."
+  }
+]

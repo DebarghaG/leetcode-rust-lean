@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HeightOfTree.spec_1",
+    "negation": "AegisSpec.HeightOfTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let H be the height function on Tree defined by H(Null) = -1 and H(Node(v,l,r)) = 1 + max(H(l), H(r)). Then height_of_tree(root) returns a result r and r = H(root). Equivalently, r is the number of edges on a longest path from the root to any node of root.",
+    "preconditions": "root is a finite Tree, root is not Null, N(root)=n where N(t) is the number of Node constructors in t, 2 <= n <= 10000, and the node labels are pairwise distinct integers in 1..n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HeightOfTree.spec_2",
+    "negation": "AegisSpec.HeightOfTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input root satisfying the preconditions, the call height_of_tree(root) returns a result; it does not fail with a panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HeightOfTree.spec_3",
+    "negation": "AegisSpec.HeightOfTree.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever height_of_tree(root) returns a result r, we have r >= 1.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HeightOfTree.spec_4",
+    "negation": "AegisSpec.HeightOfTree.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever height_of_tree(root) returns a result r, we have r <= N(root) - 1, where N(t) is the number of Node constructors in t.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HeightOfTree.spec_5",
+    "negation": "AegisSpec.HeightOfTree.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For a node occurrence u of root, let depth(root,u) be the number of edges on the unique path from the root of root to u, with the root itself having depth 0. Whenever height_of_tree(root) returns a result r, there exists a node occurrence u of root such that depth(root,u) = r.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HeightOfTree.spec_6",
+    "negation": "AegisSpec.HeightOfTree.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For a node occurrence u of root, let depth(root,u) be the number of edges on the unique path from the root of root to u, with the root itself having depth 0. Whenever height_of_tree(root) returns a result r, for every node occurrence u of root we have depth(root,u) <= r.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HeightOfTree.spec_7",
+    "negation": "AegisSpec.HeightOfTree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "A leaf of root is a node occurrence of the form Node(v, Null, Null), and depth(root,leaf) is its distance in edges from the root. Whenever height_of_tree(root) returns a result r, every leaf of root satisfies depth(root,leaf) <= r, and there exists a leaf of root with depth(root,leaf) = r.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, where N(t) is the number of Node constructors, and the node labels are pairwise distinct integers in 1..N(root)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HeightOfTree.spec_8",
+    "negation": "AegisSpec.HeightOfTree.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If root and root2 have the same shape, meaning root2 is obtained from root by replacing the integer label at every node while recursively preserving all Null positions and left/right child relationships, then whenever height_of_tree(root) returns Ok r and height_of_tree(root2) returns Ok r2, we have r = r2.",
+    "preconditions": "root and root2 are finite Trees each satisfying the problem constraints: each is non-Null, has between 2 and 10000 nodes, and has pairwise distinct labels in 1..its node count."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HeightOfTree.spec_9",
+    "negation": "AegisSpec.HeightOfTree.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever height_of_tree(root) returns Ok h and height_of_tree(Node(v,r,l)) returns Ok h2, we have h = h2.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, the node labels are pairwise distinct integers in 1..N(root), and root = Node(v,l,r) for some value v and subtrees l and r."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HeightOfTree.spec_10",
+    "negation": "AegisSpec.HeightOfTree.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H(Null) = -1 and H(Node(_,a,b)) = 1 + max(H(a), H(b)). Whenever height_of_tree(root) returns a result h, we have h = 1 + H(c), where c is the unique non-Null child of root.",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, the node labels are pairwise distinct integers in 1..N(root), and root = Node(v,l,r) where exactly one of l and r is not Null."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.HeightOfTree.spec_11",
+    "negation": "AegisSpec.HeightOfTree.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H(Null) = -1 and H(Node(_,a,b)) = 1 + max(H(a), H(b)). Whenever height_of_tree(root) returns a result h, we have h = 1 + max(H(l), H(r)).",
+    "preconditions": "root is a finite non-Null Tree with 2 <= N(root) <= 10000, the node labels are pairwise distinct integers in 1..N(root), and root = Node(v,l,r) with l != Null and r != Null."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r equals the minimum, over all integers m >= 1 and all cut positions 0 = p_0 < p_1 < ... < p_m = n, of the total cost sum_{t=1}^{m} ( (sum_{q=0}^{p_t-1} nums[q]) + k*t ) * (sum_{q=p_{t-1}}^{p_t-1} cost[q]). Each term is the cost of the t-th subarray nums[p_{t-1} .. p_t-1], with t 1-based; every division into contiguous nonempty subarrays corresponds exactly to such a cut sequence.",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (a successful Result containing a 64-bit integer); there is no overflow, out-of-bounds access, or panic.",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (nums[0] + k) * (sum_{i=0}^{n-1} cost[i]).",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 2 <= r <= 1001000000000.",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist an integer m >= 1 and cut positions 0 = p_0 < p_1 < ... < p_m = n such that r = sum_{t=1}^{m} ( (sum_{q=0}^{p_t-1} nums[q]) + k*t ) * (sum_{q=p_{t-1}}^{p_t-1} cost[q]).",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer m >= 1 and every cut positions 0 = p_0 < p_1 < ... < p_m = n, r <= sum_{t=1}^{m} ( (sum_{q=0}^{p_t-1} nums[q]) + k*t ) * (sum_{q=p_{t-1}}^{p_t-1} cost[q]).",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of minimum_cost(nums, cost, k1) and r2 the result of minimum_cost(nums, cost, k2). Whenever both calls return results, r1 <= r2.",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; k1 and k2 are integers with 1 <= k1 <= k2 <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of minimum_cost(nums, cost, k) and let r' be the result of minimum_cost(nums, cost', k), where cost'[i] = c * cost[i] for every i. Whenever both calls return results, r' = c * r.",
+    "preconditions": "n = len(nums) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000 and 1 <= cost[i] <= 1000; 1 <= k <= 1000; c is an integer with c >= 1 and c*cost[i] <= 1000 for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = minimum_cost(nums, cost, k) and r2 = minimum_cost(nums, cost2, k). Whenever both calls return results, r <= r2.",
+    "preconditions": "n = len(nums) = len(cost) = len(cost2); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000, 1 <= cost[i] <= 1000, 1 <= cost2[i] <= 1000, and cost[i] <= cost2[i]; 1 <= k <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCost.spec_10",
+    "negation": "AegisSpec.MinimumCost.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = minimum_cost(nums, cost, k) and r2 = minimum_cost(nums2, cost, k). Whenever both calls return results, r <= r2.",
+    "preconditions": "n = len(nums) = len(nums2) = len(cost); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000, 1 <= nums2[i] <= 1000, 1 <= cost[i] <= 1000, and nums[i] <= nums2[i]; 1 <= k <= 1000."
+  }
+]

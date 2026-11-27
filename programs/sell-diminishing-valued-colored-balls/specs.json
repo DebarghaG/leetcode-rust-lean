@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Call an integer allocation a[0],...,a[len(inventory)-1] feasible when 0 <= a[i] <= inventory[i] for every i and sum_{i=0}^{len(inventory)-1} a[i] = orders. For a feasible allocation a define V(a) = sum_{i=0}^{len(inventory)-1} sum_{t=0}^{a[i]-1} (inventory[i] - t), which equals sum_i (a[i]*inventory[i] - a[i]*(a[i]-1)/2). The function returns a result r with r = (max over all feasible a of V(a)) mod M, where mod M means the least nonnegative remainder. This is the maximum total value obtainable by selling exactly orders balls.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function does not fail: it returns a result r (no arithmetic overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with 0 <= r < 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = max_{0 <= i < len(inventory)} inventory[i]. No reduction modulo M is needed because this maximum is at most 1000000000 < 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000); orders = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = (orders * inventory[0] - orders*(orders-1)/2) mod 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000); len(inventory) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = (sum_{i=0}^{len(inventory)-1} inventory[i]*(inventory[i]+1)/2) mod 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000); orders = sum_{i=0}^{len(inventory)-1} inventory[i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = ( (sum_{i=0}^{len(inventory)-1} inventory[i]*(inventory[i]+1)/2) - 1 ) mod 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000); sum_{i=0}^{len(inventory)-1} inventory[i] >= 2 and orders = sum_{i=0}^{len(inventory)-1} inventory[i] - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let m = len(inventory), q = orders div m, and s = orders mod m, so orders = q*m + s and 0 <= s < m. The function returns r = ( m*(q*v - q*(q-1)/2) + s*(v-q) ) mod 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000); there exists v with 1 <= v <= 1000000000 such that inventory[i] = v for every i with 0 <= i < len(inventory)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any slice inventory' of the same length whose entries are a permutation of the entries of inventory, the function returns the same value for (inventory', orders) as for (inventory, orders): max_profit(inventory, orders) = max_profit(inventory', orders).",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let max_inv = max_{0 <= i < len(inventory)} inventory[i]. For each integer t >= 1 define C_t = sum_{i=0}^{len(inventory)-1} max(0, inventory[i] - t + 1), the number of balls whose value is at least t before any sale. The function returns r = ( sum_{t=1}^{max_inv} min(orders, C_t) ) mod 1000000007.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfit.spec_11",
+    "negation": "AegisSpec.MaxProfit.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define V(a) = sum_{i=0}^{len(inventory)-1} (a[i]*inventory[i] - a[i]*(a[i]-1)/2) for an allocation a. There exist integers a[0],...,a[len(inventory)-1] such that: (i) 0 <= a[i] <= inventory[i] for all i; (ii) sum_i a[i] = orders; (iii) V(a) is maximum among all feasible allocations; (iv) the returned r satisfies r = V(a) mod 1000000007; and (v) for every pair i,j with a[i] < inventory[i] and a[j] > 0, inventory[i] - a[i] <= inventory[j] - a[j] + 1.",
+    "preconditions": "len(inventory) >= 1 and len(inventory) <= 100000; for every i with 0 <= i < len(inventory), 1 <= inventory[i] and inventory[i] <= 1000000000; 1 <= orders and orders <= min(sum_{i=0}^{len(inventory)-1} inventory[i], 1000000000)."
+  }
+]

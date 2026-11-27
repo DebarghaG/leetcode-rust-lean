@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumWeight.spec_1",
+    "negation": "AegisSpec.MinimumWeight.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Write from(i)=edges[i][0], to(i)=edges[i][1], wt(i)=edges[i][2]. Whenever the function returns a result r, define Feas to be the set of all subsets S of {0,...,len(edges)-1} such that dest is reachable from src1 using only edges with indices in S and dest is reachable from src2 using only edges with indices in S. A path from a to b using S is a sequence v0,...,vk with k>=1, v0=a, vk=b, and for each j<k an edge index e_j in S with from(e_j)=v_j and to(e_j)=v_{j+1}. If Feas is empty then r = -1. If Feas is nonempty then r is the minimum of sum_{i in S} wt(i) over S in Feas: there exists S0 in Feas with sum_{i in S0} wt(i)=r, and for every S in Feas, r <= sum_{i in S} wt(i).",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumWeight.spec_2",
+    "negation": "AegisSpec.MinimumWeight.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, panic, or other failure) on any input satisfying the preconditions.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumWeight.spec_3",
+    "negation": "AegisSpec.MinimumWeight.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Write wt(i)=edges[i][2]. Whenever the function returns a result r, either r = -1 or 1 <= r <= sum_{i=0}^{len(edges)-1} wt(i).",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumWeight.spec_4",
+    "negation": "AegisSpec.MinimumWeight.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if either there is no directed path from src1 to dest using any edge of the full graph, or there is no directed path from src2 to dest using any edge of the full graph. Equivalently, r != -1 if and only if both src1 and src2 can reach dest in the full graph.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumWeight.spec_5",
+    "negation": "AegisSpec.MinimumWeight.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Write wt(i)=edges[i][2]. Whenever the function returns a result r and r != -1, there exists a subset S of {0,...,len(edges)-1} such that dest is reachable from src1 using S, dest is reachable from src2 using S, and sum_{i in S} wt(i) = r.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumWeight.spec_6",
+    "negation": "AegisSpec.MinimumWeight.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Write wt(i)=edges[i][2]. Whenever the function returns a result r and r != -1, for every subset S of {0,...,len(edges)-1} such that dest is reachable from src1 using S and dest is reachable from src2 using S, it holds that r <= sum_{i in S} wt(i).",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumWeight.spec_7",
+    "negation": "AegisSpec.MinimumWeight.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Write wt(i)=edges[i][2]. Whenever the function returns a result r and r != -1, there exist a directed path P1 from src1 to dest and a directed path P2 from src2 to dest in the full graph such that, letting U be the set of edge indices that occur in at least one of P1 and P2, sum_{i in U} wt(i) = r.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumWeight.spec_8",
+    "negation": "AegisSpec.MinimumWeight.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For nodes a and b, let D(a,b) be the minimum total weight of a directed path from a to b in the full graph, with D(a,a)=0 for the empty path, and D(a,b)=infinity if no such path exists. Whenever the function returns a result r and r != -1, for every node v with 0 <= v < n for which D(src1,v), D(src2,v), and D(v,dest) are all finite, it holds that r <= D(src1,v) + D(src2,v) + D(v,dest).",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumWeight.spec_9",
+    "negation": "AegisSpec.MinimumWeight.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For nodes a and b, let D(a,b) be the minimum total weight of a directed path from a to b in the full graph, with D(a,a)=0 for the empty path, and D(a,b)=infinity if no such path exists. Whenever the function returns a result r and r != -1, there exists a node v with 0 <= v < n such that D(src1,v), D(src2,v), and D(v,dest) are all finite and r = D(src1,v) + D(src2,v) + D(v,dest).",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumWeight.spec_10",
+    "negation": "AegisSpec.MinimumWeight.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns results r and r' on the inputs (n, edges, src1, src2, dest) and (n, edges, src2, src1, dest), respectively, it holds that r = r'.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges is a list with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumWeight.spec_11",
+    "negation": "AegisSpec.MinimumWeight.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose edges' is a permutation of edges: there is a bijection pi on {0,...,len(edges)-1} such that edges'[j] = edges[pi(j)] for every j. Whenever the function returns r on (n, edges, src1, src2, dest) and r' on (n, edges', src1, src2, dest), it holds that r = r'.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges and edges' are lists with 0 <= len(edges) <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; edges' satisfies the same entry constraints with len(edges') = len(edges); src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumWeight.spec_12",
+    "negation": "AegisSpec.MinimumWeight.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Suppose every entry of edges occurs in edges' with at least the same multiplicity: equivalently, there is an injective map pi from {0,...,len(edges)-1} to {0,...,len(edges')-1} such that edges'[pi(i)] = edges[i] for every i. Whenever the function returns r on (n, edges, src1, src2, dest) and r' on (n, edges', src1, src2, dest), if r != -1 then r' != -1 and r' <= r.",
+    "preconditions": "n is an integer with 3 <= n <= 10^5; edges and edges' are lists with 0 <= len(edges) <= 10^5 and 0 <= len(edges') <= 10^5; for every i with 0 <= i < len(edges), len(edges[i]) = 3, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, edges[i][0] != edges[i][1], and 1 <= edges[i][2] <= 10^5; for every i with 0 <= i < len(edges'), len(edges'[i]) = 3, 0 <= edges'[i][0] < n, 0 <= edges'[i][1] < n, edges'[i][0] != edges'[i][1], and 1 <= edges'[i][2] <= 10^5; src1, src2, dest are integers with 0 <= src1 < n, 0 <= src2 < n, 0 <= dest < n, and src1, src2, dest are pairwise distinct."
+  }
+]

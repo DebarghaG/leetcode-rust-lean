@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanBeValid.spec_1",
+    "negation": "AegisSpec.CanBeValid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, r = true if and only if there exists a sequence t of length len(s) such that: (1) every entry of t is '(' or ')'; (2) for every i with 0 <= i < len(s), if locked[i] = '1' then t[i] = s[i]; (3) t is a balanced parentheses string, i.e., for every k with 0 <= k <= len(s) the number of indices i with 0 <= i < k and t[i] = '(' is at least the number of indices i with 0 <= i < k and t[i] = ')', and the total number of '(' in t equals the total number of ')' in t.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanBeValid.spec_2",
+    "negation": "AegisSpec.CanBeValid.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and locked satisfying the preconditions, can_be_valid(s, locked) returns a result r (it does not fail).",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanBeValid.spec_3",
+    "negation": "AegisSpec.CanBeValid.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if r = true then len(s) is even.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanBeValid.spec_4",
+    "negation": "AegisSpec.CanBeValid.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if r = true then 2 * A <= len(s) and 2 * B <= len(s), where A is the number of indices i with 0 <= i < len(s), locked[i] = '1', and s[i] = '(', and B is the number of indices i with 0 <= i < len(s), locked[i] = '1', and s[i] = ')'.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanBeValid.spec_5",
+    "negation": "AegisSpec.CanBeValid.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if s is a balanced parentheses string (for every k with 0 <= k <= len(s) the prefix s[0..k) has at least as many '(' as ')', and the total numbers of '(' and ')' in s are equal), then r = true.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanBeValid.spec_6",
+    "negation": "AegisSpec.CanBeValid.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if locked[i] = '1' for every i with 0 <= i < len(s), then r = true if and only if s is a balanced parentheses string (for every k with 0 <= k <= len(s) the prefix s[0..k) has at least as many '(' as ')', and the total numbers of '(' and ')' in s are equal).",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanBeValid.spec_7",
+    "negation": "AegisSpec.CanBeValid.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if locked[i] = '0' for every i with 0 <= i < len(s), then r = true if and only if len(s) is even.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanBeValid.spec_8",
+    "negation": "AegisSpec.CanBeValid.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any s1, s2, and locked of common length satisfying the preconditions, if s1[i] = s2[i] for every i with 0 <= i < len(locked) and locked[i] = '1', then for any results r1 and r2 returned by can_be_valid(s1, locked) and can_be_valid(s2, locked) respectively, r1 = r2.",
+    "preconditions": "len(s1) = len(s2) = len(locked); len(locked) >= 1; for every i with 0 <= i < len(locked), s1[i] and s2[i] are '(' or ')', and locked[i] is '0' or '1'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanBeValid.spec_9",
+    "negation": "AegisSpec.CanBeValid.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). Define sequences s' and locked' of length n by s'[i] = '(' if s[n-1-i] = ')' and s'[i] = ')' otherwise, and locked'[i] = locked[n-1-i], for every i with 0 <= i < n. Then for any result r returned by can_be_valid(s, locked) and any result r' returned by can_be_valid(s', locked'), we have r = r'.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanBeValid.spec_10",
+    "negation": "AegisSpec.CanBeValid.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if r = true then for every k with 0 <= k <= len(s), 2 * C(k) <= k, where C(k) is the number of indices i with 0 <= i < k, locked[i] = '1', and s[i] = ')'.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanBeValid.spec_11",
+    "negation": "AegisSpec.CanBeValid.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_be_valid(s, locked) returns a result r, if r = true then for every k with 0 <= k <= len(s), 2 * D(k) <= len(s) - k, where D(k) is the number of indices i with k <= i < len(s), locked[i] = '1', and s[i] = '('.",
+    "preconditions": "len(s) = len(locked); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), locked[i] is '0' or '1'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanBeValid.spec_12",
+    "negation": "AegisSpec.CanBeValid.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s, lockedA, lockedB satisfy the preconditions with len(s) = len(lockedA) = len(lockedB). If for every i with 0 <= i < len(s), lockedB[i] = '1' implies lockedA[i] = '1', then for any result rA returned by can_be_valid(s, lockedA) and any result rB returned by can_be_valid(s, lockedB), if rA = true then rB = true.",
+    "preconditions": "len(s) = len(lockedA) = len(lockedB); len(s) >= 1; for every i with 0 <= i < len(s), s[i] is '(' or ')'; for every i with 0 <= i < len(s), lockedA[i] and lockedB[i] are '0' or '1'."
+  }
+]

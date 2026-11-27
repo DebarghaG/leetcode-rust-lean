@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSets.spec_1",
+    "negation": "AegisSpec.NumberOfSets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For these n,k, define Cnt(n,k) as follows. A segment over the points {0,1,...,n-1} is a pair (a,b) of integers with 0 <= a < b <= n-1. Two segments (a,b) and (c,d) are non-overlapping if b <= c or d <= a; thus sharing an endpoint is allowed. Cnt(n,k) is the number of sets T of exactly k pairwise non-overlapping segments over {0,1,...,n-1}, where T is an unordered set of distinct segments. Whenever the function returns a result r on these inputs, r is the unique integer with 0 <= r < M and r congruent to Cnt(n,k) modulo M.",
+    "preconditions": "n and k are i64 values with 2 <= n <= 1000 and 1 <= k <= n-1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSets.spec_2",
+    "negation": "AegisSpec.NumberOfSets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and k satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "n and k are i64 values with 2 <= n <= 1000 and 1 <= k <= n-1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSets.spec_3",
+    "negation": "AegisSpec.NumberOfSets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on inputs satisfying the preconditions, 0 <= r < 1000000007.",
+    "preconditions": "n and k are i64 values with 2 <= n <= 1000 and 1 <= k <= n-1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSets.spec_4",
+    "negation": "AegisSpec.NumberOfSets.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on inputs satisfying the preconditions, r is not equal to 0.",
+    "preconditions": "n and k are i64 values with 2 <= n <= 1000 and 1 <= k <= n-1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSets.spec_5",
+    "negation": "AegisSpec.NumberOfSets.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on inputs satisfying the preconditions, r is congruent modulo M = 1000000007 to the binomial coefficient binom(n+k-1, 2k). Here binom(A,B) is the usual number of B-element subsets of an A-element set (and is 0 if B<0 or B>A).",
+    "preconditions": "n and k are i64 values with 2 <= n <= 1000 and 1 <= k <= n-1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSets.spec_6",
+    "negation": "AegisSpec.NumberOfSets.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n*(n-1)/2 exactly (not merely modulo M).",
+    "preconditions": "n is an i64 with 2 <= n <= 1000 and k = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfSets.spec_7",
+    "negation": "AegisSpec.NumberOfSets.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "n is an i64 with 2 <= n <= 1000 and k = n-1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfSets.spec_8",
+    "negation": "AegisSpec.NumberOfSets.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2*n - 3.",
+    "preconditions": "n is an i64 with 3 <= n <= 1000 and k = n-2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfSets.spec_9",
+    "negation": "AegisSpec.NumberOfSets.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 5.",
+    "preconditions": "n = 4 and k = 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfSets.spec_10",
+    "negation": "AegisSpec.NumberOfSets.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each j with 1 <= j <= n-1, let r_j be the result returned by number_of_sets(n,j). Then (sum_{j=1}^{n-1} r_j) modulo 1000000007 equals (F_{2n-1} - 1) modulo 1000000007, where F_0 = 0, F_1 = 1, and F_{m+2} = F_{m+1} + F_m for all m >= 0.",
+    "preconditions": "n is an i64 with 2 <= n <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfSets.spec_11",
+    "negation": "AegisSpec.NumberOfSets.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each n with k+1 <= n <= N, let r_n be the result returned by number_of_sets(n,k). Then (sum_{n=k+1}^{N} r_n) modulo 1000000007 equals binom(N+k, 2k+1) modulo 1000000007, where binom(A,B) is the usual binomial coefficient.",
+    "preconditions": "k and N are i64 values with 1 <= k <= 999 and k+1 <= N <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfSets.spec_12",
+    "negation": "AegisSpec.NumberOfSets.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 70047606.",
+    "preconditions": "n = 1000 and k = 500."
+  }
+]

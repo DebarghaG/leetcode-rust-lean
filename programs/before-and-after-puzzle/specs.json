@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_1",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a valid phrase p, let firstWord(p) be p[0..f], where f = min{ g | 0<=g<len(p) and p[g]=32 } if this set is nonempty, otherwise f=len(p). Let lastWord(p) be p[l..len(p)], where l=0 if p has no space, otherwise l=1+max{ g | 0<=g<len(p) and p[g]=32 }. For a valid phrase q, let suffixAfterFirstWord(q) be q[f..len(q)] where f is as for firstWord(q). For valid phrases p,q, let merge(p,q) be the concatenation of p and suffixAfterFirstWord(q). The function returns a result r (so it does not fail) and, with this notation, for every byte array s, s occurs in r (meaning there exists k with 0<=k<len(r) and r[k]=s) if and only if there exist indices i,j with 0<=i<len(phrases), 0<=j<len(phrases), i != j, lastWord(phrases[i])=firstWord(phrases[j]), and s=merge(phrases[i],phrases[j]); moreover, for every k with 0<=k<len(r)-1, r[k] < r[k+1] in standard lexicographic order on byte arrays (a proper prefix is smaller than the longer array; otherwise the first differing byte decides by its unsigned value).",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_2",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access memory out of bounds for any input satisfying the preconditions.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_3",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r), there exist indices i,j with 0<=i<len(phrases), 0<=j<len(phrases), i != j, such that the last word of phrases[i] equals the first word of phrases[j] and r[k] is the merge of phrases[i] and phrases[j], where the merge is phrases[i] followed by phrases[j] with its first word removed (equivalently, phrases[i] concatenated with phrases[j] starting immediately after the first word of phrases[j]).",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_4",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i,j with 0<=i<len(phrases), 0<=j<len(phrases), and i != j, if the last word of phrases[i] equals the first word of phrases[j], then there exists k with 0<=k<len(r) such that r[k] is the merge of phrases[i] and phrases[j], defined as phrases[i] followed by phrases[j] with its first word removed.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_5",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r)-1, r[k] <= r[k+1] in standard lexicographic order on byte arrays (a proper prefix is smaller than the longer array; otherwise the first differing byte decides by its unsigned value).",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_6",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every k,l with 0<=k<len(r) and 0<=l<len(r), if r[k]=r[l] then k=l.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_7",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r), 1 <= len(r[k]) <= 199.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_8",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) is at most the number of ordered pairs (i,j) such that 0<=i<len(phrases), 0<=j<len(phrases), i != j, and the last word of phrases[i] equals the first word of phrases[j].",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_9",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every i,j with 0<=i<len(phrases), 0<=j<len(phrases), and i != j, the last word of phrases[i] is not equal to the first word of phrases[j], then len(r)=0.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_10",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r), r[k] is a valid phrase: len(r[k])>=1; every byte of r[k] is either 32 or a lowercase ASCII letter with code 97..122; r[k][0] != 32; r[k][len(r[k])-1] != 32; and for every t with 0<=t<len(r[k])-1, not (r[k][t]=32 and r[k][t+1]=32).",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_11",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r), there exist indices i,j with 0<=i<len(phrases), 0<=j<len(phrases), i != j, such that lastWord(phrases[i]) = firstWord(phrases[j]) and r[k] = merge(phrases[i], phrases[j]), where merge(p,q) is p followed by q with q's first word removed (equivalently, p concatenated with q starting immediately after q's first word). Moreover, for every i,j that satisfy these same conditions (i != j, lastWord(phrases[i]) = firstWord(phrases[j]), and r[k] = merge(phrases[i], phrases[j])), firstWord(r[k]) = firstWord(phrases[i]) and lastWord(r[k]) = lastWord(phrases[j]); here firstWord and lastWord are applied to r[k] using the same definition, and r[k] is a valid phrase because it is such a merge.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_12",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0<=k<len(r), for every i,j with 0<=i<len(phrases), 0<=j<len(phrases), i != j, if the last word of phrases[i] equals the first word of phrases[j] and r[k] is the merge of phrases[i] and phrases[j], then len(r[k]) = len(phrases[i]) + len(phrases[j]) - len(firstWord(phrases[j])), where firstWord(phrases[j]) is the first word of phrases[j].",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_13",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever before_and_after_puzzles(phrases) returns a result r and before_and_after_puzzles(phrases2) returns a result r2, we have r = r2 (the two byte-array lists are equal elementwise).",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive and every element of phrases is a valid phrase as described in S1 (bytes are spaces or lowercase ASCII letters 97..122, no leading or trailing spaces, no consecutive spaces, lengths 1..100). Also phrases2 is a list of valid phrases with len(phrases2) between 1 and 100 inclusive, and phrases2 is a permutation of phrases: for every byte array x, the number of indices i with 0<=i<len(phrases) and phrases[i]=x equals the number of indices j with 0<=j<len(phrases2) and phrases2[j]=x."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BeforeAndAfterPuzzles.spec_14",
+    "negation": "AegisSpec.BeforeAndAfterPuzzles.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there exist i,j with 0<=i<len(phrases), 0<=j<len(phrases), i != j, and the last word of phrases[i] equals the first word of phrases[j], then len(r) > 0.",
+    "preconditions": "len(phrases) is between 1 and 100 inclusive. For every i with 0 <= i < len(phrases), p = phrases[i] is a valid phrase: 1 <= len(p) <= 100; every byte p[t] with 0 <= t < len(p) is either 32 (space) or a lowercase ASCII letter with code 97..122; p[0] != 32; p[len(p)-1] != 32; and for every t with 0 <= t < len(p)-1, not (p[t] = 32 and p[t+1] = 32). Words in a phrase are its maximal non-space substrings; the first word is the prefix before the first space, or the whole phrase if there is no space; the last word is the suffix after the last space, or the whole phrase if there is no space."
+  }
+]

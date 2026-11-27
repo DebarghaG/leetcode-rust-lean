@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.VideoStitching.spec_1",
+    "negation": "AegisSpec.VideoStitching.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define Cover(S), for S a subset of {0,...,n-1}, to mean: for every real x with 0 <= x <= time there exists i in S with clips[i][0] <= x <= clips[i][1]. Whenever video_stitching clips time returns a result r: if no subset S of {0,...,n-1} satisfies Cover(S), then r = -1; otherwise r is the least nonnegative integer k such that some subset S with |S| = k satisfies Cover(S).",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.VideoStitching.spec_2",
+    "negation": "AegisSpec.VideoStitching.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "video_stitching clips time returns a result r; it does not fail (no panic, out-of-bounds access, or i64 overflow) on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.VideoStitching.spec_3",
+    "negation": "AegisSpec.VideoStitching.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define U = {x : 0 <= x <= time and there exists i with clips[i][0] <= x <= clips[i][1]}. Whenever video_stitching clips time returns r, r = -1 iff U is not equal to the whole interval [0,time] (equivalently, the union of all clip intervals does not cover [0,time]).",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.VideoStitching.spec_4",
+    "negation": "AegisSpec.VideoStitching.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever video_stitching clips time returns r and r != -1, there exists a subset S of {0,...,n-1} such that |S| = r and for every real x with 0 <= x <= time there is i in S with clips[i][0] <= x <= clips[i][1].",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.VideoStitching.spec_5",
+    "negation": "AegisSpec.VideoStitching.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever video_stitching clips time returns r and r != -1, for every subset S of {0,...,n-1} with |S| < r, it is not true that for every real x with 0 <= x <= time there is i in S with clips[i][0] <= x <= clips[i][1].",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.VideoStitching.spec_6",
+    "negation": "AegisSpec.VideoStitching.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever video_stitching clips time returns r, either r = -1 or 1 <= r <= n.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.VideoStitching.spec_7",
+    "negation": "AegisSpec.VideoStitching.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an index i with 0 <= i < n, clips[i][0] <= 0, and clips[i][1] >= time, then whenever video_stitching clips time returns r, r = 1.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.VideoStitching.spec_8",
+    "negation": "AegisSpec.VideoStitching.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever video_stitching clips time returns r and r = 1, there exists an index i with 0 <= i < n, clips[i][0] <= 0, and clips[i][1] >= time.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.VideoStitching.spec_9",
+    "negation": "AegisSpec.VideoStitching.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no index i with 0 <= i < n and clips[i][0] <= 0, then whenever video_stitching clips time returns r, r = -1.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.VideoStitching.spec_10",
+    "negation": "AegisSpec.VideoStitching.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no index i with 0 <= i < n and clips[i][1] >= time, then whenever video_stitching clips time returns r, r = -1.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.VideoStitching.spec_11",
+    "negation": "AegisSpec.VideoStitching.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever video_stitching clips time returns r and video_stitching clips' time returns r', we have r' = r.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100. Let clips' be any slice of Vec I64 obtained by permuting clips; assume len(clips') = n and clips' also satisfies the endpoint constraints 0 <= start <= end <= 100 for every entry."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.VideoStitching.spec_12",
+    "negation": "AegisSpec.VideoStitching.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever video_stitching clips time returns r with r != -1 and video_stitching clips' time returns r', we have r' != -1 and r' <= r.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100. Let clips' be obtained from clips by inserting one or more additional two-element intervals, each satisfying 0 <= start <= end <= 100, so 1 <= len(clips') <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.VideoStitching.spec_13",
+    "negation": "AegisSpec.VideoStitching.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exist indices i and j with 0 <= i,j < n such that clips[i][0] <= 0, clips[j][1] >= time, and clips[j][0] <= clips[i][1], then whenever video_stitching clips time returns r, r = 2.",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100. Also assume no index i satisfies clips[i][0] <= 0 and clips[i][1] >= time (so no single clip covers [0,time])."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.VideoStitching.spec_14",
+    "negation": "AegisSpec.VideoStitching.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever video_stitching clips time returns r and r = k >= 1, there exist distinct indices i_0, ..., i_{k-1} in {0,...,n-1} such that: (a) clips[i_0][0] <= 0; (b) max over 0 <= h < k of clips[i_h][1] is at least time; (c) for every j with 1 <= j < k, clips[i_j][0] <= max over 0 <= h < j of clips[i_h][1].",
+    "preconditions": "Let n = len(clips). Assume 1 <= n <= 100; for each i with 0 <= i < n, clips[i] has length 2, write clips[i] = [s_i, e_i], and 0 <= s_i <= e_i <= 100; and 1 <= time <= 100."
+  }
+]

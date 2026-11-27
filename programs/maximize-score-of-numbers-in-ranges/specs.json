@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_1",
+    "negation": "AegisSpec.MaxPossibleScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a tuple of integers x_0,...,x_{n-1}, call it valid if start[i] <= x_i <= start[i] + d for every i with 0 <= i < n. For a valid tuple define score(x) = min over all pairs 0 <= i < j < n of |x_i - x_j|. Let M be the maximum of score(x) over all valid tuples. Whenever max_possible_score(start,d) returns a result r, r = M.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1, where start[i] + d is the mathematical sum (not wrapped)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_2",
+    "negation": "AegisSpec.MaxPossibleScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call max_possible_score(start,d) returns a result r; it does not fail, overflow, go out of bounds, or panic.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and 0 <= start[i] <= 10^12 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_3",
+    "negation": "AegisSpec.MaxPossibleScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, r >= min over all pairs 0 <= i < j < n of |start[i] - start[j]|.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1, where start[i] + d is the mathematical sum (not wrapped)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_4",
+    "negation": "AegisSpec.MaxPossibleScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L = min_{0 <= i < n} start[i] and U = max_{0 <= i < n} (start[i] + d). Whenever max_possible_score(start,d) returns a result r, r <= floor((U - L) / (n - 1)).",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1, where start[i] + d is the mathematical sum (not wrapped)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_5",
+    "negation": "AegisSpec.MaxPossibleScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, r = floor(d / (n - 1)).",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1. Additionally, there exists an integer c such that start[i] = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_6",
+    "negation": "AegisSpec.MaxPossibleScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, r = max( |start[0] - (start[1] + d)|, |(start[0] + d) - start[1]| ).",
+    "preconditions": "Let n = len(start). The parameters satisfy n = 2, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_7",
+    "negation": "AegisSpec.MaxPossibleScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, r = min over all pairs 0 <= i < j < n of |start[i] - start[j]|.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= start[i] and start[i] + 0 <= 2^63 - 1 for every i, and d = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_8",
+    "negation": "AegisSpec.MaxPossibleScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_possible_score(start,d1) returns r1 and max_possible_score(start,d2) returns r2, then r1 <= r2.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= start[i] for every i with 0 <= i < n, 0 <= d1 <= d2 <= 10^9, and start[i] + d2 <= 2^63 - 1 for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_9",
+    "negation": "AegisSpec.MaxPossibleScore.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_possible_score(start,d) returns r and max_possible_score(start',d) returns r', then r = r'.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1. Let c be an integer such that for every i, 0 <= start[i] + c and start[i] + c + d <= 2^63 - 1. Define start'[i] = start[i] + c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_10",
+    "negation": "AegisSpec.MaxPossibleScore.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, there exist integers x_0,...,x_{n-1} such that start[i] <= x_i <= start[i] + d for every i with 0 <= i < n, and |x_i - x_j| >= r for every i,j with 0 <= i < j < n.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1, where start[i] + d is the mathematical sum (not wrapped)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxPossibleScore.spec_11",
+    "negation": "AegisSpec.MaxPossibleScore.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever max_possible_score(start,d) returns a result r, for every choice of integers x_0,...,x_{n-1} with start[i] <= x_i <= start[i] + d for all i with 0 <= i < n, there exist i,j with 0 <= i < j < n and |x_i - x_j| <= r.",
+    "preconditions": "Let n = len(start). The parameters satisfy 2 <= n <= 10^5, 0 <= d <= 10^9, and for every i with 0 <= i < n, 0 <= start[i] and start[i] + d <= 2^63 - 1, where start[i] + d is the mathematical sum (not wrapped)."
+  }
+]

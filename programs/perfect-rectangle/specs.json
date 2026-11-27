@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsRectangleCover.spec_1",
+    "negation": "AegisSpec.IsRectangleCover.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if the following two conditions hold: (1) for every i,j with 0 <= i < j < len(rectangles), the open rectangles I_i = (x_i,a_i) x (y_i,b_i) and I_j = (x_j,a_j) x (y_j,b_j) are disjoint; (2) the union of all closed rectangles R_i = [x_i,a_i] x [y_i,b_i], for 0 <= i < len(rectangles), is exactly the closed bounding rectangle B = [Xmin,Xmax] x [Ymin,Ymax], where Xmin = min_i x_i, Xmax = max_i a_i, Ymin = min_i y_i, Ymax = max_i b_i. Equivalently, r = true exactly when the rectangles form an exact cover of a rectangular region, and r = false otherwise.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsRectangleCover.spec_2",
+    "negation": "AegisSpec.IsRectangleCover.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (either true or false); it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsRectangleCover.spec_3",
+    "negation": "AegisSpec.IsRectangleCover.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns true, sum_{i=0}^{len(rectangles)-1} (a_i - x_i) * (b_i - y_i) equals (Xmax - Xmin) * (Ymax - Ymin), where Xmin = min_i x_i, Xmax = max_i a_i, Ymin = min_i y_i, Ymax = max_i b_i.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsRectangleCover.spec_4",
+    "negation": "AegisSpec.IsRectangleCover.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns true, for every i,j with 0 <= i < j < len(rectangles), the open rectangles I_i = (x_i,a_i) x (y_i,b_i) and I_j = (x_j,a_j) x (y_j,b_j) are disjoint. Equivalently, at least one of a_i <= x_j, a_j <= x_i, b_i <= y_j, or b_j <= y_i holds, so two rectangles may touch only along an edge or at a corner.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsRectangleCover.spec_5",
+    "negation": "AegisSpec.IsRectangleCover.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns true, for every real point (u,v) with Xmin <= u <= Xmax and Ymin <= v <= Ymax, there exists an index i with 0 <= i < len(rectangles) such that x_i <= u <= a_i and y_i <= v <= b_i. Here Xmin = min_i x_i, Xmax = max_i a_i, Ymin = min_i y_i, Ymax = max_i b_i.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsRectangleCover.spec_6",
+    "negation": "AegisSpec.IsRectangleCover.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever, in addition to the preconditions, the open rectangles I_i = (x_i,a_i) x (y_i,b_i) are pairwise disjoint for all 0 <= i < j < len(rectangles), and sum_{i=0}^{len(rectangles)-1} (a_i - x_i) * (b_i - y_i) equals (Xmax - Xmin) * (Ymax - Ymin), where Xmin = min_i x_i, Xmax = max_i a_i, Ymin = min_i y_i, Ymax = max_i b_i, the function returns true.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsRectangleCover.spec_7",
+    "negation": "AegisSpec.IsRectangleCover.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of the index set {0,...,len(rectangles)-1}, let rectangles' be the slice of the same length with rectangles'[i] = rectangles[pi(i)] for every i. Whenever the function returns r on rectangles and r' on rectangles', r = r'.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsRectangleCover.spec_8",
+    "negation": "AegisSpec.IsRectangleCover.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of integers (dx,dy) such that the translated slice rectangles', defined by rectangles'[i] = [x_i + dx, y_i + dy, a_i + dx, b_i + dy] for every i, also satisfies the preconditions, the result of the function on rectangles equals its result on rectangles'.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsRectangleCover.spec_9",
+    "negation": "AegisSpec.IsRectangleCover.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rectangles' be obtained from rectangles by replacing each entry [x_i,y_i,a_i,b_i] with [-a_i,y_i,-x_i,b_i], which is reflection in the y-axis. Whenever rectangles' also satisfies the preconditions, the result of the function on rectangles equals its result on rectangles'.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsRectangleCover.spec_10",
+    "negation": "AegisSpec.IsRectangleCover.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rectangles' be obtained from rectangles by replacing each entry [x_i,y_i,a_i,b_i] with [-b_i,x_i,-y_i,a_i], which is 90-degree counterclockwise rotation about the origin. Whenever rectangles' also satisfies the preconditions, the result of the function on rectangles equals its result on rectangles'.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsRectangleCover.spec_11",
+    "negation": "AegisSpec.IsRectangleCover.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every positive integer k such that the slice rectangles', defined by rectangles'[i] = [k*x_i, k*y_i, k*a_i, k*b_i] for every i, also satisfies the preconditions, the result of the function on rectangles equals its result on rectangles'.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsRectangleCover.spec_12",
+    "negation": "AegisSpec.IsRectangleCover.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns false.",
+    "preconditions": "len(rectangles) >= 2 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000; there exist i,j with 0 <= i < j < len(rectangles) such that rectangles[i] and rectangles[j] have the same four coordinates."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsRectangleCover.spec_13",
+    "negation": "AegisSpec.IsRectangleCover.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns true, let c(p) be the number of indices i and corners C in {(x_i,y_i),(x_i,b_i),(a_i,y_i),(a_i,b_i)} with C = p. Let Xmin = min_i x_i, Xmax = max_i a_i, Ymin = min_i y_i, Ymax = max_i b_i. Then c(Xmin,Ymin) = c(Xmin,Ymax) = c(Xmax,Ymin) = c(Xmax,Ymax) = 1, and for every integer point p not equal to one of these four bounding-box corners, c(p) is even.",
+    "preconditions": "len(rectangles) >= 1 and len(rectangles) <= 20000; for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4, and writing x_i = rectangles[i][0], y_i = rectangles[i][1], a_i = rectangles[i][2], b_i = rectangles[i][3], we have -100000 <= x_i < a_i <= 100000 and -100000 <= y_i < b_i <= 100000."
+  }
+]

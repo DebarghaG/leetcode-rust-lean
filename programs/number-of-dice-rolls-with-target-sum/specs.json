@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_1",
+    "negation": "AegisSpec.NumRollsToTarget.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Let W be the number of ordered sequences (a_1, ..., a_n) of integers such that 1 <= a_i <= k for every i with 1 <= i <= n, and a_1 + ... + a_n = target. The function returns a result r (it does not fail), and r is the unique integer satisfying 0 <= r < M and r ≡ W (mod M). Equivalently, r is the remainder of W on division by M.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_2",
+    "negation": "AegisSpec.NumRollsToTarget.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 0 <= r < M, where M = 1000000007.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_3",
+    "negation": "AegisSpec.NumRollsToTarget.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (a successful Result containing an i64); it does not overflow, panic, go out of bounds, or otherwise fail.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_4",
+    "negation": "AegisSpec.NumRollsToTarget.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r = 0.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, 1 <= target <= 1000, and target < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_5",
+    "negation": "AegisSpec.NumRollsToTarget.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1 if 1 <= target <= k, and returns r = 0 if target > k.",
+    "preconditions": "n = 1, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_6",
+    "negation": "AegisSpec.NumRollsToTarget.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1 if target = n, and returns r = 0 otherwise.",
+    "preconditions": "1 <= n <= 30, k = 1, and 1 <= target <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_7",
+    "negation": "AegisSpec.NumRollsToTarget.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1.",
+    "preconditions": "1 <= n <= 30, 1 <= k <= 30, 1 <= target <= 1000, and target = n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_8",
+    "negation": "AegisSpec.NumRollsToTarget.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t = target and t' = n*(k+1) - target. Let r be the function's result on (n, k, t), and let r' be the function's result on (n, k, t'). Then r = r'.",
+    "preconditions": "1 <= n <= 30, 1 <= k <= 30, 1 <= target <= 1000, and 1 <= n*(k+1) - target <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_9",
+    "negation": "AegisSpec.NumRollsToTarget.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A be the set of integers a such that 1 <= a <= k and 1 <= target - a <= k. The function returns r = |A| mod M, where M = 1000000007 and |A| is the number of such integers. Since |A| <= 30, this is simply r = |A|.",
+    "preconditions": "n = 2, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_10",
+    "negation": "AegisSpec.NumRollsToTarget.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m = target - n. If 0 <= m <= n, the function returns r = binomial(n, m) mod M, where M = 1000000007; if m < 0 or m > n, the function returns r = 0.",
+    "preconditions": "1 <= n <= 30, k = 2, and 1 <= target <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_11",
+    "negation": "AegisSpec.NumRollsToTarget.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer k' with k <= k' <= 30, the function's result on (n, k, target) equals its result on (n, k', target).",
+    "preconditions": "1 <= n <= 30, 1 <= k <= 30, 1 <= target <= 1000, and target <= k."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_12",
+    "negation": "AegisSpec.NumRollsToTarget.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let W be the number of ordered sequences (a_1, ..., a_n) of integers such that 1 <= a_i <= k for every i and a_1 + ... + a_n = target. Whenever the function returns a result r with r != 0, there exists at least one such sequence; equivalently, W > 0.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, and 1 <= target <= 1000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumRollsToTarget.spec_13",
+    "negation": "AegisSpec.NumRollsToTarget.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let W be the number of ordered sequences (a_1, ..., a_n) of integers such that 1 <= a_i <= k for every i and a_1 + ... + a_n = target. If W < M, where M = 1000000007, then the function returns r = W.",
+    "preconditions": "n, k, and target are integers with 1 <= n <= 30, 1 <= k <= 30, and 1 <= target <= 1000."
+  }
+]

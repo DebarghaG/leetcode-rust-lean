@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_1",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(arr), and let O = { v | there exist integers i and j with 0 <= i <= j < n and v = arr[i] OR arr[i+1] OR ... OR arr[j] }, where OR is bitwise OR on non-negative integers. Whenever the function returns a result r, the mathematical integer value of r equals |O|, the number of distinct bitwise ORs of all non-empty contiguous subarrays of arr, counting each distinct value once.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000, where arr[i] denotes the mathematical integer value of the i-th 64-bit element. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_2",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: for every arr satisfying the preconditions, there is no overflow, out-of-bounds access, panic, or other failure.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000, where arr[i] denotes the mathematical integer value of the i-th 64-bit element. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_3",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= |{ x | there exists an integer i with 0 <= i < len(arr) and x = arr[i] }|, the number of distinct values that occur as elements of arr.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_4",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(arr) * (len(arr) + 1) / 2, the number of non-empty contiguous subarrays of arr.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_5",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 31 * len(arr).",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_6",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(arr) * (len(arr) + 1) / 2.",
+    "preconditions": "len(arr) >= 1, for every i with 0 <= i < len(arr), 0 < arr[i] <= 1000000000, and for every i,j with 0 <= i < j < len(arr), (arr[i] AND arr[j]) = 0 using bitwise AND. All indices are 0-based."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_7",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns result r on arr and result q on rev, then r = q.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 50000, and for every i with 0 <= i < len(arr), 0 <= arr[i] <= 1000000000. Let rev be the slice with len(rev) = len(arr) and rev[i] = arr[len(arr)-1-i] for every 0 <= i < len(arr). All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_8",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns result r on arr and result q on b, then r <= q.",
+    "preconditions": "arr and b are slices satisfying the input constraints: 1 <= len(arr) <= 50000, 1 <= len(b) <= 50000, all entries are between 0 and 1000000000 inclusive, and all indices are 0-based. In addition, there exists an integer s with 0 <= s and s + len(arr) <= len(b) such that for every i with 0 <= i < len(arr), arr[i] = b[s+i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SubarrayBitwiseORs.spec_9",
+    "negation": "AegisSpec.SubarrayBitwiseORs.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns result r on arr and result q on arr2, then r = q.",
+    "preconditions": "arr satisfies len(arr) <= 49999 and all original entry bounds 0 <= arr[i] <= 1000000000 for 0 <= i < len(arr). Let n = len(arr). Let arr2 be a slice with len(arr2) = n+1 for which there exists an integer k with 0 <= k < n such that arr2[i] = arr[i] for 0 <= i <= k, arr2[k+1] = arr[k], and arr2[i] = arr[i-1] for k+2 <= i <= n. All indices are 0-based."
+  }
+]

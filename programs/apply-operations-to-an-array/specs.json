@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ApplyOperations.spec_1",
+    "negation": "AegisSpec.ApplyOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define arrays B_0,...,B_{n-1} of length n by B_0 = nums, and for each i with 0 <= i < n-1, B_{i+1} is obtained from B_i as follows: if B_i[i] = B_i[i+1], then B_{i+1}[i] = 2 * B_i[i], B_{i+1}[i+1] = 0, and B_{i+1}[j] = B_i[j] for every j not in {i,i+1}; if B_i[i] != B_i[i+1], then B_{i+1} = B_i. Let A = B_{n-1}. Let m be the number of indices j with A[j] != 0. The function returns a result r with len(r) = n, and: for every j with 0 <= j < m, r[j] is the (j+1)-th nonzero entry of A when A is read from left to right; and for every j with m <= j < n, r[j] = 0. Equivalently, r is obtained from A by deleting all zero entries, keeping the remaining entries in their original order, and appending n - m zeros.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ApplyOperations.spec_2",
+    "negation": "AegisSpec.ApplyOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, panic, or out-of-bounds failure).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ApplyOperations.spec_3",
+    "negation": "AegisSpec.ApplyOperations.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(nums).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ApplyOperations.spec_4",
+    "negation": "AegisSpec.ApplyOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the maximum of nums[0],...,nums[n-1]. Whenever the function returns a result r, every entry r[j] satisfies 0 <= r[j] <= 2 * M.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ApplyOperations.spec_5",
+    "negation": "AegisSpec.ApplyOperations.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for all i and j with 0 <= i < j < len(r), if r[i] = 0 then r[j] = 0. Thus all zero entries of r form a suffix of r.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ApplyOperations.spec_6",
+    "negation": "AegisSpec.ApplyOperations.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let A be the final array obtained from nums by performing, in order for i = 0,1,...,n-2, the operation: if the current array has equal entries at positions i and i+1, replace the i-th entry by twice its value and set the (i+1)-st entry to 0; otherwise do nothing. Whenever the function returns a result r, for every integer v, the number of indices j with r[j] = v equals the number of indices j with A[j] = v.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ApplyOperations.spec_7",
+    "negation": "AegisSpec.ApplyOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let A be the final array obtained from nums by performing, in order for i = 0,1,...,n-2, the operation: if the current array has equal entries at positions i and i+1, replace the i-th entry by twice its value and set the (i+1)-st entry to 0; otherwise do nothing. Whenever the function returns a result r, for every p and q with 0 <= p < q < n and A[p] != 0 and A[q] != 0, if u is the number of indices t < p with A[t] != 0 and v is the number of indices t < q with A[t] != 0, then u < v, r[u] = A[p], and r[v] = A[q].",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ApplyOperations.spec_8",
+    "negation": "AegisSpec.ApplyOperations.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r) and r[j] != 0, there exists an input index i with 0 <= i < n such that r[j] = nums[i] or r[j] = 2 * nums[i].",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ApplyOperations.spec_9",
+    "negation": "AegisSpec.ApplyOperations.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every i with 0 <= i < n-1, nums[i] != 0 implies nums[i] != nums[i+1], then r is obtained from nums by deleting all zero entries while keeping the order of the remaining entries, and then appending as many zero entries as were deleted.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ApplyOperations.spec_10",
+    "negation": "AegisSpec.ApplyOperations.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if r[j] != 0 for every j with 0 <= j < len(r), then r equals nums as a sequence (same length and same entries).",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ApplyOperations.spec_11",
+    "negation": "AegisSpec.ApplyOperations.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there exists i with 0 <= i < n and nums[i] = 0, then there exists j with 0 <= j < len(r) and r[j] = 0.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ApplyOperations.spec_12",
+    "negation": "AegisSpec.ApplyOperations.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the sum of the entries of r equals the sum of the entries of nums.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 2000 and 0 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  }
+]

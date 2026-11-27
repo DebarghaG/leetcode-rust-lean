@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_1",
+    "negation": "AegisSpec.GetDescentPeriods.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever get_descent_periods(prices) returns a result res, res is the number of pairs (l,u) of integers with 0 <= l <= u < n such that for every k with l <= k < u, prices[k] - prices[k+1] = 1. This includes all one-day periods (l = u), whose condition is vacuous.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_2",
+    "negation": "AegisSpec.GetDescentPeriods.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "get_descent_periods(prices) returns a result res; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_3",
+    "negation": "AegisSpec.GetDescentPeriods.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let g be the number of indices i with 0 <= i < n-1 and prices[i] - prices[i+1] = 1. Whenever get_descent_periods(prices) returns a result res, res >= n + g.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_4",
+    "negation": "AegisSpec.GetDescentPeriods.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_descent_periods(prices) returns a result res, res <= n*(n+1)/2.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_5",
+    "negation": "AegisSpec.GetDescentPeriods.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_descent_periods(prices) returns a result res, res = n if and only if for every i with 0 <= i < n-1, prices[i] - prices[i+1] != 1.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_6",
+    "negation": "AegisSpec.GetDescentPeriods.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Call an index i with 0 <= i < n-1 a good edge if prices[i] - prices[i+1] = 1. Let (a_1,b_1), ..., (a_m,b_m) be all maximal intervals of consecutive good edges: each [a_j,b_j] consists only of good edges, and either a_j = 0 or a_j-1 is not good, and either b_j = n-2 or b_j+1 is not good. Let L_j = b_j - a_j + 1. Whenever get_descent_periods(prices) returns a result res, res = n + sum_{j=1}^m L_j*(L_j+1)/2.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_7",
+    "negation": "AegisSpec.GetDescentPeriods.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "get_descent_periods(prices) returns a result res and get_descent_periods(shifted) returns a result res'; moreover res = res'.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n. Let c be an integer such that 1 <= prices[i] + c <= 100000 for every i with 0 <= i < n, and let shifted be the list with shifted[i] = prices[i] + c."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_8",
+    "negation": "AegisSpec.GetDescentPeriods.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "get_descent_periods(C) returns a result r_C, get_descent_periods(A) returns r_A, get_descent_periods(B) returns r_B, and r_C = r_A + r_B.",
+    "preconditions": "Let A and B be nonempty lists of i64 with 1 <= len(A), 1 <= len(B), len(A)+len(B) <= 100000, and every element of A and B in the range 1..100000. Let C be the concatenation of A followed by B. Assume A[len(A)-1] - B[0] != 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_9",
+    "negation": "AegisSpec.GetDescentPeriods.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the number of indices l with 0 <= l < n such that for every k with l <= k < n-1, prices[k] - prices[k+1] = 1 (so s >= 1, with l = n-1 always allowed vacuously). Whenever get_descent_periods(prices) returns a result res and get_descent_periods(ext) returns a result res_ext, res_ext = res + 1 + (if prices[n-1] - x = 1 then s else 0).",
+    "preconditions": "Let n = len(prices). Assume 1 <= n < 100000, 1 <= prices[i] <= 100000 for every i with 0 <= i < n, and let x be an integer with 1 <= x <= 100000. Let ext be the list of length n+1 with ext[i] = prices[i] for 0 <= i < n and ext[n] = x."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetDescentPeriods.spec_10",
+    "negation": "AegisSpec.GetDescentPeriods.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For each e with 0 <= e < n, let d_e be the largest integer d such that 0 <= d <= e and for every k with e-d <= k < e, prices[k] - prices[k+1] = 1. Whenever get_descent_periods(prices) returns a result res, res = sum_{e=0}^{n-1} (d_e + 1).",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 100000 and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  }
+]

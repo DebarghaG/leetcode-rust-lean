@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumScore.spec_1",
+    "negation": "AegisSpec.MaximumScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max over all choice sequences c of Score(c), where a choice sequence is a function c : {0,...,m-1} -> {F,B}; for each i in 0..m-1, define f(i) = |{j : 0 <= j < i and c(j) = F}| and b(i) = |{j : 0 <= j < i and c(j) = B}|, let x_i = nums[f(i)] if c(i)=F and nums[n-1-b(i)] if c(i)=B, and Score(c) = sum_{i=0}^{m-1} multipliers[i] * x_i.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumScore.spec_2",
+    "negation": "AegisSpec.MaximumScore.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every choice sequence c (with Score(c) defined as in spec_1), Score(c) <= r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumScore.spec_3",
+    "negation": "AegisSpec.MaximumScore.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a choice sequence c such that Score(c) = r, where Score is defined as in spec_1.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumScore.spec_4",
+    "negation": "AegisSpec.MaximumScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and -m * 10^6 <= r <= m * 10^6.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumScore.spec_5",
+    "negation": "AegisSpec.MaximumScore.spec_5_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums and multipliers satisfying the preconditions, the function returns a result r (i.e., it does not fail, panic, overflow, or go out of bounds).",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumScore.spec_6",
+    "negation": "AegisSpec.MaximumScore.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every nums and multipliers satisfying the preconditions, let nums_rev be the slice of length n with nums_rev[i] = nums[n-1-i] for 0 <= i < n. The function returns results r for (nums, multipliers) and r' for (nums_rev, multipliers), and r = r'.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumScore.spec_7",
+    "negation": "AegisSpec.MaximumScore.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nums and multipliers satisfying the preconditions, and every integer c >= 0 such that c * multipliers[j] is representable in i64 for all 0 <= j < m, let multipliers' be the slice of length m with multipliers'[j] = c * multipliers[j]. Whenever the function returns a result r for (nums, multipliers) and a result r' for (nums, multipliers'), we have r' = c * r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumScore.spec_8",
+    "negation": "AegisSpec.MaximumScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nums and multipliers satisfying the preconditions, and every integer c such that nums[i] + c is representable in i64 for all 0 <= i < n, let nums' be the slice of length n with nums'[i] = nums[i] + c. Whenever the function returns a result r for (nums, multipliers) and a result r' for (nums', multipliers), we have r' = r + c * (sum_{j=0}^{m-1} multipliers[j]).",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumScore.spec_9",
+    "negation": "AegisSpec.MaximumScore.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every nums and multipliers satisfying the preconditions, let nums'[i] = -nums[i] for 0 <= i < n and multipliers'[j] = -multipliers[j] for 0 <= j < m. Whenever the function returns a result r for (nums, multipliers) and a result r' for (nums', multipliers'), we have r' = r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumScore.spec_10",
+    "negation": "AegisSpec.MaximumScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nums, nums' (both of length n) and multipliers (of length m) satisfying the preconditions, if nums'[i] >= nums[i] for all 0 <= i < n and multipliers[j] >= 0 for all 0 <= j < m, then whenever the function returns a result r for (nums, multipliers) and a result r' for (nums', multipliers), we have r' >= r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000, and additionally nums' is a slice of length n with -1000 <= nums'[i] <= 1000 for all i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumScore.spec_11",
+    "negation": "AegisSpec.MaximumScore.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = c * max_{0 <= k <= m} ( sum_{i=0}^{k-1} nums[i] + sum_{i=n-(m-k)}^{n-1} nums[i] ), where each sum over an empty range is 0.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and there exists an integer c >= 0 such that multipliers[j] = c for all 0 <= j < m."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumScore.spec_12",
+    "negation": "AegisSpec.MaximumScore.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 0.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000, and additionally nums[i] >= 0 for all 0 <= i < n and multipliers[j] >= 0 for all 0 <= j < m."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumScore.spec_13",
+    "negation": "AegisSpec.MaximumScore.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= 0.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000, and additionally nums[i] >= 0 for all 0 <= i < n and multipliers[j] <= 0 for all 0 <= j < m."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumScore.spec_14",
+    "negation": "AegisSpec.MaximumScore.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max(nums[0] * multipliers[0], nums[n-1] * multipliers[0]).",
+    "preconditions": "n = len(nums), m = len(multipliers), m = 1, 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, and for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumScore.spec_15",
+    "negation": "AegisSpec.MaximumScore.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nums and multipliers satisfying the preconditions, let nums' be the slice of length n with nums'[i] = c * nums[i]. Whenever the function returns a result r for (nums, multipliers) and a result r' for (nums', multipliers), we have r' = c * r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000, for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000, and c is an integer with c >= 0 such that c * nums[i] is representable in i64 for all 0 <= i < n."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaximumScore.spec_16",
+    "negation": "AegisSpec.MaximumScore.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every nums, multipliers, and multipliers' satisfying the preconditions, whenever the function returns a result r for (nums, multipliers) and a result r' for (nums, multipliers'), we have r' >= r.",
+    "preconditions": "n = len(nums), m = len(multipliers), 1 <= m <= 300, m <= n <= 100000, for every i with 0 <= i < n, -1000 <= nums[i] <= 1000 and nums[i] >= 0, for every j with 0 <= j < m, -1000 <= multipliers[j] <= 1000, and multipliers' is a slice of length m with -1000 <= multipliers'[j] <= 1000 and multipliers'[j] >= multipliers[j] for all 0 <= j < m."
+  }
+]

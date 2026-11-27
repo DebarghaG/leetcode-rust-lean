@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_1",
+    "negation": "AegisSpec.CountCompleteComponents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define adj(i,j) for i,j in {0,...,n-1} to mean that there exists an index k with 0 <= k < len(edges) such that (edges[k][0] = i and edges[k][1] = j) or (edges[k][0] = j and edges[k][1] = i). Define a path from u to v as a sequence of vertices v0, v1, ..., vm (m >= 0) with v0 = u, vm = v, and for each t with 0 <= t < m, adj(v_t, v_{t+1}). Define u and v to be connected if there exists a path from u to v. For u in {0,...,n-1}, let C(u) = { v in {0,...,n-1} : v is connected to u }. A set C(u) is complete if for every pair of distinct vertices x, y in C(u), adj(x,y) holds. The function returns a result r and r is the number of distinct sets among { C(u) : 0 <= u < n } that are complete. Equivalently, r = |{ C(u) : 0 <= u < n and C(u) is complete }|.",
+    "preconditions": "n is an integer with 1 <= n <= 50. edges is a list (slice) of vectors, each of length exactly 2. For each k with 0 <= k < len(edges), edges[k][0] and edges[k][1] are integers in {0,1,...,n-1} and edges[k][0] != edges[k][1]. No unordered pair of vertices appears more than once in edges (i.e., for k != l, the set {edges[k][0], edges[k][1]} is not equal to {edges[l][0], edges[l][1]}). Also len(edges) <= n*(n-1)/2."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_2",
+    "negation": "AegisSpec.CountCompleteComponents.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= n.",
+    "preconditions": "n is an integer with 1 <= n <= 50. edges is a list (slice) of vectors, each of length exactly 2. For each k with 0 <= k < len(edges), edges[k][0] and edges[k][1] are integers in {0,1,...,n-1} and edges[k][0] != edges[k][1]. No unordered pair of vertices appears more than once in edges (i.e., for k != l, the set {edges[k][0], edges[k][1]} is not equal to {edges[l][0], edges[l][1]}). Also len(edges) <= n*(n-1)/2."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_3",
+    "negation": "AegisSpec.CountCompleteComponents.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r. Let c be the number of connected components of the graph, i.e., c = |{ C(u) : 0 <= u < n }|, where C(u) is defined as in spec_1. Then r <= c.",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_4",
+    "negation": "AegisSpec.CountCompleteComponents.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r. Let I = { v in {0,...,n-1} : for all u in {0,...,n-1}, u != v implies not adj(v,u) }, where adj is defined as in spec_1. (These are the vertices incident to no edge.) Then r >= |I|.",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_5",
+    "negation": "AegisSpec.CountCompleteComponents.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. Then r = 0 if and only if every connected component of the graph is not complete, i.e., for every u in {0,...,n-1}, the set C(u) (as defined in spec_1) is not complete.",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_6",
+    "negation": "AegisSpec.CountCompleteComponents.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of count_complete_components(n, edges) and r' be the result of count_complete_components(n, edges'). Then r = r'.",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2. Let edges' be any permutation of the list edges (same elements, possibly different order). Then n and edges' also satisfy the constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_7",
+    "negation": "AegisSpec.CountCompleteComponents.spec_7_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and edges satisfying the preconditions, the function returns a result r (i.e., it does not panic, overflow, or return an error).",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_8",
+    "negation": "AegisSpec.CountCompleteComponents.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = m = n/2.",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2. Additionally, n = 2*m for some integer m >= 1, and edges consists of exactly m disjoint edges that form a perfect matching on all n vertices: every vertex in {0,...,n-1} appears in exactly one edge (i.e., for each vertex v, the number of indices k with edges[k][0]=v or edges[k][1]=v is exactly 1)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_9",
+    "negation": "AegisSpec.CountCompleteComponents.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 + (n - k).",
+    "preconditions": "n and edges satisfy the constraints: 1 <= n <= 50, edges is a list of pairs of distinct vertices in {0,...,n-1} with no repeated unordered pair, len(edges) <= n*(n-1)/2, and each edge vector has length 2. Additionally, there exists an integer k with 1 <= k <= n such that the vertex set {0,1,...,k-1} induces a complete subgraph (for every distinct i, j in {0,...,k-1}, adj(i,j) holds), every vertex in {k,...,n-1} is isolated (has no incident edges), and there are no other edges. Equivalently, edges consists exactly of all unordered pairs {i,j} with 0 <= i < j < k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_10",
+    "negation": "AegisSpec.CountCompleteComponents.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r. Then r = n if and only if len(edges) = 0.",
+    "preconditions": "n is an integer with 1 <= n <= 50. edges is a list (slice) of vectors, each of length exactly 2. For each k with 0 <= k < len(edges), edges[k][0] and edges[k][1] are integers in {0,1,...,n-1} and edges[k][0] != edges[k][1]. No unordered pair of vertices appears more than once in edges, and len(edges) <= n*(n-1)/2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountCompleteComponents.spec_11",
+    "negation": "AegisSpec.CountCompleteComponents.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let c = |{ C(u) : 0 <= u < n }|, where C(u) is the connected component of u as defined in spec_1. The function returns a result r. Then r = c if and only if every connected component of the graph is complete, i.e., for every u in {0,...,n-1}, C(u) is complete.",
+    "preconditions": "n is an integer with 1 <= n <= 50. edges is a list (slice) of vectors, each of length exactly 2. For each k with 0 <= k < len(edges), edges[k][0] and edges[k][1] are integers in {0,1,...,n-1} and edges[k][0] != edges[k][1]. No unordered pair of vertices appears more than once in edges, and len(edges) <= n*(n-1)/2."
+  }
+]

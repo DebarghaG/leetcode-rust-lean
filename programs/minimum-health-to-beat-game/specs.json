@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumHealth.spec_1",
+    "negation": "AegisSpec.MinimumHealth.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S = sum_{i=0}^{n-1} damage[i] and P = max_{0 <= i < n} min(damage[i], armor). The function returns a result r and r = 1 + S - P.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumHealth.spec_2",
+    "negation": "AegisSpec.MinimumHealth.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumHealth.spec_3",
+    "negation": "AegisSpec.MinimumHealth.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 1.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumHealth.spec_4",
+    "negation": "AegisSpec.MinimumHealth.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} damage[i]. The function returns a result r and r <= 1 + S.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumHealth.spec_5",
+    "negation": "AegisSpec.MinimumHealth.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} damage[i]. The function returns a result r and for every i with 0 <= i < n, r <= 1 + S - min(damage[i], armor).",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumHealth.spec_6",
+    "negation": "AegisSpec.MinimumHealth.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let S = sum_{i=0}^{n-1} damage[i]. The function returns a result r and there exists j with 0 <= j < n such that r = 1 + S - min(damage[j], armor).",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumHealth.spec_7",
+    "negation": "AegisSpec.MinimumHealth.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists j with 0 <= j < n such that, if the player starts with health r, uses the armor only on level j to block exactly min(damage[j], armor) damage, and uses no armor on all other levels, then after every level t with 0 <= t < n the player's health is greater than 0.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumHealth.spec_8",
+    "negation": "AegisSpec.MinimumHealth.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, for every integer H with H < r and every armor usage consisting either of no armor or of one choice of a level j with 0 <= j < n and a protected amount p with 0 <= p <= min(damage[j], armor), the health value obtained by starting at H and subtracting the net damage of all n levels is at most 0.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumHealth.spec_9",
+    "negation": "AegisSpec.MinimumHealth.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If armor = 0, then the function returns a result r and r = 1 + sum_{i=0}^{n-1} damage[i].",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumHealth.spec_10",
+    "negation": "AegisSpec.MinimumHealth.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If armor >= max_{0 <= i < n} damage[i], then the function returns a result r and r = 1 + sum_{i=0}^{n-1} damage[i] - max_{0 <= i < n} damage[i].",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumHealth.spec_11",
+    "negation": "AegisSpec.MinimumHealth.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If damage[i] = 0 for every i with 0 <= i < n, then the function returns a result r and r = 1.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumHealth.spec_12",
+    "negation": "AegisSpec.MinimumHealth.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1, then the function returns a result r and r = 1 + max(0, damage[0] - armor).",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumHealth.spec_13",
+    "negation": "AegisSpec.MinimumHealth.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 on input (damage, a1) and returns r2 on input (damage, a2), then r1 >= r2.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; and 0 <= a1 <= a2 <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumHealth.spec_14",
+    "negation": "AegisSpec.MinimumHealth.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 on input (d1, armor) and returns r2 on input (d2, armor), then r1 <= r2.",
+    "preconditions": "n = len(d1) = len(d2); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= d1[i] <= d2[i] <= 100000; and 0 <= armor <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumHealth.spec_15",
+    "negation": "AegisSpec.MinimumHealth.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input (damage, armor) and returns r' on input (damage', armor), then r' = r.",
+    "preconditions": "n = len(damage); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= damage[i] <= 100000; 0 <= armor <= 100000; damage' is an array with len(damage') = n and is a permutation of damage, meaning there is a bijection f from {0,...,n-1} to itself with damage'[f(i)] = damage[i] for every i."
+  }
+]

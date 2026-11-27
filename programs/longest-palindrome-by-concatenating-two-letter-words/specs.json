@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindrome.spec_1",
+    "negation": "AegisSpec.LongestPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let c(a,b) be the number of indices i with 0 <= i < len(words), words[i][0] = a, and words[i][1] = b, for a,b in 97..122. Let S = sum over a in 97..122 of c(a,a). Let O be the number of letters a in 97..122 for which c(a,a) is odd. Let P = sum over 97 <= a < b <= 122 of min(c(a,b), c(b,a)). The function returns a result r and r = 4*P + 2*(S - max(0, O - 1)).",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindrome.spec_2",
+    "negation": "AegisSpec.LongestPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, read outside a word, or overflow 64-bit arithmetic.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindrome.spec_3",
+    "negation": "AegisSpec.LongestPalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 2 * len(words).",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindrome.spec_4",
+    "negation": "AegisSpec.LongestPalindrome.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r is even; equivalently r mod 2 = 0.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindrome.spec_5",
+    "negation": "AegisSpec.LongestPalindrome.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2 if words[0][0] = words[0][1], and r = 0 otherwise.",
+    "preconditions": "len(words) = 1. The single word satisfies len(words[0]) = 2 and both bytes words[0][0] and words[0][1] are in 97..122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindrome.spec_6",
+    "negation": "AegisSpec.LongestPalindrome.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c(a,a) be the number of i with words[i][0] = words[i][1] = a, for a in 97..122, let S = sum over a of c(a,a), and let O be the number of a for which c(a,a) is odd. The function returns r and r = 2*(S - max(0, O - 1)).",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2, both bytes are in 97..122, and words[i][0] = words[i][1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindrome.spec_7",
+    "negation": "AegisSpec.LongestPalindrome.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c(a,b) count indices i with words[i][0]=a and words[i][1]=b, and let P = sum over 97 <= a < b <= 122 of min(c(a,b), c(b,a)). The function returns r and r = 4*P.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2, both bytes are in 97..122, and words[i][0] != words[i][1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindrome.spec_8",
+    "negation": "AegisSpec.LongestPalindrome.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c(a,b) be the number of indices i with words[i][0]=a and words[i][1]=b. Whenever the function returns a result r, r = 0 if and only if both: (1) c(a,a) = 0 for every a in 97..122; and (2) for every 97 <= a < b <= 122, min(c(a,b), c(b,a)) = 0.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindrome.spec_9",
+    "negation": "AegisSpec.LongestPalindrome.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If longest_palindrome(words) returns r and longest_palindrome(words') returns r', then r = r'.",
+    "preconditions": "words and words' are slices of Vec U8, each satisfying: len between 1 and 100000; each entry has length 2 with bytes in 97..122; and words' is a permutation of words as a multiset of two-byte strings."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindrome.spec_10",
+    "negation": "AegisSpec.LongestPalindrome.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer k >= 0 and distinct indices i_1,...,i_k in [0, len(words)) such that r = 2*k and the byte string words[i_1] ++ words[i_2] ++ ... ++ words[i_k] is a palindrome; k = 0 is allowed, meaning the empty string.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindrome.spec_11",
+    "negation": "AegisSpec.LongestPalindrome.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k >= 0 and every sequence of distinct indices i_1,...,i_k in [0, len(words)) such that words[i_1] ++ ... ++ words[i_k] is a palindrome, we have 2*k <= r.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindrome.spec_12",
+    "negation": "AegisSpec.LongestPalindrome.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let c(a,b) be the number of indices i with words[i][0]=a and words[i][1]=b. Whenever the function returns a result r, for every 97 <= a < b <= 122, r >= 4 * min(c(a,b), c(b,a)).",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindrome.spec_13",
+    "negation": "AegisSpec.LongestPalindrome.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let c(a,a) be the number of indices i with 0 <= i < len(words) and words[i][0] = words[i][1] = a. Whenever the function returns a result r, for every a in 97..122, r >= 2 * c(a,a).",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestPalindrome.spec_14",
+    "negation": "AegisSpec.LongestPalindrome.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let c(a,b) be the number of indices i with 0 <= i < len(words), words[i][0] = a, and words[i][1] = b. Let O be the number of letters a in 97..122 for which c(a,a) is odd. Whenever the function returns a result r, if O = 0 then r mod 4 = 0, and if O > 0 then r mod 4 = 2.",
+    "preconditions": "len(words) is between 1 and 100000 inclusive. For every i with 0 <= i < len(words), len(words[i]) = 2 and both bytes words[i][0] and words[i][1] are in the range 97..122 (lowercase English letters 'a'..'z')."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FlipEquiv.spec_1",
+    "negation": "AegisSpec.FlipEquiv.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let FlipEquiv be the least relation on Tree defined by: (i) FlipEquiv(Null, Null) holds; (ii) FlipEquiv(Node(v,l1,r1), Node(w,l2,r2)) holds iff v = w and either (FlipEquiv(l1,l2) and FlipEquiv(r1,r2)) or (FlipEquiv(l1,r2) and FlipEquiv(r1,l2)); (iii) no other pairs are related. Whenever flip_equiv root1 root2 returns Result.ok b with b a Boolean, b = true if and only if FlipEquiv(root1, root2) holds, and b = false otherwise.",
+    "preconditions": "root1 and root2 are finite binary trees represented by Tree and satisfy the problem constraints: each has at most 100 nodes, and all node values within any one tree are distinct integers in [0,99]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FlipEquiv.spec_2",
+    "negation": "AegisSpec.FlipEquiv.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call flip_equiv root1 root2 does not fail: it returns Result.ok b for some Boolean b. In particular, there is no overflow, out-of-bounds access, or panic.",
+    "preconditions": "root1 and root2 are finite binary trees represented by Tree and satisfy the problem constraints."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FlipEquiv.spec_3",
+    "negation": "AegisSpec.FlipEquiv.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "flip_equiv Null t returns Result.ok false.",
+    "preconditions": "t is a non-null finite Tree, i.e. t = Node(v,l,r) for some i64 v and finite subtrees l and r."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FlipEquiv.spec_4",
+    "negation": "AegisSpec.FlipEquiv.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "flip_equiv t t returns Result.ok true.",
+    "preconditions": "t is a finite Tree."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FlipEquiv.spec_5",
+    "negation": "AegisSpec.FlipEquiv.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every Boolean ba and bb, if flip_equiv a b returns Result.ok ba and flip_equiv b a returns Result.ok bb, then ba = bb. Equivalently, flip_equiv a b returns Result.ok true exactly when flip_equiv b a returns Result.ok true.",
+    "preconditions": "a and b are finite Trees."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FlipEquiv.spec_6",
+    "negation": "AegisSpec.FlipEquiv.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If flip_equiv a b returns Result.ok true and flip_equiv b c returns Result.ok true, then flip_equiv a c returns Result.ok true.",
+    "preconditions": "a, b, and c are finite Trees."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FlipEquiv.spec_7",
+    "negation": "AegisSpec.FlipEquiv.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "flip_equiv (Node(v,l1,r1)) (Node(w,l2,r2)) returns Result.ok false.",
+    "preconditions": "v and w are i64 integers with v ≠ w; l1, r1, l2, r2 are finite Trees."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FlipEquiv.spec_8",
+    "negation": "AegisSpec.FlipEquiv.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "flip_equiv (Node(v,Null,Null)) t returns Result.ok true if and only if t = Node(v,Null,Null).",
+    "preconditions": "v is an i64 integer; t is a finite Tree."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FlipEquiv.spec_9",
+    "negation": "AegisSpec.FlipEquiv.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If flip_equiv l1 l2 returns Result.ok true and flip_equiv r1 r2 returns Result.ok true, then flip_equiv (Node(v,l1,r1)) (Node(v,l2,r2)) returns Result.ok true.",
+    "preconditions": "v is an i64 integer; l1, r1, l2, r2 are finite Trees; the constructed trees Node(v,l1,r1) and Node(v,l2,r2) satisfy the problem constraints."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FlipEquiv.spec_10",
+    "negation": "AegisSpec.FlipEquiv.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If flip_equiv l1 r2 returns Result.ok true and flip_equiv r1 l2 returns Result.ok true, then flip_equiv (Node(v,l1,r1)) (Node(v,l2,r2)) returns Result.ok true.",
+    "preconditions": "v is an i64 integer; l1, r1, l2, r2 are finite Trees; the constructed trees Node(v,l1,r1) and Node(v,l2,r2) satisfy the problem constraints."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FlipEquiv.spec_11",
+    "negation": "AegisSpec.FlipEquiv.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If flip_equiv root1 root2 returns Result.ok true, then node_count(root1) = node_count(root2), where node_count(Null) = 0 and node_count(Node(_,l,r)) = 1 + node_count(l) + node_count(r).",
+    "preconditions": "root1 and root2 are finite Trees."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FlipEquiv.spec_12",
+    "negation": "AegisSpec.FlipEquiv.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If flip_equiv root1 root2 returns Result.ok true, then for every integer d ≥ 0 and every i64 value v, the number of nodes of value v at depth d in root1 equals the number of nodes of value v at depth d in root2, where the root has depth 0.",
+    "preconditions": "root1 and root2 are finite Trees."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FlipEquiv.spec_13",
+    "negation": "AegisSpec.FlipEquiv.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever flip_equiv root1 root2 returns Result.ok b with b a Boolean, b = true if and only if there exists a finite sequence, possibly empty, of flip operations, each replacing some node Node(v,L,R) by Node(v,R,L) within its containing tree, that transforms root1 into root2.",
+    "preconditions": "root1 and root2 are finite Trees."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FlipEquiv.spec_14",
+    "negation": "AegisSpec.FlipEquiv.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If flip_equiv root1 root2 returns Result.ok true, then height(root1) = height(root2), where height(Null) = 0 and height(Node(_,l,r)) = 1 + max(height(l), height(r)).",
+    "preconditions": "root1 and root2 are finite Trees."
+  }
+]

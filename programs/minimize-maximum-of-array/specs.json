@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_1",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = max over integers k with 1 <= k <= n of ceil(S_k / k), where S_k = sum of nums[j] for 0 <= j < k, and ceil(a/b) for positive b is the least integer c such that b*c >= a.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_2",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_3",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer k with 1 <= k <= n, k*r >= S_k, where S_k = sum of nums[j] for 0 <= j < k.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_4",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= max over i with 0 <= i < n of nums[i].",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_5",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a finite sequence (possibly empty) of arrays current_0, ..., current_m of length n with current_0 = nums such that for each t with 0 <= t < m, current_{t+1} is obtained from current_t by choosing an index i with 1 <= i < n and current_t[i] > 0, setting current_{t+1}[i] = current_t[i] - 1, current_{t+1}[i-1] = current_t[i-1] + 1, and current_{t+1}[j] = current_t[j] for all other j, and such that current_m[i] <= r for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_6",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer M with M < r, there is no finite sequence of allowed operations transforming nums into an array v of length n with v[i] <= M for every i with 0 <= i < n, where an allowed operation chooses i with 1 <= i < n and current[i] > 0, decrements current[i], and increments current[i-1].",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_7",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on nums and r' on shifted, r' = r + c.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000. Let c be an integer with 0 <= c and nums[i]+c <= 1000000000 for every i with 0 <= i < n. Let shifted be the array of length n with shifted[i] = nums[i]+c for every i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimizeArrayValue.spec_8",
+    "negation": "AegisSpec.MinimizeArrayValue.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on nums and r' on v, r <= r'.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000. Let v be another slice of length n satisfying the same constraints, and assume v[i] >= nums[i] for every i with 0 <= i < n."
+  }
+]

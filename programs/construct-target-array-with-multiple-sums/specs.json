@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPossible.spec_1",
+    "negation": "AegisSpec.IsPossible.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exist an integer k >= 0 and arrays A^0,...,A^k, each of length n, such that: (1) A^0[i] = 1 for every 0 <= i < n; (2) A^k[i] = target[i] for every 0 <= i < n; and (3) for every t with 0 <= t < k there is an index i_t with 0 <= i_t < n such that A^{t+1}[i_t] = sum_{j=0}^{n-1} A^t[j] and A^{t+1}[j] = A^t[j] for every j with 0 <= j < n and j != i_t. Equivalently, r is false exactly when no such finite sequence exists.",
+    "preconditions": "Let n = len(target). The slice is nonempty with 1 <= n <= 50000, and every entry satisfies 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPossible.spec_2",
+    "negation": "AegisSpec.IsPossible.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every target satisfying the preconditions, the function returns a result (a Bool); it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(target). The slice is nonempty with 1 <= n <= 50000, and every entry satisfies 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPossible.spec_3",
+    "negation": "AegisSpec.IsPossible.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is true if and only if target[0] = 1.",
+    "preconditions": "n = len(target) = 1 and 1 <= target[0] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPossible.spec_4",
+    "negation": "AegisSpec.IsPossible.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is true.",
+    "preconditions": "n = len(target) >= 1 and target[i] = 1 for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPossible.spec_5",
+    "negation": "AegisSpec.IsPossible.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is false.",
+    "preconditions": "n = len(target) > 1 and there exists an integer c > 1 such that target[i] = c for every 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPossible.spec_6",
+    "negation": "AegisSpec.IsPossible.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r = true, the greatest positive integer d that divides target[i] for every 0 <= i < n is 1.",
+    "preconditions": "Let n = len(target). The slice is nonempty with 1 <= n <= 50000, and every entry satisfies 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPossible.spec_7",
+    "negation": "AegisSpec.IsPossible.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is true if and only if gcd(target[0], target[1]) = 1, where gcd(a,b) is the greatest positive integer dividing both a and b.",
+    "preconditions": "n = len(target) = 2, and 1 <= target[0], target[1] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsPossible.spec_8",
+    "negation": "AegisSpec.IsPossible.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true and target is not the all-ones array, there is exactly one index i with 0 <= i < n such that target[i] > sum_{0 <= j < n, j != i} target[j].",
+    "preconditions": "Let n = len(target) > 1, with 1 <= n <= 50000 and 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsPossible.spec_9",
+    "negation": "AegisSpec.IsPossible.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "There is a unique index i with 0 <= i < n such that target[i] > sum_{0 <= j < n, j != i} target[j]. For this i, define target' by target'[i] = target[i] - sum_{0 <= j < n, j != i} target[j] and target'[j] = target[j] for every j != i. Then target' is constructible from the all-ones array by the same operation, i.e. there is a finite sequence as in spec_1 ending at target'.",
+    "preconditions": "Let n = len(target) > 1, with 1 <= n <= 50000 and 1 <= target[i] <= 10^9 for 0 <= i < n. Assume the function returns r = true and target is not the all-ones array."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsPossible.spec_10",
+    "negation": "AegisSpec.IsPossible.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exists an integer q >= 0 such that target[i] = 1 + q*(n-1).",
+    "preconditions": "n = len(target) > 1, and there is exactly one index i with 0 <= i < n such that target[i] > 1, while target[j] = 1 for every j != i. Also 1 <= target[i] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsPossible.spec_11",
+    "negation": "AegisSpec.IsPossible.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r = true, target[i] is odd for every 0 <= i < n, equivalently target[i] mod 2 = 1.",
+    "preconditions": "n = len(target) is odd, with 1 <= n <= 50000, and 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsPossible.spec_12",
+    "negation": "AegisSpec.IsPossible.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of {0,...,n-1}, let target' be defined by target'[i] = target[pi(i)] for 0 <= i < n. Whenever the function returns a result r on target and a result r' on target', we have r = r'.",
+    "preconditions": "Let n = len(target). The slice is nonempty with 1 <= n <= 50000, and every entry satisfies 1 <= target[i] <= 10^9 for 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsPossible.spec_13",
+    "negation": "AegisSpec.IsPossible.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, sum_{i=0}^{n-1} target[i] >= 2*n - 1.",
+    "preconditions": "Let n = len(target) > 1, with 1 <= n <= 50000 and 1 <= target[i] <= 10^9 for 0 <= i < n. Assume target is not the all-ones array."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsPossible.spec_14",
+    "negation": "AegisSpec.IsPossible.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let i be the unique index with 0 <= i < n such that target[i] > sum_{0 <= j < n, j != i} target[j]. Then every finite sequence A^0,...,A^k as in spec_1 with A^k = target has k >= 1, and its last step (t = k-1) chooses index i, i.e. i_{k-1} = i.",
+    "preconditions": "Let n = len(target) > 1, with 1 <= n <= 50000 and 1 <= target[i] <= 10^9 for 0 <= i < n. Assume the function returns r = true and target is not the all-ones array."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.IsPossible.spec_15",
+    "negation": "AegisSpec.IsPossible.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns results r on target and r' on target', r = true if and only if r' = true; equivalently, target is constructible exactly when target' is constructible.",
+    "preconditions": "Let n = len(target) > 1, with 1 <= n <= 50000 and 1 <= target[i] <= 10^9 for 0 <= i < n. Assume target is not the all-ones array and has a unique index i with 0 <= i < n such that target[i] > sum_{0 <= j < n, j != i} target[j]. Define target' by target'[i] = target[i] - sum_{0 <= j < n, j != i} target[j] and target'[j] = target[j] for every j != i."
+  }
+]

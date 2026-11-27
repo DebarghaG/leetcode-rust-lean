@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BalancedString.spec_1",
+    "negation": "AegisSpec.BalancedString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result ans and ans is exactly the minimum integer L for which there exist integers l, j with 0 <= l <= j <= n, j - l = L, and for every x in {81,87,69,82}, if C_x(a,b) denotes the number of indices i with a <= i < b and s[i] = x, then C_x(0,l) + C_x(j,n) <= T. The minimum exists because (l,j) = (0,n) is always allowed.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and for every i with 0 <= i < n, s[i] is one of the bytes 81 ('Q'), 87 ('W'), 69 ('E'), 82 ('R'). Let T = n/4, the exact integer target count for each allowed byte."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BalancedString.spec_2",
+    "negation": "AegisSpec.BalancedString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result ans; it does not fail, panic, overflow, or access memory out of bounds for any input satisfying the preconditions.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BalancedString.spec_3",
+    "negation": "AegisSpec.BalancedString.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result ans, one has 0 <= ans <= 3 * (n / 4). Here n / 4 is the exact integer T because n is divisible by 4.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BalancedString.spec_4",
+    "negation": "AegisSpec.BalancedString.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result ans, ans >= sum over x in {81,87,69,82} of max(0, C_x(0,n) - T).",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let T = n/4 and let C_x(0,n) be the number of indices i with 0 <= i < n and s[i] = x."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BalancedString.spec_5",
+    "negation": "AegisSpec.BalancedString.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result ans, ans = 0 if and only if for every x in {81,87,69,82}, the byte x occurs exactly T times in s.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let T = n/4."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BalancedString.spec_6",
+    "negation": "AegisSpec.BalancedString.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result ans, there exist integers l and j with 0 <= l <= j <= n, j - l = ans, and for every x in {81,87,69,82}, C_x(0,l) + C_x(j,n) <= T.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let T = n/4 and define C_x(a,b) as the number of indices i with a <= i < b and s[i] = x."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BalancedString.spec_7",
+    "negation": "AegisSpec.BalancedString.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result ans, for every pair of integers l and j with 0 <= l <= j <= n, if C_x(0,l) + C_x(j,n) <= T for every x in {81,87,69,82}, then j - l >= ans.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let T = n/4 and define C_x(a,b) as the number of indices i with a <= i < b and s[i] = x."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BalancedString.spec_8",
+    "negation": "AegisSpec.BalancedString.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result ans, there exist integers l and j with 0 <= l <= j <= n, j - l = ans, and a byte array t of length ans whose every entry belongs to {81,87,69,82}, such that replacing s[l..j) by t yields a byte array s' of length n in which each byte in {81,87,69,82} occurs exactly T times.",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let T = n/4."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BalancedString.spec_9",
+    "negation": "AegisSpec.BalancedString.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result ans on input s, the same function returns the same result ans on input rev(s).",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let rev(s) be the slice of length n with rev(s)[i] = s[n-1-i] for 0 <= i < n; rev(s) also satisfies the preconditions."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BalancedString.spec_10",
+    "negation": "AegisSpec.BalancedString.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result ans on input s, the same function returns the same result ans on input pi(s).",
+    "preconditions": "Let n = len(s). Assume 4 <= n <= 100000, n is divisible by 4, and every s[i] belongs to {81,87,69,82}. Let pi be any bijection from {81,87,69,82} to itself, and let pi(s) be the slice of length n with pi(s)[i] = pi(s[i]) for 0 <= i < n; pi(s) also satisfies the preconditions."
+  }
+]

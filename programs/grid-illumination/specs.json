@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GridIllumination.spec_1",
+    "negation": "AegisSpec.GridIllumination.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries), and for every j with 0 <= j < len(queries), letting q_r = queries[j][0] and q_c = queries[j][1], r[j] = 1 if and only if there exists i with 0 <= i < len(lamps) such that, writing p_r = lamps[i][0] and p_c = lamps[i][1], (p_r = q_r or p_c = q_c or p_r - p_c = q_r - q_c or p_r + p_c = q_r + q_c) and for every k with 0 <= k < j, not (|queries[k][0] - p_r| <= 1 and |queries[k][1] - p_c| <= 1); if no such i exists then r[j] = 0.",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; for every i with 0 <= i < len(lamps), len(lamps[i]) = 2 and 0 <= lamps[i][0] < n and 0 <= lamps[i][1] < n; for every j with 0 <= j < len(queries), len(queries[j]) = 2 and 0 <= queries[j][0] < n and 0 <= queries[j][1] < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GridIllumination.spec_2",
+    "negation": "AegisSpec.GridIllumination.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail by panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GridIllumination.spec_3",
+    "negation": "AegisSpec.GridIllumination.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries).",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GridIllumination.spec_4",
+    "negation": "AegisSpec.GridIllumination.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), r[j] = 0 or r[j] = 1.",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GridIllumination.spec_5",
+    "negation": "AegisSpec.GridIllumination.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the calls grid_illumination n lamps queries and grid_illumination n lamps2 queries return results r and r2, len(r) = len(r2) = len(queries) and for every j with 0 <= j < len(queries), r[j] = r2[j].",
+    "preconditions": "n and queries satisfy the query constraints from spec_1; lamps and lamps2 both satisfy the lamp constraints (len <= 20000, each inner vector has length 2, all coordinates in [0,n)); for every cell (a,b) with 0 <= a < n and 0 <= b < n, (a,b) occurs at least once in lamps if and only if it occurs at least once in lamps2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GridIllumination.spec_6",
+    "negation": "AegisSpec.GridIllumination.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the calls grid_illumination n lamps1 queries and grid_illumination n lamps2 queries return results r1 and r2, for every j with 0 <= j < len(queries), r1[j] <= r2[j].",
+    "preconditions": "n and queries satisfy the constraints from spec_1; lamps1 and lamps2 satisfy the lamp constraints; for every i with 0 <= i < len(lamps1), the cell (lamps1[i][0], lamps1[i][1]) occurs at least once in lamps2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GridIllumination.spec_7",
+    "negation": "AegisSpec.GridIllumination.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the calls grid_illumination n lamps queries and grid_illumination n lamps2 queries return results r and r2, r and r2 have the same length and r[j] = r2[j] for every j with 0 <= j < len(queries).",
+    "preconditions": "n and queries satisfy the query constraints from spec_1; lamps and lamps2 satisfy the lamp constraints; let L be the set of cells occurring in lamps and L2 the set occurring in lamps2; for every cell p = (a,b) in the symmetric difference of L and L2 (present in exactly one of the two sets), and for every j with 0 <= j < len(queries), a != queries[j][0], b != queries[j][1], a - b != queries[j][0] - queries[j][1], and a + b != queries[j][0] + queries[j][1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GridIllumination.spec_8",
+    "negation": "AegisSpec.GridIllumination.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all j and k with 0 <= j < k < len(queries) and queries[j][0] = queries[k][0] and queries[j][1] = queries[k][1], if r[j] = 0 then r[k] = 0.",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GridIllumination.spec_9",
+    "negation": "AegisSpec.GridIllumination.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the calls grid_illumination n lamps queries and grid_illumination n lamps queries2 return results r and r2, for every j with 0 <= j < len(queries) and 0 <= j < len(queries2), if for every i with 0 <= i <= j, queries[i][0] = queries2[i][0] and queries[i][1] = queries2[i][1], then r[j] = r2[j].",
+    "preconditions": "n, lamps, queries, and queries2 satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; len(queries2) <= 20000; every lamps[i], queries[j], and queries2[j] has length 2; all their coordinates are in [0, n)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GridIllumination.spec_10",
+    "negation": "AegisSpec.GridIllumination.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(queries) and every i with 0 <= i < len(lamps), if, writing p_r = lamps[i][0], p_c = lamps[i][1], q_r = queries[j][0], q_c = queries[j][1], we have (p_r = q_r or p_c = q_c or p_r - p_c = q_r - q_c or p_r + p_c = q_r + q_c) and for every k with 0 <= k < j, not (|queries[k][0] - p_r| <= 1 and |queries[k][1] - p_c| <= 1), then r[j] = 1.",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GridIllumination.spec_11",
+    "negation": "AegisSpec.GridIllumination.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(queries), if r[j] = 1 then there exists i with 0 <= i < len(lamps) such that, writing p_r = lamps[i][0], p_c = lamps[i][1], q_r = queries[j][0], q_c = queries[j][1], we have (p_r = q_r or p_c = q_c or p_r - p_c = q_r - q_c or p_r + p_c = q_r + q_c) and for every k with 0 <= k < j, not (|queries[k][0] - p_r| <= 1 and |queries[k][1] - p_c| <= 1).",
+    "preconditions": "n, lamps, queries satisfy the problem constraints: 1 <= n <= 10^9; len(lamps) <= 20000; len(queries) <= 20000; every lamps[i] and queries[j] has length 2; all coordinates are in [0, n)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GridIllumination.spec_12",
+    "negation": "AegisSpec.GridIllumination.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries) and for every j with 0 <= j < len(queries), r[j] = 0.",
+    "preconditions": "n and queries satisfy the query constraints from spec_1; len(lamps) = 0."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GridIllumination.spec_13",
+    "negation": "AegisSpec.GridIllumination.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 1 and r[0] = 1 if and only if there exists i with 0 <= i < len(lamps) such that, writing p_r = lamps[i][0], p_c = lamps[i][1], q_r = queries[0][0], q_c = queries[0][1], we have (p_r = q_r or p_c = q_c or p_r - p_c = q_r - q_c or p_r + p_c = q_r + q_c); otherwise r[0] = 0.",
+    "preconditions": "n and lamps satisfy the constraints from spec_1; len(queries) = 1; queries[0] has length 2 and 0 <= queries[0][0] < n and 0 <= queries[0][1] < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GridIllumination.spec_14",
+    "negation": "AegisSpec.GridIllumination.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries). If len(queries) > 0, then r[0] = 1 if and only if len(lamps) > 0, and for every j with 1 <= j < len(queries), r[j] = 0.",
+    "preconditions": "n = 1; lamps and queries satisfy the problem constraints (so every coordinate in lamps and queries is 0); len(lamps) <= 20000; len(queries) <= 20000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.GridIllumination.spec_15",
+    "negation": "AegisSpec.GridIllumination.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the calls grid_illumination n1 lamps queries and grid_illumination n2 lamps queries return results r1 and r2, len(r1) = len(r2) = len(queries) and r1[j] = r2[j] for every j with 0 <= j < len(queries).",
+    "preconditions": "n1 and n2 satisfy 1 <= n1 <= 10^9 and 1 <= n2 <= 10^9; lamps and queries satisfy the problem constraints for both n1 and n2, meaning len(lamps) <= 20000, len(queries) <= 20000, every lamps[i] and queries[j] has length 2, and every coordinate is at least 0 and less than both n1 and n2."
+  }
+]

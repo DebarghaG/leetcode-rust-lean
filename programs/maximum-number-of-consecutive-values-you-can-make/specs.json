@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_1",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_1_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such coins, the function returns a result r; it does not fail by panic, overflow, or out-of-bounds access.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_2",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_2_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the largest integer k with k >= 1 such that every integer x satisfying 0 <= x < k is equal to sum_{i in S} coins[i] for some set S of distinct indices with 0 <= i < len(coins) for every i in S. Equivalently, r is the smallest nonnegative integer that is not equal to such a subset sum.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_3",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_4",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 1 + sum_{i=0}^{len(coins)-1} coins[i].",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_5",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000, and for every index i with 0 <= i < len(coins), coins[i] != 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_6",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r >= 2.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000, and there exists an index i with 0 <= i < len(coins) and coins[i] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_7",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(coins) + 1.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000, and for every index i with 0 <= i < len(coins), coins[i] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_8",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there is no set S of distinct indices with 0 <= i < len(coins) for every i in S such that sum_{i in S} coins[i] = r.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_9",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If get_maximum_consecutive(coins) returns r and get_maximum_consecutive(coins2) returns r2, then r = r2.",
+    "preconditions": "coins and coins2 are slices of 64-bit integers, both satisfy 1 <= len(coins), len(coins2) <= 40000 and all their entries lie in [1,40000], and coins2 is a permutation of coins (same length and same multiset of values)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_10",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If get_maximum_consecutive(coins) returns r and get_maximum_consecutive(coins2) returns r2, then r2 >= r.",
+    "preconditions": "coins and coins2 satisfy the input constraints, len(coins) < 40000, len(coins2) = len(coins) + 1, and there is a value v with 1 <= v <= 40000 such that coins2[i] = coins[i] for 0 <= i < len(coins) and coins2[len(coins)] = v."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_11",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If get_maximum_consecutive(coins) returns r, get_maximum_consecutive(coins2) returns r2, and 1 <= v <= r, then r2 >= r + v.",
+    "preconditions": "coins and coins2 satisfy the input constraints, len(coins) < 40000, len(coins2) = len(coins) + 1, and there is a value v with 1 <= v <= 40000 such that coins2[i] = coins[i] for 0 <= i < len(coins) and coins2[len(coins)] = v."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_12",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the equality r = 1 + sum_{i=0}^{len(coins)-1} coins[i] holds if and only if every integer x with 0 <= x <= sum_{i=0}^{len(coins)-1} coins[i] is equal to sum_{i in S} coins[i] for some set S of distinct indices with 0 <= i < len(coins) for every i in S.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_13",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If get_maximum_consecutive(coins) returns r, get_maximum_consecutive(coins2) returns r2, and v > r, then r2 = r.",
+    "preconditions": "coins and coins2 satisfy the input constraints, len(coins) < 40000, len(coins2) = len(coins) + 1, and there is a value v with 1 <= v <= 40000 such that coins2[i] = coins[i] for 0 <= i < len(coins) and coins2[len(coins)] = v."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GetMaximumConsecutive.spec_14",
+    "negation": "AegisSpec.GetMaximumConsecutive.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let a be the nondecreasing sort of coins, and let p_j = sum_{i=0}^{j-1} a_i, with p_0 = 0. Let m be the least index j with 0 <= j < len(a) and a_j > 1 + p_j; if no such j exists, let m = len(a). Whenever the function returns a result r, r = 1 + p_m.",
+    "preconditions": "coins is a slice of 64-bit integers with 1 <= len(coins) <= 40000 and, for every index i with 0 <= i < len(coins), 1 <= coins[i] <= 40000."
+  }
+]

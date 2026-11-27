@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestWay.spec_1",
+    "negation": "AegisSpec.ShortestWay.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns Ok ans (i.e. it does not fail), where ans is the minimum number of subsequences of source whose concatenation equals target. Equivalently, let n = len(target). Call a contiguous segment target[l..e) (0 <= l <= e <= n) good when it is a subsequence of source, meaning that either e = l, or there are indices 0 <= i_l < i_{l+1} < ... < i_{e-1} < len(source) with source[i_t] = target[t] for every t in [l,e). A decomposition into k parts is a sequence 0 = c_0 < c_1 < ... < c_k = n such that target[c_j..c_{j+1}) is good for every j with 0 <= j < k. Then ans is the least k for which such a decomposition exists; if no decomposition exists, ans = -1. Since target is nonempty in the precondition, any valid decomposition has k >= 1 and all parts are nonempty.",
+    "preconditions": "source and target are byte slices of lowercase English letters with 1 <= len(source) <= 1000 and 1 <= len(target) <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestWay.spec_2",
+    "negation": "AegisSpec.ShortestWay.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns Ok r for some i64 r; it does not panic, overflow, return Err, or otherwise fail.",
+    "preconditions": "source and target are byte slices with len(source) <= 1000 and len(target) <= 1000. No lowercase or nonemptiness assumption is needed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestWay.spec_3",
+    "negation": "AegisSpec.ShortestWay.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if there exists an index i with 0 <= i < len(target) such that target[i] is different from source[j] for every j with 0 <= j < len(source).",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestWay.spec_4",
+    "negation": "AegisSpec.ShortestWay.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 0, r <= len(target).",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestWay.spec_5",
+    "negation": "AegisSpec.ShortestWay.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with len(target) > 0 and r >= 0, r >= 1.",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestWay.spec_6",
+    "negation": "AegisSpec.ShortestWay.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if len(target) = 0.",
+    "preconditions": "source and target are byte slices with len(source) <= 1000 and len(target) <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestWay.spec_7",
+    "negation": "AegisSpec.ShortestWay.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if target is a subsequence of source, i.e. there exist indices 0 <= i_0 < i_1 < ... < i_{len(target)-1} < len(source) such that source[i_j] = target[j] for every j with 0 <= j < len(target).",
+    "preconditions": "source and target are byte slices with len(target) > 0 and len(source), len(target) <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestWay.spec_8",
+    "negation": "AegisSpec.ShortestWay.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if target is not a subsequence of source (i.e. there do not exist 0 <= i_0 < ... < i_{len(target)-1} < len(source) with source[i_j] = target[j] for all j), then r >= 2.",
+    "preconditions": "source and target are byte slices with len(target) > 0, len(source), len(target) <= 1000, and for every i with 0 <= i < len(target) there exists j with 0 <= j < len(source) and source[j] = target[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestWay.spec_9",
+    "negation": "AegisSpec.ShortestWay.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n if and only if both of the following hold: for every i with 0 <= i < n there exists j with 0 <= j < len(source) and source[j] = target[i]; and for every i with 0 <= i < n-1 there do not exist indices 0 <= j < k < len(source) with source[j] = target[i] and source[k] = target[i+1].",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(target) = n >= 1 and len(source) <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestWay.spec_10",
+    "negation": "AegisSpec.ShortestWay.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if target[i] = c for every i with 0 <= i < n, then r is the least integer k with n <= k*m; otherwise r = -1.",
+    "preconditions": "source and target are byte slices with len(source) = m > 0, len(target) = n <= 1000, and there exists a byte c such that source[j] = c for every j with 0 <= j < m."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ShortestWay.spec_11",
+    "negation": "AegisSpec.ShortestWay.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = k >= 0, there exist cut points 0 = c_0 < c_1 < ... < c_k = len(target) such that for every j with 0 <= j < k, the segment target[c_j..c_{j+1}) is a subsequence of source, meaning there are indices 0 <= i_{c_j} < i_{c_j+1} < ... < i_{c_{j+1}-1} < len(source) with source[i_t] = target[t] for every t in [c_j,c_{j+1}).",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ShortestWay.spec_12",
+    "negation": "AegisSpec.ShortestWay.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = k >= 0, for every j with 0 <= j < k there does not exist a decomposition of target into j subsequences of source, i.e. there are no cut points 0 = d_0 < d_1 < ... < d_j = len(target) such that every segment target[d_t..d_{t+1}) is a subsequence of source.",
+    "preconditions": "source and target are byte slices of lowercase English letters with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ShortestWay.spec_13",
+    "negation": "AegisSpec.ShortestWay.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns Ok r (it never fails), and r >= 0 if and only if every byte of target occurs at least once in source. Consequently r = -1 if and only if some target byte does not occur in source; in particular, r >= 0 when len(target) = 0.",
+    "preconditions": "source and target are byte slices with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ShortestWay.spec_14",
+    "negation": "AegisSpec.ShortestWay.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Ok r, if target can be partitioned into k contiguous segments, each a subsequence of source (i.e. there exist 0 = c_0 < c_1 < ... < c_k = len(target) such that each segment target[c_j..c_{j+1}) is a subsequence of source, with k = 0 allowed only when len(target) = 0), then 0 <= r <= k. In particular, if such a decomposition exists then r != -1, and if no such decomposition exists then r = -1.",
+    "preconditions": "source and target are byte slices with len(source) <= 1000 and len(target) <= 1000; empty slices are allowed."
+  }
+]

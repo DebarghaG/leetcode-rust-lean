@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_1",
+    "negation": "AegisSpec.MctFromLeafValues.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = ans(arr), where ans(arr) is defined as follows. A valid tree for arr is a finite rooted ordered binary tree in which every node has either 0 or 2 children, whose leaves, read in in-order, have values arr[0], arr[1], ..., arr[n-1], and in which every internal (non-leaf) node has value (max of the leaf values in its left subtree) * (max of the leaf values in its right subtree). For such a tree T, let C(T) be the sum of the values of all internal nodes of T (leaves are not summed). Then ans(arr) = min { C(T) : T is a valid tree for arr }. Thus r is the smallest possible sum of non-leaf node values over all such trees.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n. (The problem's guarantee that the answer fits in a 32-bit signed integer is automatic from these bounds.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_2",
+    "negation": "AegisSpec.MctFromLeafValues.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for arr; it does not panic, fail, or overflow at any point.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_3",
+    "negation": "AegisSpec.MctFromLeafValues.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (n-1) * m * m, where n = len(arr) and m = min { arr[i] : 0 <= i < n }.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_4",
+    "negation": "AegisSpec.MctFromLeafValues.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (n-1) * M * M, where n = len(arr) and M = max { arr[i] : 0 <= i < n }.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_5",
+    "negation": "AegisSpec.MctFromLeafValues.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{n-2} arr[i] * arr[i+1].",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_6",
+    "negation": "AegisSpec.MctFromLeafValues.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = arr[0] * arr[1].",
+    "preconditions": "arr is a slice of i64 with n = len(arr), n = 2, and 1 <= arr[i] <= 15 for i = 0,1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_7",
+    "negation": "AegisSpec.MctFromLeafValues.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min( arr[1]*arr[2] + arr[0]*max(arr[1], arr[2]), arr[0]*arr[1] + max(arr[0], arr[1])*arr[2] ).",
+    "preconditions": "arr is a slice of i64 with n = len(arr), n = 3, and 1 <= arr[i] <= 15 for i = 0,1,2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_8",
+    "negation": "AegisSpec.MctFromLeafValues.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{n-2} arr[i] * arr[i+1].",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i. Also arr is monotone: either arr[0] <= arr[1] <= ... <= arr[n-1], or arr[0] >= arr[1] >= ... >= arr[n-1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_9",
+    "negation": "AegisSpec.MctFromLeafValues.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (n-1) * x * x.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and there is an integer x with 1 <= x <= 15 such that arr[i] = x for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_10",
+    "negation": "AegisSpec.MctFromLeafValues.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever mct_from_leaf_values(arr) returns r and mct_from_leaf_values(arr') returns r', we have r <= r'.",
+    "preconditions": "arr and arr' are two slices of i64, both with length n, 2 <= n <= 40, and 1 <= arr[i], arr'[i] <= 15 for every i with 0 <= i < n. Moreover arr[i] <= arr'[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_11",
+    "negation": "AegisSpec.MctFromLeafValues.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever mct_from_leaf_values(arr) returns r and mct_from_leaf_values(rev(arr)) returns r_rev, we have r = r_rev.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i. Let rev(arr) be the slice of length n with rev(arr)[i] = arr[n-1-i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_12",
+    "negation": "AegisSpec.MctFromLeafValues.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever mct_from_leaf_values(arr) returns r and mct_from_leaf_values(c*arr) returns r_c, we have r_c = c * c * r.",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i. Let c be a positive integer such that 1 <= c * arr[i] <= 15 for every i. Define c*arr by (c*arr)[i] = c * arr[i]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_13",
+    "negation": "AegisSpec.MctFromLeafValues.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a valid right-comb tree for arr whose non-leaf-node sum is R(arr) = sum_{i=0}^{n-2} ( arr[i] * max { arr[j] : i+1 <= j <= n-1 } ). Whenever the function returns a result r, r <= R(arr).",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MctFromLeafValues.spec_14",
+    "negation": "AegisSpec.MctFromLeafValues.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a valid left-comb tree for arr whose non-leaf-node sum is L(arr) = sum_{i=1}^{n-1} ( max { arr[j] : 0 <= j <= i-1 } * arr[i] ). Whenever the function returns a result r, r <= L(arr).",
+    "preconditions": "arr is a slice of i64 with n = len(arr), 2 <= n <= 40, and 1 <= arr[i] <= 15 for every i with 0 <= i < n."
+  }
+]

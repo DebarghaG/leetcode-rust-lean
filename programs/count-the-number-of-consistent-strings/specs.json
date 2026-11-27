@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_1",
+    "negation": "AegisSpec.CountConsistentStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the integer value of r equals the number of indices i with 0 <= i < len(words) such that for every k with 0 <= k < len(words[i]) there exists j with 0 <= j < len(allowed) and allowed[j] = words[i][k].",
+    "preconditions": "len(allowed) >= 1 and len(allowed) <= 26; all bytes of allowed are pairwise distinct and are lowercase English letters (ASCII codes 97 through 122); len(words) >= 1 and len(words) <= 10000; for every i with 0 <= i < len(words), len(words[i]) >= 1 and len(words[i]) <= 10, and every byte of words[i] is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_2",
+    "negation": "AegisSpec.CountConsistentStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "len(allowed) >= 1 and len(allowed) <= 26; all bytes of allowed are pairwise distinct and are lowercase English letters (ASCII codes 97 through 122); len(words) >= 1 and len(words) <= 10000; for every i with 0 <= i < len(words), len(words[i]) >= 1 and len(words[i]) <= 10, and every byte of words[i] is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_3",
+    "negation": "AegisSpec.CountConsistentStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the integer value of r satisfies 0 <= r <= len(words).",
+    "preconditions": "len(allowed) >= 1 and len(allowed) <= 26; all bytes of allowed are pairwise distinct and are lowercase English letters (ASCII codes 97 through 122); len(words) >= 1 and len(words) <= 10000; for every i with 0 <= i < len(words), len(words[i]) >= 1 and len(words[i]) <= 10, and every byte of words[i] is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_4",
+    "negation": "AegisSpec.CountConsistentStrings.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, the integer value of r is 0 if and only if there is no index i with 0 <= i < len(words) such that for every k with 0 <= k < len(words[i]) there exists j with 0 <= j < len(allowed) and allowed[j] = words[i][k].",
+    "preconditions": "len(allowed) >= 1 and len(allowed) <= 26; all bytes of allowed are pairwise distinct and are lowercase English letters (ASCII codes 97 through 122); len(words) >= 1 and len(words) <= 10000; for every i with 0 <= i < len(words), len(words[i]) >= 1 and len(words[i]) <= 10, and every byte of words[i] is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_5",
+    "negation": "AegisSpec.CountConsistentStrings.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, the integer value of r equals len(words) if and only if for every i with 0 <= i < len(words) and every k with 0 <= k < len(words[i]) there exists j with 0 <= j < len(allowed) and allowed[j] = words[i][k].",
+    "preconditions": "len(allowed) >= 1 and len(allowed) <= 26; all bytes of allowed are pairwise distinct and are lowercase English letters (ASCII codes 97 through 122); len(words) >= 1 and len(words) <= 10000; for every i with 0 <= i < len(words), len(words[i]) >= 1 and len(words[i]) <= 10, and every byte of words[i] is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_6",
+    "negation": "AegisSpec.CountConsistentStrings.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_consistent_strings(allowed1, words) returns r1 and count_consistent_strings(allowed2, words) returns r2, the integer values of r1 and r2 are equal.",
+    "preconditions": "The usual constraints hold for (allowed1, words) and for (allowed2, words): each allowed has length 1 through 26 with pairwise distinct lowercase English letters, and words has length 1 through 10000 with every word having length 1 through 10 and lowercase English letters. Additionally, allowed2 is a permutation of allowed1, meaning that for every byte c, c occurs in allowed1 if and only if c occurs in allowed2, where c occurs in an allowed slice a if there exists j with 0 <= j < len(a) and a[j] = c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_7",
+    "negation": "AegisSpec.CountConsistentStrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the two calls return r1 and r2, the integer values of r1 and r2 are equal.",
+    "preconditions": "The usual constraints hold for (allowed, words1) and for (allowed, words2): allowed has length 1 through 26 with pairwise distinct lowercase English letters, and each word list has length 1 through 10000 with every word having length 1 through 10 and lowercase English letters. Additionally, words2 is a permutation of words1, meaning len(words1) = len(words2) and there exists a bijection pi from the index set {0,...,len(words1)-1} to itself such that for every i, words2[i] and words1[pi(i)] are the same byte sequence (same length and same bytes at each position)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_8",
+    "negation": "AegisSpec.CountConsistentStrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_consistent_strings(allowedA, words) returns rA and count_consistent_strings(allowedB, words) returns rB, the integer value of rA is at most the integer value of rB.",
+    "preconditions": "The usual constraints hold for (allowedA, words) and for (allowedB, words): each allowed has length 1 through 26 with pairwise distinct lowercase English letters, and words has length 1 through 10000 with every word having length 1 through 10 and lowercase English letters. Additionally, every byte c that occurs in allowedA also occurs in allowedB, where c occurs in an allowed slice a if there exists j with 0 <= j < len(a) and a[j] = c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountConsistentStrings.spec_9",
+    "negation": "AegisSpec.CountConsistentStrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_consistent_strings(allowed, words) returns r, count_consistent_strings(allowed, words1) returns r1, and count_consistent_strings(allowed, words2) returns r2, the integer value of r equals the integer value of r1 plus the integer value of r2.",
+    "preconditions": "The usual constraints hold for (allowed, words): allowed has length 1 through 26 with pairwise distinct lowercase English letters, and words has length 1 through 10000 with every word having length 1 through 10 and lowercase English letters. Let p be an integer with 1 <= p < len(words). Let words1 be the prefix words[0..p) and words2 the suffix words[p..len(words)). The usual constraints also hold for (allowed, words1) and for (allowed, words2), which are both nonempty word lists."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumEffort.spec_1",
+    "negation": "AegisSpec.MinimumEffort.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever minimum_effort(tasks) returns r, for every integer E the following two conditions are equivalent: (1) there exists a permutation p of {0,...,n-1} such that for every k with 0 <= k < n, E >= m_{p(k)} + (sum of a_{p(j)} for 0 <= j < k); (2) E >= r. Thus r is exactly the least integer initial energy that permits finishing all tasks in some order.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumEffort.spec_2",
+    "negation": "AegisSpec.MinimumEffort.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function minimum_effort(tasks) returns a result: there exists r such that the Lean result is Result.ok r. It does not fail, overflow, or panic.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumEffort.spec_3",
+    "negation": "AegisSpec.MinimumEffort.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_effort(tasks) returns r, for every i with 0 <= i < n we have r >= m_i; equivalently r >= max_{0 <= i < n} m_i.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumEffort.spec_4",
+    "negation": "AegisSpec.MinimumEffort.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_effort(tasks) returns r, r >= (sum_{i=0}^{n-1} a_i) + min_{0 <= i < n} (m_i - a_i).",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumEffort.spec_5",
+    "negation": "AegisSpec.MinimumEffort.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_effort(tasks) returns r, r <= (sum_{i=0}^{n-1} a_i) + max_{0 <= i < n} (m_i - a_i).",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumEffort.spec_6",
+    "negation": "AegisSpec.MinimumEffort.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_effort(tasks) returns r, for every permutation p of {0,...,n-1}, r <= max_{0 <= k < n} (m_{p(k)} + (sum of a_{p(j)} for 0 <= j < k)).",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumEffort.spec_7",
+    "negation": "AegisSpec.MinimumEffort.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_effort(tasks) returns r, r = (sum_{i=0}^{n-1} a_i) + D.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000. Assume additionally that there exists an integer D such that m_i - a_i = D for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumEffort.spec_8",
+    "negation": "AegisSpec.MinimumEffort.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_effort(tasks) returns r, r = M + (sum_{i=0}^{n-1} a_i) - max_{0 <= i < n} a_i.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000. Assume additionally that there exists an integer M such that m_i = M for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumEffort.spec_9",
+    "negation": "AegisSpec.MinimumEffort.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_effort(tasks) returns r and minimum_effort(tasks') returns r', we have r = r'.",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000. Let tasks' be a valid task list under the same constraints with len(tasks') = n, and assume there is a permutation q of {0,...,n-1} such that tasks'[i] = tasks[q(i)] for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumEffort.spec_10",
+    "negation": "AegisSpec.MinimumEffort.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_effort(tasks) returns r and minimum_effort(tasks') returns r', we have r <= r'.",
+    "preconditions": "Let n = len(tasks) = len(tasks'). Assume both tasks and tasks' are valid task lists: for every i with 0 <= i < n, len(tasks[i]) = len(tasks'[i]) = 2, and writing a_i = tasks[i][0], m_i = tasks[i][1], a'_i = tasks'[i][0], m'_i = tasks'[i][1], we have 1 <= a_i <= m_i <= 10000 and 1 <= a'_i <= m'_i <= 10000. Assume moreover a_i <= a'_i and m_i <= m'_i for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumEffort.spec_11",
+    "negation": "AegisSpec.MinimumEffort.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever minimum_effort(tasks) returns r, if p is a permutation of {0,...,n-1} such that d_{p(0)} >= d_{p(1)} >= ... >= d_{p(n-1)}, then r = max_{0 <= k < n} (m_{p(k)} + (sum of a_{p(j)} for 0 <= j < k)).",
+    "preconditions": "Let n = len(tasks). Assume 1 <= n <= 100000. For every i with 0 <= i < n, assume len(tasks[i]) = 2. Write a_i = tasks[i][0] and m_i = tasks[i][1]; assume 1 <= a_i <= m_i <= 10000. Let d_i = m_i - a_i."
+  }
+]

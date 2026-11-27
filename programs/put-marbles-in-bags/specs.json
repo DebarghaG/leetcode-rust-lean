@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PutMarbles.spec_1",
+    "negation": "AegisSpec.PutMarbles.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(weights). For any subset C of {0, 1, ..., n-2} with |C| = k-1, define score(C) = weights[0] + weights[n-1] + sum_{c in C} (weights[c] + weights[c+1]). (If n = 1, the set {0, ..., n-2} is empty; the only such C is the empty set, and score(empty) = weights[0] + weights[0].) Let maxScore = max_{C} score(C) and minScore = min_{C} score(C), where C ranges over all subsets of {0, ..., n-2} with |C| = k-1. The function returns a result r and r = maxScore - minScore.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PutMarbles.spec_2",
+    "negation": "AegisSpec.PutMarbles.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PutMarbles.spec_3",
+    "negation": "AegisSpec.PutMarbles.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(weights) and let P be the multiset of adjacent pair sums P = { weights[i] + weights[i+1] : 0 <= i < n-1 }. Define SumLargest(P, m) as the sum of the m largest elements of P (with multiplicity), and 0 if m = 0. Define SumSmallest(P, m) as the sum of the m smallest elements of P (with multiplicity), and 0 if m = 0. The function returns a result r and r = SumLargest(P, k-1) - SumSmallest(P, k-1).",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PutMarbles.spec_4",
+    "negation": "AegisSpec.PutMarbles.spec_4_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every weights and k satisfying the preconditions, the function returns a result (it does not fail, panic, or overflow).",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PutMarbles.spec_5",
+    "negation": "AegisSpec.PutMarbles.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, the function returns r = 0.",
+    "preconditions": "1 <= len(weights) <= 100000; k = 1; for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PutMarbles.spec_6",
+    "negation": "AegisSpec.PutMarbles.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = len(weights), the function returns r = 0.",
+    "preconditions": "1 <= len(weights) <= 100000; k = len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PutMarbles.spec_7",
+    "negation": "AegisSpec.PutMarbles.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 2, let M = max{ weights[i] + weights[i+1] : 0 <= i < len(weights)-1 } and m = min{ weights[i] + weights[i+1] : 0 <= i < len(weights)-1 }. Then the function returns r = M - m.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); k = 2; for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PutMarbles.spec_8",
+    "negation": "AegisSpec.PutMarbles.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(weights) >= 2 and k = len(weights) - 1, let M and m be as in spec_7. Then the function returns r = M - m.",
+    "preconditions": "len(weights) >= 2; len(weights) <= 100000; k = len(weights) - 1; for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PutMarbles.spec_9",
+    "negation": "AegisSpec.PutMarbles.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If weights[i] = c for every i with 0 <= i < len(weights), then the function returns r = 0.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); there exists c such that weights[i] = c for every i with 0 <= i < len(weights); for every i, 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PutMarbles.spec_10",
+    "negation": "AegisSpec.PutMarbles.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any weights satisfying the preconditions, let weights' be the array defined by weights'[i] = weights[len(weights)-1-i] for 0 <= i < len(weights). Whenever the function returns r for (weights, k) and r' for (weights', k), we have r = r'.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PutMarbles.spec_11",
+    "negation": "AegisSpec.PutMarbles.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let weights'[i] = weights[i] + c for every i. Whenever the function returns r for (weights, k) and r' for (weights', k), we have r = r'.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i, 1 <= weights[i] <= 1000000000; c is an integer such that 1 <= weights[i] + c <= 1000000000 for every i with 0 <= i < len(weights)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PutMarbles.spec_12",
+    "negation": "AegisSpec.PutMarbles.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let weights'[i] = c * weights[i] for every i. Whenever the function returns r for (weights, k) and r' for (weights', k), we have r' = c * r.",
+    "preconditions": "1 <= len(weights) <= 100000; 1 <= k <= len(weights); for every i, 1 <= weights[i] <= 1000000000; c is a positive integer such that 1 <= c * weights[i] <= 1000000000 for every i with 0 <= i < len(weights)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PutMarbles.spec_13",
+    "negation": "AegisSpec.PutMarbles.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max{ weights[i] + weights[i+1] : 0 <= i < len(weights)-1 } and m = min{ weights[i] + weights[i+1] : 0 <= i < len(weights)-1 }. Whenever the function returns a result r, r <= (k-1) * (M - m).",
+    "preconditions": "1 <= len(weights) <= 100000; len(weights) >= 2; 1 <= k <= len(weights); for every i with 0 <= i < len(weights), 1 <= weights[i] <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PutMarbles.spec_14",
+    "negation": "AegisSpec.PutMarbles.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for (weights, k) and r' for (weights', k), we have r = r'.",
+    "preconditions": "weights and weights' are arrays of the same length n with 1 <= n <= 100000 and 1 <= k <= n; for every i with 0 <= i < n, 1 <= weights[i] <= 1000000000 and 1 <= weights'[i] <= 1000000000; and the multisets { weights[i] + weights[i+1] : 0 <= i < n-1 } and { weights'[i] + weights'[i+1] : 0 <= i < n-1 } are equal."
+  }
+]

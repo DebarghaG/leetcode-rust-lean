@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_1",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). Let C(s) be the number of permutations p of the set {0,1,...,n} (equivalently, lists p of length n+1 containing each of 0,1,...,n exactly once) such that for every i with 0 <= i < n, if s[i] = 68 then p[i] > p[i+1], and if s[i] = 73 then p[i] < p[i+1]. Whenever num_perms_di_sequence returns a result r, r is congruent to C(s) modulo M = 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_2",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, num_perms_di_sequence returns a result r; it does not fail, panic, or encounter arithmetic overflow.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_3",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_perms_di_sequence returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_4",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_perms_di_sequence returns a result r, r = 1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I'). Assume either s[i] = 73 for all i with 0 <= i < n, or s[i] = 68 for all i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_5",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let E_m be the Euler zigzag number: the number of permutations a of {0,1,...,m-1} such that for every j with 0 <= j < m-1, a[j] < a[j+1] when j is even and a[j] > a[j+1] when j is odd. Then whenever num_perms_di_sequence returns r, r is congruent to E_{n+1} modulo 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I'). Assume s is alternating: either s[i] = 73 exactly for even i and s[i] = 68 exactly for odd i, or s[i] = 68 exactly for even i and s[i] = 73 exactly for odd i, for all 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_6",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte array t of length n with t[i] = s[n-1-i] for 0 <= i < n, and let C(s) and C(t) be the corresponding valid-permutation counts as defined in spec_1. Then C(s) = C(t). Equivalently, if the function returns r_s on s and r_t on rev(s), then r_s = r_t.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_7",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let comp(s) be the byte array t with t[i] = 73 if s[i] = 68, and t[i] = 68 if s[i] = 73, for 0 <= i < n. Let C(s) and C(t) be the corresponding valid-permutation counts as defined in spec_1. Then C(s) = C(t). Equivalently, if the function returns r_s on s and r_t on comp(s), then r_s = r_t.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_8",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_perms_di_sequence returns a result r, r equals the exact number C(s) of valid permutations as defined in spec_1, not merely C(s) modulo 1000000007.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I'). Assume n <= 11."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_9",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_perms_di_sequence returns r, r is congruent modulo 1000000007 to binom(n+1, k+1) - 1, where binom(a,b) is the ordinary binomial coefficient.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I'). Assume there is exactly one index k with 0 <= k < n such that s[k] = 68, and s[i] = 73 for every i with 0 <= i < n and i != k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumPermsDiSequence.spec_10",
+    "negation": "AegisSpec.NumPermsDiSequence.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_perms_di_sequence returns r, r is congruent modulo 1000000007 to binom(n+1, k+1) - 1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 200, and for every i with 0 <= i < n, s[i] is either 68 (ASCII 'D') or 73 (ASCII 'I'). Assume there is exactly one index k with 0 <= k < n such that s[k] = 73, and s[i] = 68 for every i with 0 <= i < n and i != k."
+  }
+]

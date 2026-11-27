@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MatrixScore.spec_1",
+    "negation": "AegisSpec.MatrixScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). For bits a_0,...,a_{m-1} in {0,1} and b_0,...,b_{n-1} in {0,1}, let A[i][j] = (grid[i][j] + a_i + b_j) mod 2 for 0 <= i < m and 0 <= j < n, and let score(A) = sum_{i=0}^{m-1} sum_{j=0}^{n-1} A[i][j] * 2^(n-1-j). Then (i) score(A) <= r for every choice of the bits a_i, b_j, and (ii) score(A) = r for some choice of the bits a_i, b_j. Equivalently, r is the maximum score over all matrices obtainable from grid by any number of row/column toggles, where the score of a matrix is the sum of its rows read as binary numbers with the leftmost entry most significant (weight 2^(n-1-j) for column j).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n (for every i with 0 <= i < m, len(grid[i]) = n), and every entry is binary (for every i, j with 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MatrixScore.spec_2",
+    "negation": "AegisSpec.MatrixScore.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r <= m * (2^n - 1), where m = len(grid) and n = len(grid[0]).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MatrixScore.spec_3",
+    "negation": "AegisSpec.MatrixScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have r >= m * 2^(n-1), where m = len(grid) and n = len(grid[0]).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MatrixScore.spec_4",
+    "negation": "AegisSpec.MatrixScore.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, we have r >= sum_{i=0}^{m-1} sum_{j=0}^{n-1} grid[i][j] * 2^(n-1-j), i.e., the answer is at least the score of the input matrix itself.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MatrixScore.spec_5",
+    "negation": "AegisSpec.MatrixScore.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist bits a_0,...,a_{m-1} in {0,1} and b_0,...,b_{n-1} in {0,1} such that the matrix A defined by A[i][j] = (grid[i][j] + a_i + b_j) mod 2 for 0 <= i < m and 0 <= j < n satisfies sum_{i=0}^{m-1} sum_{j=0}^{n-1} A[i][j] * 2^(n-1-j) = r. Thus the maximum is attained by some sequence of moves.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MatrixScore.spec_6",
+    "negation": "AegisSpec.MatrixScore.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every choice of bits a_0,...,a_{m-1} in {0,1} and b_0,...,b_{n-1} in {0,1}, the matrix A defined by A[i][j] = (grid[i][j] + a_i + b_j) mod 2 for 0 <= i < m and 0 <= j < n satisfies sum_{i=0}^{m-1} sum_{j=0}^{n-1} A[i][j] * 2^(n-1-j) <= r. Thus no sequence of moves yields a strictly larger score.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MatrixScore.spec_7",
+    "negation": "AegisSpec.MatrixScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and m = len(grid) = 1, we have r = 2^n - 1, where n = len(grid[0]).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MatrixScore.spec_8",
+    "negation": "AegisSpec.MatrixScore.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and n = len(grid[0]) = 1, we have r = m, where m = len(grid).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MatrixScore.spec_9",
+    "negation": "AegisSpec.MatrixScore.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and grid[i][j] = 0 for every 0 <= i < m and 0 <= j < n, we have r = m * (2^n - 1).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MatrixScore.spec_10",
+    "negation": "AegisSpec.MatrixScore.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever matrix_score(grid) returns a result r and matrix_score(grid') returns a result r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary. Fix an index i0 with 0 <= i0 < m and define grid' by grid'[i][j] = 1 - grid[i][j] if i = i0, and grid'[i][j] = grid[i][j] otherwise (so grid' is again an m x n binary matrix satisfying the preconditions)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MatrixScore.spec_11",
+    "negation": "AegisSpec.MatrixScore.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist bits a_0,...,a_{m-1} in {0,1} and b_0,...,b_{n-1} in {0,1} such that the matrix A defined by A[i][j] = (grid[i][j] + a_i + b_j) mod 2 for 0 <= i < m and 0 <= j < n satisfies sum_{i=0}^{m-1} sum_{j=0}^{n-1} A[i][j] * 2^(n-1-j) = r and additionally A[i][0] = 1 for every 0 <= i < m.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MatrixScore.spec_12",
+    "negation": "AegisSpec.MatrixScore.spec_12_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (it does not fail): no 64-bit signed integer arithmetic overflows, no list index goes out of bounds, and no panic is raised.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MatrixScore.spec_13",
+    "negation": "AegisSpec.MatrixScore.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). For each column j with 0 <= j < n, let c_j = |{ i : 0 <= i < m and grid[i][j] = grid[i][0] }|. Then r = sum_{j=0}^{n-1} max(c_j, m - c_j) * 2^(n-1-j).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is non-empty (m >= 1), 1 <= n <= 20 and 1 <= m <= 20, every row of grid has length n, and every entry is binary."
+  }
+]

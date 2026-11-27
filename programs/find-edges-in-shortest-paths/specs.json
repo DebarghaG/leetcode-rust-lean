@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindAnswer.spec_1",
+    "negation": "AegisSpec.FindAnswer.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let m = len(edges). A path from 0 to n-1 is a sequence v_0,...,v_k with k >= 1, v_0 = 0, v_k = n-1, pairwise distinct vertices v_j, and for each j < k some edge index e_j < m with {v_j,v_{j+1}} = {a_{e_j},b_{e_j}}; its weight is the sum of w_{e_j}. Let D be the minimum weight of such a path, or infinity if no such path exists. Then len(r) = m, and for every i with 0 <= i < m, r[i] = true if and only if there is a path from 0 to n-1 of weight D that uses edge i, meaning some consecutive pair of its vertices equals {a_i,b_i}. In particular, if D is infinite then every r[i] is false.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindAnswer.spec_2",
+    "negation": "AegisSpec.FindAnswer.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result on every such input; it does not fail. In particular, no i64 overflow is required: a simple path uses at most n-1 <= 49999 edges, each of weight at most 100000, so every relevant path weight is at most 49999 * 100000 = 4,999,900,000, which is below 2^63.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindAnswer.spec_3",
+    "negation": "AegisSpec.FindAnswer.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(edges). Thus r has exactly one Boolean entry for each input edge, with the same index i from 0 to len(edges)-1.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindAnswer.spec_4",
+    "negation": "AegisSpec.FindAnswer.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(edges), if r[i] = true then there exists a path P from 0 to n-1 whose total weight equals the shortest-path distance D and such that edge i is one of the edges of P, traversed in either direction. Here D is the minimum weight of a path from 0 to n-1, with D = infinity if no such path exists.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindAnswer.spec_5",
+    "negation": "AegisSpec.FindAnswer.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(edges), if r[i] = false then no path from 0 to n-1 of minimum weight D uses edge i. Equivalently, there is no shortest path from 0 to n-1 in which edge i appears as a consecutive pair of vertices.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindAnswer.spec_6",
+    "negation": "AegisSpec.FindAnswer.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[i] = false for every i with 0 <= i < len(edges) if and only if there is no path from 0 to n-1 in the undirected graph represented by edges. Thus, if 0 can reach n-1, at least one entry of r is true.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindAnswer.spec_7",
+    "negation": "AegisSpec.FindAnswer.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(edges), if r[i] = true then w_i <= D, where D is the minimum weight of a path from 0 to n-1. In this case D is finite, and edge i cannot have weight larger than the whole shortest-path distance.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindAnswer.spec_8",
+    "negation": "AegisSpec.FindAnswer.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(edges), r[i] = true if and only if D is finite and min(d0[a_i] + w_i + dT[b_i], d0[b_i] + w_i + dT[a_i]) = D. Here d0[v] is the minimum total weight of a simple path from 0 to v, or infinity if no such path exists; dT[v] is the minimum total weight of a simple path from v to n-1, or infinity if no such path exists; D = d0[n-1]; addition and min are extended to infinity by infinity + x = infinity and min(infinity, x) = x.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindAnswer.spec_9",
+    "negation": "AegisSpec.FindAnswer.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever n and edges satisfy the preconditions and r is the result of find_answer n edges, then for every i with 0 <= i < len(edges), if edges' is obtained by replacing edges[i] = [a_i,b_i,w_i] with [b_i,a_i,w_i] and leaving all other entries unchanged, and if find_answer n edges' returns r', then r' = r: the two Boolean vectors have the same length and agree at every index.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindAnswer.spec_10",
+    "negation": "AegisSpec.FindAnswer.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever n and edges satisfy the preconditions, for every permutation π of {0,...,m-1}, if edges' is defined by edges'[j] = edges[π(j)] for 0 <= j < m, and if find_answer n edges returns r and find_answer n edges' returns r', then len(r') = m and for every j with 0 <= j < m, r'[j] = r[π(j)]. Reordering the edge list merely permutes the answer entries in the same way.",
+    "preconditions": "n and edges satisfy: n is an i64 with 2 <= n <= 50000; edges is a slice of i64 vectors, m = len(edges), 1 <= m <= min(50000, n*(n-1)/2); for every i with 0 <= i < m, edges[i] has length 3 and edges[i] = [a_i,b_i,w_i] with 0 <= a_i,b_i < n, a_i != b_i, and 1 <= w_i <= 100000; and no two distinct indices i,j have {a_i,b_i} = {a_j,b_j}."
+  }
+]

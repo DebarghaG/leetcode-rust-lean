@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_1",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of pairs (i, j) of integers such that 0 <= i <= j < n and the contiguous non-empty subarray nums[i..j] (that is, nums[i], nums[i+1], ..., nums[j]) has exactly as many distinct values as the whole array nums. Equivalently, letting D = |{nums[k] : 0 <= k < n}|, r = |{(i, j) : 0 <= i <= j < n and |{nums[k] : i <= k <= j}| = D}|.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_2",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_3",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The returned r satisfies r >= 1. Moreover, the whole array nums[0..n-1] is complete, because its set of distinct values is exactly the set of distinct values of nums.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_4",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = n * (n + 1) / 2. Equivalently, every contiguous non-empty subarray of nums is complete.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, for every i with 0 <= i < n, 1 <= nums[i] <= 2000, and the whole array has exactly one distinct value (D = |{nums[k] : 0 <= k < n}| = 1)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_5",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1; the only complete subarray is the whole array nums[0..n-1].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, for every i with 0 <= i < n, 1 <= nums[i] <= 2000, and the entries of nums are pairwise distinct (D = |{nums[k] : 0 <= k < n}| = n)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_6",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = |{nums[k] : 0 <= k < n}|. The returned r satisfies r <= (n - D + 1) * (n - D + 2) / 2, which is the number of contiguous non-empty subarrays of nums whose length is at least D.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_7",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every 0 <= i <= j < n, the subarray nums[i..j] is complete with respect to nums if and only if the subarray nums'[i..j] is complete with respect to nums'. Consequently, the returned value r for nums equals the value returned by count_complete_subarrays on nums'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000. Let nums' be any array of length n satisfying 1 <= nums'[i] <= 2000 for all i and having the same equality pattern as nums: for all 0 <= i < n and 0 <= j < n, nums[i] = nums[j] if and only if nums'[i] = nums'[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_8",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array defined by rev[k] = nums[n - 1 - k] for 0 <= k < n. For every 0 <= i <= j < n, nums[i..j] is complete in nums if and only if rev[n - 1 - j .. n - 1 - i] is complete in rev. Consequently, the returned r for nums equals the number of complete subarrays of rev.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_9",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = p * q.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000. Suppose there exist positive integers p and q with p + q = n and two distinct values a and b such that nums[i] = a for 0 <= i < p and nums[i] = b for p <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountCompleteSubarrays.spec_10",
+    "negation": "AegisSpec.CountCompleteSubarrays.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = n * (n - 1) / 2. Equivalently, the complete subarrays are exactly the contiguous subarrays of length at least 2.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 2000. Suppose the whole array has exactly two distinct values (D = |{nums[k] : 0 <= k < n}| = 2) and no two adjacent entries are equal: for every i with 0 <= i < n - 1, nums[i] != nums[i + 1]."
+  }
+]

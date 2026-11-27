@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_1",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c. Whenever the function returns a result r, r = true if and only if for every two byte values c and d with 0 <= c,d <= 255, if occ(c) > 0 and occ(d) > 0 then occ(c) = occ(d). Equivalently, all characters that appear in s have the same number of occurrences. Also r = false if and only if this condition does not hold.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_2",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail on any input satisfying the preconditions: for every such s, there exists a Boolean r such that are_occurrences_equal s = Result.ok r. Moreover, for every byte value c, letting occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c, we have 0 <= occ(c) <= len(s) <= 1000, so occurrence counts are bounded and fit in 64-bit integers.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_3",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c. Whenever the function returns r = true, for every index i with 0 <= i < len(s), occ(s[i]) = occ(s[0]). In particular, the character at index 0 is a witness whose frequency is the common frequency.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_4",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c. Whenever the function returns r = false, there exist byte values a and b with 0 <= a,b <= 255 such that a != b, occ(a) > 0, occ(b) > 0, and occ(a) != occ(b). Thus a false answer has a concrete pair of appearing characters with different frequencies.",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_5",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c. Whenever the function returns r = true, let m be the number of byte values c with occ(c) > 0, and let k be the common occurrence count, so every such c has occ(c) = k. Then m >= 1, k >= 1, and len(s) = m * k. Consequently, both m and k divide len(s).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_6",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any such s and t, the function returns results r_s on s and r_t on t, and r_s = r_t. Thus the answer depends only on the multiset of characters, not on their order.",
+    "preconditions": "s and t are byte slices with 1 <= len(s) <= 1000 and 1 <= len(t) <= 1000, all entries of s and t are lowercase English letters (97 <= byte <= 122), len(s) = len(t), and for every byte value c, occ_s(c) = occ_t(c), where occ_s(c) counts indices i with s[i] = c and occ_t(c) counts indices i with t[i] = c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AreOccurrencesEqual.spec_7",
+    "negation": "AegisSpec.AreOccurrencesEqual.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let occ(c) be the number of indices i with 0 <= i < len(s) and s[i] = c. Whenever the function returns r = false, there exists an index i with 0 <= i < len(s) such that occ(s[i]) != occ(s[0]).",
+    "preconditions": "1 <= len(s) <= 1000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

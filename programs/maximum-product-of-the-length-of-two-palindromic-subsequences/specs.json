@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProduct.spec_1",
+    "negation": "AegisSpec.MaxProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For an index set I subset of {0,...,n-1}, let seq(s,I) be the byte sequence obtained by listing s[i] for i in I in increasing order, and call I palindromic for s if seq(s,I) equals its reverse. Whenever max_product(s) returns a result r, r is exactly the maximum of |I| * |J| over all ordered pairs (I,J) of nonempty finite subsets of {0,...,n-1} such that I and J are disjoint and both I and J are palindromic for s. The order of the two subsequences is irrelevant, so using an ordered pair does not change the maximum.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProduct.spec_2",
+    "negation": "AegisSpec.MaxProduct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, max_product(s) returns a result r (there is an I64 value r such that the call succeeds); it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProduct.spec_3",
+    "negation": "AegisSpec.MaxProduct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_product(s) returns a result r, 0 <= r and r <= floor(len(s)^2 / 4), where floor(x) is the greatest integer not exceeding x. Equivalently, r <= (len(s) * len(s)) / 4 using integer division.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProduct.spec_4",
+    "negation": "AegisSpec.MaxProduct.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_product(s) returns a result r, r >= 1.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProduct.spec_5",
+    "negation": "AegisSpec.MaxProduct.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_product(s) returns a result r, r = 1.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z'), and len(s) = 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProduct.spec_6",
+    "negation": "AegisSpec.MaxProduct.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_product(s) returns a result r, r = floor(len(s)^2 / 4), where floor(x) is the greatest integer not exceeding x.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z'), and there exists a byte c such that for every i with 0 <= i < len(s), s[i] = c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProduct.spec_7",
+    "negation": "AegisSpec.MaxProduct.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_product(s) returns a result r, r >= 2.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z'), len(s) >= 3, and there exist indices i,j with 0 <= i < j < len(s) and s[i] = s[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProduct.spec_8",
+    "negation": "AegisSpec.MaxProduct.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_product(s) returns a result r and max_product(t) returns a result r', it holds that r = r'.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z'), and t is the reversal of s, meaning len(t) = len(s) and t[i] = s[len(s)-1-i] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProduct.spec_9",
+    "negation": "AegisSpec.MaxProduct.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_product(s) returns a result r_s and max_product(t) returns a result r_t, it holds that r_t >= r_s.",
+    "preconditions": "s and t both satisfy 2 <= len(s) <= 12, 2 <= len(t) <= 12, and consist only of ASCII lowercase English letters; and s is a subsequence of t, meaning there exist indices 0 <= k_0 < k_1 < ... < k_{len(s)-1} < len(t) such that s[i] = t[k_i] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProduct.spec_10",
+    "negation": "AegisSpec.MaxProduct.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_product(s) returns a result r, there exist nonempty disjoint finite index sets I,J subset of {0,...,len(s)-1} such that |I| * |J| = r and both I and J are palindromic for s, where an index set I is palindromic for s if, when its elements are written in increasing order, the corresponding bytes s[i] form a palindrome.",
+    "preconditions": "len(s) is an integer with 2 <= len(s) <= 12, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase English letter ('a' through 'z')."
+  }
+]

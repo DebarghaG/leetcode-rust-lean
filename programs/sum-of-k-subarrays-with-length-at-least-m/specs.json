@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSum.spec_1",
+    "negation": "AegisSpec.MaxSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a valid k-selection be a sequence of k half-open intervals [l_j, r_j) for j = 0,...,k-1 such that 0 <= l_0, l_j < r_j, r_j <= l_{j+1} for every j < k-1, r_{k-1} <= n, and r_j - l_j >= m for every j. Its sum is sum_{j=0}^{k-1} sum_{i=l_j}^{r_j-1} nums[i]. The function returns a result r and r is the maximum of the sums of all valid k-selections.",
+    "preconditions": "Let n = len(nums). The following hold: 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n (equivalently k <= floor(n/m))."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSum.spec_2",
+    "negation": "AegisSpec.MaxSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, the function returns a result (that is, it does not fail, panic, or overflow).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSum.spec_3",
+    "negation": "AegisSpec.MaxSum.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, then for every valid k-selection S, the sum of S is at most r. Here a valid k-selection is a sequence of k half-open intervals [l_j, r_j) with 0 <= l_j < r_j <= n, r_j <= l_{j+1} for j < k-1, and r_j - l_j >= m for every j, and its sum is sum_{j=0}^{k-1} sum_{i=l_j}^{r_j-1} nums[i].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSum.spec_4",
+    "negation": "AegisSpec.MaxSum.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a valid k-selection S, that is, a sequence of k half-open intervals [l_j, r_j) for j = 0,...,k-1 such that 0 <= l_j < r_j <= n for every j, r_j <= l_{j+1} for every j < k-1, and r_j - l_j >= m for every j, whose sum sum_{j=0}^{k-1} sum_{i=l_j}^{r_j-1} nums[i] is exactly r.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSum.spec_5",
+    "negation": "AegisSpec.MaxSum.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{n-1} max(nums[i], 0).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSum.spec_6",
+    "negation": "AegisSpec.MaxSum.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, -10000*n <= r <= 10000*n.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; and k*m <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSum.spec_7",
+    "negation": "AegisSpec.MaxSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; k*m <= n; and k*m = n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSum.spec_8",
+    "negation": "AegisSpec.MaxSum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is the maximum of the sums of all valid k-selections whose every chosen interval has length exactly m.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 2000; -10000 <= nums[i] <= 10000 for every i with 0 <= i < n; 1 <= k; 1 <= m <= 3; k*m <= n; and nums[i] <= 0 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSum.spec_9",
+    "negation": "AegisSpec.MaxSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_sum(nums,k,m) returns a result r and max_sum(nums2,k,m) returns a result r2, we have r <= r2.",
+    "preconditions": "Let n = len(nums) = len(nums2). Assume 1 <= n <= 2000; all entries of nums and nums2 lie in [-10000,10000]; 1 <= k; 1 <= m <= 3; k*m <= n; and nums[i] <= nums2[i] for every i with 0 <= i < n."
+  }
+]

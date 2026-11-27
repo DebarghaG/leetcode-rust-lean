@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_1",
+    "negation": "AegisSpec.CycleLengthQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, len(r) = m and for every i with 0 <= i < m, r[i] = treeDist(a_i, b_i) + 1. Here depth(x), for x >= 1, is the unique d >= 0 with 2^d <= x < 2^(d+1); u is an ancestor of v if u = floor(v / 2^k) for some k >= 0; lca(a,b) is the common ancestor of a and b of maximum depth; and treeDist(a,b) = depth(a) + depth(b) - 2*depth(lca(a,b)), which is the number of edges on the unique simple path between a and b in the complete binary tree with nodes {1,...,2^n - 1} and parent of x > 1 equal to floor(x/2).",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_2",
+    "negation": "AegisSpec.CycleLengthQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions the function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_3",
+    "negation": "AegisSpec.CycleLengthQueries.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, 2 <= r[i] <= 2*n - 1.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_4",
+    "negation": "AegisSpec.CycleLengthQueries.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m: if a_i is an ancestor of b_i (that is, a_i = floor(b_i / 2^k) for some k >= 0), then r[i] = depth(b_i) - depth(a_i) + 1; symmetrically, if b_i is an ancestor of a_i, then r[i] = depth(a_i) - depth(b_i) + 1. Here depth(x) is the unique d >= 0 with 2^d <= x < 2^(d+1).",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_5",
+    "negation": "AegisSpec.CycleLengthQueries.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if floor(a_i/2) = floor(b_i/2), then r[i] = 3.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_6",
+    "negation": "AegisSpec.CycleLengthQueries.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i,j with 0 <= i < m and 0 <= j < m, if a_i = b_j and b_i = a_j, then r[i] = r[j]. Thus the answer for a query does not depend on the order of its two endpoints.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_7",
+    "negation": "AegisSpec.CycleLengthQueries.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, r[i] mod 2 = (depth(a_i) + depth(b_i) + 1) mod 2, where depth(x) is the unique d >= 0 with 2^d <= x < 2^(d+1).",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_8",
+    "negation": "AegisSpec.CycleLengthQueries.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if neither a_i is an ancestor of b_i nor b_i is an ancestor of a_i (where u is an ancestor of v iff u = floor(v / 2^k) for some k >= 0), then r[i] >= 3.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_9",
+    "negation": "AegisSpec.CycleLengthQueries.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if neither endpoint is an ancestor of the other (u is an ancestor of v iff u = floor(v / 2^k) for some k >= 0) and floor(a_i/2) != floor(b_i/2), then r[i] >= 4.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_10",
+    "negation": "AegisSpec.CycleLengthQueries.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer n' with n <= n' <= 30, let r be a result returned by cycle_length_queries(n, queries) and let r' be a result returned by cycle_length_queries(n', queries). Whenever both calls return results, len(r') = len(r) = m and for every i with 0 <= i < m, r'[i] = r[i].",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_11",
+    "negation": "AegisSpec.CycleLengthQueries.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let queries' be any other slice of vectors satisfying the same preconditions with the same n and the same length m. Whenever cycle_length_queries(n, queries) returns r and cycle_length_queries(n, queries') returns r', for every i with 0 <= i < m such that queries'[i][0] = a_i and queries'[i][1] = b_i, we have r[i] = r'[i]. Thus the i-th answer depends only on the i-th query, not on the other queries.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_12",
+    "negation": "AegisSpec.CycleLengthQueries.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if depth(a_i) = depth(b_i) = n - 1 and lca(a_i,b_i) = 1 (the root), then r[i] = 2*n - 1. Here depth(x) is the unique d >= 0 with 2^d <= x < 2^(d+1), and lca(a,b) is the deepest common ancestor of a and b.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_13",
+    "negation": "AegisSpec.CycleLengthQueries.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if lca(a_i,b_i) = 1 (the root), then r[i] = depth(a_i) + depth(b_i) + 1, where depth and lca are as in spec_1.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CycleLengthQueries.spec_14",
+    "negation": "AegisSpec.CycleLengthQueries.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i,j with 0 <= i < m and 0 <= j < m, if a_i = a_j and b_i = b_j, then r[i] = r[j]. Thus equal queries receive equal answers.",
+    "preconditions": "Let m = len(queries). Assume 2 <= n <= 30, 1 <= m <= 100000, and for every i with 0 <= i < m: queries[i] has length 2; writing a_i = queries[i][0] and b_i = queries[i][1], we have 1 <= a_i <= 2^n - 1, 1 <= b_i <= 2^n - 1, and a_i != b_i."
+  }
+]

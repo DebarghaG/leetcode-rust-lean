@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinAnagramLength.spec_1",
+    "negation": "AegisSpec.MinAnagramLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For a byte c and integers a,b, let cnt(c,a,b) be the number of indices i with a <= i < b and s[i] = c. The function returns a result r, and r is the least positive integer L such that: (1) L divides n; (2) for every j with 0 <= j < n/L and every byte c, cnt(c, j*L, (j+1)*L) = cnt(c, 0, L). Equivalently, r is the minimum possible length of a string t such that s is the concatenation of n/L consecutive length-L blocks, all anagrams of t, i.e. all having the same byte multiset.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinAnagramLength.spec_2",
+    "negation": "AegisSpec.MinAnagramLength.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinAnagramLength.spec_3",
+    "negation": "AegisSpec.MinAnagramLength.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r >= 1 and len(s) is divisible by r, i.e. len(s) mod r = 0.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinAnagramLength.spec_4",
+    "negation": "AegisSpec.MinAnagramLength.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let n = len(s) and m = n/r. Then r >= 1 and r divides n, and there exists a byte string t of length r such that for every j with 0 <= j < m, the block s[j*r .. (j+1)*r) is an anagram of t: for every byte c, the number of occurrences of c in that block equals the number of occurrences of c in t.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinAnagramLength.spec_5",
+    "negation": "AegisSpec.MinAnagramLength.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer L with 1 <= L < r that divides len(s), the len(s)/L consecutive blocks s[j*L .. (j+1)*L), 0 <= j < len(s)/L, do not all have the same byte multiset. That is, there exist block indices j,k and a byte c such that the number of c's in block j differs from the number of c's in block k.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinAnagramLength.spec_6",
+    "negation": "AegisSpec.MinAnagramLength.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, let n = len(s) and m = n/r. For every byte c, the total number of occurrences of c in s is divisible by m. Equivalently, if cnt(c) is the number of positions i with 0 <= i < n and s[i] = c, then cnt(c) mod m = 0.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinAnagramLength.spec_7",
+    "negation": "AegisSpec.MinAnagramLength.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, let n = len(s) and m = n/r. For every byte c and every j with 0 <= j < m, the number of occurrences of c in s[j*r .. (j+1)*r) equals cnt(c,0,n)/m, where cnt(c,0,n) is the total number of occurrences of c in s and the quotient is the exact integer quotient.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinAnagramLength.spec_8",
+    "negation": "AegisSpec.MinAnagramLength.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, every byte is an ASCII lowercase letter, and for all i,j with 0 <= i < len(s) and 0 <= j < len(s), s[i] = s[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinAnagramLength.spec_9",
+    "negation": "AegisSpec.MinAnagramLength.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s).",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, every byte is an ASCII lowercase letter, and for all i,j with 0 <= i < j < len(s), s[i] != s[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinAnagramLength.spec_10",
+    "negation": "AegisSpec.MinAnagramLength.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if all bytes of s are equal then r = 1, and if not all bytes of s are equal then r = len(s).",
+    "preconditions": "len(s) >= 2, len(s) <= 100000, len(s) is prime, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinAnagramLength.spec_11",
+    "negation": "AegisSpec.MinAnagramLength.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every positive integer d that divides len(s), if s[i] = s[i mod d] for every i with 0 <= i < len(s), then r <= d.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinAnagramLength.spec_12",
+    "negation": "AegisSpec.MinAnagramLength.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every L with 1 <= L <= len(s) such that L divides len(s), if all len(s)/L blocks s[j*L .. (j+1)*L) for 0 <= j < len(s)/L have the same byte multiset, then r <= L.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinAnagramLength.spec_13",
+    "negation": "AegisSpec.MinAnagramLength.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(s) and define the reversed byte string s_rev by s_rev[i] = s[n-1-i] for 0 <= i < n. Whenever the function returns a result r, r is also the least positive integer L such that L divides n and all n/L consecutive blocks of s_rev of length L have the same byte multiset. Equivalently, reversing the input string does not change the minimum anagram length.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinAnagramLength.spec_14",
+    "negation": "AegisSpec.MinAnagramLength.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let G be the greatest common divisor of all positive numbers cnt(c,0,len(s)) over bytes c that occur in s, where cnt(c,0,len(s)) is the total number of occurrences of c in s. Then r >= len(s)/G.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinAnagramLength.spec_15",
+    "negation": "AegisSpec.MinAnagramLength.spec_15_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail due to panic, out-of-bounds access, or 64-bit integer overflow.",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinAnagramLength.spec_16",
+    "negation": "AegisSpec.MinAnagramLength.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if for all i,j with 0 <= i < len(s) and 0 <= j < len(s), s[i] = s[j].",
+    "preconditions": "len(s) >= 1, len(s) <= 100000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

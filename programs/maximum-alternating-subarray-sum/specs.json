@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_1",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max{ A(i,j) | 0 <= i <= j < n }, where A(i,j) = sum_{k=i}^{j} (-1)^(k-i) * nums[k] = nums[i] - nums[i+1] + nums[i+2] - ... +/- nums[j]. The maximum is over all non-empty contiguous subarrays; subarrays of length 1 are included.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_2",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, go out of bounds, or panic) and |r| <= 100000 * n <= 10^10. Hence r is always representable as an I64.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_3",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and, for every pair of indices i,j with 0 <= i <= j < n, A(i,j) <= r, where A(i,j) = sum_{k=i}^{j} (-1)^(k-i) * nums[k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_4",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist indices i,j with 0 <= i <= j < n such that r = A(i,j), where A(i,j) = sum_{k=i}^{j} (-1)^(k-i) * nums[k].",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_5",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and |r| <= sum_{i=0}^{n-1} |nums[i]|.",
+    "preconditions": "n = len(nums); 1 <= n <= 100000; for every i with 0 <= i < n, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_6",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = nums[0].",
+    "preconditions": "n = len(nums); n = 1; -100000 <= nums[0] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_7",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max(nums[0], nums[1], nums[0] - nums[1]), where max denotes the largest of the three integers.",
+    "preconditions": "n = len(nums); n = 2; -100000 <= nums[0] <= 100000; -100000 <= nums[1] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_8",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max(c, 0).",
+    "preconditions": "n = len(nums); 2 <= n <= 100000; there exists an integer c with -100000 <= c <= 100000 such that for every i with 0 <= i < n, nums[i] = c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_9",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r on nums and a result r' on nums', and r <= r'.",
+    "preconditions": "Let nums be a slice satisfying n = len(nums), 1 <= n <= 100000, and -100000 <= nums[i] <= 100000 for every 0 <= i < n. Let nums' be a slice satisfying m = len(nums'), 1 <= m <= 100000, and -100000 <= nums'[i] <= 100000 for every 0 <= i < m. Assume nums is a contiguous subarray of nums': there exists d with 0 <= d and d + n <= m and nums'[d+i] = nums[i] for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_10",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let m = min{ A(i,j) | 0 <= i <= j < n }, where A(i,j) = sum_{k=i}^{j} (-1)^(k-i) * nums[k]. The function returns a result r' on nums' and r' = -m.",
+    "preconditions": "Let nums be a slice satisfying n = len(nums), 1 <= n <= 100000, and -100000 <= nums[i] <= 100000 for every 0 <= i < n. Let nums' be any slice with len(nums') = n and nums'[i] = -nums[i] for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumAlternatingSubarraySum.spec_11",
+    "negation": "AegisSpec.MaximumAlternatingSubarraySum.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and, if c >= 0 then r = c * n, while if c < 0 then r = -c * (n - 1).",
+    "preconditions": "n = len(nums); 2 <= n <= 100000; there exists an integer c with -100000 <= c <= 100000 such that for every k with 0 <= k < n, nums[k] = c when k is even and nums[k] = -c when k is odd."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SecondMinimum.spec_1",
+    "negation": "AegisSpec.SecondMinimum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let an admissible walk be a finite sequence (v_0,...,v_k) with k >= 0, v_0 = 1, v_k = n, and each consecutive pair {v_j, v_{j+1}} an edge from edges (edges are undirected). For t >= 0 let D(t) = t when floor(t/change) is even (signal green), and D(t) = (floor(t/change)+1)*change when floor(t/change) is odd (wait at a red signal to the next green). Define A_0 = 0 and A_{k+1} = D(A_k) + time. Let L = { k >= 0 : an admissible walk from 1 to n with exactly k edges exists }, d1 = min L, and d2 = min { k in L : k > d1 }. The function returns a result r with r = A_{d2}. Equivalently, r is the second smallest possible final arrival time at vertex n over all admissible walks obeying the signal rules: the smallest arrival time strictly larger than the minimum possible arrival time.",
+    "preconditions": "n, edges, time, change satisfy all LeetCode constraints: 2 <= n <= 10^4; writing m = len(edges), n-1 <= m <= min(20000, n*(n-1)/2); every edges[i] has length 2, with 1 <= edges[i][0] <= n, 1 <= edges[i][1] <= n, and edges[i][0] != edges[i][1]; no two edges join the same unordered pair of vertices; the undirected graph on vertices 1..n given by edges is connected; 1 <= time <= 1000; 1 <= change <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SecondMinimum.spec_2",
+    "negation": "AegisSpec.SecondMinimum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail: it does not panic, access out of bounds, or overflow 64-bit integer arithmetic.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SecondMinimum.spec_3",
+    "negation": "AegisSpec.SecondMinimum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned value. Then r >= 2 * time.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SecondMinimum.spec_4",
+    "negation": "AegisSpec.SecondMinimum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned value. Then r <= (n + 1) * (time + change).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SecondMinimum.spec_5",
+    "negation": "AegisSpec.SecondMinimum.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Using the definitions of L, d1, d2, and A_k from spec_1, d2 is either d1 + 1 or d1 + 2. Consequently, the returned value r is either A_{d1+1} or A_{d1+2}, according to which value d2 equals.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SecondMinimum.spec_6",
+    "negation": "AegisSpec.SecondMinimum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Using A_{d1} from spec_1, the returned value r satisfies r > A_{d1}. Thus r is strictly larger than the minimum possible arrival time at vertex n.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SecondMinimum.spec_7",
+    "negation": "AegisSpec.SecondMinimum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every admissible walk from vertex 1 to vertex n, if its final arrival time under the signal rules is t, then t = A_{d1} or t >= r. Equivalently, no attainable final arrival time lies strictly between the minimum A_{d1} and the returned value r.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SecondMinimum.spec_8",
+    "negation": "AegisSpec.SecondMinimum.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists an admissible walk from vertex 1 to vertex n whose final arrival time under the signal rules equals the returned value r.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SecondMinimum.spec_9",
+    "negation": "AegisSpec.SecondMinimum.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let L and d1 be as in spec_1. If d1 + 1 is in L, then the returned value r equals A_{d1+1}; if d1 + 1 is not in L, then r equals A_{d1+2}.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SecondMinimum.spec_10",
+    "negation": "AegisSpec.SecondMinimum.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let r be the returned value. Then r >= time and floor((r - time)/change) is even. Equivalently, the last edge traversal of any admissible walk attaining r starts at time r - time, when the signal is green.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SecondMinimum.spec_11",
+    "negation": "AegisSpec.SecondMinimum.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let edges and edges' be two edge lists satisfying the preconditions for the same n, time, and change. Let L and L' be their respective sets of attainable walk lengths from vertex 1 to vertex n. If L = L', then the function returns the same value for (n, edges, time, change) and for (n, edges', time, change).",
+    "preconditions": "Same as spec_1, applied to both edge lists edges and edges' for the same n, time, and change."
+  }
+]

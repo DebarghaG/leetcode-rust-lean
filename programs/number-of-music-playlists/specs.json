@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_1",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Let P be the set of all sequences p = (p_0, ..., p_{goal-1}) with p_i in {1, ..., n} for each 0 <= i < goal, such that (1) for every song s in {1, ..., n} there exists an index i with 0 <= i < goal and p_i = s, and (2) for every pair of indices i, j with 0 <= i < j < goal and p_i = p_j, we have j - i > k. Then the function returns a result r and r = |P| mod M, where |P| mod M is the unique integer in [0, M-1] congruent to |P| modulo M.",
+    "preconditions": "n, goal, and k are integers satisfying 0 <= k < n <= goal <= 100. Thus n >= 1 and goal >= 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_2",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n, goal, and k satisfying the preconditions, the function returns a result r; it does not fail, panic, or hit an integer overflow.",
+    "preconditions": "n, goal, and k are integers satisfying 0 <= k < n <= goal <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_3",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r for an input satisfying the preconditions, 0 <= r < M, where M = 1000000007.",
+    "preconditions": "n, goal, and k are integers satisfying 0 <= k < n <= goal <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_4",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = goal, then the function returns a result r and r = n! mod M, where M = 1000000007 and n! = 1 * 2 * ... * n (so 1! = 1).",
+    "preconditions": "n, goal, and k satisfy 0 <= k < n <= goal <= 100 and n = goal."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_5",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 0, then the function returns a result r and r = T mod M, where M = 1000000007 and T is the number of sequences of length goal over the n song labels in which every one of the n labels occurs at least once. Equivalently, r is the least nonnegative residue modulo M of sum_{j=0}^{n} (-1)^j * C(n,j) * (n-j)^goal, where C(n,j) is the binomial coefficient.",
+    "preconditions": "n, goal, and k satisfy 0 <= k < n <= goal <= 100 and k = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_6",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If k = n - 1, then for every valid goal the function returns a result r and r = n! mod M, where M = 1000000007 and n! = 1 * 2 * ... * n.",
+    "preconditions": "n, goal, and k satisfy 0 <= k < n <= goal <= 100 and k = n - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_7",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, then the function returns a result r and r is the least nonnegative residue modulo M = 1000000007 of sum_{j=0}^{n} (-1)^j * C(n,j) * (n-j) * (n-j-1)^{goal-1}, where C(n,j) is the binomial coefficient and the usual integer exponent convention applies (the term is zero whenever n-j = 0, and also whenever n-j = 1 because the exponent goal-1 is positive).",
+    "preconditions": "n, goal, and k satisfy 0 <= k < n <= goal <= 100 and k = 1. Thus n >= 2 and goal >= 2, so goal - 1 >= 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_8",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If goal = n + 1, then the function returns a result r and r = (n! * P) mod M, where M = 1000000007, n! = 1 * 2 * ... * n, and P is the number of pairs of indices (i,j) with 0 <= i < j <= n and j - i > k.",
+    "preconditions": "n, goal, and k satisfy 0 <= k < n <= goal <= 100 and goal = n + 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_9",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every input satisfying the preconditions, the set P of valid playlists defined in S1 is nonempty; for example, the sequence p_i = 1 + (i mod n) for i = 0, ..., goal-1 is valid. Consequently, the exact number T = |P| is a positive integer, and whenever the function returns a result r, r = T mod M with M = 1000000007.",
+    "preconditions": "n, goal, and k are integers satisfying 0 <= k < n <= goal <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumMusicPlaylists.spec_10",
+    "negation": "AegisSpec.NumMusicPlaylists.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let P1 be the set of valid playlists for (n, goal, k1) and P2 the set for (n, goal, k2), using the definition in spec_1. Then P2 is a subset of P1, so |P1| >= |P2|. If the function returns r1 on (n, goal, k1) and r2 on (n, goal, k2), then r1 = |P1| mod M and r2 = |P2| mod M, with M = 1000000007 and both residues in [0, M-1].",
+    "preconditions": "n, goal, k1, and k2 are integers satisfying 0 <= k1 <= k2 < n <= goal <= 100. Each of the two calls (n, goal, k1) and (n, goal, k2) satisfies the original constraints."
+  }
+]

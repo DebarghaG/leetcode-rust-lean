@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_1",
+    "negation": "AegisSpec.CheckSubarraySum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a Bool r and r = true if and only if there exist integers i and j with 0 <= i < j < len(nums) and an integer n such that nums[i] + nums[i+1] + ... + nums[j] = n * k. If no such i, j, n exist, then r = false. This says exactly that nums has a contiguous subarray of length at least two whose sum is a multiple of k.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_2",
+    "negation": "AegisSpec.CheckSubarraySum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result on every input satisfying the preconditions: there exists a Bool b such that check_subarray_sum nums k = Result.ok b. It does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_3",
+    "negation": "AegisSpec.CheckSubarraySum.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist integers i and j with 0 <= i < j < len(nums) and an integer n such that sum_{t=i}^{j} nums[t] = n * k, then the function returns true.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_4",
+    "negation": "AegisSpec.CheckSubarraySum.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns true, then there exist integers i and j with 0 <= i < j < len(nums) and an integer n such that sum_{t=i}^{j} nums[t] = n * k.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_5",
+    "negation": "AegisSpec.CheckSubarraySum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 1, then the function returns false.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_6",
+    "negation": "AegisSpec.CheckSubarraySum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) >= 2, the function returns true; if len(nums) = 1, it returns false. Equivalently, for these inputs the result is true exactly when len(nums) >= 2.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and k = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_7",
+    "negation": "AegisSpec.CheckSubarraySum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if there is an index i with 0 <= i < len(nums) - 1 such that nums[i] = 0 and nums[i+1] = 0.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; 1 <= k <= 2^31 - 1; and k > sum_{i=0}^{len(nums)-1} nums[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_8",
+    "negation": "AegisSpec.CheckSubarraySum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If nums[i] ≡ nums'[i] (mod k) for every i with 0 <= i < len(nums), meaning k divides nums[i] - nums'[i], then the Bool result returned for nums and k equals the Bool result returned for nums' and k.",
+    "preconditions": "Both nums and nums' are slices with len(nums) >= 1, len(nums') = len(nums), len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000 and 0 <= nums'[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; sum_{i=0}^{len(nums')-1} nums'[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_9",
+    "negation": "AegisSpec.CheckSubarraySum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The Bool result returned for nums and k equals the Bool result returned for nums' and k, where nums' is the reversal of nums.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; 1 <= k <= 2^31 - 1; and nums' is a slice with len(nums') = len(nums) and nums'[i] = nums[len(nums)-1-i] for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_10",
+    "negation": "AegisSpec.CheckSubarraySum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If check_subarray_sum nums k returns true, then check_subarray_sum nums' k returns true.",
+    "preconditions": "Both nums and nums' are slices with len(nums) >= 1, len(nums') >= len(nums), len(nums') <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; for every i with 0 <= i < len(nums'), 0 <= nums'[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; sum_{i=0}^{len(nums')-1} nums'[i] <= 2^31 - 1; 1 <= k <= 2^31 - 1; and there exists s with 0 <= s <= len(nums') - len(nums) such that nums'[s+i] = nums[i] for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_11",
+    "negation": "AegisSpec.CheckSubarraySum.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define pref(m) = sum_{t=0}^{m-1} nums[t] for 0 <= m <= len(nums), with pref(0) = 0. The function returns true if and only if there exist integers p and q with 0 <= p < q <= len(nums), q - p >= 2, and an integer n such that pref(q) - pref(p) = n * k.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CheckSubarraySum.spec_12",
+    "negation": "AegisSpec.CheckSubarraySum.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if nums[0] + nums[1] is a multiple of k, i.e. there exists an integer n such that nums[0] + nums[1] = n * k.",
+    "preconditions": "len(nums) = 2; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000; sum_{i=0}^{len(nums)-1} nums[i] <= 2^31 - 1; and 1 <= k <= 2^31 - 1."
+  }
+]

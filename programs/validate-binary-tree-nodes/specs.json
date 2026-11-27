@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_1",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define P(c) for 0 <= c < n by P(c) = (number of i in [0,n) with leftChild[i] = c) + (number of i in [0,n) with rightChild[i] = c); each of the two child slots is counted separately. Say v is reachable from r if there exist k >= 0 and nodes v_0,...,v_k in [0,n) with v_0 = r, v_k = v, and for every j < k, leftChild[v_j] = v_{j+1} or rightChild[v_j] = v_{j+1}. The function returns Result.ok b for some Bool b, and b = true if and only if there exists a node root with 0 <= root < n such that: (1) P(root) = 0; (2) P(v) = 1 for every v with 0 <= v < n and v != root; (3) every v with 0 <= v < n is reachable from root. Equivalently, b = false exactly when no such root exists.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_2",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns Result.ok b for some Bool b; in particular it does not fail (no panic, arithmetic overflow, or out-of-bounds access) on any input satisfying the preconditions.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_3",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Result.ok b with b = true, the total number of non-negative child slots is exactly n-1: (sum over 0 <= i < n of 1 if leftChild[i] != -1 else 0) + (sum over 0 <= i < n of 1 if rightChild[i] != -1 else 0) = n-1.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_4",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define P(c) as P(c) = (number of i in [0,n) with leftChild[i] = c) + (number of i in [0,n) with rightChild[i] = c). Whenever the function returns Result.ok b with b = true, there is exactly one node c with 0 <= c < n such that P(c) = 0; for every other node d with 0 <= d < n and d != c, P(d) >= 1.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_5",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define P(c) as P(c) = (number of i in [0,n) with leftChild[i] = c) + (number of i in [0,n) with rightChild[i] = c). Whenever the function returns Result.ok b with b = true, P(c) <= 1 for every c with 0 <= c < n.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_6",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns Result.ok b with b = true, the directed graph whose edges are i -> c for every i in [0,n) and every non-negative slot c in {leftChild[i], rightChild[i]} has no directed cycle of positive length: there do not exist k >= 1 and nodes v_0,...,v_{k-1} in [0,n) such that, with indices taken modulo k, for each j, leftChild[v_j] = v_{j+1} or rightChild[v_j] = v_{j+1}.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_7",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Result.ok b with b = true, there exists a node root with 0 <= root < n such that every node v with 0 <= v < n is reachable from root by following zero or more child edges, where an edge u -> w exists exactly when leftChild[u] = w or rightChild[u] = w with w != -1.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidateBinaryTreeNodes.spec_8",
+    "negation": "AegisSpec.ValidateBinaryTreeNodes.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define P(c) as P(c) = (number of i in [0,n) with leftChild[i] = c) + (number of i in [0,n) with rightChild[i] = c). If there exists a node root with 0 <= root < n such that P(root) = 0 and P(v) = 1 for every v with 0 <= v < n and v != root, but some node w with 0 <= w < n is not reachable from root by following child edges, then the function returns Result.ok false.",
+    "preconditions": "n = len(leftChild), n = len(rightChild), 1 <= n <= 10000, and for every i with 0 <= i < n, -1 <= leftChild[i] < n and -1 <= rightChild[i] < n."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PourWater.spec_1",
+    "negation": "AegisSpec.PourWater.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(heights). Whenever the function returns a result r, len(r) = n and r is the final level array defined by the following sequential process. Initialize w^0_i = 0 for every i with 0 <= i < n. For each t = 0,1,...,volume-1, let L^t_i = heights[i] + w^t_i. Define the next index j_t as follows. Let a be the smallest index with 0 <= a <= k such that L^t_k >= L^t_{k-1} >= ... >= L^t_a (this chain is vacuous if a = k) and either a = 0 or L^t_{a-1} > L^t_a. Let m_L = min { L^t_i : a <= i <= k }. If m_L < L^t_k, let j_L be the largest index i with a <= i <= k and L^t_i = m_L. If m_L < L^t_k, set j_t = j_L. Otherwise, let b be the largest index with k <= b < n such that L^t_k >= L^t_{k+1} >= ... >= L^t_b (this chain is vacuous if b = k) and either b = n-1 or L^t_{b+1} > L^t_b. Let m_R = min { L^t_i : k <= i <= b }. If m_R < L^t_k, let j_R be the smallest index i with k <= i <= b and L^t_i = m_R. If m_R < L^t_k, set j_t = j_R. If neither left nor right case applies, set j_t = k. Then set w^{t+1}_i = w^t_i + 1 if i = j_t, and w^{t+1}_i = w^t_i otherwise. Finally, for every i with 0 <= i < n, r[i] = heights[i] + w^{volume}_i.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PourWater.spec_2",
+    "negation": "AegisSpec.PourWater.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PourWater.spec_3",
+    "negation": "AegisSpec.PourWater.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(heights).",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PourWater.spec_4",
+    "negation": "AegisSpec.PourWater.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(heights), heights[i] <= r[i] <= heights[i] + volume.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PourWater.spec_5",
+    "negation": "AegisSpec.PourWater.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, sum_{i=0}^{len(heights)-1} (r[i] - heights[i]) = volume.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PourWater.spec_6",
+    "negation": "AegisSpec.PourWater.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(heights), r[i] = heights[i].",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights); volume = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PourWater.spec_7",
+    "negation": "AegisSpec.PourWater.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 1 and r[0] = heights[0] + volume.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights); len(heights) = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PourWater.spec_8",
+    "negation": "AegisSpec.PourWater.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index i with 0 <= i < len(heights) such that r[i] > heights[i].",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights); volume > 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PourWater.spec_9",
+    "negation": "AegisSpec.PourWater.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index i with 0 <= i < len(heights) such that r[i] = heights[i].",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights); volume < len(heights)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PourWater.spec_10",
+    "negation": "AegisSpec.PourWater.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(heights), V = volume, q = V / n (integer division), and rmd = V mod n, so V = q*n + rmd with 0 <= rmd < n. Define the sequence O of length n by O_t = k - t for 0 <= t <= k, and O_t = t for k < t < n. Then whenever the function returns a result r, for every i with 0 <= i < n, r[i] = c + q + (1 if there exists t with 0 <= t < rmd and O_t = i, else 0).",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights); there exists an integer c such that for every i with 0 <= i < len(heights), heights[i] = c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PourWater.spec_11",
+    "negation": "AegisSpec.PourWater.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index i with 0 <= i < len(heights) such that len(heights) * (r[i] - heights[i]) >= volume.",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PourWater.spec_12",
+    "negation": "AegisSpec.PourWater.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Let r1 be the result of pouring v1 units at index k and r2 the result of pouring v2 units at index k on the same heights. Whenever both calls return, for every i with 0 <= i < len(heights), r1[i] <= r2[i].",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= k < len(heights); 0 <= v1 <= v2 <= 2000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PourWater.spec_13",
+    "negation": "AegisSpec.PourWater.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the number of indices i with 0 <= i < len(heights) and r[i] > heights[i] is at most min(volume, len(heights)).",
+    "preconditions": "len(heights) is an integer with 1 <= len(heights) <= 100; for every i with 0 <= i < len(heights), 0 <= heights[i] <= 99; 0 <= volume <= 2000; 0 <= k < len(heights)."
+  }
+]

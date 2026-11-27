@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReachingPoints.spec_1",
+    "negation": "AegisSpec.ReachingPoints.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (so it does not fail), and r = true if and only if there exists an integer n >= 0 and a finite sequence of ordered pairs of integers (x_0, y_0), ..., (x_n, y_n) such that (x_0, y_0) = (sx, sy), (x_n, y_n) = (tx, ty), and for every i with 0 <= i < n, either (x_{i+1}, y_{i+1}) = (x_i, x_i + y_i) or (x_{i+1}, y_{i+1}) = (x_i + y_i, y_i). Equivalently, r = false exactly when no such sequence exists.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReachingPoints.spec_2",
+    "negation": "AegisSpec.ReachingPoints.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, reaching_points(sx, sy, tx, ty) returns a result r and does not fail: there is no arithmetic overflow, division by zero, out-of-bounds access, or panic.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReachingPoints.spec_3",
+    "negation": "AegisSpec.ReachingPoints.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If tx < sx or ty < sy, then the function returns false.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReachingPoints.spec_4",
+    "negation": "AegisSpec.ReachingPoints.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If gcd(sx, sy) != gcd(tx, ty), then the function returns false, where gcd denotes the greatest common divisor of two positive integers.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReachingPoints.spec_5",
+    "negation": "AegisSpec.ReachingPoints.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If (tx, ty) != (sx, sy) and tx + ty <= sx + sy, then the function returns false.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReachingPoints.spec_6",
+    "negation": "AegisSpec.ReachingPoints.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If tx = sx and ty = sy, then the function returns true.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReachingPoints.spec_7",
+    "negation": "AegisSpec.ReachingPoints.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If tx = sx, then the function returns true if and only if ty >= sy and there exists an integer k >= 0 such that ty = sy + k * sx; otherwise it returns false.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReachingPoints.spec_8",
+    "negation": "AegisSpec.ReachingPoints.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If ty = sy, then the function returns true if and only if tx >= sx and there exists an integer k >= 0 such that tx = sx + k * sy; otherwise it returns false.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReachingPoints.spec_9",
+    "negation": "AegisSpec.ReachingPoints.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If sx = sy, then the function returns true if and only if gcd(tx, ty) = sx; otherwise it returns false.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReachingPoints.spec_10",
+    "negation": "AegisSpec.ReachingPoints.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns the same Boolean value on (sx, sy, tx, ty) as on (sy, sx, ty, tx): if r1 is the result on the first quadruple and r2 is the result on the second, then r1 = r2.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ReachingPoints.spec_11",
+    "negation": "AegisSpec.ReachingPoints.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same Boolean value on (sx, sy, tx, ty) as on (c*sx, c*sy, c*tx, c*ty).",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9; c is a positive integer such that c*sx, c*sy, c*tx, c*ty are all at most 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ReachingPoints.spec_12",
+    "negation": "AegisSpec.ReachingPoints.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If reaching_points(sx, sy, mx, my) returns true and reaching_points(mx, my, tx, ty) returns true, then reaching_points(sx, sy, tx, ty) returns true.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9; mx and my are integers with 1 <= mx <= 10^9 and 1 <= my <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ReachingPoints.spec_13",
+    "negation": "AegisSpec.ReachingPoints.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If tx > ty, then reaching_points(sx, sy, tx, ty) returns true if and only if reaching_points(sx, sy, tx - ty, ty) returns true; if ty > tx, then it returns true if and only if reaching_points(sx, sy, tx, ty - tx) returns true.",
+    "preconditions": "1 <= sx, sy, tx, ty <= 10^9 and (tx, ty) != (sx, sy)."
+  }
+]

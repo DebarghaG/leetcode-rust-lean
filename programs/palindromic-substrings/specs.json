@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubstrings.spec_1",
+    "negation": "AegisSpec.CountSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "count_substrings returns a result r and r is the number of pairs (i, j) of integers such that 0 <= i < j <= n and the substring s[i..j) is a palindrome. Here s[i..j) denotes the contiguous substring of length j - i consisting of s[i], s[i+1], ..., s[j-1], and it is a palindrome iff for every k with 0 <= k < j - i we have s[i + k] = s[j - 1 - k]. Different position intervals are counted separately even if their byte contents are equal.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s consists of lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubstrings.spec_2",
+    "negation": "AegisSpec.CountSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, count_substrings s returns a result (it does not fail, panic, overflow, or access out of bounds).",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubstrings.spec_3",
+    "negation": "AegisSpec.CountSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_substrings returns a result r, r <= n * (n + 1) / 2, where n = len(s); this is the total number of non-empty contiguous substrings of s.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubstrings.spec_4",
+    "negation": "AegisSpec.CountSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_substrings returns a result r, r >= n + e1 + e2, where n = len(s), e1 is the number of indices i with 0 <= i < n - 1 and s[i] = s[i + 1], and e2 is the number of indices i with 0 <= i < n - 2 and s[i] = s[i + 2].",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubstrings.spec_5",
+    "negation": "AegisSpec.CountSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings returns a result r, r = 1 if and only if n = 1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubstrings.spec_6",
+    "negation": "AegisSpec.CountSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings returns a result r, r = 2 + (if s[0] = s[1] then 1 else 0). Equivalently, r = 3 when the two bytes are equal and r = 2 otherwise.",
+    "preconditions": "Let n = len(s). n = 2 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubstrings.spec_7",
+    "negation": "AegisSpec.CountSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_substrings returns a result r, r = 3 + I(s[0] = s[1]) + I(s[1] = s[2]) + I(s[0] = s[2]), where I(condition) is 1 if the condition holds and 0 otherwise.",
+    "preconditions": "Let n = len(s). n = 3 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubstrings.spec_8",
+    "negation": "AegisSpec.CountSubstrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings returns a result r, r = n * (n + 1) / 2 if and only if for every i with 0 <= i < n, s[i] = s[0] (all characters of s are equal).",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubstrings.spec_9",
+    "negation": "AegisSpec.CountSubstrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings returns a result r, r = n if and only if both of the following hold: (a) for every i with 0 <= i < n - 1, s[i] != s[i + 1]; and (b) for every i with 0 <= i < n - 2, s[i] != s[i + 2].",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubstrings.spec_10",
+    "negation": "AegisSpec.CountSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings returns a result r, if the whole string s[0..n) is a palindrome (that is, for every k with 0 <= k < n, s[k] = s[n - 1 - k]), then r >= n + floor(n / 2).",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubstrings.spec_11",
+    "negation": "AegisSpec.CountSubstrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_substrings returns a result r, r equals the number of pairs (i, j) with 0 <= i < j <= n such that the substring of the reversed byte sequence rev(s) on [i, j) is a palindrome, where rev(s)[k] = s[n - 1 - k] for 0 <= k < n.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountSubstrings.spec_12",
+    "negation": "AegisSpec.CountSubstrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_substrings returns a result r, for every m with 0 <= m <= n we have r >= P_m, where P_m is the number of pairs (i, j) with 0 <= i < j <= m and s[i..j) palindrome.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000 and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  }
+]

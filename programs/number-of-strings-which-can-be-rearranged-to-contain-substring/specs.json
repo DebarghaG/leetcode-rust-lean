@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StringCount.spec_1",
+    "negation": "AegisSpec.StringCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let Sigma be the 26 lowercase English letters, and let G(n) be the number of strings s of length n over Sigma such that s has at least two occurrences of 'e', at least one occurrence of 'l', and at least one occurrence of 't'. Let M = 1000000007. Whenever string_count(n) returns r, r is the unique integer with 0 <= r < M and r ≡ G(n) (mod M).",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StringCount.spec_2",
+    "negation": "AegisSpec.StringCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every I64 value n with 1 <= n <= 100000, string_count(n) returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StringCount.spec_3",
+    "negation": "AegisSpec.StringCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever string_count(n) returns r, 0 <= r < 1000000007.",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StringCount.spec_4",
+    "negation": "AegisSpec.StringCount.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Let B(n) be the number of length-n strings over the 26 lowercase English letters that satisfy at least one of the following: the number of 'e' occurrences is at most 1; the number of 'l' occurrences is 0; the number of 't' occurrences is 0. Whenever string_count(n) returns r, r is the unique integer with 0 <= r < M and r ≡ 26^n - B(n) (mod M).",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StringCount.spec_5",
+    "negation": "AegisSpec.StringCount.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Whenever string_count(n) returns r, r is the unique integer with 0 <= r < M and r ≡ 26^n - (25^n + n*25^(n-1)) - 2*25^n + 2*(24^n + n*24^(n-1)) + 24^n - (23^n + n*23^(n-1)) (mod M).",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StringCount.spec_6",
+    "negation": "AegisSpec.StringCount.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007, and let C(n,j) denote the binomial coefficient. Whenever string_count(n) returns r, r is the unique integer with 0 <= r < M and r ≡ sum_{j=2}^{n} C(n,j) * (25^(n-j) - 2*24^(n-j) + 23^(n-j)) (mod M), where the sum is 0 when n < 2 and a^0 = 1 for every nonzero a.",
+    "preconditions": "n is an I64 value with 1 <= n <= 100000."
+  }
+]

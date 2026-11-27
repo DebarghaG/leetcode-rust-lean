@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGameVi.spec_1",
+    "negation": "AegisSpec.StoneGameVi.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every valid input, whenever the function returns a result r, the following holds. Let sigma be any permutation of {0,...,n-1} such that alice_values[sigma(k)] + bob_values[sigma(k)] >= alice_values[sigma(k+1)] + bob_values[sigma(k+1)] for every k with 0 <= k < n-1. Define A = sum over even k with 0 <= k < n of alice_values[sigma(k)], and B = sum over odd k with 0 <= k < n of bob_values[sigma(k)]. Then r = 1 if A > B, r = 0 if A = B, and r = -1 if A < B.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGameVi.spec_2",
+    "negation": "AegisSpec.StoneGameVi.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid input, whenever the function returns a result r, r is either -1, 0, or 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGameVi.spec_3",
+    "negation": "AegisSpec.StoneGameVi.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid input, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGameVi.spec_4",
+    "negation": "AegisSpec.StoneGameVi.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define alice_prime_values[k] = alice_values[pi(k)] and bob_prime_values[k] = bob_values[pi(k)] for every k with 0 <= k < n. If the function returns r on (alice_values, bob_values) and r_prime on (alice_prime_values, bob_prime_values), then r = r_prime.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Let pi be any permutation of {0,...,n-1}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StoneGameVi.spec_5",
+    "negation": "AegisSpec.StoneGameVi.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); n = 1; 1 <= alice_values[0] <= 100 and 1 <= bob_values[0] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StoneGameVi.spec_6",
+    "negation": "AegisSpec.StoneGameVi.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let h and l be distinct indices with {h,l} = {0,1} and alice_values[h] + bob_values[h] >= alice_values[l] + bob_values[l]. Whenever the function returns a result r, r = 1 if alice_values[h] > bob_values[l], r = 0 if alice_values[h] = bob_values[l], and r = -1 if alice_values[h] < bob_values[l].",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); n = 2; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StoneGameVi.spec_7",
+    "negation": "AegisSpec.StoneGameVi.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, define D = (sum over i with 0 <= i < n of alice_values[i]) - floor(n/2) * S. Then r = 1 if D > 0, r = 0 if D = 0, and r = -1 if D < 0.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. There exists an integer S such that alice_values[i] + bob_values[i] = S for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StoneGameVi.spec_8",
+    "negation": "AegisSpec.StoneGameVi.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if n is odd then r = 1, and if n is even then r is either 0 or 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100, 1 <= bob_values[i] <= 100, and alice_values[i] >= bob_values[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StoneGameVi.spec_9",
+    "negation": "AegisSpec.StoneGameVi.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is either 0 or 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Also, sum over i with 0 <= i < n of alice_values[i] >= sum over i with 0 <= i < n of bob_values[i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StoneGameVi.spec_10",
+    "negation": "AegisSpec.StoneGameVi.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define alice_prime_values[i] = alice_values[i] + c and bob_prime_values[i] = bob_values[i] + c for every i with 0 <= i < n. If the function returns r on (alice_values, bob_values) and r_prime on (alice_prime_values, bob_prime_values), then r = r_prime.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); n is even; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Let c be an integer such that 1 <= alice_values[i] + c <= 100 and 1 <= bob_values[i] + c <= 100 for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StoneGameVi.spec_11",
+    "negation": "AegisSpec.StoneGameVi.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define alice_prime_values[i] = lambda * alice_values[i] and bob_prime_values[i] = lambda * bob_values[i] for every i with 0 <= i < n. If the function returns r on (alice_values, bob_values) and r_prime on (alice_prime_values, bob_prime_values), then r = r_prime.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Let lambda be a positive integer such that 1 <= lambda * alice_values[i] <= 100 and 1 <= lambda * bob_values[i] <= 100 for every i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.StoneGameVi.spec_12",
+    "negation": "AegisSpec.StoneGameVi.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define alice_prime_values[k] = alice_values[k] for k != i and alice_prime_values[i] = alice_values[i] + c; let bob_prime_values = bob_values. If the function returns r on (alice_values, bob_values) and r_prime on (alice_prime_values, bob_prime_values), then r_prime >= r, comparing integers -1 < 0 < 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Let i be an index with 0 <= i < n and let c be an integer with c >= 0 such that 1 <= alice_values[i] + c <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.StoneGameVi.spec_13",
+    "negation": "AegisSpec.StoneGameVi.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define bob_prime_values[k] = bob_values[k] for k != i and bob_prime_values[i] = bob_values[i] + c; let alice_prime_values = alice_values. If the function returns r on (alice_values, bob_values) and r_prime on (alice_prime_values, bob_prime_values), then r_prime <= r, comparing integers -1 < 0 < 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and 1 <= bob_values[i] <= 100. Let i be an index with 0 <= i < n and let c be an integer with c >= 0 such that 1 <= bob_values[i] + c <= 100."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.StoneGameVi.spec_14",
+    "negation": "AegisSpec.StoneGameVi.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if every distinct value v occurring among alice_values occurs an even number of times; otherwise r = 1.",
+    "preconditions": "Let n = len(alice_values) = len(bob_values); n is even; 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= alice_values[i] <= 100 and alice_values[i] = bob_values[i]."
+  }
+]

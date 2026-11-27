@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsInterleave.spec_1",
+    "negation": "AegisSpec.IsInterleave.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns a result r, r = true if and only if there exists a sequence d of length len(s3) with each d[t] in {0,1}, exactly len(s1) entries equal to 0, and exactly len(s2) entries equal to 1, such that reading s3 from left to right and assigning s3[t] to s1 when d[t]=0 and to s2 when d[t]=1, the bytes assigned to s1 in their order of appearance form exactly s1 and the bytes assigned to s2 in their order of appearance form exactly s2. Equivalently, the subsequence of s3 at positions t with d[t]=0 equals s1, and the complementary subsequence at positions with d[t]=1 equals s2. This is the usual interleaving/shuffle preserving the internal left-to-right order of s1 and s2.",
+    "preconditions": "Let Valid mean s1, s2, s3 are byte slices with 0 <= len(s1), len(s2) <= 100, 0 <= len(s3) <= 200, and every byte of s1, s2, s3 is in 97..122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsInterleave.spec_2",
+    "negation": "AegisSpec.IsInterleave.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every Valid s1,s2,s3 with len(s3) != len(s1) + len(s2), whenever is_interleave(s1,s2,s3) returns a result r, r = false.",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsInterleave.spec_3",
+    "negation": "AegisSpec.IsInterleave.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every Valid s1,s2,s3 such that s3 is exactly the concatenation s1 followed by s2 (len(s3)=len(s1)+len(s2), s3[i]=s1[i] for 0 <= i < len(s1), and s3[len(s1)+j]=s2[j] for 0 <= j < len(s2)), whenever is_interleave(s1,s2,s3) returns a result r, r = true.",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsInterleave.spec_4",
+    "negation": "AegisSpec.IsInterleave.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns r and is_interleave(s2,s1,s3) returns r', we have r = r'.",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsInterleave.spec_5",
+    "negation": "AegisSpec.IsInterleave.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns r and is_interleave(rev(s1),rev(s2),rev(s3)) returns r', we have r = r'.",
+    "preconditions": "Let Valid be as in spec_1. For a byte slice a, define rev(a) by len(rev(a))=len(a) and rev(a)[i] = a[len(a)-1-i] for 0 <= i < len(a)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsInterleave.spec_6",
+    "negation": "AegisSpec.IsInterleave.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true, for every byte c with 97 <= c <= 122 the number of indices i with 0 <= i < len(s3) and s3[i]=c equals the number of indices i with 0 <= i < len(s1) and s1[i]=c plus the number of indices j with 0 <= j < len(s2) and s2[j]=c.",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsInterleave.spec_7",
+    "negation": "AegisSpec.IsInterleave.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true and len(s3) > 0, either (len(s1) > 0 and s3[0] = s1[0]) or (len(s2) > 0 and s3[0] = s2[0]).",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsInterleave.spec_8",
+    "negation": "AegisSpec.IsInterleave.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true and len(s3) > 0, either (len(s1) > 0 and s3[len(s3)-1] = s1[len(s1)-1]) or (len(s2) > 0 and s3[len(s3)-1] = s2[len(s2)-1]).",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsInterleave.spec_9",
+    "negation": "AegisSpec.IsInterleave.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s1' be s1 with c appended (len(s1')=len(s1)+1, s1'[i]=s1[i] for 0 <= i < len(s1), and s1'[len(s1)]=c), and let s3' be s3 with c appended similarly. For every such Valid s1,s2,s3, if is_interleave(s1,s2,s3) returns true, then is_interleave(s1',s2,s3') returns true.",
+    "preconditions": "Let Valid be as in spec_1, let c be a byte with 97 <= c <= 122, and suppose len(s1) < 100 and len(s3) < 200."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsInterleave.spec_10",
+    "negation": "AegisSpec.IsInterleave.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s2' be s2 with c appended (len(s2')=len(s2)+1, s2'[i]=s2[i] for 0 <= i < len(s2), and s2'[len(s2)]=c), and let s3' be s3 with c appended similarly. For every such Valid s1,s2,s3, if is_interleave(s1,s2,s3) returns true, then is_interleave(s1,s2',s3') returns true.",
+    "preconditions": "Let Valid be as in spec_1, let c be a byte with 97 <= c <= 122, and suppose len(s2) < 100 and len(s3) < 200."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsInterleave.spec_11",
+    "negation": "AegisSpec.IsInterleave.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true, for every k with 0 <= k <= len(s3) there exist i,j with 0 <= i <= len(s1), 0 <= j <= len(s2), and i+j=k, such that Inter(prefix(s1,i), prefix(s2,j), prefix(s3,k)) holds.",
+    "preconditions": "Let Valid be as in spec_1, and let Inter(a,b,c) denote the interleaving predicate from S1 (c is a shuffle of a and b preserving internal order). Let prefix(a,t) be the byte slice of the first t bytes of a."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsInterleave.spec_12",
+    "negation": "AegisSpec.IsInterleave.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true, for every k with 0 <= k <= len(s3) there exist i,j with 0 <= i <= len(s1), 0 <= j <= len(s2), and i+j=k, such that Inter(suffix(s1,i), suffix(s2,j), suffix(s3,k)) holds.",
+    "preconditions": "Let Valid be as in spec_1, let Inter be as in spec_11, and let suffix(a,t) be the byte slice of the last t bytes of a, so suffix(a,t)[u] = a[len(a)-t+u] for 0 <= u < t."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsInterleave.spec_13",
+    "negation": "AegisSpec.IsInterleave.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every Valid s1,s2,s3, whenever is_interleave(s1,s2,s3) returns true, there exist integers n >= 0 and m >= 0 with |n-m| <= 1 and byte substrings u_0,...,u_{n-1} (if n > 0) and v_0,...,v_{m-1} (if m > 0) such that: s1 is the concatenation u_0+...+u_{n-1}; s2 is the concatenation v_0+...+v_{m-1}; every u_i and v_j is nonempty, except that if s1 is empty then n=0 and if s2 is empty then m=0; and s3 is one of the two alternating concatenations u_0+v_0+u_1+v_1+... or v_0+u_0+v_1+u_1+..., where missing parts at the end are omitted and the expression stops when all existing parts have been used.",
+    "preconditions": "Let Valid be as in spec_1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsInterleave.spec_14",
+    "negation": "AegisSpec.IsInterleave.spec_14_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every Valid s1,s2,s3, is_interleave(s1,s2,s3) returns a result (either true or false) and does not fail: no overflow, out-of-bounds access, panic, or other failure occurs.",
+    "preconditions": "Let Valid be as in spec_1."
+  }
+]

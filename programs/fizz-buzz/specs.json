@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FizzBuzz.spec_1",
+    "negation": "AegisSpec.FizzBuzz.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "fizz_buzz n returns a result r and does not fail. The vector r has len(r) = n. For every 0-based index j with 0 <= j < n, let i = j + 1. Then r[j] is exactly: the 8-byte ASCII text 'FizzBuzz' [70,105,122,122,66,117,122,122] if i is divisible by both 3 and 5; the 4-byte ASCII text 'Fizz' [70,105,122,122] if i is divisible by 3 but not by 5; the 4-byte ASCII text 'Buzz' [66,117,122,122] if i is divisible by 5 but not by 3; otherwise the ASCII decimal representation of i (no leading zeros).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4. The Lean parameter is Std.I64, and this range is representable in I64."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FizzBuzz.spec_2",
+    "negation": "AegisSpec.FizzBuzz.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever fizz_buzz n returns a result r, the length of r is n: len(r) = n.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FizzBuzz.spec_3",
+    "negation": "AegisSpec.FizzBuzz.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n, let i = j + 1. If i is divisible by 15 (i.e. by both 3 and 5) then len(r[j]) = 8. If i is divisible by exactly one of 3 and 5 then len(r[j]) = 4. If i is divisible by neither 3 nor 5 then len(r[j]) equals the number of decimal digits of i; since i <= 10^4 and 10^4 = 10000 is itself divisible by 5, such i is at most 9999, so 1 <= len(r[j]) <= 4.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FizzBuzz.spec_4",
+    "negation": "AegisSpec.FizzBuzz.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n such that i = j + 1 is divisible by 15, r[j] is the ASCII byte sequence [70,105,122,122,66,117,122,122], i.e. the text 'FizzBuzz'.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FizzBuzz.spec_5",
+    "negation": "AegisSpec.FizzBuzz.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n such that i = j + 1 is divisible by 3 and not divisible by 5, r[j] is the ASCII byte sequence [70,105,122,122], i.e. the text 'Fizz'.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FizzBuzz.spec_6",
+    "negation": "AegisSpec.FizzBuzz.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n such that i = j + 1 is divisible by 5 and not divisible by 3, r[j] is the ASCII byte sequence [66,117,122,122], i.e. the text 'Buzz'.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FizzBuzz.spec_7",
+    "negation": "AegisSpec.FizzBuzz.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n such that i = j + 1 is divisible by neither 3 nor 5, r[j] is the unique nonempty ASCII digit sequence (bytes 48 through 57) whose decimal numerical value is i and which has no leading zero.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FizzBuzz.spec_8",
+    "negation": "AegisSpec.FizzBuzz.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n satisfying the precondition, fizz_buzz n returns a result r; it does not fail (no overflow, out-of-bounds, panic, or error result occurs).",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FizzBuzz.spec_9",
+    "negation": "AegisSpec.FizzBuzz.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever fizz_buzz n returns a result r, the first entry r[0] is the ASCII byte sequence [49], i.e. the text '1'.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FizzBuzz.spec_10",
+    "negation": "AegisSpec.FizzBuzz.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever fizz_buzz n returns a result r, the last entry r[n-1] is determined by n as follows: it is ASCII 'FizzBuzz' [70,105,122,122,66,117,122,122] if n is divisible by 15; it is ASCII 'Fizz' [70,105,122,122] if n is divisible by 3 but not 5; it is ASCII 'Buzz' [66,117,122,122] if n is divisible by 5 but not 3; otherwise it is the ASCII decimal representation of n with no leading zeros.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FizzBuzz.spec_11",
+    "negation": "AegisSpec.FizzBuzz.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If fizz_buzz n1 returns r1 and fizz_buzz n2 returns r2, then len(r1) = n1, len(r2) = n2, and for every index j with 0 <= j < n1, r1[j] = r2[j]. Equivalently, r1 is a prefix of r2.",
+    "preconditions": "n1 and n2 are integers with 1 <= n1 <= n2 <= 10^4."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FizzBuzz.spec_12",
+    "negation": "AegisSpec.FizzBuzz.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n and every position k with 0 <= k < len(r[j]), the byte r[j][k] belongs to the ASCII set of digits '0' through '9' or to one of the letters occurring in 'FizzBuzz'; explicitly, r[j][k] is one of 48,49,50,51,52,53,54,55,56,57,66,70,105,117,122.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FizzBuzz.spec_13",
+    "negation": "AegisSpec.FizzBuzz.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever fizz_buzz n returns a result r, for every index j with 0 <= j < n such that i = j + 1 is divisible by neither 3 nor 5, the byte array r[j] is nonempty and its first byte is not 48, the ASCII code of '0'.",
+    "preconditions": "n is an integer with 1 <= n <= 10^4."
+  }
+]

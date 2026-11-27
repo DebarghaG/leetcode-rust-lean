@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumGain.spec_1",
+    "negation": "AegisSpec.MaximumGain.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a block of s to be a maximal contiguous substring all of whose bytes are 'a' or 'b'. For a block t, let A(t) and B(t) be the numbers of 'a' and 'b' in t, let M(t)=min(A(t),B(t)), let K_ab(t) be the maximum cardinality of a set of pairwise disjoint pairs (i,j) of positions in t with i<j, t[i]='a', t[j]='b', and let K_ba(t) be the analogous maximum with t[i]='b', t[j]='a'. Let M=sum_t M(t), K_ab=sum_t K_ab(t), and K_ba=sum_t K_ba(t). Whenever the function returns a result r, r satisfies: if x>=y then r = x*K_ab + y*(M-K_ab); if y>=x then r = y*K_ba + x*(M-K_ba). When x=y both formulas reduce to x*M.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter (ASCII codes 'a' through 'z'); 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumGain.spec_2",
+    "negation": "AegisSpec.MaximumGain.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s, x, and y satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumGain.spec_3",
+    "negation": "AegisSpec.MaximumGain.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a finite sequence of legal operations starting from s, where each operation removes a current adjacent occurrence of 'ab' and adds x or removes a current adjacent occurrence of 'ba' and adds y, such that the total added score is exactly r.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumGain.spec_4",
+    "negation": "AegisSpec.MaximumGain.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every finite sequence of legal operations starting from s has total score at most r.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumGain.spec_5",
+    "negation": "AegisSpec.MaximumGain.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let M be the sum, over all maximal contiguous substrings t of s containing only 'a' and 'b', of min(number of 'a' in t, number of 'b' in t). Whenever the function returns a result r, r is achieved by some legal sequence with exactly M removal operations; no legal sequence starting from s contains more than M removal operations.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumGain.spec_6",
+    "negation": "AegisSpec.MaximumGain.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the sum, over all maximal contiguous substrings t of s containing only 'a' and 'b', of min(number of 'a' in t, number of 'b' in t). Whenever the function returns a result r, r >= M * min(x,y).",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumGain.spec_7",
+    "negation": "AegisSpec.MaximumGain.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the sum, over all maximal contiguous substrings t of s containing only 'a' and 'b', of min(number of 'a' in t, number of 'b' in t). Whenever the function returns a result r, r <= M * max(x,y).",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumGain.spec_8",
+    "negation": "AegisSpec.MaximumGain.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the concatenation p ++ [c] ++ q. If the function returns r for s with x and y, r_p for p with the same x and y, and r_q for q with the same x and y, then r = r_p + r_q.",
+    "preconditions": "1 <= x <= 10000; 1 <= y <= 10000; p and q are nonempty byte strings all of whose bytes are lowercase English letters; c is a lowercase English letter with c not equal to 'a' and c not equal to 'b'; 1 <= len(p)+1+len(q) <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumGain.spec_9",
+    "negation": "AegisSpec.MaximumGain.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for s and r' for s' with the same x and y, then r = r'.",
+    "preconditions": "1 <= x <= 10000; 1 <= y <= 10000; s and s' are byte strings of lowercase English letters with the same length n, 1 <= n <= 100000; for every i with 0 <= i < n, either s[i]=s'[i], or both s[i] and s'[i] are different from 'a' and 'b'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumGain.spec_10",
+    "negation": "AegisSpec.MaximumGain.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 for (s, x1, y) and r2 for (s, x2, y), then r1 <= r2.",
+    "preconditions": "s is a byte string of lowercase English letters with 1 <= len(s) <= 100000; 1 <= y <= 10000; 1 <= x1 <= x2 <= 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumGain.spec_11",
+    "negation": "AegisSpec.MaximumGain.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 for (s, x, y1) and r2 for (s, x, y2), then r1 <= r2.",
+    "preconditions": "s is a byte string of lowercase English letters with 1 <= len(s) <= 100000; 1 <= x <= 10000; 1 <= y1 <= y2 <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumGain.spec_12",
+    "negation": "AegisSpec.MaximumGain.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000; there is no index i with 0 <= i < len(s)-1 such that s[i]='a' and s[i+1]='b', or s[i]='b' and s[i+1]='a'."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumGain.spec_13",
+    "negation": "AegisSpec.MaximumGain.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = x if s[0]='a' and s[1]='b'; r = y if s[0]='b' and s[1]='a'; and r = 0 otherwise.",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000; len(s)=2."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumGain.spec_14",
+    "negation": "AegisSpec.MaximumGain.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A be the number of 'a' bytes and B the number of 'b' bytes in s. Whenever the function returns a result r, r = x * min(A,B).",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000; s consists only of bytes 'a' and 'b'; there are no indices i<j with s[i]='b' and s[j]='a' (equivalently, s has the form a^A b^B)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumGain.spec_15",
+    "negation": "AegisSpec.MaximumGain.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let A be the number of 'a' bytes and B the number of 'b' bytes in s. Whenever the function returns a result r, r = y * min(A,B).",
+    "preconditions": "1 <= len(s) <= 100000; every byte of s is a lowercase English letter; 1 <= x <= 10000; 1 <= y <= 10000; s consists only of bytes 'a' and 'b'; there are no indices i<j with s[i]='a' and s[j]='b' (equivalently, s has the form b^B a^A)."
+  }
+]

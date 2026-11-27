@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountOfPairs.spec_1",
+    "negation": "AegisSpec.CountOfPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_of_pairs nums returns a result r, r is the unique integer with 0 <= r < 1000000007 that is congruent modulo 1000000007 to the number of monotonic pairs for nums. A monotonic pair is an ordered pair (arr1, arr2) of arrays of length n of non-negative integers such that (1) arr1[0] <= arr1[1] <= ... <= arr1[n-1], (2) arr2[0] >= arr2[1] >= ... >= arr2[n-1], and (3) arr1[i] + arr2[i] = nums[i] for every i with 0 <= i < n. The number of such pairs is finite because arr1[i] is then an integer with 0 <= arr1[i] <= nums[i].",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountOfPairs.spec_2",
+    "negation": "AegisSpec.CountOfPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, count_of_pairs nums returns a result r; it does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountOfPairs.spec_3",
+    "negation": "AegisSpec.CountOfPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_of_pairs nums returns a result r, r <= binomial(n + max(nums), n) as an ordinary integer, where max(nums) = max{nums[i] : 0 <= i < n} and binomial(A,B) is the ordinary binomial coefficient. This holds because r is at most the unmodded count, every monotonic pair is determined by arr1, and arr1 is a non-decreasing length-n sequence with all entries in {0,1,...,max(nums)}; there are binomial(n + max(nums), n) such sequences.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountOfPairs.spec_4",
+    "negation": "AegisSpec.CountOfPairs.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever nums is non-decreasing and count_of_pairs nums returns r, r = binomial(n + nums[0], n) mod 1000000007.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, for every i with 0 <= i < n, 1 <= nums[i] <= 1000, and nums[0] <= nums[1] <= ... <= nums[n-1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountOfPairs.spec_5",
+    "negation": "AegisSpec.CountOfPairs.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever nums is non-increasing and count_of_pairs nums returns r, r = binomial(n + nums[n-1], n) mod 1000000007.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, for every i with 0 <= i < n, 1 <= nums[i] <= 1000, and nums[0] >= nums[1] >= ... >= nums[n-1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountOfPairs.spec_6",
+    "negation": "AegisSpec.CountOfPairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_pairs nums returns r, the ordinary (unmodded) number of monotonic pairs for nums is zero if and only if there exists an index i with 0 <= i < n such that sum_{k=0}^{i-1} max(0, nums[k+1] - nums[k]) > nums[i], where an empty sum (i = 0) is 0. Consequently, if such an i exists then r = 0; if no such i exists then the ordinary number of monotonic pairs is positive (and r is that positive number modulo 1000000007, which may still be 0).",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountOfPairs.spec_7",
+    "negation": "AegisSpec.CountOfPairs.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(nums) be the slice of length n defined by rev(nums)[i] = nums[n-1-i] for 0 <= i < n. Whenever count_of_pairs nums returns r and count_of_pairs rev(nums) returns r_rev, r = r_rev.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountOfPairs.spec_8",
+    "negation": "AegisSpec.CountOfPairs.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_of_pairs nums returns a non-zero result r, define rise(i) = sum_{k=0}^{i-1} max(0, nums[k+1] - nums[k]) for 0 <= i < n, with rise(0) = 0. Then rise(i) <= nums[i] for every i, and the pair of arrays (arr1, arr2) with arr1[i] = rise(i) and arr2[i] = nums[i] - rise(i) is a monotonic pair for nums.",
+    "preconditions": "nums is a slice of 64-bit integers, n = len(nums), 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= nums[i] <= 1000."
+  }
+]

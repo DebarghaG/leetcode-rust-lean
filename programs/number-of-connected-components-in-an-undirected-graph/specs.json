@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountComponents.spec_1",
+    "negation": "AegisSpec.CountComponents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_components n edges returns Result.ok r, r is the number of connected components of the undirected graph G whose vertex set is {0,1,...,n-1} and whose edge set consists exactly of the unordered pairs {edges[i][0], edges[i][1]} for 0 <= i < len(edges). Equivalently, define u ~ v for vertices u and v to mean that u = v or there is a finite sequence of vertices u = w0, w1, ..., wk = v with k >= 0 such that for every j with 0 <= j < k the unordered pair {wj, wj+1} is one of the listed edge pairs; then r is the number of equivalence classes of ~.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountComponents.spec_2",
+    "negation": "AegisSpec.CountComponents.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and edges satisfying the preconditions, count_components n edges returns a result: there exists an integer r such that the call evaluates to Result.ok r. In particular, on all stated valid inputs the function does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountComponents.spec_3",
+    "negation": "AegisSpec.CountComponents.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_components n edges returns Result.ok r, 1 <= r <= n.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountComponents.spec_4",
+    "negation": "AegisSpec.CountComponents.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_components n edges returns Result.ok r, r >= 1 and r >= n - len(edges); equivalently, r >= max(1, n - len(edges)).",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountComponents.spec_5",
+    "negation": "AegisSpec.CountComponents.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_components n edges returns Result.ok r, r = 1 if and only if every two vertices u and v with 0 <= u < v < n are connected in G by a path using the listed undirected edges; equivalently, r = 1 exactly when the graph has a single connected component containing all n vertices.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountComponents.spec_6",
+    "negation": "AegisSpec.CountComponents.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_components n edges returns Result.ok r, r = n - len(edges).",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1]). Additionally, the graph G is acyclic: there is no integer k >= 3 and no k distinct vertices v0, v1, ..., v_{k-1} such that all unordered pairs {v0,v1}, {v1,v2}, ..., {v_{k-2},v_{k-1}}, {v_{k-1},v0} occur among the listed edge pairs."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountComponents.spec_7",
+    "negation": "AegisSpec.CountComponents.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_components n edges returns Result.ok r and count_components n edges' returns Result.ok r', we have r' = r.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1]). Also, 0 <= a < b < n, len(edges) < 5000, vertices a and b are connected in G by a path using the listed undirected edges, and the unordered pair {a,b} is not one of the listed edge pairs. Let edges' be the slice obtained by appending one vector [a,b] to edges."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountComponents.spec_8",
+    "negation": "AegisSpec.CountComponents.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_components n edges returns Result.ok r and count_components n edges' returns Result.ok r', we have r' = r - 1.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1]). Also, 0 <= a < b < n, len(edges) < 5000, and vertices a and b are not connected in G by any path using the listed undirected edges. Let edges' be the slice obtained by appending one vector [a,b] to edges."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountComponents.spec_9",
+    "negation": "AegisSpec.CountComponents.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let edges' be any slice with len(edges') = len(edges) such that there exists a bijection f from {0,...,len(edges)-1} to itself with edges'[j] = edges[f(j)] for every j with 0 <= j < len(edges). Whenever count_components n edges returns Result.ok r and count_components n edges' returns Result.ok r', we have r' = r.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountComponents.spec_10",
+    "negation": "AegisSpec.CountComponents.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be any bijection from {0,1,...,n-1} to itself. Form edges' by replacing, for each i, the edge vector [a,b] = [edges[i][0], edges[i][1]] with [min(pi(a),pi(b)), max(pi(a),pi(b))] at the same index i. Whenever count_components n edges returns Result.ok r and count_components n edges' returns Result.ok r', we have r' = r.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountComponents.spec_11",
+    "negation": "AegisSpec.CountComponents.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let I be the number of vertices v with 0 <= v < n such that for every i with 0 <= i < len(edges), v != edges[i][0] and v != edges[i][1]. Whenever count_components n edges returns Result.ok r, r >= I + 1.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountComponents.spec_12",
+    "negation": "AegisSpec.CountComponents.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let I be the number of vertices v with 0 <= v < n such that for every i with 0 <= i < len(edges), v != edges[i][0] and v != edges[i][1]. Whenever count_components n edges returns Result.ok r, r <= I + floor((n - I)/2), where floor denotes the greatest integer not exceeding (n-I)/2.",
+    "preconditions": "1 <= n <= 2000 and 1 <= len(edges) <= 5000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] <= edges[i][1] < n, and edges[i][0] != edges[i][1]; and there are no repeated edges: for all i and j with 0 <= i < j < len(edges), not (edges[i][0] = edges[j][0] and edges[i][1] = edges[j][1])."
+  }
+]

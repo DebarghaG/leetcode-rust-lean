@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_1",
+    "negation": "AegisSpec.NumDistinctIslands.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever num_distinct_islands returns a result r, r is the number of distinct island shapes up to translation. Precisely: call a cell (i,j) land if grid[i][j]=1; an island is a maximal nonempty set S of land cells such that any two cells of S are connected by a path of cells in S whose successive cells differ by 1 in exactly one coordinate and by 0 in the other (4-directional adjacency). Two islands S,T are equivalent iff there exist integers dr,dc with T = {(i+dr, j+dc) : (i,j) in S}. Then r equals the number of equivalence classes of all islands of grid under this relation.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_2",
+    "negation": "AegisSpec.NumDistinctIslands.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, num_distinct_islands returns a result r; in particular it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_3",
+    "negation": "AegisSpec.NumDistinctIslands.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_distinct_islands returns a result r, r <= C, where C is the number of islands of grid, i.e. the number of maximal 4-connected components of cells with value 1. Consequently r <= m*n.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_4",
+    "negation": "AegisSpec.NumDistinctIslands.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_distinct_islands returns a result r, r = 0 if and only if grid[i][j]=0 for every 0 <= i < m and 0 <= j < n.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_5",
+    "negation": "AegisSpec.NumDistinctIslands.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_distinct_islands returns a result r, r = 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Assume grid has exactly one island, i.e. exactly one maximal 4-connected component of cells with value 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_6",
+    "negation": "AegisSpec.NumDistinctIslands.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For the single row, call a run a maximal nonempty interval [a,b] of columns such that grid[0][j]=1 for every a <= j <= b, and either a=0 or grid[0][a-1]=0, and either b=n-1 or grid[0][b+1]=0. Let D be the set of lengths b-a+1 of all such runs. Whenever num_distinct_islands returns a result r, r equals the number of elements of D.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Assume m = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_7",
+    "negation": "AegisSpec.NumDistinctIslands.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For the single column, call a run a maximal nonempty interval [a,b] of rows such that grid[i][0]=1 for every a <= i <= b, and either a=0 or grid[a-1][0]=0, and either b=m-1 or grid[b+1][0]=0. Let D be the set of lengths b-a+1 of all such runs. Whenever num_distinct_islands returns a result r, r equals the number of elements of D.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Assume n = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_8",
+    "negation": "AegisSpec.NumDistinctIslands.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_distinct_islands(grid) returns r and num_distinct_islands(grid') returns r', we have r = r'.",
+    "preconditions": "Let grid satisfy the base preconditions: m = len(grid), n = len(grid[0]), every row has length n, 1 <= m,n <= 50, and all entries are in {0,1}. Let grid' be any valid grid with m' rows and n' columns (all entries in {0,1}) for which there exist integers top,bottom,left,right >= 0 such that m'=m+top+bottom, n'=n+left+right, grid'[i+top][j+left]=grid[i][j] for all 0 <= i < m and 0 <= j < n, and grid'[u][v]=0 for every other cell (u,v) of grid'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_9",
+    "negation": "AegisSpec.NumDistinctIslands.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_distinct_islands returns a result r, r is at least the number of distinct positive integers that occur as the size |S| (number of cells) of an island S of grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_10",
+    "negation": "AegisSpec.NumDistinctIslands.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_distinct_islands(grid) returns r and num_distinct_islands(grid^R) returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Let grid^R be the horizontal reflection of grid, with the same m and n and grid^R[i][j] = grid[i][n-1-j] for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_11",
+    "negation": "AegisSpec.NumDistinctIslands.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_distinct_islands(grid) returns r and num_distinct_islands(grid^V) returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Let grid^V be the vertical reflection of grid, with the same m and n and grid^V[i][j] = grid[m-1-i][j] for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumDistinctIslands.spec_12",
+    "negation": "AegisSpec.NumDistinctIslands.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_distinct_islands(grid) returns r and num_distinct_islands(grid^T) returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]), with every row of grid having length n. Assume 1 <= m,n <= 50 and grid[i][j] in {0,1} for every 0 <= i < m and 0 <= j < n. Let grid^T be the transpose of grid, with n rows and m columns and grid^T[i][j] = grid[j][i] for all 0 <= i < n and 0 <= j < m."
+  }
+]

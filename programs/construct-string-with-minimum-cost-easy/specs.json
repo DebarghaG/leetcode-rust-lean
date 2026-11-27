@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. If there is no valid decomposition of target (a finite sequence of indices i_0,...,i_{k-1} with k >= 0, 0 <= i_j < len(words) for every j, and words[i_0] ++ ... ++ words[i_{k-1}] = target, where ++ is byte-array concatenation), then r = -1. Otherwise r is the minimum, over all such valid decompositions, of the sum costs[i_0] + ... + costs[i_{k-1}].",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1, or 1 <= r <= len(target) * 100000. Since len(target) <= 2000, in the second case r <= 200000000.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists a valid decomposition of target (a finite sequence of indices i_0,...,i_{k-1} with 0 <= i_j < len(words) for every j and words[i_0] ++ ... ++ words[i_{k-1}] = target) such that sum costs[i_j] = r and 1 <= k <= len(target).",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r >= 0, for every valid decomposition of target (a finite sequence of indices i_0,...,i_{k-1} with 0 <= i_j < len(words) for every j and words[i_0] ++ ... ++ words[i_{k-1}] = target), the inequality r <= costs[i_0] + ... + costs[i_{k-1}] holds.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let w = words[0] and c = costs[0]. Whenever the function returns a result r, if len(w) divides len(target) and target is exactly the concatenation of len(target)/len(w) copies of w, then r = (len(target)/len(w)) * c; otherwise r = -1.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, len(words) = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if no index i with 0 <= i < len(words) satisfies len(words[i]) = 1 and words[i][0] = target[0], then r = -1; otherwise r = min { costs[i] | 0 <= i < len(words), len(words[i]) = 1, and words[i][0] = target[0] }.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, len(target) = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, if for every position j with 0 <= j < len(target) there exists an index i with words[i] = [target[j]], then r = sum_{j=0}^{len(target)-1} min { costs[i] | 0 <= i < len(words) and words[i] = [target[j]] }; otherwise r = -1. Here [target[j]] is the one-byte array containing target[j].",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, for every i with 0 <= i < len(words), len(words[i]) = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of the function on (target, words, costs) and r' the result on (target, words', costs'). Whenever both results are returned, r' = r.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, fix indices i and j with 0 <= i < len(words), 0 <= j < len(words), i != j, words[i] = words[j], and costs[j] <= costs[i]. Let words' and costs' be the arrays obtained by deleting position i from words and costs respectively."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both results are returned, the result of the function on (target, words_p, costs_p) equals the result of the function on (target, words, costs).",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, let p be any permutation of {0,...,len(words)-1}; define words_p[k] = words[p(k)] and costs_p[k] = costs[p(k)] for 0 <= k < len(words)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCost.spec_10",
+    "negation": "AegisSpec.MinimumCost.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result on (target, words, costs) and r' the result on (target, words, costs'). Whenever both results are returned: r' = -1 if and only if r = -1, and if r >= 0 then r' >= r.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, let costs' be an array with len(costs') = len(words) and costs[i] <= costs'[i] <= 100000 for every i with 0 <= i < len(words)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumCost.spec_11",
+    "negation": "AegisSpec.MinimumCost.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, if no valid decomposition of target exists (a finite sequence of indices i_0,...,i_{k-1} with 0 <= i_j < len(words) and words[i_0] ++ ... ++ words[i_{k-1}] = target), then r = -1; otherwise r = c * k, where k is the minimum length among all such valid decompositions.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, there is an integer c with 1 <= c <= 100000 such that costs[i] = c for every i with 0 <= i < len(words)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumCost.spec_12",
+    "negation": "AegisSpec.MinimumCost.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if there exists an index i with 0 <= i < len(words) such that words[i] = target, then r >= 0 and r <= min { costs[i] | 0 <= i < len(words) and words[i] = target }.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumCost.spec_13",
+    "negation": "AegisSpec.MinimumCost.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists an index i with 0 <= i < len(words) such that words[i] is a prefix of target, and there exists an index j with 0 <= j < len(words) such that words[j] is a suffix of target. Here words[i] is a prefix of target if len(words[i]) <= len(target) and words[i][k] = target[k] for every 0 <= k < len(words[i]); it is a suffix if len(words[j]) <= len(target) and words[j][k] = target[len(target)-len(words[j])+k] for every 0 <= k < len(words[j]).",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumCost.spec_14",
+    "negation": "AegisSpec.MinimumCost.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result on (target, words, costs) and r_c the result on (target, words, costs_c). Whenever both results are returned: if r >= 0 then r_c = c * r, and if r = -1 then r_c = -1.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based. In addition, let c be an integer with 1 <= c and c * costs[i] <= 100000 for every i with 0 <= i < len(words); define costs_c[i] = c * costs[i] for 0 <= i < len(words)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumCost.spec_15",
+    "negation": "AegisSpec.MinimumCost.spec_15_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail (no out-of-bounds access, arithmetic overflow, or panic occurs) on any input satisfying the preconditions.",
+    "preconditions": "Common input assumptions: len(target) is between 1 and 2000 inclusive; 1 <= len(words) = len(costs) <= 50; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= len(target) and every byte of words[i] is a lowercase English letter code (97 through 122); every byte of target is a lowercase English letter code; for every i with 0 <= i < len(words), 1 <= costs[i] <= 100000. All indices are 0-based."
+  }
+]

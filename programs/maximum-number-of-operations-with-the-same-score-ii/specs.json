@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxOperations.spec_1",
+    "negation": "AegisSpec.MaxOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let n = len(nums). For k >= 0, call k feasible if k = 0, or if there exist an integer S and a sequence of k operations starting from the current interval [L,R) = [0,n) such that each operation uses the current interval and is exactly one of: (a) delete the two leftmost elements, add nums[L]+nums[L+1] to the scores, and set L := L+2; (b) delete the two rightmost elements, add nums[R-2]+nums[R-1] to the scores, and set R := R-2; (c) delete the leftmost and rightmost elements, add nums[L]+nums[R-1] to the scores, and set L := L+1, R := R-1; each operation is allowed only when R-L >= 2; and all k operation scores are equal to S. Then r = max { k | 0 <= k <= floor(n/2) and k is feasible }.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxOperations.spec_2",
+    "negation": "AegisSpec.MaxOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every call satisfying the preconditions, the function returns a result r of type Result.ok; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxOperations.spec_3",
+    "negation": "AegisSpec.MaxOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxOperations.spec_4",
+    "negation": "AegisSpec.MaxOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= floor(len(nums)/2).",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxOperations.spec_5",
+    "negation": "AegisSpec.MaxOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "n = len(nums) = 2, and 1 <= nums[0], nums[1] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxOperations.spec_6",
+    "negation": "AegisSpec.MaxOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2 if (nums[0]+nums[1] = nums[2]+nums[3] or nums[0]+nums[3] = nums[1]+nums[2]); otherwise r = 1.",
+    "preconditions": "n = len(nums) = 4, and 1 <= nums[i] <= 1000 for every i with 0 <= i < 4."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxOperations.spec_7",
+    "negation": "AegisSpec.MaxOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = floor(len(nums)/2).",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, 1 <= nums[i] <= 1000 for every i, and there exists an integer c such that nums[i] = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxOperations.spec_8",
+    "negation": "AegisSpec.MaxOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n with rev[i] = nums[n-1-i] for every i with 0 <= i < n. If the function returns r on nums and returns r' on rev, then r = r'.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxOperations.spec_9",
+    "negation": "AegisSpec.MaxOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on nums and returns r' on shifted, then r = r'.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, 1 <= nums[i] <= 1000 for every i, c is an integer such that 1 <= nums[i]+c <= 1000 for every i, and shifted[i] = nums[i]+c for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxOperations.spec_10",
+    "negation": "AegisSpec.MaxOperations.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on nums and returns r' on scaled, then r = r'.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, 1 <= nums[i] <= 1000 for every i, c is a positive integer such that 1 <= c*nums[i] <= 1000 for every i, and scaled[i] = c*nums[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxOperations.spec_11",
+    "negation": "AegisSpec.MaxOperations.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist an integer S and a sequence of exactly r allowed current-interval deletions starting from [0,len(nums)), where the current interval starts as [0,len(nums)) and a deletion removes either the first two, the last two, or the first and last elements of the current interval, then updates the interval by removing exactly those indices, and every deletion has score S.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxOperations.spec_12",
+    "negation": "AegisSpec.MaxOperations.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, there is no integer k with r < k <= floor(len(nums)/2) for which there exist an integer S and a sequence of k allowed current-interval deletions starting from [0,len(nums)), each deletion having score S.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxOperations.spec_13",
+    "negation": "AegisSpec.MaxOperations.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist S in the set { nums[0]+nums[1], nums[len(nums)-2]+nums[len(nums)-1], nums[0]+nums[len(nums)-1] } and a sequence of exactly r allowed current-interval deletions starting from [0,len(nums)), each deletion having score S.",
+    "preconditions": "nums is a slice of i64 with n = len(nums), 2 <= n <= 2000, and 1 <= nums[i] <= 1000 for every i with 0 <= i < n."
+  }
+]

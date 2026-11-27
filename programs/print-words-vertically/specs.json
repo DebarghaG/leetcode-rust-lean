@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PrintVertically.spec_1",
+    "negation": "AegisSpec.PrintVertically.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Then len(r) = m, and for every i with 0 <= i < m, len(r[i]) = 1 + max{ j | 0 <= j < k and i < len(w_j) } (the set is nonempty), and for every j with 0 <= j < len(r[i]), r[i][j] = w_j[i] if i < len(w_j), otherwise r[i][j] = 32.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200. It consists of k >= 1 nonempty words w_0,...,w_{k-1} in that order, where each word is a maximal contiguous block of bytes in 65..90 (uppercase English letters), and consecutive words are separated by exactly one byte 32 (space). Thus there are no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PrintVertically.spec_2",
+    "negation": "AegisSpec.PrintVertically.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns some result r. It does not fail, panic, overflow, or access any index out of bounds.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200. It consists of k >= 1 nonempty words w_0,...,w_{k-1} in that order, where each word is a maximal contiguous block of bytes in 65..90, and consecutive words are separated by exactly one byte 32. Thus there are no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PrintVertically.spec_3",
+    "negation": "AegisSpec.PrintVertically.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) = m and, for every i with 0 <= i < m, 1 <= len(r[i]) <= k.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PrintVertically.spec_4",
+    "negation": "AegisSpec.PrintVertically.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, if j_i = max{ j | 0 <= j < k and i < len(w_j) }, then len(r[i]) = j_i + 1.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PrintVertically.spec_5",
+    "negation": "AegisSpec.PrintVertically.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i and j with 0 <= i < m, 0 <= j < k, i < len(w_j), and j < len(r[i]), we have r[i][j] = w_j[i].",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PrintVertically.spec_6",
+    "negation": "AegisSpec.PrintVertically.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i and j with 0 <= i < m, 0 <= j < k, j < len(r[i]), and i >= len(w_j), we have r[i][j] = 32.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PrintVertically.spec_7",
+    "negation": "AegisSpec.PrintVertically.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), len(r[i]) > 0 and r[i][len(r[i]) - 1] != 32. In particular, no output row ends with a space.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PrintVertically.spec_8",
+    "negation": "AegisSpec.PrintVertically.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, the sequence obtained from r[i] by deleting every byte equal to 32 is exactly the sequence of bytes w_j[i], taken over j = 0,1,...,k-1 in increasing order with i < len(w_j).",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PrintVertically.spec_9",
+    "negation": "AegisSpec.PrintVertically.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, the number of positions p with 0 <= p < len(r[i]) and r[i][p] != 32 equals the number of j with 0 <= j < k and i < len(w_j).",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PrintVertically.spec_10",
+    "negation": "AegisSpec.PrintVertically.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, let j_i = max{ j | 0 <= j < k and i < len(w_j) }; then len(r[i]) > 0 and r[i][len(r[i]) - 1] = w_{j_i}[i].",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PrintVertically.spec_11",
+    "negation": "AegisSpec.PrintVertically.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every i and p with 0 <= i < len(r) and 0 <= p < len(r[i]), the byte r[i][p] is either 32 or satisfies 65 <= r[i][p] <= 90.",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PrintVertically.spec_12",
+    "negation": "AegisSpec.PrintVertically.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) >= 1, len(r[0]) = k, and for every j with 0 <= j < k, r[0][j] = w_j[0].",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PrintVertically.spec_13",
+    "negation": "AegisSpec.PrintVertically.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every i and j with 0 <= i < m and 0 <= j < k, if i < len(w_j), then j < len(r[i]).",
+    "preconditions": "Let s be a nonempty byte array of length at most 200, consisting of k >= 1 nonempty uppercase words w_0,...,w_{k-1} separated by single spaces, with no leading, trailing, or consecutive spaces. Let m = max_{0 <= j < k} len(w_j)."
+  }
+]

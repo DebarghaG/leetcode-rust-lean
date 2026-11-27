@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckEqualTree.spec_1",
+    "negation": "AegisSpec.CheckEqualTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = true if and only if there exists a non-root Node occurrence u in root such that 2 * sum(u) = sum(root).",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10^4, and every Node value v satisfies -10^5 <= v <= 10^5. For a Tree t, sum(t) is the sum of values of all Node occurrences in t, with sum(Null)=0. A non-root Node occurrence is any Node occurrence that is the left or right child of some Node occurrence in root."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckEqualTree.spec_2",
+    "negation": "AegisSpec.CheckEqualTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "check_equal_tree(root) returns a result, either true or false; it does not fail, panic, or overflow.",
+    "preconditions": "root is a finite Tree with 1 <= number of Node occurrences <= 10^4, and every Node value v satisfies -10^5 <= v <= 10^5."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckEqualTree.spec_3",
+    "negation": "AegisSpec.CheckEqualTree.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = false.",
+    "preconditions": "root = Node(v, Null, Null) for some integer v with -10^5 <= v <= 10^5, so root has exactly one node."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckEqualTree.spec_4",
+    "negation": "AegisSpec.CheckEqualTree.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = true if and only if there exists a non-root Node occurrence u in root with sum(u)=0.",
+    "preconditions": "root has 1 <= number of Node occurrences <= 10^4 and every Node value v satisfies -10^5 <= v <= 10^5. Let sum(t) be the sum of values of all Node occurrences in t, with sum(Null)=0. Assume sum(root)=0. A non-root Node occurrence is any Node occurrence that is the left or right child of some Node occurrence in root."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckEqualTree.spec_5",
+    "negation": "AegisSpec.CheckEqualTree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = true if and only if a = b.",
+    "preconditions": "root is either Node(a, Node(b, Null, Null), Null) or Node(a, Null, Node(b, Null, Null)), with -10^5 <= a <= 10^5 and -10^5 <= b <= 10^5. Thus root has exactly two nodes: value a at the root and value b at its only child."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckEqualTree.spec_6",
+    "negation": "AegisSpec.CheckEqualTree.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = true if and only if (b = a + c or c = a + b).",
+    "preconditions": "root = Node(a, Node(b, Null, Null), Node(c, Null, Null)) with -10^5 <= a,b,c <= 10^5. Thus root has exactly three nodes: root value a, left child value b, and right child value c."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckEqualTree.spec_7",
+    "negation": "AegisSpec.CheckEqualTree.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever check_equal_tree(root) returns a result r, r = true.",
+    "preconditions": "root is either Node(a, u, Null) with u a non-null Tree, or Node(a, Null, u) with u a non-null Tree. All Node values are in [-10^5, 10^5] and the total number of nodes is at most 10^4. Let sum(t) be the sum of values of all Node occurrences in t, with sum(Null)=0. Assume a = sum(u)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckEqualTree.spec_8",
+    "negation": "AegisSpec.CheckEqualTree.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_equal_tree(root) returns r and check_equal_tree(neg(root)) returns r', we have r = r'.",
+    "preconditions": "root has 1 <= number of Node occurrences <= 10^4 and every Node value v satisfies -10^5 <= v <= 10^5. Let neg(root) be the Tree obtained by replacing every Node value v by -v; neg(root) also satisfies the value bounds."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckEqualTree.spec_9",
+    "negation": "AegisSpec.CheckEqualTree.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_equal_tree(root) returns r and check_equal_tree(mirror(root)) returns r', we have r = r'.",
+    "preconditions": "root has 1 <= number of Node occurrences <= 10^4 and every Node value v satisfies -10^5 <= v <= 10^5. Let mirror(root) be defined recursively by mirror(Null)=Null and mirror(Node(v,l,r))=Node(v,mirror(r),mirror(l))."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheckEqualTree.spec_10",
+    "negation": "AegisSpec.CheckEqualTree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_equal_tree(root) returns r and check_equal_tree(scale(root,c)) returns r', we have r = r'.",
+    "preconditions": "root has 1 <= number of Node occurrences <= 10^4 and every Node value v satisfies -10^5 <= v <= 10^5. Let c be any nonzero integer such that c*v is within the i64 range for every Node value v in root, and let scale(root,c) be the Tree obtained by replacing every Node value v by c*v."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheckEqualTree.spec_11",
+    "negation": "AegisSpec.CheckEqualTree.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_equal_tree(root) returns r and check_equal_tree(swap_children(root,p)) returns r', we have r = r'.",
+    "preconditions": "root has 1 <= number of Node occurrences <= 10^4 and every Node value v satisfies -10^5 <= v <= 10^5. Let p be any Node occurrence in root. Let swap_children(root,p) be the Tree obtained by interchanging the left and right subtrees of p, leaving all other nodes and values unchanged."
+  }
+]

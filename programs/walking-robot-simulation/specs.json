@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RobotSim.spec_1",
+    "negation": "AegisSpec.RobotSim.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let O be the set of obstacle coordinates { (obstacles[i][0], obstacles[i][1]) | 0 <= i < len(obstacles) }. The robot state (x,y,dir) starts at (0,0) facing North, where North=(0,1), East=(1,0), South=(0,-1), West=(-1,0). Execute commands in order: command -2 rotates dir 90 degrees left; command -1 rotates dir 90 degrees right; command k with 1 <= k <= 9 attempts k one-unit forward steps. For each such unit step, let (nx,ny) = (x,y) + unit(dir); if (nx,ny) is in O, the robot does not move into it and abandons the remaining steps of that command; otherwise the robot moves to (nx,ny). Record the initial position (0,0) and every position reached after a successful unit step. The function returns a result r equal to the maximum of x^2 + y^2 over all recorded positions (x,y).",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RobotSim.spec_2",
+    "negation": "AegisSpec.RobotSim.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying these preconditions, the function returns a result r; it does not fail through arithmetic overflow or out-of-bounds access. If S is the sum of all forward command amounts, then S <= 90000 and every position the robot can visit has |x| + |y| <= S, so every squared distance that may be computed is at most S^2 <= 8100000000 < 2^63.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]. The answer < 2^31 guarantee is not needed for this specification."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RobotSim.spec_3",
+    "negation": "AegisSpec.RobotSim.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum of commands[i] over all indices i with 1 <= commands[i] <= 9. The function returns a result r and r <= S^2.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RobotSim.spec_4",
+    "negation": "AegisSpec.RobotSim.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r is not congruent to 3 modulo 4.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RobotSim.spec_5",
+    "negation": "AegisSpec.RobotSim.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Using the robot execution described by commands and O = { (obstacles[i][0], obstacles[i][1]) | 0 <= i < len(obstacles) }, the function returns a result r and there exists a position (x,y) visited by the robot during that execution such that r = x^2 + y^2.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RobotSim.spec_6",
+    "negation": "AegisSpec.RobotSim.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] is either -2 or -1; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RobotSim.spec_7",
+    "negation": "AegisSpec.RobotSim.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r >= commands[0]^2.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) = 1, obstacles[0][0] = 0, obstacles[0][1] = 0; 1 <= commands[0] <= 9; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RobotSim.spec_8",
+    "negation": "AegisSpec.RobotSim.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The call robot_sim(commands, obstacles) returns a result r, the call robot_sim(commands, obstacles') returns a result r', and r = r'.",
+    "preconditions": "For both obstacle lists obstacles and obstacles', len(obstacles) <= 10000 and len(obstacles') <= 10000; every entry of either list has length exactly 2 with coordinates in [-30000, 30000]; commands satisfies len(commands) >= 1, len(commands) <= 10000, and every commands[i] is -2, -1, or an integer k with 1 <= k <= 9. Let S be the sum of commands[i] over all i with 1 <= commands[i] <= 9. For every integer point (x,y) with -S <= x <= S and -S <= y <= S, (x,y) is in the obstacle set of obstacles if and only if it is in the obstacle set of obstacles'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RobotSim.spec_9",
+    "negation": "AegisSpec.RobotSim.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The call robot_sim(commands, obstacles) returns a result r, the call robot_sim(commands', obstacles) returns a result r', and r = r'.",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] has length exactly 2 with coordinates in [-30000, 30000]; commands' is commands concatenated with a finite sequence T of values, each of which is either -1 or -2, and len(commands') <= 10000; the answer is guaranteed to be < 2^31."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RobotSim.spec_10",
+    "negation": "AegisSpec.RobotSim.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let O = { (obstacles[i][0], obstacles[i][1]) | 0 <= i < len(obstacles) }. Execute the commands with the unit-step obstacle rule: -2 and -1 turn in place, and a positive command attempts one-unit forward steps but abandons the remaining steps of that command if the next square is in O. Let B be the set containing (0,0) and the robot's position immediately after each complete command. The function returns a result r and r = max_{(x,y) in B} (x^2 + y^2).",
+    "preconditions": "len(commands) >= 1 and len(commands) <= 10000; every commands[i] for 0 <= i < len(commands) is either -2, -1, or an integer k with 1 <= k <= 9; len(obstacles) <= 10000; every obstacles[j] for 0 <= j < len(obstacles) has length exactly 2, and its two entries obstacles[j][0], obstacles[j][1] are integers in [-30000, 30000]; the answer is guaranteed to be < 2^31."
+  }
+]

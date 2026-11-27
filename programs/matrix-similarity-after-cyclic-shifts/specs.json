@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AreSimilar.spec_1",
+    "negation": "AegisSpec.AreSimilar.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = true if and only if, for every row index i with 0 <= i < m and every column index j with 0 <= j < n: if i is even then mat[i][(j + k) mod n] = mat[i][j], and if i is odd then mat[i][(j - k) mod n] = mat[i][j], where 'mod n' denotes the least non-negative residue modulo n. Equivalently, r = true exactly when the matrix obtained by performing k rounds (each even-indexed row shifted cyclically left by one per round and each odd-indexed row shifted cyclically right by one per round) is identical to mat.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AreSimilar.spec_2",
+    "negation": "AegisSpec.AreSimilar.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, divide by zero, access out of bounds, or overflow on any input satisfying the preconditions.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AreSimilar.spec_3",
+    "negation": "AegisSpec.AreSimilar.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n; and k mod n = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AreSimilar.spec_4",
+    "negation": "AegisSpec.AreSimilar.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true if and only if every row of mat is constant, i.e., for every 0 <= i < m and every 0 <= j < n, mat[i][j] = mat[i][0].",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n; n > 1; and either k mod n = 1 or k mod n = n - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AreSimilar.spec_5",
+    "negation": "AegisSpec.AreSimilar.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r = true, for every even row index i with 0 <= i < m and every column j with 0 <= j < n, mat[i][(j + k) mod n] = mat[i][j].",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AreSimilar.spec_6",
+    "negation": "AegisSpec.AreSimilar.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r = true, for every odd row index i with 0 <= i < m and every column j with 0 <= j < n, mat[i][(j - k) mod n] = mat[i][j], where 'mod n' denotes the least non-negative residue modulo n.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AreSimilar.spec_7",
+    "negation": "AegisSpec.AreSimilar.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = false, there exist a row index i with 0 <= i < m and a column index j with 0 <= j < n such that either (i is even and mat[i][(j + k) mod n] != mat[i][j]) or (i is odd and mat[i][(j - k) mod n] != mat[i][j]).",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AreSimilar.spec_8",
+    "negation": "AegisSpec.AreSimilar.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n. Also assume there exist a row index i with 0 <= i < m and a column index j with 0 <= j < n such that either (i is even and mat[i][(j + k) mod n] != mat[i][j]) or (i is odd and mat[i][(j - k) mod n] != mat[i][j])."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AreSimilar.spec_9",
+    "negation": "AegisSpec.AreSimilar.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, for every row index i with 0 <= i < m and all column indices j and l with 0 <= j,l < n, if j ≡ l (mod gcd(n,k)), then mat[i][j] = mat[i][l], where gcd(n,k) is the greatest common divisor of n and k.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AreSimilar.spec_10",
+    "negation": "AegisSpec.AreSimilar.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true if and only if for every row index i with 0 <= i < m and all column indices j and l with 0 <= j,l < n, if j ≡ l (mod gcd(n,k)), then mat[i][j] = mat[i][l], where gcd(n,k) is the greatest common divisor of n and k.",
+    "preconditions": "Let m = len(mat) and n = len(mat[0]). Assume 1 <= m <= 25; every row of mat has length n with 1 <= n <= 25; 1 <= k <= 50; and 1 <= mat[i][j] <= 25 for every 0 <= i < m and 0 <= j < n."
+  }
+]

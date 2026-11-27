@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCoins.spec_1",
+    "negation": "AegisSpec.MinimumCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(prices). Call a subset P of {0,...,n-1} feasible if for every j with 0 <= j < n, either j is in P, or there exists i in P with i < j and j <= 2*i + 1 (equivalently, j is among the next i+1 fruits after i). The function returns a result r and r = min { sum_{i in P} prices[i] | P is a feasible subset of {0,...,n-1} }.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCoins.spec_2",
+    "negation": "AegisSpec.MinimumCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every prices array satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCoins.spec_3",
+    "negation": "AegisSpec.MinimumCoins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= prices[0].",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCoins.spec_4",
+    "negation": "AegisSpec.MinimumCoins.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= prices[0] + sum_{i=2}^{n-1} prices[i], where the sum is 0 if n <= 2.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCoins.spec_5",
+    "negation": "AegisSpec.MinimumCoins.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a feasible subset P of {0,...,n-1} such that r = sum_{i in P} prices[i], where feasible means that for every j with 0 <= j < n, either j is in P or there exists i in P with i < j and j <= 2*i + 1.",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCoins.spec_6",
+    "negation": "AegisSpec.MinimumCoins.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every feasible subset P of {0,...,n-1} (where feasible means that for every j with 0 <= j < n, either j is in P or there exists i in P with i < j and j <= 2*i + 1), we have r <= sum_{i in P} prices[i].",
+    "preconditions": "Let n = len(prices). Assume 1 <= n <= 1000 and for every i with 0 <= i < n, 1 <= prices[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCoins.spec_7",
+    "negation": "AegisSpec.MinimumCoins.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= prices[0] + min(prices[1], prices[2]).",
+    "preconditions": "Assume n = len(prices), 3 <= n <= 1000, and 1 <= prices[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCoins.spec_8",
+    "negation": "AegisSpec.MinimumCoins.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "r_a <= r_b.",
+    "preconditions": "Let a and b be two arrays both satisfying the valid-input preconditions with the same length n (1 <= n <= 1000 and entries in [1,100000]). Suppose a[i] <= b[i] for every i with 0 <= i < n. Let r_a be the result returned for a and r_b the result returned for b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCoins.spec_9",
+    "negation": "AegisSpec.MinimumCoins.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "r_b = r_a + d.",
+    "preconditions": "Let a be a valid array with n = len(a), 1 <= n <= 1000, entries in [1,100000]. Let d be an integer with d >= 0 such that b defined by b[0] = a[0] + d and b[i] = a[i] for 1 <= i < n also satisfies 1 <= b[0] <= 100000 (so b is valid). Let r_a and r_b be the results returned for a and b."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCoins.spec_10",
+    "negation": "AegisSpec.MinimumCoins.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "r_b = c * r_a.",
+    "preconditions": "Let a be a valid array with n = len(a), 1 <= n <= 1000, entries in [1,100000]. Let c be an integer with c >= 1 such that b[i] = c * a[i] satisfies 1 <= b[i] <= 100000 for every i with 0 <= i < n (so b is valid). Let r_a and r_b be the results returned for a and b."
+  }
+]

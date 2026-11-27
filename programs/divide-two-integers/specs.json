@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Divide.spec_1",
+    "negation": "AegisSpec.Divide.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every dividend and divisor satisfying the preconditions, the function returns Result.ok r with r = clamp(T, -2147483648, 2147483647), where T is defined as follows: if dividend = 0 then T = 0; otherwise let q = |dividend| / |divisor| (integer division of nonnegative integers); if dividend and divisor have the same sign then T = q, and if they have opposite signs then T = -q. Here clamp(x,L,U) = L if x < L, U if x > U, and x otherwise.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Divide.spec_2",
+    "negation": "AegisSpec.Divide.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every dividend and divisor satisfying the preconditions, there exists an integer r such that the function returns r; the function does not fail or panic.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Divide.spec_3",
+    "negation": "AegisSpec.Divide.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r for inputs satisfying the preconditions, -2147483648 <= r <= 2147483647.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Divide.spec_4",
+    "negation": "AegisSpec.Divide.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if dividend*divisor > 0 then r >= 0, if dividend*divisor < 0 then r <= 0, and if dividend = 0 then r = 0.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Divide.spec_5",
+    "negation": "AegisSpec.Divide.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, |r| <= |dividend|.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Divide.spec_6",
+    "negation": "AegisSpec.Divide.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c >= 1 such that -2147483648 <= c*dividend <= 2147483647 and -2147483648 <= c*divisor <= 2147483647, if the function returns r for (dividend, divisor) and returns r' for (c*dividend, c*divisor), then r = r'.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, and divisor != 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Divide.spec_7",
+    "negation": "AegisSpec.Divide.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for (dividend, divisor) and returns r' for (-dividend, divisor), then r' = -r.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, divisor != 0, and dividend != -2147483648."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Divide.spec_8",
+    "negation": "AegisSpec.Divide.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer rem such that dividend = r*divisor + rem, |rem| < |divisor|, and either rem = 0 or rem has the same sign as dividend.",
+    "preconditions": "-2147483648 <= dividend <= 2147483647, -2147483648 <= divisor <= 2147483647, divisor != 0, and not (dividend = -2147483648 and divisor = -1)."
+  }
+]

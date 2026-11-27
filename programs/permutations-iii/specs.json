@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Permute.spec_1",
+    "negation": "AegisSpec.Permute.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) such that r is exactly the list of all alternating permutations of {1,2,...,n}, each appearing once, in strictly increasing lexicographic order. An alternating permutation of {1,...,n} is a vector p with len(p)=n, whose entries are pairwise distinct and all lie in {1,...,n}, and such that for every i with 0 <= i < n-1, p[i] and p[i+1] have opposite parity (one is odd and the other is even). Strictly increasing lexicographic order means that for every k with 0 <= k < r.length-1, there is an index j with 0 <= j < n such that r[k][t]=r[k+1][t] for all t with 0 <= t < j and r[k][j] < r[k+1][j].",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Permute.spec_2",
+    "negation": "AegisSpec.Permute.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, panic, or allocation failure).",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Permute.spec_3",
+    "negation": "AegisSpec.Permute.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every inner vector has length n: for every k with 0 <= k < r.length, len(r[k]) = n.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Permute.spec_4",
+    "negation": "AegisSpec.Permute.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every entry of every inner vector is in the range from 1 to n inclusive: for every k with 0 <= k < r.length and every i with 0 <= i < n, 1 <= r[k][i] <= n.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Permute.spec_5",
+    "negation": "AegisSpec.Permute.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the entries of each inner vector are pairwise distinct: for every k with 0 <= k < r.length and all i,j with 0 <= i < j < n, r[k][i] != r[k][j].",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Permute.spec_6",
+    "negation": "AegisSpec.Permute.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, adjacent entries of each inner vector have opposite parity: for every k with 0 <= k < r.length and every i with 0 <= i < n-1, (r[k][i] mod 2) != (r[k][i+1] mod 2).",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Permute.spec_7",
+    "negation": "AegisSpec.Permute.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, every alternating permutation of {1,...,n} occurs in r: for every vector p with len(p)=n, with pairwise distinct entries all in {1,...,n}, and with (p[i] mod 2) != (p[i+1] mod 2) for every 0 <= i < n-1, there exists k with 0 <= k < r.length such that r[k][i]=p[i] for all i with 0 <= i < n.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Permute.spec_8",
+    "negation": "AegisSpec.Permute.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, no two inner vectors are equal: for all k,l with 0 <= k < l < r.length, there exists i with 0 <= i < n such that r[k][i] != r[l][i].",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Permute.spec_9",
+    "negation": "AegisSpec.Permute.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the inner vectors are in strictly increasing lexicographic order: for every k with 0 <= k < r.length-1, there exists j with 0 <= j < n such that r[k][t]=r[k+1][t] for all t with 0 <= t < j and r[k][j] < r[k+1][j].",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Permute.spec_10",
+    "negation": "AegisSpec.Permute.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is nonempty and its first inner vector is the identity permutation [1,2,...,n]: r.length > 0 and for every i with 0 <= i < n, r[0][i] = i+1.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Permute.spec_11",
+    "negation": "AegisSpec.Permute.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is nonempty and its last inner vector is the descending permutation [n,n-1,...,1]: r.length > 0 and for every i with 0 <= i < n, r[r.length-1][i] = n-i.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Permute.spec_12",
+    "negation": "AegisSpec.Permute.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every inner vector has odd entries in even positions and even entries in odd positions: for every k with 0 <= k < r.length and every i with 0 <= i < n, (r[k][i] mod 2 = 1) if and only if i is even.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10 and n is odd."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Permute.spec_13",
+    "negation": "AegisSpec.Permute.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, each inner vector uses one of the two possible alternating parity patterns: for every k with 0 <= k < r.length, either (for all i with 0 <= i < n, r[k][i] mod 2 = 1 if and only if i is even) or (for all i with 0 <= i < n, r[k][i] mod 2 = 1 if and only if i is odd).",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10 and n is even."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.Permute.spec_14",
+    "negation": "AegisSpec.Permute.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, the length of r equals the number of alternating permutations of {1,...,n}. Concretely, if n is odd then r.length = ((n+1)/2)! * ((n-1)/2)!, and if n is even then r.length = 2 * ((n/2)!)^2, where m! denotes the factorial 1*2*...*m with 0!=1.",
+    "preconditions": "n is an integer satisfying 1 <= n <= 10."
+  }
+]

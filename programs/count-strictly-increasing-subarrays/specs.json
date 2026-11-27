@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubarrays.spec_1",
+    "negation": "AegisSpec.CountSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_subarrays returns a result r, r equals the number of pairs (i, j) of integers such that 0 <= i <= j < len(nums) and, for every k with i <= k < j, nums[k] < nums[k+1].",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubarrays.spec_2",
+    "negation": "AegisSpec.CountSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, count_subarrays returns a result r; it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubarrays.spec_3",
+    "negation": "AegisSpec.CountSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_subarrays returns a result r, r >= len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubarrays.spec_4",
+    "negation": "AegisSpec.CountSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_subarrays returns a result r, r <= len(nums) * (len(nums) + 1) / 2, where the arithmetic is in mathematical integers.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubarrays.spec_5",
+    "negation": "AegisSpec.CountSubarrays.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_subarrays returns a result r, r = len(nums) * (len(nums) + 1) / 2 if and only if for every i with 0 <= i < len(nums) - 1, nums[i] < nums[i+1].",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubarrays.spec_6",
+    "negation": "AegisSpec.CountSubarrays.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_subarrays returns a result r, r = len(nums) if and only if for every i with 0 <= i < len(nums) - 1, nums[i] >= nums[i+1].",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubarrays.spec_7",
+    "negation": "AegisSpec.CountSubarrays.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever count_subarrays returns a result r, if the maximal strictly increasing runs of nums are the intervals [l_1, r_1], ..., [l_m, r_m] in increasing index order, where an interval [l, r] satisfies 0 <= l <= r < len(nums), nums[k] < nums[k+1] for every k with l <= k < r, and is maximal (l = 0 or nums[l-1] >= nums[l], and r = len(nums)-1 or nums[r] >= nums[r+1]), then r = sum_{t=1}^m ((r_t - l_t + 1) * (r_t - l_t + 2) / 2).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubarrays.spec_8",
+    "negation": "AegisSpec.CountSubarrays.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_subarrays returns a result r, for each i with 0 <= i < len(nums), let L_i be the largest integer m such that 1 <= m <= len(nums) - i and for every k with i <= k < i + m - 1, nums[k] < nums[k+1]. Then r = sum_{i=0}^{len(nums)-1} L_i.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubarrays.spec_9",
+    "negation": "AegisSpec.CountSubarrays.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_subarrays returns a result r on nums, for every p with 1 <= p < len(nums) and nums[p-1] >= nums[p], if the function returns r_left on the prefix nums[0..p-1] and r_right on the suffix nums[p..len(nums)-1], then r = r_left + r_right.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubarrays.spec_10",
+    "negation": "AegisSpec.CountSubarrays.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every i with 0 <= i < len(x) - 1, x[i] < x[i+1] if and only if y[i] < y[i+1], then whenever count_subarrays returns r_x on x and r_y on y, r_x = r_y.",
+    "preconditions": "Both x and y satisfy 1 <= len(x) = len(y) <= 100000 and all elements of x and y are between 1 and 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubarrays.spec_11",
+    "negation": "AegisSpec.CountSubarrays.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_subarrays returns a result r, r >= len(nums) + (the number of indices i with 0 <= i < len(nums) - 1 and nums[i] < nums[i+1]).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  }
+]

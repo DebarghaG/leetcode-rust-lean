@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, letting n = len(s), r equals the minimum, over all byte strings t of length n such that t[i] is either 48 ('0') or 49 ('1') for every 0 <= i < n and t[i] != t[i+1] for every 0 <= i < n-1, of the number of indices i with 0 <= i < n and s[i] != t[i].",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic occurs).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= floor(len(s)/2), where floor(len(s)/2) is integer division of the nonnegative length by 2.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if s is alternating, i.e. if and only if for every i with 0 <= i < len(s)-1, s[i] != s[i+1].",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if all bytes of s are equal (s[i] = 48 for every i, or s[i] = 49 for every i), then r = floor(len(s)/2), with integer division by 2.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a byte string t of length len(s) such that every t[i] is 48 ('0') or 49 ('1'), t is alternating (t[i] != t[i+1] for every 0 <= i < len(t)-1), and the number of indices i with s[i] != t[i] equals r.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every byte string t of length len(s) such that every t[i] is 48 ('0') or 49 ('1') and t is alternating (t[i] != t[i+1] for every 0 <= i < len(t)-1), the number of indices i with s[i] != t[i] is at least r.",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let n = len(s) and let c be the number of indices i with 0 <= i < n for which either (i is even and s[i] = 48) or (i is odd and s[i] = 49). Then r = min(c, n - c).",
+    "preconditions": "len(s) is between 1 and 10000 inclusive, and for every i with 0 <= i < len(s), s[i] is either 48 ('0') or 49 ('1')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the call on s returns r_s and the call on t returns r_t, we have r_s = r_t.",
+    "preconditions": "s is a valid input: len(s) is between 1 and 10000 inclusive, and every s[i] is 48 ('0') or 49 ('1'). Define t of length len(s) by t[i] = 49 if s[i] = 48, and t[i] = 48 if s[i] = 49; then t is also valid."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the call on s returns r_s and the call on u returns r_u, |r_s - r_u| <= D, where D is the number of indices i with 0 <= i < len(s) and s[i] != u[i].",
+    "preconditions": "s and u are valid byte strings with the same length: len(s) = len(u), lengths are between 1 and 10000 inclusive, and every byte of s and u is 48 ('0') or 49 ('1')."
+  }
+]

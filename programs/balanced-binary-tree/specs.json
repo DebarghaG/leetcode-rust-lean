@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsBalanced.spec_1",
+    "negation": "AegisSpec.IsBalanced.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define h(t) recursively by h(Null)=0 and h(Node(_, l, r))=1+max(h(l), h(r)). Define B(t) recursively by B(Null)=true and B(Node(_, l, r)) = (B(l) and B(r) and |h(l)-h(r)| <= 1), where |h(l)-h(r)| is the absolute difference of the nonnegative heights. Then for every such root, is_balanced(root) returns a result res and res=true if and only if B(root)=true; equivalently, res=false exactly when B(root)=false.",
+    "preconditions": "root is any Tree satisfying the problem constraints: the number of nodes in root is at most 5000, and every node value v satisfies -10000 <= v <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsBalanced.spec_2",
+    "negation": "AegisSpec.IsBalanced.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "is_balanced(root) returns a result, either true or false; it does not fail.",
+    "preconditions": "root is any finite Tree with at most 5000 nodes; node values may be arbitrary i64 values."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsBalanced.spec_3",
+    "negation": "AegisSpec.IsBalanced.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever is_balanced(root) returns a result res with res=true, for every subtree occurrence s of root that is of the form Node(v, l, r), the heights of l and r differ by at most 1, i.e. |h(l)-h(r)| <= 1. Here h(Null)=0, h(Node(_,a,b))=1+max(h(a),h(b)), and a subtree occurrence means any tree obtained by following zero or more left or right child pointers from root, with root itself included.",
+    "preconditions": "root is any Tree satisfying the problem constraints: the number of nodes in root is at most 5000 and all node values are in [-10000,10000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsBalanced.spec_4",
+    "negation": "AegisSpec.IsBalanced.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_balanced(root) returns a result res with res=false, there exists a subtree occurrence s of root of the form Node(v, l, r) such that |h(l)-h(r)| > 1, where h(Null)=0, h(Node(_,a,b))=1+max(h(a),h(b)), and a subtree occurrence means any tree obtained by following zero or more left or right child pointers from root, with root itself included.",
+    "preconditions": "root is any Tree satisfying the problem constraints: the number of nodes in root is at most 5000 and all node values are in [-10000,10000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsBalanced.spec_5",
+    "negation": "AegisSpec.IsBalanced.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever is_balanced(root1) returns a result res1 and is_balanced(root2) returns a result res2, res1 = res2.",
+    "preconditions": "root1 and root2 are Trees with the same shape, meaning they have Null at exactly the same positions and Node at exactly the same positions, while stored i64 values may differ; each has at most 5000 nodes."
+  }
+]

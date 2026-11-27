@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KSum.spec_1",
+    "negation": "AegisSpec.KSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the k-th largest element (1-indexed, counting multiplicity) of the multiset of all 2^n subsequence sums of nums, where the empty subsequence has sum 0. Equivalently: let S range over all subsets of {0, 1, ..., n-1} and write sum(S) = Σ_{i∈S} nums[i]. Then (a) the number of S with sum(S) > r is at most k-1, and (b) the number of S with sum(S) >= r is at least k.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KSum.spec_2",
+    "negation": "AegisSpec.KSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, panic, or out-of-bounds).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KSum.spec_3",
+    "negation": "AegisSpec.KSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let sum_neg = Σ_{i: nums[i] < 0} nums[i] (0 if there are no negative elements) and sum_pos = Σ_{i: nums[i] > 0} nums[i] (0 if there are no positive elements). Then sum_neg <= r <= sum_pos.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KSum.spec_4",
+    "negation": "AegisSpec.KSum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, with k = 1, r equals sum_pos = Σ_{i: nums[i] > 0} nums[i] (0 if there are no positive elements).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums). Also k = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KSum.spec_5",
+    "negation": "AegisSpec.KSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, with k = 2^n, r equals sum_neg = Σ_{i: nums[i] < 0} nums[i] (0 if there are no negative elements).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums). Also k = 2^n (which forces n <= 10 because k <= 2000)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KSum.spec_6",
+    "negation": "AegisSpec.KSum.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, with n = 1: (a) if k = 1, then r = max(nums[0], 0); (b) if k = 2, then r = min(nums[0], 0).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums). Also n = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KSum.spec_7",
+    "negation": "AegisSpec.KSum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever k_sum(nums, k) returns r and k_sum(nums', k) returns r', we have r = r'.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums). Let nums' be any slice with len(nums') = n and with the same multiset of values as nums (i.e., for every integer v, the count of indices i with nums'[i] = v equals the count with nums[i] = v)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KSum.spec_8",
+    "negation": "AegisSpec.KSum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums, k1) returns r1 and k_sum(nums, k2) returns r2, we have r1 >= r2.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let k1 and k2 be positive integers with 1 <= k1 <= k2 <= min(2000, 2^n)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KSum.spec_9",
+    "negation": "AegisSpec.KSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums, k) returns r and k_sum(neg_nums, 2^n - k + 1) returns r', we have r = -r'.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n. Also 2^n - k + 1 <= 2000 (so the second call also satisfies the problem's bound on k). Let neg_nums be the slice of length n with neg_nums[i] = -nums[i] for all i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KSum.spec_10",
+    "negation": "AegisSpec.KSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums', 2j-1) returns r1, k_sum(nums', 2j) returns r2, and k_sum(nums, j) returns r3, we have r1 = r2 = r3.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 99999 (so len(nums ++ [0]) <= 100000). For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let nums' = nums ++ [0]. Let j be an integer with 1 <= j <= 2^n and 2j <= 2000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.KSum.spec_11",
+    "negation": "AegisSpec.KSum.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a subset S ⊆ {0, 1, ..., n-1} such that r = Σ_{i∈S} nums[i].",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.KSum.spec_12",
+    "negation": "AegisSpec.KSum.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r: if nums[i] >= 0 for all i, then r >= 0; if nums[i] <= 0 for all i, then r <= 0.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. 1 <= k <= 2000 and k <= 2^n (where 2^n is the mathematical integer, the number of subsequences of nums). Also either nums[i] >= 0 for all i with 0 <= i < n, or nums[i] <= 0 for all i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.KSum.spec_13",
+    "negation": "AegisSpec.KSum.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums, 2j-1) returns r1, k_sum(nums, 2j) returns r2, and k_sum(nums', j) returns r3, we have r1 = r2 = r3.",
+    "preconditions": "Let n = len(nums). 2 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Assume nums contains at least one zero. Let nums' be a slice of length n-1 obtained by deleting one occurrence of 0 from nums. Let j be an integer with 1 <= j <= 2^{n-1} and 2j <= 2000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.KSum.spec_14",
+    "negation": "AegisSpec.KSum.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums, k) returns r and k_sum(nums, 2^n - k + 1) returns r', we have r + r' = total.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let total = Σ_{i=0}^{n-1} nums[i]. Let 1 <= k <= 2000 with k <= 2^n, and also 2^n - k + 1 <= 2000 (so the complementary index is a valid k bound)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.KSum.spec_15",
+    "negation": "AegisSpec.KSum.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever k_sum(nums, k) returns r and k_sum(nums', k) returns r', we have r <= r'.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000. For every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let nums' be another slice of length n with -10^9 <= nums'[i] <= 10^9 for all i, and nums[i] <= nums'[i] for every i. Let 1 <= k <= 2000 with k <= 2^n."
+  }
+]

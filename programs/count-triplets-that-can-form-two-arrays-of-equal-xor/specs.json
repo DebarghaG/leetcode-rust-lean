@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountTriplets.spec_1",
+    "negation": "AegisSpec.CountTriplets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the number of integer triples (i,j,k) such that 0 <= i < j <= k < n and arr[i] ^ arr[i+1] ^ ... ^ arr[j-1] = arr[j] ^ arr[j+1] ^ ... ^ arr[k], where ^ denotes bitwise exclusive-or. Equivalently, r is the cardinality of the set of all such triples.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and for every t with 0 <= t < n, arr[t] is an integer with 1 <= arr[t] <= 10^8. All arithmetic in this specification is exact mathematical integer arithmetic."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountTriplets.spec_2",
+    "negation": "AegisSpec.CountTriplets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r on every input satisfying the preconditions; in particular, it does not overflow, access outside the slice, or panic.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and for every t with 0 <= t < n, arr[t] is an integer with 1 <= arr[t] <= 10^8. All arithmetic in this specification is exact mathematical integer arithmetic."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountTriplets.spec_3",
+    "negation": "AegisSpec.CountTriplets.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = sum over all integer pairs (i,k) with 0 <= i < k < n and arr[i] ^ arr[i+1] ^ ... ^ arr[k] = 0 of (k - i). If there is no such pair, the sum is 0.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and for every t with 0 <= t < n, arr[t] is an integer with 1 <= arr[t] <= 10^8. All arithmetic in this specification is exact mathematical integer arithmetic."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountTriplets.spec_4",
+    "negation": "AegisSpec.CountTriplets.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let P[0] = 0 and, for 1 <= t <= n, let P[t] = arr[0] ^ arr[1] ^ ... ^ arr[t-1]. Whenever the function returns a result r, r = sum over all integer pairs (a,b) with 0 <= a < b <= n and P[a] = P[b] of (b - a - 1). Pairs with b = a + 1 contribute 0; if there is no such pair, the sum is 0.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and for every t with 0 <= t < n, arr[t] is an integer with 1 <= arr[t] <= 10^8. All arithmetic in this specification is exact mathematical integer arithmetic."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountTriplets.spec_5",
+    "negation": "AegisSpec.CountTriplets.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n defined by rev[t] = arr[n-1-t] for 0 <= t < n. Whenever count_triplets(arr) returns r and count_triplets(rev) returns r', we have r = r'.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and for every t with 0 <= t < n, arr[t] is an integer with 1 <= arr[t] <= 10^8. All arithmetic in this specification is exact mathematical integer arithmetic."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountTriplets.spec_6",
+    "negation": "AegisSpec.CountTriplets.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum over all even integers s with 2 <= s <= n of (s - 1) * (n - s + 1). If no such even s exists, the sum is 0.",
+    "preconditions": "Let n = len(arr). The slice arr is 0-indexed and satisfies 1 <= n <= 300, and there is an integer c with 1 <= c <= 10^8 such that arr[t] = c for every t with 0 <= t < n. All arithmetic in this specification is exact mathematical integer arithmetic."
+  }
+]

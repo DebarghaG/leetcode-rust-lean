@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_1",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. A length-5 index subsequence is a tuple (p0,p1,p2,p3,p4) with 0 <= p0 < p1 < p2 < p3 < p4 < len(nums). For such a tuple let a_j = nums[p_j] for j=0..4, and for every integer value v let count(v) be the number of j in {0,1,2,3,4} with a_j = v. Call the tuple good when count(v) < count(a2) for every integer v with v != a2; equivalently, the third selected value a2 is the unique value of maximum frequency among the five selected values. Let N be the number of good tuples. Then the function returns a result r and r = N mod M, where 0 <= r < M.",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and for every index i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_2",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on an input satisfying the preconditions, 0 <= r <= 1000000006.",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and for every index i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_3",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail: no arithmetic overflow, no out-of-bounds access, and no panic occurs.",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and for every index i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_4",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let f0 be the number of occurrences of nums[2] among the five entries nums[0], nums[1], nums[2], nums[3], nums[4], and for each value v different from nums[2] let f(v) be the number of occurrences of v among those five entries. The function returns r = 1 if f0 > f(v) for every v != nums[2], and returns r = 0 otherwise.",
+    "preconditions": "len(nums) = 5 and each nums[i] is between -1000000000 and 1000000000 inclusive."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_5",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = (len(nums) choose 5) mod 1000000007.",
+    "preconditions": "5 <= len(nums) <= 1000 and there is an integer c such that nums[i] = c for every i with 0 <= i < len(nums), with c between -1000000000 and 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_6",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "5 <= len(nums) <= 1000, each nums[i] is between -1000000000 and 1000000000, and nums[i] != nums[j] for all i,j with 0 <= i < j < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_7",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let N be the number of length-5 index subsequences whose third selected value is the unique mode among the five selected values. Whenever the function returns a nonzero result r (r != 0), N > 0; equivalently, there exist indices 0 <= p0 < p1 < p2 < p3 < p4 < len(nums) such that nums[p2] is the unique mode among nums[p0], nums[p1], nums[p2], nums[p3], nums[p4].",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and every nums[i] is between -1000000000 and 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_8",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result returned for nums equals the result returned for rev.",
+    "preconditions": "nums and its reversal rev both have length between 5 and 1000 inclusive and all their entries are between -1000000000 and 1000000000, where rev[i] = nums[len(nums)-1-i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_9",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result returned for nums equals the result returned for nums2.",
+    "preconditions": "nums and nums2 are two slices with the same length n, where 5 <= n <= 1000, all entries of both slices are between -1000000000 and 1000000000, and for all i,j with 0 <= i < n and 0 <= j < n, nums[i] = nums[j] if and only if nums2[i] = nums2[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_10",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the number of length-5 index subsequences for which the third selected value is the unique mode among the five selected values. Then the function returns r = N.",
+    "preconditions": "5 <= len(nums) <= 100 and all entries are between -1000000000 and 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_11",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the number of length-5 index subsequences whose third selected value is the unique mode among the five selected values. Whenever the function returns a result r, r - N is divisible by 1000000007.",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and every nums[i] is between -1000000000 and 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SubsequencesWithMiddleMode.spec_12",
+    "negation": "AegisSpec.SubsequencesWithMiddleMode.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no index tuple 0 <= p0 < p1 < p2 < p3 < p4 < len(nums) for which nums[p2] is the unique mode among nums[p0], nums[p1], nums[p2], nums[p3], nums[p4], then the function returns r = 0.",
+    "preconditions": "len(nums) is between 5 and 1000 inclusive, and every nums[i] is between -1000000000 and 1000000000."
+  }
+]

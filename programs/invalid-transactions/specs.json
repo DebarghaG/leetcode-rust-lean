@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.InvalidTransactions.spec_1",
+    "negation": "AegisSpec.InvalidTransactions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(transactions). For 0 <= i < n, let name_i, time_i, amount_i, city_i be the components of transactions[i] as described in the preconditions. Define invalid(i) as: amount_i > 1000, or there exists j with 0 <= j < n, j != i, such that name_j = name_i, city_j != city_i, and |time_i - time_j| <= 60. Whenever the function returns a result r, r is a permutation of the list [transactions[i] | 0 <= i < n and invalid(i)]. Equivalently, for every byte vector v, the number of occurrences of v in r equals the number of indices i with invalid(i) and transactions[i] = v.",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.InvalidTransactions.spec_2",
+    "negation": "AegisSpec.InvalidTransactions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic or fail due to overflow or out-of-bounds access).",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.InvalidTransactions.spec_3",
+    "negation": "AegisSpec.InvalidTransactions.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(transactions). For 0 <= i < n, let name_i, time_i, amount_i, city_i be the components of transactions[i]. Define invalid(i) as: amount_i > 1000, or there exists j with 0 <= j < n, j != i, such that name_j = name_i, city_j != city_i, and |time_i - time_j| <= 60. Whenever the function returns a result r, for every i with 0 <= i < n, if invalid(i) then transactions[i] appears at least once in r.",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.InvalidTransactions.spec_4",
+    "negation": "AegisSpec.InvalidTransactions.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(transactions). For 0 <= i < n, let name_i, time_i, amount_i, city_i be the components of transactions[i]. Define invalid(i) as: amount_i > 1000, or there exists j with 0 <= j < n, j != i, such that name_j = name_i, city_j != city_i, and |time_i - time_j| <= 60. Whenever the function returns a result r, for every element v of r, there exists i with 0 <= i < n such that v = transactions[i] and invalid(i).",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.InvalidTransactions.spec_5",
+    "negation": "AegisSpec.InvalidTransactions.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(transactions). For 0 <= i < n, let name_i, time_i, amount_i, city_i be the components of transactions[i]. Define invalid(i) as: amount_i > 1000, or there exists j with 0 <= j < n, j != i, such that name_j = name_i, city_j != city_i, and |time_i - time_j| <= 60. Whenever the function returns a result r, len(r) = the number of indices i with 0 <= i < n such that invalid(i).",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.InvalidTransactions.spec_6",
+    "negation": "AegisSpec.InvalidTransactions.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(transactions). Whenever the function returns a result r, for every byte vector v, the number of occurrences of v in r is at most the number of occurrences of v in transactions.",
+    "preconditions": "transactions is a slice of byte vectors with len(transactions) <= 1000. For every i with 0 <= i < len(transactions), transactions[i] is an ASCII string of the form name_i + ',' + time_i + ',' + amount_i + ',' + city_i, where name_i and city_i are strings of lowercase English letters of length 1 to 10, time_i is a decimal integer with 0 <= time_i <= 1000, and amount_i is a decimal integer with 0 <= amount_i <= 2000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.InvalidTransactions.spec_7",
+    "negation": "AegisSpec.InvalidTransactions.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any two input arrays transactions1 and transactions2 that are permutations of each other (i.e., for every byte vector v, the number of occurrences of v in transactions1 equals the number of occurrences of v in transactions2), if the function returns r1 on transactions1 and r2 on transactions2, then r1 and r2 are permutations of each other (i.e., for every byte vector v, the number of occurrences of v in r1 equals the number of occurrences of v in r2).",
+    "preconditions": "Both transactions1 and transactions2 are slices of byte vectors with len <= 1000. For every transaction in either slice, it is an ASCII string of the form name + ',' + time + ',' + amount + ',' + city, where name and city are strings of lowercase English letters of length 1 to 10, time is a decimal integer with 0 <= time <= 1000, and amount is a decimal integer with 0 <= amount <= 2000."
+  }
+]

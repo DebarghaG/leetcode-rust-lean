@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountQuadruplets.spec_1",
+    "negation": "AegisSpec.CountQuadruplets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the number of quadruplets (a,b,c,d) of indices such that 0 <= a < b < c < d < len(nums) and nums[a] + nums[b] + nums[c] = nums[d]. A quadruplet means an ordered 4-tuple of indices; two quadruplets are distinct exactly when their index tuples differ.",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountQuadruplets.spec_2",
+    "negation": "AegisSpec.CountQuadruplets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (Ok r); under the stated preconditions it does not fail, panic, access out of bounds, or overflow.",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountQuadruplets.spec_3",
+    "negation": "AegisSpec.CountQuadruplets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= binomial(len(nums),4), where binomial(n,4) = n*(n-1)*(n-2)*(n-3)/24 is the number of 4-element subsets of {0,...,n-1}.",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountQuadruplets.spec_4",
+    "negation": "AegisSpec.CountQuadruplets.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "4 <= len(nums) <= 50, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100, and for every i with 0 <= i+1 < len(nums), nums[i] >= nums[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountQuadruplets.spec_5",
+    "negation": "AegisSpec.CountQuadruplets.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there do not exist integers a,b,c,d with 0 <= a < b < c < d < len(nums) and nums[a] + nums[b] + nums[c] = nums[d].",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountQuadruplets.spec_6",
+    "negation": "AegisSpec.CountQuadruplets.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = sum_{d=0}^{len(nums)-1} T(d), where for each integer d with 0 <= d < len(nums), T(d) is the number of triples (a,b,c) of integers such that 0 <= a < b < c < d and nums[a] + nums[b] + nums[c] = nums[d].",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountQuadruplets.spec_7",
+    "negation": "AegisSpec.CountQuadruplets.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_quadruplets(xs) returns a result r and count_quadruplets(ys) returns a result s, s = r + T, where T is the number of triples (a,b,c) of integers such that 0 <= a < b < c < n and xs[a] + xs[b] + xs[c] = x.",
+    "preconditions": "Let n = len(xs). Assume 4 <= n <= 49, for every i with 0 <= i < n, 1 <= xs[i] <= 100, and x is an integer with 1 <= x <= 100. Let ys be a slice of length n+1 such that ys[i] = xs[i] for every 0 <= i < n and ys[n] = x."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountQuadruplets.spec_8",
+    "negation": "AegisSpec.CountQuadruplets.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_quadruplets(nums) returns a result r and count_quadruplets(p) returns a result s, s <= r.",
+    "preconditions": "Let n = len(nums). Assume 4 <= n <= 50, for every i with 0 <= i < n, 1 <= nums[i] <= 100, and m is an integer with 4 <= m <= n. Let p be the prefix slice of length m with p[i] = nums[i] for every 0 <= i < m."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountQuadruplets.spec_9",
+    "negation": "AegisSpec.CountQuadruplets.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_quadruplets(xs) returns a result r and count_quadruplets(ys) returns a result s, r = s.",
+    "preconditions": "Let xs and ys be slices of the same length n with 4 <= n <= 50, and assume for every i with 0 <= i < n, 1 <= xs[i] <= 100 and 1 <= ys[i] <= 100. Assume there exists a positive integer k such that ys[i] = k * xs[i] for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountQuadruplets.spec_10",
+    "negation": "AegisSpec.CountQuadruplets.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= U, where U is the number of index quadruplets (a,b,c,d) with 0 <= a < b < c < d < len(nums) and nums[a] + nums[b] + nums[c] <= 100.",
+    "preconditions": "4 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  }
+]

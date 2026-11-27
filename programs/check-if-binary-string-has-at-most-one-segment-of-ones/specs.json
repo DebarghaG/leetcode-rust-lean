@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_1",
+    "negation": "AegisSpec.CheckOnesSegment.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever check_ones_segment returns a result r, r = true if and only if s contains at most one maximal contiguous segment of ones. A maximal contiguous segment of ones is a pair (l, r) with 0 <= l <= r < len(s) such that s[i] = '1' for every i with l <= i <= r, l = 0 or s[l-1] = '0', and r = len(s)-1 or s[r+1] = '0'. Equivalently, r = false exactly when there are two distinct such maximal segments.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is the ASCII byte 48 ('0') or 49 ('1'); and s[0] = 49 ('1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_2",
+    "negation": "AegisSpec.CheckOnesSegment.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function check_ones_segment returns a result r (it does not fail, overflow, or panic) for every s satisfying the preconditions.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_3",
+    "negation": "AegisSpec.CheckOnesSegment.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever check_ones_segment returns true, there exists an integer m with 1 <= m <= len(s) such that s[i] = '1' for every i with 0 <= i < m, and s[i] = '0' for every i with m <= i < len(s).",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_4",
+    "negation": "AegisSpec.CheckOnesSegment.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever check_ones_segment returns false, there exist indices j and k with 0 < j < k < len(s) such that s[j] = '0' and s[k] = '1'.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_5",
+    "negation": "AegisSpec.CheckOnesSegment.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist indices j and k with 0 < j < k < len(s) such that s[j] = '0' and s[k] = '1', then whenever check_ones_segment returns a result r, r = false.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_6",
+    "negation": "AegisSpec.CheckOnesSegment.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever check_ones_segment returns a result r: if no byte of s equals '0', then r = true; otherwise, letting z be the least index with s[z] = '0', r = true if and only if s[i] = '0' for every i with z <= i < len(s).",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_7",
+    "negation": "AegisSpec.CheckOnesSegment.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the string obtained by appending n bytes equal to '0' to s. If check_ones_segment returns r on s and r' on s', then r = r'.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'. Let n >= 0 be such that len(s)+n <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_8",
+    "negation": "AegisSpec.CheckOnesSegment.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the string obtained by prepending one byte equal to '1' to s, so s'[0]='1' and s'[i+1]=s[i] for 0 <= i < len(s). If check_ones_segment returns r on s and r' on s', then r = r'.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'. Also len(s) <= 99."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_9",
+    "negation": "AegisSpec.CheckOnesSegment.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For the concatenation s ++ t, whenever check_ones_segment returns a result r, r = false.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; s[0] = '1'; and check_ones_segment returns false on s. Let t be any byte sequence of length m with every byte '0' or '1' and len(s)+m <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_10",
+    "negation": "AegisSpec.CheckOnesSegment.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_ones_segment returns a result r on s', r = false.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; s[0] = '1'; and check_ones_segment returns false on s. Let s' be any string obtained from s by inserting one or more bytes equal to '0' at positions strictly greater than 0, with len(s') <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_11",
+    "negation": "AegisSpec.CheckOnesSegment.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s0 be the string obtained from s by deleting every byte equal to '0'. Then s0 is nonempty, every byte of s0 is '1', and whenever check_ones_segment returns a result r on s0, r = true.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; s[0] = '1'; and check_ones_segment returns true on s."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_12",
+    "negation": "AegisSpec.CheckOnesSegment.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function check_ones_segment returns true on s.",
+    "preconditions": "m and n are integers with 1 <= m, 0 <= n, and m+n <= 100. s is the binary string of length m+n with s[i] = '1' for 0 <= i < m and s[i] = '0' for m <= i < m+n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_13",
+    "negation": "AegisSpec.CheckOnesSegment.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function check_ones_segment returns false on s.",
+    "preconditions": "a, b, c are integers with 1 <= a, 1 <= b, 1 <= c, and a+b+c <= 100. s is the binary string of length a+b+c with s[i] = '1' for 0 <= i < a, s[i] = '0' for a <= i < a+b, and s[i] = '1' for a+b <= i < a+b+c."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_14",
+    "negation": "AegisSpec.CheckOnesSegment.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever check_ones_segment returns a result r, the number of maximal contiguous segments of ones in s is exactly 1 if r = true, and is at least 2 if r = false.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CheckOnesSegment.spec_15",
+    "negation": "AegisSpec.CheckOnesSegment.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever check_ones_segment returns a result r, the number of maximal contiguous segments of ones in s is 1 + the number of indices i with 0 <= i < len(s)-1, s[i] = '0', and s[i+1] = '1'. In particular, r = true exactly when this number is 1, and r = false exactly when it is at least 2.",
+    "preconditions": "s is a valid input: 1 <= len(s) <= 100; every s[i] is '0' or '1'; and s[0] = '1'."
+  }
+]

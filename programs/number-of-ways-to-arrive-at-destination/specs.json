@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPaths.spec_1",
+    "negation": "AegisSpec.CountPaths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let MOD = 1000000007. For a finite sequence p = (p_0,...,p_k) with k >= 0, call p a path from 0 to n-1 if p_0 = 0, p_k = n-1, and for every j with 0 <= j < k there is exactly one road index i with {roads[i][0], roads[i][1]} = {p_j, p_{j+1}}; its time is the sum over j of roads[i][2] for that unique i, with the empty sum 0 when k = 0. Let D be the minimum time of such paths (which exists by connectivity), and let N be the number of such paths whose time is D. Then count_paths(n, roads) returns a result r such that 0 <= r < MOD and r is congruent to N modulo MOD (equivalently r = N mod MOD).",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPaths.spec_2",
+    "negation": "AegisSpec.CountPaths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, count_paths(n, roads) does not fail: there exists an i64 r with count_paths(n, roads) = Result.ok r. No i64 overflow, out-of-bounds indexing, or panic occurs.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPaths.spec_3",
+    "negation": "AegisSpec.CountPaths.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_paths(n, roads) returns Result.ok r, the value r satisfies 0 <= r < 1000000007.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPaths.spec_4",
+    "negation": "AegisSpec.CountPaths.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "count_paths(n, roads) returns Result.ok 1.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected; and len(roads) = n - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPaths.spec_5",
+    "negation": "AegisSpec.CountPaths.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the number of shortest paths from 0 to n-1, counted as in spec_1. If N < 1000000007, then count_paths(n, roads) returns Result.ok N.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPaths.spec_6",
+    "negation": "AegisSpec.CountPaths.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If count_paths(n, roads) returns Result.ok r and count_paths(n, roads') returns Result.ok r', then r = r'.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected. Let roads' be the slice obtained from roads by replacing every triple [u_i, v_i, t_i] with [v_i, u_i, t_i], keeping the same order; then (n, roads') also satisfies the valid-input constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPaths.spec_7",
+    "negation": "AegisSpec.CountPaths.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k_min be the minimum number of edges in any path from 0 to n-1, where a path is a vertex sequence p_0,...,p_k with p_0 = 0, p_k = n-1 and each consecutive pair joined by a road, and the empty path has 0 edges when n = 1. Let N be the number of such paths with exactly k_min edges. Then count_paths(n, roads) returns Result.ok (N mod 1000000007).",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected; and all roads have the same positive travel time, i.e. if len(roads) > 0 then there is an integer c with 1 <= c <= 1000000000 such that roads[i][2] = c for every i (if len(roads) = 0 the condition is vacuous)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPaths.spec_8",
+    "negation": "AegisSpec.CountPaths.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let A be the time of the unique road whose endpoints are {0,1}, B the time of the unique road whose endpoints are {1,2}, and C the time of the unique road whose endpoints are {0,2}. Then count_paths(3, roads) returns Result.ok 2 if C = A + B, and returns Result.ok 1 if C != A + B.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected; and n = 3 and len(roads) = 3."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPaths.spec_9",
+    "negation": "AegisSpec.CountPaths.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the number of shortest paths from 0 to n-1, counted as in spec_1. Then N >= 1. Consequently, if count_paths(n, roads) returns Result.ok 0, then N is a positive multiple of 1000000007.",
+    "preconditions": "n is an i64 with 1 <= n <= 200; roads is a slice of i64 vectors with length m satisfying n-1 <= m <= n*(n-1)/2; for every i with 0 <= i < m, roads[i] has length 3, and writing u_i=roads[i][0], v_i=roads[i][1], t_i=roads[i][2], we have 0 <= u_i < n, 0 <= v_i < n, u_i != v_i, and 1 <= t_i <= 1000000000; the unordered pairs {u_i,v_i} are pairwise distinct; and the undirected graph on vertices 0,...,n-1 with edges {u_i,v_i} is connected; and n > 1."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindCircleNum.spec_1",
+    "negation": "AegisSpec.FindCircleNum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r equals the number of provinces of the graph on the city indices {0,...,n-1}, defined as follows. For indices i and j, say j is reachable from i if there is an integer m >= 0 and a sequence v_0, v_1, ..., v_m of indices in {0,...,n-1} with v_0 = i, v_m = j, and isConnected[v_t][v_{t+1}] = 1 for every t with 0 <= t < m. A province is a nonempty subset S of {0,...,n-1} such that (a) for every i,j in S, j is reachable from i, and (b) for every i in S and every j not in S, j is not reachable from i and i is not reachable from j. Then r is the number of distinct provinces.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindCircleNum.spec_2",
+    "negation": "AegisSpec.FindCircleNum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid input isConnected, the call find_circle_num(isConnected) returns a result r; it does not panic, does not access an index outside the slice or outside a row, and does not perform an arithmetic operation whose result leaves the signed 64-bit range.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindCircleNum.spec_3",
+    "negation": "AegisSpec.FindCircleNum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r on a valid input, the integer r satisfies 1 <= r <= n.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindCircleNum.spec_4",
+    "negation": "AegisSpec.FindCircleNum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns n.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]. Also, for every i,j with 0 <= i,j < n and i != j, isConnected[i][j] = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindCircleNum.spec_5",
+    "negation": "AegisSpec.FindCircleNum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 1.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]. Also, for every i,j with 0 <= i,j < n, isConnected[i][j] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindCircleNum.spec_6",
+    "negation": "AegisSpec.FindCircleNum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, we have r = 1 if and only if for every pair of indices i,j in {0,...,n-1}, j is reachable from i, where j is reachable from i if there is an integer m >= 0 and a sequence v_0, v_1, ..., v_m of indices in {0,...,n-1} with v_0 = i, v_m = j, and isConnected[v_t][v_{t+1}] = 1 for every t with 0 <= t < m. Equivalently, r = 1 exactly when all n cities lie in a single province.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindCircleNum.spec_7",
+    "negation": "AegisSpec.FindCircleNum.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and r >= 2, there exist two distinct indices i,j in {0,...,n-1} such that j is not reachable from i, where j is reachable from i if there is an integer m >= 0 and a sequence v_0, v_1, ..., v_m of indices in {0,...,n-1} with v_0 = i, v_m = j, and isConnected[v_t][v_{t+1}] = 1 for every t with 0 <= t < m. Equivalently, at least two different provinces occur.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindCircleNum.spec_8",
+    "negation": "AegisSpec.FindCircleNum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r equals the number of indices i with 0 <= i < n for which there is no index j with 0 <= j < i such that i is reachable from j, where i is reachable from j if there is an integer m >= 0 and a sequence v_0, v_1, ..., v_m of indices in {0,...,n-1} with v_0 = j, v_m = i, and isConnected[v_t][v_{t+1}] = 1 for every t with 0 <= t < m.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindCircleNum.spec_9",
+    "negation": "AegisSpec.FindCircleNum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever find_circle_num(A) returns rA and find_circle_num(B) returns rB, we have rB <= rA.",
+    "preconditions": "Let n be an integer with 1 <= n <= 200. Let A and B be two n x n input matrices satisfying the problem constraints: every row has length n; every entry is 0 or 1; A[i][i] = B[i][i] = 1 for all i with 0 <= i < n; and A and B are symmetric. Additionally, for every i,j with 0 <= i,j < n, if A[i][j] = 1 then B[i][j] = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindCircleNum.spec_10",
+    "negation": "AegisSpec.FindCircleNum.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_circle_num(A) returns rA and find_circle_num(B) returns rB, we have rA = rB.",
+    "preconditions": "Let A be a valid n x n input matrix satisfying the problem constraints: 1 <= n <= 200; every row has length n; every entry is 0 or 1; A[i][i] = 1 for all i with 0 <= i < n; and A is symmetric. Let pi be a permutation of {0,...,n-1}. Let B be the n x n matrix defined by B[i][j] = A[pi(i)][pi(j)] for all i,j with 0 <= i,j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindCircleNum.spec_11",
+    "negation": "AegisSpec.FindCircleNum.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = n if and only if for every pair of distinct indices i,j in {0,...,n-1}, j is not reachable from i, where j is reachable from i if there is an integer m >= 0 and a sequence v_0, v_1, ..., v_m of indices in {0,...,n-1} with v_0 = i, v_m = j, and isConnected[v_t][v_{t+1}] = 1 for every t with 0 <= t < m.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindCircleNum.spec_12",
+    "negation": "AegisSpec.FindCircleNum.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exist exactly r sets P_1, ..., P_r such that: each P_k is a nonempty subset of {0,...,n-1}; P_k and P_l are disjoint for k != l; the union P_1 ∪ ... ∪ P_r is {0,...,n-1}; and for each k, P_k is a province, meaning every two cities in P_k are mutually reachable via finite sequences of 1-entries and no city in P_k is reachable from a city outside P_k and no city outside P_k is reachable from a city in P_k. Conversely, any such partition into provinces has exactly r sets.",
+    "preconditions": "Let n = len(isConnected). The input is valid: 1 <= n <= 200; for every i with 0 <= i < n, len(isConnected[i]) = n; for every i,j with 0 <= i,j < n, isConnected[i][j] is either 0 or 1; for every i with 0 <= i < n, isConnected[i][i] = 1; and for every i,j with 0 <= i,j < n, isConnected[i][j] = isConnected[j][i]."
+  }
+]

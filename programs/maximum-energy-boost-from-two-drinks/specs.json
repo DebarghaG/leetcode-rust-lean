@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_1",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "A schedule assigns to each hour i with 0 <= i < n exactly one of A, B, or cleanse. It is valid if for every i with 0 <= i < n-1, a direct switch is forbidden: it is not the case that hour i is A and hour i+1 is B, nor that hour i is B and hour i+1 is A. Its score is the sum of energyDrinkA[i] over hours assigned A, plus the sum of energyDrinkB[i] over hours assigned B, plus 0 over cleanse hours. The function returns a result r, and r is the maximum score over all valid schedules.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_2",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_3",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= max(sum over i from 0 to n-1 of energyDrinkA[i], sum over i from 0 to n-1 of energyDrinkB[i]).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_4",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r <= sum over i from 0 to n-1 of max(energyDrinkA[i], energyDrinkB[i]).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_5",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = sum over i from 0 to n-1 of energyDrinkA[i].",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000. Additionally, for every i with 0 <= i < n, energyDrinkA[i] >= energyDrinkB[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_6",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = sum over i from 0 to n-1 of energyDrinkB[i].",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000. Additionally, for every i with 0 <= i < n, energyDrinkB[i] >= energyDrinkA[i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_7",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = max(sum over i from 0 to 2 of energyDrinkA[i], sum over i from 0 to 2 of energyDrinkB[i], energyDrinkA[0] + energyDrinkB[2], energyDrinkB[0] + energyDrinkA[2]).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000. Additionally, n = 3."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_8",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For an ordered pair of arrays (X,Y), define a valid schedule exactly as in the main specification with X in place of energyDrinkA and Y in place of energyDrinkB, and define its score analogously. The function returns a result r, and r is also the maximum score over all valid schedules for the pair (energyDrinkB, energyDrinkA).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_9",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define A_rev[i] = energyDrinkA[n-1-i] and B_rev[i] = energyDrinkB[n-1-i] for 0 <= i < n. For an ordered pair of arrays (X,Y), define a valid schedule and its score exactly as in the main specification. The function returns a result r, and r is also the maximum score over all valid schedules for the pair (A_rev, B_rev).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_10",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every i with i + 2 < n, both r >= energyDrinkA[i] + energyDrinkB[i+2] and r >= energyDrinkB[i] + energyDrinkA[i+2] hold.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_11",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define valid schedules and their scores as in the main specification. The function returns a result r, and there exists a valid schedule s with score r such that for no i with 0 <= i < n-1 are both hour i and hour i+1 assigned cleanse.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_12",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define valid schedules and their scores as in the main specification. The function returns a result r, and if r > max(sum over i from 0 to n-1 of energyDrinkA[i], sum over i from 0 to n-1 of energyDrinkB[i]), then every valid schedule attaining score r assigns A at least once and assigns B at least once.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_13",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let dpA and dpB be arrays of length n with dpA[0] = energyDrinkA[0] and dpB[0] = energyDrinkB[0]; dpA[1] = energyDrinkA[0] + energyDrinkA[1] and dpB[1] = energyDrinkB[0] + energyDrinkB[1]; and for 2 <= i < n, dpA[i] = energyDrinkA[i] + max(dpA[i-1], dpB[i-2]) and dpB[i] = energyDrinkB[i] + max(dpB[i-1], dpA[i-2]). The function returns a result r, and r = max(dpA[n-1], dpB[n-1]).",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_14",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define valid schedules and scores as in the main specification. The function returns a result r, and there exists a valid schedule s with score r such that hour 0 and hour n-1 are not assigned cleanse, and for every i with 0 < i < n-1, if hour i is assigned cleanse then one of hours i-1 and i+1 is assigned A and the other is assigned B.",
+    "preconditions": "Let n = len(energyDrinkA). The inputs satisfy len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and for every i with 0 <= i < n, 1 <= energyDrinkA[i] <= 100000 and 1 <= energyDrinkB[i] <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxEnergyBoost.spec_15",
+    "negation": "AegisSpec.MaxEnergyBoost.spec_15_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If the function returns r for (energyDrinkA, energyDrinkB) and r' for (energyDrinkA', energyDrinkB'), then r <= r'.",
+    "preconditions": "Let n = len(energyDrinkA) = len(energyDrinkA'). The first pair satisfies len(energyDrinkA) = len(energyDrinkB) = n, 3 <= n <= 100000, and 1 <= energyDrinkA[i], energyDrinkB[i] <= 100000 for all i. The second pair satisfies len(energyDrinkA') = len(energyDrinkB') = n, 3 <= n <= 100000, and 1 <= energyDrinkA'[i], energyDrinkB'[i] <= 100000 for all i. Additionally, for every i with 0 <= i < n, energyDrinkA[i] <= energyDrinkA'[i] and energyDrinkB[i] <= energyDrinkB'[i]."
+  }
+]

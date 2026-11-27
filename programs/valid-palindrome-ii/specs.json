@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidPalindrome.spec_1",
+    "negation": "AegisSpec.ValidPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "A byte sequence t is called a palindrome iff for every integer j with 0 <= j < len(t), t[j] = t[len(t)-1-j]. For 0 <= i < len(s), let del(s,i) be the byte sequence of length len(s)-1 defined by del(s,i)[j] = s[j] for 0 <= j < i and del(s,i)[j] = s[j+1] for i <= j < len(s)-1. The function returns a result r and r = true iff either s is a palindrome or there exists an integer i with 0 <= i < len(s) such that del(s,i) is a palindrome.",
+    "preconditions": "1 <= len(s) <= 100000 and for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122 (so s is a nonempty string of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidPalindrome.spec_2",
+    "negation": "AegisSpec.ValidPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail or panic) for every input satisfying the preconditions; r is a Boolean value.",
+    "preconditions": "1 <= len(s) <= 100000 and for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidPalindrome.spec_3",
+    "negation": "AegisSpec.ValidPalindrome.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = false iff s is not a palindrome and for every integer i with 0 <= i < len(s), del(s,i) is not a palindrome, where del(s,i) is s with position i removed.",
+    "preconditions": "1 <= len(s) <= 100000 and for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidPalindrome.spec_4",
+    "negation": "AegisSpec.ValidPalindrome.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "1 <= len(s) <= 100000, for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122, and len(s) = 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidPalindrome.spec_5",
+    "negation": "AegisSpec.ValidPalindrome.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true iff (s[0] = s[1] or s[1] = s[2] or s[0] = s[2]).",
+    "preconditions": "1 <= len(s) <= 100000, for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122, and len(s) = 3."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidPalindrome.spec_6",
+    "negation": "AegisSpec.ValidPalindrome.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If valid_palindrome(s) returns r and valid_palindrome(t) returns r', then r = r'.",
+    "preconditions": "1 <= len(s) <= 100000 and for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122. Also t is a byte slice with len(t) = len(s) and for every j with 0 <= j < len(t), t[j] = s[len(s)-1-j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidPalindrome.spec_7",
+    "negation": "AegisSpec.ValidPalindrome.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d0 be the least integer d with 0 <= d <= len(s) such that some byte sequence u obtained from s by deleting exactly d positions, preserving order, is a palindrome; such a d exists because deleting all characters gives the empty palindrome. The function returns a result r and r = true iff d0 <= 1.",
+    "preconditions": "1 <= len(s) <= 100000 and for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidPalindrome.spec_8",
+    "negation": "AegisSpec.ValidPalindrome.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = true iff del(s,0) is a palindrome or del(s,len(s)-1) is a palindrome, where del(s,i) is s with position i removed.",
+    "preconditions": "1 <= len(s) <= 100000, for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122, len(s) >= 2, and s[0] != s[len(s)-1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidPalindrome.spec_9",
+    "negation": "AegisSpec.ValidPalindrome.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If valid_palindrome(s) returns r and r = true, then inner is a palindrome or there exists an integer i with 0 <= i < len(inner) such that del(inner,i) is a palindrome.",
+    "preconditions": "1 <= len(s) <= 100000, for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122, len(s) >= 2, and s[0] = s[len(s)-1]. Define inner to be the byte slice of length len(s)-2 with inner[j] = s[j+1] for 0 <= j < len(s)-2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidPalindrome.spec_10",
+    "negation": "AegisSpec.ValidPalindrome.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = true iff inner is a palindrome or there exists an integer i with 0 <= i < len(inner) such that del(inner,i) is a palindrome, where del(t,i) is t with position i removed. This completes S12 by adding the converse: an at-most-one-deletion solution for inner can be lifted to s by keeping the equal endpoints.",
+    "preconditions": "1 <= len(s) <= 100000, for every integer i with 0 <= i < len(s), 97 <= s[i] <= 122, len(s) >= 2, and s[0] = s[len(s)-1]. Define inner to be the byte slice of length len(s)-2 with inner[j] = s[j+1] for 0 <= j < len(s)-2."
+  }
+]

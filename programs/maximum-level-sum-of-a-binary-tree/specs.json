@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxLevelSum.spec_1",
+    "negation": "AegisSpec.MaxLevelSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let h = height(root), where height is the largest level containing at least one node, with the root at level 1, and for 1 <= l <= h let S(l) be the sum of the values of all nodes at level l. The function returns a result r : i64 such that 1 <= r <= h, for every l with 1 <= l <= h we have S(l) <= S(r), and for every l with 1 <= l < r we have S(l) < S(r). Equivalently, r is the smallest level whose level sum is maximal among all levels of root.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxLevelSum.spec_2",
+    "negation": "AegisSpec.MaxLevelSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r : i64; in particular, it does not fail by panicking, accessing a missing tree node, or overflowing a 64-bit integer. Formally, there exists r : i64 such that max_level_sum root = ok r.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxLevelSum.spec_3",
+    "negation": "AegisSpec.MaxLevelSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= nodeCount(root), where nodeCount(root) is the number of non-Null nodes in root.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxLevelSum.spec_4",
+    "negation": "AegisSpec.MaxLevelSum.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, 1 <= r <= height(root) and level r of root is nonempty; equivalently, there exists at least one node v in root whose depth from the root is r-1.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxLevelSum.spec_5",
+    "negation": "AegisSpec.MaxLevelSum.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every level l with 1 <= l <= height(root), the sum of the values of all nodes at level l is less than or equal to the sum of the values of all nodes at level r.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxLevelSum.spec_6",
+    "negation": "AegisSpec.MaxLevelSum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every level l with 1 <= l < r, the sum of the values of all nodes at level l is strictly less than the sum of the values of all nodes at level r.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxLevelSum.spec_7",
+    "negation": "AegisSpec.MaxLevelSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 1.",
+    "preconditions": "root = Tree.Node(v, Tree.Null, Tree.Null) for some i64 v with -100000 <= v <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxLevelSum.spec_8",
+    "negation": "AegisSpec.MaxLevelSum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let s2 be the sum of the values of the non-Null children of the root (so s2 is the left child's value if only the left child exists, the right child's value if only the right child exists, and left value + right value if both exist). The function returns 1 if v >= s2, and returns 2 if v < s2.",
+    "preconditions": "root = Tree.Node(v, left, right), where left and right are either Tree.Null or a leaf Tree.Node(_, Tree.Null, Tree.Null), and at least one of left and right is non-Null; all node values are in [-100000, 100000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxLevelSum.spec_9",
+    "negation": "AegisSpec.MaxLevelSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns height(root), i.e. the integer h.",
+    "preconditions": "root is not Tree.Null; the number of nodes in root is between 1 and 10000 inclusive; every node value is in [-100000, 100000]; if h = height(root) and S(l) is the sum of values at level l for 1 <= l <= h, then S(1) < S(2) < ... < S(h)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxLevelSum.spec_10",
+    "negation": "AegisSpec.MaxLevelSum.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_level_sum root1 returns r1 and max_level_sum root2 returns r2, we have r1 = r2.",
+    "preconditions": "root1 and root2 are non-Null trees, each with between 1 and 10000 nodes and all node values in [-100000, 100000]. Let h1 = height(root1), h2 = height(root2), and let S1, spec_2 be their level-sum functions. Suppose h1 = h2 = h and S1(l) = S2(l) for every 1 <= l <= h."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxLevelSum.spec_11",
+    "negation": "AegisSpec.MaxLevelSum.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_level_sum root returns r and max_level_sum root' returns r', we have r = r'.",
+    "preconditions": "root and root' are non-Null trees, each with between 1 and 10000 nodes and all node values in [-100000, 100000], and root' is obtained from root by any sequence of replacing a subnode Tree.Node(v, a, b) with Tree.Node(v, b, a) (swapping left and right children at any nodes)."
+  }
+]

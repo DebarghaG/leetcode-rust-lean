@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGameViii.spec_1",
+    "negation": "AegisSpec.StoneGameViii.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define P(m) = sum_{i=0}^{m-1} stones[i] for 0 <= m <= n. Define F(n) = 0 and, for 1 <= k < n, F(k) = max{ P(j) - F(j) | k < j <= n }, where the maximum is over the nonempty finite set {k+1, ..., n}. The function returns a result r and r = F(1). Here F(k) is the optimal future score difference, current player minus opponent, when the first k original stones have already been merged into the single leftmost stone and it is the current player's turn; the initial Alice position corresponds to F(1) because Alice's first move must choose some j with 2 <= j <= n.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGameViii.spec_2",
+    "negation": "AegisSpec.StoneGameViii.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, go out of bounds, or overflow for any input satisfying the preconditions.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGameViii.spec_3",
+    "negation": "AegisSpec.StoneGameViii.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let A = sum_{i=0}^{n-1} |stones[i]|. Whenever the function returns r, |r| <= A.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGameViii.spec_4",
+    "negation": "AegisSpec.StoneGameViii.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let T = sum_{i=0}^{n-1} stones[i]. Whenever the function returns r, r >= T.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StoneGameViii.spec_5",
+    "negation": "AegisSpec.StoneGameViii.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r >= -stones[n-1].",
+    "preconditions": "Let n = len(stones). 3 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StoneGameViii.spec_6",
+    "negation": "AegisSpec.StoneGameViii.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P(m) = sum_{i=0}^{m-1} stones[i] for 0 <= m <= n, and let U = max( P(n), max_{2 <= j <= n} (P(j) - P(n)) ). Whenever the function returns r, r <= U.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StoneGameViii.spec_7",
+    "negation": "AegisSpec.StoneGameViii.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = stones[0] + stones[1].",
+    "preconditions": "len(stones) = 2 and for i = 0,1, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StoneGameViii.spec_8",
+    "negation": "AegisSpec.StoneGameViii.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let T = stones[0] + stones[1] + stones[2] and let P2 = stones[0] + stones[1]. The function returns r = max(T, P2 - T) = max(T, -stones[2]).",
+    "preconditions": "len(stones) = 3 and for i = 0,1,2, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StoneGameViii.spec_9",
+    "negation": "AegisSpec.StoneGameViii.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = -stones[n-1].",
+    "preconditions": "Let n = len(stones). 3 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StoneGameViii.spec_10",
+    "negation": "AegisSpec.StoneGameViii.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r = P(n).",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000. Let P(m) = sum_{i=0}^{m-1} stones[i] for 0 <= m <= n. Assume P(n) >= 0 and, for every j with 2 <= j <= n, P(j) <= P(n)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StoneGameViii.spec_11",
+    "negation": "AegisSpec.StoneGameViii.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If stone_game_viii(stones) returns r and stone_game_viii(stones2) returns r2, then r2 = c * r.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000. Let c be an integer with c >= 0, and let stones2 be a slice of length n such that stones2[i] = c * stones[i] for every i, with each product represented as an i64 value."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.StoneGameViii.spec_12",
+    "negation": "AegisSpec.StoneGameViii.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P(m) = sum_{i=0}^{m-1} stones[i] for 0 <= m <= n. If the function returns r, then there exist an integer m >= 1 and integers k_1, ..., k_m such that 2 <= k_1 < k_2 < ... < k_m = n and r = sum_{t=1}^{m} (-1)^{t+1} P(k_t).",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.StoneGameViii.spec_13",
+    "negation": "AegisSpec.StoneGameViii.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Then F(n-1) = P(n), and for every k with 1 <= k <= n-2, F(k) = max(F(k+1), P(k+1) - F(k+1)). Equivalently, the value can be computed backward from dp = P(n), updating dp := max(dp, P(k+1)-dp) for k = n-2, n-3, ..., 1, and returning the final dp.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 100000 and for every i with 0 <= i < n, -10000 <= stones[i] <= 10000. Let P(m) = sum_{i=0}^{m-1} stones[i] for 0 <= m <= n. Define F(n) = 0 and, for 1 <= k < n, F(k) = max{ P(j) - F(j) | k < j <= n }."
+  }
+]

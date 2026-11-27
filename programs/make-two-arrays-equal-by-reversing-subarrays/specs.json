@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanBeEqual.spec_1",
+    "negation": "AegisSpec.CanBeEqual.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let count(xs, v) be the number of indices i with 0 <= i < len(xs) and xs[i] = v. The function returns a result r (it does not fail), and r = true if and only if for every integer v, count(arr, v) = count(target, v).",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, and every element of target and arr is an integer between 1 and 1000 inclusive."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanBeEqual.spec_2",
+    "negation": "AegisSpec.CanBeEqual.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; equivalently, there exists a Boolean b such that can_be_equal target arr = ok b. It does not overflow, panic, or go out of bounds.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, and every element of target and arr is an integer between 1 and 1000 inclusive."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanBeEqual.spec_3",
+    "negation": "AegisSpec.CanBeEqual.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The calls can_be_equal target arr and can_be_equal arr target both return results, and their Boolean results are equal.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, and every element of target and arr is an integer between 1 and 1000 inclusive."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanBeEqual.spec_4",
+    "negation": "AegisSpec.CanBeEqual.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If can_be_equal target arr returns true and can_be_equal arr other returns true, then can_be_equal target other returns true.",
+    "preconditions": "target, arr, and other are slices of 64-bit integers with len(target) = len(arr) = len(other), 1 <= len(target) <= 1000, and every element of each slice is between 1 and 1000 inclusive."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanBeEqual.spec_5",
+    "negation": "AegisSpec.CanBeEqual.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The calls can_be_equal target arr and can_be_equal target arr2 both return results, and their Boolean results are equal.",
+    "preconditions": "target, arr, and arr2 are slices of 64-bit integers with len(target) = len(arr) = len(arr2), 1 <= len(target) <= 1000, every element is between 1 and 1000 inclusive, and arr2 is obtained from arr by reversing one non-empty contiguous subarray. That is, there are integers l,u with 0 <= l <= u < len(arr) such that arr2[i] = arr[i] for i < l and for i > u, and arr2[i] = arr[l+u-i] for l <= i <= u."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanBeEqual.spec_6",
+    "negation": "AegisSpec.CanBeEqual.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = true if and only if target[i] = arr[i] for every i with 0 <= i < len(target).",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, every element is between 1 and 1000 inclusive, and both slices are nondecreasing: target[i] <= target[i+1] and arr[i] <= arr[i+1] for every 0 <= i < len(target)-1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanBeEqual.spec_7",
+    "negation": "AegisSpec.CanBeEqual.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = true if and only if arr[i] = c for every i with 0 <= i < len(arr).",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, every element is between 1 and 1000 inclusive, and there is an integer c such that target[i] = c for every 0 <= i < len(target)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanBeEqual.spec_8",
+    "negation": "AegisSpec.CanBeEqual.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = true.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, every element is between 1 and 1000 inclusive, and for every i with 0 <= i < len(target), arr[i] = target[len(target)-1-i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanBeEqual.spec_9",
+    "negation": "AegisSpec.CanBeEqual.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = false.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, every element is between 1 and 1000 inclusive, and for every i with 0 <= i < len(target) and every j with 0 <= j < len(arr), target[i] != arr[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanBeEqual.spec_10",
+    "negation": "AegisSpec.CanBeEqual.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_be_equal target arr returns a result r with r = true, there exist a natural number k and slices a_0,...,a_k of length len(arr) such that a_0 = arr, a_k = target, and for every t with 0 <= t < k, a_{t+1} is obtained from a_t by reversing one non-empty contiguous subarray of a_t.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, and every element of target and arr is an integer between 1 and 1000 inclusive."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanBeEqual.spec_11",
+    "negation": "AegisSpec.CanBeEqual.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_be_equal target arr returns a result r with r = false, there do not exist a natural number k and slices a_0,...,a_k of length len(arr) such that a_0 = arr, a_k = target, and for every t with 0 <= t < k, a_{t+1} is obtained from a_t by reversing one non-empty contiguous subarray of a_t.",
+    "preconditions": "target and arr are slices of 64-bit integers with len(target) = len(arr), 1 <= len(target) <= 1000, and every element of target and arr is an integer between 1 and 1000 inclusive."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let C be the set of total costs of all finite sequences of operations that are admissible in the following sense: each step chooses an index j with 0<=j<m and a start a>=0, is legal only when the current block of length len(original[j]) starting at a equals original[j], replaces that block by changed[j], and costs cost[j]; for every two steps with starts a,a' and lengths l=len(original[j]), l'=len(original[j']), the intervals [a,a+l-1] and [a',a'+l'-1] are either disjoint (no common index) or (a,l)=(a',l'). The sequence converts source to target if applying it to source yields target. Then whenever the function returns a result r: if C is nonempty, r = min(C); if C is empty, r = -1.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C be the set of total costs of all admissible operation sequences (as defined in spec_1) that convert source to target. Whenever the function returns r and r>=0, every c in C satisfies c >= r.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let C be the set of total costs of all admissible operation sequences (as defined in spec_1) that convert source to target. Whenever the function returns r = -1, the set C is empty; that is, no admissible operation sequence converts source to target.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let C be the set of total costs of all admissible operation sequences (as defined in spec_1) that convert source to target. If C is empty, then whenever the function returns a result r, r = -1.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r and r != -1, r >= 0.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max(cost[j] for 0<=j<m). Whenever the function returns r with r >= 0, r <= n * m * M.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let cmin = min(cost[j] for 0<=j<m). Whenever source != target and the function returns r with r >= 0, r >= cmin.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let C be the set of total costs of all admissible operation sequences (as defined in spec_1) that convert source to target. Whenever the function returns r with r >= 0, there exists an admissible sequence of total cost r converting source to target such that: (i) if two steps use different start-length intervals, those intervals are disjoint; (ii) for each fixed start-length interval, at most m steps use that interval; and (iii) every index i not covered by any step interval satisfies source[i] = target[i].",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCost.spec_10",
+    "negation": "AegisSpec.MinimumCost.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned by the function on (source,target,original,changed,cost), and let r' be the result returned on (source,target,original,changed,cost'). Whenever both results are returned, if r = -1 then r' = -1; if r >= 0 then r' >= 0 and r' <= r.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000. Additionally, cost' is an array of length m with 1 <= cost'[j] <= cost[j] <= 1000000 for every j with 0<=j<m."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumCost.spec_11",
+    "negation": "AegisSpec.MinimumCost.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define original'[i] = original[π(i)], changed'[i] = changed[π(i)], and cost'[i] = cost[π(i)] for 0<=i<m. Whenever the function returns r on (source,target,original,changed,cost) and r' on (source,target,original',changed',cost'), we have r = r'.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000. Additionally, π is a permutation of {0,...,m-1}."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumCost.spec_12",
+    "negation": "AegisSpec.MinimumCost.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (source,target,original,changed,cost) and r' on (source,target,original,changed,cost'), we have r = r'.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000. Additionally, p and q are indices with 0<=p,q<m, p != q, original[p]=original[q], changed[p]=changed[q], and cost[q] <= cost[p]. The array cost' has length m, satisfies cost'[i]=cost[i] for i != p, 1 <= cost'[p] <= 1000000, and cost'[p] >= cost[q]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumCost.spec_13",
+    "negation": "AegisSpec.MinimumCost.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever source = target (as byte arrays), the function returns 0; the empty operation sequence is admissible, costs 0, and all operation costs are positive, so the minimum is 0.",
+    "preconditions": "len(source)=len(target)=n with 1<=n<=1000; every byte of source and target is a lowercase English ASCII code (97..122). Let m=len(cost)=len(original)=len(changed) with 1<=m<=100. For every j with 0<=j<m: len(original[j])=len(changed[j]), 1<=len(original[j])<=n, every byte of original[j] and changed[j] is a lowercase English ASCII code, original[j]!=changed[j], and 1<=cost[j]<=1000000."
+  }
+]

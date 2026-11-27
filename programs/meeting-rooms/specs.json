@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_1",
+    "negation": "AegisSpec.CanAttendMeetings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever can_attend_meetings(intervals) returns a result r, r = true if and only if for every pair of indices i and j with 0 <= i < j < n, either e_i <= s_j or e_j <= s_i. Equivalently, r = false if and only if there exist 0 <= i < j < n with s_i < e_j and s_j < e_i; meetings that only touch at an endpoint, with e_i = s_j or e_j = s_i, do not conflict.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_2",
+    "negation": "AegisSpec.CanAttendMeetings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every intervals satisfying the preconditions, can_attend_meetings(intervals) returns a result r (a Bool) and does not fail: there is no panic, no out-of-bounds access, and no arithmetic overflow.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_3",
+    "negation": "AegisSpec.CanAttendMeetings.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r = false, there exist indices i and j with 0 <= i < j < n such that s_i < e_j and s_j < e_i. Equivalently, some two distinct meetings have a common time t with s_i <= t < e_i and s_j <= t < e_j.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_4",
+    "negation": "AegisSpec.CanAttendMeetings.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist distinct indices i and j with s_i = s_j and e_i = e_j, then whenever the function returns r, r = false.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_5",
+    "negation": "AegisSpec.CanAttendMeetings.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist distinct indices i and j such that s_i <= s_j and e_j <= e_i, then whenever the function returns r, r = false.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_6",
+    "negation": "AegisSpec.CanAttendMeetings.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If n >= 2 and there exists an integer t such that s_i <= t < e_i for every i with 0 <= i < n, then whenever the function returns r, r = false.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_7",
+    "negation": "AegisSpec.CanAttendMeetings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any permutation pi of the index set {0, 1, ..., n-1}, define intervals_pi by intervals_pi[k] = intervals[pi(k)] for 0 <= k < n. Whenever can_attend_meetings(intervals) returns r and can_attend_meetings(intervals_pi) returns r_pi, we have r = r_pi.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_8",
+    "negation": "AegisSpec.CanAttendMeetings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every strictly increasing sequence of indices 0 <= j_0 < j_1 < ... < j_{m-1} < n, let sub be the length-m array with sub[k] = intervals[j_k] for 0 <= k < m. Whenever can_attend_meetings(intervals) returns true, can_attend_meetings(sub) returns true.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_9",
+    "negation": "AegisSpec.CanAttendMeetings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every array intervals_ext satisfying the same preconditions such that intervals is a subsequence of intervals_ext, if can_attend_meetings(intervals) returns false, then can_attend_meetings(intervals_ext) returns false.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_10",
+    "negation": "AegisSpec.CanAttendMeetings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that the translated endpoints satisfy 0 <= s_i + c < e_i + c <= 10^6 for every i, define intervals_c by intervals_c[i][0] = s_i + c and intervals_c[i][1] = e_i + c for all i. Whenever can_attend_meetings(intervals) returns r and can_attend_meetings(intervals_c) returns r_c, we have r = r_c.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_11",
+    "negation": "AegisSpec.CanAttendMeetings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every positive integer k such that 0 <= k*s_i < k*e_i <= 10^6 for every i, define intervals_k by intervals_k[i][0] = k*s_i and intervals_k[i][1] = k*e_i. Whenever can_attend_meetings(intervals) returns r and can_attend_meetings(intervals_k) returns r_k, we have r = r_k.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_12",
+    "negation": "AegisSpec.CanAttendMeetings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the meetings are listed in nondecreasing start order, meaning s_i <= s_{i+1} for all 0 <= i < n-1, and every consecutive pair is separated, meaning e_i <= s_{i+1} for all 0 <= i < n-1, then the function returns true.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CanAttendMeetings.spec_13",
+    "negation": "AegisSpec.CanAttendMeetings.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If the meetings are sorted by nondecreasing start, meaning s_i <= s_{i+1} for all 0 <= i < n-1, then whenever can_attend_meetings(intervals) returns r, r = true if and only if e_i <= s_{i+1} for every 0 <= i < n-1. This is the converse completion of spec_12: under sorted starts, checking only adjacent separated pairs is necessary and sufficient.",
+    "preconditions": "Let n = len(intervals). Assume 0 <= n <= 10^4. For every i with 0 <= i < n, intervals[i] has length exactly 2, and 0 <= intervals[i][0] < intervals[i][1] <= 10^6. All indices are 0-based. Write s_i = intervals[i][0] and e_i = intervals[i][1]."
+  }
+]

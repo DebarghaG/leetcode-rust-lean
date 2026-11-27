@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result v, v = sum_{i=0}^{len(queries)-1} m(l_i, r_i), where for x >= 1, d(x) is the least positive integer k such that x < 4^k; S(l,r) = sum_{x=l}^{r} d(x); and m(l,r) = max(d(r), ceil(S(l,r)/2)).",
+    "preconditions": "queries is a slice of vectors of 64-bit integers satisfying the problem constraints: 1 <= len(queries) <= 100000; for every i with 0 <= i < len(queries), len(queries[i]) = 2; writing l_i = queries[i][0] and r_i = queries[i][1], we have 1 <= l_i < r_i <= 1000000000. All I64 entries are interpreted as mathematical integers."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every queries satisfying the preconditions, the function returns Result.ok v for some 64-bit integer v; it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "queries satisfies the problem constraints: 1 <= len(queries) <= 100000; every queries[i] has length 2; writing l_i = queries[i][0], r_i = queries[i][1], we have 1 <= l_i < r_i <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns v, v >= sum_{i=0}^{len(queries)-1} ceil((r_i - l_i + 1)/2). In particular, v >= len(queries).",
+    "preconditions": "queries satisfies the problem constraints: 1 <= len(queries) <= 100000; every queries[i] has length 2; l_i = queries[i][0], r_i = queries[i][1] with 1 <= l_i < r_i <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d(x) be the least positive k with x < 4^k and S(l,r) = sum_{x=l}^{r} d(x). Whenever the function returns v, v <= sum_{i=0}^{len(queries)-1} S(l_i,r_i), and therefore v <= 15 * sum_{i=0}^{len(queries)-1} (r_i - l_i + 1) <= 1500000000000000.",
+    "preconditions": "queries satisfies the problem constraints: 1 <= len(queries) <= 100000; every queries[i] has length 2; l_i = queries[i][0], r_i = queries[i][1] with 1 <= l_i < r_i <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(x) be the least positive k with x < 4^k and S(l,r) = sum_{x=l}^{r} d(x). If 2*d(r) >= S(l,r), then whenever the function returns v, v = d(r).",
+    "preconditions": "queries satisfies the problem constraints and has exactly one query; write that query as [l,r] with 1 <= l < r <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(x) be the least positive k with x < 4^k and S(l,r) = sum_{x=l}^{r} d(x). If 2*d(r) < S(l,r), then whenever the function returns v, v = ceil(S(l,r)/2).",
+    "preconditions": "queries satisfies the problem constraints and has exactly one query; write that query as [l,r] with 1 <= l < r <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(x) be the least positive k with x < 4^k, S(l,r) = sum_{x=l}^{r} d(x), and m(l,r) = max(d(r), ceil(S(l,r)/2)). For fixed l, m(l,r) is nondecreasing in r. Consequently, whenever both calls return, the value returned for q' is greater than or equal to the value returned for q.",
+    "preconditions": "q and q' are query lists satisfying the problem constraints. The list q' is obtained from q by replacing one query [l,r1] with [l,r2], where 1 <= l < r1 <= r2 <= 1000000000; all other entries are unchanged."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(x) be the least positive k with x < 4^k, S(l,r) = sum_{x=l}^{r} d(x), and m(l,r) = max(d(r), ceil(S(l,r)/2)). For fixed r, m(l,r) is nonincreasing in l. Consequently, whenever both calls return, the value returned for q' is less than or equal to the value returned for q.",
+    "preconditions": "q and q' are query lists satisfying the problem constraints. The list q' is obtained from q by replacing one query [l1,r] with [l2,r], where 1 <= l1 <= l2 < r <= 1000000000; all other entries are unchanged."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the calls on q1, q2, and q1++q2 return v1, v2, and v3 respectively, we have v3 = v1 + v2.",
+    "preconditions": "q1 and q2 are nonempty query lists satisfying the problem constraints, and their concatenation q1++q2 also has length at most 100000 with every query entry valid."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both calls return, the value returned for q' equals the value returned for queries.",
+    "preconditions": "queries satisfies the problem constraints; q' is any permutation of the entries of queries."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value is at least n. The lower bound n is attained: if every query is [1,2], then the function returns n.",
+    "preconditions": "queries satisfies the problem constraints and has n = len(queries) queries."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperations.spec_12",
+    "negation": "AegisSpec.MinOperations.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value is at most 7321043037. This bound is attained by the single query [1,1000000000].",
+    "preconditions": "queries satisfies the problem constraints and has exactly one query."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinOperations.spec_13",
+    "negation": "AegisSpec.MinOperations.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every query [l,r] in the input, define d(x) as the least positive k with x < 4^k, S(l,r) = sum_{x=l}^{r} d(x), and m(l,r) = max(d(r), ceil(S(l,r)/2)). Then m(l,r) is a true minimum: there exists a legal sequence of exactly m(l,r) operations reducing the array l,l+1,...,r to all zeros, and no legal sequence of fewer operations does so. Whenever the function returns a value, that value is the sum of these m(l,r).",
+    "preconditions": "queries satisfies the problem constraints: 1 <= len(queries) <= 100000; every queries[i] has length 2; l_i = queries[i][0], r_i = queries[i][1] with 1 <= l_i < r_i <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinOperations.spec_14",
+    "negation": "AegisSpec.MinOperations.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(x) be the least positive k with x < 4^k and S(l,r) = sum_{x=l}^{r} d(x). Whenever the function returns v, 2*v >= sum_{i=0}^{len(queries)-1} S(l_i,r_i).",
+    "preconditions": "queries satisfies the problem constraints: 1 <= len(queries) <= 100000; every queries[i] has length 2; l_i = queries[i][0], r_i = queries[i][1] with 1 <= l_i < r_i <= 1000000000."
+  }
+]

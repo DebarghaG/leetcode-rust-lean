@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_1",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the number of indices i with 0 <= i < len(properties) for which there exists an index j with 0 <= j < len(properties), j != i, properties[j][0] > properties[i][0], and properties[j][1] > properties[i][1]. Each index position contributes at most one to this count; equality in either coordinate does not make a character weak.",
+    "preconditions": "2 <= len(properties) <= 100000; for every i with 0 <= i < len(properties), len(properties[i]) = 2, 1 <= properties[i][0] <= 100000, and 1 <= properties[i][1] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_2",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "2 <= len(properties) <= 100000; for every i with 0 <= i < len(properties), len(properties[i]) = 2, 1 <= properties[i][0] <= 100000, and 1 <= properties[i][1] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_3",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(properties) - 1.",
+    "preconditions": "2 <= len(properties) <= 100000; for every i with 0 <= i < len(properties), len(properties[i]) = 2, 1 <= properties[i][0] <= 100000, and 1 <= properties[i][1] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_4",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "2 <= len(properties) <= 100000; for every i with 0 <= i < len(properties), len(properties[i]) = 2, 1 <= properties[i][0] <= 100000, and 1 <= properties[i][1] <= 100000; there exists an integer d such that for every i with 0 <= i < len(properties), properties[i][1] = d."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_5",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on properties and a result r' on properties', r = r'.",
+    "preconditions": "Both properties and properties' satisfy the base constraints: 2 <= len(properties) <= 100000, 2 <= len(properties') <= 100000, and for every i in the respective list, len of the row is 2 with both coordinates between 1 and 100000. Also len(properties') = len(properties) and there exists a bijection pi from {0,...,len(properties)-1} to itself such that properties'[i] = properties[pi(i)] for every i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_6",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r' on properties', r' = len(properties).",
+    "preconditions": "properties satisfies the base constraints: 2 <= len(properties) <= 100000, every row has length 2, and both coordinates are between 1 and 100000. Let n = len(properties), assume n < 100000. Let q be a pair with 1 <= q[0] <= 100000 and 1 <= q[1] <= 100000 such that for every i with 0 <= i < n, q[0] > properties[i][0] and q[1] > properties[i][1]. Let properties' be the list of length n+1 with properties'[i] = properties[i] for 0 <= i < n and properties'[n] = q. Then properties' also satisfies the base constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_7",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on properties and a result r' on properties', r' = r + 1.",
+    "preconditions": "properties satisfies the base constraints: 2 <= len(properties) <= 100000, every row has length 2, and both coordinates are between 1 and 100000. Let n = len(properties), assume n < 100000. Let q be a pair with 1 <= q[0] <= 100000 and 1 <= q[1] <= 100000 such that for every i with 0 <= i < n, q[0] < properties[i][0] and q[1] < properties[i][1]. Let properties' be the list of length n+1 with properties'[i] = properties[i] for 0 <= i < n and properties'[n] = q. Then properties' also satisfies the base constraints."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfWeakCharacters.spec_8",
+    "negation": "AegisSpec.NumberOfWeakCharacters.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = len(properties) - 1 if and only if there exists an index k with 0 <= k < len(properties) such that for every j with 0 <= j < len(properties) and j != k, properties[k][0] > properties[j][0] and properties[k][1] > properties[j][1].",
+    "preconditions": "2 <= len(properties) <= 100000; for every i with 0 <= i < len(properties), len(properties[i]) = 2, 1 <= properties[i][0] <= 100000, and 1 <= properties[i][1] <= 100000."
+  }
+]

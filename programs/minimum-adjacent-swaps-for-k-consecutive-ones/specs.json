@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinMoves.spec_1",
+    "negation": "AegisSpec.MinMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r is the minimum, over all binary arrays b of length n that contain exactly m ones and have k consecutive ones (there exists s with 0 <= s <= n-k such that b[s] = b[s+1] = ... = b[s+k-1] = 1), of the adjacent-swap distance D(nums,b). Here, if p_0 < p_1 < ... < p_{m-1} are the indices with nums[p_j] = 1 and q_0 < q_1 < ... < q_{m-1} are the indices with b[q_j] = 1, then D(nums,b) = sum_{j=0}^{m-1} |p_j - q_j|. Equivalently, r = min { D(nums,b) : b is a binary array of length n with exactly m ones and with k consecutive ones }.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= m, where m is the number of indices i with nums[i] = 1. Let n = len(nums)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinMoves.spec_2",
+    "negation": "AegisSpec.MinMoves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid input, the function returns a result r; it does not panic, overflow, or access an index outside the slice.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinMoves.spec_3",
+    "negation": "AegisSpec.MinMoves.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinMoves.spec_4",
+    "negation": "AegisSpec.MinMoves.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= k * len(nums).",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinMoves.spec_5",
+    "negation": "AegisSpec.MinMoves.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let M = max { c(s) : 0 <= s <= n-k }, where c(s) is the number of indices i with s <= i < s+k and nums[i] = 1. Then r >= k - M.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1. Let n = len(nums)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinMoves.spec_6",
+    "negation": "AegisSpec.MinMoves.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists an integer s with 0 <= s <= len(nums)-k such that nums[s] = nums[s+1] = ... = nums[s+k-1] = 1.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinMoves.spec_7",
+    "negation": "AegisSpec.MinMoves.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and k = 1, with 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinMoves.spec_8",
+    "negation": "AegisSpec.MinMoves.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if p_0 < p_1 < ... < p_{m-1} are all indices with nums[p_j] = 1, so m >= 2, then r = min { p_{i+1} - p_i - 1 : 0 <= i < m-1 }.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and k = 2, with 2 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinMoves.spec_9",
+    "negation": "AegisSpec.MinMoves.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min { sum_{j=0}^{k-1} |p_j - (s+j)| : 0 <= s <= n-k }.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and k equals the number of indices i with nums[i] = 1. Let n = len(nums) and let p_0 < p_1 < ... < p_{k-1} be all one-indices."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinMoves.spec_10",
+    "negation": "AegisSpec.MinMoves.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(nums), and let rev be the sequence of length n defined by rev[i] = nums[n-1-i] for 0 <= i < n. Whenever the function returns r for nums, the exact answer for input (rev,k), defined by the same minimization as spec_1 with rev in place of nums, is also r.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinMoves.spec_11",
+    "negation": "AegisSpec.MinMoves.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let core be obtained from nums by deleting all leading zeros and all trailing zeros. Whenever the function returns r for nums, the exact answer for input (core,k), defined by the same minimization as spec_1 with core in place of nums, is also r.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinMoves.spec_12",
+    "negation": "AegisSpec.MinMoves.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for parameter k, r <= R, where R is the exact minimum number of moves for the same nums and parameter k+1, defined by the main specification with k+1.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and k+1 <= the number of indices i with nums[i] = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinMoves.spec_13",
+    "negation": "AegisSpec.MinMoves.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, there exist integers l and s with 0 <= l <= m-k and 0 <= s <= n-k such that r = sum_{j=0}^{k-1} |p_{l+j} - (s+j)|, and for every l' with 0 <= l' <= m-k and every s' with 0 <= s' <= n-k, sum_{j=0}^{k-1} |p_{l'+j} - (s'+j)| >= r.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), nums[i] is 0 or 1; and 1 <= k <= m, where m is the number of indices i with nums[i] = 1. Let n = len(nums) and let p_0 < p_1 < ... < p_{m-1} be all one-indices."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinMoves.spec_14",
+    "negation": "AegisSpec.MinMoves.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For each l with 0 <= l <= m-k, define a_j = p_{l+j} - j for 0 <= j < k; these a_j are nondecreasing. Let med_l be any integer satisfying a_{floor((k-1)/2)} <= med_l <= a_{ceil((k-1)/2)}. Then whenever the function returns r, r = min { sum_{j=0}^{k-1} |a_j - med_l| : 0 <= l <= m-k }.",
+    "preconditions": "Valid input: 1 <= len(nums) <= 100000; every nums[i] is 0 or 1; 1 <= k <= m, where m is the number of ones. Let n = len(nums) and let p_0 < p_1 < ... < p_{m-1} be all one-indices."
+  }
+]

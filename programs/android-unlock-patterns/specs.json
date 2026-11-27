@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_1",
+    "negation": "AegisSpec.NumberOfPatterns.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define the dots as 1,...,9 in row-major order on the 3x3 grid (1,2,3 top row; 4,5,6 middle row; 7,8,9 bottom row). For a dot d let row(d)=floor((d-1)/3) and col(d)=(d-1) mod 3. For distinct dots a,b, say that c is a blocking dot between a and b iff c is a dot distinct from a,b with row(c)=(row(a)+row(b))/2 and col(c)=(col(a)+col(b))/2; equivalently, c is the unique grid dot at the midpoint of the segment from a to b, and there is no such c when either average is not an integer. Call a list P of dots a valid pattern iff (i) 1 <= len(P) <= 9, (ii) all entries of P are distinct, and (iii) for every i with 0 <= i < len(P)-1, if there is a blocking dot c between P[i] and P[i+1], then c occurs among P[0],...,P[i-1] (i.e. it appeared earlier in the sequence). Then the function returns a result r with r equal to the number of valid patterns P such that m <= len(P) <= n. If m > n, the interval is empty and r = 0.",
+    "preconditions": "m and n are integers with 1 <= m <= 9 and 1 <= n <= 9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_2",
+    "negation": "AegisSpec.NumberOfPatterns.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such m and n, the function returns a result r and does not fail (no overflow, panic, or out-of-bounds).",
+    "preconditions": "1 <= m <= 9 and 1 <= n <= 9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_3",
+    "negation": "AegisSpec.NumberOfPatterns.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "1 <= m <= 9 and 1 <= n <= 9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_4",
+    "negation": "AegisSpec.NumberOfPatterns.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 389497.",
+    "preconditions": "1 <= m <= 9 and 1 <= n <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_5",
+    "negation": "AegisSpec.NumberOfPatterns.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every such k, if the function returns a result r, then r equals the number of valid patterns of length exactly k. In particular, the exact-length counts are: k=1 gives 9, k=2 gives 56, k=3 gives 320, k=4 gives 1624, k=5 gives 7152, k=6 gives 26016, k=7 gives 72912, k=8 gives 140704, and k=9 gives 140704.",
+    "preconditions": "1 <= k <= 9, m = k, and n = k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_6",
+    "negation": "AegisSpec.NumberOfPatterns.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If number_of_patterns(m,n) returns r1 and number_of_patterns(m,n+1) returns r2, then r1 <= r2.",
+    "preconditions": "1 <= m <= n < 9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_7",
+    "negation": "AegisSpec.NumberOfPatterns.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If number_of_patterns(m,n) returns r1 and number_of_patterns(m-1,n) returns r2, then r1 <= r2.",
+    "preconditions": "2 <= m <= n <= 9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_8",
+    "negation": "AegisSpec.NumberOfPatterns.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If number_of_patterns(1,n) returns r, number_of_patterns(1,m-1) returns a, and number_of_patterns(m,n) returns b, then r = a + b.",
+    "preconditions": "2 <= m <= n <= 9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_9",
+    "negation": "AegisSpec.NumberOfPatterns.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If number_of_patterns(m,n) returns r and number_of_patterns(k,k) returns c_k for each k with m <= k <= n, then r = c_m + c_(m+1) + ... + c_n.",
+    "preconditions": "1 <= m <= n <= 9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_10",
+    "negation": "AegisSpec.NumberOfPatterns.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If number_of_patterns(1,n) returns r, then r >= 9.",
+    "preconditions": "1 <= n <= 9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_11",
+    "negation": "AegisSpec.NumberOfPatterns.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r with r = 389497.",
+    "preconditions": "m = 1 and n = 9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_12",
+    "negation": "AegisSpec.NumberOfPatterns.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r with r = 65.",
+    "preconditions": "m = 1 and n = 2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_13",
+    "negation": "AegisSpec.NumberOfPatterns.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r with r = 8776.",
+    "preconditions": "m = 4 and n = 5."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.NumberOfPatterns.spec_14",
+    "negation": "AegisSpec.NumberOfPatterns.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r with r = 213616.",
+    "preconditions": "m = 7 and n = 8."
+  }
+]

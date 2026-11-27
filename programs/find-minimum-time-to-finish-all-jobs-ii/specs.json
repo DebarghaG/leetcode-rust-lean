@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTime.spec_1",
+    "negation": "AegisSpec.MinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum, over all bijections p from {0,...,n-1} to {0,...,n-1}, of the maximum over i with 0 <= i < n of ceil(jobs[i] / workers[p(i)]), where ceil(a/b) is the least integer d such that d * b >= a. Equivalently, r is the least integer D >= 0 for which there exists a bijection p from {0,...,n-1} to {0,...,n-1} such that jobs[i] <= D * workers[p(i)] for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTime.spec_2",
+    "negation": "AegisSpec.MinimumTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or go out of bounds.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTime.spec_3",
+    "negation": "AegisSpec.MinimumTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= ceil( (max_{0 <= i < n} jobs[i]) / (max_{0 <= j < n} workers[j]) ), where ceil(a/b) is the least integer d with d * b >= a.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTime.spec_4",
+    "negation": "AegisSpec.MinimumTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= ceil( (max_{0 <= i < n} jobs[i]) / (min_{0 <= j < n} workers[j]) ), where ceil(a/b) is the least integer d with d * b >= a.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTime.spec_5",
+    "negation": "AegisSpec.MinimumTime.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_time(jobs, workers) returns r and minimum_time(jobs', workers') returns r', we have r = r'.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000. Let σ and τ be permutations of {0,...,n-1}. Define jobs'[i] = jobs[σ(i)] and workers'[j] = workers[τ(j)] for all 0 <= i,j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTime.spec_6",
+    "negation": "AegisSpec.MinimumTime.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_time(jobs, workers) returns r and minimum_time(jobs2, workers) returns r2, we have r <= r2.",
+    "preconditions": "Let n = len(jobs) = len(workers) = len(jobs2). Assume 1 <= n <= 100000, all entries of jobs, jobs2, and workers are between 1 and 100000, and jobs[i] <= jobs2[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTime.spec_7",
+    "negation": "AegisSpec.MinimumTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_time(jobs, workers) returns r and minimum_time(jobs, workers2) returns r2, we have r2 <= r.",
+    "preconditions": "Let n = len(jobs) = len(workers) = len(workers2). Assume 1 <= n <= 100000, all entries of jobs, workers, and workers2 are between 1 and 100000, and workers[j] <= workers2[j] for every j with 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTime.spec_8",
+    "negation": "AegisSpec.MinimumTime.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a bijection p from {0,...,n-1} to {0,...,n-1} such that for every i with 0 <= i < n, jobs[i] <= r * workers[p(i)]; equivalently, ceil(jobs[i] / workers[p(i)]) <= r, where ceil(a/b) is the least integer d with d * b >= a.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTime.spec_9",
+    "negation": "AegisSpec.MinimumTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = max_{0 <= i < n} ceil(js[i] / ws[i]), where ceil(a/b) is the least integer d with d * b >= a.",
+    "preconditions": "Let n = len(jobs) = len(workers). Assume 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= jobs[i] <= 100000 and 1 <= workers[i] <= 100000. Let js be jobs sorted in nondecreasing order, and let ws be workers sorted in nondecreasing order."
+  }
+]

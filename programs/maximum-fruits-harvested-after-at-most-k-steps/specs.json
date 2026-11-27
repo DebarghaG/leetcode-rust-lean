@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_1",
+    "negation": "AegisSpec.MaxTotalFruits.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = max { sum_{i: L <= p_i <= R} a_i | L and R are integers, L <= startPos <= R, and (R - L) + min(startPos - L, R - startPos) <= k }. The maximum is over a finite nonempty set because k >= 0 and L = R = startPos is always allowed.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_2",
+    "negation": "AegisSpec.MaxTotalFruits.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: for every input satisfying the preconditions there is no out-of-bounds access, no arithmetic overflow in the 64-bit integers, and no other panic.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_3",
+    "negation": "AegisSpec.MaxTotalFruits.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n and |p_i - startPos| <= k, we have r >= a_i. Equivalently, r is at least the maximum amount among all fruits whose position is within distance k of startPos, or 0 if there is no such fruit.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_4",
+    "negation": "AegisSpec.MaxTotalFruits.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i: |p_i - startPos| <= k} a_i.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_5",
+    "negation": "AegisSpec.MaxTotalFruits.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i: p_i = startPos} a_i.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and k = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_6",
+    "negation": "AegisSpec.MaxTotalFruits.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < n, |p_i - startPos| > k.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_7",
+    "negation": "AegisSpec.MaxTotalFruits.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = a_0 if |p_0 - startPos| <= k, and r = 0 otherwise.",
+    "preconditions": "Let n = len(fruits). n = 1, so write p_0 = fruits[0][0] and a_0 = fruits[0][1]. For every i with 0 <= i < n, fruits[i] has length 2. Also 0 <= p_0 <= 200000, 1 <= a_0 <= 10000, 0 <= startPos <= 200000, and 0 <= k <= 200000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_8",
+    "negation": "AegisSpec.MaxTotalFruits.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{n-1} a_i.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000. Additionally, either (for every i, p_i >= startPos and p_{n-1} - startPos <= k) or (for every i, p_i <= startPos and startPos - p_0 <= k)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_9",
+    "negation": "AegisSpec.MaxTotalFruits.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call max_total_fruits(fruits, startPos, k1) returns r1 and the call max_total_fruits(fruits, startPos, k2) returns r2, then r1 <= r2.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000. Let k1 and k2 be integers with 0 <= k1 <= k2 <= 200000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_10",
+    "negation": "AegisSpec.MaxTotalFruits.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call on fruits with startPos and k returns r and the call on fruits' with startPos and k returns r', then r = r'.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000. Fix an index j with 0 <= j < n and |p_j - startPos| > k. Let a'_j be an integer with 1 <= a'_j <= 10000. Let fruits' be the slice obtained from fruits by replacing a_j by a'_j, with all positions and all other amounts unchanged."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_11",
+    "negation": "AegisSpec.MaxTotalFruits.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist integers L and R such that L <= startPos <= R, (R - L) + min(startPos - L, R - startPos) <= k, and r = sum_{i: L <= p_i <= R} a_i.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_12",
+    "negation": "AegisSpec.MaxTotalFruits.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exist L and R with L <= startPos <= R, each of L and R belonging to the set {startPos} union {p_i : 0 <= i < n}, (R - L) + min(startPos - L, R - startPos) <= k, and r = sum_{i: L <= p_i <= R} a_i.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxTotalFruits.spec_13",
+    "negation": "AegisSpec.MaxTotalFruits.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either r = 0, or there exist indices i and j with 0 <= i <= j < n such that r = sum_{t=i}^{j} a_t and, setting L = min(startPos, p_i) and R = max(startPos, p_j), one has (R - L) + min(startPos - L, R - startPos) <= k.",
+    "preconditions": "Let n = len(fruits). fruits is a nonempty slice with 1 <= n <= 100000. For every i with 0 <= i < n, fruits[i] has length 2; write p_i = fruits[i][0] and a_i = fruits[i][1]. For every i, 0 <= p_i <= 200000 and 1 <= a_i <= 10000. For every i with 1 <= i < n, p_{i-1} < p_i. Also 0 <= startPos <= 200000 and 0 <= k <= 200000."
+  }
+]

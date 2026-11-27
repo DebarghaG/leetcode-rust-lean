@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_1",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a leaf of root be a node occurrence Tree.Node(v, Tree.Null, Tree.Null); let the depth of a node be the number of edges from root to it; let M be the maximum depth of a leaf of root; let D be the set of leaf occurrences of root with depth M (D is nonempty because root is non-null); and let A be the unique node of root of maximum depth whose subtree contains every node of D (equivalently, the lowest common ancestor of D). Then lca_deepest_leaves root returns Result.ok r, where r is exactly the subtree of root rooted at A: r has the value of A at its root and contains precisely A and all descendants of A, preserving the same left/right child structure and node values.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_2",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "lca_deepest_leaves root does not fail: there exists a Tree r such that lca_deepest_leaves root = Result.ok r.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_3",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever lca_deepest_leaves root = Result.ok r, r is not Tree.Null; that is, the returned tree always has at least one node.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_4",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "lca_deepest_leaves root returns Result.ok r with r = Tree.Node(v, Tree.Null, Tree.Null).",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct; and root has exactly one leaf at the maximum leaf depth. Let x be that leaf occurrence and let v be its value."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_5",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "lca_deepest_leaves root returns Result.ok r with r = Tree.Node(v, L, R), which is exactly the input tree root.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct; root = Tree.Node(v, L, R); L and R are not Tree.Null; and among the deepest leaves of root there is at least one node in L and at least one node in R."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_6",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "lca_deepest_leaves root returns Result.ok r where r is exactly the subtree of L rooted at the lowest common ancestor, computed inside L, of the deepest leaves of L; equivalently r is the answer required by this same specification when the input is L.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct; root = Tree.Node(v, L, R); L is not Tree.Null; and every deepest leaf of root lies in L, so no deepest leaf of root lies in R."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_7",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "lca_deepest_leaves root returns Result.ok r where r is exactly the subtree of R rooted at the lowest common ancestor, computed inside R, of the deepest leaves of R; equivalently r is the answer required by this same specification when the input is R.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct; root = Tree.Node(v, L, R); R is not Tree.Null; and every deepest leaf of root lies in R, so no deepest leaf of root lies in L."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_8",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever lca_deepest_leaves root = Result.ok r, every deepest leaf of root occurs as a leaf node of r with the same value; here a deepest leaf is a leaf (node with two Tree.Null children) whose depth, the number of edges from root, is maximum among all leaves of root.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_9",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever lca_deepest_leaves root = Result.ok r and r = Tree.Node(a, Lr, Rr) is not a leaf, both Lr and Rr are not Tree.Null and each of Lr and Rr contains at least one deepest leaf of root; equivalently, no proper immediate child subtree of the root of r contains all deepest leaves of root.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_10",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever lca_deepest_leaves root = Result.ok r and r = Tree.Node(a, Lr, Rr), let A be the unique node of root with value a and let M be the maximum depth of a leaf of root. Then the depth of A is at most M; moreover the depth of A equals M if and only if root has exactly one deepest leaf, and in that case r = Tree.Node(a, Tree.Null, Tree.Null).",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LcaDeepestLeaves.spec_11",
+    "negation": "AegisSpec.LcaDeepestLeaves.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever lca_deepest_leaves root = Result.ok r = Tree.Node(a, Lr, Rr), the value a occurs at a unique node A of root, and r is exactly the subtree of root rooted at A: for every node of r there is a corresponding node of root in the subtree rooted at A (including A itself) with the same sequence of left/right moves from A and the same value; conversely, for every node in the subtree of root rooted at A there is a corresponding node of r with the same relative path and value. Thus r is literally a subtree of root, not a different tree with the same root value.",
+    "preconditions": "root is a finite, non-null binary tree with n nodes, 1 <= n <= 1000; every node value is an integer in [0,1000]; all node values in root are pairwise distinct."
+  }
+]

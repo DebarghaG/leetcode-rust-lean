@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PossibleStringCount.spec_1",
+    "negation": "AegisSpec.PossibleStringCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = 1 + sum over all maximal contiguous runs of equal bytes in word of (length of that run - 1). Equivalently, if R is the number of maximal contiguous runs of equal bytes (the count of indices i with 0 <= i < len(word) such that i = 0 or word[i] != word[i-1]), then r = 1 + len(word) - R. This r is the number of distinct strings Alice could have intended: either she made no mistake and the intended string is word itself, or she made exactly one overlong key press, in which case the intended string is obtained by choosing one maximal run of word and shortening it to any positive length strictly smaller than its length in word.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122 (word consists only of lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PossibleStringCount.spec_2",
+    "negation": "AegisSpec.PossibleStringCount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the preconditions, the function returns a result r; in particular, no arithmetic overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PossibleStringCount.spec_3",
+    "negation": "AegisSpec.PossibleStringCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 1.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PossibleStringCount.spec_4",
+    "negation": "AegisSpec.PossibleStringCount.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= len(word).",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PossibleStringCount.spec_5",
+    "negation": "AegisSpec.PossibleStringCount.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "word is a slice of bytes (Std.U8) with len(word) = 1, and 97 <= word[0] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PossibleStringCount.spec_6",
+    "negation": "AegisSpec.PossibleStringCount.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(word).",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, for every i with 0 <= i < len(word), 97 <= word[i] <= 122, and for every i and j with 0 <= i < len(word) and 0 <= j < len(word), word[i] = word[j] (all bytes of word are equal)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PossibleStringCount.spec_7",
+    "negation": "AegisSpec.PossibleStringCount.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and: r = 2 if word[0] = word[1], and r = 1 if word[0] != word[1].",
+    "preconditions": "word is a slice of bytes (Std.U8) with len(word) = 2, and 97 <= word[0] <= 122 and 97 <= word[1] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PossibleStringCount.spec_8",
+    "negation": "AegisSpec.PossibleStringCount.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = 1 + |{ i | 0 <= i < len(word) - 1 and word[i] = word[i+1] }|, where |...| denotes the number of such indices i.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PossibleStringCount.spec_9",
+    "negation": "AegisSpec.PossibleStringCount.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = 1 if and only if for every i with 0 <= i < len(word) - 1, word[i] != word[i+1].",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PossibleStringCount.spec_10",
+    "negation": "AegisSpec.PossibleStringCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every word satisfying the preconditions, if possible_string_count(word) returns r and possible_string_count(rev(word)) returns r', then r = r'.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122. Let rev(word) be the slice of length len(word) with rev(word)[i] = word[len(word)-1-i] for 0 <= i < len(word)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PossibleStringCount.spec_11",
+    "negation": "AegisSpec.PossibleStringCount.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such word1 and word2, if len(word1) = len(word2) and R(word1) = R(word2), then whenever possible_string_count(word1) returns r1 and possible_string_count(word2) returns r2, we have r1 = r2.",
+    "preconditions": "word1 and word2 are byte slices, each with length between 1 and 100 inclusive, and all bytes in 97..122. Let R(w) be the number of maximal contiguous runs of equal bytes in w (the count of indices i with 0 <= i < len(w) such that i = 0 or w[i] != w[i-1])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PossibleStringCount.spec_12",
+    "negation": "AegisSpec.PossibleStringCount.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = len(word) if and only if all bytes of word are equal (i.e., word has exactly one maximal run).",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PossibleStringCount.spec_13",
+    "negation": "AegisSpec.PossibleStringCount.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If possible_string_count(word) returns r and possible_string_count(word') returns r', then r' = r.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, all bytes in 97..122, and len(word) < 100. Let c be a byte with 97 <= c <= 122 and c != word[len(word)-1]. Let word' be the slice obtained by appending c to word."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PossibleStringCount.spec_14",
+    "negation": "AegisSpec.PossibleStringCount.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If possible_string_count(word) returns r and possible_string_count(word') returns r', then r' = r + 1.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, all bytes in 97..122, and len(word) < 100. Let c = word[len(word)-1]. Let word' be the slice obtained by appending c to word."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.PossibleStringCount.spec_15",
+    "negation": "AegisSpec.PossibleStringCount.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every index i with 0 <= i < len(word) - 1 and word[i] = word[i+1], let s be the byte slice of length len(word)-1 obtained by deleting position i from word (s[j] = word[j] for j < i, and s[j] = word[j+1] for i <= j < len(word)-1). Then s is a possible original string: Alice could have typed s and produced word by pressing the key for that repeated character one extra time. Consequently, if there exists at least one such index i, then whenever the function returns r, r >= 2.",
+    "preconditions": "word is a slice of bytes (Std.U8) with 1 <= len(word) <= 100, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122."
+  }
+]

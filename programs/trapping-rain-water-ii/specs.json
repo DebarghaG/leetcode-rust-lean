@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TrapRainWater.spec_1",
+    "negation": "AegisSpec.TrapRainWater.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = T, where T is defined as follows. For a cell (i,j) with 0 <= i < m and 0 <= j < n, a path from (i,j) to the boundary is a sequence of cells p_0, p_1, ..., p_k such that p_0 = (i,j), p_k is a boundary cell (i.e., p_k[0] = 0 or p_k[0] = m-1 or p_k[1] = 0 or p_k[1] = n-1), and for each 0 <= t < k, p_{t+1} is obtained from p_t by changing exactly one coordinate by +1 or -1 (so the cells are horizontally or vertically adjacent). The maximum height along such a path is max_{0 <= t <= k} heightMap[p_t[0]][p_t[1]]. Let spill(i,j) be the minimum over all paths from (i,j) to the boundary of the maximum height along the path. Let water(i,j) = spill(i,j) - heightMap[i][j]. Then T = sum_{0 <= i < m, 0 <= j < n} water(i,j).",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TrapRainWater.spec_2",
+    "negation": "AegisSpec.TrapRainWater.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail due to overflow, out-of-bounds access, or panic).",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TrapRainWater.spec_3",
+    "negation": "AegisSpec.TrapRainWater.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 0.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TrapRainWater.spec_4",
+    "negation": "AegisSpec.TrapRainWater.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= I * M, where I = max(0, m-2) * max(0, n-2) and M = max_{0 <= i < m, 0 <= j < n} heightMap[i][j].",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TrapRainWater.spec_5",
+    "negation": "AegisSpec.TrapRainWater.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m <= 2 or n <= 2, then the function returns a result r and r = 0.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TrapRainWater.spec_6",
+    "negation": "AegisSpec.TrapRainWater.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an integer h such that heightMap[i][j] = h for all 0 <= i < m and 0 <= j < n, then the function returns a result r and r = 0.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TrapRainWater.spec_7",
+    "negation": "AegisSpec.TrapRainWater.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If trap_rain_water(heightMap) returns r and trap_rain_water(heightMap') returns r', then r' = r.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n. Let c be an integer and define heightMap' by heightMap'[i][j] = heightMap[i][j] + c for all i,j. Assume heightMap' also satisfies the problem's preconditions (i.e., it is a non-empty rectangular matrix with 0 <= heightMap'[i][j] <= 20000 for all i,j)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TrapRainWater.spec_8",
+    "negation": "AegisSpec.TrapRainWater.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If trap_rain_water(heightMap) returns r and trap_rain_water(heightMap') returns r', then r' = c * r.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n. Let c be a positive integer such that c * heightMap[i][j] <= 20000 for all i,j. Define heightMap' by heightMap'[i][j] = c * heightMap[i][j] for all i,j. Assume heightMap' satisfies the problem's preconditions (it does under the bound)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TrapRainWater.spec_9",
+    "negation": "AegisSpec.TrapRainWater.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and, if I is empty, r = 0; otherwise r = sum_{(i,j) in I} (B - heightMap[i][j]).",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n. Assume that for every boundary cell b and every interior cell c, heightMap[b] >= heightMap[c]. Let I = { (i,j) | 0 < i < m-1 and 0 < j < n-1 } be the set of interior cells. If I is nonempty, let B be the minimum of heightMap[i][j] over all boundary cells (i,j) that are not one of the four corners (0,0), (0,n-1), (m-1,0), (m-1,n-1)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TrapRainWater.spec_10",
+    "negation": "AegisSpec.TrapRainWater.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If trap_rain_water(heightMap) returns r and trap_rain_water(heightMap') returns r', then r' >= r.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n. Let heightMap' be another m x n matrix satisfying the problem's preconditions. Assume that for every interior cell (i,j), heightMap'[i][j] = heightMap[i][j], and for every boundary cell (i,j), heightMap'[i][j] >= heightMap[i][j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TrapRainWater.spec_11",
+    "negation": "AegisSpec.TrapRainWater.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r > 0 if and only if there exists a cell (i,j) with 0 <= i < m and 0 <= j < n such that water(i,j) > 0, where for any cell (i,j), spill(i,j) is the minimum over all paths from (i,j) to a boundary cell of the maximum height along the path, and water(i,j) = spill(i,j) - heightMap[i][j].",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TrapRainWater.spec_12",
+    "negation": "AegisSpec.TrapRainWater.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every cell (i,j) with 0 <= i < m and 0 <= j < n, water(i,j) <= r, where water(i,j) = spill(i,j) - heightMap[i][j] and spill(i,j) is the minimum over all paths from (i,j) to a boundary cell of the maximum height along the path.",
+    "preconditions": "heightMap is a non-empty slice of non-empty Vec<I64>. Let m = len(heightMap) and n = len(heightMap[0]). Assume all rows of heightMap have length n, 1 <= m <= 200, 1 <= n <= 200, and 0 <= heightMap[i][j] <= 20000 for all 0 <= i < m and 0 <= j < n."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanCross.spec_1",
+    "negation": "AegisSpec.CanCross.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(stones). The function returns a result r (it does not fail). Call a finite sequence of indices i_0, i_1, ..., i_m a valid crossing when: m >= 1; i_0 = 0; i_m = n - 1; 0 <= i_0 < i_1 < ... < i_m < n; and, writing d_t = stones[i_t] - stones[i_{t-1}] for t = 1, ..., m, we have d_1 = 1 and for every t with 2 <= t <= m, d_t > 0 and d_t is either d_{t-1} - 1, d_{t-1}, or d_{t-1} + 1. Then r = true if and only if there exists a valid crossing; equivalently, r = false if and only if no valid crossing exists.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanCross.spec_2",
+    "negation": "AegisSpec.CanCross.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (either true or false); it does not panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanCross.spec_3",
+    "negation": "AegisSpec.CanCross.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = false.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]; stones[1] != 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanCross.spec_4",
+    "negation": "AegisSpec.CanCross.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(stones). If stones[n - 1] > n*(n - 1)/2, then the function returns a result r and r = false.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanCross.spec_5",
+    "negation": "AegisSpec.CanCross.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(stones). If there is no index i with 0 <= i < n such that stones[i] = 2 or stones[i] = 3, then the function returns a result r and r = false.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]; n >= 3."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanCross.spec_6",
+    "negation": "AegisSpec.CanCross.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]; stones[1] = 1; for every i with 1 <= i < n - 1, 1 <= stones[i + 1] - stones[i] <= 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanCross.spec_7",
+    "negation": "AegisSpec.CanCross.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r = true on input stones, it returns a result r' with r' = true on input stones'.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 1999; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]; stones' is a strictly increasing list of length n + 1 whose entries are exactly the entries of stones together with one additional integer p satisfying 0 < p < stones[n - 1] and p != stones[i] for all i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanCross.spec_8",
+    "negation": "AegisSpec.CanCross.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(stones). If the function returns a result r with r = true, then there exists a finite sequence i_0, i_1, ..., i_m such that m >= 1, i_0 = 0, i_m = n - 1, 0 <= i_0 < i_1 < ... < i_m < n, the jump lengths d_t = stones[i_t] - stones[i_{t-1}] for t = 1, ..., m satisfy d_1 = 1 and for every t with 2 <= t <= m, d_t > 0 and d_t is either d_{t-1} - 1, d_{t-1}, or d_{t-1} + 1, and moreover 1 <= d_m <= n - 1.",
+    "preconditions": "Let n = len(stones). 2 <= n <= 2000; stones[0] = 0; for every i with 0 <= i < n, 0 <= stones[i] <= 2^31 - 1; for every i with 0 <= i < n - 1, stones[i] < stones[i + 1]."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCost.spec_1",
+    "negation": "AegisSpec.MinCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a sequence c of length n with c[i] in {0,1,2} for each i, call c beautiful if c[i] != c[i+1] for every 0 <= i < n-1 and c[i] != c[n-1-i] for every 0 <= i < n/2; its cost is sum_{i=0}^{n-1} cost[i][c[i]]. The function returns a result r and r = min { cost(c) | c is beautiful }.",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCost.spec_2",
+    "negation": "AegisSpec.MinCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no panic, out-of-bounds access, or arithmetic overflow) for every input satisfying the preconditions.",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCost.spec_3",
+    "negation": "AegisSpec.MinCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= sum_{i=0}^{n-1} min(cost[i][0], cost[i][1], cost[i][2]).",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCost.spec_4",
+    "negation": "AegisSpec.MinCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= sum_{i=0}^{n-1} max(cost[i][0], cost[i][1], cost[i][2]).",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCost.spec_5",
+    "negation": "AegisSpec.MinCost.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For a sequence c of length n with c[i] in {0,1,2} for each i, call c beautiful if c[i] != c[i+1] for every 0 <= i < n-1 and c[i] != c[n-1-i] for every 0 <= i < n/2; its cost is sum_{i=0}^{n-1} cost[i][c[i]]. Whenever the function returns a result r, for every beautiful coloring c, r <= cost(c).",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCost.spec_6",
+    "negation": "AegisSpec.MinCost.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For a sequence c of length n with c[i] in {0,1,2} for each i, call c beautiful if c[i] != c[i+1] for every 0 <= i < n-1 and c[i] != c[n-1-i] for every 0 <= i < n/2; its cost is sum_{i=0}^{n-1} cost[i][c[i]]. The function returns a result r and there exists a beautiful coloring c such that cost(c) = r.",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCost.spec_7",
+    "negation": "AegisSpec.MinCost.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{n-1} cost[i][0].",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3. Also cost[i][0] = cost[i][1] = cost[i][2] for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCost.spec_8",
+    "negation": "AegisSpec.MinCost.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by the function on (n,cost) and r' the result returned on (n,cost'). Then r' = r + n*t.",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3. Let t be an integer with 0 <= t and cost[i][j] + t <= 100000 for all i,j, and define cost'[i][j] = cost[i][j] + t."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCost.spec_9",
+    "negation": "AegisSpec.MinCost.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by the function on (n,cost) and r' the result returned on (n,cost'). Then r' = r.",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3. Let pi be a permutation of {0,1,2} and let cost' be a matrix with len(cost') = n, each row length 3, and cost'[i][pi(j)] = cost[i][j] for all i,j."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCost.spec_10",
+    "negation": "AegisSpec.MinCost.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned by the function on (n,cost) and r' the result returned on (n,cost'). Then r' >= r.",
+    "preconditions": "Assume the problem constraints hold for both cost and cost' with the same n: n is even, 2 <= n <= 100000, len(cost) = len(cost') = n, every row has length 3, and all entries are between 0 and 100000. Also cost'[i][j] >= cost[i][j] for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCost.spec_11",
+    "negation": "AegisSpec.MinCost.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{n-1} min(cost[i][0], cost[i][1], cost[i][2]).",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3. Moreover, there is a sequence c of length n with c[i] in {0,1,2} for every i, such that c[i] != c[i+1] for every 0 <= i < n-1, c[i] != c[n-1-i] for every 0 <= i < n/2, and cost[i][c[i]] = min(cost[i][0], cost[i][1], cost[i][2]) for every 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCost.spec_12",
+    "negation": "AegisSpec.MinCost.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r <= sum_{i=0}^{n-1} cost[i][i mod 2].",
+    "preconditions": "Assume the problem constraints hold: n, interpreted as an integer, satisfies 2 <= n <= 100000 and n is even; len(cost) = n; every row cost[i] has length 3; and 0 <= cost[i][j] <= 100000 for every 0 <= i < n and 0 <= j < 3."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinCost.spec_13",
+    "negation": "AegisSpec.MinCost.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by the function on (n,cost) and r' the result returned on (n,cost'). Then r' = r + sum_{i=0}^{n-1} a[i].",
+    "preconditions": "Assume the problem constraints hold for cost: n is even, 2 <= n <= 100000, len(cost) = n, every row has length 3, and 0 <= cost[i][j] <= 100000. Let a be a sequence of integers indexed 0..n-1 such that 0 <= cost[i][j] + a[i] <= 100000 for all i,j, and define cost'[i][j] = cost[i][j] + a[i]."
+  }
+]

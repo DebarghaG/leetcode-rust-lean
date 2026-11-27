@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindValidSplit.spec_1",
+    "negation": "AegisSpec.FindValidSplit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For an index i with 0 <= i <= n-2, define L(i) = nums[0] * nums[1] * ... * nums[i] and R(i) = nums[i+1] * ... * nums[n-1] as mathematical integer products. Whenever the function returns a result r, the following holds: if there exists i with 0 <= i <= n-2 and gcd(L(i), R(i)) = 1, then r is the least such i (0 <= r <= n-2, gcd(L(r), R(r)) = 1, and for every j with 0 <= j < r, gcd(L(j), R(j)) > 1); if no such i exists, then r = -1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindValidSplit.spec_2",
+    "negation": "AegisSpec.FindValidSplit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindValidSplit.spec_3",
+    "negation": "AegisSpec.FindValidSplit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums). Whenever the function returns a result r, either r = -1 or 0 <= r <= n-2. Equivalently, -1 <= r <= n-2.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindValidSplit.spec_4",
+    "negation": "AegisSpec.FindValidSplit.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(nums). For 0 <= i <= n-2 let L(i) and R(i) be the mathematical products of nums[0..i] and nums[i+1..n-1]. Whenever the function returns a result r with r != -1, the split at r is valid: 0 <= r <= n-2 and gcd(L(r), R(r)) = 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindValidSplit.spec_5",
+    "negation": "AegisSpec.FindValidSplit.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). For 0 <= i <= n-2 let L(i) and R(i) be the mathematical products of nums[0..i] and nums[i+1..n-1]. Whenever the function returns a result r with r != -1, every earlier split is invalid: for every j with 0 <= j < r, gcd(L(j), R(j)) > 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindValidSplit.spec_6",
+    "negation": "AegisSpec.FindValidSplit.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(nums). For 0 <= i <= n-2 let L(i) and R(i) be the mathematical products of nums[0..i] and nums[i+1..n-1]. Whenever the function returns a result r, r = -1 if and only if there is no index i with 0 <= i <= n-2 and gcd(L(i), R(i)) = 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindValidSplit.spec_7",
+    "negation": "AegisSpec.FindValidSplit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). For 0 <= i <= n-2 let L(i) and R(i) be the mathematical products of nums[0..i] and nums[i+1..n-1]. Whenever the function returns a result r, if there exists a valid split i (that is, 0 <= i <= n-2 and gcd(L(i), R(i)) = 1), then r != -1 and r <= i for every such valid split i.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindValidSplit.spec_8",
+    "negation": "AegisSpec.FindValidSplit.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(nums). Whenever the function returns a result r with r != -1, every element on the left of the split is coprime to every element on the right: for every a with 0 <= a <= r and every b with r < b < n, gcd(nums[a], nums[b]) = 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindValidSplit.spec_9",
+    "negation": "AegisSpec.FindValidSplit.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). Whenever the function returns a result r = -1, every split fails: for every i with 0 <= i <= n-2 there exist indices a and b with 0 <= a <= i < b < n and gcd(nums[a], nums[b]) > 1.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindValidSplit.spec_10",
+    "negation": "AegisSpec.FindValidSplit.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever find_valid_split(nums) returns a result r and find_valid_split(nums') returns a result r', we have r = r'.",
+    "preconditions": "Let n = len(nums). The slice nums satisfies 1 <= n <= 10^4 and, for every k with 0 <= k < n, 1 <= nums[k] <= 10^6. Let nums' be any slice such that len(nums') = n and, for every k with 0 <= k < n, 1 <= nums'[k] <= 10^6 and nums'[k] has exactly the same set of prime divisors as nums[k]."
+  }
+]

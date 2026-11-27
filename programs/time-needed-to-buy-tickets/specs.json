@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_1",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_1_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_2",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_2_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = (sum_{i=0}^{k} min(tickets[i], tickets[k])) + (sum_{i=k+1}^{n-1} min(tickets[i], tickets[k]-1)). Empty sums are 0, and k is the 0-based starting position of the distinguished person.",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_3",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, for every integer t with 0 <= t < r, after t seconds of the FIFO process (each second the person at the front buys one ticket and then either leaves if no tickets remain or rejoins the back) the person initially at index k has bought fewer than tickets[k] tickets.",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_4",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r >= k + tickets[k].",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_5",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r <= (k+1)*tickets[k] + (n-k-1)*(tickets[k]-1).",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_6",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r <= sum_{i=0}^{n-1} tickets[i].",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_7",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = k+1.",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, for every i with 0 <= i < n, 1 <= tickets[i] <= 100, and additionally tickets[k] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_8",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r, r = (k+1)*tickets[k] + (n-k-1)*(tickets[k]-1).",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, for every i with 0 <= i < n, 1 <= tickets[i] <= 100, and additionally for every i with 0 <= i < n, tickets[i] >= tickets[k]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_9",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r, r = sum_{i=0}^{n-1} tickets[i].",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, for every i with 0 <= i < n, 1 <= tickets[i] <= 100, and additionally for every i with 0 <= i <= k, tickets[i] <= tickets[k], and for every i with k < i < n, tickets[i] <= tickets[k]-1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_10",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any index i with 0 <= i < n and i != k, and any integer v with tickets[i] <= v <= 100, let tickets' be tickets with tickets'[i] = v and all other entries unchanged. If either (i < k and tickets[i] >= tickets[k]) or (i > k and tickets[i] >= tickets[k]-1), then time_required_to_buy(tickets', k) = time_required_to_buy(tickets, k).",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_11",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let tickets' be any array satisfying the same constraints and obtained from tickets by an arbitrary permutation of the entries at indices strictly less than k among themselves and/or an arbitrary permutation of the entries at indices strictly greater than k among themselves, while leaving the entry at index k unchanged. Then time_required_to_buy(tickets', k) = time_required_to_buy(tickets, k).",
+    "preconditions": "Let n = len(tickets). Assume 1 <= n <= 100, 0 <= k < n, and for every i with 0 <= i < n, 1 <= tickets[i] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TimeRequiredToBuy.spec_12",
+    "negation": "AegisSpec.TimeRequiredToBuy.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns results r_a and r_b for inputs (a,k) and (b,k), respectively, and r_a <= r_b.",
+    "preconditions": "Let n = len(a) = len(b). Assume 1 <= n <= 100, 0 <= k < n, for every i with 0 <= i < n, 1 <= a[i] <= 100 and 1 <= b[i] <= 100, and a[i] <= b[i] for every i with 0 <= i < n."
+  }
+]

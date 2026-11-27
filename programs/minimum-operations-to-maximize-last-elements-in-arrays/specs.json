@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums1). The function returns a result r and the following holds. For a set S of indices with S subset of {0,...,n-1}, call S valid if, after swapping nums1[i] with nums2[i] exactly for i in S and leaving all other entries unchanged, the resulting arrays A1 and A2 satisfy A1[i] <= A1[n-1] for every i with 0 <= i < n and A2[i] <= A2[n-1] for every i with 0 <= i < n. Then: if no valid S exists, r = -1; if at least one valid S exists, r != -1, there exists a valid S with |S| = r, and every valid S has |S| >= r. Thus, when feasible, r is the minimum number of swaps needed to make nums1[n-1] the maximum of its array and nums2[n-1] the maximum of its array, and r is -1 exactly when this is impossible.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail for any input satisfying the preconditions.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums1). Whenever the function returns a result r, either r = -1 or 0 <= r <= n - 1. In particular, a feasible answer never requires swapping all n indices.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums1) = 1, then the function returns r = 0.",
+    "preconditions": "len(nums1) = len(nums2) = 1, and 1 <= nums1[0] <= 10^9 and 1 <= nums2[0] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums1). Whenever the function returns a result r, r = 0 if and only if both of the following hold: nums1[n-1] >= nums1[i] for every i with 0 <= i < n, and nums2[n-1] >= nums2[i] for every i with 0 <= i < n.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(nums1). Whenever the function returns a result r, r = 1 if and only if: (i) it is not the case that both nums1[n-1] >= nums1[i] for every i with 0 <= i < n and nums2[n-1] >= nums2[i] for every i with 0 <= i < n; and (ii) there exists an index j with 0 <= j < n such that after swapping nums1[j] and nums2[j] and no other entries, the resulting arrays B1 and B2 satisfy B1[i] <= B1[n-1] for every i with 0 <= i < n and B2[i] <= B2[n-1] for every i with 0 <= i < n.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned for the input pair (nums1, nums2), and let r' be the result returned for the exchanged input pair (nums2, nums1). Then r = r'; that is, the answer is unchanged when the two input arrays are exchanged.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pi be any permutation of {0,...,n-2}. Define arrays nums1' and nums2' of length n by nums1'[i] = nums1[pi(i)] and nums2'[i] = nums2[pi(i)] for 0 <= i < n-1, and nums1'[n-1] = nums1[n-1], nums2'[n-1] = nums2[n-1]. Then the result returned on (nums1', nums2') equals the result returned on (nums1, nums2).",
+    "preconditions": "len(nums1) = len(nums2) = n, n >= 2, 1 <= n <= 1000, and for every i with 0 <= i < n, 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let f be any strictly increasing function from integers to integers. Define nums1'[i] = f(nums1[i]) and nums2'[i] = f(nums2[i]) for every i with 0 <= i < len(nums1). If every entry of nums1' and nums2' is in the range 1 <= value <= 10^9, then the result returned on (nums1', nums2') equals the result returned on (nums1, nums2).",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(nums1). For b in {0,1}, define L1(b) = nums1[n-1] if b = 0 and nums2[n-1] if b = 1, and L2(b) = nums2[n-1] if b = 0 and nums1[n-1] if b = 1. Call b feasible if for every i with 0 <= i < n-1, either (nums1[i] <= L1(b) and nums2[i] <= L2(b)) or (nums2[i] <= L1(b) and nums1[i] <= L2(b)). For feasible b, define cost(b) = b + |{ i : 0 <= i < n-1 and not (nums1[i] <= L1(b) and nums2[i] <= L2(b)) }|. Then the function returns -1 if neither b = 0 nor b = 1 is feasible, and otherwise returns the minimum of cost(b) over feasible b in {0,1}.",
+    "preconditions": "len(nums1) = len(nums2), 1 <= len(nums1) <= 1000, and for every i with 0 <= i < len(nums1), 1 <= nums1[i] <= 10^9 and 1 <= nums2[i] <= 10^9."
+  }
+]

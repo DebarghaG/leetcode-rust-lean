@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FloodFill.spec_1",
+    "negation": "AegisSpec.FloodFill.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let c0 = image[sr][sc], and let R be the set of cells (i,j) with 0 <= i < m and 0 <= j < n for which there exists a finite sequence (i_0,j_0),...,(i_k,j_k) with k >= 0 such that (i_0,j_0) = (sr,sc), (i_k,j_k) = (i,j), every (i_t,j_t) lies in the grid, image[i_t][j_t] = c0 for every t, and for every t < k the cells (i_t,j_t) and (i_{t+1},j_{t+1}) share a side, i.e. |i_{t+1}-i_t| + |j_{t+1}-j_t| = 1. The function returns a result r such that len(r) = m, every row of r has length n, and for every i,j with 0 <= i < m and 0 <= j < n: if (i,j) is in R then r[i][j] = color, and if (i,j) is not in R then r[i][j] = image[i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FloodFill.spec_2",
+    "negation": "AegisSpec.FloodFill.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever flood_fill returns a result r, len(r) = len(image), and for every i with 0 <= i < len(image), len(r[i]) = len(image[i]).",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FloodFill.spec_3",
+    "negation": "AegisSpec.FloodFill.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c0 = image[sr][sc], and let R be the set of cells reachable from (sr,sc) by a path of side-adjacent cells all of whose image values equal c0, including (sr,sc) itself. Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, if (i,j) is not in R then r[i][j] = image[i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FloodFill.spec_4",
+    "negation": "AegisSpec.FloodFill.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let c0 = image[sr][sc], and let R be the set of cells reachable from (sr,sc) by a path of side-adjacent cells all of whose image values equal c0, including (sr,sc) itself. Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, if (i,j) is in R then r[i][j] = color.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FloodFill.spec_5",
+    "negation": "AegisSpec.FloodFill.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever flood_fill returns a result r and color = image[sr][sc], r is elementwise equal to image: len(r) = len(image), len(r[i]) = len(image[i]) for every valid i, and r[i][j] = image[i][j] for every i,j with 0 <= i < m and 0 <= j < n.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FloodFill.spec_6",
+    "negation": "AegisSpec.FloodFill.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c0 = image[sr][sc]. Whenever flood_fill returns a result r and no side-neighbor of (sr,sc) that lies in the grid has image value c0, i.e. for all (i,j) in the grid with |i-sr| + |j-sc| = 1 we have image[i][j] != c0, then r[sr][sc] = color and for every (i,j) in the grid with (i,j) != (sr,sc) we have r[i][j] = image[i][j].",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FloodFill.spec_7",
+    "negation": "AegisSpec.FloodFill.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, either r[i][j] = image[i][j] or r[i][j] = color.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FloodFill.spec_8",
+    "negation": "AegisSpec.FloodFill.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail or panic.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FloodFill.spec_9",
+    "negation": "AegisSpec.FloodFill.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever flood_fill(image, sr, sc, color) returns a result r, the call flood_fill(r, sr, sc, color) also returns r, with r viewed as the image.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FloodFill.spec_10",
+    "negation": "AegisSpec.FloodFill.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c0 = image[sr][sc]. Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, if r[i][j] != image[i][j], then image[i][j] = c0 and r[i][j] = color.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FloodFill.spec_11",
+    "negation": "AegisSpec.FloodFill.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let c0 = image[sr][sc], and let R be the set of cells reachable from (sr,sc) by a path of side-adjacent cells all of whose image values equal c0, including (sr,sc) itself. Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, r[i][j] != image[i][j] if and only if (i,j) is in R and color != c0.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FloodFill.spec_12",
+    "negation": "AegisSpec.FloodFill.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let c0 = image[sr][sc]. Whenever flood_fill returns a result r, for every i,j with 0 <= i < m and 0 <= j < n, if r[i][j] != image[i][j], then there exists a finite sequence of grid cells (i_0,j_0),...,(i_k,j_k) with k >= 0 such that (i_0,j_0) = (sr,sc), (i_k,j_k) = (i,j), every cell in the sequence has image value c0, and consecutive cells share a side, i.e. |i_{t+1}-i_t| + |j_{t+1}-j_t| = 1 for every t < k.",
+    "preconditions": "Let m = len(image) and n = len(image[0]). The input satisfies: 1 <= m <= 50, 1 <= n <= 50, every row of image has length n, for every i,j with 0 <= i < m and 0 <= j < n we have 0 <= image[i][j] < 65536, 0 <= color < 65536, 0 <= sr < m, and 0 <= sc < n."
+  }
+]

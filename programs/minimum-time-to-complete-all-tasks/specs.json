@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMinimumTime.spec_1",
+    "negation": "AegisSpec.FindMinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, r is equal to the minimum of |T| over all finite sets T of integers such that, for every i with 0 ≤ i < n, the number of elements t of T with s_i ≤ t ≤ e_i is at least d_i.",
+    "preconditions": "Let n = len(tasks). 1 ≤ n ≤ 2000. For every i with 0 ≤ i < n, tasks[i] has length 3; writing s_i = tasks[i][0], e_i = tasks[i][1], d_i = tasks[i][2], we have 1 ≤ s_i ≤ 2000, 1 ≤ e_i ≤ 2000, and 1 ≤ d_i ≤ e_i - s_i + 1 (so s_i ≤ e_i)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMinimumTime.spec_2",
+    "negation": "AegisSpec.FindMinimumTime.spec_2_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, there exists a finite set T of integers with |T| = r such that (a) for every i with 0 ≤ i < n, the number of t ∈ T with s_i ≤ t ≤ e_i is at least d_i, and (b) every t ∈ T lies in at least one of the intervals [s_j, e_j] with 0 ≤ j < n.",
+    "preconditions": "Same as spec_1: n = len(tasks) with 1 ≤ n ≤ 2000, and each tasks[i] = [s_i, e_i, d_i] satisfies 1 ≤ s_i ≤ 2000, 1 ≤ e_i ≤ 2000, 1 ≤ d_i ≤ e_i - s_i + 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMinimumTime.spec_3",
+    "negation": "AegisSpec.FindMinimumTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, every finite set T of integers satisfying |{t ∈ T : s_i ≤ t ≤ e_i}| ≥ d_i for all i with 0 ≤ i < n has |T| ≥ r.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMinimumTime.spec_4",
+    "negation": "AegisSpec.FindMinimumTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, for every set J ⊆ {0, 1, ..., n-1} of indices whose intervals [s_j, e_j] are pairwise disjoint (that is, for all distinct j, k ∈ J, either e_j < s_k or e_k < s_j) we have r ≥ Σ_{j ∈ J} d_j.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMinimumTime.spec_5",
+    "negation": "AegisSpec.FindMinimumTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, r ≤ (max_{0 ≤ i < n} e_i) - (min_{0 ≤ i < n} s_i) + 1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMinimumTime.spec_6",
+    "negation": "AegisSpec.FindMinimumTime.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever find_minimum_time(tasks) returns a result r, r ≤ Σ_{i=0}^{n-1} d_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMinimumTime.spec_7",
+    "negation": "AegisSpec.FindMinimumTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the intervals [s_i, e_i] for 0 ≤ i < n are pairwise disjoint (for all distinct i, j, either e_i < s_j or e_j < s_i) and find_minimum_time(tasks) returns a result r, we have r = Σ_{i=0}^{n-1} d_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMinimumTime.spec_8",
+    "negation": "AegisSpec.FindMinimumTime.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever there exist integers a ≤ b such that s_i = a and e_i = b for every i with 0 ≤ i < n, and find_minimum_time(tasks) returns a result r, we have r = max_{0 ≤ i < n} d_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMinimumTime.spec_9",
+    "negation": "AegisSpec.FindMinimumTime.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever d_i = e_i - s_i + 1 for every i with 0 ≤ i < n, and find_minimum_time(tasks) returns a result r, r equals the number of integers t for which there exists some i with 0 ≤ i < n and s_i ≤ t ≤ e_i.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMinimumTime.spec_10",
+    "negation": "AegisSpec.FindMinimumTime.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input tasks satisfying the preconditions, find_minimum_time(tasks) returns a result (the computation does not fail, overflow, or panic).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindMinimumTime.spec_11",
+    "negation": "AegisSpec.FindMinimumTime.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every bijection π : {0, 1, ..., n-1} → {0, 1, ..., n-1}, let tasks' be the slice of length n defined by tasks'[i] = tasks[π(i)] for all i. Whenever find_minimum_time(tasks) returns r and find_minimum_time(tasks') returns r', we have r = r'.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindMinimumTime.spec_12",
+    "negation": "AegisSpec.FindMinimumTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each i with 0 ≤ i < n, let tasks^(i) be the slice of length n-1 obtained by deleting tasks[i] (tasks^(i)[k] = tasks[k] for k < i, and tasks^(i)[k] = tasks[k+1] for k ≥ i). Whenever find_minimum_time(tasks) returns r and find_minimum_time(tasks^(i)) returns r_i, we have r_i ≤ r ≤ r_i + d_i.",
+    "preconditions": "Same as spec_1, and additionally n ≥ 2."
+  }
+]

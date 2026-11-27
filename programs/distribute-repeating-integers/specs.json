@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanDistribute.spec_1",
+    "negation": "AegisSpec.CanDistribute.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let occ(v) be the number of indices j with 0 <= j < len(nums) and nums[j] = v. Whenever can_distribute nums quantity returns a result r, we have r = true if and only if there exists a function assign from {0,1,...,len(quantity)-1} to the set of integers such that: (1) for every customer i, occ(assign(i)) >= quantity[i]; and (2) for every integer v, the sum of quantity[i] over all i with assign(i) = v is at most occ(v). Consequently r = false exactly when no such assign exists.",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanDistribute.spec_2",
+    "negation": "AegisSpec.CanDistribute.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums and quantity satisfying the preconditions, the call can_distribute nums quantity returns a result r, i.e. in Lean it evaluates to Result.ok r for some Bool r. In particular, it does not fail because of arithmetic overflow, out-of-bounds indexing, or a panic.",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanDistribute.spec_3",
+    "negation": "AegisSpec.CanDistribute.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_distribute nums quantity returns a result r and r = true, the total requested amount satisfies sum over i from 0 to len(quantity)-1 of quantity[i] <= len(nums).",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanDistribute.spec_4",
+    "negation": "AegisSpec.CanDistribute.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let occ(v) be the number of indices j with 0 <= j < len(nums) and nums[j] = v. Whenever can_distribute nums quantity returns a result r and r = true, for every customer index i with 0 <= i < len(quantity), there exists an integer v such that occ(v) >= quantity[i].",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanDistribute.spec_5",
+    "negation": "AegisSpec.CanDistribute.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let occ(v) be the number of indices j with 0 <= j < len(nums) and nums[j] = v. Whenever can_distribute nums quantity returns a result r, r = true if and only if the sum over all values v occurring in nums of floor(occ(v) / q) is at least len(quantity).",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]; len(quantity) >= 2; and there exists an integer q such that quantity[i] = q for every i with 0 <= i < len(quantity)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanDistribute.spec_6",
+    "negation": "AegisSpec.CanDistribute.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let occ(v) be the number of indices j with 0 <= j < len(nums) and nums[j] = v. Whenever can_distribute nums quantity returns a result r, r = true, and sum over i from 0 to len(quantity)-1 of quantity[i] = len(nums), there exists a function assign from {0,1,...,len(quantity)-1} to integers such that: (1) for every customer i, occ(assign(i)) >= quantity[i]; and (2) for every integer v, the sum of quantity[i] over all i with assign(i) = v is exactly occ(v).",
+    "preconditions": "nums and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanDistribute.spec_7",
+    "negation": "AegisSpec.CanDistribute.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let occ(v) be the number of indices j with nums[j] = v, and let occ'(v) be the number of indices j with nums'[j] = v. If for every positive integer k, the number of integers v with occ(v) = k equals the number of integers v with occ'(v) = k, then whenever both can_distribute nums quantity and can_distribute nums' quantity return results r and r', we have r = r'.",
+    "preconditions": "nums, nums', and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; the same constraints hold for nums'; and 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanDistribute.spec_8",
+    "negation": "AegisSpec.CanDistribute.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both can_distribute nums quantity and can_distribute nums quantity' return results r and r', we have r = r'.",
+    "preconditions": "nums, quantity, and quantity' satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]; len(quantity') = len(quantity); and the entries of quantity' are a permutation of the entries of quantity."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanDistribute.spec_9",
+    "negation": "AegisSpec.CanDistribute.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both can_distribute nums quantity and can_distribute nums quantity' return results r and r', if r = true then r' = true.",
+    "preconditions": "nums, quantity, and quantity' satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]; len(quantity') = len(quantity); and 1 <= quantity'[i] <= quantity[i] for every i with 0 <= i < len(quantity)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanDistribute.spec_10",
+    "negation": "AegisSpec.CanDistribute.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both can_distribute nums quantity and can_distribute nums' quantity return results r and r', if r = true then r' = true.",
+    "preconditions": "nums, nums', and quantity satisfy: 1 <= len(nums) <= 100000; every nums[j] for 0 <= j < len(nums) is in [1, 1000]; nums has at most 50 distinct values; the same constraints hold for nums'; 1 <= len(quantity) <= 10; every quantity[i] for 0 <= i < len(quantity) is in [1, 100000]; and for every integer v, the number of occurrences of v in nums' is at least the number of occurrences of v in nums."
+  }
+]

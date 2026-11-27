@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum number of operations of the following kind needed to make the bitwise XOR of the array equal to k: one operation chooses an index j with 0 <= j < len(nums) and a bit position b >= 0 (including leading zero positions), and flips the b-th bit of the element at index j; the array length remains len(nums).",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let X = nums[0] xor nums[1] xor ... xor nums[len(nums)-1]. The returned r equals the number of bit positions b with 0 <= b < 64 such that the b-th bit of X differs from the b-th bit of k; equivalently, r = popcount(X xor k).",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result and does not fail: there is no panic, out-of-bounds access, or 64-bit arithmetic overflow.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned r satisfies 0 <= r <= 20.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a sequence of exactly r operations, each flipping one bit (possibly a leading zero bit) of one element of nums with the array length unchanged, such that the bitwise XOR of the resulting array equals k.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of min_operations(nums, k) and r' the result of min_operations(nums', k). Then r' = r.",
+    "preconditions": "nums and nums' are slices with len(nums) >= 1, len(nums) <= 100000, len(nums') = len(nums); for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000 and 0 <= nums'[i] <= 1000000; 0 <= k <= 1000000; XOR(nums') = XOR(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let X = nums[0] xor nums[1] xor ... xor nums[len(nums)-1]. Let r be the result for (nums, k) and r' the result for (nums, k'). If the b-th bit of X equals the b-th bit of k, then r' = r + 1; otherwise r' = r - 1.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; 0 <= k <= 1000000; b is an integer with 0 <= b < 20; k' = k xor (1 << b) satisfies 0 <= k' <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of min_operations(nums, k1) and r2 the result of min_operations(nums, k2). Then |r1 - r2| <= popcount(k1 xor k2), where popcount counts set bits among positions 0 through 63.",
+    "preconditions": "len(nums) >= 1 and len(nums) <= 100000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000; k1 and k2 are integers with 0 <= k1 <= 1000000 and 0 <= k2 <= 1000000."
+  }
+]

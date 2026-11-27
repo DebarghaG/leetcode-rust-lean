@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_1",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of integers s such that there exists an index i with 0 <= i < len(timeSeries) and timeSeries[i] <= s < timeSeries[i] + duration. Equivalently, r is the cardinality of P = { s in Z | exists i, 0 <= i < len(timeSeries) and timeSeries[i] <= s < timeSeries[i] + duration }.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_2",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_3",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= duration.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_4",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= timeSeries[len(timeSeries)-1] - timeSeries[0] + duration.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_5",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D be the number of distinct values appearing in timeSeries, i.e. D = |{ timeSeries[i] | 0 <= i < len(timeSeries) }|. The function returns a result r and r >= D.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]; duration >= 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_6",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D be the number of distinct values appearing in timeSeries, i.e. D = |{ timeSeries[i] | 0 <= i < len(timeSeries) }|. The function returns a result r and r <= D * duration.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_7",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = timeSeries[len(timeSeries)-1] - timeSeries[0] + duration.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i+1] - timeSeries[i] <= duration."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_8",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every index i with 0 < i < len(timeSeries) and timeSeries[i] = timeSeries[i-1], let timeSeries' be the slice of length len(timeSeries)-1 obtained by deleting index i, so timeSeries'[j] = timeSeries[j] for j < i and timeSeries'[j] = timeSeries[j+1] for j >= i. Then find_poisoned_duration(timeSeries', duration) returns r' and find_poisoned_duration(timeSeries, duration) returns r, and r' = r.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]; there exists an index i with 0 < i < len(timeSeries) and timeSeries[i] = timeSeries[i-1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_9",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let timeSeries' be the slice with timeSeries'[j] = timeSeries[j] + c for every j with 0 <= j < len(timeSeries). Then find_poisoned_duration(timeSeries', duration) returns r' and find_poisoned_duration(timeSeries, duration) returns r, and r' = r.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]; for every integer c such that 0 <= timeSeries[j] + c <= 10^7 for all j with 0 <= j < len(timeSeries)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_10",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every d1 and d2 with 0 <= d1 <= d2 <= 10^7, find_poisoned_duration(timeSeries, d1) returns r1 and find_poisoned_duration(timeSeries, d2) returns r2, and r1 <= r2.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_11",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P = { s in Z | exists i, 0 <= i < len(timeSeries) and timeSeries[i] <= s < timeSeries[i] + duration }. The function returns a result r and P has minimum timeSeries[0] and maximum timeSeries[len(timeSeries)-1] + duration - 1.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]; duration >= 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindPoisonedDuration.spec_12",
+    "negation": "AegisSpec.FindPoisonedDuration.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(timeSeries). The function returns a result r and r = duration + sum_{i=0}^{n-2} min(duration, timeSeries[i+1] - timeSeries[i]). This sum is empty when n = 1.",
+    "preconditions": "1 <= len(timeSeries) <= 10^4; 0 <= duration <= 10^7; for every i with 0 <= i < len(timeSeries), 0 <= timeSeries[i] <= 10^7; for every i with 0 <= i < len(timeSeries)-1, timeSeries[i] <= timeSeries[i+1]."
+  }
+]

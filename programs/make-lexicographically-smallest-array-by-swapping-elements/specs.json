@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_1",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define an array b (with len(b) = len(nums)) to be obtainable from nums if there is a finite sequence of arrays a_0, ..., a_k of length len(nums) such that a_0 = nums, a_k = b, and for each t with 0 <= t < k, a_{t+1} is obtained from a_t by swapping the entries at some indices p and q with 0 <= p < len(nums), 0 <= q < len(nums), and |a_t[p] - a_t[q]| <= limit. Whenever the function returns a result r, r is obtainable from nums, and for every array b obtainable from nums, r is lexicographically no larger than b: either r = b, or at the least index h with 0 <= h < len(nums) and r[h] != b[h], we have r[h] < b[h].",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_2",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail through arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_3",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_4",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let G be the graph whose vertices are the indices 0, ..., len(nums)-1, with an edge between two distinct indices p and q exactly when |nums[p] - nums[q]| <= limit. Whenever the function returns a result r, for every connected component C of G and every integer v, the number of indices i in C with r[i] = v equals the number of indices i in C with nums[i] = v.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_5",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the graph whose vertices are the indices 0, ..., len(nums)-1, with an edge between two distinct indices p and q exactly when |nums[p] - nums[q]| <= limit. Whenever the function returns a result r, for every i and j with 0 <= i < j < len(nums), if i and j are in the same connected component of G, then r[i] <= r[j].",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_6",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(nums), min_{0 <= t < len(nums)} nums[t] <= r[i] <= max_{0 <= t < len(nums)} nums[t]. In particular, 1 <= r[i] <= 1000000000.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_7",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[i] = nums[i] for every i with 0 <= i < len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; limit = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_8",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is a nondecreasing permutation of nums: for every i and j with 0 <= i < j < len(nums), r[i] <= r[j], and for every integer v, the number of indices i with r[i] = v equals the number of indices i with nums[i] = v.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000; max_{0 <= t < len(nums)} nums[t] - min_{0 <= t < len(nums)} nums[t] <= limit."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_9",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the graph whose vertices are the indices 0, ..., len(nums)-1, with an edge between two distinct indices p and q exactly when |nums[p] - nums[q]| <= limit. Whenever the function returns a result r, for every connected component C of G, if p is the smallest index in C, then r[p] = min_{i in C} nums[i].",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_10",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the graph whose vertices are the indices 0, ..., len(nums)-1, with an edge between two distinct indices p and q exactly when |nums[p] - nums[q]| <= limit. Whenever the function returns a result r, for every connected component C of G, if q is the largest index in C, then r[q] = max_{i in C} nums[i].",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_11",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every integer v, the number of indices i with 0 <= i < len(nums) and r[i] = v equals the number of indices i with 0 <= i < len(nums) and nums[i] = v.",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LexicographicallySmallestArray.spec_12",
+    "negation": "AegisSpec.LexicographicallySmallestArray.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every index k with 0 <= k < len(nums) such that for all j with 0 <= j < len(nums) and j != k we have |nums[k] - nums[j]| > limit, it holds that r[k] = nums[k].",
+    "preconditions": "1 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; 0 <= limit <= 1000000000."
+  }
+]

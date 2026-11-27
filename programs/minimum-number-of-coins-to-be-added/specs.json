@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_1",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Let T = target. Then r is the least integer k >= 0 for which there exists a finite list A of length k, whose entries are positive integers (repetitions allowed), such that for every integer x with 1 <= x <= T there exist index sets I subset of {0,...,len(coins)-1} and J subset of {0,...,k-1} with sum_{i in I} coins[i] + sum_{j in J} A[j] = x. Each index is used at most once; equivalently, x is a sum of a sub-multiset of the original coins together with the added coins.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_2",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every coins and target satisfying the preconditions, the function returns a result r; in particular it does not fail through overflow, out-of-bounds access, or panic.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_3",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let T = target and let m be the least integer m >= 0 such that 2^m - 1 >= T. The function returns a result r satisfying 0 <= r <= m. Since T <= 100000, this also implies r <= 17.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_4",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let T = target. The returned value r equals 0 if and only if for every integer v with 1 <= v <= T, the sum of all entries coins[i] with coins[i] <= v is at least v.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_5",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the function returns r, then r >= 1.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 2 <= coins[i] <= target."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_6",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(coins), and let k be the least integer k >= 0 such that (n+1) * 2^k - 1 >= target. The function returns r = k.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, coins[i] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_7",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of minimum_added_coins(coins, T1) and let r2 be the result of minimum_added_coins(coins, T2). The function returns these results and r1 <= r2.",
+    "preconditions": "T1 and T2 are integers with 1 <= T1 <= T2 <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= T1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_8",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result for coins and let r' be the result for coins'. The function returns these results and r' <= r.",
+    "preconditions": "target T has 1 <= T <= 100000; coins and coins' are slices of length between 1 and 100000; all entries of both slices lie in [1,T]; len(coins) < 100000; coins' is obtained from coins by inserting one additional value v with 1 <= v <= T at any position."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_9",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The two calls minimum_added_coins(coins, T) and minimum_added_coins(coins', T) return the same value r.",
+    "preconditions": "target T has 1 <= T <= 100000; coins and coins' are slices of length n with 1 <= n <= 100000; all entries of both slices lie in [1,T]; coins' is a permutation of coins, meaning the two slices have the same multiset of values."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_10",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the returned value. For every finite list A of length r of positive integers such that the multiset consisting of all coins[i] together with all A[j] makes every integer in [1,target] obtainable, every entry A[j] satisfies 1 <= A[j] <= target.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_11",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the returned value. For every finite list A of length r of positive integers such that coins together with A makes every integer in [1,target] obtainable, and for every integer v with 1 <= v <= target, the sum of all coins[i] with coins[i] <= v plus the sum of all A[j] with A[j] <= v is at least v.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_12",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the returned value. For every finite list A of positive integers such that coins together with A makes every integer in [1,target] obtainable, there exists an index j with A[j] = 1.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 2 <= coins[i] <= target."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumAddedCoins.spec_13",
+    "negation": "AegisSpec.MinimumAddedCoins.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let the entries of coins be sorted in nondecreasing order. Initialize R = 0 and c = 0. For each coin value v in the sorted order, while v > R + 1, set R = 2R + 1 and increment c; then set R = R + v. After all coins have been processed, while R < target, set R = 2R + 1 and increment c. The function returns c.",
+    "preconditions": "target is an integer with 1 <= target <= 100000; coins has length n with 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= coins[i] <= target."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDistance.spec_1",
+    "negation": "AegisSpec.MinDistance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_distance(houses, k) returns a result r, r is the minimum, over all k-tuples (m_1, ..., m_k) of street positions (real numbers; the value is unchanged if positions are restricted to integers or to house locations, and allowing repeated positions does not change the value because k <= n), of the total distance sum_{i=0}^{n-1} min_{1 <= j <= k} |houses[i] - m_j|. In other words, r is the least possible sum, over all houses, of the distance from that house to its nearest of the k allocated mailboxes.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDistance.spec_2",
+    "negation": "AegisSpec.MinDistance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, min_distance(houses, k) returns a result (Result.ok r for some 64-bit integer r); it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDistance.spec_3",
+    "negation": "AegisSpec.MinDistance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_distance(houses, k) returns a result r, for every index j with 0 <= j < n, r <= sum_{i=0}^{n-1} |houses[i] - houses[j]|.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDistance.spec_4",
+    "negation": "AegisSpec.MinDistance.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_distance(houses, k) returns a result r, r = 0 if and only if k = n.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDistance.spec_5",
+    "negation": "AegisSpec.MinDistance.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_distance(houses, k) returns r and min_distance(houses', k) returns r', we have r = r'.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. Let houses' be any reordering of the same n house locations; it satisfies the same preconditions. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDistance.spec_6",
+    "negation": "AegisSpec.MinDistance.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_distance(houses, k1) returns r1 and min_distance(houses, k2) returns r2, we have r1 >= r2.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. Let k1 and k2 be integers with 1 <= k1 <= k2 <= n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDistance.spec_7",
+    "negation": "AegisSpec.MinDistance.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_distance(houses, k) returns a result r, there exist k distinct indices j_1 < j_2 < ... < j_k in {0, ..., n-1} such that r = sum_{i=0}^{n-1} min_{1 <= t <= k} |houses[i] - houses[j_t]|.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDistance.spec_8",
+    "negation": "AegisSpec.MinDistance.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_distance(houses, k) returns a result r, let h be the nondecreasing sort of houses. Then r equals the minimum, over all index sequences 0 = p_0 <= p_1 <= ... <= p_k = n, of sum_{t=1}^{k} cost(p_{t-1}, p_t), where cost(a,b) = 0 if a = b, and if a < b then cost(a,b) = sum_{i=a}^{b-1} |h[i] - h[a + floor((b-a-1)/2)]|.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDistance.spec_9",
+    "negation": "AegisSpec.MinDistance.spec_9_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever min_distance(houses, k) returns r and min_distance(houses', k) returns r', we have r' >= r.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. Let houses' be a slice of length n+1 containing all elements of houses plus one additional integer x with 1 <= x <= 10000 distinct from every houses[i], so n+1 <= 100. All mentioned values are within the 64-bit signed integer range."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDistance.spec_10",
+    "negation": "AegisSpec.MinDistance.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_distance(houses, k) returns r and min_distance(houses', k) returns r', we have r' = c * r.",
+    "preconditions": "Let n = len(houses). The preconditions are: 1 <= n <= 100; k, viewed as a mathematical integer, satisfies 1 <= k <= n; for every i with 0 <= i < n, 1 <= houses[i] <= 10000; and houses[i] != houses[j] for all 0 <= i < j < n. Let c be an integer with c >= 1 such that 1 <= c * houses[i] <= 10000 for every i, and define houses'[i] = c * houses[i]; then houses' also satisfies the same constraints. All mentioned values are within the 64-bit signed integer range."
+  }
+]

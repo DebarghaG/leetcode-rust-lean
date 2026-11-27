@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestComponentSize.spec_1",
+    "negation": "AegisSpec.LargestComponentSize.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the size of the largest connected component of the undirected graph G(nums) whose vertices are the indices 0,1,...,len(nums)-1, with an edge between distinct indices i and j iff gcd(nums[i], nums[j]) > 1. Equivalently, r = max over 0 <= i < len(nums) of |C(i)|, where C(i) is the set of indices connected to i by a path in G(nums) (including i itself).",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestComponentSize.spec_2",
+    "negation": "AegisSpec.LargestComponentSize.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestComponentSize.spec_3",
+    "negation": "AegisSpec.LargestComponentSize.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(nums).",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestComponentSize.spec_4",
+    "negation": "AegisSpec.LargestComponentSize.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1.",
+    "preconditions": "The slice nums satisfies the problem constraints and len(nums) = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestComponentSize.spec_5",
+    "negation": "AegisSpec.LargestComponentSize.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if for every pair of distinct indices i,j with 0 <= i < j < len(nums), gcd(nums[i], nums[j]) = 1 (equivalently, no two distinct values in nums share a common factor greater than 1).",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestComponentSize.spec_6",
+    "negation": "AegisSpec.LargestComponentSize.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(nums).",
+    "preconditions": "The slice nums satisfies the problem constraints, and there exists an integer d > 1 such that d divides nums[i] for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestComponentSize.spec_7",
+    "negation": "AegisSpec.LargestComponentSize.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index i with 0 <= i < len(nums) such that the connected component C(i) in G(nums) has size exactly r.",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestComponentSize.spec_8",
+    "negation": "AegisSpec.LargestComponentSize.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(nums), the connected component C(i) in G(nums) has size at most r.",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestComponentSize.spec_9",
+    "negation": "AegisSpec.LargestComponentSize.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on nums and r' on nums', then r = r'.",
+    "preconditions": "Both nums and nums' satisfy the problem constraints, and nums' is a permutation of nums: len(nums') = len(nums) and there is a bijection pi on {0,...,len(nums)-1} such that nums'[k] = nums[pi(k)] for every k with 0 <= k < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestComponentSize.spec_10",
+    "negation": "AegisSpec.LargestComponentSize.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every prime p, if k_p is the number of indices i with 0 <= i < len(nums) such that p divides nums[i], then r >= k_p. Consequently, all indices whose values are divisible by the same prime p lie in one connected component of size at least k_p.",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestComponentSize.spec_11",
+    "negation": "AegisSpec.LargestComponentSize.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(nums) if and only if the graph G(nums) is connected, i.e. for every pair of indices i,j with 0 <= i < j < len(nums) there is a path between i and j in G(nums).",
+    "preconditions": "The slice nums satisfies the problem constraints: 1 <= len(nums) <= 20000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  }
+]

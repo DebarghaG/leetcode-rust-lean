@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RotateGrid.spec_1",
+    "negation": "AegisSpec.RotateGrid.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(grid) and n = len(grid[0]). For each integer d with 0 <= d < min(m,n)/2, let L_d = 2*(m+n-4*d)-4 and let C_d(0),...,C_d(L_d-1) be the cells of the ring R_d = {(i,j) : 0<=i<m, 0<=j<n, min(i,m-1-i,j,n-1-j)=d} enumerated clockwise starting at (d,d): first (d,j) for j=d,d+1,...,n-1-d; then (i,n-1-d) for i=d+1,...,m-1-d; then (m-1-d,j) for j=n-2-d,n-3-d,...,d; then (i,d) for i=m-2-d,m-3-d,...,d+1. The function returns a matrix r with len(r)=m and len(r[i])=n for every i, and for every 0 <= i < m and 0 <= j < n: if d(i,j)=min(i,m-1-i,j,n-1-j) < min(m,n)/2, let t be the unique index with C_{d(i,j)}(t)=(i,j); then r[i][j] = grid[row][col] where (row,col)=C_{d(i,j)}((t+k) mod L_{d(i,j)}). If d(i,j) >= min(m,n)/2, then r[i][j] = grid[i][j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9. (The original problem also requires m and n even; this specification uses the natural closed-ring generalization that also covers the supplied 3x3 example: cells with min(i,m-1-i,j,n-1-j) >= min(m,n)/2 are left fixed.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RotateGrid.spec_2",
+    "negation": "AegisSpec.RotateGrid.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a matrix r such that len(r) = m and len(r[i]) = n for every 0 <= i < m. In other words, the result has exactly the same m-by-n shape as the input grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RotateGrid.spec_3",
+    "negation": "AegisSpec.RotateGrid.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result matrix r; it does not fail, panic, or overflow.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RotateGrid.spec_4",
+    "negation": "AegisSpec.RotateGrid.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer d with 0 <= d < min(m,n)/2, let R_d = {(i,j) : 0<=i<m, 0<=j<n, min(i,m-1-i,j,n-1-j)=d}. The multiset of values { r[i][j] : (i,j) in R_d } is equal to the multiset of values { grid[i][j] : (i,j) in R_d }.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RotateGrid.spec_5",
+    "negation": "AegisSpec.RotateGrid.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For each d with 0 <= d < min(m,n)/2, use the clockwise enumeration C_d and length L_d from the main specification. Define A_d(t)=grid at C_d(t) and B_d(t)=r at C_d(t) for 0<=t<L_d. There exists an integer s_d with 0 <= s_d < L_d such that B_d(t) = A_d((t+s_d) mod L_d) for every 0 <= t < L_d. In fact s_d = k mod L_d.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RotateGrid.spec_6",
+    "negation": "AegisSpec.RotateGrid.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every d with 0 <= d < min(m,n)/2, if k ≡ k' (mod L_d), where L_d = 2*(m+n-4*d)-4, then for every cell (i,j) in R_d = {(i,j) : min(i,m-1-i,j,n-1-j)=d}, the two calls agree on that cell: rotate_grid(grid,k)[i][j] = rotate_grid(grid,k')[i][j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9. Also let k' be an integer with 1 <= k' <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RotateGrid.spec_7",
+    "negation": "AegisSpec.RotateGrid.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 = rotate_grid(grid,a), let r2 = rotate_grid(r1,b), and let r3 = rotate_grid(grid,a+b). Then r2 = r3 as matrices (same dimensions and r2[i][j] = r3[i][j] for every 0 <= i < m and 0 <= j < n).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n. Let a and b be integers with 1 <= a,b and a+b <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RotateGrid.spec_8",
+    "negation": "AegisSpec.RotateGrid.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every 0 <= i < m and 0 <= j < n, the returned value satisfies 1 <= r[i][j] <= 5000.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RotateGrid.spec_9",
+    "negation": "AegisSpec.RotateGrid.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every 0 <= i < m and 0 <= j < n, there exist indices 0 <= i' < m and 0 <= j' < n such that r[i][j] = grid[i'][j']. Moreover, if d(i,j)=min(i,m-1-i,j,n-1-j) < min(m,n)/2, then (i',j') can be chosen in the same ring R_{d(i,j)}; if d(i,j) >= min(m,n)/2, then (i',j')=(i,j).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RotateGrid.spec_10",
+    "negation": "AegisSpec.RotateGrid.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every d with 0 <= d < min(m,n)/2, if k ≡ 0 (mod L_d) where L_d = 2*(m+n-4*d)-4, then for every cell (i,j) in R_d = {(i,j) : min(i,m-1-i,j,n-1-j)=d}, r[i][j] = grid[i][j]. In particular, if k is a positive multiple of L_d for every d, then the whole returned matrix equals grid.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RotateGrid.spec_11",
+    "negation": "AegisSpec.RotateGrid.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If k ≡ k' (mod L_d) for every d with 0 <= d < min(m,n)/2, where L_d = 2*(m+n-4*d)-4, then rotate_grid(grid,k) = rotate_grid(grid,k') as matrices (same dimensions and equal entry by entry).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume 2 <= m,n <= 50, every row of grid has length n, 1 <= grid[i][j] <= 5000 for all 0 <= i < m and 0 <= j < n, and 1 <= k <= 10^9. Also let k' be an integer with 1 <= k' <= 10^9."
+  }
+]

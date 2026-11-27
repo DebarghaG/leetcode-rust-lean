@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindrome.spec_1",
+    "negation": "AegisSpec.LongestPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cnt(b) be the number of indices i with 0 <= i < len(s) and s[i] = b, for every byte value b with 0 <= b < 256. Let E = sum over all b of 2 * floor(cnt(b) / 2), and let O be the number of byte values b for which cnt(b) is odd. The function returns a result r (not a failure) and r = E + 1 if O > 0, while r = E if O = 0. Equivalently, r = len(s) - max(0, O - 1). This r is exactly the length of the longest palindrome that can be constructed using the multiset of letters in s, with letters compared case-sensitively.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter: 65..90 for A..Z or 97..122 for a..z."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindrome.spec_2",
+    "negation": "AegisSpec.LongestPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result (Ok r); it does not fail by arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindrome.spec_3",
+    "negation": "AegisSpec.LongestPalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(s).",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindrome.spec_4",
+    "negation": "AegisSpec.LongestPalindrome.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let O be the number of byte values whose number of occurrences in s is odd. Whenever the function returns a result r, r is odd if and only if O > 0; equivalently, r is even if and only if O = 0.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindrome.spec_5",
+    "negation": "AegisSpec.LongestPalindrome.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let O be the number of byte values whose number of occurrences in s is odd. Whenever the function returns a result r, r = len(s) if and only if O <= 1. Equivalently, all letters of s can be used in a palindrome exactly when at most one character has an odd count.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindrome.spec_6",
+    "negation": "AegisSpec.LongestPalindrome.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let O be the number of byte values whose number of occurrences in s is odd. Whenever the function returns a result r, the number of occurrences from s that are not used in the constructed longest palindrome is len(s) - r = max(0, O - 1).",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindrome.spec_7",
+    "negation": "AegisSpec.LongestPalindrome.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a byte array t of length r such that: (i) t is a palindrome, meaning t[j] = t[r - 1 - j] for every j with 0 <= j < r; and (ii) for every byte value b with 0 <= b < 256, the number of indices j with 0 <= j < r and t[j] = b is at most the number of indices i with 0 <= i < len(s) and s[i] = b. Thus a palindrome of length r can actually be built from letters of s.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindrome.spec_8",
+    "negation": "AegisSpec.LongestPalindrome.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every byte array t that is a palindrome and whose byte counts are bounded by those of s (for every byte b, the number of occurrences of b in t is at most the number of occurrences of b in s), the length of t is at most r. In particular, no palindrome longer than r can be built from the letters of s.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindrome.spec_9",
+    "negation": "AegisSpec.LongestPalindrome.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let cnt(b) be the number of occurrences of byte value b in s, and let P = sum over all byte values b of 2 * floor(cnt(b) / 2). Whenever the function returns a result r, P <= r <= P + 1; moreover r = P exactly when every count cnt(b) is even, and r = P + 1 exactly when some count cnt(b) is odd.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindrome.spec_10",
+    "negation": "AegisSpec.LongestPalindrome.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every byte value b with 0 <= b < 256 the number of occurrences of b in s1 equals the number of occurrences of b in s2, then the results returned for s1 and s2 are equal (and, by no-failure, both are returned).",
+    "preconditions": "s1 and s2 both satisfy the base preconditions: each has length between 1 and 2000 and consists only of English letters."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindrome.spec_11",
+    "negation": "AegisSpec.LongestPalindrome.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If no byte value occurs more than once in s, then whenever the function returns a result r, r = 1.",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindrome.spec_12",
+    "negation": "AegisSpec.LongestPalindrome.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If all bytes of s are equal to the same byte value b, then whenever the function returns a result r, r = len(s).",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindrome.spec_13",
+    "negation": "AegisSpec.LongestPalindrome.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If s is itself a palindrome, meaning s[i] = s[len(s) - 1 - i] for every i with 0 <= i < len(s), then whenever the function returns a result r, r = len(s).",
+    "preconditions": "1 <= len(s) <= 2000, and for every i with 0 <= i < len(s), s[i] is the ASCII code of an English letter."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestPalindrome.spec_14",
+    "negation": "AegisSpec.LongestPalindrome.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If s' is obtained from s by swapping the case of every letter, i.e. for every index i, s'[i] is the uppercase form of s[i] when s[i] is lowercase and the lowercase form of s[i] when s[i] is uppercase, then the results returned for s and s' are equal.",
+    "preconditions": "s and s' both satisfy the base preconditions: length between 1 and 2000 and only English letters."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_1",
+    "negation": "AegisSpec.SlidingPuzzle.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a state to be a 2 x 3 array containing the six values 0,1,2,3,4,5, each exactly once. Call a state solved when it is [[1,2,3],[4,5,0]]. A valid move from a state s is: let (i,j) be the unique cell with s[i][j]=0; choose a cell (i',j') with 0 <= i' < 2, 0 <= j' < 3 and |i-i'| + |j-j'| = 1; swap s[i][j] and s[i'][j']. A k-move sequence from board to solved is a list s_0,...,s_k of states with s_0=board, s_k=solved, and each s_{t+1} obtained from s_t by one valid move. The function returns a result r, and either: (1) r = -1 and there is no k >= 0 for which a k-move sequence from board to solved exists; or (2) r >= 0, there exists an r-move sequence from board to solved, and for every k with 0 <= k < r no k-move sequence from board to solved exists.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_2",
+    "negation": "AegisSpec.SlidingPuzzle.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every board satisfying the preconditions, the function returns a result r; it does not fail.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_3",
+    "negation": "AegisSpec.SlidingPuzzle.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1, or both 0 <= r and r <= 719.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_4",
+    "negation": "AegisSpec.SlidingPuzzle.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if board is solved, i.e. if and only if board[0][0]=1, board[0][1]=2, board[0][2]=3, board[1][0]=4, board[1][1]=5, and board[1][2]=0.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_5",
+    "negation": "AegisSpec.SlidingPuzzle.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists a valid move from board to the solved state [[1,2,3],[4,5,0]] (equivalently, if board becomes solved by swapping its unique 0 with one 4-directionally adjacent tile), then the function returns r = 1.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_6",
+    "negation": "AegisSpec.SlidingPuzzle.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L be the list of the five nonzero entries of board taken in row-major order (omitting the unique 0), and let inv(board) be the number of pairs (p,q) with 0 <= p < q < 5 and L[p] > L[q]. If inv(board) is odd, then the function returns r = -1.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_7",
+    "negation": "AegisSpec.SlidingPuzzle.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L be the list of the five nonzero entries of board taken in row-major order (omitting the unique 0), and let inv(board) be the number of pairs (p,q) with 0 <= p < q < 5 and L[p] > L[q]. If inv(board) is even, then the function returns a result r with r >= 0.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_8",
+    "negation": "AegisSpec.SlidingPuzzle.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns a result r with r >= 0, then there exists a sequence of exactly r valid moves that transforms board into [[1,2,3],[4,5,0]], where a valid move swaps the unique 0 with a 4-directionally adjacent tile.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_9",
+    "negation": "AegisSpec.SlidingPuzzle.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the function returns a result r with r >= 0, then for every k with 0 <= k < r there is no sequence of exactly k valid moves transforming board into [[1,2,3],[4,5,0]], where a valid move swaps the unique 0 with a 4-directionally adjacent tile.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_10",
+    "negation": "AegisSpec.SlidingPuzzle.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the function returns r = -1, then for every k >= 0 there is no sequence of exactly k valid moves transforming board into [[1,2,3],[4,5,0]], where a valid move swaps the unique 0 with a 4-directionally adjacent tile.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_11",
+    "negation": "AegisSpec.SlidingPuzzle.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose the function returns a result r with r >= 0, and let (i,j) be the unique cell with board[i][j]=0. Then r mod 2 = (i + j + 1) mod 2.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_12",
+    "negation": "AegisSpec.SlidingPuzzle.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of the function on board and let r' be the result of the function on board'. Then r' = -1 if and only if r = -1.",
+    "preconditions": "board satisfies: len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries of board are pairwise distinct. Also board' is any 2 x 3 state obtained from board by one valid move (swapping the unique 0 with a 4-directionally adjacent tile), so board' satisfies the same preconditions."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SlidingPuzzle.spec_13",
+    "negation": "AegisSpec.SlidingPuzzle.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of the function on board and let r' be the result of the function on board'. If r >= 0 and r' >= 0, then r' = r - 1 or r' = r + 1.",
+    "preconditions": "len(board) = 2; len(board[0]) = len(board[1]) = 3; for every i with 0 <= i < 2 and j with 0 <= j < 3, board[i][j] is an integer with 0 <= board[i][j] <= 5; the six entries board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2] are pairwise distinct. Also board' is any 2 x 3 state obtained from board by one valid move (swapping the unique 0 with a 4-directionally adjacent tile)."
+  }
+]

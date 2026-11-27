@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_1",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For an index set I subset of {0,1,...,n-1}, call I k-free if for every i in I and j in I with i != j, |nums[i] - nums[j]| != k, where absolute value is over the integers. Whenever the function returns a result r, r is exactly the number of k-free index sets I, with the empty set included. Equivalently, r is the number of selections of elements of nums in which no two selected elements have absolute difference k.",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; and 1 <= k <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_2",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums and k satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or leave the result undefined.",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; and 1 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_3",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r >= len(nums) + 1.",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; and 1 <= k <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_4",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2^(len(nums)).",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; and 1 <= k <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_5",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2^(len(nums)).",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; 1 <= k <= 1000; and for every i,j with 0 <= i < j < n, |nums[i] - nums[j]| != k."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_6",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums). For every integer m with 1 <= m and every collection of m pairwise disjoint unordered index pairs {i_t,j_t}, t = 1,...,m, such that 0 <= i_t < j_t < n and |nums[i_t] - nums[j_t]| = k for every t, whenever the function returns a result r, r <= 3^m * 2^(n - 2m).",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; and 1 <= k <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_7",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let Fib be defined by Fib(1)=1, Fib(2)=1, and Fib(m)=Fib(m-1)+Fib(m-2) for m >= 3. Whenever the function returns a result r, r = Fib(n+2).",
+    "preconditions": "len(nums) is an integer n with 3 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; 1 <= k <= 1000; and there exists an integer a such that the set of values {nums[i] | 0 <= i < n} equals {a + t*k | 0 <= t < n}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_8",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 3^m * 2^(n - 2m).",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; 1 <= k <= 1000; the set P = {{i,j} | 0 <= i < j < n and |nums[i] - nums[j]| = k} is nonempty and pairwise disjoint in the sense that no index occurs in two different pairs; and m = |P|."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_9",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If a call on nums with this k returns r and a call on nums2 with the same k returns r2, then r = r2.",
+    "preconditions": "len(nums) = len(nums2) = n with 1 <= n <= 50; both nums and nums2 have pairwise distinct elements all in the range 1..1000; nums2 is a permutation of nums, meaning the multiset of values of nums2 equals the multiset of values of nums; and 1 <= k <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_10",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If a call on nums with this k returns r and a call on nums2 with the same k returns r2, then r2 = 2*r.",
+    "preconditions": "nums and nums2 are slices; len(nums) = n and len(nums2) = n+1, with 1 <= n and n+1 <= 50; both have pairwise distinct elements all in the range 1..1000; there exists an integer x such that the multiset of values of nums2 is the multiset of values of nums together with x, and for every i with 0 <= i < n, |x - nums[i]| != k; and 1 <= k <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountTheNumOfKFreeSubsets.spec_11",
+    "negation": "AegisSpec.CountTheNumOfKFreeSubsets.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r is even.",
+    "preconditions": "len(nums) is an integer n with 1 <= n <= 50; for every i with 0 <= i < n, 1 <= nums[i] <= 1000; for every i,j with 0 <= i < j < n, nums[i] != nums[j]; 1 <= k <= 1000; and there exists an index i0 with 0 <= i0 < n such that for every j with 0 <= j < n and j != i0, |nums[i0] - nums[j]| != k."
+  }
+]

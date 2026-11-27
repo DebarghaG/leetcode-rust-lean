@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KIncreasing.spec_1",
+    "negation": "AegisSpec.KIncreasing.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(arr). For each c with 0 <= c < k, let m_c be the number of indices i with 0 <= i < n and i mod k = c mod k, and let A_c be the sequence (arr[c], arr[c+k], ..., arr[c+k*(m_c-1)]). Let L_c be the maximum length t for which there exist integers 0 <= j_0 < ... < j_{t-1} < m_c with A_c[j_0] <= ... <= A_c[j_{t-1}]. Then the function returns a result r and r = n - (L_0 + L_1 + ... + L_{k-1}).",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers; counts and sums in the specification are mathematical and do not overflow."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KIncreasing.spec_2",
+    "negation": "AegisSpec.KIncreasing.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KIncreasing.spec_3",
+    "negation": "AegisSpec.KIncreasing.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= n - k.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KIncreasing.spec_4",
+    "negation": "AegisSpec.KIncreasing.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If arr is K-increasing, meaning that for every index i with k <= i < n we have arr[i-k] <= arr[i], then the function returns a result r and r = 0.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KIncreasing.spec_5",
+    "negation": "AegisSpec.KIncreasing.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r = 0, arr is K-increasing: for every index i with k <= i < n, arr[i-k] <= arr[i].",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KIncreasing.spec_6",
+    "negation": "AegisSpec.KIncreasing.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an array b of length n of positive 64-bit integers such that: (a) b is K-increasing, so b[i-k] <= b[i] for every k <= i < n; (b) for every c with 0 <= c < k, if A_c and L_c are defined as in spec_1, then exactly L_c indices i with i mod k = c mod k satisfy b[i] = arr[i]; and (c) exactly r indices i with 0 <= i < n satisfy b[i] != arr[i].",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KIncreasing.spec_7",
+    "negation": "AegisSpec.KIncreasing.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every array b of length n of positive 64-bit integers that is K-increasing, meaning b[i-k] <= b[i] for every k <= i < n, the number of indices i with 0 <= i < n and b[i] != arr[i] is at least r.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KIncreasing.spec_8",
+    "negation": "AegisSpec.KIncreasing.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call k_increasing(arr, k) returns r and the call k_increasing(arr', k) returns r', then r = r'.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. Let c0 be an integer with 0 <= c0 < k and let d be an integer. Define arr' by arr'[i] = arr[i] + d when i mod k = c0 mod k, and arr'[i] = arr[i] otherwise. Assume 1 <= arr'[i] <= n and arr'[i] is a 64-bit signed integer for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KIncreasing.spec_9",
+    "negation": "AegisSpec.KIncreasing.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For each c with 0 <= c < k, let A_c be the sequence of arr values in residue class c, as in spec_1. Let B be the number of c in 0 <= c < k for which A_c is not non-decreasing. Whenever the function returns a result r, r >= B.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. All values are 64-bit signed integers."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KIncreasing.spec_10",
+    "negation": "AegisSpec.KIncreasing.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n - k.",
+    "preconditions": "Let n = len(arr). The input satisfies n >= 1, n <= 100000, 1 <= k <= n, and 1 <= arr[i] <= n for every 0 <= i < n. For every c with 0 <= c < k and every t with 0 <= t+1 < m_c, where m_c is the number of indices in residue class c, assume arr[c+k*t] > arr[c+k*(t+1)]. All values are 64-bit signed integers."
+  }
+]

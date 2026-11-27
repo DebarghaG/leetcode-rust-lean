@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinExtraChar.spec_1",
+    "negation": "AegisSpec.MinExtraChar.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). Call a selection a finite list of intervals (i_1,j_1),...,(i_t,j_t) with t >= 0 such that for each l, 0 <= i_l < j_l <= n, the contiguous substring s[i_l..j_l) (bytes s[i_l],...,s[j_l-1]) is equal to some word in dictionary, and the intervals are pairwise non-overlapping (for any two distinct l,l', either j_l <= i_{l'} or j_{l'} <= i_l). Let M be the maximum, over all selections, of the covered length sum_{l=1}^t (j_l - i_l), with M = 0 for the empty selection. The function returns a result r and r = n - M.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinExtraChar.spec_2",
+    "negation": "AegisSpec.MinExtraChar.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (a successful I64 value); it never fails, panics, overflows, or accesses an out-of-bounds index on any input satisfying the preconditions.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinExtraChar.spec_3",
+    "negation": "AegisSpec.MinExtraChar.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s).",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinExtraChar.spec_4",
+    "negation": "AegisSpec.MinExtraChar.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a selection (a finite set of pairwise non-overlapping intervals in s, each equal to a dictionary word) whose covered length is exactly len(s) - r.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinExtraChar.spec_5",
+    "negation": "AegisSpec.MinExtraChar.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every selection (a finite set of pairwise non-overlapping intervals in s, each equal to a dictionary word) the covered length of that selection is at most len(s) - r.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinExtraChar.spec_6",
+    "negation": "AegisSpec.MinExtraChar.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists a selection whose covered length is len(s) (equivalently, s is the concatenation of one or more words from dictionary).",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinExtraChar.spec_7",
+    "negation": "AegisSpec.MinExtraChar.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(s) if and only if for every pair of indices i,j with 0 <= i < j <= len(s), the contiguous substring s[i..j) is not equal to any word in dictionary.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinExtraChar.spec_8",
+    "negation": "AegisSpec.MinExtraChar.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on input (s, dictionary1) and r2 on input (s, dictionary2), it holds r2 <= r1.",
+    "preconditions": "s satisfies the constraints (1 <= len(s) <= 50 and all bytes are lowercase English letters); dictionary1 and dictionary2 each satisfy the constraints (1 <= number of entries <= 50, each word length 1..50, all lowercase English letters, pairwise distinct words); every word of dictionary1 is also a word of dictionary2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinExtraChar.spec_9",
+    "negation": "AegisSpec.MinExtraChar.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input (s, dictionary) and r' on input (s, the dictionary obtained by removing w), it holds r = r'.",
+    "preconditions": "The pair (s, dictionary) satisfies the constraints; len(dictionary) >= 2; w is a word in dictionary; w is not equal to s[i..j) for any 0 <= i < j <= len(s); the dictionary obtained by removing w from dictionary also satisfies the constraints."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinExtraChar.spec_10",
+    "negation": "AegisSpec.MinExtraChar.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on input (s, dictionary) and r' on input (s, dictionary'), it holds r = r'.",
+    "preconditions": "The pair (s, dictionary) satisfies the constraints; dictionary' is a permutation (reordering) of the entries of dictionary, so it also satisfies the constraints."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinExtraChar.spec_11",
+    "negation": "AegisSpec.MinExtraChar.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let W = { dictionary[k][0] : 0 <= k < len(dictionary) }. Whenever the function returns a result r, r = len(s) - |{ i : 0 <= i < len(s) and s[i] in W }|; equivalently, r is the number of indices i with 0 <= i < len(s) and s[i] not in W.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; every word in dictionary has length 1; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinExtraChar.spec_12",
+    "negation": "AegisSpec.MinExtraChar.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if there exists a word d in dictionary with len(d) = 1 and d[0] = s[0], and r = 1 otherwise.",
+    "preconditions": "1 <= len(s) <= 50; len(s) = 1; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinExtraChar.spec_13",
+    "negation": "AegisSpec.MinExtraChar.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let V be the set of all bytes b such that b occurs at some position k of some word d in dictionary (0 <= k < len(d)). Whenever the function returns a result r, r >= |{ i : 0 <= i < len(s) and s[i] not in V }|.",
+    "preconditions": "1 <= len(s) <= 50; 1 <= len(dictionary) <= 50; for every word d in dictionary, 1 <= len(d) <= 50; every byte of s and of every word in dictionary is an ASCII code of a lowercase English letter ('a' through 'z'); the words in dictionary are pairwise distinct."
+  }
+]

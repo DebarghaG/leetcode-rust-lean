@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CatMouseGame.spec_1",
+    "negation": "AegisSpec.CatMouseGame.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a state as a triple (m,c,t) where 0 <= m < n, 1 <= c < n (the Cat never occupies the hole), and t is either Mouse or Cat. A state is terminal if m = 0 (Mouse has won) or m = c (Cat has won); terminal states are not played from. At a nonterminal state, if t = Mouse, the legal moves are all m' occurring in graph[m]; after moving to m', if m' = 0 the Mouse wins, if m' = c the Cat wins, otherwise the next state is (m',c,Cat). If t = Cat, the legal moves are all c' occurring in graph[c] with c' != 0; after moving to c', if c' = m the Cat wins, otherwise the next state is (m,c',Mouse). If a nonterminal state is reached that equals an earlier state of the play in both m, c, and t, the game stops in a draw. The initial state is (1,2,Mouse). A Mouse strategy assigns a legal move to every finite history ending in a nonterminal Mouse-turn state; a Cat strategy is defined analogously. For a pair of strategies, follow their moves until a terminal state or a repeated state; the outcome is respectively Mouse win, Cat win, or draw. The function returns a result r, and r = 1 if there exists a Mouse strategy such that every Cat strategy yields a Mouse win; r = 2 if there exists a Cat strategy such that every Mouse strategy yields a Cat win; otherwise r = 0.",
+    "preconditions": "Let n = len(graph). The input satisfies: 3 <= n <= 50; for every i with 0 <= i < n, 1 <= len(graph[i]) < n; every element graph[i][j] satisfies 0 <= graph[i][j] < n and graph[i][j] != i; each graph[i] has no repeated values; the graph is undirected, i.e. for all u,v with 0 <= u,v < n, v occurs in graph[u] iff u occurs in graph[v]; and the promise 'the mouse and the cat can always move' holds: from every nonterminal state reachable from the initial state (1,2,Mouse) by legal moves under the rules in the statement, the player to move has at least one legal move."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CatMouseGame.spec_2",
+    "negation": "AegisSpec.CatMouseGame.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every graph satisfying the preconditions, the function cat_mouse_game(graph) returns a result r; it does not fail (no panic, overflow, or out-of-bounds).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CatMouseGame.spec_3",
+    "negation": "AegisSpec.CatMouseGame.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is in {0,1,2}.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CatMouseGame.spec_4",
+    "negation": "AegisSpec.CatMouseGame.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If there exists a Mouse strategy such that, against every Cat strategy, the play from the initial state (1,2,Mouse) ends in a Mouse win under the game rules of spec_1, then the function returns 1.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CatMouseGame.spec_5",
+    "negation": "AegisSpec.CatMouseGame.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If there exists a Cat strategy such that, against every Mouse strategy, the play from the initial state (1,2,Mouse) ends in a Cat win under the game rules of spec_1, then the function returns 2.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CatMouseGame.spec_6",
+    "negation": "AegisSpec.CatMouseGame.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If neither a Mouse force-win strategy nor a Cat force-win strategy exists from the initial state (1,2,Mouse) under the game rules of spec_1, then the function returns 0.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CatMouseGame.spec_7",
+    "negation": "AegisSpec.CatMouseGame.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns 1, there exists a Mouse strategy such that for every Cat strategy the play from (1,2,Mouse) reaches a terminal state with Mouse at node 0 before the Cat occupies the same node as the Mouse and before any nonterminal state repeats; equivalently, Mouse can force a win.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CatMouseGame.spec_8",
+    "negation": "AegisSpec.CatMouseGame.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns 2, there exists a Cat strategy such that for every Mouse strategy the play from (1,2,Mouse) reaches a terminal state with Cat and Mouse on the same node before the Mouse reaches node 0 and before any nonterminal state repeats; equivalently, Cat can force a win.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CatMouseGame.spec_9",
+    "negation": "AegisSpec.CatMouseGame.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns 0, for every Mouse strategy there exists a Cat strategy under which the play does not end in a Mouse win, and for every Cat strategy there exists a Mouse strategy under which the play does not end in a Cat win; equivalently, neither player can force a win and the game is a draw under optimal play.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CatMouseGame.spec_10",
+    "negation": "AegisSpec.CatMouseGame.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The two calls cat_mouse_game(graph) and cat_mouse_game(graph') return the same result: if they return r and r' respectively, then r = r'.",
+    "preconditions": "Let graph and graph' both satisfy the preconditions of spec_1 and have the same length n. For every i with 0 <= i < n, graph[i] and graph'[i] contain exactly the same set of values (their entries may be in different orders)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CatMouseGame.spec_11",
+    "negation": "AegisSpec.CatMouseGame.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns 1, then node 0 is reachable from node 1 in the undirected graph, i.e. there is a finite sequence of nodes v0,...,vk with v0=1, vk=0, and for each i, v_{i+1} occurs in graph[v_i].",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CatMouseGame.spec_12",
+    "negation": "AegisSpec.CatMouseGame.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever cat_mouse_game(graph) returns 0, there exist a Mouse strategy σ and a Cat strategy τ such that: (i) under σ and τ the play from (1,2,Mouse) ends in a draw, i.e. it reaches a nonterminal state equal to an earlier state of the play in both m, c, and t, and never reaches m=0 or m=c; (ii) for every Cat strategy τ', the play under σ and τ' does not end in a Cat win; and (iii) for every Mouse strategy σ', the play under σ' and τ does not end in a Mouse win.",
+    "preconditions": "Same as spec_1."
+  }
+]

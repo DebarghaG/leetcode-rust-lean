@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckIfExist.spec_1",
+    "negation": "AegisSpec.CheckIfExist.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever check_if_exist returns a result r, r = true if and only if there exist indices i and j such that 0 <= i < len(arr), 0 <= j < len(arr), i != j, and arr[i] = 2 * arr[j] as mathematical integers. If no such pair of indices exists, then r = false.",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckIfExist.spec_2",
+    "negation": "AegisSpec.CheckIfExist.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, the call check_if_exist arr returns a Bool result r and does not fail, panic, go out of bounds, or overflow.",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckIfExist.spec_3",
+    "negation": "AegisSpec.CheckIfExist.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever check_if_exist returns true, there exist indices i and j such that 0 <= i < len(arr), 0 <= j < len(arr), i != j, arr[i] is even, arr[j] = arr[i] / 2 using exact integer division, and arr[i] = 2 * arr[j].",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckIfExist.spec_4",
+    "negation": "AegisSpec.CheckIfExist.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever check_if_exist returns true, there exists an index j with 0 <= j < len(arr) such that -500 <= arr[j] <= 500 and there exists an index i with 0 <= i < len(arr), i != j, and arr[i] = 2 * arr[j].",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckIfExist.spec_5",
+    "negation": "AegisSpec.CheckIfExist.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every bijection p from {0, ..., len(arr)-1} to itself, let arr_p be the slice of length len(arr) defined by arr_p[k] = arr[p(k)] for every k with 0 <= k < len(arr). Then check_if_exist arr_p returns the same Bool result as check_if_exist arr.",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckIfExist.spec_6",
+    "negation": "AegisSpec.CheckIfExist.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let neg be the slice of length len(arr) defined by neg[k] = -arr[k] for every k with 0 <= k < len(arr). Then check_if_exist neg returns the same Bool result as check_if_exist arr.",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckIfExist.spec_7",
+    "negation": "AegisSpec.CheckIfExist.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c with c >= 1 such that -1000 <= c * arr[k] <= 1000 for every k with 0 <= k < len(arr), let scaled_c be the slice defined by scaled_c[k] = c * arr[k]. Then check_if_exist scaled_c returns the same Bool result as check_if_exist arr.",
+    "preconditions": "len(arr) >= 2 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckIfExist.spec_8",
+    "negation": "AegisSpec.CheckIfExist.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer x with -1000 <= x <= 1000, let arr' be the slice of length len(arr)+1 obtained by appending x to arr. If check_if_exist arr returns true, then check_if_exist arr' returns true.",
+    "preconditions": "len(arr) >= 2, len(arr) < 500, and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckIfExist.spec_9",
+    "negation": "AegisSpec.CheckIfExist.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index k with 0 <= k < len(arr), let arr_k be the slice of length len(arr)-1 obtained by deleting the element at position k. If check_if_exist arr returns false, then check_if_exist arr_k returns false.",
+    "preconditions": "len(arr) >= 3 and len(arr) <= 500 and for every k with 0 <= k < len(arr), -1000 <= arr[k] <= 1000."
+  }
+]

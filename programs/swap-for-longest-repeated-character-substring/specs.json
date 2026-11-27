@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_1",
+    "negation": "AegisSpec.MaxRepOpt1.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a byte value c, let total(c) = #{i | 0 <= i < len(text) and text[i] = c}. For each c with total(c) > 0, let W(c) be the maximum value u-l over all indices 0 <= l <= u <= len(text) such that the interval [l,u) contains at most one index i with text[i] != c. Then the function returns a result r and r = max { min(total(c), W(c)) | c is a byte value that occurs in text }.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_2",
+    "negation": "AegisSpec.MaxRepOpt1.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: for every text satisfying the preconditions there is no overflow, panic, or out-of-bounds access.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_3",
+    "negation": "AegisSpec.MaxRepOpt1.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 1 <= r <= len(text).",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_4",
+    "negation": "AegisSpec.MaxRepOpt1.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= max { total(c) | c is a byte value that occurs in text }, where total(c) = #{i | 0 <= i < len(text) and text[i] = c}.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_5",
+    "negation": "AegisSpec.MaxRepOpt1.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every byte value c and all indices 0 <= l <= u <= len(text), if the interval [l,u) contains at most one index i with text[i] != c, then the returned value r satisfies r >= min(u-l, total(c)), where total(c) = #{i | 0 <= i < len(text) and text[i] = c}.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_6",
+    "negation": "AegisSpec.MaxRepOpt1.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist a byte value c and indices 0 <= l <= u <= len(text) such that the interval [l,u) contains at most one index i with text[i] != c, total(c) = #{i | 0 <= i < len(text) and text[i] = c}, and r = min(u-l, total(c)).",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_7",
+    "negation": "AegisSpec.MaxRepOpt1.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= W, where W is the maximum value u-l over all byte values c and all indices 0 <= l <= u <= len(text) such that [l,u) contains at most one index i with text[i] != c.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_8",
+    "negation": "AegisSpec.MaxRepOpt1.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(text) if and only if all bytes of text are equal: there exists a byte c such that text[i] = c for every 0 <= i < len(text).",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_9",
+    "negation": "AegisSpec.MaxRepOpt1.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(text)-1 if and only if there exists a byte value c that occurs at exactly len(text)-1 indices in text (equivalently, exactly one index i has text[i] != c).",
+    "preconditions": "len(text) is between 2 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_10",
+    "negation": "AegisSpec.MaxRepOpt1.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if and only if no byte value occurs more than once in text; equivalently, text[i] != text[j] for all 0 <= i < j < len(text).",
+    "preconditions": "len(text) is between 2 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_11",
+    "negation": "AegisSpec.MaxRepOpt1.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, every byte of text is a lowercase English letter (ASCII code 97 through 122), and the maximum occurrence count of any byte value in text is exactly 2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_12",
+    "negation": "AegisSpec.MaxRepOpt1.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The returned value r is invariant under any consistent injective renaming of the lowercase alphabet: if phi is an injective map from the 26 lowercase letters to lowercase letters and text' is defined by text'[i] = phi(text[i]) for every 0 <= i < len(text), then the correct answer for text' is also r.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxRepOpt1.spec_13",
+    "negation": "AegisSpec.MaxRepOpt1.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The returned value r is unchanged when text is reversed: for text' with text'[i] = text[len(text)-1-i] for every 0 <= i < len(text), the correct answer for text' is also r.",
+    "preconditions": "len(text) is between 1 and 20000 inclusive, and every byte of text is a lowercase English letter (ASCII code 97 through 122)."
+  }
+]

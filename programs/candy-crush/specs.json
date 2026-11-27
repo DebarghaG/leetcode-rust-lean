@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CandyCrush.spec_1",
+    "negation": "AegisSpec.CandyCrush.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Call a cell (i,j) of a board B of these dimensions crushable if B[i][j] != 0 and either it belongs to a horizontal contiguous segment of at least 3 equal nonzero values, or it belongs to a vertical contiguous segment of at least 3 equal nonzero values. Let Stable(B) mean no cell is crushable. Let Crush(B) set every crushable cell to 0 and leave all other cells unchanged. Let Drop(C) be the board obtained column by column as follows: in column j, take the nonzero entries C[0][j],...,C[m-1][j] in top-to-bottom order, delete the zero entries, and place the remaining sequence in the bottom len(sequence) cells of that column in the same order, with zeros above. Let Step(B)=B if Stable(B), and Step(B)=Drop(Crush(B)) otherwise. Then len(r)=m, len(r[i])=n for every 0<=i<m, and there exist k>=0 and boards B_0,...,B_k with B_0=board, B_{t+1}=Step(B_t) for every 0<=t<k, B_k=r, and Stable(r).",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CandyCrush.spec_2",
+    "negation": "AegisSpec.CandyCrush.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every board satisfying the preconditions, candy_crush returns a result r; it does not panic, overflow, or otherwise fail.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CandyCrush.spec_3",
+    "negation": "AegisSpec.CandyCrush.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r)=len(board)=m and len(r[i])=n for every 0 <= i < m; no row or column is added or removed.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CandyCrush.spec_4",
+    "negation": "AegisSpec.CandyCrush.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, no cell of r is part of a horizontal or vertical contiguous run of at least 3 equal nonzero values. That is, for every cell (i,j) with r[i][j] != 0, there is no interval of length at least 3 in row i containing j all equal to r[i][j], and no interval of length at least 3 in column j containing i all equal to r[i][j].",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CandyCrush.spec_5",
+    "negation": "AegisSpec.CandyCrush.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r is not equal to board, then every column of r is bottom-packed: for every column j and every pair of rows a<b, if r[a][j] != 0 then r[b][j] != 0.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CandyCrush.spec_6",
+    "negation": "AegisSpec.CandyCrush.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals board if and only if board has no crushable cell, where a cell is crushable when it is nonzero and belongs to a horizontal or vertical contiguous run of at least 3 equal nonzero values.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CandyCrush.spec_7",
+    "negation": "AegisSpec.CandyCrush.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, every nonzero value appearing in r also appears somewhere in board; no new candy type is created.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CandyCrush.spec_8",
+    "negation": "AegisSpec.CandyCrush.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every column j there is an order-preserving matching from the nonzero entries of r in column j to the nonzero entries of board in column j that never moves a candy upward. Explicitly, if the input nonzero row positions in column j are p_0 < p_1 < ... < p_{K-1} and the output nonzero row positions in column j are q_0 < q_1 < ... < q_{L-1}, then there exist indices 0 <= t_0 < t_1 < ... < t_{L-1} < K such that r[q_a][j] = board[p_{t_a}][j] and q_a >= p_{t_a} for every 0 <= a < L.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CandyCrush.spec_9",
+    "negation": "AegisSpec.CandyCrush.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r differs from board then the total number of nonzero cells in r is at most the total number of nonzero cells in board minus 3; if r equals board, the two totals are equal.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CandyCrush.spec_10",
+    "negation": "AegisSpec.CandyCrush.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every entry of r satisfies 0 <= r[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n.",
+    "preconditions": "Let m = len(board) and n = len(board[0]). The board is rectangular with 3 <= m <= 50 and 3 <= n <= 50, i.e. len(board)=m and len(board[i])=n for every 0 <= i < m; moreover 0 <= board[i][j] <= 2000 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CandyCrush.spec_11",
+    "negation": "AegisSpec.CandyCrush.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every board satisfying the preconditions, if candy_crush(board) = r then candy_crush(r) = r; the returned stable board is a fixed point (the function is idempotent).",
+    "preconditions": "Let m = len(board) and n = len(board[0]) with 3 <= m,n <= 50, rectangular, and 0 <= board[i][j] <= 2000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CandyCrush.spec_12",
+    "negation": "AegisSpec.CandyCrush.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every column j, the multiset of nonzero entries in column j of r equals the multiset of nonzero entries in column j of board with some entries deleted (candies never change columns or values); in particular the number of nonzero cells in column j of r is at most the number in column j of board.",
+    "preconditions": "Let m = len(board) and n = len(board[0]) with 3 <= m,n <= 50, rectangular, and 0 <= board[i][j] <= 2000."
+  }
+]

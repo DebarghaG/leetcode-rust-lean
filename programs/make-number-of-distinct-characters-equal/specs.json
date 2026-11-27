@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsItPossible.spec_1",
+    "negation": "AegisSpec.IsItPossible.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a Boolean r and does not fail. Let D(s) be the number of distinct bytes occurring in a slice s. For 0 <= i < len(word1) and 0 <= j < len(word2), let swap1(i,j) be word1 with position i replaced by word2[j], and let swap2(i,j) be word2 with position j replaced by word1[i]. Then r = true if and only if there exist such i,j with D(swap1(i,j)) = D(swap2(i,j)). Equivalently, r is true exactly when some single swap of one character of word1 with one character of word2 makes the two resulting strings have the same number of distinct characters.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsItPossible.spec_2",
+    "negation": "AegisSpec.IsItPossible.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists a Boolean r such that is_it_possible(word1, word2) = Result.ok r; that is, on every input satisfying the preconditions the function never fails, panics, performs an out-of-bounds access, or overflows.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsItPossible.spec_3",
+    "negation": "AegisSpec.IsItPossible.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls is_it_possible(word1, word2) and is_it_possible(word2, word1) return Boolean values, and those two Boolean values are equal.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsItPossible.spec_4",
+    "negation": "AegisSpec.IsItPossible.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both is_it_possible(word1, word2) and is_it_possible(word1', word2') return Boolean values, and those values are equal.",
+    "preconditions": "word1, word2, word1', word2' are nonempty byte slices with lengths at most 100000 and lowercase English letters; word1' is a permutation of word1 (same length and, for every byte c, freq_{word1'}(c) = freq_{word1}(c)) and word2' is a permutation of word2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsItPossible.spec_5",
+    "negation": "AegisSpec.IsItPossible.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a Boolean r with r = false.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Let D(s) be the number of distinct bytes in s. Then |D(word1) - D(word2)| >= 3."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsItPossible.spec_6",
+    "negation": "AegisSpec.IsItPossible.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a Boolean r with r = true.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Let D(s) be the number of distinct bytes in s. Assume D(word1) = D(word2), and there exist indices i,j with 0 <= i < len(word1), 0 <= j < len(word2), and word1[i] = word2[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsItPossible.spec_7",
+    "negation": "AegisSpec.IsItPossible.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a Boolean r with r = true if and only if at least one of these two conditions holds: (a) there is a byte c with freq_{word1}(c) = 1 and a byte d with freq_{word2}(d) = 1; (b) there is a byte c with freq_{word1}(c) >= 2 and a byte d with freq_{word2}(d) >= 2.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Let D(s) be the number of distinct bytes in s, and let C(s) be the set of bytes occurring in s. Assume C(word1) and C(word2) are disjoint, and D(word1) = D(word2)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsItPossible.spec_8",
+    "negation": "AegisSpec.IsItPossible.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a Boolean r with r = true if and only if there is at most one index j with 0 <= j < len(word2) and word2[j] != a.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Assume len(word1) = 1, and let a = word1[0]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsItPossible.spec_9",
+    "negation": "AegisSpec.IsItPossible.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a Boolean r with r = true if and only if x = y, or (len(word1) = 1 and len(word2) = 1), or (len(word1) >= 2 and len(word2) >= 2).",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Assume there exist bytes x and y such that word1[k] = x for every 0 <= k < len(word1), and word2[k] = y for every 0 <= k < len(word2)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsItPossible.spec_10",
+    "negation": "AegisSpec.IsItPossible.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a Boolean r; if r = true, then the string among word1 and word2 with the larger distinct count contains a character whose frequency in that string is exactly 1, and the other string (with the smaller distinct count) contains a character whose frequency in that string is at least 2.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Let D(s) be the number of distinct bytes in s. Assume |D(word1) - D(word2)| = 2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsItPossible.spec_11",
+    "negation": "AegisSpec.IsItPossible.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a Boolean r with r = true if and only if A has a byte c with freq_A(c) = 1 and B has a byte d with freq_B(d) >= 2.",
+    "preconditions": "word1 and word2 are nonempty byte slices with 1 <= len(word1), len(word2) <= 100000, and every byte of both is an ASCII lowercase English letter. Let D(s) be the number of distinct bytes in s, C(s) the set of bytes occurring in s, and freq_s(c) the frequency of byte c in s. Assume C(word1) and C(word2) are disjoint and |D(word1) - D(word2)| = 1. Let A be the one of word1 and word2 with larger D, and B the other."
+  }
+]

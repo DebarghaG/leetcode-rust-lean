@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BuildMatrix.spec_1",
+    "negation": "AegisSpec.BuildMatrix.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever build_matrix returns a result r, define a matrix M to be valid for (k,row_conditions,col_conditions) iff: (1) len(M)=k and for every i with 0 <= i < k, len(M[i])=k; (2) for every i,j with 0 <= i < k and 0 <= j < k, M[i][j]=0 or 1 <= M[i][j] <= k; (3) for every x with 1 <= x <= k there is exactly one pair (i,j) with 0 <= i < k, 0 <= j < k, and M[i][j]=x; (4) for every t with 0 <= t < len(row_conditions), writing row_conditions[t]=[a,b], for every cells (i_a,j_a) and (i_b,j_b) with 0 <= i_a < k, 0 <= j_a < k, 0 <= i_b < k, 0 <= j_b < k, M[i_a][j_a]=a, and M[i_b][j_b]=b, we have i_a < i_b; (5) for every t with 0 <= t < len(col_conditions), writing col_conditions[t]=[a,b], for every cells (i_a,j_a) and (i_b,j_b) with 0 <= i_a < k, 0 <= j_a < k, 0 <= i_b < k, 0 <= j_b < k, M[i_a][j_a]=a, and M[i_b][j_b]=b, we have j_a < j_b. Then either (A) there exists a valid M and r itself is valid, or (B) no valid M exists and len(r)=0. These alternatives are exclusive.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BuildMatrix.spec_2",
+    "negation": "AegisSpec.BuildMatrix.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the call build_matrix(k,row_conditions,col_conditions) does not fail: there exists a vector r of vectors of 64-bit integers such that the function returns r (an Ok result, not Err or panic).",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BuildMatrix.spec_3",
+    "negation": "AegisSpec.BuildMatrix.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever build_matrix returns a result r, either len(r)=0, or len(r)=k and for every i with 0 <= i < k, len(r[i])=k. In particular, a nonempty result is a k-by-k matrix and an empty result has no rows.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BuildMatrix.spec_4",
+    "negation": "AegisSpec.BuildMatrix.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, for every i,j with 0 <= i < len(r) and 0 <= j < len(r[i]), either r[i][j]=0 or 1 <= r[i][j] <= k.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BuildMatrix.spec_5",
+    "negation": "AegisSpec.BuildMatrix.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, for every x with 1 <= x <= k there is exactly one pair (i,j) with 0 <= i < len(r), 0 <= j < len(r[i]), and r[i][j]=x.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BuildMatrix.spec_6",
+    "negation": "AegisSpec.BuildMatrix.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, the number of pairs (i,j) with 0 <= i < len(r), 0 <= j < len(r[i]), and r[i][j] != 0 is exactly k.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BuildMatrix.spec_7",
+    "negation": "AegisSpec.BuildMatrix.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, for every t with 0 <= t < len(row_conditions), writing row_conditions[t]=[a,b], for every cells (i_a,j_a) and (i_b,j_b) with 0 <= i_a < len(r), 0 <= j_a < len(r[i_a]), 0 <= i_b < len(r), 0 <= j_b < len(r[i_b]), r[i_a][j_a]=a, and r[i_b][j_b]=b, we have i_a < i_b.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BuildMatrix.spec_8",
+    "negation": "AegisSpec.BuildMatrix.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, for every t with 0 <= t < len(col_conditions), writing col_conditions[t]=[a,b], for every cells (i_a,j_a) and (i_b,j_b) with 0 <= i_a < len(r), 0 <= j_a < len(r[i_a]), 0 <= i_b < len(r), 0 <= j_b < len(r[i_b]), r[i_a][j_a]=a, and r[i_b][j_b]=b, we have j_a < j_b.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BuildMatrix.spec_9",
+    "negation": "AegisSpec.BuildMatrix.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever build_matrix returns a result r, if either the row condition graph or the column condition graph contains a directed cycle, then len(r)=0. The row condition graph has vertex set {1,...,k} and a directed edge a -> b for each entry [a,b] of row_conditions; a directed cycle means there are t >= 1 and numbers x_0,...,x_t in {1,...,k} with x_t = x_0 and, for every q with 0 <= q < t, the pair [x_q,x_{q+1}] occurs as an entry of row_conditions. The column condition graph is defined analogously from col_conditions.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BuildMatrix.spec_10",
+    "negation": "AegisSpec.BuildMatrix.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever build_matrix returns a result r, if neither the row condition graph nor the column condition graph contains a directed cycle, then len(r)>0. Here a directed cycle in row_conditions means there are t >= 1 and numbers x_0,...,x_t in {1,...,k} with x_t = x_0 and each pair [x_q,x_{q+1}] for 0 <= q < t occurs as an entry of row_conditions; the same definition applies to col_conditions.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BuildMatrix.spec_11",
+    "negation": "AegisSpec.BuildMatrix.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever build_matrix returns a result r with len(r)>0, let row_conditions' be any list obtained from row_conditions by reordering its entries and then duplicating some entries, and let col_conditions' be any list obtained from col_conditions by reordering its entries and then duplicating some entries. Then r is also a valid matrix for (k,row_conditions',col_conditions'): len(r)=k, every row of r has length k, every cell of r is 0 or an integer in [1,k], every x with 1 <= x <= k appears exactly once in r, every entry [a,b] of row_conditions' satisfies that every occurrence of a in r has row index strictly less than every occurrence of b in r, and every entry [a,b] of col_conditions' satisfies that every occurrence of a in r has column index strictly less than every occurrence of b in r. In particular, duplicate conditions impose no new constraint and the order of the condition lists is irrelevant.",
+    "preconditions": "k is an integer with 2 <= k <= 400; row_conditions and col_conditions are slices of vectors of 64-bit integers; 1 <= len(row_conditions) <= 10000; 1 <= len(col_conditions) <= 10000; for every t with 0 <= t < len(row_conditions), len(row_conditions[t]) = 2, and if row_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b; for every t with 0 <= t < len(col_conditions), len(col_conditions[t]) = 2, and if col_conditions[t] = [a,b] then 1 <= a <= k, 1 <= b <= k, and a != b."
+  }
+]

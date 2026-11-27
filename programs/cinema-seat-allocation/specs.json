@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_1",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = Σ_{t=1}^{n} cap(t). For a row t and seat label c, say (t,c) is reserved if there is an index i with 0 <= i < len(reservedSeats), reservedSeats[i][0]=t, and reservedSeats[i][1]=c. For each row t, let L_t={2,3,4,5}, M_t={4,5,6,7}, R_t={6,7,8,9} be the allowed four-seat blocks (seat labels in row t). A block is free if none of its seats is reserved. cap(t) is the maximum number of pairwise disjoint free blocks among L_t, M_t, R_t. Equivalently, cap(t)=2 if all seats (t,c) with c in {2,3,4,5,6,7,8,9} are unreserved; cap(t)=1 if at least one of those seats is reserved but at least one of L_t, M_t, R_t is free; cap(t)=0 otherwise.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed, as in the provided examples."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_2",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access an out-of-range element.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_3",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 2*n.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_4",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every entry reservedSeats[i] has seat label reservedSeats[i][1] equal to 1 or 10, so no seat in columns 2 through 9 is reserved in any row, then whenever the function returns a result r, r = 2*n.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_5",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every row t with 1 <= t <= n, each of the three blocks L_t={2,3,4,5}, M_t={4,5,6,7}, R_t={6,7,8,9} contains at least one reserved seat in row t, then whenever the function returns a result r, r = 0.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_6",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the set of reserved pairs in A is a subset of the set of reserved pairs in B, and if max_number_of_families(n,A) returns r_A and max_number_of_families(n,B) returns r_B, then r_B <= r_A.",
+    "preconditions": "Both inputs (n, A) and (n, B) satisfy the standard precondition: n is an integer with 1 <= n <= 10^9; each input is a slice of vectors, every element has length 2 and is read as [row, seat]; for every element, 1 <= row <= n and 1 <= seat <= 10; all pairs in each input are distinct; len <= min(10*n, 10^4); empty slices are allowed. The two inputs use the same n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_7",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If reservedSeats' is a permutation of reservedSeats, meaning they contain the same multiset of pairs (equivalently the same set, since all pairs are distinct), and if the two calls return r and r' respectively, then r = r'.",
+    "preconditions": "Both inputs (n, reservedSeats) and (n, reservedSeats') satisfy the standard precondition: n is an integer with 1 <= n <= 10^9; each input is a slice of vectors, every element has length 2 and is read as [row, seat]; for every element, 1 <= row <= n and 1 <= seat <= 10; all pairs in each input are distinct; len <= min(10*n, 10^4); empty slices are allowed. The two inputs use the same n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_8",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_number_of_families(n,reservedSeats) returns r and max_number_of_families(n,reservedSeats') returns r', then r = r'.",
+    "preconditions": "The input (n, reservedSeats) satisfies the standard precondition: 1 <= n <= 10^9; every reservedSeats[i] has length 2 and is read as [row, seat]; 1 <= row <= n and 1 <= seat <= 10; all pairs are distinct; len(reservedSeats) <= min(10*n, 10^4); empty slices are allowed. Additionally t is a row with 1 <= t <= n, c is in {1,10}, (t,c) is not already in reservedSeats, and len(reservedSeats) < min(10*n, 10^4). reservedSeats' is reservedSeats with (t,c) appended; then reservedSeats' also satisfies the preconditions."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_9",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an assignment of r groups to seats such that each group occupies one entire allowed block L_t={(t,2),(t,3),(t,4),(t,5)}, M_t={(t,4),(t,5),(t,6),(t,7)}, or R_t={(t,6),(t,7),(t,8),(t,9)} for some row t in {1,...,n}; no two groups occupy the same seat; and no occupied seat is in reservedSeats.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_10",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every collection of k four-person groups such that each group occupies one allowed block L_t={(t,2),(t,3),(t,4),(t,5)}, M_t={(t,4),(t,5),(t,6),(t,7)}, or R_t={(t,6),(t,7),(t,8),(t,9)} for some row t in {1,...,n}, no two groups share a seat, and no occupied seat is reserved, we have k <= r.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_11",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the number of distinct rows t in {1,...,n} for which reservedSeats contains at least one pair with first coordinate t and second coordinate in {2,3,4,5,6,7,8,9}. Whenever the function returns a result r, r <= 2*n - k.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_12",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let k be the number of distinct rows t in {1,...,n} for which reservedSeats contains at least one pair with first coordinate t and second coordinate in {2,3,4,5,6,7,8,9}. Let k1 be the number of distinct rows t for which exactly one entry of reservedSeats has first coordinate t and second coordinate in {2,3,4,5,6,7,8,9}. Whenever the function returns a result r, r >= 2*(n - k) + k1.",
+    "preconditions": "n is an integer with 1 <= n <= 10^9. reservedSeats is a slice of vectors; every reservedSeats[i] has length 2 and is read as a pair [row, seat]. For every i with 0 <= i < len(reservedSeats), 1 <= reservedSeats[i][0] <= n and 1 <= reservedSeats[i][1] <= 10. All pairs reservedSeats[i] are distinct. Also len(reservedSeats) <= min(10*n, 10^4). The empty slice is allowed."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_13",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of max_number_of_families(n, reservedSeats) and r' be the result of max_number_of_families(n', reservedSeats). Whenever both calls return results, r' = r + 2*(n' - n).",
+    "preconditions": "The input (n, reservedSeats) satisfies the standard precondition: 1 <= n <= 10^9; every reservedSeats[i] has length 2 and is read as [row, seat]; 1 <= row <= n and 1 <= seat <= 10; all pairs are distinct; len <= min(10*n, 10^4); empty slices are allowed. Also n' is an integer with n <= n' <= 10^9, so (n', reservedSeats) also satisfies the same constraints because all reserved rows are at most n <= n'."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxNumberOfFamilies.spec_14",
+    "negation": "AegisSpec.MaxNumberOfFamilies.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_number_of_families(n, reservedSeats) returns r and max_number_of_families(n, reservedSeats') returns r', then r = r'.",
+    "preconditions": "The input (n, reservedSeats) satisfies the standard precondition: 1 <= n <= 10^9; every reservedSeats[i] has length 2 and is read as [row, seat]; 1 <= row <= n and 1 <= seat <= 10; all pairs are distinct; len <= min(10*n, 10^4); empty slices are allowed. Also π is a permutation of {1,...,n}, and reservedSeats' is obtained from reservedSeats by replacing each pair [row, seat] with [π(row), seat]; then (n, reservedSeats') also satisfies the preconditions."
+  }
+]

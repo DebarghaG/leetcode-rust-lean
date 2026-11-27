@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumDecodings.spec_1",
+    "negation": "AegisSpec.NumDecodings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). A valid decoding of s is a partition of the index range {0,...,n-1} into consecutive blocks, each of size 1 or 2, such that (i) a size-1 block at index i is allowed exactly when s[i] is an ASCII digit from '1' to '9' (49 <= s[i] <= 57), and (ii) a size-2 block covering indices i and i+1 is allowed exactly when the two-digit number 10*(s[i]-48) + (s[i+1]-48) is between 10 and 26 inclusive. Let D(s) be the number of such partitions. For every s satisfying the preconditions, whenever num_decodings(s) returns a result r, r = D(s).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); and the number of valid decodings of s, defined in the statement, is at most 2^31 - 1 (2147483647)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumDecodings.spec_2",
+    "negation": "AegisSpec.NumDecodings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, if for every contiguous substring t of s (including the empty substring) the number D(t) of valid decodings of t, defined as in spec_1 with D(empty)=1, is at most 2^63 - 1, then num_decodings(s) returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); and D(s) <= 2^31 - 1, where D(s) is the number of valid decodings of s as defined in spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumDecodings.spec_3",
+    "negation": "AegisSpec.NumDecodings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every s satisfying the preconditions, whenever num_decodings(s) returns a result r, 0 <= r <= F(len(s)+1), where F(1)=1, F(2)=1, and F(k)=F(k-1)+F(k-2) for k > 2.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); and D(s) <= 2^31 - 1, where D(s) is the number of valid decodings of s as defined in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumDecodings.spec_4",
+    "negation": "AegisSpec.NumDecodings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) = 1, then whenever num_decodings(s) returns a result r, r = 1 if 49 <= s[0] <= 57, and r = 0 if s[0] = 48 ('0').",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); D(s) <= 2^31 - 1; and len(s) = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumDecodings.spec_5",
+    "negation": "AegisSpec.NumDecodings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If s[0] = 48 (the ASCII character '0'), then whenever num_decodings(s) returns a result r, r = 0.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); D(s) <= 2^31 - 1; and s[0] = 48 ('0')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumDecodings.spec_6",
+    "negation": "AegisSpec.NumDecodings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s satisfying the preconditions, whenever num_decodings(s) returns a result r, r > 0 if and only if for every index i with 0 <= i < len(s) and s[i] = 48 ('0'), we have i > 0 and (s[i-1] = 49 ('1') or s[i-1] = 50 ('2')).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); and D(s) <= 2^31 - 1, where D(s) is the number of valid decodings of s as defined in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumDecodings.spec_7",
+    "negation": "AegisSpec.NumDecodings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Under these preconditions, whenever num_decodings(s) returns a result r, r = F(len(s)+1), where F(1)=1, F(2)=1, and F(k)=F(k-1)+F(k-2) for k > 2.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); D(s) <= 2^31 - 1; and for every i with 0 <= i < len(s), s[i] = 49 ('1') or s[i] = 50 ('2')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumDecodings.spec_8",
+    "negation": "AegisSpec.NumDecodings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Under these preconditions, whenever num_decodings(s) returns a result r, r = 1.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); D(s) <= 2^31 - 1; and for every i with 0 <= i < len(s), 51 <= s[i] <= 57 (the digit is one of '3','4','5','6','7','8','9')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumDecodings.spec_9",
+    "negation": "AegisSpec.NumDecodings.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s satisfying the preconditions, if there exist byte slices p and q and a byte b such that b = 49 ('1') or b = 50 ('2'), and s is the concatenation p ++ [b, 48 ('0')] ++ q, then whenever num_decodings(s) returns a result r, r = D(p) * D(q), where D(t) is the number of valid decodings of a digit string t as defined in spec_1, with D(empty) = 1.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); and D(s) <= 2^31 - 1, where D(s) is the number of valid decodings of s as defined in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumDecodings.spec_10",
+    "negation": "AegisSpec.NumDecodings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If s is the byte string '226', then num_decodings(s) returns a result r and r = 3.",
+    "preconditions": "s is the byte string '226' (ASCII bytes [50, 50, 54])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumDecodings.spec_11",
+    "negation": "AegisSpec.NumDecodings.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let va = s[0] - 48 and vb = s[1] - 48. Whenever num_decodings(s) returns a result r, r = I(1 <= va <= 9 and 1 <= vb <= 9) + I(10 <= 10*va + vb <= 26), where I(true)=1 and I(false)=0.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); D(s) <= 2^31 - 1; and len(s) = 2."
+  }
+]

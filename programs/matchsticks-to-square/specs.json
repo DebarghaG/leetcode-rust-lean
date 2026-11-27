@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Makesquare.spec_1",
+    "negation": "AegisSpec.Makesquare.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let total = sum_{i=0}^{len(matchsticks)-1} matchsticks[i]. The function returns a Boolean result r (it does not fail) and r = true if and only if total is divisible by 4 and there exists a function f from the index set {0,...,len(matchsticks)-1} to {0,1,2,3} such that, for every k in {0,1,2,3}, sum_{0 <= i < len(matchsticks), f(i)=k} matchsticks[i] = total / 4. Equivalently, all sticks can be partitioned into four pairwise disjoint groups, using every stick exactly once, each group summing to total/4.",
+    "preconditions": "1 <= len(matchsticks) <= 15 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Makesquare.spec_2",
+    "negation": "AegisSpec.Makesquare.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call makesquare(matchsticks) returns Result.ok r for some Boolean r; it never fails, panics, overflows, or accesses an index out of bounds.",
+    "preconditions": "1 <= len(matchsticks) <= 15 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Makesquare.spec_3",
+    "negation": "AegisSpec.Makesquare.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, r = false.",
+    "preconditions": "1 <= len(matchsticks) <= 3 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Makesquare.spec_4",
+    "negation": "AegisSpec.Makesquare.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, r = true if and only if matchsticks[0] = matchsticks[1] = matchsticks[2] = matchsticks[3].",
+    "preconditions": "len(matchsticks) = 4 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Makesquare.spec_5",
+    "negation": "AegisSpec.Makesquare.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, r = true if and only if len(matchsticks) mod 4 = 0.",
+    "preconditions": "1 <= len(matchsticks) <= 15, for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000, and there exists an integer L such that matchsticks[i] = L for every i with 0 <= i < len(matchsticks)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Makesquare.spec_6",
+    "negation": "AegisSpec.Makesquare.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, if r = true then total = sum_{i=0}^{len(matchsticks)-1} matchsticks[i] satisfies total mod 4 = 0.",
+    "preconditions": "1 <= len(matchsticks) <= 15 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Makesquare.spec_7",
+    "negation": "AegisSpec.Makesquare.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, if r = true then for every i with 0 <= i < len(matchsticks), matchsticks[i] <= S.",
+    "preconditions": "1 <= len(matchsticks) <= 15, for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000, and total = sum_{i=0}^{len(matchsticks)-1} matchsticks[i] is divisible by 4; let S = total / 4."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Makesquare.spec_8",
+    "negation": "AegisSpec.Makesquare.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever makesquare(a) returns ra and makesquare(b) returns rb, ra = rb.",
+    "preconditions": "Slices a and b each satisfy 1 <= len <= 15 and all entries in [1,100000000], and there is a bijection p from {0,...,len(a)-1} to {0,...,len(b)-1} such that b[p(i)] = a[i] for every i with 0 <= i < len(a)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Makesquare.spec_9",
+    "negation": "AegisSpec.Makesquare.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists a function f from {0,...,len(matchsticks)-1} to {0,1,2,3} such that for every k in {0,1,2,3}, sum_{0 <= i < len(matchsticks), f(i)=k} matchsticks[i] = S, then whenever makesquare(matchsticks) returns a result r, r = true.",
+    "preconditions": "1 <= len(matchsticks) <= 15, for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000, and total = sum_{i=0}^{len(matchsticks)-1} matchsticks[i] is divisible by 4; let S = total / 4."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Makesquare.spec_10",
+    "negation": "AegisSpec.Makesquare.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let total = sum_{i=0}^{4} matchsticks[i] and S = total / 4 using integer division. Whenever makesquare(matchsticks) returns a result r, r = true if and only if total mod 4 = 0 and the number of indices i with 0 <= i < 5 and matchsticks[i] = S is exactly 3.",
+    "preconditions": "len(matchsticks) = 5 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Makesquare.spec_11",
+    "negation": "AegisSpec.Makesquare.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If makesquare(a) returns true, then whenever makesquare(b) returns rb, rb = true.",
+    "preconditions": "Slice a satisfies 1 <= len(a) <= 15 and all entries in [1,100000000], len(a) + 4 <= 15, L is an integer with 1 <= L <= 100000000, and slice b satisfies len(b) = len(a) + 4, b[i] = a[i] for 0 <= i < len(a), and b[len(a)+j] = L for j = 0,1,2,3."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Makesquare.spec_12",
+    "negation": "AegisSpec.Makesquare.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever makesquare(matchsticks) returns a result r, if r = true then total = sum_{i=0}^{len(matchsticks)-1} matchsticks[i] is divisible by 4 and S = total / 4 satisfies S <= 300000000.",
+    "preconditions": "1 <= len(matchsticks) <= 15 and for every i with 0 <= i < len(matchsticks), 1 <= matchsticks[i] <= 100000000."
+  }
+]

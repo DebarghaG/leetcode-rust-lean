@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_1",
+    "negation": "AegisSpec.MaximizeSweetness.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r = max { min { S(b_{j-1}, b_j) : 1 <= j <= k+1 } : 0 = b_0 < b_1 < ... < b_{k+1} = n }, where S(a,b) denotes the sum of sweetness[i] for all i with a <= i < b. In words, r is the largest possible minimum total sweetness of one piece over all ways to cut the bar into exactly k+1 nonempty consecutive pieces.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n. The integer k is nonnegative and is interpreted as a natural number."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_2",
+    "negation": "AegisSpec.MaximizeSweetness.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_3",
+    "negation": "AegisSpec.MaximizeSweetness.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and min(sweetness) <= r <= floor((sum of all sweetness[i] for 0 <= i < n) / (k+1)), where min(sweetness) = min { sweetness[i] : 0 <= i < n } and floor denotes integer floor division.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_4",
+    "negation": "AegisSpec.MaximizeSweetness.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist integers 0 = b_0 < b_1 < ... < b_{k+1} = n such that, putting S_j = sum of sweetness[i] for b_{j-1} <= i < b_j, we have S_j >= r for every j with 1 <= j <= k+1, and S_j = r for at least one such j.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_5",
+    "negation": "AegisSpec.MaximizeSweetness.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every choice of integers 0 = b_0 < b_1 < ... < b_{k+1} = n, the minimum of the piece sums S_j = sum of sweetness[i] for b_{j-1} <= i < b_j (1 <= j <= k+1) is at most r. Equivalently, no partition into k+1 nonempty consecutive pieces has all piece sums strictly greater than r.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_6",
+    "negation": "AegisSpec.MaximizeSweetness.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every integer x, there exists a partition of sweetness into exactly k+1 nonempty consecutive pieces all of whose sums are at least x if and only if x <= r.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_7",
+    "negation": "AegisSpec.MaximizeSweetness.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns results r1 = maximize_sweetness(sweetness, k1) and r2 = maximize_sweetness(sweetness, k2), and r1 >= r2.",
+    "preconditions": "Let n = len(sweetness). The array satisfies n >= 1, n <= 10000, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n. Let k1 and k2 be integers with 0 <= k1 <= k2 < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_8",
+    "negation": "AegisSpec.MaximizeSweetness.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns results r = maximize_sweetness(sweetness, k) and r' = maximize_sweetness(rev, k), and r = r'.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n. Let rev be the array of length n defined by rev[i] = sweetness[n-1-i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_9",
+    "negation": "AegisSpec.MaximizeSweetness.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = c * floor(n / (k+1)), where floor denotes integer floor division.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and there is an integer c with 1 <= c <= 100000 such that sweetness[i] = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_10",
+    "negation": "AegisSpec.MaximizeSweetness.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns results rA = maximize_sweetness(A, k) and rB = maximize_sweetness(B, k), and rA <= rB.",
+    "preconditions": "Let n = len(sweetness). Fix k with 0 <= k < n. Let A and B be two arrays of length n such that n <= 10000 and 1 <= A[i] <= B[i] <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximizeSweetness.spec_11",
+    "negation": "AegisSpec.MaximizeSweetness.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns results r = maximize_sweetness(sweetness, k) and rA = maximize_sweetness(A, k), and rA = c * r.",
+    "preconditions": "Let n = len(sweetness). The input satisfies n >= 1, n <= 10000, 0 <= k < n, and 1 <= sweetness[i] <= 100000 for every i with 0 <= i < n. Let c be an integer with c >= 1, and let A be the array of length n defined by A[i] = c * sweetness[i]. Assume 1 <= A[i] <= 100000 for every i with 0 <= i < n."
+  }
+]

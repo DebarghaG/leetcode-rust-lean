@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsUnivalTree.spec_1",
+    "negation": "AegisSpec.IsUnivalTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Let S be the set of stored integer values of all Node constructors reachable from root, including root itself. Then r = true if and only if S has exactly one element; equivalently, there exists an integer v such that every reachable Node has stored value v. In particular, r = false if and only if there exist two reachable Nodes with different stored values.",
+    "preconditions": "root is not Tree.Null; the number of Node constructors reachable from root is between 1 and 100 inclusive; every stored value is an integer in [0, 100)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsUnivalTree.spec_2",
+    "negation": "AegisSpec.IsUnivalTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it never fails (in particular, no integer overflow, out-of-bounds access, or panic occurs).",
+    "preconditions": "None; root may be any Tree, including Tree.Null, and stored values may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsUnivalTree.spec_3",
+    "negation": "AegisSpec.IsUnivalTree.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = false.",
+    "preconditions": "root is not Tree.Null and satisfies the problem constraints (1 to 100 nodes, stored values in [0, 100)). There are reachable Nodes p and c such that c is the left child or the right child of p, c is not Tree.Null, and the stored value of p differs from the stored value of c."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsUnivalTree.spec_4",
+    "negation": "AegisSpec.IsUnivalTree.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = true.",
+    "preconditions": "root is not Tree.Null and satisfies the problem constraints (1 to 100 nodes, stored values in [0, 100)). For every reachable Node p and every non-Null child c of p (left or right), the stored value of p equals the stored value of c."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsUnivalTree.spec_5",
+    "negation": "AegisSpec.IsUnivalTree.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result res, res = false.",
+    "preconditions": "root = Tree.Node(v, l, rt) and root satisfies the problem constraints (1 to 100 nodes, stored values in [0, 100)). Either (a) l is nonempty and there exist two Nodes n1 and n2 reachable from l whose stored values differ, or (b) rt is nonempty and there exist two Nodes n1 and n2 reachable from rt whose stored values differ."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsUnivalTree.spec_6",
+    "negation": "AegisSpec.IsUnivalTree.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every Node n reachable from root, whenever the function is applied to the subtree rooted at n, it returns a result r_n with r_n = true.",
+    "preconditions": "root is not Tree.Null and satisfies the problem constraints. Every Node reachable from root has the same stored value v."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsUnivalTree.spec_7",
+    "negation": "AegisSpec.IsUnivalTree.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r1 on T1 and r2 on T2, r1 = r2.",
+    "preconditions": "T1 and T2 are nonempty trees, each satisfying the problem constraints (1 to 100 nodes, stored values in [0, 100)), and for every integer v the number of Nodes with stored value v in T1 equals the number of Nodes with stored value v in T2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsUnivalTree.spec_8",
+    "negation": "AegisSpec.IsUnivalTree.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on root and r_f on root_f, r = r_f.",
+    "preconditions": "root is nonempty and satisfies the problem constraints. f is a function from integers to integers that is injective on the set S of stored values occurring in root and maps S into [0, 100). root_f is obtained from root by replacing every stored value v by f(v)."
+  }
+]

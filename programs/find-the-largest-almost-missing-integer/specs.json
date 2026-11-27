@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestInteger.spec_1",
+    "negation": "AegisSpec.LargestInteger.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For any integer x, let count(x) be the number of start indices s with 0 <= s <= len(nums) - k such that the length-k contiguous subarray nums[s..s+k-1] contains x, i.e. there exists j with s <= j < s + k and nums[j] = x. The function returns a result r, and: if there exists an integer x with count(x) = 1, then count(r) = 1 and every integer y with count(y) = 1 satisfies y <= r; otherwise r = -1.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestInteger.spec_2",
+    "negation": "AegisSpec.LargestInteger.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestInteger.spec_3",
+    "negation": "AegisSpec.LargestInteger.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or there exists an index i with 0 <= i < len(nums) and nums[i] = r.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestInteger.spec_4",
+    "negation": "AegisSpec.LargestInteger.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists exactly one start index s with 0 <= s <= len(nums) - k such that the length-k subarray nums[s..s+k-1] contains r.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestInteger.spec_5",
+    "negation": "AegisSpec.LargestInteger.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != -1, for every integer y with y > r, the number of length-k subarrays of nums that contain y is not equal to 1.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestInteger.spec_6",
+    "negation": "AegisSpec.LargestInteger.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r = -1, every distinct integer v that occurs in nums is contained in at least two length-k subarrays of nums.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestInteger.spec_7",
+    "negation": "AegisSpec.LargestInteger.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions with k = len(nums), the function returns r = max{nums[i] | 0 <= i < len(nums)}.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestInteger.spec_8",
+    "negation": "AegisSpec.LargestInteger.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions with k = 1, the function returns r, where r is the largest integer v such that exactly one index i with 0 <= i < len(nums) has nums[i] = v, and r = -1 if no such v exists.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestInteger.spec_9",
+    "negation": "AegisSpec.LargestInteger.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions in which all elements of nums are equal to one integer c, the function returns c if k = len(nums), and returns -1 if k < len(nums).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestInteger.spec_10",
+    "negation": "AegisSpec.LargestInteger.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every input satisfying the preconditions with len(nums) >= 2 and k = len(nums) - 1, the function returns r, where r is the maximum of the set of integers v such that either (v = nums[0] and no index i with 1 <= i < len(nums) has nums[i] = v) or (v = nums[len(nums)-1] and no index i with 0 <= i < len(nums)-1 has nums[i] = v); if this set is empty, r = -1.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 50, 1 <= k <= len(nums), and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 50."
+  }
+]

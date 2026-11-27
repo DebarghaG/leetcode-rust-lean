@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPrefixString.spec_1",
+    "negation": "AegisSpec.IsPrefixString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = true if and only if there exists an integer k with 1 <= k <= len(words) such that s equals the byte-sequence concatenation of words[0], words[1], ..., words[k-1]. The concatenation of zero words is the empty byte sequence; the concatenation of words[0..k-1] has length sum_{i=0}^{k-1} len(words[i]) and at each position j (0 <= j < that length) its byte is words[i][j - offset], where i is the unique index with offset <= j < offset + len(words[i]) and offset = sum_{t=0}^{i-1} len(words[t]).",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPrefixString.spec_2",
+    "negation": "AegisSpec.IsPrefixString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, no out-of-bounds slice access, no arithmetic overflow) for any inputs satisfying the preconditions.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPrefixString.spec_3",
+    "negation": "AegisSpec.IsPrefixString.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, there exists an integer k with 1 <= k <= len(words) such that len(s) = sum_{i=0}^{k-1} len(words[i]).",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPrefixString.spec_4",
+    "negation": "AegisSpec.IsPrefixString.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, len(words[0]) <= len(s) <= sum_{i=0}^{len(words)-1} len(words[i]).",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPrefixString.spec_5",
+    "negation": "AegisSpec.IsPrefixString.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever len(s) < len(words[0]), the function returns a result r with r = false.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPrefixString.spec_6",
+    "negation": "AegisSpec.IsPrefixString.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever s equals words[0] as byte sequences (len(s) = len(words[0]) and s[i] = words[0][i] for every i with 0 <= i < len(s)), the function returns a result r with r = true.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPrefixString.spec_7",
+    "negation": "AegisSpec.IsPrefixString.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever len(s) > sum_{i=0}^{len(words)-1} len(words[i]), the function returns a result r with r = false.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsPrefixString.spec_8",
+    "negation": "AegisSpec.IsPrefixString.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever s equals the byte-sequence concatenation of all words words[0], words[1], ..., words[len(words)-1], the function returns a result r with r = true.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsPrefixString.spec_9",
+    "negation": "AegisSpec.IsPrefixString.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever len(s) = len(words[0]) and s is not equal to words[0] as byte sequences, the function returns a result r with r = false.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsPrefixString.spec_10",
+    "negation": "AegisSpec.IsPrefixString.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, s is a prefix of the concatenation of all words: i.e., len(s) <= sum_{i=0}^{len(words)-1} len(words[i]) and for every j with 0 <= j < len(s), the j-th byte of s equals the j-th byte of the concatenation of words[0], words[1], ..., words[len(words)-1].",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsPrefixString.spec_11",
+    "negation": "AegisSpec.IsPrefixString.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true and s is not equal to words[0] as byte sequences (which forces len(words) >= 2 and len(s) > len(words[0])), let t be the suffix of s obtained by deleting its first len(words[0]) bytes: len(t) = len(s) - len(words[0]) and t[j] = s[len(words[0]) + j] for every j with 0 <= j < len(t). Then t is a prefix string of the slice consisting of words[1], words[2], ..., words[len(words)-1], i.e. there exists an integer m with 1 <= m <= len(words)-1 such that t equals the byte-sequence concatenation of words[1], words[2], ..., words[m].",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsPrefixString.spec_12",
+    "negation": "AegisSpec.IsPrefixString.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = true, there exists exactly one integer k with 1 <= k <= len(words) such that s equals the byte-sequence concatenation of words[0], words[1], ..., words[k-1].",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsPrefixString.spec_13",
+    "negation": "AegisSpec.IsPrefixString.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r = true, the byte sequence s begins with words[0]: len(words[0]) <= len(s) and for every i with 0 <= i < len(words[0]), s[i] = words[0][i]. Equivalently, if len(s) < len(words[0]) or s[i] != words[0][i] for some 0 <= i < len(words[0]), then r = false.",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsPrefixString.spec_14",
+    "negation": "AegisSpec.IsPrefixString.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with r = false, for every integer k with 1 <= k <= len(words), s is not equal to the byte-sequence concatenation of words[0], words[1], ..., words[k-1].",
+    "preconditions": "1 <= len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 20; 1 <= len(s) <= 1000; every byte of s and of each words[i] is an ASCII code of a lowercase English letter (97 <= byte <= 122)."
+  }
+]

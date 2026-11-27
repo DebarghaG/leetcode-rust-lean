@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountRoutes.spec_1",
+    "negation": "AegisSpec.CountRoutes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(locations) and M = 1000000007. A route is a finite sequence of indices c_0, ..., c_m for some m >= 0 such that c_0 = start, c_m = finish, every c_t satisfies 0 <= c_t < n, c_t != c_{t+1} for every 0 <= t < m, and sum_{t=1..m} |locations[c_t] - locations[c_{t-1}]| <= fuel. The case m = 0 is the one-term sequence (start) and is allowed exactly when start = finish. Let C be the number of such routes. The function returns a result r and r = C mod M, i.e., r is the unique integer with 0 <= r < M and C ≡ r (mod M).",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountRoutes.spec_2",
+    "negation": "AegisSpec.CountRoutes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail due to overflow, panic, or out-of-bounds access.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountRoutes.spec_3",
+    "negation": "AegisSpec.CountRoutes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountRoutes.spec_4",
+    "negation": "AegisSpec.CountRoutes.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if |locations[start] - locations[finish]| > fuel, then r = 0.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountRoutes.spec_5",
+    "negation": "AegisSpec.CountRoutes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every j with 0 <= j < len(locations) and j != start we have |locations[j] - locations[start]| > fuel, then r = 1 when start = finish, and r = 0 when start != finish.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountRoutes.spec_6",
+    "negation": "AegisSpec.CountRoutes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every j with 0 <= j < len(locations) and j != finish we have |locations[j] - locations[finish]| > fuel, then r = 1 when start = finish, and r = 0 when start != finish.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountRoutes.spec_7",
+    "negation": "AegisSpec.CountRoutes.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if start = finish and fuel < 2 * min { |locations[j] - locations[start]| : 0 <= j < len(locations), j != start }, then r = 1.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountRoutes.spec_8",
+    "negation": "AegisSpec.CountRoutes.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if for every pair of indices i, j with 0 <= i < j < len(locations) we have 2 * |locations[i] - locations[j]| > fuel, then r equals 1 when start = finish; if start != finish, then r equals 1 when |locations[start] - locations[finish]| <= fuel, and r equals 0 otherwise.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountRoutes.spec_9",
+    "negation": "AegisSpec.CountRoutes.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if len(locations) = 2, let d = |locations[0] - locations[1]| and q = floor(fuel / d). If start != finish then r = floor((q + 1) / 2); if start = finish then r = floor(q / 2) + 1.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountRoutes.spec_10",
+    "negation": "AegisSpec.CountRoutes.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every input satisfying the preconditions, consider the two calls count_routes locations start finish fuel and count_routes locations finish start fuel. Whenever these two calls both return results r1 and r2 respectively, r1 = r2.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountRoutes.spec_11",
+    "negation": "AegisSpec.CountRoutes.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer k and every slice other with len(other) = len(locations) such that other[i] = locations[i] + k for all 0 <= i < len(locations) and other also satisfies the same location-value constraints, whenever count_routes locations start finish fuel returns r1 and count_routes other start finish fuel returns r2, we have r1 = r2.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountRoutes.spec_12",
+    "negation": "AegisSpec.CountRoutes.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation p of {0, ..., n-1}, where n = len(locations), define other[i] = locations[p(i)] for 0 <= i < n, and let s and f be the indices with p(s) = start and p(f) = finish. Whenever count_routes locations start finish fuel returns r1 and count_routes other s f fuel returns r2, we have r1 = r2.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountRoutes.spec_13",
+    "negation": "AegisSpec.CountRoutes.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if start != finish and fuel = |locations[start] - locations[finish]|, let k be the number of indices i with 0 <= i < len(locations), i != start, i != finish, and min(locations[start], locations[finish]) < locations[i] < max(locations[start], locations[finish]). Then r = (2^k) mod 1000000007.",
+    "preconditions": "len(locations) is between 2 and 100 inclusive; for every i with 0 <= i < len(locations), locations[i] is an integer with 1 <= locations[i] <= 1000000000; the values locations[i] are pairwise distinct; 0 <= start < len(locations); 0 <= finish < len(locations); 1 <= fuel <= 200."
+  }
+]

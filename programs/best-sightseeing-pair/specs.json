@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_1",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the maximum of the set { values[i] + values[j] + i - j | 0 <= i < j < len(values) }. Equivalently, for every i and j with 0 <= i < j < len(values), values[i] + values[j] + i - j <= r, and there exist i and j with 0 <= i < j < len(values) such that values[i] + values[j] + i - j = r.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_2",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not panic, access out of bounds, or overflow.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_3",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i and j with 0 <= i < j < len(values), values[i] + values[j] + i - j <= r.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_4",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices i and j with 0 <= i < j < len(values) such that r = values[i] + values[j] + i - j.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_5",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is the least integer upper bound on the set of pair scores: for every i and j with 0 <= i < j < len(values), values[i] + values[j] + i - j <= r; and for every integer B, if values[i] + values[j] + i - j <= B for every i and j with 0 <= i < j < len(values), then r <= B.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000. All indices are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_6",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2 * M - 1, where M = max { values[i] | 0 <= i < len(values) }.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_7",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = values[0] + values[1] - 1.",
+    "preconditions": "len(values) = 2, and 1 <= values[0] <= 1000 and 1 <= values[1] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_8",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = values[len(values)-2] + values[len(values)-1] - 1.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000, and for every i with 0 <= i < len(values) - 1, values[i] <= values[i+1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_9",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every array values satisfying the preconditions, define rev by len(rev) = len(values) and rev[k] = values[len(values)-1-k] for every k with 0 <= k < len(values). If the function returns r on values and returns r_rev on rev, then r_rev = r.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScoreSightseeingPair.spec_10",
+    "negation": "AegisSpec.MaxScoreSightseeingPair.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define shifted by len(shifted) = len(values) and shifted[i] = values[i] + c for every i with 0 <= i < len(values). If the function returns r on values and returns r_c on shifted, then r_c = r + 2*c.",
+    "preconditions": "len(values) >= 2 and len(values) <= 50000, and for every i with 0 <= i < len(values), 1 <= values[i] <= 1000. Also c is an integer such that for every i with 0 <= i < len(values), 1 <= values[i] + c <= 1000."
+  }
+]

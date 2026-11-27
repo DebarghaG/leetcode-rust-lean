@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindLongestChain.spec_1",
+    "negation": "AegisSpec.FindLongestChain.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = L(pairs), where L(pairs) is the largest integer k ≥ 0 such that there exist pairwise distinct indices i_0, ..., i_{k-1} in {0, ..., len(pairs)-1} with pairs[i_t][1] < pairs[i_{t+1}][0] for every t with 0 ≤ t < k-1. (For k=0 the sequence is empty; for k=1 there is one index and the adjacency condition is vacuous.)",
+    "preconditions": "Every element of pairs has length exactly 2; 1 ≤ len(pairs) ≤ 1000; for every i with 0 ≤ i < len(pairs), -1000 ≤ pairs[i][0] < pairs[i][1] ≤ 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindLongestChain.spec_2",
+    "negation": "AegisSpec.FindLongestChain.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not overflow, panic, or access out of bounds).",
+    "preconditions": "Every element of pairs has length exactly 2 and len(pairs) ≤ 1000; the integer entries may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindLongestChain.spec_3",
+    "negation": "AegisSpec.FindLongestChain.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 ≤ r ≤ len(pairs).",
+    "preconditions": "Every element of pairs has length exactly 2 and len(pairs) ≤ 1000; the integer entries may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindLongestChain.spec_4",
+    "negation": "AegisSpec.FindLongestChain.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result r = 1.",
+    "preconditions": "len(pairs) = 1 and pairs[0] has length exactly 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindLongestChain.spec_5",
+    "negation": "AegisSpec.FindLongestChain.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 2 if (pairs[0][1] < pairs[1][0] or pairs[1][1] < pairs[0][0]); otherwise r = 1.",
+    "preconditions": "len(pairs) = 2; both pairs[0] and pairs[1] have length exactly 2; for i ∈ {0,1}, -1000 ≤ pairs[i][0] < pairs[i][1] ≤ 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindLongestChain.spec_6",
+    "negation": "AegisSpec.FindLongestChain.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exist pairwise distinct indices i_0, ..., i_{r-1} in {0, ..., len(pairs)-1} such that pairs[i_t][1] < pairs[i_{t+1}][0] for every t with 0 ≤ t < r-1.",
+    "preconditions": "Every element of pairs has length exactly 2; 1 ≤ len(pairs) ≤ 1000; for every i with 0 ≤ i < len(pairs), -1000 ≤ pairs[i][0] < pairs[i][1] ≤ 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindLongestChain.spec_7",
+    "negation": "AegisSpec.FindLongestChain.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every k ≥ 0 and every sequence of pairwise distinct indices i_0, ..., i_{k-1} in {0, ..., len(pairs)-1} satisfying pairs[i_t][1] < pairs[i_{t+1}][0] for all 0 ≤ t < k-1, we have k ≤ r.",
+    "preconditions": "Every element of pairs has length exactly 2; 1 ≤ len(pairs) ≤ 1000; for every i with 0 ≤ i < len(pairs), -1000 ≤ pairs[i][0] < pairs[i][1] ≤ 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindLongestChain.spec_8",
+    "negation": "AegisSpec.FindLongestChain.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input pairs and r' on input pairs', then r = r'.",
+    "preconditions": "pairs and pairs' are slices of two-element vectors, each of length n with 0 ≤ n ≤ 1000; every entry of every pair lies in [-1000, 1000]; for every i with 0 ≤ i < n, pairs[i][0] < pairs[i][1] (and hence also pairs'[i][0] < pairs'[i][1]); there is a bijection f from {0, ..., n-1} to itself such that pairs'[f(i)] = pairs[i] for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindLongestChain.spec_9",
+    "negation": "AegisSpec.FindLongestChain.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on input pairs and r' on input pairs', then r ≤ r'.",
+    "preconditions": "pairs and pairs' are slices of two-element vectors; len(pairs) ≤ 1000, len(pairs') ≤ 1000; every entry lies in [-1000, 1000]; pairs is a subsequence of pairs', meaning there exist indices j_0 < j_1 < ... < j_{len(pairs)-1} in {0, ..., len(pairs')-1} such that pairs'[j_i] = pairs[i] for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindLongestChain.spec_10",
+    "negation": "AegisSpec.FindLongestChain.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result r = n.",
+    "preconditions": "len(pairs) = n with 1 ≤ n ≤ 1000; every pair has length exactly 2; every entry lies in [-1000, 1000]; for every i, pairs[i][0] < pairs[i][1]; for every i with 0 ≤ i < n-1, pairs[i][1] < pairs[i+1][0]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindLongestChain.spec_11",
+    "negation": "AegisSpec.FindLongestChain.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r ≤ D, where D is the number of distinct two-element vectors among the entries of pairs (that is, the cardinality of the set {pairs[i] | 0 ≤ i < n}).",
+    "preconditions": "len(pairs) = n with 1 ≤ n ≤ 1000; every pair has length exactly 2; every entry lies in [-1000, 1000]; for every i, pairs[i][0] < pairs[i][1]."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumAmount.spec_1",
+    "negation": "AegisSpec.MaximumAmount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum, over all monotone paths P = (p_0,...,p_{m+n-2}) from (0,0) to (m-1,n-1) (each step moves one cell right or one cell down) and over all sets T of indices in {0,...,m+n-2} with |T| <= 2 and coins[p_k.row][p_k.col] < 0 for every k in T, of score(P,T) = sum_{k=0}^{m+n-2} (0 if k is in T else coins[p_k.row][p_k.col]).",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumAmount.spec_2",
+    "negation": "AegisSpec.MaximumAmount.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid input, the function returns a result r; it does not fail (no overflow, out-of-bounds, or panic).",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumAmount.spec_3",
+    "negation": "AegisSpec.MaximumAmount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L = m + n - 1. The function returns a result r and -1000 * L <= r <= 1000 * L.",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumAmount.spec_4",
+    "negation": "AegisSpec.MaximumAmount.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= sum_{i=0}^{m-1} sum_{j=0}^{n-1} max(coins[i][j], 0).",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumAmount.spec_5",
+    "negation": "AegisSpec.MaximumAmount.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every monotone path P = (p_0,...,p_{m+n-2}) from (0,0) to (m-1,n-1) and every set T of indices in {0,...,m+n-2} with |T| <= 2 and coins[p_k.row][p_k.col] < 0 for every k in T, score(P,T) <= r, where score(P,T) = sum_{k=0}^{m+n-2} (0 if k is in T else coins[p_k.row][p_k.col]).",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumAmount.spec_6",
+    "negation": "AegisSpec.MaximumAmount.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exist a monotone path P = (p_0,...,p_{m+n-2}) from (0,0) to (m-1,n-1) and a set T of indices in {0,...,m+n-2} with |T| <= 2 and coins[p_k.row][p_k.col] < 0 for every k in T such that score(P,T) = r, where score(P,T) = sum_{k=0}^{m+n-2} (0 if k is in T else coins[p_k.row][p_k.col]).",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumAmount.spec_7",
+    "negation": "AegisSpec.MaximumAmount.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c_0,...,c_{m+n-2} be the coin values along the unique monotone path from (0,0) to (m-1,n-1), in order. The function returns a result r and r = (sum_{k=0}^{m+n-2} c_k) - S, where S is the sum of the min(2,q) smallest values, counting multiplicity, among the q values c_k with c_k < 0; if q = 0 then S = 0.",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n. Additionally, m = 1 or n = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumAmount.spec_8",
+    "negation": "AegisSpec.MaximumAmount.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max { sum_{k=0}^{m+n-2} coins[p_k.row][p_k.col] : P=(p_0,...,p_{m+n-2}) is a monotone path from (0,0) to (m-1,n-1) }.",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n. Additionally, coins[i][j] >= 0 for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumAmount.spec_9",
+    "negation": "AegisSpec.MaximumAmount.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and -1000 * (L - 2) <= r <= -(L - 2), where L = m + n - 1.",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n. Additionally, coins[i][j] < 0 for every 0 <= i < m, 0 <= j < n, and L = m + n - 1 >= 3."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumAmount.spec_10",
+    "negation": "AegisSpec.MaximumAmount.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for coins and returns r2 for coins2, then r <= r2.",
+    "preconditions": "Let m = len(coins), n = len(coins[0]), m2 = len(coins2), and n2 = len(coins2[0]). Both coins and coins2 are valid grids: 1 <= m,m2 <= 500, 1 <= n,n2 <= 500, all rows have the stated lengths, and all entries are in [-1000,1000]. Moreover m = m2, n = n2, and coins[i][j] <= coins2[i][j] for every 0 <= i < m, 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumAmount.spec_11",
+    "negation": "AegisSpec.MaximumAmount.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for coins and returns rT for coinsT, then r = rT.",
+    "preconditions": "Let m = len(coins) and n = len(coins[0]). The input is a valid grid: 1 <= m <= 500, 1 <= n <= 500, len(coins[i]) = n for every 0 <= i < m, and -1000 <= coins[i][j] <= 1000 for every 0 <= i < m, 0 <= j < n. Let coinsT be the n x m grid defined by coinsT[j][i] = coins[i][j] for every 0 <= i < m, 0 <= j < n."
+  }
+]

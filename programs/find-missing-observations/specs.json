@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MissingRolls.spec_1",
+    "negation": "AegisSpec.MissingRolls.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S = sum_{i=0}^{m-1} rolls[i] and T = mean*(n+m) - S. The function returns a result r and the following two implications hold. (a) If n <= T <= 6*n, then len(r) = n, for every j with 0 <= j < n we have 1 <= r[j] <= 6, and S + sum_{j=0}^{n-1} r[j] = mean*(n+m). (b) If T < n or T > 6*n, then len(r) = 0.",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MissingRolls.spec_2",
+    "negation": "AegisSpec.MissingRolls.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), 1 <= r[j] <= 6.",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MissingRolls.spec_3",
+    "negation": "AegisSpec.MissingRolls.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; in particular, no overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MissingRolls.spec_4",
+    "negation": "AegisSpec.MissingRolls.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with len(r) = 0, there is no vector w of length n such that 1 <= w[k] <= 6 for every k with 0 <= k < n and S + sum_{k=0}^{n-1} w[k] = mean*(n+m).",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6. Let S = sum_{i=0}^{m-1} rolls[i]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MissingRolls.spec_5",
+    "negation": "AegisSpec.MissingRolls.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with len(r) > 0, r is a valid completion: len(r) = n, 1 <= r[k] <= 6 for every k with 0 <= k < n, and S + sum_{k=0}^{n-1} r[k] = mean*(n+m).",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6. Let S = sum_{i=0}^{m-1} rolls[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MissingRolls.spec_6",
+    "negation": "AegisSpec.MissingRolls.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either len(r) = 0 or len(r) = n.",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MissingRolls.spec_7",
+    "negation": "AegisSpec.MissingRolls.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r1 and r2 be the results returned by the function on rolls1 and on rolls2 with the same mean and n. Whenever both calls return results, len(r1) = len(r2). If this common length is positive, then len(r1) = n and sum_{j=0}^{n-1} r1[j] = sum_{j=0}^{n-1} r2[j] = mean*(n+m) - sum_{i=0}^{m-1} rolls1[i]; if the common length is 0, then both calls return empty vectors.",
+    "preconditions": "Let m = len(rolls1) = len(rolls2); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls1[i] <= 6 and 1 <= rolls2[i] <= 6; and sum_{i=0}^{m-1} rolls1[i] = sum_{i=0}^{m-1} rolls2[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MissingRolls.spec_8",
+    "negation": "AegisSpec.MissingRolls.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) > 0 if and only if n <= T <= 6*n.",
+    "preconditions": "m = len(rolls); 1 <= m <= 100000; 1 <= n <= 100000; 1 <= mean <= 6; for every i with 0 <= i < m, 1 <= rolls[i] <= 6. Let S = sum_{i=0}^{m-1} rolls[i] and T = mean*(n+m) - S."
+  }
+]

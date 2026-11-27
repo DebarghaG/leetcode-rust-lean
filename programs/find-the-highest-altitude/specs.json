@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestAltitude.spec_1",
+    "negation": "AegisSpec.LargestAltitude.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let A(0)=0 and, for each integer k with 1 <= k <= len(gain), let A(k)=gain[0]+gain[1]+...+gain[k-1]. The function returns a result r (it does not fail), and r = max { A(k) | 0 <= k <= len(gain) }.",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestAltitude.spec_2",
+    "negation": "AegisSpec.LargestAltitude.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every gain satisfying the preconditions; it does not fail because of overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestAltitude.spec_3",
+    "negation": "AegisSpec.LargestAltitude.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer k with 0 <= k <= len(gain) such that r = A(k), where A(0)=0 and A(k)=gain[0]+...+gain[k-1] for 1 <= k <= len(gain).",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestAltitude.spec_4",
+    "negation": "AegisSpec.LargestAltitude.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer k with 0 <= k <= len(gain), A(k) <= r, where A(0)=0 and A(k)=gain[0]+...+gain[k-1] for 1 <= k <= len(gain).",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestAltitude.spec_5",
+    "negation": "AegisSpec.LargestAltitude.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer M, if A(k) <= M for every integer k with 0 <= k <= len(gain), then r <= M, where A(0)=0 and A(k)=gain[0]+...+gain[k-1] for 1 <= k <= len(gain).",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestAltitude.spec_6",
+    "negation": "AegisSpec.LargestAltitude.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if A(k) <= 0 for every integer k with 0 <= k <= len(gain), where A(0)=0 and A(k)=gain[0]+...+gain[k-1] for 1 <= k <= len(gain).",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestAltitude.spec_7",
+    "negation": "AegisSpec.LargestAltitude.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every slice h of 64-bit integers with 1 <= len(h) = len(gain) <= 100 and -100 <= h[i] <= 100 for every i with 0 <= i < len(h), if gain[i] <= h[i] for every i with 0 <= i < len(gain), then whenever largest_altitude(gain) returns r and largest_altitude(h) returns s, r <= s.",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestAltitude.spec_8",
+    "negation": "AegisSpec.LargestAltitude.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{len(gain)-1} max(gain[i], 0).",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 100 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestAltitude.spec_9",
+    "negation": "AegisSpec.LargestAltitude.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c with -100 <= c <= 0, let h be the slice of 64-bit integers of length len(gain)+1 such that h[i]=gain[i] for every i with 0 <= i < len(gain) and h[len(gain)]=c. Then whenever largest_altitude(gain) returns r and largest_altitude(h) returns s, r = s.",
+    "preconditions": "gain is a slice of 64-bit integers with 1 <= len(gain) <= 99 and, for every i with 0 <= i < len(gain), -100 <= gain[i] <= 100."
+  }
+]

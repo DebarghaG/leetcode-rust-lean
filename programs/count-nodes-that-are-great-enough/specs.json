@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_1",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of node occurrences u of root that are great enough for k, i.e. r = #{u : sz(u) >= k and less(u) >= k}.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. For a node occurrence u of root, let sub(u) be the set of node occurrences in the subtree rooted at u, including u; let sz(u)=|sub(u)|; let less(u)=#{w in sub(u) : val(w) < val(u)}. A node occurrence u is great enough for k iff sz(u) >= k and less(u) >= k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_2",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail: there is no panic, no out-of-bounds access, and no 64-bit integer overflow during the computation.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_3",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= N(root).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. Let N(root) be the number of node occurrences in root."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_4",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= #{u : u is a node occurrence of root and sz(u) >= k}.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. For a node occurrence u, let sz(u) be the number of node occurrences in the subtree rooted at u, including u."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_5",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. Let N(root) be the number of node occurrences in root, and assume k >= N(root)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_6",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the number of node occurrences u of root for which there exists a node occurrence w in the subtree rooted at u (including u) with val(w) < val(u).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_7",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = A(L,k) + A(R,k) + (1 if szRoot >= k and lessRoot >= k else 0).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10; root = Node(v,L,R). For any Tree T, let A(T,k) be the mathematical number of node occurrences u of T with sz_T(u) >= k and less_T(u) >= k, using the same subtree definitions, and let A(Null,k)=0. Let szRoot = 1 + N(L) + N(R), where N(L) and N(R) are the numbers of node occurrences in L and R; let lessRoot be the number of node occurrences w in L or R with val(w) < v."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_8",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on root, r equals the number of great-enough node occurrences of shift(root,c) for the same k; equivalently A(root,k)=A(shift(root,c),k).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. Let c be any integer such that 1 <= val(u)+c <= 10000 for every node occurrence u of root. Let shift(root,c) be the tree with the same shape as root and with each node value val(u) replaced by val(u)+c."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_9",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on root, r equals the number of great-enough node occurrences of mirror(root) for the same k; equivalently A(root,k)=A(mirror(root),k).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. Define mirror(T) recursively by mirror(Null)=Null and mirror(Node(v,L,R))=Node(v,mirror(R),mirror(L)). For any Tree T, let A(T,k) be the mathematical number of great-enough node occurrences of T for k, using the same subtree definitions."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_10",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there is no node occurrence u of root with sz(u) >= k and less(u) >= k.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10. For a node occurrence u, let sz(u) be the number of node occurrences in the subtree rooted at u, including u; let less(u) be the number of w in that subtree with val(w) < val(u)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_11",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_11_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns results r1 for k1 and r2 for k2 on the same root, r2 <= r1. Equivalently A(root,k2) <= A(root,k1), where A(T,k) is the number of great-enough node occurrences of T for k.",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k1 and k2 are i64 with 1 <= k1 <= k2 <= 10."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountGreatEnoughNodes.spec_12",
+    "negation": "AegisSpec.CountGreatEnoughNodes.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on root, r equals the number of great-enough node occurrences of map(root,f) for the same k; equivalently A(root,k)=A(map(root,f),k).",
+    "preconditions": "root is a non-null Tree with between 1 and 10000 node occurrences; every node value is an integer in [1,10000]; k is an i64 with 1 <= k <= 10; f is a strictly increasing function on integers such that 1 <= f(val(u)) <= 10000 for every node occurrence u of root. Let map(root,f) be the tree with the same shape and each node value val(u) replaced by f(val(u))."
+  }
+]

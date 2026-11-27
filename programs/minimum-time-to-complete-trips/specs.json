@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTime.spec_1",
+    "negation": "AegisSpec.MinimumTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r is the least integer T ≥ 0 such that Σ_{i=0}^{len(time)-1} ⌊T / time[i]⌋ ≥ totalTrips, where ⌊·/·⌋ denotes integer division (floor) for non-negative operands.",
+    "preconditions": "The array `time` is non-empty (1 ≤ len(time) ≤ 100000) and every element satisfies 1 ≤ time[i] ≤ 10000000. The integer `totalTrips` satisfies 1 ≤ totalTrips ≤ 10000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTime.spec_2",
+    "negation": "AegisSpec.MinimumTime.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≤ totalTrips * min_{0 ≤ i < len(time)} time[i].",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTime.spec_3",
+    "negation": "AegisSpec.MinimumTime.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and Σ_{i=0}^{len(time)-1} ⌊r / time[i]⌋ ≥ totalTrips.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTime.spec_4",
+    "negation": "AegisSpec.MinimumTime.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and for every integer T with 0 ≤ T < r, Σ_{i=0}^{len(time)-1} ⌊T / time[i]⌋ < totalTrips.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTime.spec_5",
+    "negation": "AegisSpec.MinimumTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r ≥ min_{0 ≤ i < len(time)} time[i] * ceil(totalTrips / len(time)), where ceil(a/b) = (a + b - 1) / b for positive integers a, b.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTime.spec_6",
+    "negation": "AegisSpec.MinimumTime.spec_6_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (it does not fail, overflow, or panic).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTime.spec_7",
+    "negation": "AegisSpec.MinimumTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = min_{0 ≤ i < len(time)} time[i].",
+    "preconditions": "Same as spec_1, and additionally totalTrips = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTime.spec_8",
+    "negation": "AegisSpec.MinimumTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns results r1 and r2 for these inputs, r1 ≤ r2.",
+    "preconditions": "Consider two inputs (time, totalTrips1) and (time, totalTrips2) both satisfying the constraints of spec_1, with the same array `time` and totalTrips1 ≤ totalTrips2. Let r1 and r2 be the results returned for these inputs."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTime.spec_9",
+    "negation": "AegisSpec.MinimumTime.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns results r1 and r2 for these inputs, r1 = r2.",
+    "preconditions": "Consider two inputs (time1, totalTrips) and (time2, totalTrips) both satisfying the constraints of spec_1, such that time2 is a permutation of time1 (i.e., len(time1) = len(time2) and there exists a bijection π on {0, ..., len(time1)-1} with time2[i] = time1[π(i)] for all i). Let r1 and r2 be the results returned for these inputs."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumTime.spec_10",
+    "negation": "AegisSpec.MinimumTime.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns results r1 and r2 for these inputs, r2 = c * r1.",
+    "preconditions": "Consider two inputs (time1, totalTrips) and (time2, totalTrips) both satisfying the constraints of spec_1, and a positive integer c ≥ 1 such that len(time1) = len(time2) and time2[i] = c * time1[i] for every 0 ≤ i < len(time1). Let r1 and r2 be the results returned for these inputs."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumTime.spec_11",
+    "negation": "AegisSpec.MinimumTime.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists an index i with 0 ≤ i < len(time) such that r mod time[i] = 0 (i.e., r is an integer multiple of time[i]).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumTime.spec_12",
+    "negation": "AegisSpec.MinimumTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns results r1 and r2 for these inputs, r2 ≤ r1.",
+    "preconditions": "Consider two inputs (time1, totalTrips) and (time2, totalTrips) both satisfying the constraints of spec_1, where time2 is obtained by appending one extra positive integer t to time1: len(time2) = len(time1) + 1, time2[i] = time1[i] for 0 ≤ i < len(time1), and time2[len(time1)] = t with 1 ≤ t ≤ 10000000. Let r1 and r2 be the results returned for these inputs."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumTime.spec_13",
+    "negation": "AegisSpec.MinimumTime.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = t * ceil(totalTrips / len(time)), where ceil(a/b) = (a + b - 1) / b for positive integers a, b.",
+    "preconditions": "Same as spec_1, and additionally there exists an integer t with 1 ≤ t ≤ 10000000 such that time[i] = t for every 0 ≤ i < len(time)."
+  }
+]

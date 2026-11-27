@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.XorOperation.spec_1",
+    "negation": "AegisSpec.XorOperation.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the bitwise XOR of the n integers a_i = start + 2*i for i = 0, 1, ..., n-1. Equivalently, r = a_0 XOR a_1 XOR ... XOR a_{n-1}. Here each a_i is computed as an integer (it is at most 2998 and hence fits in i64), and XOR is the 64-bit bitwise exclusive-or operation. For every bit position b with 0 <= b < 64, bit b of r is 1 exactly when the number of indices i with 0 <= i < n and bit b of a_i equal to 1 is odd.",
+    "preconditions": "1 <= n <= 1000 and 0 <= start <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.XorOperation.spec_2",
+    "negation": "AegisSpec.XorOperation.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and start satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= n <= 1000 and 0 <= start <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.XorOperation.spec_3",
+    "negation": "AegisSpec.XorOperation.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 4096 (equivalently 0 <= r <= 4095).",
+    "preconditions": "1 <= n <= 1000 and 0 <= start <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.XorOperation.spec_4",
+    "negation": "AegisSpec.XorOperation.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r mod 2 = (start mod 2) * (n mod 2). In other words, the least significant bit of r is 1 exactly when start is odd and n is odd.",
+    "preconditions": "1 <= n <= 1000 and 0 <= start <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.XorOperation.spec_5",
+    "negation": "AegisSpec.XorOperation.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for input (n, start) and returns r' for input (n+1, start), then r' = r XOR (start + 2*n).",
+    "preconditions": "1 <= n < 1000 and 0 <= start <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.XorOperation.spec_6",
+    "negation": "AegisSpec.XorOperation.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for input (n, start+2) and returns r' for input (n+1, start), then r = r' XOR start.",
+    "preconditions": "1 <= n < 1000 and 0 <= start <= 998."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.XorOperation.spec_7",
+    "negation": "AegisSpec.XorOperation.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let b = (r / 2) mod 2 (integer division). Then b = 1 if and only if ((start mod 4 = 0 or start mod 4 = 1) and (floor(n/2) mod 2 = 1)) or ((start mod 4 = 2 or start mod 4 = 3) and (floor((n+1)/2) mod 2 = 1)).",
+    "preconditions": "1 <= n <= 1000 and 0 <= start <= 1000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumValue.spec_1",
+    "negation": "AegisSpec.MaximumValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a byte string s, define digits(s) to mean that for every k with 0 <= k < len(s), 48 <= s[k] <= 57. If digits(s), define num(s) = sum over k from 0 to len(s)-1 of (s[k]-48) * 10^(len(s)-1-k). Define val(s) = num(s) if digits(s), and val(s) = len(s) otherwise. The function returns a result r and r = max{ val(strs[i]) | 0 <= i < len(strs) }, the ordinary integer maximum over this nonempty finite set.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumValue.spec_2",
+    "negation": "AegisSpec.MaximumValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, read out of bounds, or panic).",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumValue.spec_3",
+    "negation": "AegisSpec.MaximumValue.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumValue.spec_4",
+    "negation": "AegisSpec.MaximumValue.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 999999999.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumValue.spec_5",
+    "negation": "AegisSpec.MaximumValue.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define val(s) as in spec_1. Whenever the function returns a result r, there exists an index j with 0 <= j < len(strs) such that r = val(strs[j]).",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumValue.spec_6",
+    "negation": "AegisSpec.MaximumValue.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define val(s) as in spec_1. Whenever the function returns a result r, for every i with 0 <= i < len(strs), val(strs[i]) <= r.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumValue.spec_7",
+    "negation": "AegisSpec.MaximumValue.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define digits(s) and num(s) as in spec_1. Whenever the function returns a result r and r > 9, there exists an index j with 0 <= j < len(strs) such that digits(strs[j]) and num(strs[j]) = r.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumValue.spec_8",
+    "negation": "AegisSpec.MaximumValue.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r > 9, for every i with 0 <= i < len(strs), len(strs[i]) < r.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumValue.spec_9",
+    "negation": "AegisSpec.MaximumValue.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If maximum_value(strs) returns r and maximum_value(strs_prime) returns r_prime, then r = r_prime.",
+    "preconditions": "strs and strs_prime both satisfy the base constraints: their lengths are between 1 and 100, every inner string has length between 1 and 9, and every byte is a lowercase English letter (97..122) or a digit (48..57). Also strs_prime is a permutation of strs."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumValue.spec_10",
+    "negation": "AegisSpec.MaximumValue.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define num(s) as in spec_1. If num(s) = num(t), maximum_value(strs) returns r, and maximum_value(strs_prime) returns r_prime, then r = r_prime.",
+    "preconditions": "1 <= len(strs) <= 100; for every i with 0 <= i < len(strs), 1 <= len(strs[i]) <= 9 and every byte of strs[i] is either a lowercase English letter (byte value 97..122) or a digit (byte value 48..57); j is an index with 0 <= j < len(strs); s = strs[j] is digits-only; t is a byte string satisfying 1 <= len(t) <= 9, consists only of digits (48..57), and has the same numeric value as s; strs_prime is obtained from strs by replacing entry j with t."
+  }
+]

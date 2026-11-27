@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumXor.spec_1",
+    "negation": "AegisSpec.MaximumXor.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum possible bitwise XOR of all elements after applying the operation any number of times. Equivalently, let b range over all arrays of length len(nums) such that for every i with 0 <= i < len(nums), b[i] is a bitwise submask of nums[i] (i.e., every 1-bit of b[i] is also a 1-bit of nums[i], or (b[i] AND nums[i]) = b[i]); then r = max { b[0] XOR b[1] XOR ... XOR b[len(nums)-1] }. Equivalently, r = nums[0] OR nums[1] OR ... OR nums[len(nums)-1], the bitwise OR of all elements of nums.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumXor.spec_2",
+    "negation": "AegisSpec.MaximumXor.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 134217727 (i.e., r < 2^27).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumXor.spec_3",
+    "negation": "AegisSpec.MaximumXor.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(nums), r >= nums[i] (ordinary integer ordering).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumXor.spec_4",
+    "negation": "AegisSpec.MaximumXor.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i < len(nums), nums[i] is a bitwise submask of r; equivalently, (nums[i] AND r) = nums[i], or (nums[i] OR r) = r.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumXor.spec_5",
+    "negation": "AegisSpec.MaximumXor.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every non-negative 64-bit integer y, if for every i with 0 <= i < len(nums) we have (nums[i] AND y) = nums[i] (i.e., every nums[i] is a submask of y), then r <= y.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumXor.spec_6",
+    "negation": "AegisSpec.MaximumXor.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every array b of length len(nums) such that for every i with 0 <= i < len(nums), b[i] is a bitwise submask of nums[i] (i.e., (b[i] AND nums[i]) = b[i]), the bitwise XOR b[0] XOR b[1] XOR ... XOR b[len(nums)-1] is at most r (ordinary integer ordering).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumXor.spec_7",
+    "negation": "AegisSpec.MaximumXor.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an array b of length len(nums) such that for every i with 0 <= i < len(nums), b[i] is a bitwise submask of nums[i] (i.e., (b[i] AND nums[i]) = b[i]), and b[0] XOR b[1] XOR ... XOR b[len(nums)-1] = r.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumXor.spec_8",
+    "negation": "AegisSpec.MaximumXor.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Under these conditions, the result returned by maximum_xor for nums equals the result returned by maximum_xor for nums'.",
+    "preconditions": "For two arrays nums and nums' of length n = len(nums), both satisfy 1 <= n <= 100000 and for every i with 0 <= i < n, 0 <= nums[i] <= 100000000 and 0 <= nums'[i] <= 100000000; and there is a permutation π of {0,...,n-1} such that nums'[i] = nums[π(i)] for every i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumXor.spec_9",
+    "negation": "AegisSpec.MaximumXor.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every r and r', if maximum_xor nums returns r and maximum_xor nums' returns r', then r <= r' (ordinary integer ordering).",
+    "preconditions": "For two arrays nums and nums' of the same length n with 1 <= n <= 100000, both satisfying for every i with 0 <= i < n, 0 <= nums[i] <= 100000000 and 0 <= nums'[i] <= 100000000, and for every i with 0 <= i < n, nums[i] is a bitwise submask of nums'[i] (i.e., (nums[i] AND nums'[i]) = nums[i])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumXor.spec_10",
+    "negation": "AegisSpec.MaximumXor.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every bit position k with 0 <= k < 64, if every element nums[i] has bit k equal to 0, then r has bit k equal to 0.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 100000000."
+  }
+]

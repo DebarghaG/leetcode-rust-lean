@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountGood.spec_1",
+    "negation": "AegisSpec.CountGood.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result ans and, interpreting ans as a mathematical integer, ans = # { (l,u) | 0 <= l < u <= len(nums) and P(nums,l,u) >= k }, where for 0 <= l <= u <= len(nums), P(nums,l,u) = # { (i,j) | l <= i < j < u and nums[i] = nums[j] }. Thus ans is exactly the number of non-empty contiguous subarrays nums[l],...,nums[u-1] whose number of equal-value index pairs is at least k.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountGood.spec_2",
+    "negation": "AegisSpec.CountGood.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, 0 <= ans <= len(nums)*(len(nums)+1)/2.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountGood.spec_3",
+    "negation": "AegisSpec.CountGood.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans, ans <= sum_{L=1}^{len(nums)} I(L), where I(L) = len(nums)-L+1 if L*(L-1)/2 >= k, and I(L) = 0 otherwise.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountGood.spec_4",
+    "negation": "AegisSpec.CountGood.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, if k > P(nums,0,len(nums)) then ans = 0, where P(nums,0,len(nums)) = # { (i,j) | 0 <= i < j < len(nums) and nums[i] = nums[j] }.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountGood.spec_5",
+    "negation": "AegisSpec.CountGood.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any slice nums2 with len(nums2) = len(nums), each nums2[i] in [1,1000000000], and with nums[i] = nums[j] if and only if nums2[i] = nums2[j] for all 0 <= i,j < len(nums), if count_good(nums,k) returns ans1 and count_good(nums2,k) returns ans2, then ans1 = ans2.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountGood.spec_6",
+    "negation": "AegisSpec.CountGood.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(nums) be the slice of length len(nums) with rev(nums)[i] = nums[len(nums)-1-i] for 0 <= i < len(nums). If count_good(nums,k) returns ans1 and count_good(rev(nums),k) returns ans2, then ans1 = ans2.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountGood.spec_7",
+    "negation": "AegisSpec.CountGood.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any k1,k2 with 1 <= k1 <= k2 <= 1000000000, if count_good(nums,k1) returns ans1 and count_good(nums,k2) returns ans2, then ans1 >= ans2.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountGood.spec_8",
+    "negation": "AegisSpec.CountGood.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any integer x with 1 <= x <= 1000000000 and with len(nums) < 100000, let ext be the slice of length len(nums)+1 with ext[i] = nums[i] for 0 <= i < len(nums) and ext[len(nums)] = x. If count_good(nums,k) returns ans and count_good(ext,k) returns ans_ext, then ans <= ans_ext.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountGood.spec_9",
+    "negation": "AegisSpec.CountGood.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any integer x with 1 <= x <= 1000000000 and len(nums) < 100000 such that x != nums[i] for every 0 <= i < len(nums), let ext be the slice of length len(nums)+1 with ext[i] = nums[i] for 0 <= i < len(nums) and ext[len(nums)] = x. Let S = # { l | 0 <= l < len(nums) and P(nums,l,len(nums)) >= k }, where P(nums,l,len(nums)) = # { (i,j) | l <= i < j < len(nums) and nums[i] = nums[j] }. If count_good(nums,k) returns ans and count_good(ext,k) returns ans_ext, then ans_ext = ans + S.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountGood.spec_10",
+    "negation": "AegisSpec.CountGood.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns ans, ans >= # { l | 0 <= l < len(nums) and P(nums,l,len(nums)) >= k }, where P(nums,l,len(nums)) = # { (i,j) | l <= i < j < len(nums) and nums[i] = nums[j] }.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountGood.spec_11",
+    "negation": "AegisSpec.CountGood.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums2 be a non-empty contiguous subarray of nums: 1 <= len(nums2) <= len(nums) and there is an s with 0 <= s <= len(nums)-len(nums2) such that nums2[i] = nums[s+i] for all 0 <= i < len(nums2). If count_good(nums2,k) returns ans2 and count_good(nums,k) returns ans, then ans2 <= ans.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountGood.spec_12",
+    "negation": "AegisSpec.CountGood.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, ans = 0 if and only if for every 0 <= i < j < len(nums), nums[i] != nums[j].",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and k = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountGood.spec_13",
+    "negation": "AegisSpec.CountGood.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let nums2 be any slice with len(nums2) = len(nums), each nums2[i] in [1,1000000000], and for all 0 <= i,j < len(nums), if nums[i] = nums[j] then nums2[i] = nums2[j]. If count_good(nums,k) returns ans and count_good(nums2,k) returns ans2, then ans2 >= ans.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountGood.spec_14",
+    "negation": "AegisSpec.CountGood.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, ans = 0 if and only if k > P(nums,0,len(nums)), where P(nums,0,len(nums)) = # { (i,j) | 0 <= i < j < len(nums) and nums[i] = nums[j] }. Equivalently, ans >= 1 if and only if the whole array nums is good, i.e. k <= P(nums,0,len(nums)).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000, and 1 <= k <= 1000000000."
+  }
+]

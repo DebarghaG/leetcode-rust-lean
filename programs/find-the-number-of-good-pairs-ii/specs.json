@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfPairs.spec_1",
+    "negation": "AegisSpec.NumberOfPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = |{(i,j) : 0 <= i < len(nums1), 0 <= j < len(nums2), and nums1[i] is divisible by nums2[j]*k}|. Here 'a is divisible by b' means there exists an integer q with a = b*q (equivalently, since b > 0, a mod b = 0).",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000. All lists are 0-indexed."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfPairs.spec_2",
+    "negation": "AegisSpec.NumberOfPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, the function returns a result r; it does not fail because of arithmetic overflow, division by zero, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfPairs.spec_3",
+    "negation": "AegisSpec.NumberOfPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(nums1)*len(nums2).",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfPairs.spec_4",
+    "negation": "AegisSpec.NumberOfPairs.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exist indices i and j with 0 <= i < len(nums1) and 0 <= j < len(nums2) such that nums1[i] is divisible by nums2[j]*k (that is, there exists an integer q with nums1[i] = (nums2[j]*k)*q).",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfPairs.spec_5",
+    "negation": "AegisSpec.NumberOfPairs.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{len(nums1)-1} c_i, where for each i, c_i is the number of indices j with 0 <= j < len(nums2) such that nums1[i] is divisible by nums2[j]*k.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfPairs.spec_6",
+    "negation": "AegisSpec.NumberOfPairs.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = sum_{j=0}^{len(nums2)-1} d_j, where for each j, d_j is the number of indices i with 0 <= i < len(nums1) such that nums1[i] is divisible by nums2[j]*k.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfPairs.spec_7",
+    "negation": "AegisSpec.NumberOfPairs.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a ++ b denote the concatenation of a and b. Whenever number_of_pairs(a ++ b, nums2, k), number_of_pairs(a, nums2, k), and number_of_pairs(b, nums2, k) all return results r, r_a, and r_b, then r = r_a + r_b.",
+    "preconditions": "Let m = len(nums2). Assume 1 <= m <= 100000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000. Let a and b be slices of i64 with lengths at least 1, with len(a)+len(b) <= 100000, and with every entry in [1,1000000]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfPairs.spec_8",
+    "negation": "AegisSpec.NumberOfPairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let b ++ c denote the concatenation of b and c. Whenever number_of_pairs(nums1, b ++ c, k), number_of_pairs(nums1, b, k), and number_of_pairs(nums1, c, k) all return results r, r_b, and r_c, then r = r_b + r_c.",
+    "preconditions": "Let n = len(nums1). Assume 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, and 1 <= k <= 1000. Let b and c be slices of i64 with lengths at least 1, with len(b)+len(c) <= 100000, and with every entry in [1,1000000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfPairs.spec_9",
+    "negation": "AegisSpec.NumberOfPairs.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever number_of_pairs(a, nums2, k) and number_of_pairs(nums1, nums2, k) return results r_a and r, r_a = r.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000. Let p be a bijection from {0,...,len(nums1)-1} to itself and let a be a slice of length len(nums1) with a[i] = nums1[p(i)] for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfPairs.spec_10",
+    "negation": "AegisSpec.NumberOfPairs.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever number_of_pairs(nums1, b, k) and number_of_pairs(nums1, nums2, k) return results r_b and r, r_b = r.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000. Let p be a bijection from {0,...,len(nums2)-1} to itself and let b be a slice of length len(nums2) with b[j] = nums2[p(j)] for every j."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfPairs.spec_11",
+    "negation": "AegisSpec.NumberOfPairs.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever number_of_pairs(a, nums2, k) and number_of_pairs(nums1, nums2, k) return results r_a and r, r_a >= r.",
+    "preconditions": "Let n = len(nums1) and m = len(nums2). Assume 1 <= n <= 100000, 1 <= m <= 100000, for every i with 0 <= i < n, 1 <= nums1[i] <= 1000000, for every j with 0 <= j < m, 1 <= nums2[j] <= 1000000, and 1 <= k <= 1000. Let a be a slice of length len(nums1) such that 1 <= a[i] <= 1000000 and nums1[i] divides a[i] for every i."
+  }
+]

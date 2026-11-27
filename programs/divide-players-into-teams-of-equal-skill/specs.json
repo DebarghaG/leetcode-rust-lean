@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DividePlayers.spec_1",
+    "negation": "AegisSpec.DividePlayers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(skill). A valid equal-sum pairing of skill is a set P of n/2 unordered pairs {i,j}, with 0 <= i < j < n, such that every index i with 0 <= i < n occurs in exactly one pair of P and there exists an integer S with skill[i] + skill[j] = S for every {i,j} in P. The function returns a result r and: if a valid equal-sum pairing exists, then r = sum over {i,j} in P of skill[i] * skill[j] for every valid equal-sum pairing P, and this value is independent of P; if no valid equal-sum pairing exists, then r = -1.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DividePlayers.spec_2",
+    "negation": "AegisSpec.DividePlayers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow) on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DividePlayers.spec_3",
+    "negation": "AegisSpec.DividePlayers.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever divide_players(skill) returns a result r with r != -1, r <= (len(skill) / 2) * 1_000_000.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DividePlayers.spec_4",
+    "negation": "AegisSpec.DividePlayers.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever divide_players(skill) returns a result r with r != -1, r >= len(skill) / 2.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DividePlayers.spec_5",
+    "negation": "AegisSpec.DividePlayers.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = skill[0] * skill[1].",
+    "preconditions": "len(skill) = 2, and 1 <= skill[0] <= 1000 and 1 <= skill[1] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DividePlayers.spec_6",
+    "negation": "AegisSpec.DividePlayers.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = (n / 2) * (v * v).",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000. There exists an integer v with 1 <= v <= 1000 such that for every i with 0 <= i < n, skill[i] = v."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DividePlayers.spec_7",
+    "negation": "AegisSpec.DividePlayers.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever divide_players(skill) returns a result r with r != -1, let n = len(skill), T = sum_{i=0}^{n-1} skill[i], and Q = sum_{i=0}^{n-1} skill[i] * skill[i]. Then there is an integer S with 2*T = n*S and 2*r = S*T - Q.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DividePlayers.spec_8",
+    "negation": "AegisSpec.DividePlayers.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever divide_players(skill) returns a result r and divide_players(perm) returns a result r_prime, we have r = -1 if and only if r_prime = -1, and if r != -1 then r = r_prime.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000. Let perm be any slice of length n such that for every integer v, the number of indices i with 0 <= i < n and perm[i] = v equals the number of indices i with 0 <= i < n and skill[i] = v."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DividePlayers.spec_9",
+    "negation": "AegisSpec.DividePlayers.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever divide_players(skill) returns a result r with r != -1, let n = len(skill), T = sum_{i=0}^{n-1} skill[i], and S = (2 * T) / n. Then S is an integer and every valid equal-sum pairing of skill (a set of n/2 unordered index pairs covering every index exactly once with a common skill sum) has common pair sum S.",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DividePlayers.spec_10",
+    "negation": "AegisSpec.DividePlayers.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(skill) and T = sum_{i=0}^{n-1} skill[i]. Whenever divide_players(skill) returns a result r, r != -1 if and only if there exists an integer S such that 2*T = n*S and, for every integer v, the number of indices i with 0 <= i < n and skill[i] = v equals the number of indices i with 0 <= i < n and skill[i] = S - v (both counts being 0 when the value is outside the range of skill).",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DividePlayers.spec_11",
+    "negation": "AegisSpec.DividePlayers.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever divide_players(skill) returns a result r with r != -1, let n = len(skill), T = sum_{i=0}^{n-1} skill[i], S = (2*T)/n, and let a be the nondecreasing sorted version of skill. Then S is an integer, for every i with 0 <= i < n/2 we have a[i] + a[n-1-i] = S, and r = sum_{i=0}^{n/2-1} a[i] * a[n-1-i].",
+    "preconditions": "Let n = len(skill). n is even, 2 <= n <= 100000, and for every i with 0 <= i < n, 1 <= skill[i] <= 1000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WinnerOfGame.spec_1",
+    "negation": "AegisSpec.WinnerOfGame.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a be the number of indices i with 1 <= i <= n-2 such that colors[i-1] = colors[i] = colors[i+1] = 'A', and let b be the number of indices i with 1 <= i <= n-2 such that colors[i-1] = colors[i] = colors[i+1] = 'B'. Whenever winner_of_game(colors) returns a result r, r = true if and only if a > b. Equivalently, r = true exactly when Alice wins under optimal play of the described removal game (Alice moves first and loses if she has no legal move on her turn), and r = false exactly when Bob wins.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, and for every i with 0 <= i < n, colors[i] is the ASCII code for 'A' or for 'B'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WinnerOfGame.spec_2",
+    "negation": "AegisSpec.WinnerOfGame.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every colors satisfying the preconditions, winner_of_game(colors) returns a result r; it does not fail by arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, and for every i with 0 <= i < n, colors[i] is the ASCII code for 'A' or for 'B'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WinnerOfGame.spec_3",
+    "negation": "AegisSpec.WinnerOfGame.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "winner_of_game(colors) returns a result r, and r = true if and only if n >= 3.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, and for every i with 0 <= i < n, colors[i] is the ASCII code for 'A'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WinnerOfGame.spec_4",
+    "negation": "AegisSpec.WinnerOfGame.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "winner_of_game(colors) returns a result r, and r = false.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, every colors[i] is the ASCII code for 'A' or for 'B', and for every i with 1 <= i <= n-2, it is not the case that colors[i-1] = colors[i] = colors[i+1] = 'A'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WinnerOfGame.spec_5",
+    "negation": "AegisSpec.WinnerOfGame.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "winner_of_game(colors) returns a result r, and r = true.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, every colors[i] is the ASCII code for 'A' or for 'B', there is at least one i with 1 <= i <= n-2 such that colors[i-1] = colors[i] = colors[i+1] = 'A', and for every i with 1 <= i <= n-2 it is not the case that colors[i-1] = colors[i] = colors[i+1] = 'B'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WinnerOfGame.spec_6",
+    "negation": "AegisSpec.WinnerOfGame.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If a(x) = a(y) and b(x) = b(y), then winner_of_game(x) returns a result r_x and winner_of_game(y) returns a result r_y with r_x = r_y.",
+    "preconditions": "For each of two inputs x and y, len(x) is between 1 and 100000 inclusive and every byte is the ASCII code for 'A' or for 'B'. For a string z, define a(z) as the number of indices i with 1 <= i <= len(z)-2 and z[i-1] = z[i] = z[i+1] = 'A', and b(z) analogously with 'B'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WinnerOfGame.spec_7",
+    "negation": "AegisSpec.WinnerOfGame.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If a(x) >= a(y), b(x) <= b(y), winner_of_game(y) returns a result r_y, and r_y = true, then winner_of_game(x) returns a result r_x and r_x = true.",
+    "preconditions": "For each of two inputs x and y, len(x) is between 1 and 100000 inclusive and every byte is the ASCII code for 'A' or for 'B'. For a string z, define a(z) as the number of indices i with 1 <= i <= len(z)-2 and z[i-1] = z[i] = z[i+1] = 'A', and b(z) analogously with 'B'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WinnerOfGame.spec_8",
+    "negation": "AegisSpec.WinnerOfGame.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever winner_of_game(colors) returns true, there exists an index i with 1 <= i <= n-2 such that colors[i-1] = colors[i] = colors[i+1] = 'A'.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, and every colors[i] is the ASCII code for 'A' or for 'B'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WinnerOfGame.spec_9",
+    "negation": "AegisSpec.WinnerOfGame.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "winner_of_game(colors) returns a result r, and r = true if and only if colors[0] = colors[1] = colors[2] = 'A'.",
+    "preconditions": "len(colors) = 3, and every colors[i] is the ASCII code for 'A' or for 'B'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WinnerOfGame.spec_10",
+    "negation": "AegisSpec.WinnerOfGame.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If winner_of_game(colors) returns false and a > 0, then b > 0.",
+    "preconditions": "Let n = len(colors). 1 <= n <= 100000, and every colors[i] is the ASCII code for 'A' or for 'B'. Let a be the number of indices i with 1 <= i <= n-2 and colors[i-1] = colors[i] = colors[i+1] = 'A', and b be the analogous count for 'B'."
+  }
+]

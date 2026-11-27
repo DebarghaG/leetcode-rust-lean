@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a journey to be a sequence c_0, c_1, ..., c_k of cities with 0 <= c_i < n for every i with 0 <= i <= k. Its score is the sum over i = 0,...,k-1 of stayScore[i][c_i] if c_{i+1} = c_i, and travelScore[c_i][c_{i+1}] if c_{i+1} != c_i. The function returns a result r and r is the maximum score over all journeys.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not panic, perform an out-of-bounds access, or overflow i64.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and k <= r <= 100*k.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{k-1} stayScore[i][0].",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. Also n = 1. All indices are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max( { stayScore[0][j] | 0 <= j < n } union { travelScore[a][b] | 0 <= a < n, 0 <= b < n, a != b } ). If n = 1, the second set is empty.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. Also k = 1. All indices are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every city c with 0 <= c < n, r >= sum_{i=0}^{k-1} stayScore[i][c].",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= max_{0 <= a < n, 0 <= b < n, a != b} ( travelScore[a][b] + (k-1) ).",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. Also n >= 2. All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = max_score(n,k,stayScore,travelScore) and r2 = max_score(n,k,stayScore2,travelScore2). The function returns r and r2, and r <= r2.",
+    "preconditions": "Let P(n,k,stayScore,travelScore) mean: 1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. Both P(n,k,stayScore,travelScore) and P(n,k,stayScore2,travelScore2) hold. Also stayScore[i][j] <= stayScore2[i][j] for every 0 <= i < k and 0 <= j < n, and travelScore[a][b] <= travelScore2[a][b] for every 0 <= a < n and 0 <= b < n. All indices are 0-based."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 = max_score(n,k1,stayScore1,travelScore1) and r2 = max_score(n,k2,stayScore2,travelScore2). The function returns r1 and r2, and r2 >= r1.",
+    "preconditions": "Let P(n,k,stayScore,travelScore) mean: 1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. Both P(n,k1,stayScore1,travelScore1) and P(n,k2,stayScore2,travelScore2) hold. Also k2 >= k1, travelScore1[a][b] = travelScore2[a][b] for every 0 <= a < n and 0 <= b < n, and stayScore1[i][j] = stayScore2[i][j] for every 0 <= i < k1 and 0 <= j < n. All indices are 0-based."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r = max_score(n,k,stayScore,travelScore) and r2 = max_score(n,k,stayScore2,travelScore2). The function returns r and r2, and r2 = r.",
+    "preconditions": "Let P(n,k,stayScore,travelScore) mean: 1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. P(n,k,stayScore,travelScore) holds. Let pi be a permutation of {0,...,n-1}. Define stayScore2[i][j] = stayScore[i][pi(j)] for every 0 <= i < k and 0 <= j < n, and travelScore2[a][b] = travelScore[pi(a)][pi(b)] for every 0 <= a < n and 0 <= b < n. Then P(n,k,stayScore2,travelScore2) also holds. All indices are 0-based."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScore.spec_11",
+    "negation": "AegisSpec.MaxScore.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r = max_score(n,k,stayScore,travelScore) and r2 = max_score(n,k,stayScore2,travelScore2). The function returns r and r2, and r2 = c * r.",
+    "preconditions": "Let P(n,k,stayScore,travelScore) mean: 1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. P(n,k,stayScore,travelScore) holds. Let c be a positive integer. Define stayScore2[i][j] = c * stayScore[i][j] and travelScore2[a][b] = c * travelScore[a][b]. Assume P(n,k,stayScore2,travelScore2) holds. All indices are 0-based."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxScore.spec_12",
+    "negation": "AegisSpec.MaxScore.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist cities c_0, c_1, ..., c_k with 0 <= c_i < n for every 0 <= i <= k such that r = sum_{i=0}^{k-1} g_i, where g_i = stayScore[i][c_i] if c_{i+1} = c_i, and g_i = travelScore[c_i][c_{i+1}] if c_{i+1} != c_i.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxScore.spec_13",
+    "negation": "AegisSpec.MaxScore.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every sequence c_0, c_1, ..., c_k of cities with 0 <= c_i < n for every 0 <= i <= k, if g_i = stayScore[i][c_i] when c_{i+1} = c_i and g_i = travelScore[c_i][c_{i+1}] when c_{i+1} != c_i, then sum_{i=0}^{k-1} g_i <= r.",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxScore.spec_14",
+    "negation": "AegisSpec.MaxScore.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= sum_{i=0}^{k-1} B_i, where for each i with 0 <= i < k, B_i = max_{0 <= c < n} max( stayScore[i][c], max_{0 <= d < n, d != c} travelScore[c][d] ), with the inner maximum over d != c omitted when n = 1 (so B_i = stayScore[i][0]).",
+    "preconditions": "1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. All indices are 0-based."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxScore.spec_15",
+    "negation": "AegisSpec.MaxScore.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = sum_{i=0}^{k-1} stayScore[i][c0].",
+    "preconditions": "Let P(n,k,stayScore,travelScore) mean: 1 <= n <= 200, 1 <= k <= 200, len(stayScore) = k, len(travelScore) = n, len(stayScore[i]) = n for every 0 <= i < k, len(travelScore[a]) = n for every 0 <= a < n, 1 <= stayScore[i][j] <= 100 for every 0 <= i < k and 0 <= j < n, 0 <= travelScore[a][b] <= 100 for every 0 <= a < n and 0 <= b < n, and travelScore[a][a] = 0 for every 0 <= a < n. P(n,k,stayScore,travelScore) holds. Also travelScore[a][b] = 0 for every 0 <= a < n and 0 <= b < n, and there exists a city c0 with 0 <= c0 < n such that stayScore[i][j] <= stayScore[i][c0] for every 0 <= i < k and 0 <= j < n. All indices are 0-based."
+  }
+]

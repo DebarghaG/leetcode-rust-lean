@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LevelOrder.spec_1",
+    "negation": "AegisSpec.LevelOrder.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result res and: (1) len(res) = H(root), where H(Null) = 0 and H(Node(_, l, rt)) = 1 + max(H(l), H(rt)); (2) for every k with 0 <= k < len(res), res[k] = L(root, k), where L(Null, k) = [] for every k >= 0, L(Node(v, l, rt), 0) = [v], and L(Node(v, l, rt), k+1) = L(l, k) ++ L(rt, k) for every k >= 0, with ++ denoting list concatenation. Thus res is exactly the level-order traversal: levels from top to bottom, and each level from left to right.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LevelOrder.spec_2",
+    "negation": "AegisSpec.LevelOrder.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for every root satisfying the preconditions.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LevelOrder.spec_3",
+    "negation": "AegisSpec.LevelOrder.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every inner list is non-empty: for every k with 0 <= k < len(r), len(r[k]) >= 1.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LevelOrder.spec_4",
+    "negation": "AegisSpec.LevelOrder.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result res, the total number of entries in all inner lists equals the number of nodes of root: sum over k from 0 to len(res)-1 of len(res[k]) = N(root), where N(Null) = 0 and N(Node(_, l, rt)) = 1 + N(l) + N(rt).",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LevelOrder.spec_5",
+    "negation": "AegisSpec.LevelOrder.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k < len(r), len(r[k]) <= 2^k.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LevelOrder.spec_6",
+    "negation": "AegisSpec.LevelOrder.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result res, len(res) <= N(root), where N(Null) = 0 and N(Node(_, l, rt)) = 1 + N(l) + N(rt). In particular, under the precondition len(res) <= 2000.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LevelOrder.spec_7",
+    "negation": "AegisSpec.LevelOrder.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result res, len(res) > 0, len(res[0]) = 1, and res[0][0] = v.",
+    "preconditions": "root = Node(v, l, rt) for some integer v and subtrees l and rt, with at most 2000 total nodes and every node value between -1000 and 1000 inclusive."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LevelOrder.spec_8",
+    "negation": "AegisSpec.LevelOrder.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k+1 < len(r) and every integer x, the number of indices j with 0 <= j < len(r[k+1]) and r[k+1][j] = x equals the number of nodes u at depth k of root such that u has a left child with value x plus the number of nodes u at depth k of root such that u has a right child with value x.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LevelOrder.spec_9",
+    "negation": "AegisSpec.LevelOrder.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k < len(r) and every j with 0 <= j < len(r[k]), there exists a node u of root at depth k such that value(u) = r[k][j], where value(u) denotes the integer stored at node u.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LevelOrder.spec_10",
+    "negation": "AegisSpec.LevelOrder.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every node u of root, if u has depth k, then k < len(r) and there exists an index j with 0 <= j < len(r[k]) such that r[k][j] = value(u), where value(u) denotes the integer stored at node u.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LevelOrder.spec_11",
+    "negation": "AegisSpec.LevelOrder.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every k with 0 <= k < len(r), if all nodes of root at depth k are ordered by their root-to-node paths (a path is a word over L and R, empty at the root, L for a left edge and R for a right edge; words have equal length at fixed k and are compared lexicographically with L < R), and W is the list of their values in that order, then r[k] = W.",
+    "preconditions": "root is a Tree with at most 2000 nodes, and every node value v of root satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LevelOrder.spec_12",
+    "negation": "AegisSpec.LevelOrder.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any integer k >= 0, if k < H(root1), k < H(root2), and L(root1, k) = L(root2, k), where H(Null) = 0, H(Node(_, l, r)) = 1 + max(H(l), H(r)), L(Null, k) = [], L(Node(v, l, r), 0) = [v], and L(Node(v, l, r), k+1) = L(l, k) ++ L(r, k), then whenever level_order(root1) returns r1 and level_order(root2) returns r2, r1[k] = r2[k].",
+    "preconditions": "root1 and root2 are Trees, each with at most 2000 nodes and every node value between -1000 and 1000 inclusive."
+  }
+]

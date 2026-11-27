@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSegments.spec_1",
+    "negation": "AegisSpec.CountSegments.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that r equals the number of indices i with 0 <= i < len(s) for which s[i] is not a whitespace character and (i = 0 or s[i-1] is a whitespace character).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSegments.spec_2",
+    "negation": "AegisSpec.CountSegments.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that 0 <= r <= len(s).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSegments.spec_3",
+    "negation": "AegisSpec.CountSegments.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) = 0, then the function returns r = 0.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSegments.spec_4",
+    "negation": "AegisSpec.CountSegments.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) > 0 and for every i with 0 <= i < len(s), s[i] is not a whitespace character (i.e., s[i] is not 32, 9, 10, or 13), then the function returns r = 1.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSegments.spec_5",
+    "negation": "AegisSpec.CountSegments.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every i with 0 <= i < len(s), s[i] is a whitespace character (32, 9, 10, or 13), then the function returns r = 0.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSegments.spec_6",
+    "negation": "AegisSpec.CountSegments.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r such that r equals the number of indices i with 0 <= i < len(s) for which s[i] is not a whitespace character (32, 9, 10, or 13) and (i = len(s)-1 or s[i+1] is a whitespace character).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSegments.spec_7",
+    "negation": "AegisSpec.CountSegments.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any byte slice s' of the same length as s that also satisfies the same allowed-character condition (i.e., for every i with 0 <= i < len(s), s'[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)) and such that for every i with 0 <= i < len(s), s[i] is a whitespace character (32, 9, 10, or 13) if and only if s'[i] is a whitespace character (32, 9, 10, or 13), if count_segments(s) returns r and count_segments(s') returns r', then r = r'.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSegments.spec_8",
+    "negation": "AegisSpec.CountSegments.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the byte slice obtained by prepending a space character (32) to s (so len(s') = len(s) + 1, s'[0] = 32, and s'[i+1] = s[i] for 0 <= i < len(s)). Then if count_segments(s) returns r and count_segments(s') returns r', we have r = r'. The analogous statement holds for appending a space character (32) to s.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSegments.spec_9",
+    "negation": "AegisSpec.CountSegments.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the byte slice obtained from s by replacing every maximal contiguous run of whitespace characters (32, 9, 10, or 13) in s with a single space character (32). Then if count_segments(s) returns r and count_segments(s') returns r', we have r = r'.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSegments.spec_10",
+    "negation": "AegisSpec.CountSegments.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that r <= (len(s) + 1) / 2, where division is integer division.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSegments.spec_11",
+    "negation": "AegisSpec.CountSegments.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that r = 0 if and only if there is no index i with 0 <= i < len(s) for which s[i] is not a whitespace character (32, 9, 10, or 13).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountSegments.spec_12",
+    "negation": "AegisSpec.CountSegments.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that r >= 1 if and only if there exists an index i with 0 <= i < len(s) for which s[i] is not a whitespace character (32, 9, 10, or 13).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountSegments.spec_13",
+    "negation": "AegisSpec.CountSegments.spec_13_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail).",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountSegments.spec_14",
+    "negation": "AegisSpec.CountSegments.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' be the byte slice obtained by removing all leading and trailing whitespace characters (32, 9, 10, or 13) from s. Then if count_segments(s) returns r and count_segments(s') returns r', we have r = r'.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountSegments.spec_15",
+    "negation": "AegisSpec.CountSegments.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s' be the byte slice obtained by appending c to s (so len(s') = len(s) + 1, s'[i] = s[i] for 0 <= i < len(s), and s'[len(s)] = c). If count_segments(s) returns r and count_segments(s') returns r', then: if len(s) = 0 or s[len(s)-1] is a whitespace character (32, 9, 10, or 13), then r' = r + 1; otherwise r' = r. The analogous statement holds for prepending c to s: if len(s) = 0 or s[0] is a whitespace character (32, 9, 10, or 13), then r' = r + 1; otherwise r' = r.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13). Let c be a byte that is an English letter, a digit, or one of the characters \"!@#$%^&*()_+-=',.:\" (i.e., a non-whitespace allowed character)."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.CountSegments.spec_16",
+    "negation": "AegisSpec.CountSegments.spec_16_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r such that r equals the number of pairs (i, j) with 0 <= i <= j <= len(s) such that: (a) for every k with i <= k < j, s[k] is not a whitespace character (32, 9, 10, or 13); (b) either i = 0 or s[i-1] is a whitespace character (32, 9, 10, or 13); (c) either j = len(s) or s[j] is a whitespace character (32, 9, 10, or 13); and (d) i < j.",
+    "preconditions": "s is a byte slice. For every i with 0 <= i < len(s), s[i] is either an English letter, a digit, one of the characters \"!@#$%^&*()_+-=',.:\", or a whitespace character (32, 9, 10, or 13)."
+  }
+]

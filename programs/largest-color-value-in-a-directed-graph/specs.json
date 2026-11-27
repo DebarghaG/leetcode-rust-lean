@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestPathValue.spec_1",
+    "negation": "AegisSpec.LargestPathValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever largest_path_value returns a result r, r is characterized as follows. The directed graph has nodes 0,...,n-1 and an edge a -> b whenever some edges[j] = [a,b]. A directed cycle means a sequence v_0,...,v_{k-1} with k >= 1 such that for every i there is an edge from v_i to v_{(i+1) mod k}; a self-loop is the case k = 1. If the graph contains a directed cycle, then r = -1. Otherwise the graph is acyclic, and r = max { val(P) : P is a nonempty valid path }, where a nonempty valid path is a sequence P = (x_0,...,x_{L-1}) with L >= 1 such that for every i with 0 <= i < L-1 there is an edge from x_i to x_{i+1}, and val(P) is the maximum, over lowercase English letters c, of the number of indices i with 0 <= i < L and colors[x_i] = c.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestPathValue.spec_2",
+    "negation": "AegisSpec.LargestPathValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, largest_path_value returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestPathValue.spec_3",
+    "negation": "AegisSpec.LargestPathValue.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_path_value returns a result r, r = -1 if and only if the directed graph determined by edges contains a directed cycle, where a self-loop is counted as a cycle of length 1.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestPathValue.spec_4",
+    "negation": "AegisSpec.LargestPathValue.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_path_value returns a result r, -1 <= r <= n.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestPathValue.spec_5",
+    "negation": "AegisSpec.LargestPathValue.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle, then r >= 1.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestPathValue.spec_6",
+    "negation": "AegisSpec.LargestPathValue.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle, then for every nonempty valid path P = (x_0,...,x_{L-1}) and every lowercase English letter c, the number of indices i with 0 <= i < L and colors[x_i] = c is at most r. Here a nonempty valid path means L >= 1 and for every i with 0 <= i < L-1 there is an edge from x_i to x_{i+1}.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestPathValue.spec_7",
+    "negation": "AegisSpec.LargestPathValue.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle, then there exists a nonempty valid path P such that val(P) = r, where val(P) is the maximum, over lowercase English letters c, of the number of nodes of P whose color is c.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestPathValue.spec_8",
+    "negation": "AegisSpec.LargestPathValue.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle and there exists a nonempty valid path P = (x_0,...,x_{L-1}) and a lowercase English letter c such that colors[x_i] = c for every i with 0 <= i < L, then r >= L.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestPathValue.spec_9",
+    "negation": "AegisSpec.LargestPathValue.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle, then r <= Lmax, where Lmax is the maximum L such that there exists a nonempty valid path with exactly L nodes.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestPathValue.spec_10",
+    "negation": "AegisSpec.LargestPathValue.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle and colors[i] != colors[j] for every pair 0 <= i < j < n, then r = 1.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestPathValue.spec_11",
+    "negation": "AegisSpec.LargestPathValue.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_path_value returns a result r, if the directed graph determined by edges contains no directed cycle and for every j with 0 <= j < m we have colors[edges[j][0]] = colors[edges[j][1]], then r = Lmax, where Lmax is the maximum L such that there exists a nonempty valid path with exactly L nodes.",
+    "preconditions": "Let n = len(colors) and m = len(edges). Preconditions: 1 <= n <= 100000; every byte colors[i] for 0 <= i < n is the ASCII code of a lowercase English letter; 0 <= m <= 100000; for every j with 0 <= j < m, edges[j] is a vector of length 2, and if edges[j][0] = a and edges[j][1] = b then 0 <= a < n and 0 <= b < n."
+  }
+]

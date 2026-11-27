@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_1",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true if and only if there exists a binary array original of length n such that for every i with 0 <= i < n, derived[i] = original[i] XOR original[(i + 1) mod n]. Equivalently, r = false if and only if no such binary array original exists.",
+    "preconditions": "Let n = len(derived). We have n >= 1, and for every i with 0 <= i < n, derived[i] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_2",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every derived satisfying the preconditions; in particular, it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "Let n = len(derived). We have n >= 1, and for every i with 0 <= i < n, derived[i] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_3",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = true if and only if the number of indices i with 0 <= i < n and derived[i] = 1 is even. Equivalently, r = true if and only if the sum of all entries derived[i] is even, or equivalently the XOR of all entries is 0.",
+    "preconditions": "Let n = len(derived). We have n >= 1, and for every i with 0 <= i < n, derived[i] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_4",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns true on derived.",
+    "preconditions": "Let n = len(derived) >= 1. The array derived is binary, the array original has length n and is binary, and for every i with 0 <= i < n, derived[i] = original[i] XOR original[(i + 1) mod n]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_5",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true on derived, there exists a binary array original of length n such that for every i with 0 <= i < n, derived[i] = original[i] XOR original[(i + 1) mod n].",
+    "preconditions": "Let n = len(derived) >= 1, and for every i with 0 <= i < n, derived[i] is either 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_6",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r_a on input a and r_b on input b, then r_a = r_b.",
+    "preconditions": "Let a and b be two binary arrays of the same length n >= 1, and suppose a and b have the same number of entries equal to 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_7",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on derived and r2 on derived2, then r2 = not r.",
+    "preconditions": "Let derived be a binary array of length n >= 1. Let j satisfy 0 <= j < n. Let derived2 be the binary array of length n with derived2[j] = 1 - derived[j] and derived2[i] = derived[i] for every i with 0 <= i < n and i != j."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_8",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on derived and r_ext on extended, then r_ext = r.",
+    "preconditions": "Let derived be a binary array of length n >= 1. Let extended be the binary array of length n + 1 with extended[i] = derived[i] for every i with 0 <= i < n and extended[n] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DoesValidArrayExist.spec_9",
+    "negation": "AegisSpec.DoesValidArrayExist.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on derived and r_ext on extended, then r_ext = not r.",
+    "preconditions": "Let derived be a binary array of length n >= 1. Let extended be the binary array of length n + 1 with extended[i] = derived[i] for every i with 0 <= i < n and extended[n] = 1."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetKth.spec_1",
+    "negation": "AegisSpec.GetKth.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define f(x) = x/2 when x is even and f(x) = 3*x + 1 when x is odd, for integers x >= 1. Define P(x) as the least n >= 0 such that applying f n times to x equals 1. Let L be the list [lo, lo+1, ..., hi] sorted in ascending lexicographic order of the key (P(x), x); that is, first by P(x), and among equal powers by x. Whenever get_kth lo hi k returns a result r, r = L[k-1], where L is 0-indexed and k is the given 1-based rank.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that for every integer x with lo <= x <= hi the Collatz iteration defined in the statement reaches 1 and P(x) fits in a 32-bit signed integer."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetKth.spec_2",
+    "negation": "AegisSpec.GetKth.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function get_kth lo hi k returns a result r; it does not fail by panic, out-of-bounds indexing, or signed 64-bit arithmetic overflow.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that for every integer x with lo <= x <= hi the Collatz iteration reaches 1 and P(x) fits in a 32-bit signed integer."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetKth.spec_3",
+    "negation": "AegisSpec.GetKth.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_kth lo hi k returns a result r, lo <= r <= hi.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetKth.spec_4",
+    "negation": "AegisSpec.GetKth.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define P(x) as in spec_1: the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi] and the number of integers x with lo <= x <= hi and (P(x), x) < (P(r), r) in lexicographic order is exactly k-1.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetKth.spec_5",
+    "negation": "AegisSpec.GetKth.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi] and the number of integers x with lo <= x <= hi and (P(r), r) < (P(x), x) in lexicographic order is exactly hi - lo + 1 - k.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetKth.spec_6",
+    "negation": "AegisSpec.GetKth.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi] and the number of integers x with lo <= x <= hi and P(x) < P(r) is strictly less than k.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetKth.spec_7",
+    "negation": "AegisSpec.GetKth.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi] and the number of integers x with lo <= x <= hi and P(x) <= P(r) is at least k.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetKth.spec_8",
+    "negation": "AegisSpec.GetKth.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi]. Let C be the number of integers x with lo <= x <= hi and P(x) < P(r). Then the number of integers x with lo <= x <= hi, P(x) = P(r), and x < r is exactly k - 1 - C.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetKth.spec_9",
+    "negation": "AegisSpec.GetKth.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. If get_kth lo hi k1 returns r1 and get_kth lo hi k2 returns r2, then (P(r1), r1) < (P(r2), r2) in lexicographic order.",
+    "preconditions": "lo, hi, k1 and k2 are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k1 < k2 <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetKth.spec_10",
+    "negation": "AegisSpec.GetKth.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi 1 returns a result r, r lies in [lo, hi], and for every integer x with lo <= x <= hi, (P(r), r) <= (P(x), x) in lexicographic order. Equivalently, P(r) is minimal on [lo, hi] and r is the smallest integer attaining that minimal power.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000, k = 1, and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetKth.spec_11",
+    "negation": "AegisSpec.GetKth.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi (hi - lo + 1) returns a result r, r lies in [lo, hi], and for every integer x with lo <= x <= hi, (P(x), x) <= (P(r), r) in lexicographic order. Equivalently, P(r) is maximal on [lo, hi] and r is the largest integer attaining that maximal power.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000, k = hi - lo + 1, and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetKth.spec_12",
+    "negation": "AegisSpec.GetKth.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_kth lo hi k returns a result r, r = lo = hi.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000, lo = hi, and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) is defined for every x in [lo, hi]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetKth.spec_13",
+    "negation": "AegisSpec.GetKth.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define P(x) as the number of Collatz steps from x to 1. Whenever get_kth lo hi k returns a result r, r lies in [lo, hi] and 0 <= P(r) <= 2^31 - 1.",
+    "preconditions": "lo, hi and k are mathematical integers represented by Std.I64, with 1 <= lo <= hi <= 1000 and 1 <= k <= hi - lo + 1. The problem guarantees that P(x) fits in a 32-bit signed integer for every x in [lo, hi]."
+  }
+]

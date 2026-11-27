@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountDays.spec_1",
+    "negation": "AegisSpec.CountDays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a day d to be covered by meetings if there exists an index i with 0 <= i < len(meetings) and s_i <= d <= e_i. The function returns a result r (it does not fail) and the integer value R of r equals the number of integers d such that 1 <= d <= D and d is not covered by meetings.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountDays.spec_2",
+    "negation": "AegisSpec.CountDays.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r (it does not fail) and its integer value R satisfies 0 <= R <= D.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountDays.spec_3",
+    "negation": "AegisSpec.CountDays.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (it does not fail, overflow, panic, or go out of bounds).",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountDays.spec_4",
+    "negation": "AegisSpec.CountDays.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and its integer value R equals D - Σ_{i=0}^{len(meetings)-1} (e_i - s_i + 1).",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i. Assume that for every pair of indices i,j with 0 <= i < j < len(meetings), the intervals [s_i,e_i] and [s_j,e_j] are disjoint, i.e., e_i < s_j or e_j < s_i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountDays.spec_5",
+    "negation": "AegisSpec.CountDays.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the call count_days(days, meetings) returns a result r and the call count_days(days, meetings') returns a result r', the integer values R and R' are equal.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9. Assume meetings and meetings' are two meeting lists, each satisfying: 1 <= len(meetings), len(meetings') <= 10^5, and for every index in the appropriate range, the inner vector has length 2 and 1 <= start <= end <= D. Write s_i,e_i for meetings and s'_j,e'_j for meetings'. Suppose that for every integer d with 1 <= d <= D, d is covered by meetings if and only if d is covered by meetings', i.e., (∃i, s_i <= d <= e_i) iff (∃j, s'_j <= d <= e'_j)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountDays.spec_6",
+    "negation": "AegisSpec.CountDays.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both calls count_days(days, meetings) and count_days(days, meetings') return results r and r', their integer values satisfy R' <= R.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9. Assume meetings and meetings' are two meeting lists, each satisfying: 1 <= len(meetings), len(meetings') <= 10^5, and for every index in the appropriate range, the inner vector has length 2 and 1 <= start <= end <= D. Write s_i,e_i for meetings and s'_j,e'_j for meetings'. Suppose that for every integer d with 1 <= d <= D, if d is covered by meetings then d is covered by meetings', i.e., (∃i, s_i <= d <= e_i) implies (∃j, s'_j <= d <= e'_j)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountDays.spec_7",
+    "negation": "AegisSpec.CountDays.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r with integer value R = 0 if and only if for every integer d with 1 <= d <= D there exists an index i with 0 <= i < len(meetings) and s_i <= d <= e_i.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountDays.spec_8",
+    "negation": "AegisSpec.CountDays.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and its integer value R equals (a - 1) + (D - b).",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i. Assume there exist integers a and b with 1 <= a <= b <= D such that for every integer d with 1 <= d <= D, there exists an index i with 0 <= i < len(meetings) and s_i <= d <= e_i if and only if a <= d <= b."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountDays.spec_9",
+    "negation": "AegisSpec.CountDays.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and its integer value R satisfies R >= (s_min - 1) + (D - e_max).",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i. Let s_min = min_{0<=i<len(meetings)} s_i and e_max = max_{0<=i<len(meetings)} e_i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountDays.spec_10",
+    "negation": "AegisSpec.CountDays.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and its integer value R satisfies R <= D - L.",
+    "preconditions": "Let D be the integer value of days. Assume 1 <= D <= 10^9, 1 <= len(meetings) <= 10^5, and for every i with 0 <= i < len(meetings), len(meetings[i]) = 2 and 1 <= meetings[i][0] <= meetings[i][1] <= D. Write s_i = meetings[i][0] and e_i = meetings[i][1] for each such i. Let L = max_{0<=i<len(meetings)} (e_i - s_i + 1)."
+  }
+]

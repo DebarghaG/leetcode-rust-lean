@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountComponents.spec_1",
+    "negation": "AegisSpec.CountComponents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, r equals the number of connected components of the undirected graph G whose vertices are the indices 0,1,...,n-1 and in which distinct indices i,j are joined by an edge if and only if lcm(nums[i], nums[j]) <= threshold. A connected component is an equivalence class of the relation i and j are connected, where i and j are connected iff i = j or there is a finite sequence i = p0, p1, ..., pk = j with k >= 0 such that for every t with 1 <= t <= k the pair {p_{t-1}, p_t} is an edge of G. Equivalently, it is a maximal nonempty set of vertices that is connected and has no edge to its complement. The value r is the i64 representation of this count.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountComponents.spec_2",
+    "negation": "AegisSpec.CountComponents.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, count_components(nums, threshold) returns a result r; in particular it does not panic, fail by arithmetic overflow or underflow, or access nums out of bounds.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountComponents.spec_3",
+    "negation": "AegisSpec.CountComponents.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, 1 <= r <= n, where n = len(nums).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountComponents.spec_4",
+    "negation": "AegisSpec.CountComponents.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, r = 1.",
+    "preconditions": "Let n = len(nums). Assume n = 1, 1 <= nums[0] <= 1000000000, and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountComponents.spec_5",
+    "negation": "AegisSpec.CountComponents.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, r = n if and only if for every i,j with 0 <= i < j < n, lcm(nums[i], nums[j]) > threshold. Equivalently, the returned count equals the number of vertices exactly when the graph G has no edges.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountComponents.spec_6",
+    "negation": "AegisSpec.CountComponents.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, if for every i,j with 0 <= i < j < n we have lcm(nums[i], nums[j]) <= threshold, then r = 1.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountComponents.spec_7",
+    "negation": "AegisSpec.CountComponents.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, if threshold = 1 then r = n.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountComponents.spec_8",
+    "negation": "AegisSpec.CountComponents.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, if there exists k with 0 <= k < n and nums[k] = 1, and if threshold >= M, then r = 1.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000. Let M = max{nums[i] | 0 <= i < n}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountComponents.spec_9",
+    "negation": "AegisSpec.CountComponents.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_components(nums, threshold) returns r and count_components(nums2, threshold) returns r2, we have r = r2.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and 1 <= threshold <= 200000. Let nums2 be any other slice of length n whose entries are a permutation of the entries of nums: there exists a bijection pi from {0,...,n-1} to itself such that nums2[pi(i)] = nums[i] for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountComponents.spec_10",
+    "negation": "AegisSpec.CountComponents.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_components(nums, t1) returns r1 and count_components(nums, t2) returns r2, we have r2 <= r1.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; and let t1,t2 be integers with 1 <= t1 <= t2 <= 200000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountComponents.spec_11",
+    "negation": "AegisSpec.CountComponents.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, r <= n - 1.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; 1 <= threshold <= 200000; and there exist distinct indices i,j with 0 <= i,j < n such that lcm(nums[i], nums[j]) <= threshold."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountComponents.spec_12",
+    "negation": "AegisSpec.CountComponents.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_components(nums, threshold) returns a result r, r = 1 + the number of indices i with 0 <= i < n and nums[i] > threshold.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000; for every i with 0 <= i < n, 1 <= nums[i] <= 1000000000; for all distinct i,j with 0 <= i,j < n, nums[i] != nums[j]; 1 <= threshold <= 200000; and there exists k with 0 <= k < n and nums[k] = 1."
+  }
+]

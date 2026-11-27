@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_1",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = score(s), where score is defined on balanced parentheses strings by: score(empty) = 0; for nonempty x, let p be the shortest nonempty balanced prefix of x and write x = p ++ rest (rest may be empty); if p = '()' then score(x) = 1 + score(rest); otherwise p has length at least 4 and p = '(' ++ t ++ ')' for a nonempty balanced t, and score(x) = 2 * score(t) + score(rest).",
+    "preconditions": "s is a byte slice whose length is between 2 and 50 inclusive; every byte s[i] (0 <= i < len(s)) is either 40 (ASCII '(') or 41 (ASCII ')'); and s is balanced: the number of '(' bytes in s equals the number of ')' bytes in s, and for every k with 0 <= k <= len(s), the number of '(' bytes among s[0],...,s[k-1] is at least the number of ')' bytes among s[0],...,s[k-1] (the prefix is empty when k=0)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_2",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (that is, it does not fail, panic, overflow, or access an index outside 0..len(s)-1) for every s satisfying the preconditions.",
+    "preconditions": "s is a byte slice whose length is between 2 and 50 inclusive; every byte of s is either 40 (ASCII '(') or 41 (ASCII ')'); and s is balanced: total '(' count equals total ')' count and every prefix has at least as many '(' as ')'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_3",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= n, where n is the number of '(' bytes in s (equivalently n = len(s)/2 is the number of matched pairs).",
+    "preconditions": "s is a byte slice whose length is between 2 and 50 inclusive; every byte of s is either 40 (ASCII '(') or 41 (ASCII ')'); and s is balanced: total '(' count equals total ')' count and every prefix has at least as many '(' as ')'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_4",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 2 to the power (n-1), where n is the number of '(' bytes in s.",
+    "preconditions": "s is a byte slice whose length is between 2 and 50 inclusive; every byte of s is either 40 (ASCII '(') or 41 (ASCII ')'); and s is balanced: total '(' count equals total ')' count and every prefix has at least as many '(' as ')'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_5",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = n.",
+    "preconditions": "s is balanced and, for some integer n with 1 <= n <= 25, len(s) = 2*n and for every i with 0 <= i < n, s[2*i] = '(' and s[2*i+1] = ')'. Thus s is '()' repeated n times."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_6",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 2 to the power (n-1).",
+    "preconditions": "s is balanced and, for some integer n with 1 <= n <= 25, len(s) = 2*n, s[i] = '(' for every i with 0 <= i < n, and s[i] = ')' for every i with n <= i < 2*n. Thus s = '(' repeated n times followed by ')' repeated n times."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_7",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on s, r_u on u, and r_v on v, it holds that r = r_u + r_v.",
+    "preconditions": "s satisfies the main preconditions. There is an integer k with 0 < k < len(s) such that u is the prefix s[0..k) (bytes at indices 0 through k-1) and v is the suffix s[k..len(s)) (bytes at indices k through len(s)-1); both u and v are nonempty and consist only of bytes 40 ('(') and 41 (')'), and both are balanced parentheses strings."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_8",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on s and r_t on t, it holds that r = 2 * r_t.",
+    "preconditions": "s satisfies the main preconditions, and there is a nonempty balanced parentheses string t such that s = '(' ++ t ++ ')'; thus s is a single primitive balanced block with nonempty inside."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_9",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on s and r' on mirror(s), it holds that r = r'.",
+    "preconditions": "s satisfies the main preconditions. Define mirror(s) to be the byte array of length len(s) with mirror(s)[i] = '(' if s[len(s)-1-i] = ')' and mirror(s)[i] = ')' if s[len(s)-1-i] = '(' (indices are 0-based). Then mirror(s) is also balanced and has the same length."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_10",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on s and r' on t, it holds that r = r'.",
+    "preconditions": "s satisfies the main preconditions, and s = u ++ v where u and v are nonempty balanced parentheses strings. Let t = v ++ u."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ScoreOfParentheses.spec_11",
+    "negation": "AegisSpec.ScoreOfParentheses.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = the sum over all indices i with 0 <= i < len(s)-1, s[i] = '(' and s[i+1] = ')' of 2 to the power d(i), where d(i) is the number of '(' bytes among s[0],...,s[i-1] minus the number of ')' bytes among s[0],...,s[i-1].",
+    "preconditions": "s satisfies the main preconditions."
+  }
+]

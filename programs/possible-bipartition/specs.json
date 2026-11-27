@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PossibleBipartition.spec_1",
+    "negation": "AegisSpec.PossibleBipartition.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r, r = true if and only if there exists a function c from {1,...,n} to {0,1} such that for every i with 0 <= i < len(dislikes), c(dislikes[i][0]) != c(dislikes[i][1]).",
+    "preconditions": "n and dislikes satisfy the problem constraints: 1 <= n <= 2000; 0 <= len(dislikes) <= 10000; every dislikes[i] has length 2; for every i with 0 <= i < len(dislikes), 1 <= dislikes[i][0] < dislikes[i][1] <= n; and all ordered pairs (dislikes[i][0], dislikes[i][1]) are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PossibleBipartition.spec_2",
+    "negation": "AegisSpec.PossibleBipartition.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function possible_bipartition n dislikes returns a result r; in particular, it does not fail by overflow, out-of-bounds indexing, or panic on any input satisfying the constraints.",
+    "preconditions": "n and dislikes satisfy the problem constraints: 1 <= n <= 2000; 0 <= len(dislikes) <= 10000; every dislikes[i] has length 2; for every i with 0 <= i < len(dislikes), 1 <= dislikes[i][0] < dislikes[i][1] <= n; and all ordered pairs (dislikes[i][0], dislikes[i][1]) are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PossibleBipartition.spec_3",
+    "negation": "AegisSpec.PossibleBipartition.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r, r = false.",
+    "preconditions": "n and dislikes satisfy the problem constraints, and there exist an odd integer k >= 3 and pairwise distinct labels v_0,...,v_{k-1} in {1,...,n} such that for every j with 0 <= j < k, the unordered pair {v_j, v_{(j+1) mod k}} occurs among the dislike pairs."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PossibleBipartition.spec_4",
+    "negation": "AegisSpec.PossibleBipartition.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r and r = false, there exist an odd integer k >= 3 and pairwise distinct labels v_0,...,v_{k-1} in {1,...,n} such that for every j with 0 <= j < k, the unordered pair {v_j, v_{(j+1) mod k}} occurs among the dislike pairs.",
+    "preconditions": "n and dislikes satisfy the problem constraints."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PossibleBipartition.spec_5",
+    "negation": "AegisSpec.PossibleBipartition.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "n and dislikes satisfy the problem constraints, and the undirected graph G with vertex set {1,...,n} and an edge between a and b exactly when some dislike pair equals {a,b} contains no cycle of length at least 3."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PossibleBipartition.spec_6",
+    "negation": "AegisSpec.PossibleBipartition.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r and possible_bipartition n dislikes' returns a result r', we have r = r'.",
+    "preconditions": "n, dislikes, and dislikes' all satisfy the problem constraints over the same n, and dislikes' is a permutation of dislikes (the same multiset of ordered pairs, possibly in a different order)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PossibleBipartition.spec_7",
+    "negation": "AegisSpec.PossibleBipartition.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever possible_bipartition n1 dislikes returns a result r1 and possible_bipartition n2 dislikes returns a result r2, we have r1 = r2.",
+    "preconditions": "1 <= n1 <= n2 <= 2000, and dislikes satisfies the problem constraints with n = n1; hence dislikes also satisfies the problem constraints with n = n2 because all its entries lie in 1..n1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PossibleBipartition.spec_8",
+    "negation": "AegisSpec.PossibleBipartition.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r and possible_bipartition n dislikes' returns a result r', if r = true then r' = true.",
+    "preconditions": "n, dislikes, and dislikes' satisfy the problem constraints, and every dislike pair of dislikes' also occurs as a dislike pair of dislikes (so dislikes' has a subset of the edges of dislikes)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PossibleBipartition.spec_9",
+    "negation": "AegisSpec.PossibleBipartition.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever possible_bipartition n dislikes returns r, possible_bipartition n dislikes1 returns r1, and possible_bipartition n dislikes2 returns r2, we have r = true if and only if (r1 = true and r2 = true).",
+    "preconditions": "n, dislikes, dislikes1, and dislikes2 satisfy the problem constraints; no person label occurs as an endpoint in both dislikes1 and dislikes2; and dislikes is a permutation of the concatenation of dislikes1 and dislikes2 (the dislike pairs of dislikes are exactly the disjoint union of those of dislikes1 and dislikes2)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PossibleBipartition.spec_10",
+    "negation": "AegisSpec.PossibleBipartition.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever possible_bipartition n dislikes returns a result r with r = true, there exists a valid split c : {1,...,n} -> {0,1} (meaning c(dislikes[i][0]) != c(dislikes[i][1]) for every dislike pair), and for every such valid split c, every two labels u and v in {1,...,n}, every integer L >= 0, and every sequence u = w_0, w_1, ..., w_L = v of labels such that for each j with 0 <= j < L the unordered pair {w_j, w_{j+1}} occurs among the dislike pairs, we have: if L is odd then c(u) != c(v), and if L is even then c(u) = c(v).",
+    "preconditions": "n and dislikes satisfy the problem constraints."
+  }
+]

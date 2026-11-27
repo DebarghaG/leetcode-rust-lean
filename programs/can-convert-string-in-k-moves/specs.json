@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanConvertString.spec_1",
+    "negation": "AegisSpec.CanConvertString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). If len(t) != n, then whenever the function returns a result r, r = false. If len(t) = n, for each i with 0 <= i < n let d_i be the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26. For each d in {1,...,25}, let C_d = |{i | 0 <= i < n and d_i = d}| and let A_d = |{m in Z | 1 <= m <= k and m mod 26 = d}|. Then whenever the function returns a result r, r = true if and only if C_d <= A_d for every d in {1,...,25}. Equivalently, for every d in {1,...,25} with C_d > 0, d + 26*(C_d - 1) <= k. Positions with d_i = 0 need no move and impose no condition.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanConvertString.spec_2",
+    "negation": "AegisSpec.CanConvertString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s, t, and k satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanConvertString.spec_3",
+    "negation": "AegisSpec.CanConvertString.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If len(s) != len(t), then the function returns false.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanConvertString.spec_4",
+    "negation": "AegisSpec.CanConvertString.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if len(s) = len(t) and s[i] = t[i] for every i with 0 <= i < len(s).",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; k = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanConvertString.spec_5",
+    "negation": "AegisSpec.CanConvertString.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d be the unique integer in {0,...,25} such that (s[0] - 97 + d) mod 26 = (t[0] - 97) mod 26. The function returns true if and only if d = 0 or k >= d.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = 1; 0 <= k <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanConvertString.spec_6",
+    "negation": "AegisSpec.CanConvertString.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For each i with 0 <= i < n let d_i be the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26. The function returns true if and only if the nonzero values among d_0,...,d_{n-1} are pairwise distinct and each is at most k.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k < 26."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanConvertString.spec_7",
+    "negation": "AegisSpec.CanConvertString.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns true for (s, t, k1), then the function returns true for (s, t, k2).",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k1 <= k2 <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanConvertString.spec_8",
+    "negation": "AegisSpec.CanConvertString.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let s' and t' be the byte slices defined by s'[i] = s[pi(i)] and t'[i] = t[pi(i)] for every i with 0 <= i < n. Then the function returns the same boolean on (s, t, k) and on (s', t', k).",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k <= 10^9; pi is a permutation of {0,...,n-1}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanConvertString.spec_9",
+    "negation": "AegisSpec.CanConvertString.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns true.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k <= 10^9; k >= 26*n - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanConvertString.spec_10",
+    "negation": "AegisSpec.CanConvertString.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns true, then len(s) = len(t) = n and, for every i with 0 <= i < n, if d_i > 0 then d_i <= k, where d_i is the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanConvertString.spec_11",
+    "negation": "AegisSpec.CanConvertString.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns true, then len(s) = len(t) = n and the number of indices i with 0 <= i < n and d_i > 0 is at most k, where d_i is the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); 1 <= len(s), len(t) <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanConvertString.spec_12",
+    "negation": "AegisSpec.CanConvertString.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For each i with 0 <= i < n let d_i be the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26. If every nonzero d_i satisfies d_i <= k and no two indices i != j have the same nonzero d_i, then the function returns true.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CanConvertString.spec_13",
+    "negation": "AegisSpec.CanConvertString.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c be the number of indices i with 0 <= i < n and d_i = d. The function returns true if and only if c = 0 or (k >= d and c <= floor((k - d)/26) + 1).",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k <= 10^9; d is an integer with 1 <= d <= 25; for every i with 0 <= i < n, the unique d_i in {0,...,25} satisfying (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26 belongs to {0, d}."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CanConvertString.spec_14",
+    "negation": "AegisSpec.CanConvertString.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For each i with 0 <= i < n let d_i be the unique integer in {0,...,25} such that (s[i] - 97 + d_i) mod 26 = (t[i] - 97) mod 26. For each d in {1,...,25} let C_d be the number of i with d_i = d. For every d in {1,...,25} with C_d > 0, if k < d + 26*(C_d - 1), then the function returns false.",
+    "preconditions": "s and t are byte slices containing only lowercase English letters (bytes 97 through 122); len(s) = len(t) = n with 1 <= n <= 10^5; 0 <= k <= 10^9."
+  }
+]

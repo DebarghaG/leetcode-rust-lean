@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_1",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). Call an index pair (l, r) admissible when 0 <= l <= r < n and the sequence obtained by deleting nums[l], nums[l+1], ..., nums[r] from nums, namely nums[0], nums[1], ..., nums[l-1], nums[r+1], nums[r+2], ..., nums[n-1] (all these entries kept in their original order), is strictly increasing: for every two consecutive entries a, b of this remaining sequence we have a < b. By definition the empty sequence and any one-element sequence are strictly increasing. The call returns a result res (an i64) such that res equals the number of admissible pairs (l, r).",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_2",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums) and let res be the returned value. Then res <= n*(n+1)/2.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_3",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(nums) and let res be the returned value. If n >= 2, then res >= 3. In particular the three distinct subarrays nums[0..n-1], nums[0..n-2] and nums[1..n-1] are all incremovable: removing nums[0..n-1] leaves the empty array, removing nums[0..n-2] leaves the single entry nums[n-1], and removing nums[1..n-1] leaves the single entry nums[0]; the empty array and any one-element array are strictly increasing.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_4",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 1, the call returns res = 1.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_5",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 2, the call returns res = 3.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_6",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(nums) and let res be the returned value. If nums is strictly increasing (for every i with 0 <= i < n-1, nums[i] < nums[i+1]), then res = n*(n+1)/2.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_7",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_7_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (it does not fail, panic, overflow, or go out of bounds).",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_8",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums) and let res be the returned value. If n >= 3 and nums is strictly decreasing (for every i with 0 <= i < n-1, nums[i] > nums[i+1]), then res = 3.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_9",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(nums) and let res be the returned value. If n >= 2 and all entries of nums are equal (nums[i] = nums[j] for all 0 <= i, j < n), then res = 3.",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_10",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every pair of indices i, j with 0 <= i, j < n, a[i] < a[j] if and only if b[i] < b[j]. Then incremovable_subarray_count(a) = incremovable_subarray_count(b).",
+    "preconditions": "1 <= len(a) = len(b) = n <= 50, and 1 <= a[i], b[i] <= 50 for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IncremovableSubarrayCount.spec_11",
+    "negation": "AegisSpec.IncremovableSubarrayCount.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums) and let res be the returned value. If n >= 3 and res = n*(n+1)/2, then nums is strictly increasing (for every i with 0 <= i < n-1, nums[i] < nums[i+1]).",
+    "preconditions": "1 <= len(nums) <= 50 and 1 <= nums[i] <= 50 for every 0 <= i < len(nums)."
+  }
+]

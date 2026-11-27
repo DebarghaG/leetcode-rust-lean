@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_1",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r : Bool (it does not fail) and r = true if and only if all of the following hold: (1) len(password) >= 8; (2) there exists an index i with 0 <= i < len(password) and 97 <= password[i] <= 122; (3) there exists an index i with 0 <= i < len(password) and 65 <= password[i] <= 90; (4) there exists an index i with 0 <= i < len(password) and 48 <= password[i] <= 57; (5) there exists an index i with 0 <= i < len(password) such that password[i] is one of the special bytes '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'; (6) for every index i with 0 <= i < len(password)-1, password[i] != password[i+1].",
+    "preconditions": "password is a Slice U8 with 1 <= len(password) <= 100, and every byte password[i], for 0 <= i < len(password), is an ASCII uppercase letter (65 <= password[i] <= 90), an ASCII lowercase letter (97 <= password[i] <= 122), an ASCII digit (48 <= password[i] <= 57), or one of the special bytes '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_2",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r : Bool; equivalently, the computation does not fail on any input satisfying the preconditions.",
+    "preconditions": "password is a Slice U8 with 1 <= len(password) <= 100, and every byte password[i], for 0 <= i < len(password), is an ASCII uppercase letter (65 <= password[i] <= 90), an ASCII lowercase letter (97 <= password[i] <= 122), an ASCII digit (48 <= password[i] <= 57), or one of the special bytes '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_3",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r : Bool, if r = true then all six conditions hold: len(password) >= 8; there exists a lowercase ASCII letter; there exists an uppercase ASCII letter; there exists an ASCII digit; there exists a special byte from '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'; and for every i with 0 <= i < len(password)-1, password[i] != password[i+1].",
+    "preconditions": "password is a Slice U8 satisfying the problem constraints."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_4",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r : Bool with r = true.",
+    "preconditions": "password is a Slice U8 satisfying the problem constraints, len(password) >= 8, password contains at least one lowercase ASCII letter, at least one uppercase ASCII letter, at least one ASCII digit, at least one special byte from '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', and for every i with 0 <= i < len(password)-1, password[i] != password[i+1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_5",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever strong_password_checker_ii(password) returns a result r1 : Bool and strong_password_checker_ii(other) returns a result r2 : Bool, we have r1 = r2.",
+    "preconditions": "password and other are two Slice U8 values satisfying the problem constraints, len(password) = len(other), for every i with 0 <= i < len(password) the bytes password[i] and other[i] lie in the same one of the four categories (uppercase ASCII letter, lowercase ASCII letter, ASCII digit, special byte), and for every i with 0 <= i < len(password)-1, password[i] = password[i+1] if and only if other[i] = other[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_6",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r : Bool with r = true, there exist indices iL, iU, iD, iS such that 0 <= iL, iU, iD, iS < len(password), password[iL] is a lowercase ASCII letter, password[iU] is an uppercase ASCII letter, password[iD] is an ASCII digit, password[iS] is a special byte from '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', and for every j with 0 <= j < len(password)-1, password[j] != password[j+1].",
+    "preconditions": "password is a Slice U8 satisfying the problem constraints."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StrongPasswordCheckerIi.spec_7",
+    "negation": "AegisSpec.StrongPasswordCheckerIi.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r : Bool, if r = false then at least one of the following holds: len(password) < 8; there is no lowercase ASCII letter; there is no uppercase ASCII letter; there is no ASCII digit; there is no special byte from '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'; or there exists i with 0 <= i < len(password)-1 and password[i] = password[i+1].",
+    "preconditions": "password is a Slice U8 satisfying the problem constraints."
+  }
+]

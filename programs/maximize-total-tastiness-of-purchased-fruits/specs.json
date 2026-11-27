@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTastiness.spec_1",
+    "negation": "AegisSpec.MaxTastiness.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum total tastiness over all purchase plans (S, C) such that S ⊆ {0,...,n-1}, C ⊆ S, |C| <= maxCoupons, and the total price sum_{i in S\\C} price[i] + sum_{i in C} floor(price[i]/2) is at most maxAmount; the tastiness of such a plan is sum_{i in S} tastiness[i]. Equivalently, r = max { sum_{i in S} tastiness[i] | S ⊆ {0,...,n-1}, C ⊆ S, |C| <= maxCoupons, sum_{i in S\\C} price[i] + sum_{i in C} floor(price[i]/2) <= maxAmount }. The empty plan (S = C = ∅) is allowed and gives tastiness 0.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5. All values are 64-bit integers; price[i]/2 denotes integer division rounding down (floor)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTastiness.spec_2",
+    "negation": "AegisSpec.MaxTastiness.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (i.e., it does not fail, panic, or overflow).",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTastiness.spec_3",
+    "negation": "AegisSpec.MaxTastiness.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTastiness.spec_4",
+    "negation": "AegisSpec.MaxTastiness.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{n-1} tastiness[i].",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTastiness.spec_5",
+    "negation": "AegisSpec.MaxTastiness.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist sets S and C with C ⊆ S ⊆ {0,...,n-1} such that |C| <= maxCoupons, sum_{i in S\\C} price[i] + sum_{i in C} floor(price[i]/2) <= maxAmount, and sum_{i in S} tastiness[i] = r.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTastiness.spec_6",
+    "negation": "AegisSpec.MaxTastiness.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of sets S, C with C ⊆ S ⊆ {0,...,n-1}, |C| <= maxCoupons, and sum_{i in S\\C} price[i] + sum_{i in C} floor(price[i]/2) <= maxAmount, we have sum_{i in S} tastiness[i] <= r.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTastiness.spec_7",
+    "negation": "AegisSpec.MaxTastiness.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exists a subset S ⊆ {0,...,n-1} such that r = sum_{i in S} tastiness[i].",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTastiness.spec_8",
+    "negation": "AegisSpec.MaxTastiness.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (price, tastiness, maxAmount, maxCoupons) and returns r' on (price', tastiness', maxAmount, maxCoupons), we have r = r'.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5. Let π be any permutation of {0,...,n-1}, and define slices price' and tastiness' of length n by price'[i] = price[π(i)] and tastiness'[i] = tastiness[π(i)] for 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxTastiness.spec_9",
+    "negation": "AegisSpec.MaxTastiness.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on (price, tastiness, maxAmount1, maxCoupons) and returns r2 on (price, tastiness, maxAmount2, maxCoupons), we have r1 <= r2.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount1 <= maxAmount2 <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxTastiness.spec_10",
+    "negation": "AegisSpec.MaxTastiness.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on (price, tastiness, maxAmount, maxCoupons1) and returns r2 on (price, tastiness, maxAmount, maxCoupons2), we have r1 <= r2.",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons1 <= maxCoupons2 <= 5."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxTastiness.spec_11",
+    "negation": "AegisSpec.MaxTastiness.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on (p1, tastiness, maxAmount, maxCoupons) and returns r2 on (p2, tastiness, maxAmount, maxCoupons), we have r1 >= r2.",
+    "preconditions": "n = len(p1) = len(p2) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= p1[i] <= p2[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxTastiness.spec_12",
+    "negation": "AegisSpec.MaxTastiness.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r1 on (price, t1, maxAmount, maxCoupons) and returns r2 on (price, t2, maxAmount, maxCoupons), we have r1 <= r2.",
+    "preconditions": "n = len(price) = len(t1) = len(t2); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= t1[i] <= t2[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxTastiness.spec_13",
+    "negation": "AegisSpec.MaxTastiness.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{n-1} tastiness[i].",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; 0 <= maxCoupons <= 5; and sum_{i=0}^{n-1} price[i] <= maxAmount."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxTastiness.spec_14",
+    "negation": "AegisSpec.MaxTastiness.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r equals the maximum over all subsets S ⊆ {0,...,n-1} with sum_{i in S} price[i] <= maxAmount of sum_{i in S} tastiness[i].",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; maxCoupons = 0."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxTastiness.spec_15",
+    "negation": "AegisSpec.MaxTastiness.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r equals the maximum over all subsets S ⊆ {0,...,n-1} with sum_{i in S} floor(price[i]/2) <= maxAmount of sum_{i in S} tastiness[i].",
+    "preconditions": "n = len(price) = len(tastiness); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= price[i] <= 1000 and 0 <= tastiness[i] <= 1000; 0 <= maxAmount <= 1000; maxCoupons >= n."
+  }
+]

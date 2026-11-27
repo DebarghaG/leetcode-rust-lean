@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_1",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). The length of r is exactly len(puzzles): len(r) = len(puzzles). For every i with 0 <= i < len(puzzles), r[i] equals the number of indices j with 0 <= j < len(words) such that the word words[j] is valid for the puzzle puzzles[i], where a word w is valid for a puzzle p if and only if (1) w contains p[0] (there exists k with 0 <= k < len(w) and w[k] = p[0]) and (2) every byte of w occurs in p (for every k with 0 <= k < len(w), there exists l with 0 <= l < len(p) and w[k] = p[l]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_2",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r whose length is exactly len(puzzles): len(r) = len(puzzles). There are no extra entries, and no puzzles are omitted.",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_3",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), 0 <= r[i] <= len(words).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_4",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), r[i] = 0 if and only if there is no index j with 0 <= j < len(words) for which the word words[j] is valid for the puzzle puzzles[i] (validity: words[j] contains puzzles[i][0] and every byte of words[j] occurs in puzzles[i]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_5",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), r[i] = len(words) if and only if every word words[j] (0 <= j < len(words)) is valid for puzzles[i] (i.e., words[j] contains puzzles[i][0] and every byte of words[j] occurs in puzzles[i]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_6",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that the sum of r[i] over all i with 0 <= i < len(puzzles) equals the number of pairs (i, j) with 0 <= i < len(puzzles) and 0 <= j < len(words) such that words[j] is valid for puzzles[i] (contains puzzles[i][0] and all its bytes occur in puzzles[i]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_7",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r such that for any two indices i and k with 0 <= i < len(puzzles) and 0 <= k < len(puzzles), if puzzles[i][0] = puzzles[k][0] and for every byte c it holds that c occurs in puzzles[i] if and only if c occurs in puzzles[k], then r[i] = r[k].",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_8",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that for any two indices i and k with 0 <= i < len(puzzles) and 0 <= k < len(puzzles), if puzzles[i][0] = puzzles[k][0] and every byte occurring in puzzles[i] also occurs in puzzles[k], then r[i] <= r[k].",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_9",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), r[i] equals the number of non-empty words w in words (i.e., len(w) >= 1) that are valid for puzzles[i] (contain puzzles[i][0] and have all bytes in puzzles[i]). In particular, any empty word in words contributes 0 to every r[i].",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_10",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), if len(puzzles[i]) = 1, then r[i] equals the number of words w in words with len(w) >= 1 such that every byte of w equals puzzles[i][0].",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_11",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), if every lowercase letter 'a' through 'z' occurs in puzzles[i], then r[i] equals the number of words w in words that contain puzzles[i][0] (i.e., there exists k with 0 <= k < len(w) and w[k] = puzzles[i][0]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_12",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), r[i] is at most the number of indices j with 0 <= j < len(words) such that words[j] contains puzzles[i][0] (there exists k with 0 <= k < len(words[j]) and words[j][k] = puzzles[i][0]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_13",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every i with 0 <= i < len(puzzles), r[i] is at most the number of indices j with 0 <= j < len(words) such that every byte of words[j] occurs in puzzles[i] (for every k with 0 <= k < len(words[j]), there exists l with 0 <= l < len(puzzles[i]) and words[j][k] = puzzles[i][l]).",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_14",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r1 for (words1, puzzles) and r2 for (words2, puzzles), and neither call fails. If len(words1) = len(words2) and for every j with 0 <= j < len(words1) the set of bytes occurring in words1[j] equals the set of bytes occurring in words2[j] (for every byte c, c occurs in words1[j] if and only if c occurs in words2[j]), then for every i with 0 <= i < len(puzzles), r1[i] = r2[i]. Equivalently, for each puzzle the count depends on each word only through its set of occurring bytes, not the order or multiplicity of those bytes.",
+    "preconditions": "words1, words2, and puzzles are slices of byte vectors. 0 <= len(words1) = len(words2) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_15",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r such that for any permutation sigma of the index set {0, ..., len(words)-1}, if words' is the slice with words'[j] = words[sigma(j)] and r' is the result for (words', puzzles), then for every i with 0 <= i < len(puzzles), r'[i] = r[i].",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_16",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r is the result for (words, puzzles) and r' is the result for (words', puzzles), then for every i with 0 <= i < len(puzzles), r'[i] = r[i] + 1 if w is valid for puzzles[i] (w contains puzzles[i][0] and every byte of w occurs in puzzles[i]), and r'[i] = r[i] otherwise.",
+    "preconditions": "words, words', and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5, len(words') = len(words) + 1, and 0 <= len(puzzles) <= 10^4. There is a byte vector w such that words'[j] = words[j] for every 0 <= j < len(words) and words'[len(words)] = w. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.FindNumOfValidWords.spec_17",
+    "negation": "AegisSpec.FindNumOfValidWords.spec_17_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every i with 0 <= i < len(puzzles), r[i] equals the sum over all sets S of bytes such that puzzles[i][0] is in S and S is a subset of letters(puzzles[i]) of the number of indices j with 0 <= j < len(words) and letters(words[j]) = S, where letters(v) is the set of bytes occurring in v.",
+    "preconditions": "words and puzzles are slices of byte vectors. 0 <= len(words) <= 10^5 and 0 <= len(puzzles) <= 10^4. Every byte occurring in any word or puzzle is a lowercase ASCII letter ('a' through 'z'). Every puzzle is non-empty: for every i with 0 <= i < len(puzzles), len(puzzles[i]) >= 1."
+  }
+]

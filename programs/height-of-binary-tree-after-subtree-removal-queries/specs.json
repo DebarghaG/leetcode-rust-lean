@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TreeQueries.spec_1",
+    "negation": "AegisSpec.TreeQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, len(r) = m and for every i with 0 <= i < m, r[i] = height(R_i), where height(S) is the number of edges in a longest simple path from the root of S to any node of S, so a one-node tree has height 0. Each R_i is formed from the original root independently; no query uses a tree modified by another query.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; every node value is an integer in {1,...,n}; all node values are distinct, hence the set of values is exactly {1,...,n}. queries is a 0-indexed slice of m 64-bit integers with 1 <= m <= min(n,10^4). For every i with 0 <= i < m, queries[i] is in {1,...,n} and queries[i] is not the value at the root. For each i, let R_i be the tree obtained from the original root by deleting the node whose value is queries[i] and all descendants of that node, keeping all other nodes and all original parent-child edges among them; R_i is nonempty."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TreeQueries.spec_2",
+    "negation": "AegisSpec.TreeQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root and queries satisfying the preconditions, tree_queries(root, queries) returns a result (it does not fail, panic, or overflow).",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TreeQueries.spec_3",
+    "negation": "AegisSpec.TreeQueries.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, len(r) = len(queries) = m.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TreeQueries.spec_4",
+    "negation": "AegisSpec.TreeQueries.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, r[i] >= 0.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TreeQueries.spec_5",
+    "negation": "AegisSpec.TreeQueries.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, r[i] <= height(root), where height(root) is the number of edges in a longest simple path from the root of the original tree to any node of the original tree.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TreeQueries.spec_6",
+    "negation": "AegisSpec.TreeQueries.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, r[i] <= n - 2.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TreeQueries.spec_7",
+    "negation": "AegisSpec.TreeQueries.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, there exists a node y of the original root such that y is not in the subtree rooted at the node whose value is queries[i] (the subtree includes that node and all its descendants), and the number of edges on the original path from the root to y is exactly r[i].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TreeQueries.spec_8",
+    "negation": "AegisSpec.TreeQueries.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m and every node y of the original root that is not in the subtree rooted at the node whose value is queries[i] (the subtree is that node together with all its descendants), the number of edges on the original path from the root to y is at most r[i].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TreeQueries.spec_9",
+    "negation": "AegisSpec.TreeQueries.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for all i and j with 0 <= i < m and 0 <= j < m, if queries[i] = queries[j], then r[i] = r[j].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TreeQueries.spec_10",
+    "negation": "AegisSpec.TreeQueries.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever tree_queries(root, queries) returns r and tree_queries(root, queries') returns r', for every i with 0 <= i < m, if queries'[i] = queries[i], then r'[i] = r[i].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries and queries' are two 0-indexed slices of length m with 1 <= m <= min(n,10^4); every entry of queries and every entry of queries' is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TreeQueries.spec_11",
+    "negation": "AegisSpec.TreeQueries.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, if there exists a node y of the original root whose depth equals height(root) and y is not in the subtree rooted at the node whose value is queries[i] (the subtree is that node together with all its descendants), then r[i] = height(root), where depth is the number of edges from the original root and height(root) is the maximum depth in the original tree.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TreeQueries.spec_12",
+    "negation": "AegisSpec.TreeQueries.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, if every node y of the original root whose depth equals height(root) lies in the subtree rooted at the node whose value is queries[i] (the subtree is that node together with all its descendants), then r[i] < height(root), where depth and height(root) are measured in edges from the original root.",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.TreeQueries.spec_13",
+    "negation": "AegisSpec.TreeQueries.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for every i with 0 <= i < m, r[i] = 0 if and only if every node of the original root other than the root lies in the subtree rooted at the node whose value is queries[i].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.TreeQueries.spec_14",
+    "negation": "AegisSpec.TreeQueries.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever tree_queries(root, queries) returns a result r, for all i and j with 0 <= i < m and 0 <= j < m, if the node whose value is queries[i] is a proper ancestor of the node whose value is queries[j] in the original tree (that is, it lies on the original path from the root to that node and is not that node), then r[i] <= r[j].",
+    "preconditions": "The input satisfies the problem constraints: root is a finite binary tree with n >= 2 nodes; node values are distinct and exactly {1,...,n}; queries has length m with 1 <= m <= min(n,10^4); each queries[i] is in {1,...,n} and differs from the root value."
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPathCrossing.spec_1",
+    "negation": "AegisSpec.IsPathCrossing.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P(0)=(0,0). For 1 <= t <= n let P(t)=(X(t),Y(t)), where X(t) is the number of indices i with 0 <= i < t and path[i]='E' minus the number of indices i with 0 <= i < t and path[i]='W', and Y(t) is the number of indices i with 0 <= i < t and path[i]='N' minus the number of indices i with 0 <= i < t and path[i]='S'. Whenever the function returns a result r, r=true if and only if there exist integers k,l with 0 <= k < l <= n and P(k)=P(l); equivalently r=false if and only if the n+1 positions P(0),...,P(n) are pairwise distinct.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPathCrossing.spec_2",
+    "negation": "AegisSpec.IsPathCrossing.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for every path satisfying the preconditions; in particular, there is no out-of-bounds access to path and no 64-bit integer overflow during the computation.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPathCrossing.spec_3",
+    "negation": "AegisSpec.IsPathCrossing.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if there exists an index i with 0 <= i < n-1 such that path[i] and path[i+1] are opposite directions, then r is true.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPathCrossing.spec_4",
+    "negation": "AegisSpec.IsPathCrossing.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P(t) be the position after t moves, as defined by the prefix displacement counts from spec_1. Whenever the function returns a result r, if there exists an integer t with 1 <= t <= n such that P(t)=(0,0), then r is true.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPathCrossing.spec_5",
+    "negation": "AegisSpec.IsPathCrossing.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let P(t) be the position after t moves, as defined by the prefix displacement counts from spec_1. Whenever the function returns a result r and r=true, there exists an integer l with 1 <= l <= n such that (a) P(l)=P(k) for some integer k with 0 <= k < l, and (b) for every integer t with 1 <= t < l, P(t) is not equal to P(j) for any integer j with 0 <= j < t. Thus l is the first time at which a previously visited location is reached.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPathCrossing.spec_6",
+    "negation": "AegisSpec.IsPathCrossing.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(path) be the byte sequence of length n with rev(path)[i]=path[n-1-i] for 0 <= i < n. For every path satisfying the preconditions, whenever is_path_crossing(path) returns a result r and is_path_crossing(rev(path)) returns a result r', we have r=r'.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPathCrossing.spec_7",
+    "negation": "AegisSpec.IsPathCrossing.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(path) be obtained from path by replacing every byte 'N' with 'S' and every byte 'S' with 'N', leaving 'E' and 'W' unchanged. For every path satisfying the preconditions, whenever is_path_crossing(path) returns a result r and is_path_crossing(mirror(path)) returns a result r', we have r=r'.",
+    "preconditions": "Let n = len(path). Assume 1 <= n <= 10000 and for every i with 0 <= i < n, path[i] is one of the ASCII bytes for 'N', 'S', 'E', 'W'."
+  }
+]

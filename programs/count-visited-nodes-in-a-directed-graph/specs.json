@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_1",
+    "negation": "AegisSpec.CountVisitedNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_visited_nodes returns a result r, we have len(r) = n, and for every start i with 0 <= i < n the following holds. Define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. Let m_i be the least positive integer m for which there exists j with 0 <= j < m and x_m(i)=x_j(i). Then r[i] = m_i. Equivalently, r[i] is the number of distinct nodes in the initial segment x_0(i), x_1(i), ..., x_{m_i-1}(i), i.e. the number visited before the first repeated node.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n. Self-loops are allowed; see the note."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_2",
+    "negation": "AegisSpec.CountVisitedNodes.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever count_visited_nodes returns a result r, len(r) = len(edges).",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_3",
+    "negation": "AegisSpec.CountVisitedNodes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, 1 <= r[i] <= n.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_4",
+    "negation": "AegisSpec.CountVisitedNodes.spec_4_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, count_visited_nodes returns a result r; it does not fail due to arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_5",
+    "negation": "AegisSpec.CountVisitedNodes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, if edges[i] = i then r[i] = 1.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_6",
+    "negation": "AegisSpec.CountVisitedNodes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_visited_nodes returns a result r, for all i and j with 0 <= i < n and 0 <= j < n, if i != j, edges[i] = j, and edges[j] = i, then r[i] = 2 and r[j] = 2.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_7",
+    "negation": "AegisSpec.CountVisitedNodes.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If there exists k >= 1 with x_k(i)=i, then r[i] equals the least such k.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_8",
+    "negation": "AegisSpec.CountVisitedNodes.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If for all k >= 1, x_k(i) != i, then r[i] = r[edges[i]] + 1.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_9",
+    "negation": "AegisSpec.CountVisitedNodes.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If there exists k >= 1 with x_k(edges[i]) = i, then r[i] = r[edges[i]]; otherwise r[i] = r[edges[i]] + 1.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_10",
+    "negation": "AegisSpec.CountVisitedNodes.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_visited_nodes returns a result r, for all i and j with 0 <= i < n and 0 <= j < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If there exist a >= 0 and b >= 0 such that x_a(i)=j and x_b(j)=i, then r[i] = r[j].",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_11",
+    "negation": "AegisSpec.CountVisitedNodes.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If for all k >= 1, x_k(i) != i, then r[i] > r[edges[i]].",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_12",
+    "negation": "AegisSpec.CountVisitedNodes.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_visited_nodes returns a result r, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If for every i with 0 <= i < n the least positive k satisfying x_k(i)=i exists and equals n, then r[i] = n for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_13",
+    "negation": "AegisSpec.CountVisitedNodes.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, r[i] >= 2.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n. Suppose additionally that edges[i] != i for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_14",
+    "negation": "AegisSpec.CountVisitedNodes.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_visited_nodes returns a result r, for every i with 0 <= i < n, if r[i] = 1 then edges[i] = i.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountVisitedNodes.spec_15",
+    "negation": "AegisSpec.CountVisitedNodes.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_visited_nodes returns a result r, for all i and j with 0 <= i < n and 0 <= j < n, define x_0(i)=i and x_{k+1}(i)=edges[x_k(i)] for k >= 0. If there exists a >= 0 with x_a(i)=j, then r[i] >= r[j]. Moreover, equality holds for distinct i and j exactly when there also exists b >= 0 with x_b(j)=i.",
+    "preconditions": "Let n = len(edges). Assume 2 <= n <= 100000 and for every index i with 0 <= i < n, 0 <= edges[i] < n."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsSubtree.spec_1",
+    "negation": "AegisSpec.IsSubtree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r : Bool (it does not fail), and r = true if and only if there exists a node v of root such that the subtree of root rooted at v is structurally equal to subRoot. The subtree rooted at v consists of v and all descendants of v. Structural equality means the two trees have the same shape (Null matches only Null, Node matches Node with left and right corresponding) and equal i64 values at every corresponding Node.",
+    "preconditions": "root and subRoot are binary Tree values satisfying the problem constraints: size(root) is between 1 and 2000 and size(subRoot) is between 1 and 1000, where size(T) is the number of Node constructors in T; every node value in root and subRoot lies in [-10000,10000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsSubtree.spec_2",
+    "negation": "AegisSpec.IsSubtree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a Result Bool value; it does not fail (no overflow, out-of-bounds, or panic).",
+    "preconditions": "root and subRoot are binary Tree values satisfying the problem constraints: size(root) is between 1 and 2000 and size(subRoot) is between 1 and 1000, where size(T) is the number of Node constructors in T; every node value in root and subRoot lies in [-10000,10000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsSubtree.spec_3",
+    "negation": "AegisSpec.IsSubtree.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns false (and does not fail).",
+    "preconditions": "root and subRoot are nonempty binary trees with all node values in [-10000,10000], size(root) <= 2000, size(subRoot) <= 1000, and size(subRoot) > size(root), where size(T) is the number of Node constructors in T."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsSubtree.spec_4",
+    "negation": "AegisSpec.IsSubtree.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists an i64 value x such that x occurs strictly more times as a node value in subRoot than as a node value in root, then the function returns false (and does not fail).",
+    "preconditions": "root and subRoot are nonempty binary trees satisfying size(root) <= 2000, size(subRoot) <= 1000, and all node values in [-10000,10000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsSubtree.spec_5",
+    "negation": "AegisSpec.IsSubtree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true (and does not fail).",
+    "preconditions": "root and subRoot are nonempty binary trees satisfying size(root) <= 2000, size(subRoot) <= 1000, all node values in [-10000,10000], and root and subRoot are structurally equal (same shape and equal corresponding node values)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsSubtree.spec_6",
+    "negation": "AegisSpec.IsSubtree.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if root contains a leaf Node(b, Null, Null) with b = a; equivalently, some Node occurrence in root has value a and both children Null. (The function does not fail.)",
+    "preconditions": "root is a nonempty binary tree satisfying size(root) <= 2000 and all node values in [-10000,10000], and subRoot = Node(a, Null, Null) for some i64 a in [-10000,10000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsSubtree.spec_7",
+    "negation": "AegisSpec.IsSubtree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call is_subtree(b, a) returns true and the call is_subtree(c, b) returns true, then the call is_subtree(c, a) returns true. All these calls do not fail.",
+    "preconditions": "a and b are nonempty binary trees with all node values in [-10000,10000] and with size(a), size(b) at most 1000; c is a nonempty binary tree with all node values in [-10000,10000] and size(c) at most 2000, where size(T) is the number of Node constructors in T."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsSubtree.spec_8",
+    "negation": "AegisSpec.IsSubtree.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If is_subtree(a, b) returns true and is_subtree(b, a) returns true, then a and b are structurally equal (same shape and equal corresponding node values). Both calls do not fail.",
+    "preconditions": "a and b are nonempty binary trees with all node values in [-10000,10000] and size(a), size(b) <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsSubtree.spec_9",
+    "negation": "AegisSpec.IsSubtree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If s is a subtree of L (that is, L is nonempty and is_subtree(L, s) returns true) or s is a subtree of R (that is, R is nonempty and is_subtree(R, s) returns true), then is_subtree(root, s) returns true. The relevant calls do not fail.",
+    "preconditions": "root = Node(v, L, R) is a nonempty binary tree with all node values in [-10000,10000] and size(root) <= 2000; s is a nonempty binary tree with all node values in [-10000,10000] and size(s) <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsSubtree.spec_10",
+    "negation": "AegisSpec.IsSubtree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The call is_subtree(mirror(root), mirror(subRoot)) returns the same Bool as is_subtree(root, subRoot); both calls do not fail.",
+    "preconditions": "root and subRoot are nonempty binary trees satisfying size(root) <= 2000, size(subRoot) <= 1000, and all node values in [-10000,10000]. Let mirror(T) be defined by mirror(Null)=Null and mirror(Node(v,L,R))=Node(v,mirror(R),mirror(L))."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsSubtree.spec_11",
+    "negation": "AegisSpec.IsSubtree.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The call is_subtree(shift_c(root), shift_c(subRoot)) returns the same Bool as is_subtree(root, subRoot); both calls do not fail.",
+    "preconditions": "root and subRoot are nonempty binary trees satisfying size(root) <= 2000, size(subRoot) <= 1000, and all node values in [-10000,10000]. Let c be an integer such that every value x+c, for x a node value in root or subRoot, lies in [-10000,10000]. Define shift_c(T) recursively by replacing each node value x in T with x+c."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsSubtree.spec_12",
+    "negation": "AegisSpec.IsSubtree.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if subRoot is structurally equal to Node(a, Null, Null). (The function does not fail.)",
+    "preconditions": "root = Node(a, Null, Null) for some i64 a in [-10000,10000]; subRoot is a nonempty binary tree with all node values in [-10000,10000] and size(subRoot) <= 1000."
+  }
+]

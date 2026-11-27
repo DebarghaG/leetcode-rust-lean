@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ContainsPattern.spec_1",
+    "negation": "AegisSpec.ContainsPattern.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns ok r for some Boolean r and does not fail. Say that the block of length m starting at i is k-repeated when 0 <= i, i + m*k <= L, and for every b with 0 <= b < k and every j with 0 <= j < m, arr[i + b*m + j] = arr[i + j]. Then r = true if and only if there exists an integer i such that the block of length m starting at i is k-repeated; otherwise r = false.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ContainsPattern.spec_2",
+    "negation": "AegisSpec.ContainsPattern.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns ok r for some Boolean r; in particular, it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ContainsPattern.spec_3",
+    "negation": "AegisSpec.ContainsPattern.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns ok true, there exists an integer i such that 0 <= i, i + m*k <= L, and for every b with 0 <= b < k and every j with 0 <= j < m, arr[i + b*m + j] = arr[i + j].",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ContainsPattern.spec_4",
+    "negation": "AegisSpec.ContainsPattern.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ok false, for every integer i with 0 <= i and i + m*k <= L, there exist b with 0 <= b < k and j with 0 <= j < m such that arr[i + b*m + j] != arr[i + j].",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ContainsPattern.spec_5",
+    "negation": "AegisSpec.ContainsPattern.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If there exists an integer i such that 0 <= i, i + m*k <= L, and for every b with 0 <= b < k and every j with 0 <= j < m, arr[i + b*m + j] = arr[i + j], then the function returns ok true.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ContainsPattern.spec_6",
+    "negation": "AegisSpec.ContainsPattern.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ok true, m*k <= L.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ContainsPattern.spec_7",
+    "negation": "AegisSpec.ContainsPattern.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m*k > L, then the function returns ok false.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ContainsPattern.spec_8",
+    "negation": "AegisSpec.ContainsPattern.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m*k = L, then the function returns ok true if and only if for every b with 0 <= b < k and every j with 0 <= j < m, arr[b*m + j] = arr[j].",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ContainsPattern.spec_9",
+    "negation": "AegisSpec.ContainsPattern.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m = 1, then the function returns ok true if and only if there exists an integer i with 0 <= i, i + k <= L, and for every j with 0 <= j < k, arr[i + j] = arr[i].",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ContainsPattern.spec_10",
+    "negation": "AegisSpec.ContainsPattern.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 2, then the function returns ok true if and only if there exists an integer i with 0 <= i, i + 2*m <= L, and for every j with 0 <= j < m, arr[i + j] = arr[i + m + j].",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ContainsPattern.spec_11",
+    "negation": "AegisSpec.ContainsPattern.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If all entries of arr are equal (that is, arr[i] = arr[0] for every i with 0 <= i < L), then the function returns ok true if and only if m*k <= L.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ContainsPattern.spec_12",
+    "negation": "AegisSpec.ContainsPattern.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer k' with 2 <= k' <= k, if contains_pattern arr m k returns ok true, then contains_pattern arr m k' returns ok true.",
+    "preconditions": "Let L = len(arr). All indices are 0-based. Assume: L is an integer with 2 <= L <= 100; for every i with 0 <= i < L, arr[i] is an integer with 1 <= arr[i] <= 100; m is an integer with 1 <= m <= 100; k is an integer with 2 <= k <= 100."
+  }
+]

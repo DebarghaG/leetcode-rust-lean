@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCharacters.spec_1",
+    "negation": "AegisSpec.MinCharacters.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_characters a b returns a result r, the following holds. A target pair is a pair of byte slices (A', B') with len(A') = len(a), len(B') = len(b), and every byte in 'a'..'z'. Its change cost is cost(A',B') = (number of i with 0 <= i < len(a) and A'[i] != a[i]) + (number of j with 0 <= j < len(b) and B'[j] != b[j]). The target pair is admissible if either (1) A'[i] < B'[j] for every i,j, or (2) B'[j] < A'[i] for every i,j, or (3) all bytes of A' are equal and all bytes of B' are equal. Then r equals the minimum of cost(A',B') over all admissible target pairs.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCharacters.spec_2",
+    "negation": "AegisSpec.MinCharacters.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call min_characters a b does not fail: it returns Result.ok r for some i64 r.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCharacters.spec_3",
+    "negation": "AegisSpec.MinCharacters.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_characters a b returns a result r, 0 <= r.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCharacters.spec_4",
+    "negation": "AegisSpec.MinCharacters.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_characters a b returns a result r, r <= len(a) + len(b).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCharacters.spec_5",
+    "negation": "AegisSpec.MinCharacters.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer k with 0 <= k <= 24, whenever min_characters a b returns a result r, r <= (number of i with 0 <= i < len(a) and (a[i] - 97) > k) + (number of j with 0 <= j < len(b) and (b[j] - 97) <= k).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCharacters.spec_6",
+    "negation": "AegisSpec.MinCharacters.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer k with 0 <= k <= 24, whenever min_characters a b returns a result r, r <= (number of i with 0 <= i < len(a) and (a[i] - 97) <= k) + (number of j with 0 <= j < len(b) and (b[j] - 97) > k).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCharacters.spec_7",
+    "negation": "AegisSpec.MinCharacters.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every lowercase byte x and every lowercase byte y, whenever min_characters a b returns a result r, r <= (len(a) - (number of i with 0 <= i < len(a) and a[i] = x)) + (len(b) - (number of j with 0 <= j < len(b) and b[j] = y)).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCharacters.spec_8",
+    "negation": "AegisSpec.MinCharacters.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_characters a b returns a result r, r = 0 if and only if at least one of the following holds: (i) a[i] < b[j] for every i with 0 <= i < len(a) and every j with 0 <= j < len(b); (ii) b[j] < a[i] for every i with 0 <= i < len(a) and every j with 0 <= j < len(b); (iii) all bytes of a are equal and all bytes of b are equal.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCharacters.spec_9",
+    "negation": "AegisSpec.MinCharacters.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_characters a b returns a result r, there exists a target pair (A', B') with len(A') = len(a), len(B') = len(b), and all bytes in 'a'..'z' such that either (1) A'[i] < B'[j] for every i,j, or (2) B'[j] < A'[i] for every i,j, or (3) all bytes of A' are equal and all bytes of B' are equal; and the number of changed positions (number of i with A'[i] != a[i] plus number of j with B'[j] != b[j]) is exactly r.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCharacters.spec_10",
+    "negation": "AegisSpec.MinCharacters.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_characters a b returns a result r, for every target pair (A', B') with len(A') = len(a), len(B') = len(b), and all bytes in 'a'..'z' that satisfies either (1) A'[i] < B'[j] for every i,j, or (2) B'[j] < A'[i] for every i,j, or (3) all bytes of A' are equal and all bytes of B' are equal, the change count (number of i with A'[i] != a[i] plus number of j with B'[j] != b[j]) is at least r.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCharacters.spec_11",
+    "negation": "AegisSpec.MinCharacters.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any a and b satisfying the preconditions, if min_characters a b returns r and min_characters b a returns r', then r = r'.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCharacters.spec_12",
+    "negation": "AegisSpec.MinCharacters.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let a' and b' be any byte slices such that len(a') = len(a), len(b') = len(b), and for every lowercase byte c the number of occurrences of c in a' equals that in a and the number of occurrences of c in b' equals that in b (so a' and b' are arbitrary reorderings of a and b). If min_characters a b returns r and min_characters a' b' returns r', then r = r'.",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinCharacters.spec_13",
+    "negation": "AegisSpec.MinCharacters.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever min_characters a b returns a result r, r equals the minimum of these three quantities: (C1) min over k = 0..24 of (number of i with 0 <= i < len(a) and a[i]-97 > k) + (number of j with 0 <= j < len(b) and b[j]-97 <= k); (C2) min over k = 0..24 of (number of i with 0 <= i < len(a) and a[i]-97 <= k) + (number of j with 0 <= j < len(b) and b[j]-97 > k); (C3) (len(a) - max over c in 'a'..'z' of number of i with 0 <= i < len(a) and a[i] = c) + (len(b) - max over c in 'a'..'z' of number of j with 0 <= j < len(b) and b[j] = c).",
+    "preconditions": "len(a) >= 1, len(b) >= 1, len(a) <= 100000, len(b) <= 100000, and every byte of a and b is in the ASCII range 97 ('a') through 122 ('z')."
+  }
+]

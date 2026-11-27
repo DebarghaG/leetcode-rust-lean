@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Candy.spec_1",
+    "negation": "AegisSpec.Candy.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the minimum, over all functions c from {0,...,n-1} to the integers, of the sum sum_{i=0}^{n-1} c[i], subject to the constraints: (i) for every i with 0 <= i < n, c[i] >= 1; (ii) for every i with 0 <= i < n-1, if ratings[i] < ratings[i+1] then c[i] < c[i+1], and if ratings[i] > ratings[i+1] then c[i] > c[i+1]. (If ratings[i] = ratings[i+1], there is no constraint between c[i] and c[i+1].)",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Candy.spec_2",
+    "negation": "AegisSpec.Candy.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, overflow, or otherwise fail).",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Candy.spec_3",
+    "negation": "AegisSpec.Candy.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= n.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Candy.spec_4",
+    "negation": "AegisSpec.Candy.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= n*(n+1)/2.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Candy.spec_5",
+    "negation": "AegisSpec.Candy.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, define for each i with 0 <= i < n: a_i = the largest integer k >= 1 such that for every j with 0 <= j < k-1, the index i-k+1+j >= 0 and ratings[i-k+1+j] < ratings[i-k+2+j] (equivalently, a_i is the length of the maximal contiguous strictly increasing run of ratings ending at index i); b_i = the largest integer k >= 1 such that for every j with 0 <= j < k-1, the index i+j+1 < n and ratings[i+j] > ratings[i+j+1] (equivalently, b_i is the length of the maximal contiguous strictly decreasing run of ratings starting at index i). Then the assignment c* given by c*[i] = max(a_i, b_i) for 0 <= i < n is a valid assignment (as defined in spec_1) and satisfies sum_{i=0}^{n-1} c*[i] = r.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Candy.spec_6",
+    "negation": "AegisSpec.Candy.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, there is exactly one valid assignment c (as defined in spec_1) with sum_{i=0}^{n-1} c[i] = r.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Candy.spec_7",
+    "negation": "AegisSpec.Candy.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and ratings[i] = ratings[0] for every i with 0 <= i < n, r = n.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Candy.spec_8",
+    "negation": "AegisSpec.Candy.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and ratings[i] < ratings[i+1] for every i with 0 <= i < n-1, r = n*(n+1)/2.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Candy.spec_9",
+    "negation": "AegisSpec.Candy.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and ratings[i] > ratings[i+1] for every i with 0 <= i < n-1, r = n*(n+1)/2.",
+    "preconditions": "n = len(ratings); 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Candy.spec_10",
+    "negation": "AegisSpec.Candy.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on ratings and a result r' on rev, r = r'.",
+    "preconditions": "Let ratings be any slice with n = len(ratings); 1 <= n <= 20000; for every i, 0 <= ratings[i] <= 20000. Let rev be the slice of length n defined by rev[i] = ratings[n-1-i] for 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Candy.spec_11",
+    "negation": "AegisSpec.Candy.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on ratings and a result r' on ratings', r = r'.",
+    "preconditions": "Let ratings and ratings' be two slices of the same length n; 1 <= n <= 20000; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000 and 0 <= ratings'[i] <= 20000. Suppose for all i, j with 0 <= i, j < n: ratings[i] < ratings[j] if and only if ratings'[i] < ratings'[j], and ratings[i] = ratings[j] if and only if ratings'[i] = ratings'[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Candy.spec_12",
+    "negation": "AegisSpec.Candy.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on ratings and a result r' on ratings', r' = r + 1.",
+    "preconditions": "Let ratings be a slice of length n with 1 <= n <= 19999; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000. Let v = ratings[n-1]. Let ratings' be the slice of length n+1 defined by ratings'[i] = ratings[i] for 0 <= i < n and ratings'[n] = v."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Candy.spec_13",
+    "negation": "AegisSpec.Candy.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on ratings and a result r' on ratings', r' = r + a + 1.",
+    "preconditions": "Let ratings be a slice of length n with 1 <= n <= 19999; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000. Let a be the length of the maximal contiguous strictly increasing run ending at index n-1 in ratings, i.e., the largest integer k >= 1 such that for every j with 0 <= j < k-1, ratings[n-k+j] < ratings[n-k+1+j]. Let v be an integer with ratings[n-1] < v <= 20000. Let ratings' be the slice of length n+1 defined by ratings'[i] = ratings[i] for 0 <= i < n and ratings'[n] = v."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.Candy.spec_14",
+    "negation": "AegisSpec.Candy.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on ratings and a result r' on ratings', r' = r + d + (if a <= d then 1 else 0). Equivalently, r' = r + d + 1 when a <= d, and r' = r + d when a > d.",
+    "preconditions": "Let ratings be a slice of length n with 1 <= n <= 19999; for every i with 0 <= i < n, 0 <= ratings[i] <= 20000. Let d be the length of the maximal contiguous strictly decreasing run ending at index n-1 in ratings, i.e., the largest integer k >= 1 such that for every j with 0 <= j < k-1, ratings[n-k+j] > ratings[n-k+1+j]. Let s = n - d. Let a be the length of the maximal contiguous strictly increasing run ending at index s in ratings, i.e., the largest integer k >= 1 such that for every j with 0 <= j < k-1, s-k+1+j >= 0 and ratings[s-k+1+j] < ratings[s-k+2+j]. Let v be an integer with 0 <= v < ratings[n-1]. Let ratings' be the slice of length n+1 defined by ratings'[i] = ratings[i] for 0 <= i < n and ratings'[n] = v."
+  }
+]

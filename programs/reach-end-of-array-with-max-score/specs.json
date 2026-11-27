@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindMaximumScore.spec_1",
+    "negation": "AegisSpec.FindMaximumScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r equals the maximum possible total score over all valid jump sequences from index 0 to index n-1. A valid jump sequence is a finite sequence of indices i_0, i_1, ..., i_m such that i_0 = 0, i_m = n-1, m >= 0, and i_t < i_{t+1} for every 0 <= t < m; its total score is sum_{t=0}^{m-1} (i_{t+1} - i_t) * nums[i_t]. For n = 1 the only sequence is [0] and its total score is 0.",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindMaximumScore.spec_2",
+    "negation": "AegisSpec.FindMaximumScore.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = S, where S is defined by: if n = 1 then S = 0, and if n >= 2 then S = sum_{i=0}^{n-2} P(i) with P(i) = max({nums[k] | 0 <= k <= i}).",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindMaximumScore.spec_3",
+    "negation": "AegisSpec.FindMaximumScore.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every nums satisfying the preconditions; it does not fail due to panic, out-of-bounds indexing, or arithmetic overflow.",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindMaximumScore.spec_4",
+    "negation": "AegisSpec.FindMaximumScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (n - 1) * M, where M = max({nums[i] | 0 <= i < n}).",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindMaximumScore.spec_5",
+    "negation": "AegisSpec.FindMaximumScore.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{n-2} nums[i], with the sum empty and equal to 0 when n = 1.",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindMaximumScore.spec_6",
+    "negation": "AegisSpec.FindMaximumScore.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= (n - 1) * nums[0].",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindMaximumScore.spec_7",
+    "negation": "AegisSpec.FindMaximumScore.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both calls find_maximum_score(nums) and find_maximum_score(nums') return results r and r', and r = r'.",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and 1 <= nums[i] <= 100000 for all 0 <= i < n. Let v be an integer with 1 <= v <= 100000, and let nums' be the array of length n that agrees with nums at every index except nums'[n-1] = v."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindMaximumScore.spec_8",
+    "negation": "AegisSpec.FindMaximumScore.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls find_maximum_score(nums) and find_maximum_score(nums') return results r and r', and r <= r'.",
+    "preconditions": "Let n >= 1 with n <= 100000. Let nums and nums' be arrays of length n satisfying 1 <= nums[i] <= 100000 and 1 <= nums'[i] <= 100000 for every 0 <= i < n, and assume nums[i] <= nums'[i] for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindMaximumScore.spec_9",
+    "negation": "AegisSpec.FindMaximumScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls find_maximum_score(nums) and find_maximum_score(nums') return results r and r', and r' = c * r.",
+    "preconditions": "Let n >= 1 with n <= 100000 and nums be an array of length n with 1 <= nums[i] <= 100000 for every 0 <= i < n. Let c be an integer with c >= 1 and c * nums[i] <= 100000 for every 0 <= i < n. Let nums' be the array of length n with nums'[i] = c * nums[i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindMaximumScore.spec_10",
+    "negation": "AegisSpec.FindMaximumScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls find_maximum_score(nums) and find_maximum_score(nums') return results r and r', and r' = r + (n - 1) * c.",
+    "preconditions": "Let n >= 1 with n <= 100000 and nums be an array of length n with 1 <= nums[i] <= 100000 for every 0 <= i < n. Let c be an integer with c >= 0 and nums[i] + c <= 100000 for every 0 <= i < n. Let nums' be the array of length n with nums'[i] = nums[i] + c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindMaximumScore.spec_11",
+    "negation": "AegisSpec.FindMaximumScore.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a valid jump sequence from index 0 to index n-1 whose total score is exactly r. A valid jump sequence is a finite sequence i_0, i_1, ..., i_m with i_0 = 0, i_m = n-1, m >= 0, and i_t < i_{t+1} for every 0 <= t < m; its total score is sum_{t=0}^{m-1} (i_{t+1} - i_t) * nums[i_t].",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindMaximumScore.spec_12",
+    "negation": "AegisSpec.FindMaximumScore.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every valid jump sequence from index 0 to index n-1, its total score is at most r. A valid jump sequence is a finite sequence i_0, i_1, ..., i_m with i_0 = 0, i_m = n-1, m >= 0, and i_t < i_{t+1} for every 0 <= t < m; its total score is sum_{t=0}^{m-1} (i_{t+1} - i_t) * nums[i_t].",
+    "preconditions": "Let n = len(nums). Assume n >= 1, n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  }
+]

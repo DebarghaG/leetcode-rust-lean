@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumPushes.spec_1",
+    "negation": "AegisSpec.MinimumPushes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let freq(c) be the number of indices i with 0 <= i < len(word) and word[i] = c, for each lowercase letter c with 97 <= c <= 122. Let D be the set of lowercase letters with freq(c) > 0, let m = |D|, and let f_1 >= f_2 >= ... >= f_m be the positive numbers freq(c) for c in D, listed in non-increasing order (ties may be broken arbitrarily). Whenever minimum_pushes(word) returns a result r, r = sum_{j=1}^{m} f_j * (floor((j-1)/8) + 1). Here j is 1-based and floor is integer division.",
+    "preconditions": "1 <= len(word) <= 100000, and for every i with 0 <= i < len(word), 97 <= word[i] <= 122 (word[i] is an ASCII lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumPushes.spec_2",
+    "negation": "AegisSpec.MinimumPushes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every byte slice word satisfying the preconditions, minimum_pushes(word) returns a result r; it does not fail, overflow, panic, or run out of bounds.",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumPushes.spec_3",
+    "negation": "AegisSpec.MinimumPushes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_pushes(word) returns a result r, r >= len(word).",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumPushes.spec_4",
+    "negation": "AegisSpec.MinimumPushes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_pushes(word) returns a result r, r <= len(word) * (floor((m-1)/8) + 1).",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter. Let m be the number of distinct lowercase letters that occur at least once in word."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumPushes.spec_5",
+    "negation": "AegisSpec.MinimumPushes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_pushes(word) returns a result r, r = len(word).",
+    "preconditions": "1 <= len(word) <= 100000, every byte of word is an ASCII lowercase English letter, and the number m of distinct letters occurring in word satisfies m <= 8."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumPushes.spec_6",
+    "negation": "AegisSpec.MinimumPushes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_pushes(word) returns a result r, r > len(word).",
+    "preconditions": "1 <= len(word) <= 100000, every byte of word is an ASCII lowercase English letter, and the number m of distinct letters occurring in word satisfies m > 8."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumPushes.spec_7",
+    "negation": "AegisSpec.MinimumPushes.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If for every lowercase letter c the number of indices i with word[i] = c equals the number of indices i with word'[i] = c, then whenever minimum_pushes(word) returns r and minimum_pushes(word') returns r', we have r = r'.",
+    "preconditions": "word and word' are byte slices, each satisfying 1 <= len <= 100000 and having every byte in the ASCII lowercase range 97 through 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumPushes.spec_8",
+    "negation": "AegisSpec.MinimumPushes.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_pushes(word) returns r and minimum_pushes(word') returns r', r' = t * r.",
+    "preconditions": "word is a byte slice with 1 <= len(word) <= 100000 and every byte in the ASCII lowercase range 97 through 122. t is a positive integer with len(word) * t <= 100000, and word' is the byte slice of length len(word) * t defined by word'[i] = word[i mod len(word)] for all 0 <= i < len(word) * t, i.e. word' is t copies of word concatenated."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumPushes.spec_9",
+    "negation": "AegisSpec.MinimumPushes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_pushes(word) returns r and minimum_pushes(word') returns r', r = r'.",
+    "preconditions": "word and word' are byte slices, each with 1 <= length <= 100000 and every byte in the ASCII lowercase range 97 through 122. Let pi be a bijection from the set {97,98,...,122} to itself. Assume len(word) = len(word') and word'[i] = pi(word[i]) for every 0 <= i < len(word)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumPushes.spec_10",
+    "negation": "AegisSpec.MinimumPushes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_pushes(word) returns r, there exist functions key: D -> {0,1,...,7} and p: D -> {1,2,...} such that: (1) for each k in {0,...,7}, if D_k = {c in D | key(c) = k}, then either D_k is empty or there exists an integer q_k >= 1 such that p restricted to D_k is a bijection onto {1,2,...,q_k}; and (2) r = sum_{c in D} freq(c) * p(c).",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter (97 <= word[i] <= 122). Let D be the set of lowercase letters with positive frequency in word, and let freq(c) be the number of occurrences of c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumPushes.spec_11",
+    "negation": "AegisSpec.MinimumPushes.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_pushes(word) returns r, for every pair of functions key: D -> {0,1,...,7} and p: D -> {1,2,...} such that for each k in {0,...,7}, if D_k = {c in D | key(c) = k}, then either D_k is empty or there exists an integer q_k >= 1 such that p restricted to D_k is a bijection onto {1,2,...,q_k}, we have sum_{c in D} freq(c) * p(c) >= r.",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter (97 <= word[i] <= 122). Let D be the set of lowercase letters with positive frequency in word, and let freq(c) be the number of occurrences of c."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumPushes.spec_12",
+    "negation": "AegisSpec.MinimumPushes.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_pushes(word) returns r, r >= len(word) + sum_{j=9}^{m} f_j, where the sum is empty if m < 9.",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter. Let D, m, and f_1 >= ... >= f_m be as in the main specification."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumPushes.spec_13",
+    "negation": "AegisSpec.MinimumPushes.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever minimum_pushes(word) returns r, there exist integers q_c for c in D such that: (1) 1 <= q_c <= 4 for every c in D; (2) for each k in {1,2,3,4}, the number of c in D with q_c = k is at most 8; and (3) r = sum_{c in D} freq(c) * q_c.",
+    "preconditions": "1 <= len(word) <= 100000, and every byte of word is an ASCII lowercase English letter. Let D be the set of lowercase letters with positive frequency in word, and let freq(c) be the number of occurrences of c."
+  }
+]

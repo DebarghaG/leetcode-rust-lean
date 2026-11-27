@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EarliestAcq.spec_1",
+    "negation": "AegisSpec.EarliestAcq.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. For a time t, let G(t) be the undirected graph on vertices {0,1,...,n-1} whose edges are exactly the unordered pairs {x(i),y(i)} for all i with ts(i) <= t. If there exists a timestamp t equal to some ts(i) such that G(t) is connected, then r is the least such timestamp. If no timestamp t equal to some ts(i) makes G(t) connected, then r = -1. Equivalently, r is the earliest time at which every pair of people is in one connected acquaintance component using all friendship events with timestamp <= r, or -1 if no such time exists.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EarliestAcq.spec_2",
+    "negation": "AegisSpec.EarliestAcq.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, the function returns a result r; it does not fail, panic, or report overflow.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EarliestAcq.spec_3",
+    "negation": "AegisSpec.EarliestAcq.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either r = -1 or there exists an index i with 0 <= i < len(logs) such that r = ts(i).",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EarliestAcq.spec_4",
+    "negation": "AegisSpec.EarliestAcq.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r and r != -1, min_{0 <= i < len(logs)} ts(i) <= r <= max_{0 <= i < len(logs)} ts(i).",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EarliestAcq.spec_5",
+    "negation": "AegisSpec.EarliestAcq.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r != -1, let G(r) be the undirected graph on vertices {0,1,...,n-1} with an edge {x(i),y(i)} for every i with ts(i) <= r. Then G(r) is connected: for every two people a and b with 0 <= a < n and 0 <= b < n, there is a sequence of people starting at a and ending at b in which every consecutive pair appears as such an edge.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EarliestAcq.spec_6",
+    "negation": "AegisSpec.EarliestAcq.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r != -1, for every integer t with 0 <= t < r, the graph G(t) on vertices {0,1,...,n-1} with edges {x(i),y(i)} for all i with ts(i) <= t is not connected.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EarliestAcq.spec_7",
+    "negation": "AegisSpec.EarliestAcq.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if the graph on vertices {0,1,...,n-1} containing an edge {x(i),y(i)} for every log entry i with 0 <= i < len(logs) is not connected.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EarliestAcq.spec_8",
+    "negation": "AegisSpec.EarliestAcq.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and r = -1, there exists a nonempty proper subset S of {0,1,...,n-1} such that for every i with 0 <= i < len(logs), x(i) is in S if and only if y(i) is in S; thus no friendship log crosses the cut between S and its complement.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EarliestAcq.spec_9",
+    "negation": "AegisSpec.EarliestAcq.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r and r != -1, let j be the unique index with ts(j) = r. In the graph G_<r on vertices {0,1,...,n-1} with edges {x(i),y(i)} for all i with ts(i) < r, the vertices x(j) and y(j) are in different connected components.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EarliestAcq.spec_10",
+    "negation": "AegisSpec.EarliestAcq.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r and r != -1, for every integer t with r <= t <= 10^9, the graph G(t) on vertices {0,1,...,n-1} with edges {x(i),y(i)} for all i with ts(i) <= t is connected.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EarliestAcq.spec_11",
+    "negation": "AegisSpec.EarliestAcq.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (logs,n) and returns r' on (logs',n), we have r = r'.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct; logs' is any slice satisfying the same constraints whose entries are a permutation of the entries of logs."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.EarliestAcq.spec_12",
+    "negation": "AegisSpec.EarliestAcq.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (logs,n) and returns r' on (logs',n), if r = -1 then r' = -1, and if r != -1 then r' = r + c.",
+    "preconditions": "len(logs) >= 1 and len(logs) <= 10000; for every i with 0 <= i < len(logs), len(logs[i]) = 3; write ts(i) = logs[i][0], x(i) = logs[i][1], y(i) = logs[i][2]; then 2 <= n <= 100, 0 <= ts(i) <= 10^9, 0 <= x(i) < n, 0 <= y(i) < n, x(i) != y(i); the values ts(i) are pairwise distinct; for i != j the unordered pairs {x(i),y(i)} and {x(j),y(j)} are distinct; c is an integer and logs' is obtained from logs by replacing each entry [ts(i),x(i),y(i)] with [ts(i)+c,x(i),y(i)], with 0 <= ts(i)+c <= 10^9 for every i and all constraints still holding."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.EarliestAcq.spec_13",
+    "negation": "AegisSpec.EarliestAcq.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (logs,n) with r != -1, and returns r' on (logs',n), and every additional entry of logs' not present in logs has first component greater than r, then r' = r.",
+    "preconditions": "All constraints hold for (logs,n) and for (logs',n); the multiset of entries of logs' consists of all entries of logs plus finitely many additional valid log entries."
+  }
+]

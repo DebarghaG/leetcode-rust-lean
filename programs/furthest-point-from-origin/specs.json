@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_1",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cL, cR, and cU be the numbers of indices i with 0 <= i < len(moves) for which moves[i] is 'L', 'R', and '_', respectively. Whenever the function returns a result r, r = |cR - cL| + cU.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_2",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every moves satisfying the preconditions; it does not fail, panic, access out of bounds, or overflow.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_3",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(moves).",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_4",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r and len(moves) have the same parity: r mod 2 = len(moves) mod 2.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_5",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For each index i with 0 <= i < len(moves), define a direction d_i by d_i = -1 when moves[i] is 'L', d_i = +1 when moves[i] is 'R', and for moves[i] = '_' choose d_i to be either -1 or +1. Whenever the function returns a result r, there exists such a choice of the d_i for all underscore positions for which |sum_{i=0}^{len(moves)-1} d_i| = r.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_6",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every choice of a direction d_i in {-1, +1} for each underscore position, with d_i = -1 for each 'L' and d_i = +1 for each 'R', let p = sum_{i=0}^{len(moves)-1} d_i. Whenever the function returns a result r, |p| <= r for every such choice.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_7",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let cL, cR, and cU be the numbers of 'L', 'R', and '_' bytes in moves. Whenever the function returns a result r, r = max(|cR - cL - cU|, |cR - cL + cU|).",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_8",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let sw be the slice obtained from moves by replacing every 'L' byte with 'R' and every 'R' byte with 'L', leaving '_' unchanged. Whenever the function returns r on moves and r' on sw, r = r'.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_9",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every index k with 0 <= k < len(moves) such that moves[k] is 'L' or 'R', let moves' be the slice obtained from moves by changing only position k to '_' and leaving every other byte unchanged. Whenever the function returns r on moves and r' on moves', r' >= r.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FurthestDistanceFromOrigin.spec_10",
+    "negation": "AegisSpec.FurthestDistanceFromOrigin.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let perm be any slice of the same length as moves such that the number of occurrences of each of the bytes 'L', 'R', and '_' in perm equals its number of occurrences in moves. Whenever the function returns r on moves and r' on perm, r = r'.",
+    "preconditions": "len(moves) >= 1, len(moves) <= 50, and for every i with 0 <= i < len(moves), moves[i] is the ASCII byte for one of 'L', 'R', or '_'."
+  }
+]

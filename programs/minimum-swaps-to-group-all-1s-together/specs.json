@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinSwaps.spec_1",
+    "negation": "AegisSpec.MinSwaps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let k be the number of indices i with 0 <= i < n and data[i] = 1. For each integer s with 0 <= s <= n-k, define Z(s) to be the number of indices i such that s <= i < s+k and data[i] = 0; when k = 0, set Z(s) = 0 for every such s. The function returns a result r and r = min { Z(s) | 0 <= s <= n-k }.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinSwaps.spec_2",
+    "negation": "AegisSpec.MinSwaps.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinSwaps.spec_3",
+    "negation": "AegisSpec.MinSwaps.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinSwaps.spec_4",
+    "negation": "AegisSpec.MinSwaps.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= k, where k is the number of indices i with 0 <= i < n and data[i] = 1.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinSwaps.spec_5",
+    "negation": "AegisSpec.MinSwaps.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= n-k, where k is the number of indices i with 0 <= i < n and data[i] = 1.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinSwaps.spec_6",
+    "negation": "AegisSpec.MinSwaps.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists an integer s with 0 <= s <= n-k such that for every i with 0 <= i < n, data[i] = 1 exactly when s <= i < s+k, where k is the number of indices i with data[i] = 1. For k = 0 this says all entries are 0.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinSwaps.spec_7",
+    "negation": "AegisSpec.MinSwaps.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an integer s with 0 <= s <= n-k such that the number of indices i with s <= i < s+k and data[i] = 0 is exactly r, where k is the number of indices i with data[i] = 1. When k = 0, this number is 0.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinSwaps.spec_8",
+    "negation": "AegisSpec.MinSwaps.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer s with 0 <= s <= n-k, the number of indices i with s <= i < s+k and data[i] = 0 is at least r, where k is the number of indices i with data[i] = 1. When k = 0, these numbers are 0.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinSwaps.spec_9",
+    "negation": "AegisSpec.MinSwaps.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = k - M, where k is the number of indices i with 0 <= i < n and data[i] = 1, and M is the maximum, over all integers s with 0 <= s <= n-k, of the number of indices i with s <= i < s+k and data[i] = 1. When k = 0, M = 0.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinSwaps.spec_10",
+    "negation": "AegisSpec.MinSwaps.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let data_rev be the array of length n with data_rev[i] = data[n-1-i] for 0 <= i < n. Whenever the function returns a result r on data, r also equals the minimum over all integers s with 0 <= s <= n-k of the number of indices i with s <= i < s+k and data_rev[i] = 0, where k is the number of indices i with data[i] = 1.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinSwaps.spec_11",
+    "negation": "AegisSpec.MinSwaps.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r: if k = 0 then r = 0; if k > 0, let a be the smallest index with data[a] = 1 and b the largest index with data[b] = 1, let m = b-a+1, and then r equals the minimum, over all integers s with 0 <= s <= m-k, of the number of indices i with s <= i < s+k and data[a+i] = 0, where k is the number of indices i with data[i] = 1.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinSwaps.spec_12",
+    "negation": "AegisSpec.MinSwaps.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r > 0 then 0 < k < n, where k is the number of indices i with 0 <= i < n and data[i] = 1.",
+    "preconditions": "Let n = len(data). Assume 1 <= n <= 100000 and, for every i with 0 <= i < n, data[i] = 0 or data[i] = 1."
+  }
+]

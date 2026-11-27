@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MagnificentSets.spec_1",
+    "negation": "AegisSpec.MagnificentSets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. A valid division into m groups is a function g from {1,...,n} to {1,...,m} such that every group j in {1,...,m} is nonempty (there exists v with g(v)=j) and for every edge {a,b} of G, |g(a)-g(b)| = 1. Whenever magnificent_sets returns a result r: if there exists a valid division into some m >= 1, then r is the largest such m; otherwise r = -1.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MagnificentSets.spec_2",
+    "negation": "AegisSpec.MagnificentSets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, magnificent_sets returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MagnificentSets.spec_3",
+    "negation": "AegisSpec.MagnificentSets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever magnificent_sets returns a result r, either r = -1 or 1 <= r <= n.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MagnificentSets.spec_4",
+    "negation": "AegisSpec.MagnificentSets.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r, r = -1 if and only if G is not bipartite. Equivalently, r = -1 if and only if G contains a cycle of odd length.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MagnificentSets.spec_5",
+    "negation": "AegisSpec.MagnificentSets.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r and G is bipartite, let C_1,...,C_k be the connected components of G. For each component C, let diam(C) be the maximum, over all ordered pairs of vertices u,v in C, of the length of a shortest u-v path in G (so diam(C)=0 if C is a singleton). Then r = sum_{j=1..k} (diam(C_j) + 1).",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MagnificentSets.spec_6",
+    "negation": "AegisSpec.MagnificentSets.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r with r >= 1, there exists a valid division of {1,...,n} into exactly r nonempty groups, meaning a function g from {1,...,n} to {1,...,r} such that every group is nonempty and for every edge {a,b} of G, |g(a)-g(b)| = 1.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MagnificentSets.spec_7",
+    "negation": "AegisSpec.MagnificentSets.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r with r >= 1, for every integer m > r there is no valid division of {1,...,n} into m nonempty groups satisfying the edge condition: there is no function g from {1,...,n} to {1,...,m} such that every group is nonempty and for every edge {a,b} of G, |g(a)-g(b)| = 1.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MagnificentSets.spec_8",
+    "negation": "AegisSpec.MagnificentSets.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns r = -1, for every integer m >= 1 there is no valid division of {1,...,n} into m nonempty groups satisfying the edge condition: there is no function g from {1,...,n} to {1,...,m} such that every group is nonempty and for every edge {a,b} of G, |g(a)-g(b)| = 1.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MagnificentSets.spec_9",
+    "negation": "AegisSpec.MagnificentSets.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r with r >= 1, if G has k connected components, then r >= k.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MagnificentSets.spec_10",
+    "negation": "AegisSpec.MagnificentSets.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r with r >= 1, for every connected component C of G, r >= diam(C) + 1, where diam(C) is the maximum shortest-path distance between two vertices of C in G, with diam(C)=0 for a singleton component.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MagnificentSets.spec_11",
+    "negation": "AegisSpec.MagnificentSets.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let G be the undirected graph on vertices {1,...,n} induced by edges. Consider the call magnificent_sets(n, edges) and the call magnificent_sets(n+k, edges), where in the second call the vertices n+1,...,n+k are isolated because all edge entries are at most n. If the first call returns r and the second returns r', then: if G is bipartite, r' = r + k; if G is not bipartite, r' = r = -1.",
+    "preconditions": "n and k are integers with 1 <= n <= 500, k >= 0, and n+k <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MagnificentSets.spec_12",
+    "negation": "AegisSpec.MagnificentSets.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such permutation pi and corresponding edge slice edges', if magnificent_sets(n, edges) returns r and magnificent_sets(n, edges') returns r', then r = r'.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry. Also pi is a permutation of {1,...,n}, and edges' is obtained from edges by replacing each entry [a,b] with [pi(a),pi(b)] in the same list order."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MagnificentSets.spec_13",
+    "negation": "AegisSpec.MagnificentSets.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r, r = n if and only if every connected component of G is a path, where a single vertex counts as a path of length 0 and a path means a graph whose vertices can be ordered v_0,...,v_{s-1} so that its edges are exactly {v_i,v_{i+1}} for 0 <= i < s-1.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MagnificentSets.spec_14",
+    "negation": "AegisSpec.MagnificentSets.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the undirected graph with vertex set {1,...,n} and an edge between a and b iff [a,b] or [b,a] occurs in edges. Whenever magnificent_sets returns a result r with r >= 1, there exists a valid division g from {1,...,n} to {1,...,r} into exactly r nonempty groups such that, for every connected component C of G, the set {g(v) | v in C} is an interval of integers of cardinality diam(C)+1, where diam(C) is the maximum shortest-path distance between two vertices of C (0 for a singleton); these intervals are pairwise disjoint and their union is {1,...,r}.",
+    "preconditions": "n is a 64-bit integer with 1 <= n <= 500; edges is a slice of vectors of 64-bit integers with 1 <= len(edges) <= 10000; every edges[i] has length 2; if edges[i] = [a,b] then 1 <= a,b <= n and a != b; and no unordered pair {a,b} occurs in more than one entry."
+  }
+]

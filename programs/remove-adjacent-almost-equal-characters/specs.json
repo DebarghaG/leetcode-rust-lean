@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_1",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). r is the minimum, over all byte arrays t of length n such that every byte of t is the ASCII code of a lowercase English letter and for every j with 0 <= j < n-1 the letters t[j] and t[j+1] are not almost-equal, of the number of indices i with 0 <= i < n and t[i] != word[i]. Here two lowercase letters are almost-equal exactly when they are equal or their alphabet positions differ by 1.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_2",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input word satisfying the preconditions, the function returns a result r; it never fails, panics, or overflows.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_3",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_4",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= floor(n / 2), where n = len(word) and floor(n / 2) is integer division of n by 2.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_5",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every j with 0 <= j < n-1, word[j] and word[j+1] are not almost-equal.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_6",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = floor(n / 2), with integer division by 2.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z'). Also, for every j with 0 <= j < n-1, word[j] and word[j+1] are almost-equal."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_7",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the byte array of length n defined by rev[i] = word[n-1-i] for 0 <= i < n. Whenever the function returns r on word and returns r' on rev, r = r'.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_8",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let alt be the byte array of length n defined by alt[i] = 122 - (word[i] - 97) for 0 <= i < n, i.e. each letter is replaced by its mirror in the alphabet (a<->z, b<->y, ..., m<->n). Whenever the function returns r on word and returns r' on alt, r = r'.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_9",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let shift be the byte array of length n defined by shift[i] = word[i] + d for 0 <= i < n. Whenever the function returns r on word and returns r' on shift, r = r'.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z'). There is an integer d such that for every i with 0 <= i < n, the byte word[i] + d is still the ASCII code of a lowercase English letter."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_10",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k with 1 <= k <= n, let pre_k be the slice (word[0], ..., word[k-1]). Whenever the function returns r on word and r_k on pre_k, r_k <= r.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_11",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k with 1 <= k <= n, let pre_k be the slice (word[0], ..., word[k-1]). Whenever the function returns r on word and r_k on pre_k, r <= r_k + (n - k).",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_12",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph with vertex set {0, 1, ..., n-1} and with an edge between j and j+1 exactly when word[j] and word[j+1] are almost-equal, for 0 <= j < n-1; there are no other edges. Whenever the function returns a result r, r is the minimum cardinality of a subset S of {0, 1, ..., n-1} such that every edge of G has at least one endpoint in S. Equivalently, r is the size of a minimum vertex cover of G.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_13",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected graph on {0, 1, ..., n-1} with an edge between j and j+1 exactly when word[j] and word[j+1] are almost-equal. Whenever the function returns a result r, r equals the sum, over all connected components C of G, of floor(|V(C)| / 2), where |V(C)| is the number of vertices in C and division is integer division by 2.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_14",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a byte array t of length n such that every byte of t is a lowercase English letter, for every j with 0 <= j < n-1 the letters t[j] and t[j+1] are not almost-equal, and exactly r indices i with 0 <= i < n satisfy t[i] != word[i].",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_15",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define a left-to-right scan with i = 0 and c = 0: while i + 1 < n, if word[i] and word[i+1] are almost-equal then increment c and set i := i + 2, otherwise set i := i + 1. Whenever the function returns a result r, r = c. Here two lowercase letters are almost-equal exactly when equal or their alphabet positions differ by 1.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_16",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on word and r' on v, r = r'. That is, the answer depends only on the pattern of adjacent almost-equal pairs, not on the actual letters.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z'). Also let v be a byte array of length n, all of whose bytes are lowercase English letters, such that for every j with 0 <= j < n-1, word[j] and word[j+1] are almost-equal if and only if v[j] and v[j+1] are almost-equal."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.RemoveAlmostEqualCharacters.spec_17",
+    "negation": "AegisSpec.RemoveAlmostEqualCharacters.spec_17_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every byte array t of length n such that every byte of t is a lowercase English letter and for every j with 0 <= j < n-1 the letters t[j] and t[j+1] are not almost-equal, the number of indices i with 0 <= i < n and t[i] != word[i] is at least r.",
+    "preconditions": "Let n = len(word). The slice word has 1 <= n <= 100 and every byte of word is the ASCII code of a lowercase English letter ('a' through 'z')."
+  }
+]

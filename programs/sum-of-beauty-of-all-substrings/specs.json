@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BeautySum.spec_1",
+    "negation": "AegisSpec.BeautySum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For 0 <= i <= j < n and a lowercase letter c, let F(i,j,c) be the number of indices k with i <= k <= j and s[k] = c. Let P(i,j) be the set of lowercase letters c with F(i,j,c) > 0. Define the beauty of the contiguous nonempty substring s[i..j] as B(i,j) = max_{c in P(i,j)} F(i,j,c) - min_{c in P(i,j)} F(i,j,c). Then beauty_sum(s) returns a result r : I64 whose mathematical integer value is sum_{0 <= i <= j < n} B(i,j).",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter, i.e. 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BeautySum.spec_2",
+    "negation": "AegisSpec.BeautySum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, beauty_sum(s) returns a result r : I64; it does not panic, return an error, access out of bounds, or overflow.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BeautySum.spec_3",
+    "negation": "AegisSpec.BeautySum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every s satisfying the preconditions, if beauty_sum(s) returns r, then the mathematical integer value of r satisfies r >= 0.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BeautySum.spec_4",
+    "negation": "AegisSpec.BeautySum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). For every s satisfying the preconditions, if beauty_sum(s) returns r, then the mathematical integer value of r satisfies r <= (n * (n - 1) * (n + 1)) / 6, where the division is ordinary integer division and the numerator is divisible by 6.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BeautySum.spec_5",
+    "negation": "AegisSpec.BeautySum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every s satisfying the preconditions, beauty_sum(s) returns r with mathematical integer value 0.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, every byte of s is an ASCII lowercase letter, and all bytes of s are equal: s[i] = s[0] for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BeautySum.spec_6",
+    "negation": "AegisSpec.BeautySum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). For 0 <= i <= j < n, let P(i,j) be the set of lowercase letters occurring in s[i..j], and let F(i,j,c) be the number of occurrences of c in s[i..j]. If beauty_sum(s) returns r, then r = 0 if and only if for every 0 <= i <= j < n and every c,d in P(i,j), F(i,j,c) = F(i,j,d).",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BeautySum.spec_7",
+    "negation": "AegisSpec.BeautySum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s), and for 0 <= i <= j < n let B(i,j) be the beauty of s[i..j], namely the largest positive character frequency in that substring minus the smallest positive character frequency. If beauty_sum(s) returns r, then for every L with 1 <= L <= n, r >= sum_{i=0}^{n-L} B(i,i+L-1).",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BeautySum.spec_8",
+    "negation": "AegisSpec.BeautySum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such s and c, beauty_sum(s) returns r, beauty_sum(s') returns r', and the mathematical integer values satisfy r' >= r.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 499, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Also c is an ASCII lowercase letter, and s' is the byte slice obtained by appending c to s."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BeautySum.spec_9",
+    "negation": "AegisSpec.BeautySum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s satisfying the preconditions, beauty_sum(s) returns r, beauty_sum(rev(s)) returns r', and the mathematical integer values satisfy r = r'.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let n = len(s), and let rev(s) be the byte slice of length n with rev(s)[i] = s[n - 1 - i] for 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BeautySum.spec_10",
+    "negation": "AegisSpec.BeautySum.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s and every such permutation pi, beauty_sum(s) returns r, beauty_sum(pi(s)) returns r_pi, and the mathematical integer values satisfy r = r_pi.",
+    "preconditions": "len(s) is an integer with 1 <= len(s) <= 500, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let pi be any bijection of the set of ASCII lowercase letters to itself, and let pi(s) be the byte slice of length len(s) with pi(s)[i] = pi(s[i])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BeautySum.spec_11",
+    "negation": "AegisSpec.BeautySum.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For this s, beauty_sum(s) returns r with mathematical integer value 5.",
+    "preconditions": "s is the byte slice with values [97,97,98,99,98], the ASCII codes of the string 'aabcb'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BeautySum.spec_12",
+    "negation": "AegisSpec.BeautySum.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For this s, beauty_sum(s) returns r with mathematical integer value 87.",
+    "preconditions": "s is the byte slice with values [120,121,122,122,120,121,122,122,120,121,122,122], the ASCII codes of the string 'xyzzxyzzxyzz'."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BeautySum.spec_13",
+    "negation": "AegisSpec.BeautySum.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For this s, beauty_sum(s) returns r with mathematical integer value 29.",
+    "preconditions": "s is the byte slice with values [97,97,97,98,98,98,99,99,99], the ASCII codes of the string 'aaabbbccc'."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BeautySum.spec_14",
+    "negation": "AegisSpec.BeautySum.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For this s, beauty_sum(s) returns r with mathematical integer value 16.",
+    "preconditions": "s is the byte slice with values [97,98,99,100,101,100,99,98,97], the ASCII codes of the string 'abcdedcba'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.BeautySum.spec_15",
+    "negation": "AegisSpec.BeautySum.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such s and t, beauty_sum(s++t) returns r, beauty_sum(s) returns r_s, beauty_sum(t) returns r_t, and the mathematical integer values satisfy r >= r_s + r_t.",
+    "preconditions": "len(s) and len(t) are integers with 1 <= len(s), 1 <= len(t), len(s)+len(t) <= 500, and every byte of s and t is an ASCII lowercase letter, i.e. 97 <= byte <= 122. Let s++t be the concatenated byte slice."
+  }
+]

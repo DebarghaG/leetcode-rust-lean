@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_1",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) such that r equals the minimum of the set { r_idx - l | 0 <= l <= r_idx <= n and Rem(l, r_idx) is non-decreasing }, where for 0 <= l <= r_idx <= n, Rem(l, r_idx) denotes the sequence arr[0], arr[1], ..., arr[l-1], arr[r_idx], arr[r_idx+1], ..., arr[n-1] (with empty parts when l=0 or r_idx=n). The set is non-empty because choosing l=0 and r_idx=n-1 leaves the single element arr[n-1], which is non-decreasing.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_2",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= n - 1.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_3",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if the whole array arr is non-decreasing, i.e., for every i with 0 <= i < n-1, arr[i] <= arr[i+1].",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_4",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n - 1.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9; and for every i with 0 <= i < n-1, arr[i] > arr[i+1] (the array is strictly decreasing; vacuously true for n=1)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_5",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist integers l and r_idx with 0 <= l <= r_idx <= n such that r_idx - l = r and Rem(l, r_idx) is non-decreasing, where Rem(l, r_idx) is the concatenation of arr[0..l] and arr[r_idx..n] as defined in spec_1.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_6",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and for every pair of integers l and r_idx with 0 <= l <= r_idx <= n and r_idx - l < r, the sequence Rem(l, r_idx) (the concatenation of arr[0..l] and arr[r_idx..n]) is not non-decreasing; that is, there exist consecutive elements x, y in Rem(l, r_idx) with x > y.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_7",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = n - M, where M is the maximum over all pairs (p, q) of integers with 0 <= p, 0 <= q, and p + q <= n such that (a) the prefix arr[0..p] is non-decreasing (for all i with 0 <= i < p-1, arr[i] <= arr[i+1]), (b) the suffix arr[n-q..n] is non-decreasing (for all i with n-q <= i < n-1, arr[i] <= arr[i+1]), and (c) if p > 0 and q > 0 then arr[p-1] <= arr[n-q], of the value p + q. (The set of such pairs is non-empty, e.g., p=q=0, so M is well-defined.)",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_8",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by the function on arr. For every strictly increasing function f: Z -> Z (i.e., x < y implies f(x) < f(y)) such that f(arr[i]) is in the range [-2^63, 2^63-1] for all i with 0 <= i < n, define brr[i] = f(arr[i]) for 0 <= i < n. Then the minimum length of a contiguous subarray whose removal from brr leaves a non-decreasing sequence is also r.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_9",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_9_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, the function returns a result (i.e., it does not fail, panic, overflow, or access out-of-bounds memory).",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_10",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result returned by the function on arr. Define brr by brr[i] = -arr[n-1-i] for 0 <= i < n. (Since 0 <= arr[i] <= 10^9, -arr[i] is in [-10^9, 0], which fits in i64.) Then the minimum length of a contiguous subarray whose removal from brr leaves a non-decreasing sequence is also r.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindLengthOfShortestSubarray.spec_11",
+    "negation": "AegisSpec.FindLengthOfShortestSubarray.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D be the number of descents in arr, i.e., D = |{ i | 0 <= i < n-1 and arr[i] > arr[i+1] }|. The function returns a result r and r >= D.",
+    "preconditions": "n = len(arr); 1 <= n <= 10^5; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  }
+]

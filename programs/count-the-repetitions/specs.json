@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_1",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define repeat(s,k) for integer k >= 0 as the byte sequence with len(repeat(s,k)) = k*len(s) and repeat(s,k)[i] = s[i mod len(s)] for all 0 <= i < k*len(s). Define A is a subsequence of B to mean that there are indices 0 <= j_0 < j_1 < ... < j_{len(A)-1} < len(B) with B[j_t] = A[t] for every 0 <= t < len(A); if A is empty this holds by convention. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, for every integer m >= 0, repeat(s2, n2*m) is a subsequence of repeat(s1, n1) if and only if m <= r. Thus r is the greatest m >= 0 such that [str2,m] can be obtained from [str1,n1], where str1 = [s1,n1] and str2 = [s2,n2].",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122). Here len is the mathematical length of the slice; n1 and n2 are interpreted as mathematical integers."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_2",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s1,n1,s2,n2 satisfying the preconditions, get_max_repetitions(s1,n1,s2,n2) returns Ok r for some I64 value r; it does not return Err, overflow, panic, or go out of bounds.",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_3",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define repeat(s,k) for integer k >= 0 as the byte sequence with len(repeat(s,k)) = k*len(s) and repeat(s,k)[i] = s[i mod len(s)] for all 0 <= i < k*len(s). Define A is a subsequence of B to mean that there are indices 0 <= j_0 < j_1 < ... < j_{len(A)-1} < len(B) with B[j_t] = A[t] for every 0 <= t < len(A); if A is empty this holds by convention. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, r >= 0 and for every integer m with 0 <= m <= r, repeat(s2, n2*m) is a subsequence of repeat(s1, n1).",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_4",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define repeat(s,k) for integer k >= 0 as the byte sequence with len(repeat(s,k)) = k*len(s) and repeat(s,k)[i] = s[i mod len(s)] for all 0 <= i < k*len(s). Define A is a subsequence of B to mean that there are indices 0 <= j_0 < j_1 < ... < j_{len(A)-1} < len(B) with B[j_t] = A[t] for every 0 <= t < len(A); if A is empty this holds by convention. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, for every integer m >= 0, if repeat(s2, n2*m) is a subsequence of repeat(s1, n1), then m <= r.",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_5",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define repeat(s,k) for integer k >= 0 as the byte sequence with len(repeat(s,k)) = k*len(s) and repeat(s,k)[i] = s[i mod len(s)] for all 0 <= i < k*len(s). Define A is a subsequence of B to mean that there are indices 0 <= j_0 < j_1 < ... < j_{len(A)-1} < len(B) with B[j_t] = A[t] for every 0 <= t < len(A); if A is empty this holds by convention. Let K be the maximum integer K >= 0 such that repeat(s2,K) is a subsequence of repeat(s1,n1); K exists because len(s2) >= 1 and repeat(s1,n1) is finite. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r and K as mathematical integers, r = K / n2, where / is integer division of nonnegative integers (floor).",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_6",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let repeat(s,k) be the k-fold repetition of s. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, r >= 0 and r * n2 * len(s2) <= n1 * len(s1).",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_7",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let repeat(s,k) be the k-fold repetition of s. For a byte array x and byte value c, let count(x,c) be the number of indices i with 0 <= i < len(x) and x[i] = c. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, r >= 0 and for every byte value c with 0 <= c < 256, r * n2 * count(s2,c) <= n1 * count(s1,c).",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_8",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Define repeat(s,k) for integer k >= 0 as the byte sequence with len(repeat(s,k)) = k*len(s) and repeat(s,k)[i] = s[i mod len(s)] for all 0 <= i < k*len(s). Define A is a subsequence of B to mean that there are indices 0 <= j_0 < j_1 < ... < j_{len(A)-1} < len(B) with B[j_t] = A[t] for every 0 <= t < len(A); if A is empty this holds by convention. Whenever get_max_repetitions(s1,n1,s2,n2) returns Ok r, interpreting r as a mathematical integer, r = 0 if and only if repeat(s2, n2) is not a subsequence of repeat(s1, n1).",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_9",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer n1' with n1 <= n1' <= 10^6, if get_max_repetitions(s1,n1,s2,n2) returns Ok r and get_max_repetitions(s1,n1',s2,n2) returns Ok r', then interpreting r and r' as mathematical integers, r <= r'.",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetMaxRepetitions.spec_10",
+    "negation": "AegisSpec.GetMaxRepetitions.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer n2' with n2 <= n2' <= 10^6, if get_max_repetitions(s1,n1,s2,n2) returns Ok r and get_max_repetitions(s1,n1,s2,n2') returns Ok r', then interpreting r and r' as mathematical integers, r' <= r.",
+    "preconditions": "len(s1) >= 1, len(s2) >= 1, len(s1) <= 100, len(s2) <= 100, 1 <= n1 <= 10^6, 1 <= n2 <= 10^6, and every byte of s1 and s2 is an ASCII lowercase letter (97 <= byte <= 122)."
+  }
+]

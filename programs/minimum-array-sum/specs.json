@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinArraySum.spec_1",
+    "negation": "AegisSpec.MinArraySum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (so it does not fail). Define a state as a function from indices 0..n-1 to integers, initially s(i) = nums[i]. A valid operation is either (1,i) or (2,i). A finite sequence of operations is valid if: (a) each (1,i) occurs at most once and each (2,i) occurs at most once; (b) the number of (1,i) operations is at most op1 and the number of (2,i) operations is at most op2; (c) whenever an operation (2,i) occurs, the current value s(i) is at least k; and (d) applying (1,i) changes s(i) to ceil(s(i)/2) = (s(i)+1) div 2, while applying (2,i) changes s(i) to s(i)-k. For a valid sequence, let final_sum be sum_{i=0}^{n-1} s(i) after all operations. Then r = min { final_sum | valid sequence }.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinArraySum.spec_2",
+    "negation": "AegisSpec.MinArraySum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a value of the form Result.ok r for some integer r; it does not panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinArraySum.spec_3",
+    "negation": "AegisSpec.MinArraySum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i]. The function returns a result r and r <= S.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinArraySum.spec_4",
+    "negation": "AegisSpec.MinArraySum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinArraySum.spec_5",
+    "negation": "AegisSpec.MinArraySum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i]. The function returns r and r = min over all subsets T of {0,...,n-1} with |T| <= op1 of ( sum_{i in T} ceil(nums[i]/2) + sum_{i not in T} nums[i] ), where ceil(a/2) = (a+1) div 2.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; k = 0; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinArraySum.spec_6",
+    "negation": "AegisSpec.MinArraySum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i] and let m be the number of indices i with 0 <= i < n and nums[i] >= k. The function returns r and r = S - k * min(op2, m).",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; op1 = 0; 0 <= op2 <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinArraySum.spec_7",
+    "negation": "AegisSpec.MinArraySum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i] and let d_i = nums[i] div 2 for 0 <= i < n. The function returns r and r = S - (sum of the min(op1, n) largest elements of the multiset {d_0,...,d_{n-1}}). The sum of an empty multiset is 0.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; op2 = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinArraySum.spec_8",
+    "negation": "AegisSpec.MinArraySum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let S = sum_{i=0}^{n-1} nums[i] and let d_i = nums[i] div 2 for 0 <= i < n. The function returns r and r = S - (sum of the min(op1, n) largest elements of the multiset {d_0,...,d_{n-1}}). Equivalently, the value of op2 has no effect on the answer.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; for every i with 0 <= i < n, nums[i] < k; 0 <= op1 <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinArraySum.spec_9",
+    "negation": "AegisSpec.MinArraySum.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a = nums[0]. The function returns r and r = min( {a} union {ceil(a/2) if op1 >= 1} union {a-k if op2 >= 1 and a >= k} union {ceil(a/2)-k if op1 >= 1 and op2 >= 1 and ceil(a/2) >= k} union {ceil((a-k)/2) if op1 >= 1 and op2 >= 1 and a >= k} ), where ceil(x/2) = (x+1) div 2 for x >= 0.",
+    "preconditions": "n = len(nums); n = 1; 0 <= nums[0] <= 100000; 0 <= k <= 100000; 0 <= op1 <= 1; 0 <= op2 <= 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinArraySum.spec_10",
+    "negation": "AegisSpec.MinArraySum.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For each i with 0 <= i < n, let V_i be the set containing: nums[i]; ceil(nums[i]/2); nums[i]-k if nums[i] >= k; ceil(nums[i]/2)-k if ceil(nums[i]/2) >= k; and ceil((nums[i]-k)/2) if nums[i] >= k, where ceil(x/2) = (x+1) div 2 for x >= 0. The function returns r and r = sum_{i=0}^{n-1} min(V_i).",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; op1 = n; op2 = n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinArraySum.spec_11",
+    "negation": "AegisSpec.MinArraySum.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the Result.ok value returned by min_array_sum(nums, k, op1, op2) and r' be the Result.ok value returned by min_array_sum(nums, k, op1', op2). Then r >= r'.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= op1' <= n; 0 <= op2 <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinArraySum.spec_12",
+    "negation": "AegisSpec.MinArraySum.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the Result.ok value returned by min_array_sum(nums, k, op1, op2) and r' be the Result.ok value returned by min_array_sum(nums, k, op1, op2'). Then r >= r'.",
+    "preconditions": "n = len(nums); 1 <= n <= 100; for every i with 0 <= i < n, 0 <= nums[i] <= 100000; 0 <= k <= 100000; 0 <= op1 <= n; 0 <= op2 <= op2' <= n."
+  }
+]

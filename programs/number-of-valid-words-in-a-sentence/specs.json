@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountValidWords.spec_1",
+    "negation": "AegisSpec.CountValidWords.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a token of sentence be a maximal nonempty interval of indices [a,b) with 0 <= a < b <= len(sentence) such that sentence[a..b) contains no 32, and (a=0 or sentence[a-1]=32) and (b=len(sentence) or sentence[b]=32). For a token t = sentence[a..b), let m=b-a. Call t valid iff: (1) every byte t[j] (0 <= j < m) is a lowercase letter (97 <= t[j] <= 122), a hyphen (t[j]=45), or a punctuation mark (t[j] in {33,44,46}); under the input alphabet this is equivalent to containing no digit; (2) the set H={j | 0 <= j < m and t[j]=45} has size at most 1, and if H={j} then 0 < j < m-1 and both t[j-1] and t[j+1] are in 97..122; (3) the set P={j | 0 <= j < m and t[j] in {33,44,46}} has size at most 1, and if P={j} then j=m-1. The function returns a result r and r equals the number of valid tokens of sentence.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122 (lowercase letters), 48..57 (digits), 32 (space), 45 (hyphen), 33 ('!'), 44 (','), or 46 ('.'); and sentence contains at least one byte different from 32 (at least one token)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountValidWords.spec_2",
+    "negation": "AegisSpec.CountValidWords.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no overflow, panic, or out-of-bounds access) for every sentence satisfying the preconditions.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122, 48..57, 32, 45, 33, 44, 46; and sentence contains at least one non-space byte."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountValidWords.spec_3",
+    "negation": "AegisSpec.CountValidWords.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= N, where N is the number of tokens of sentence, i.e. the number of maximal nonempty non-space blocks defined as in spec_1.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122, 48..57, 32, 45, 33, 44, 46; and sentence contains at least one non-space byte."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountValidWords.spec_4",
+    "negation": "AegisSpec.CountValidWords.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = 0 if and only if no token of sentence is valid, where a token is a maximal nonempty non-space block and is valid exactly when it contains no digit, has at most one hyphen with any hyphen between two lowercase letters, and has at most one punctuation mark from {33,44,46} with any such mark at the token's last byte.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122, 48..57, 32, 45, 33, 44, 46; and sentence contains at least one non-space byte."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountValidWords.spec_5",
+    "negation": "AegisSpec.CountValidWords.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let N be the number of tokens of sentence. The function returns a result r and r = N if and only if every token of sentence is valid, where validity is: no digit byte, at most one hyphen and any hyphen is surrounded by lowercase letters, at most one punctuation mark from {33,44,46} and any such mark is at the token's last byte.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122, 48..57, 32, 45, 33, 44, 46; and sentence contains at least one non-space byte."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountValidWords.spec_6",
+    "negation": "AegisSpec.CountValidWords.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 exactly when the whole sentence, viewed as the unique token, is valid (no digit byte; at most one hyphen with lowercase neighbors; at most one punctuation mark from {33,44,46} at the last byte); otherwise r = 0.",
+    "preconditions": "1 <= len(sentence) <= 1000; each byte of sentence is one of the ASCII codes 97..122, 48..57, 32, 45, 33, 44, 46; sentence contains at least one non-space byte; and sentence contains no byte equal to 32."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountValidWords.spec_7",
+    "negation": "AegisSpec.CountValidWords.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r on sentence and a result r' on sentence'; then r = r'.",
+    "preconditions": "sentence and sentence' are byte sequences each satisfying: 1 <= len <= 1000; every byte is one of 97..122, 48..57, 32, 45, 33, 44, 46; and each contains at least one byte different from 32. Further, sentence' has the same sequence of maximal nonempty non-space tokens as sentence, with consecutive tokens separated by nonempty runs of 32 and arbitrary (possibly empty) leading and trailing runs of 32."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountValidWords.spec_8",
+    "negation": "AegisSpec.CountValidWords.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on sentence and r' on sentence', then r' = r + 1.",
+    "preconditions": "sentence satisfies the global constraints of spec_1; t is a nonempty byte sequence with no 32 byte that is a valid token (no digit; at most one hyphen with lowercase neighbors; at most one punctuation mark from {33,44,46} at the last byte); sentence' is obtained by appending to sentence a 32 byte followed by t; and sentence' satisfies the global constraints of spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountValidWords.spec_9",
+    "negation": "AegisSpec.CountValidWords.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on sentence and r' on sentence', then r' = r.",
+    "preconditions": "sentence satisfies the global constraints of spec_1; t is a nonempty byte sequence with no 32 byte that is not a valid token (it contains a digit, or has two or more hyphens, or has a hyphen not surrounded by lowercase letters, or has two or more punctuation marks from {33,44,46}, or has a punctuation mark not at the last byte); sentence' is obtained by appending to sentence a 32 byte followed by t; and sentence' satisfies the global constraints of spec_1."
+  }
+]

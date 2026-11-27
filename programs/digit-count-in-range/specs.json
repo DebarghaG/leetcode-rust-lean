@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DigitsCount.spec_1",
+    "negation": "AegisSpec.DigitsCount.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the sum over all integers n with low <= n <= high of occ(n,d), where for each n >= 1, occ(n,d) is the number of positions k with 0 <= k < L(n) such that the k-th digit from the left in the ordinary decimal representation of n (no leading zeros) equals the decimal digit d (ASCII code 48+d), and L(n) is the number of digits of n. A digit that appears several times in the same n is counted several times.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000 (that is, 2*10^8)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DigitsCount.spec_2",
+    "negation": "AegisSpec.DigitsCount.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever digits_count(d, low, high) returns a result r, we have 0 <= r.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DigitsCount.spec_3",
+    "negation": "AegisSpec.DigitsCount.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever digits_count(d, low, high) returns a result r, we have r <= 9 * (high - low + 1).",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DigitsCount.spec_4",
+    "negation": "AegisSpec.DigitsCount.spec_4_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every d, low, and high satisfying the preconditions, digits_count(d, low, high) returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DigitsCount.spec_5",
+    "negation": "AegisSpec.DigitsCount.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever digits_count(d, low, high) returns r, digits_count(d, low, m) returns r1, and digits_count(d, m+1, high) returns r2, we have r = r1 + r2.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= m < high <= 200000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DigitsCount.spec_6",
+    "negation": "AegisSpec.DigitsCount.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever digits_count(d, low, high1) returns r1 and digits_count(d, low, high2) returns r2, we have r1 <= r2.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high1 <= high2 <= 200000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DigitsCount.spec_7",
+    "negation": "AegisSpec.DigitsCount.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever digits_count(d, low1, high) returns r1 and digits_count(d, low2, high) returns r2, we have r2 <= r1.",
+    "preconditions": "0 <= d <= 9 and 1 <= low1 <= low2 <= high <= 200000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DigitsCount.spec_8",
+    "negation": "AegisSpec.DigitsCount.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever digits_count(d, low, high) returns a result r, r = 0 if and only if no integer n with low <= n <= high has the digit d in its ordinary decimal representation (no leading zeros).",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DigitsCount.spec_9",
+    "negation": "AegisSpec.DigitsCount.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever digits_count(d, low, high) returns a result r with r >= 2, at least one of the following holds: (a) there is an n with low <= n <= high whose ordinary decimal representation (no leading zeros) contains d at least twice; or (b) there are integers n1 and n2 with low <= n1 < n2 <= high such that each of the ordinary decimal representations of n1 and n2 contains d at least once.",
+    "preconditions": "0 <= d <= 9 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DigitsCount.spec_10",
+    "negation": "AegisSpec.DigitsCount.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever digits_count(0, low, high) returns a result r, we have r <= 8 * (high - low + 1).",
+    "preconditions": "d = 0 and 1 <= low <= high <= 200000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.DigitsCount.spec_11",
+    "negation": "AegisSpec.DigitsCount.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever for each digit e with 0 <= e <= 9 the call digits_count(e, low, high) returns a result r_e, we have sum_{e=0}^{9} r_e = sum_{n=low}^{high} L(n), where L(n) is the number of digits in the ordinary decimal representation of n with no leading zeros.",
+    "preconditions": "1 <= low <= high <= 200000000."
+  }
+]

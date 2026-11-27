@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDifference.spec_1",
+    "negation": "AegisSpec.MinimumDifference.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "minimum_difference nums returns Result.ok r, and r is the minimum of the set of all integers D(i) = (sum_{k=0}^{n-1} nums[i_k]) - (sum_{k=n}^{2n-1} nums[i_k]), where i_0 < i_1 < ... < i_{2n-1} ranges over all strictly increasing sequences of 2n indices with 0 <= i_k < len(nums). In symbols, r = min { D(i) | 0 <= i_0 < ... < i_{2n-1} < len(nums) }.",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDifference.spec_2",
+    "negation": "AegisSpec.MinimumDifference.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, minimum_difference nums returns a result: there exists an i64 r such that the result is Result.ok r. It does not overflow, panic, or otherwise fail.",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDifference.spec_3",
+    "negation": "AegisSpec.MinimumDifference.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, for every strictly increasing sequence 0 <= i_0 < i_1 < ... < i_{2n-1} < len(nums), we have r <= (sum_{k=0}^{n-1} nums[i_k]) - (sum_{k=n}^{2n-1} nums[i_k]).",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDifference.spec_4",
+    "negation": "AegisSpec.MinimumDifference.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, there exists a strictly increasing sequence 0 <= i_0 < i_1 < ... < i_{2n-1} < len(nums) such that (sum_{k=0}^{n-1} nums[i_k]) - (sum_{k=n}^{2n-1} nums[i_k]) = r.",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDifference.spec_5",
+    "negation": "AegisSpec.MinimumDifference.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, let mn = min_{0 <= i < len(nums)} nums[i] and mx = max_{0 <= i < len(nums)} nums[i]. Then -n*(mx-mn) <= r <= n*(mx-mn).",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDifference.spec_6",
+    "negation": "AegisSpec.MinimumDifference.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, r <= (sum_{i=0}^{n-1} nums[i]) - (sum_{i=2n}^{3n-1} nums[i]).",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDifference.spec_7",
+    "negation": "AegisSpec.MinimumDifference.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, r = 0.",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums). Additionally, there is an integer c such that nums[i] = c for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDifference.spec_8",
+    "negation": "AegisSpec.MinimumDifference.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, r = (sum_{i=0}^{n-1} nums[i]) - (sum_{i=2n}^{3n-1} nums[i]).",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums). Additionally, nums is nondecreasing: nums[0] <= nums[1] <= ... <= nums[len(nums)-1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDifference.spec_9",
+    "negation": "AegisSpec.MinimumDifference.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_difference nums returns Result.ok r and minimum_difference nums' returns Result.ok r', we have r' = r.",
+    "preconditions": "Let nums and nums' be two slices of the same length, both satisfying: with n = len(nums)/3 = len(nums')/3, len(nums) = 3*n, 1 <= n <= 100000, and all entries of both slices lie in [1, 100000]. Let c be an integer such that nums'[i] = nums[i] + c for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDifference.spec_10",
+    "negation": "AegisSpec.MinimumDifference.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever minimum_difference nums returns Result.ok r and minimum_difference nums' returns Result.ok r', we have r' = c * r.",
+    "preconditions": "Let nums and nums' be two slices of the same length, both satisfying: with n = len(nums)/3 = len(nums')/3, len(nums) = 3*n, 1 <= n <= 100000, and all entries of both slices lie in [1, 100000]. Let c be a positive integer such that nums'[i] = c * nums[i] for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumDifference.spec_11",
+    "negation": "AegisSpec.MinimumDifference.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_difference nums returns Result.ok r, for each integer j with n <= j <= 2n, let P(j) be the sum of the n smallest elements, with multiplicity, of the prefix nums[0..j-1], and let Q(j) be the sum of the n largest elements, with multiplicity, of the suffix nums[j..3n-1]. Then r = min_{n <= j <= 2n} (P(j) - Q(j)).",
+    "preconditions": "Let n = len(nums)/3. The slice nums satisfies len(nums) = 3*n, 1 <= n <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  }
+]

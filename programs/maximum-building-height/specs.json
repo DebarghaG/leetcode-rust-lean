@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxBuilding.spec_1",
+    "negation": "AegisSpec.MaxBuilding.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, r equals the maximum value of max_{1 <= i <= n} h(i) over all height sequences h satisfying: (a) h maps each label 1,...,n to an integer; (b) h(1) = 0; (c) h(i) >= 0 for every i with 1 <= i <= n; (d) |h(i+1) - h(i)| <= 1 for every i with 1 <= i < n; and (e) h(id_j) <= m_j for every j with 0 <= j < len(restrictions). This maximum exists because the all-zero height sequence is feasible.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxBuilding.spec_2",
+    "negation": "AegisSpec.MaxBuilding.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, max_building(n, restrictions) returns a result r; it does not panic, go out of bounds, overflow, or otherwise fail.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxBuilding.spec_3",
+    "negation": "AegisSpec.MaxBuilding.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, r <= n - 1.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxBuilding.spec_4",
+    "negation": "AegisSpec.MaxBuilding.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, there exist a height sequence h and a label i with 1 <= i <= n such that h is feasible, meaning h maps labels 1,...,n to integers, h(1)=0, h(k)>=0 for all k, |h(k+1)-h(k)|<=1 for all k with 1<=k<n, and h(id_j)<=m_j for all j, and such that h(i)=r.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxBuilding.spec_5",
+    "negation": "AegisSpec.MaxBuilding.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, for every feasible height sequence h and every label i with 1 <= i <= n, we have h(i) <= r, where feasible means h maps labels 1,...,n to integers, h(1)=0, h(k)>=0 for all k, |h(k+1)-h(k)|<=1 for all k with 1<=k<n, and h(id_j)<=m_j for all j.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxBuilding.spec_6",
+    "negation": "AegisSpec.MaxBuilding.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, for every label i with 1 <= i <= n, r >= B_i, where B_i = min( {i-1} union { m_j + |i - id_j| : 0 <= j < len(restrictions) } ).",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxBuilding.spec_7",
+    "negation": "AegisSpec.MaxBuilding.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, r = n - 1.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5). Additionally len(restrictions) = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxBuilding.spec_8",
+    "negation": "AegisSpec.MaxBuilding.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, r = min(1, m), where m = restrictions[0][1].",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5). Additionally n = 2 and len(restrictions) = 1; the unique entry must be [2,m]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxBuilding.spec_9",
+    "negation": "AegisSpec.MaxBuilding.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If max_building(n, restrictions) returns r and max_building(n, restrictions') returns r', then r <= r'.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5). Also restrictions' is another list satisfying the same conditions for the same n, has exactly the same set of ids as restrictions, and for each id its maxHeight in restrictions' is at least its maxHeight in restrictions."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxBuilding.spec_10",
+    "negation": "AegisSpec.MaxBuilding.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If max_building(n, restrictions) returns r and max_building(n, restrictions') returns r', then r = r'.",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5). Also restrictions' is a permutation of restrictions (same length and same entries, possibly in a different order)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxBuilding.spec_11",
+    "negation": "AegisSpec.MaxBuilding.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, for every j with 0 <= j < len(restrictions), writing id = restrictions[j][0] and m = restrictions[j][1], we have r <= max_{1 <= i <= n} min(i - 1, m + |i - id|).",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxBuilding.spec_12",
+    "negation": "AegisSpec.MaxBuilding.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever max_building(n, restrictions) returns a result r, the function B(i) = min( {i-1} union { m_j + |i - id_j| : 0 <= j < len(restrictions) } ) is a feasible height sequence and r = max_{1 <= i <= n} B(i).",
+    "preconditions": "n is an integer with 2 <= n <= 10^9. restrictions is a list of pairs of 64-bit integers: for every j with 0 <= j < len(restrictions), restrictions[j] has length 2, and writing id_j = restrictions[j][0] and m_j = restrictions[j][1], we have 2 <= id_j <= n, 0 <= m_j <= 10^9, the id_j are pairwise distinct, no id_j equals 1, and len(restrictions) <= min(n-1, 10^5)."
+  }
+]

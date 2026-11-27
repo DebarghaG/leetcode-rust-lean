@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_1",
+    "negation": "AegisSpec.NumTilePossibilities.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let occ(c, x) denote the number of indices i with 0 <= i < len(x) and x[i] = c. Call a finite list s of bytes a valid sequence for tiles if len(s) >= 1 and for every byte c, occ(c, s) <= occ(c, tiles). Then whenever num_tile_possibilities(tiles) returns a result r, r equals the number of distinct valid sequences for tiles, where two sequences are distinct exactly when they differ in length or in some position.",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90 (so tiles[i] is an uppercase English letter in ASCII)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_2",
+    "negation": "AegisSpec.NumTilePossibilities.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every slice tiles satisfying the preconditions, num_tile_possibilities(tiles) returns a result r (i.e., it does not fail with an error, overflow, out-of-bounds access, or panic).",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_3",
+    "negation": "AegisSpec.NumTilePossibilities.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let occ(c, x) denote the number of indices i with 0 <= i < len(x) and x[i] = c. For every slice tiles satisfying the preconditions, whenever num_tile_possibilities(tiles) returns a result r, r >= d, where d is the number of distinct bytes c such that occ(c, tiles) >= 1 (i.e., the number of distinct letters appearing in tiles).",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_4",
+    "negation": "AegisSpec.NumTilePossibilities.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every slice tiles satisfying the preconditions, whenever num_tile_possibilities(tiles) returns a result r, r <= sum_{k=1}^{len(tiles)} (len(tiles))! / (len(tiles)-k)!, where m! denotes the factorial of the natural number m and the sum is over integers k from 1 to len(tiles).",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_5",
+    "negation": "AegisSpec.NumTilePossibilities.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every slice tiles satisfying the preconditions, if len(tiles) = 1, then whenever num_tile_possibilities(tiles) returns a result r, r = 1.",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_6",
+    "negation": "AegisSpec.NumTilePossibilities.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every slice tiles satisfying the preconditions, if all bytes in tiles are equal (i.e., there exists a byte c such that for every i with 0 <= i < len(tiles), tiles[i] = c), then whenever num_tile_possibilities(tiles) returns a result r, r = len(tiles).",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_7",
+    "negation": "AegisSpec.NumTilePossibilities.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every slice tiles satisfying the preconditions, if all bytes in tiles are pairwise distinct (i.e., for every i,j with 0 <= i < j < len(tiles), tiles[i] != tiles[j]), then whenever num_tile_possibilities(tiles) returns a result r, r = sum_{k=1}^{len(tiles)} (len(tiles))! / (len(tiles)-k)!, where m! denotes the factorial of the natural number m.",
+    "preconditions": "len(tiles) >= 1 and len(tiles) <= 7 and for every i with 0 <= i < len(tiles), 65 <= tiles[i] <= 90."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_8",
+    "negation": "AegisSpec.NumTilePossibilities.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let occ(c, x) denote the number of indices i with 0 <= i < len(x) and x[i] = c. For every two slices tiles1 and tiles2 satisfying the preconditions, if for every byte c, occ(c, tiles1) = occ(c, tiles2) (i.e., tiles2 is a permutation of tiles1), then whenever num_tile_possibilities(tiles1) returns r1 and num_tile_possibilities(tiles2) returns r2, r1 = r2.",
+    "preconditions": "Both tiles1 and tiles2 satisfy: len >= 1 and len <= 7 and every byte is an uppercase English letter (65..90)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_9",
+    "negation": "AegisSpec.NumTilePossibilities.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let occ(c, x) denote the number of indices i with 0 <= i < len(x) and x[i] = c. For every two slices tiles1 and tiles2 satisfying the preconditions, if for every byte c, occ(c, tiles1) <= occ(c, tiles2) (i.e., the multiset of tiles1 is a sub-multiset of the multiset of tiles2), then whenever num_tile_possibilities(tiles1) returns r1 and num_tile_possibilities(tiles2) returns r2, r1 <= r2.",
+    "preconditions": "Both tiles1 and tiles2 satisfy: len >= 1 and len <= 7 and every byte is an uppercase English letter (65..90)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_10",
+    "negation": "AegisSpec.NumTilePossibilities.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let tiles' be the slice of the same length as tiles such that for every i with 0 <= i < len(tiles), tiles'[i] = f(tiles[i]). Then whenever num_tile_possibilities(tiles) returns r and num_tile_possibilities(tiles') returns r', we have r = r'.",
+    "preconditions": "tiles satisfies len >= 1 and len <= 7 and every byte is an uppercase English letter (65..90). f is a bijection from the set of uppercase English letters (ASCII codes 65..90) to itself."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumTilePossibilities.spec_11",
+    "negation": "AegisSpec.NumTilePossibilities.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let occ(c, x) denote the number of indices i with 0 <= i < len(x) and x[i] = c. Let c and d be the two distinct bytes appearing in tiles, and let a = occ(c, tiles) and b = occ(d, tiles). Then whenever num_tile_possibilities(tiles) returns a result r, r = (sum_{i=0}^{a} sum_{j=0}^{b} (i+j)! / (i! * j!)) - 1, where m! denotes the factorial of the natural number m.",
+    "preconditions": "tiles satisfies len >= 1 and len <= 7 and every byte is an uppercase English letter (65..90), and the set of bytes appearing in tiles has exactly two elements."
+  }
+]

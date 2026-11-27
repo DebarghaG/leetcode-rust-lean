@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let N = m*n and let s[0] <= s[1] <= ... <= s[N-1] be the nondecreasing list of all entries of grid over all cells. If not all entries of grid are congruent modulo x (that is, some difference grid[i][j] - grid[k][l] is not divisible by x), then r = -1. If all entries of grid are congruent modulo x, then r = (sum_{i=0}^{N-1} abs(s[i] - s[floor(N/2)])) / x.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, no arithmetic overflow, no out-of-bounds access) for every input satisfying the preconditions.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = -1 if and only if there exist indices (i,j) and (k,l) with 0 <= i,k < m and 0 <= j,l < n such that x does not divide grid[i][j] - grid[k][l].",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = 0 if and only if all entries of grid are equal to each other.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every integer t such that x divides grid[i][j] - t for every cell (i,j), we have r <= (sum_{i=0}^{m-1} sum_{j=0}^{n-1} abs(grid[i][j] - t)) / x.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000. Also assume all entries of grid are congruent modulo x."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let N = m*n and let s[0] <= s[1] <= ... <= s[N-1] be all entries of grid sorted nondecreasingly. The function returns a result r, and there exists a median index k with 0 <= k < N (if N is odd then k = (N-1)/2, and if N is even then k = N/2 - 1 or k = N/2) such that r = (sum_{i=0}^{N-1} abs(s[i] - s[k])) / x.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000. Also assume all entries of grid are congruent modulo x."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let N = m*n, lo = min_{i,j} grid[i][j], and hi = max_{i,j} grid[i][j]. The function returns a result r, and whenever r != -1, 0 <= r <= ((N-1)*(hi-lo))/x.",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both min_operations(grid, x) and min_operations(grid2, x) return results, and min_operations(grid2, x) = min_operations(grid, x).",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000. Let c be an integer, and define grid2 by grid2[i][j] = grid[i][j] + c*x for all i,j. Assume grid2 also satisfies the same common preconditions with the same m,n,x."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both min_operations(grid, x) and min_operations(grid2, x2) return results, and min_operations(grid2, x2) = min_operations(grid, x).",
+    "preconditions": "Let m = len(grid). It is assumed that m >= 1, every row of grid is nonempty, all rows of grid have the same length n = len(grid[0]), 1 <= m*n <= 100000, x is an integer with 1 <= x <= 10000, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= grid[i][j] <= 10000. Let c be an integer with c >= 1. Define grid2[i][j] = c * grid[i][j] for all i,j and x2 = c * x. Assume grid2 and x2 satisfy the common preconditions."
+  }
+]

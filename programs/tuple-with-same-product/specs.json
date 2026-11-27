@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TupleSameProduct.spec_1",
+    "negation": "AegisSpec.TupleSameProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P be the set of unordered index pairs {i, j} with 0 <= i < j < len(nums). For each integer p, let k_p = |{ {i,j} in P : nums[i] * nums[j] = p }|. The function returns a result r such that r = 8 * Σ_p (k_p * (k_p - 1) / 2), where the sum is over all distinct values p that occur as nums[i]*nums[j] for some {i,j} in P.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct (i.e., for 0 <= i < j < len(nums), nums[i] != nums[j])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TupleSameProduct.spec_2",
+    "negation": "AegisSpec.TupleSameProduct.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let a 4-element index set S = {i,j,k,l} with 0 <= i < j < k < l < len(nums) be called good if there exists a partition of S into two unordered pairs {a,b} and {c,d} (so {a,b,c,d} = {i,j,k,l}) such that nums[a]*nums[b] = nums[c]*nums[d]. The function returns a result r such that r = 8 * (number of good 4-element index sets).",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TupleSameProduct.spec_3",
+    "negation": "AegisSpec.TupleSameProduct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 0.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TupleSameProduct.spec_4",
+    "negation": "AegisSpec.TupleSameProduct.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r is a multiple of 8 (i.e., there exists an integer q with r = 8*q).",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TupleSameProduct.spec_5",
+    "negation": "AegisSpec.TupleSameProduct.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= 8 * C(len(nums), 4), where C(n,4) = n*(n-1)*(n-2)*(n-3)/24 for n >= 4, and C(n,4) = 0 for n < 4.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TupleSameProduct.spec_6",
+    "negation": "AegisSpec.TupleSameProduct.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) < 4, then the function returns r = 0.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TupleSameProduct.spec_7",
+    "negation": "AegisSpec.TupleSameProduct.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 4, then the function returns r = 8 if there exists a partition of the four elements into two unordered pairs {a,b} and {c,d} such that a*b = c*d, and returns r = 0 otherwise.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TupleSameProduct.spec_8",
+    "negation": "AegisSpec.TupleSameProduct.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist indices i, j, k, l with 0 <= i < j < k < l < len(nums) such that nums[i]*nums[j] = nums[k]*nums[l], then the function returns r >= 8.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TupleSameProduct.spec_9",
+    "negation": "AegisSpec.TupleSameProduct.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of tuple_same_product(nums1) and r2 be the result of tuple_same_product(nums2). Then r1 = r2.",
+    "preconditions": "Both slices nums1 and nums2 satisfy: 1 <= len <= 1000; for every i, 1 <= nums[i] <= 10^4; all elements pairwise distinct. Additionally, len(nums1) = len(nums2) and there exists a bijection π from {0,...,len(nums1)-1} to {0,...,len(nums2)-1} such that nums1[i] = nums2[π(i)] for all i (i.e., nums2 is a permutation of nums1)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TupleSameProduct.spec_10",
+    "negation": "AegisSpec.TupleSameProduct.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = tuple_same_product(nums) and r' = tuple_same_product(nums'). Then r = r'.",
+    "preconditions": "Let nums be a slice satisfying: 1 <= len(nums) <= 1000; for every i, 1 <= nums[i] <= 10^4; all elements pairwise distinct. Let c be a positive integer such that the slice nums' defined by nums'[i] = c * nums[i] for all i also satisfies the same preconditions (in particular, 1 <= nums'[i] <= 10^4 and all elements pairwise distinct)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TupleSameProduct.spec_11",
+    "negation": "AegisSpec.TupleSameProduct.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail with an overflow, out-of-bounds, or panic).",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TupleSameProduct.spec_12",
+    "negation": "AegisSpec.TupleSameProduct.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = 0 if and only if for every two disjoint unordered index pairs {i,j} and {k,l} (with 0 <= i < j < len(nums), 0 <= k < l < len(nums), and {i,j} ∩ {k,l} = ∅) we have nums[i]*nums[j] != nums[k]*nums[l].",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^4; all elements of nums are pairwise distinct."
+  }
+]

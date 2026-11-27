@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPyramids.spec_1",
+    "negation": "AegisSpec.CountPyramids.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the following number. A pyramid plot is a triple (a,b,h) of integers with 0 <= a < m, 0 <= b < n, h >= 2, a+h-1 < m, b-(h-1) >= 0, b+(h-1) < n, and grid[i][j] = 1 for every i,j with a <= i <= a+h-1 and b-(i-a) <= j <= b+(i-a). An inverse pyramid plot is a triple (a,b,h) with 0 <= a < m, 0 <= b < n, h >= 2, a-h+1 >= 0, b-(h-1) >= 0, b+(h-1) < n, and grid[i][j] = 1 for every i,j with a-h+1 <= i <= a and b-(a-i) <= j <= b+(a-i). Then r is the number of pyramid plots plus the number of inverse pyramid plots.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular: there is an integer n >= 1 such that len(grid[i]) = n for every i with 0 <= i < m. Assume 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and grid[i][j] is either 0 or 1 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPyramids.spec_2",
+    "negation": "AegisSpec.CountPyramids.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every admissible grid; it does not panic, access an out-of-bounds index, or overflow i64 while computing r.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPyramids.spec_3",
+    "negation": "AegisSpec.CountPyramids.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPyramids.spec_4",
+    "negation": "AegisSpec.CountPyramids.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= U(m,n), where U(m,n) = 2 * sum for h from 2 to H of (m-h+1)*(n-2h+2), with H = min(m, (n+1) div 2) and with the sum equal to 0 when H < 2. Here div is integer division. The number U(m,n) counts all pyramid and inverse-pyramid shapes of height at least 2 that fit entirely in an m by n grid, ignoring whether their cells are fertile.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPyramids.spec_5",
+    "negation": "AegisSpec.CountPyramids.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result returned for grid and r2 the result returned for grid2. Then r1 <= r2.",
+    "preconditions": "Let grid and grid2 be two admissible grids with the same number of rows m and columns n, and assume grid[i][j] <= grid2[i][j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPyramids.spec_6",
+    "negation": "AegisSpec.CountPyramids.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result returned for grid2 equals the result returned for grid.",
+    "preconditions": "Let grid be admissible with m rows and n columns. Let grid2 be the m-by-n grid defined by grid2[i][j] = grid[i][n-1-j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPyramids.spec_7",
+    "negation": "AegisSpec.CountPyramids.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If m < 2 or n < 3, then the function returns 0.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPyramids.spec_8",
+    "negation": "AegisSpec.CountPyramids.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist integers i,j such that 0 <= i < m-1 and 1 <= j < n-1, and either (1) grid[i][j] = 1, grid[i+1][j-1] = 1, grid[i+1][j] = 1, grid[i+1][j+1] = 1, or (2) grid[i][j-1] = 1, grid[i][j] = 1, grid[i][j+1] = 1, grid[i+1][j] = 1.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPyramids.spec_9",
+    "negation": "AegisSpec.CountPyramids.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let N2P be the number of pairs (i,j) with 0 <= i < m-1 and 1 <= j < n-1 such that grid[i][j] = 1, grid[i+1][j-1] = 1, grid[i+1][j] = 1, and grid[i+1][j+1] = 1. Let N2I be the number of pairs (i,j) with 0 <= i < m-1 and 1 <= j < n-1 such that grid[i][j-1] = 1, grid[i][j] = 1, grid[i][j+1] = 1, and grid[i+1][j] = 1. Whenever the function returns a result r, r >= N2P + N2I.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPyramids.spec_10",
+    "negation": "AegisSpec.CountPyramids.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "Let m = len(grid). Assume grid is rectangular with common row length n, 1 <= m <= 1000, 1 <= n <= 1000, m*n <= 100000, and every grid[i][j] is 0 or 1. Assume that for every row i and every j with 0 <= i < m and 0 <= j < n-2, it is not the case that grid[i][j] = 1, grid[i][j+1] = 1, and grid[i][j+2] = 1."
+  }
+]

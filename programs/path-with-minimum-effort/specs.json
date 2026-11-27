@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_1",
+    "negation": "AegisSpec.MinimumEffortPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. A route is a finite sequence of cells (a_0,b_0),...,(a_k,b_k) such that 0 <= a_t < R and 0 <= b_t < C for all t, (a_0,b_0) = (0,0), (a_k,b_k) = (R-1,C-1), and for every t with 0 <= t < k, |a_{t+1}-a_t| + |b_{t+1}-b_t| = 1. The effort of such a route is 0 if k = 0, and otherwise is the maximum of |heights[a_t][b_t] - heights[a_{t+1}][b_{t+1}]| over all t with 0 <= t < k. Then r is the minimum effort among all such routes.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_2",
+    "negation": "AegisSpec.MinimumEffortPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, or access an invalid index) for every input satisfying the preconditions.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_3",
+    "negation": "AegisSpec.MinimumEffortPath.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_4",
+    "negation": "AegisSpec.MinimumEffortPath.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let M = 0 if R*C = 1; otherwise let M be the maximum of |heights[i][j] - heights[i'][j']| over all pairs of cells (i,j),(i',j') with 0 <= i,i' < R, 0 <= j,j' < C, and |i-i'| + |j-j'| = 1. Then r <= M.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_5",
+    "negation": "AegisSpec.MinimumEffortPath.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every route P (a finite sequence of orthogonally adjacent cells from (0,0) to (R-1,C-1)), the effort of P is at least r, where the effort is the maximum absolute height difference between consecutive cells of P and is 0 for a one-cell route.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_6",
+    "negation": "AegisSpec.MinimumEffortPath.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a route P (a finite sequence of orthogonally adjacent cells from (0,0) to (R-1,C-1)) whose effort is exactly r, where the effort is the maximum absolute height difference between consecutive cells of P and is 0 for a one-cell route.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_7",
+    "negation": "AegisSpec.MinimumEffortPath.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists a finite sequence of orthogonally adjacent cells from (0,0) to (R-1,C-1) such that every two consecutive cells of the sequence have equal heights.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_8",
+    "negation": "AegisSpec.MinimumEffortPath.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t with 0 <= t <= 1000000, r <= t if and only if there exists a route from (0,0) to (R-1,C-1) whose effort is at most t, where the effort is the maximum absolute height difference between consecutive cells of the route and is 0 for a one-cell route.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_9",
+    "negation": "AegisSpec.MinimumEffortPath.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = 0, or there exist cells (i,j) and (i',j') with 0 <= i,i' < R, 0 <= j,j' < C, and |i-i'| + |j-j'| = 1, such that r = |heights[i][j] - heights[i'][j']|.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_10",
+    "negation": "AegisSpec.MinimumEffortPath.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, with the convention that a maximum over an empty set is 0, r = max over 0 <= j < C-1 of |heights[0][j+1] - heights[0][j]|.",
+    "preconditions": "Let R = len(heights). There is an integer C such that R = 1, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_11",
+    "negation": "AegisSpec.MinimumEffortPath.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let T be the C by R array defined by len(T) = C, len(T[i]) = R for 0 <= i < C, and T[i][j] = heights[j][i] for 0 <= i < C and 0 <= j < R. Whenever minimum_effort_path(heights) returns r and minimum_effort_path(T) returns r', we have r = r'.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_12",
+    "negation": "AegisSpec.MinimumEffortPath.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let F be the R by C array defined by F[i][j] = heights[R-1-i][C-1-j] for 0 <= i < R and 0 <= j < C. Whenever minimum_effort_path(heights) returns r and minimum_effort_path(F) returns r', we have r = r'.",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_13",
+    "negation": "AegisSpec.MinimumEffortPath.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every set S of cells (i,j) with 0 <= i < R and 0 <= j < C such that (0,0) is in S and (R-1,C-1) is not in S, let B be the set of all |heights[i][j] - heights[i'][j']| for which (i,j) is in S, (i',j') is not in S, and |i-i'| + |j-j'| = 1. Then B is nonempty and r >= min(B).",
+    "preconditions": "Let R = len(heights). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, len(heights[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumEffortPath.spec_14",
+    "negation": "AegisSpec.MinimumEffortPath.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_effort_path(heights) returns r and minimum_effort_path(heights') returns r', we have r <= r'.",
+    "preconditions": "Let heights and heights' be two grids. Let R = len(heights) and R' = len(heights'). There is an integer C such that 1 <= R <= 100, 1 <= C <= 100, R' = R, len(heights[i]) = C and len(heights'[i]) = C for every i with 0 <= i < R, and 1 <= heights[i][j] <= 1000000 and 1 <= heights'[i][j] <= 1000000 for every i,j with 0 <= i < R and 0 <= j < C. Also, for every i,j,i',j' with 0 <= i,i' < R, 0 <= j,j' < C, and |i-i'| + |j-j'| = 1, |heights[i][j]-heights[i'][j']| <= |heights'[i][j]-heights'[i'][j']|."
+  }
+]

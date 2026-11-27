@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BstToGst.spec_1",
+    "negation": "AegisSpec.BstToGst.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). For every finite path p of left/right moves from the root (the empty path denotes the root), the node at p in r is Null if and only if the node at p in root is Null. Moreover, for every non-null node u of root, if v is the key of u and p is the path of u, then the node at p in r is non-null and has key v + G(v), where G(v) is the sum of all keys w occurring in root with w > v (and G(v) = 0 if no such key exists).",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BstToGst.spec_2",
+    "negation": "AegisSpec.BstToGst.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (an Ok value, not a failure); in particular there is no panic, out-of-bounds access, or 64-bit overflow.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BstToGst.spec_3",
+    "negation": "AegisSpec.BstToGst.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r such that for every finite path p of left/right moves from the root, the node at p in r is Null exactly when the node at p in root is Null (so r has the same pattern of present and absent children as root).",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BstToGst.spec_4",
+    "negation": "AegisSpec.BstToGst.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r such that for every non-null node u of root, if v is the key of u and u' is the node of r at the same path, then the key of u' is v + sum{ w | w is a key of some node of root and w > v } (the sum is 0 if no key is greater than v).",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BstToGst.spec_5",
+    "negation": "AegisSpec.BstToGst.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S be the sum of all keys of non-null nodes of root. The function returns a result r such that every key y of a non-null node of r satisfies 0 <= y <= S.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BstToGst.spec_6",
+    "negation": "AegisSpec.BstToGst.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every non-null node u of root with key v, the key of the node at the same path in r is at least v.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BstToGst.spec_7",
+    "negation": "AegisSpec.BstToGst.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r such that for every non-null node u of root whose key v is not the maximum key among all keys in root, the key of the node at the same path in r is strictly greater than v.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BstToGst.spec_8",
+    "negation": "AegisSpec.BstToGst.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k_0, k_1, ..., k_{n-1} be the keys of the non-null nodes of root in in-order (left subtree, then node, then right subtree). Let y_0, y_1, ..., y_{n-1} be the keys of the non-null nodes of r in the same in-order. Then for every i with 0 <= i < n-1, y_i >= y_{i+1}.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BstToGst.spec_9",
+    "negation": "AegisSpec.BstToGst.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r such that for any two non-null nodes u and u' of root with keys a < b, if y and y' are the keys of the nodes at their same paths in r, then y - y' = sum{ w | w is a key of some node of root and a <= w < b }.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BstToGst.spec_10",
+    "negation": "AegisSpec.BstToGst.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns results r1 and r2 for root1 and root2. For every key v in the common key set, and for any node u1 of root1 and u2 of root2 both having key v, the key at the same path as u1 in r1 equals the key at the same path as u2 in r2.",
+    "preconditions": "root1 and root2 are binary search trees, each with between 1 and 100 non-null nodes; every key in root1 or root2 is an integer with 0 <= key <= 100; all keys in root1 are pairwise distinct and all keys in root2 are pairwise distinct; and the set of keys of root1 is equal to the set of keys of root2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BstToGst.spec_11",
+    "negation": "AegisSpec.BstToGst.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let S be the sum of all keys of non-null nodes of root. The function returns a result r such that there exists a non-null node of r whose key is S.",
+    "preconditions": "root is a binary search tree: for every node, all keys in its left subtree are strictly less than its key and all keys in its right subtree are strictly greater than its key, and the same property holds recursively; the number of non-null nodes in root is between 1 and 100; every key in root is an integer with 0 <= key <= 100; all keys in root are pairwise distinct."
+  }
+]

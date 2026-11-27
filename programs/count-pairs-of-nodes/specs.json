@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPairs.spec_1",
+    "negation": "AegisSpec.CountPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define, for 1 <= a < b <= n, incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }|. Whenever count_pairs(n, edges, queries) returns a result r, r has length len(queries), and for every j with 0 <= j < len(queries), r[j] = |{ (a,b) : 1 <= a < b <= n and incident(a,b) > queries[j] }|.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPairs.spec_2",
+    "negation": "AegisSpec.CountPairs.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever count_pairs(n, edges, queries) returns a result r, len(r) = len(queries).",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPairs.spec_3",
+    "negation": "AegisSpec.CountPairs.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "count_pairs(n, edges, queries) returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPairs.spec_4",
+    "negation": "AegisSpec.CountPairs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), 0 <= r[j] <= n*(n-1)/2.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPairs.spec_5",
+    "negation": "AegisSpec.CountPairs.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_pairs(n, edges, queries) returns a result r, for all i,k with 0 <= i < len(queries) and 0 <= k < len(queries), if queries[i] <= queries[k] then r[i] >= r[k].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPairs.spec_6",
+    "negation": "AegisSpec.CountPairs.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every j with 0 <= j < len(queries1) and 0 <= j < len(queries2), if queries1[j] = queries2[j], then whenever count_pairs(n, edges, queries1) returns r1 and count_pairs(n, edges, queries2) returns r2, r1[j] = r2[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries1 and queries2 are slices with 1 <= len <= 20; for every valid j, 0 <= queries1[j] < len(edges) and 0 <= queries2[j] < len(edges)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPairs.spec_7",
+    "negation": "AegisSpec.CountPairs.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n, and let minIncident = min { incident(a,b) : 1 <= a < b <= n }. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), if queries[j] < minIncident then r[j] = n*(n-1)/2.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPairs.spec_8",
+    "negation": "AegisSpec.CountPairs.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n, and let maxIncident = max { incident(a,b) : 1 <= a < b <= n }. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), if queries[j] >= maxIncident then r[j] = 0.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPairs.spec_9",
+    "negation": "AegisSpec.CountPairs.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), if r[j] > 0 then there exist integers a,b with 1 <= a < b <= n such that incident(a,b) > queries[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPairs.spec_10",
+    "negation": "AegisSpec.CountPairs.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), if r[j] < n*(n-1)/2 then there exist integers a,b with 1 <= a < b <= n such that incident(a,b) <= queries[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPairs.spec_11",
+    "negation": "AegisSpec.CountPairs.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), r[j] = n*(n-1)/2 if and only if for every pair a,b with 1 <= a < b <= n, incident(a,b) > queries[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPairs.spec_12",
+    "negation": "AegisSpec.CountPairs.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let incident(a,b) = |{ k : 0 <= k < len(edges) and (edges[k][0] = a or edges[k][1] = a or edges[k][0] = b or edges[k][1] = b) }| for 1 <= a < b <= n. Whenever count_pairs(n, edges, queries) returns a result r, for every j with 0 <= j < len(queries), r[j] = 0 if and only if for every pair a,b with 1 <= a < b <= n, incident(a,b) <= queries[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountPairs.spec_13",
+    "negation": "AegisSpec.CountPairs.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_pairs(n, edges1, queries) returns r1 and count_pairs(n, edges2, queries) returns r2, r1 = r2.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges1 and edges2 are slices of vectors, each satisfying 1 <= len <= 100000, every element has length 2, both entries are in {1,...,n}, and the two entries are distinct. Assume len(edges1) = len(edges2) and edges2 is a permutation of edges1: there is a bijection p from {0,...,len(edges1)-1} to itself such that edges2[k] = edges1[p(k)] for every k. queries is a slice with 1 <= len(queries) <= 20 and 0 <= queries[j] < len(edges1) for every j."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountPairs.spec_14",
+    "negation": "AegisSpec.CountPairs.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_pairs(n, edges, queries) returns r and count_pairs(n, edges_rev, queries) returns r_rev, r = r_rev.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges and edges_rev are slices of vectors, each satisfying 1 <= len <= 100000, every element has length 2, both entries are in {1,...,n}, and the two entries are distinct. Assume len(edges) = len(edges_rev) and for every k with 0 <= k < len(edges), edges_rev[k] has length 2 and edges_rev[k][0] = edges[k][1] and edges_rev[k][1] = edges[k][0]. queries is a slice with 1 <= len(queries) <= 20 and 0 <= queries[j] < len(edges) for every j."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountPairs.spec_15",
+    "negation": "AegisSpec.CountPairs.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_pairs(n, edges, queries) returns a result r and count_pairs(n, edges_sigma, queries) returns a result r_sigma, r = r_sigma.",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. Let sigma be a bijection from {1,...,n} to itself, and let edges_sigma be the slice with len(edges_sigma) = len(edges) and edges_sigma[k][0] = sigma(edges[k][0]), edges_sigma[k][1] = sigma(edges[k][1]) for every k. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges)."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.CountPairs.spec_16",
+    "negation": "AegisSpec.CountPairs.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_pairs(n, edges, queries1) returns a result r1 and count_pairs(n, edges, queries2) returns a result r2, for every k with 0 <= k < len(queries2), r2[k] = r1[pi(k)].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges is a slice of vectors with 1 <= len(edges) <= 100000; every element edges[k] has length 2, edges[k][0] and edges[k][1] are in {1,...,n}, and edges[k][0] != edges[k][1]. queries1 and queries2 are slices with 1 <= len(queries1) <= 20 and 1 <= len(queries2) <= 20; for every valid index j, 0 <= queries1[j] < len(edges) and 0 <= queries2[j] < len(edges). Assume len(queries1) = len(queries2) and there is a bijection pi from {0,...,len(queries1)-1} to itself such that queries2[k] = queries1[pi(k)] for every k."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.CountPairs.spec_17",
+    "negation": "AegisSpec.CountPairs.spec_17_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever count_pairs(n, edges1, queries) returns a result r1 and count_pairs(n, edges2, queries) returns a result r2, for every j with 0 <= j < len(queries), r1[j] <= r2[j].",
+    "preconditions": "n is an integer with 2 <= n <= 20000. edges1 and edges2 are slices of vectors, each with 1 <= len <= 100000; every element has length 2, both entries are in {1,...,n}, and the two entries are distinct. For every vector e, let count1(e) = |{ k : 0 <= k < len(edges1) and edges1[k] = e }| and count2(e) = |{ k : 0 <= k < len(edges2) and edges2[k] = e }|; assume count1(e) <= count2(e) for every e. queries is a slice with 1 <= len(queries) <= 20; for every j with 0 <= j < len(queries), 0 <= queries[j] < len(edges1) and 0 <= queries[j] < len(edges2)."
+  }
+]

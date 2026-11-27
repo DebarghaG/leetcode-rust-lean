@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_1",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let p = 10^9 + 7. For 0 <= i <= j < n let mn(i,j) = min{ nums[k] : i <= k <= j }, sm(i,j) = sum_{k=i}^{j} nums[k], mp(i,j) = mn(i,j) * sm(i,j), and M = max{ mp(i,j) : 0 <= i <= j < n }. The function returns a result r such that 0 <= r < p and r is congruent to M modulo p; equivalently r = M mod p, the unique integer in [0, p-1] congruent to M.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M (as defined in the statement) is at most 2^63 - 1, so it fits in a 64-bit signed integer."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_2",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it never fails (no 64-bit signed arithmetic overflow, no out-of-bounds index access, no panic).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_3",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1 then r = (nums[0] * nums[0]) mod (10^9 + 7); that is, 0 <= r < 10^9+7 and r is congruent to nums[0]^2 modulo 10^9+7.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_4",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 2 then the maximum min-product is M = max(nums[0]*nums[0], nums[1]*nums[1], min(nums[0], nums[1]) * (nums[0] + nums[1])) and r = M mod (10^9 + 7).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_5",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums[0] = nums[1] = ... = nums[n-1] = c, then M = c * c * n and r = (c * c * n) mod (10^9 + 7).",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_6",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exist indices i, j with 0 <= i <= j < n such that mp(i,j) = M and r = mp(i,j) mod (10^9 + 7), where mn, sm, mp, and M are as defined in spec_1.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_7",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every 0 <= i <= j < n, mp(i,j) <= M, where M is the maximum min-product and r = M mod (10^9 + 7). Equivalently, no non-empty contiguous subarray has min-product strictly larger than the maximum whose residue is returned.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_8",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If M < 10^9 + 7 then r = M, i.e., the returned value equals the unreduced maximum min-product.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_9",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "0 <= r <= M, where M is the maximum min-product.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSumMinProduct.spec_10",
+    "negation": "AegisSpec.MaxSumMinProduct.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "r = 0 if and only if M is divisible by 10^9 + 7; if M is not divisible by 10^9 + 7 then 1 <= r < 10^9 + 7.",
+    "preconditions": "Let n = len(nums). 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= nums[i] <= 10000000. It is guaranteed that the maximum min-product M is at most 2^63 - 1."
+  }
+]

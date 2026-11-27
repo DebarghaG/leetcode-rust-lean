@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_1",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the number of pairs (i, j) of integers with 0 <= i < j <= len(s) such that the substring s[i..j) is beautiful, where for such a pair we define V(i,j) = the number of indices t with i <= t < j and s[t] in {97, 101, 105, 111, 117} (the ASCII codes of 'a','e','i','o','u'), C(i,j) = (j - i) - V(i,j), and s[i..j) is called beautiful iff V(i,j) = C(i,j) and (V(i,j) * C(i,j)) mod k = 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122 (s is an ASCII lowercase English word); 1 <= k <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_2",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, beautiful_substrings returns some result r; it does not fail, overflow, or panic.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_3",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever beautiful_substrings returns a result r, we have r >= 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_4",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever beautiful_substrings returns a result r, we have r <= len(s) * (len(s) + 1) / 2.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_5",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) = 0, then beautiful_substrings returns 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_6",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) = 1, then beautiful_substrings returns 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_7",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever beautiful_substrings returns a result r with r > 0, there exists at least one pair (i, j) with 0 <= i < j <= len(s) such that V(i,j) = C(i,j) and (V(i,j) * C(i,j)) mod k = 0, where V(i,j) is the number of t with i <= t < j and s[t] in {97, 101, 105, 111, 117} and C(i,j) = (j - i) - V(i,j).",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_8",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever beautiful_substrings returns a result r with r = 0, for every pair (i, j) with 0 <= i < j <= len(s) we have that V(i,j) != C(i,j) or (V(i,j) * C(i,j)) mod k != 0, where V(i,j) is the number of t with i <= t < j and s[t] in {97, 101, 105, 111, 117} and C(i,j) = (j - i) - V(i,j).",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_9",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every byte s[t] with 0 <= t < len(s) is not in {97, 101, 105, 111, 117} (that is, every character is a consonant), then beautiful_substrings returns 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000; len(s) >= 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_10",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every byte s[t] with 0 <= t < len(s) is in {97, 101, 105, 111, 117} (that is, every character is a vowel), then beautiful_substrings returns 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000; len(s) >= 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_11",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = floor(len(s) / 2). If k > m * m, then beautiful_substrings returns 0.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000; len(s) >= 2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_12",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If beautiful_substrings(s, d) returns r_d and beautiful_substrings(s, k) returns r_k, then r_k <= r_d.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; d and k are integers with 1 <= d <= 1000, 1 <= k <= 1000, and d divides k (k = d * t for some integer t)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_13",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the string with len(rev) = len(s) and rev[u] = s[len(s) - 1 - u] for all u with 0 <= u < len(s). If beautiful_substrings(s, k) returns r and beautiful_substrings(rev, k) returns r', then r = r'.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_14",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If beautiful_substrings(s, k) returns r_s and beautiful_substrings(t, k) returns r_t, then r_s = r_t. Equivalently, the answer depends only on the vowel/consonant pattern of s and on k, not on which particular vowel or consonant occupies each position.",
+    "preconditions": "0 <= len(s) <= 50000; 0 <= len(t) <= 50000; len(s) = len(t); every byte of s and t is in 97..122; for every u with 0 <= u < len(s), s[u] is in {97,101,105,111,117} iff t[u] is in {97,101,105,111,117}; 1 <= k <= 1000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_15",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever beautiful_substrings(s, k) returns a result r, we have r <= floor(len(s)/2) * floor((len(s)+1)/2). This is the number of non-empty even-length substrings of s, since every beautiful substring has V = C and therefore even length.",
+    "preconditions": "0 <= len(s) <= 50000; every byte s[t] with 0 <= t < len(s) satisfies 97 <= s[t] <= 122; 1 <= k <= 1000."
+  }
+]

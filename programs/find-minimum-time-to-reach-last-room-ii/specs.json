@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinTimeToReach.spec_1",
+    "negation": "AegisSpec.MinTimeToReach.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a walk be a finite sequence W = ((i_0,j_0),...,(i_k,j_k)) of rooms with (i_0,j_0)=(0,0), (i_k,j_k)=(n-1,m-1), and |i_{q+1}-i_q| + |j_{q+1}-j_q| = 1 for every 0 <= q < k. Define T_W(0)=0 and, for q=0,...,k-1, T_W(q+1) = max(T_W(q), moveTime[i_{q+1}][j_{q+1}]) + (1 if q is even, 2 if q is odd). Then the function returns a result r and r = min { T_W(k) | W is a walk from (0,0) to (n-1,m-1) }.",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinTimeToReach.spec_2",
+    "negation": "AegisSpec.MinTimeToReach.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r and does not fail: no arithmetic overflow, no out-of-bounds slice or vector access, and no panic occurs.",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinTimeToReach.spec_3",
+    "negation": "AegisSpec.MinTimeToReach.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d = n+m-2 and let T be the minimum of moveTime[i][j] over all rooms (i,j) with (i,j) != (0,0). The result r satisfies r >= T + floor(3*d/2).",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinTimeToReach.spec_4",
+    "negation": "AegisSpec.MinTimeToReach.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d = n+m-2 and let M be the maximum of moveTime[i][j] over all 0 <= i < n and 0 <= j < m. The result r satisfies r <= M + floor(3*d/2).",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinTimeToReach.spec_5",
+    "negation": "AegisSpec.MinTimeToReach.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d = n+m-2. The result r satisfies r >= moveTime[n-1][m-1] + c, where c = 1 when d is odd and c = 2 when d is even.",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinTimeToReach.spec_6",
+    "negation": "AegisSpec.MinTimeToReach.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d = n+m-2. The result is r = C + floor(3*d/2).",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m. Assume additionally that all entries of moveTime are equal to the same integer C."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinTimeToReach.spec_7",
+    "negation": "AegisSpec.MinTimeToReach.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a = moveTime[0][1], b = moveTime[1][0], and c = moveTime[1][1]. The result is r = max(c, min(a+1, b+1)) + 2.",
+    "preconditions": "Let n = len(moveTime) and m be the common row length. Assume n = 2, m = 2, every row moveTime[i] has length 2, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < 2 and 0 <= j < 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinTimeToReach.spec_8",
+    "negation": "AegisSpec.MinTimeToReach.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Then min_time_to_reach(A) = min_time_to_reach(B).",
+    "preconditions": "Let A and B be two admissible inputs with the same row count n and common column count m, so 2 <= n <= 750, 2 <= m <= 750, all rows have length m, and all entries are in [0,10^9]. Assume A[i][j] = B[i][j] for every 0 <= i < n and 0 <= j < m except possibly at (i,j)=(0,0)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinTimeToReach.spec_9",
+    "negation": "AegisSpec.MinTimeToReach.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_A = min_time_to_reach(A) and r_B = min_time_to_reach(B). Then r_A <= r_B.",
+    "preconditions": "Let A and B be two admissible inputs with the same row count n and common column count m, so 2 <= n <= 750, 2 <= m <= 750, all rows have length m, and all entries are in [0,10^9]. Assume A[i][j] <= B[i][j] for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinTimeToReach.spec_10",
+    "negation": "AegisSpec.MinTimeToReach.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Then min_time_to_reach(B) = min_time_to_reach(A) + C.",
+    "preconditions": "Let A be an admissible input with row count n and common column count m. Let C be an integer with C >= 0 such that B defined by B[i][j] = A[i][j] + C for every 0 <= i < n and 0 <= j < m is also admissible (in particular all B entries are at most 10^9)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinTimeToReach.spec_11",
+    "negation": "AegisSpec.MinTimeToReach.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_A = min_time_to_reach(A) and r_B = min_time_to_reach(B). Then r_A <= r_B <= r_A + C.",
+    "preconditions": "Let A be an admissible input with row count n and common column count m. Let C >= 0 be such that B is admissible, B[i][j] = A[i][j] for every room except (n-1,m-1), and B[n-1][m-1] = A[n-1][m-1] + C."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinTimeToReach.spec_12",
+    "negation": "AegisSpec.MinTimeToReach.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the result. There exists a walk W from (0,0) to (n-1,m-1), under the movement and waiting rules of the problem, whose arrival time is exactly r and in which no room occurs twice. Consequently, this optimal walk has at most n*m-1 moves.",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinTimeToReach.spec_13",
+    "negation": "AegisSpec.MinTimeToReach.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "There exists an optimal walk W from (0,0) to (n-1,m-1) that only moves down (increasing i by 1) or right (increasing j by 1); consequently, this optimal walk has exactly d = n+m-2 moves.",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinTimeToReach.spec_14",
+    "negation": "AegisSpec.MinTimeToReach.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d = n+m-2 and let t = min(moveTime[0][1], moveTime[1][0]). The result r satisfies r >= t + floor(3*d/2).",
+    "preconditions": "Let n = len(moveTime); let m be the common row length. Assume 2 <= n <= 750, 2 <= m <= 750, every row moveTime[i] has length m, and 0 <= moveTime[i][j] <= 10^9 for every 0 <= i < n and 0 <= j < m."
+  }
+]

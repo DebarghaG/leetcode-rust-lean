@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfSets.spec_1",
+    "negation": "AegisSpec.NumberOfSets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is exactly the number of subsets S of {0,...,n-1} for which the following holds. Put A = {0,...,n-1} \\ S. For every u,v in A there exist k >= 0 and vertices p_0,...,p_k such that p_0 = u, p_k = v, every p_j is in A, and for each j = 0,...,k-1 there is a road index t_j with {roads[t_j][0], roads[t_j][1]} = {p_j, p_{j+1}}; moreover the sum over j = 0,...,k-1 of roads[t_j][2] is at most maxDistance. For u = v, k = 0 is allowed. In words, after closing exactly S, every two remaining branches are connected by a route of total length at most maxDistance using only remaining branches, with empty and one-element active sets valid vacuously. The quantification is over all subsets S, including S = {} and S = {0,...,n-1}; each subset contributes to r exactly when the displayed condition holds.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= n <= 10; 1 <= maxDistance <= 100000; 0 <= len(roads) <= 1000; for every i with 0 <= i < len(roads), roads[i] has length 3, roads[i][0] and roads[i][1] are in [0,n-1], roads[i][0] != roads[i][1], and 1 <= roads[i][2] <= 1000; and the undirected graph on {0,...,n-1} whose edges are the road entries is connected."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfSets.spec_2",
+    "negation": "AegisSpec.NumberOfSets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying these preconditions, the function returns a result r; it does not return Err, panic, overflow, or access roads out of bounds.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= n <= 10; 1 <= maxDistance <= 100000; len(roads) <= 1000; for every i with 0 <= i < len(roads), roads[i] has length 3, roads[i][0] and roads[i][1] are in [0,n-1], roads[i][0] != roads[i][1], and 1 <= roads[i][2] <= 1000; and the undirected graph on {0,...,n-1} whose edges are the road entries is connected."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfSets.spec_3",
+    "negation": "AegisSpec.NumberOfSets.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= 2^n; in particular, since n <= 10, 0 <= r <= 1024.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= n <= 10; 1 <= maxDistance <= 100000; len(roads) <= 1000; for every i with 0 <= i < len(roads), roads[i] has length 3, roads[i][0] and roads[i][1] are in [0,n-1], roads[i][0] != roads[i][1], and 1 <= roads[i][2] <= 1000; and the undirected graph on {0,...,n-1} whose edges are the road entries is connected."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfSets.spec_4",
+    "negation": "AegisSpec.NumberOfSets.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and r >= n+1. Indeed, all subsets S with active set {0,...,n-1} \\ S of size 0 or 1 are valid, and there are exactly n+1 such subsets.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= n <= 10; 1 <= maxDistance <= 100000; len(roads) <= 1000; for every i with 0 <= i < len(roads), roads[i] has length 3, roads[i][0] and roads[i][1] are in [0,n-1], roads[i][0] != roads[i][1], and 1 <= roads[i][2] <= 1000; and the undirected graph on {0,...,n-1} whose edges are the road entries is connected."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfSets.spec_5",
+    "negation": "AegisSpec.NumberOfSets.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 2.",
+    "preconditions": "The input satisfies the problem constraints and n = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfSets.spec_6",
+    "negation": "AegisSpec.NumberOfSets.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r, and r = 4 if m <= maxDistance, while r = 3 if m > maxDistance.",
+    "preconditions": "The input satisfies the problem constraints and n = 2. Let m = min{roads[i][2] | 0 <= i < len(roads)}. Since n = 2 and the graph is connected, this minimum is over a nonempty set and every road joins 0 and 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfSets.spec_7",
+    "negation": "AegisSpec.NumberOfSets.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r, and the empty closed set S = {} is counted among the sets defining r if and only if, in the original graph using all branches, for every u,v in {0,...,n-1} there is a path from u to v of total length at most maxDistance. Equivalently, the diameter of the original road graph is at most maxDistance.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= n <= 10; 1 <= maxDistance <= 100000; len(roads) <= 1000; for every i with 0 <= i < len(roads), roads[i] has length 3, roads[i][0] and roads[i][1] are in [0,n-1], roads[i][0] != roads[i][1], and 1 <= roads[i][2] <= 1000; and the undirected graph on {0,...,n-1} whose edges are the road entries is connected."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfSets.spec_8",
+    "negation": "AegisSpec.NumberOfSets.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r1 and r2, and r1 <= r2.",
+    "preconditions": "Fix n and roads satisfying the structural and connectivity constraints for n. Let D1 and D2 be integers with 1 <= D1 <= D2 <= 100000. Let r1 and r2 be the results of the function on (n,D1,roads) and (n,D2,roads), respectively."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfSets.spec_9",
+    "negation": "AegisSpec.NumberOfSets.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns r1 and r2, and r1 = r2.",
+    "preconditions": "Fix n and maxDistance satisfying the constraints. Let roads1 and roads2 be two road lists satisfying the constraints for n, such that roads2 is a permutation (reordering) of roads1, including multiplicities. Let r1 and r2 be the results on (n,maxDistance,roads1) and (n,maxDistance,roads2)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfSets.spec_10",
+    "negation": "AegisSpec.NumberOfSets.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and r = n+1.",
+    "preconditions": "The input satisfies the problem constraints, and for every i with 0 <= i < len(roads), roads[i][2] > maxDistance."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfSets.spec_11",
+    "negation": "AegisSpec.NumberOfSets.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r, and r equals the number of subsets A of {0,...,n-1} such that for every u,v in A there is a path from u to v whose intermediate vertices all lie in A. Equivalently, r is the number of active sets A whose induced subgraph is connected in the path sense, with the empty set and singleton sets counted as connected vacuously. The corresponding closed set is S = {0,...,n-1} \\ A.",
+    "preconditions": "The input satisfies the problem constraints. Let W be the sum of roads[i][2] over all 0 <= i < len(roads). Assume maxDistance >= W."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfSets.spec_12",
+    "negation": "AegisSpec.NumberOfSets.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r and r = 2^n.",
+    "preconditions": "The input satisfies the problem constraints, and for every pair of distinct vertices u,v with 0 <= u < v < n there exists a road index i such that {roads[i][0], roads[i][1]} = {u,v} and roads[i][2] <= maxDistance."
+  }
+]

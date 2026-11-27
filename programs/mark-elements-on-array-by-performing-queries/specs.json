@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_1",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define M_{-1} = empty set. For 0 <= i < m, let idx_i = queries[i][0], k_i = queries[i][1], A_i = M_{i-1} union {idx_i}, U_i = { j | 0 <= j < n and j not in A_i }, and t_i = min(k_i, |U_i|). Let T_i be the unique subset of U_i with |T_i| = t_i such that for every j in T_i and every u in U_i minus T_i, either nums[j] < nums[u], or nums[j] = nums[u] and j < u. Define M_i = A_i union T_i. Whenever the function returns a result r, len(r) = m and for every i with 0 <= i < m, r[i] = sum over j with 0 <= j < n and j not in M_i of nums[j].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_2",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = m, where m = len(queries).",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_3",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, 0 <= r[i] <= S, where S = sum_{j=0}^{n-1} nums[j].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_4",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_4_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_5",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < m, r[i] <= r[i-1].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_6",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M_i be the set of marked indices after the i-th query under the process where M_{-1} = empty set, and for each query first queries[i][0] is marked, then min(queries[i][1], number of remaining unmarked indices) unmarked indices with smallest pairs (nums[j], j) are marked. Whenever the function returns a result r, for every i with 0 <= i < m, r[i] = 0 if and only if M_i = { j | 0 <= j < n }.",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_7",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M_i be the marked set after i queries under the process where M_{-1} = empty set and each query marks its own index and then the smallest remaining unmarked elements by the order (nums[j], j). For each i, let A_i = M_{i-1} union {queries[i][0]}. Whenever the function returns a result r, for every i with 0 <= i < m, r[i] = 0 if and only if queries[i][1] >= n - |A_i|.",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_8",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < m, r[i] = S - sum_{j in I_i} nums[j], where S = sum_{j=0}^{n-1} nums[j] and I_i = { queries[t][0] | 0 <= t <= i } with duplicates removed.",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, 0 <= queries[i][1] <= n - 1, and queries[i][1] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_9",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < m, if queries[i][1] = 0 and there exists t with 0 <= t < i and queries[t][0] = queries[i][0], then r[i] = r[i-1].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_10",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M_i be the marked set after i queries under the process where M_{-1} = empty set and each query marks its own index and then the smallest remaining unmarked elements by the order (nums[j], j). Whenever the function returns a result r, for every i with 1 <= i < m, if queries[i][1] = 0 and queries[i][0] not in M_{i-1}, then r[i] = r[i-1] - nums[queries[i][0]].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_11",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let M_i be the marked set after i queries under the process where M_{-1} = empty set and each query marks its own index and then the smallest remaining unmarked elements by the order (nums[j], j). Whenever the function returns a result r, for every i with 1 <= i < m, r[i-1] - r[i] = sum over j with 0 <= j < n and j in M_i minus M_{i-1} of nums[j].",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.UnmarkedSumArray.spec_12",
+    "negation": "AegisSpec.UnmarkedSumArray.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M_i be the marked set after i queries under the process where M_{-1} = empty set and each query marks its own index and then the smallest remaining unmarked elements by the order (nums[j], j). Whenever the function returns a result r, for every i with 0 <= i < m, r[i] = c * (n - |M_i|).",
+    "preconditions": "n = len(nums), m = len(queries), 1 <= n, 1 <= m <= n, n <= 100000, for every j with 0 <= j < n: 1 <= nums[j] <= 100000, for every i with 0 <= i < m: len(queries[i]) = 2, 0 <= queries[i][0] < n, and 0 <= queries[i][1] <= n - 1, and there exists c such that for every j with 0 <= j < n, nums[j] = c."
+  }
+]

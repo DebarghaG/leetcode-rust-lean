@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindPattern.spec_1",
+    "negation": "AegisSpec.FindPattern.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a vector ans of length 2. If at least one matching placement exists, then ans=[R,C] where (R,C) is a matching placement and for every matching placement (R',C'), either R<R', or R=R' and C<=C'. If no matching placement exists, then ans=[-1,-1].",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code (48<=pattern[u][v]<=57) or an ASCII lowercase letter code (97<=pattern[u][v]<=122). For this specification, a placement (R,C) matches pattern if 0<=R<=n-p, 0<=C<=m-q, and for all u,v,u',v' with 0<=u,u'<p and 0<=v,v'<q: (1) if pattern[u][v] is a digit code then board[R+u][C+v]=pattern[u][v]-48; and (2) pattern[u][v]=pattern[u'][v'] iff board[R+u][C+v]=board[R+u'][C+v']."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindPattern.spec_2",
+    "negation": "AegisSpec.FindPattern.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result vector ans; it does not fail.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code (48<=pattern[u][v]<=57) or an ASCII lowercase letter code (97<=pattern[u][v]<=122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindPattern.spec_3",
+    "negation": "AegisSpec.FindPattern.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns ans, ans=[-1,-1] if and only if there is no matching placement (R,C).",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1: 0<=R<=n-p, 0<=C<=m-q, digit cells agree, and pattern-character equality coincides with board-value equality in the window."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindPattern.spec_4",
+    "negation": "AegisSpec.FindPattern.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], the pair (ans[0],ans[1]) is a matching placement: 0<=ans[0]<=n-p, 0<=ans[1]<=m-q, every digit pattern cell equals the corresponding board digit, and equal pattern characters correspond to equal board values while different pattern characters correspond to different board values within the selected window.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindPattern.spec_5",
+    "negation": "AegisSpec.FindPattern.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], for every matching placement (R',C'), ans[0]<=R'.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindPattern.spec_6",
+    "negation": "AegisSpec.FindPattern.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], for every matching placement (R',C') with R'=ans[0], ans[1]<=C'.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindPattern.spec_7",
+    "negation": "AegisSpec.FindPattern.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], 0<=ans[0]<=n-p and 0<=ans[1]<=m-q; in particular, the selected p by q window fits inside board.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindPattern.spec_8",
+    "negation": "AegisSpec.FindPattern.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], for all 0<=u,u'<p and 0<=v,v'<q, if pattern[u][v]=pattern[u'][v'] then board[ans[0]+u][ans[1]+v]=board[ans[0]+u'][ans[1]+v'].",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindPattern.spec_9",
+    "negation": "AegisSpec.FindPattern.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], for all 0<=u,u'<p and 0<=v,v'<q, if pattern[u][v]!=pattern[u'][v'] then board[ans[0]+u][ans[1]+v]!=board[ans[0]+u'][ans[1]+v'].",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindPattern.spec_10",
+    "negation": "AegisSpec.FindPattern.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns ans and ans!=[-1,-1], for every 0<=u<p and 0<=v<q such that pattern[u][v] is an ASCII digit code, board[ans[0]+u][ans[1]+v]=pattern[u][v]-48.",
+    "preconditions": "Let n=len(board), m=len(board[0]), p=len(pattern), q=len(pattern[0]). Assume 1<=n<=50, 1<=m<=50, every row of board has length m, 1<=p<=50, 1<=q<=50, every row of pattern has length q, every board[i][j] satisfies 0<=board[i][j]<=9, and every pattern[u][v] is either an ASCII digit code or an ASCII lowercase letter code. Define a matching placement as in spec_1."
+  }
+]

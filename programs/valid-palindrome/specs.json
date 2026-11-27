@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsPalindrome.spec_1",
+    "negation": "AegisSpec.IsPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define T(s) to be the byte sequence obtained from s by scanning s from left to right, keeping exactly those bytes b that are alphanumeric (i.e., 48 <= b <= 57, or 65 <= b <= 90, or 97 <= b <= 122), and replacing each kept byte b by low(b), where low(b) = b + 32 if 65 <= b <= 90, and low(b) = b otherwise. The function returns a result r (it does not fail), and r = true if and only if T(s) is a palindrome, meaning T(s) = reverse(T(s)), where reverse is the sequence reversal. Equivalently, r = true iff for every i with 0 <= i < floor(len(T(s))/2), T(s)[i] = T(s)[len(T(s))-1-i].",
+    "preconditions": "1 <= len(s) <= 200000, and for every i with 0 <= i < len(s), 32 <= s[i] <= 126 (s is printable ASCII)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsPalindrome.spec_2",
+    "negation": "AegisSpec.IsPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input s satisfying the preconditions, the function returns a Bool result; it never fails, panics, overflows, or indexes out of bounds.",
+    "preconditions": "1 <= len(s) <= 200000, and for every i with 0 <= i < len(s), 32 <= s[i] <= 126 (s is printable ASCII)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsPalindrome.spec_3",
+    "negation": "AegisSpec.IsPalindrome.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let T be defined as in spec_1. If T(s) = T(t), then the result of the function on s equals the result of the function on t.",
+    "preconditions": "For byte slices s and t, each satisfying 1 <= len <= 200000 and printable ASCII."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsPalindrome.spec_4",
+    "negation": "AegisSpec.IsPalindrome.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of the function on s equals the result of the function on s'.",
+    "preconditions": "s is a printable ASCII byte slice with 1 <= len(s) <= 200000. s' is any printable ASCII byte slice of the same length such that for every i with 0 <= i < len(s), either s'[i] = s[i], or both s[i] and s'[i] are ASCII letters and one is the uppercase form of the other (i.e., they differ by exactly 32 in the letter ranges)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsPalindrome.spec_5",
+    "negation": "AegisSpec.IsPalindrome.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rev(s) be the byte slice of length len(s) with rev(s)[i] = s[len(s)-1-i] for all i with 0 <= i < len(s). Then the result of the function on s equals the result of the function on rev(s).",
+    "preconditions": "s is a printable ASCII byte slice with 1 <= len(s) <= 200000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsPalindrome.spec_6",
+    "negation": "AegisSpec.IsPalindrome.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of the function on s equals the result of the function on t.",
+    "preconditions": "s and t are printable ASCII byte slices with lengths in [1, 200000], and t is obtained from s by inserting or deleting zero or more bytes that are not alphanumeric."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsPalindrome.spec_7",
+    "negation": "AegisSpec.IsPalindrome.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "s is printable ASCII, 1 <= len(s) <= 200000, and s is a palindrome as raw bytes: for every i with 0 <= i < len(s), s[i] = s[len(s)-1-i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsPalindrome.spec_8",
+    "negation": "AegisSpec.IsPalindrome.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then low(s[i0]) = low(s[i1]), where low is defined as in spec_1.",
+    "preconditions": "s is printable ASCII, 1 <= len(s) <= 200000, and s contains at least one alphanumeric byte. Let i0 be the smallest index with an alphanumeric byte, and i1 the largest such index."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsPalindrome.spec_9",
+    "negation": "AegisSpec.IsPalindrome.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = false if and only if there exists an index k with 0 <= k < floor(len(T(s))/2) such that T(s)[k] != T(s)[len(T(s))-1-k].",
+    "preconditions": "s is printable ASCII, 1 <= len(s) <= 200000. Let T(s) be as defined in spec_1."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HighFive.spec_1",
+    "negation": "AegisSpec.HighFive.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let scores(items,d) be the list of all items[i][1] such that 0 <= i < len(items) and items[i][0] = d. Let top5sum(items,d) be the sum of the five largest elements of scores(items,d), counting multiplicities; equivalently, the maximum over all choices of five pairwise distinct indices i1,...,i5 with items[ik][0] = d of items[i1][1]+...+items[i5][1]. Let top5avg(items,d) = top5sum(items,d) / 5 using integer division (floor, since top5sum(items,d) >= 0). For every items satisfying the preconditions, whenever high_five(items) returns a result r, let ids be the list of distinct IDs occurring in items sorted in strictly increasing order. Then len(r) = len(ids), and for every j with 0 <= j < len(r), len(r[j]) = 2, r[j][0] = ids[j], and r[j][1] = top5avg(items, ids[j]).",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HighFive.spec_2",
+    "negation": "AegisSpec.HighFive.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every items satisfying the preconditions, high_five(items) returns a result r (it does not fail).",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HighFive.spec_3",
+    "negation": "AegisSpec.HighFive.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2.",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HighFive.spec_4",
+    "negation": "AegisSpec.HighFive.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every i and j with 0 <= i < j < len(r), len(r[i]) = 2 and len(r[j]) = 2 and r[i][0] < r[j][0].",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HighFive.spec_5",
+    "negation": "AegisSpec.HighFive.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every integer d, (there exists j with 0 <= j < len(r) and len(r[j]) = 2 and r[j][0] = d) if and only if (there exists i with 0 <= i < len(items) and items[i][0] = d).",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HighFive.spec_6",
+    "negation": "AegisSpec.HighFive.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define scores(items,d) as the list of all items[i][1] with 0 <= i < len(items) and items[i][0] = d. Define top5sum(items,d) as the maximum over all choices of five pairwise distinct indices i1,...,i5 with items[ik][0] = d of items[i1][1]+...+items[i5][1]. Define top5avg(items,d) = top5sum(items,d) / 5 using integer division (floor, since top5sum(items,d) >= 0). For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2, there exists i with 0 <= i < len(items) and items[i][0] = r[j][0], and r[j][1] = top5avg(items, r[j][0]).",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HighFive.spec_7",
+    "negation": "AegisSpec.HighFive.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2. Let d = r[j][0] and a = r[j][1]. Then: (a) there exist five pairwise distinct indices i1,...,i5 with 0 <= ik < len(items) and items[ik][0] = d for all k such that 5*a <= items[i1][1]+...+items[i5][1] <= 5*a+4; and (b) for every five pairwise distinct indices i1,...,i5 with 0 <= ik < len(items) and items[ik][0] = d for all k, items[i1][1]+...+items[i5][1] <= 5*a+4.",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HighFive.spec_8",
+    "negation": "AegisSpec.HighFive.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2 and 0 <= r[j][1] <= 100.",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HighFive.spec_9",
+    "negation": "AegisSpec.HighFive.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2 and 1 <= r[j][0] <= 1000.",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HighFive.spec_10",
+    "negation": "AegisSpec.HighFive.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every items satisfying the preconditions, whenever high_five(items) returns a result r, len(r) equals the number of distinct values among items[0][0], items[1][0], ..., items[len(items)-1][0].",
+    "preconditions": "items is a slice of Vec<I64> with 1 <= len(items) <= 1000. For every i with 0 <= i < len(items), len(items[i]) = 2, 1 <= items[i][0] <= 1000, and 0 <= items[i][1] <= 100. For every distinct ID d that occurs as items[i][0] for some i, the number of indices i with items[i][0] = d is at least 5."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.HighFive.spec_11",
+    "negation": "AegisSpec.HighFive.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such items and items', whenever high_five(items) returns a result r and high_five(items') returns a result r', we have r = r'.",
+    "preconditions": "Both items and items' satisfy the common preconditions: each is a slice of Vec<I64> with 1 <= len <= 1000; every entry has length 2; IDs are in 1..1000; scores are in 0..100; and every occurring ID has at least five scores. Additionally, items' is a permutation of the entries of items (same length and same multiset of two-element vectors)."
+  }
+]

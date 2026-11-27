@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let c(x) = #{ i | 0 <= i < len(nums) and nums[i] = x } and let D = { nums[i] | 0 <= i < len(nums) }. Whenever min_operations(nums) returns a result r, r = -1 if there exists x in D with c(x) = 1; otherwise r = sum_{x in D} ceil(c(x)/3), where ceil(c/3) is the least integer >= c/3 (equivalently (c+2) div 3).",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call min_operations(nums) returns a result r (it does not fail, panic, overflow, or return an error).",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_operations(nums) returns a result r, if r != -1 then r >= ceil(len(nums)/3), where ceil(len(nums)/3) is the least integer >= len(nums)/3.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = { nums[i] | 0 <= i < len(nums) }. Whenever min_operations(nums) returns a result r, if r != -1 then r >= |D|, the number of distinct values occurring in nums.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_operations(nums) returns a result r, if r != -1 then r <= floor(len(nums)/2).",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = { nums[i] | 0 <= i < len(nums) }. Whenever min_operations(nums) returns a result r, if r != -1 then r <= len(nums) - |D|.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_operations(nums) returns a result r, if r != -1 then there exists a finite sequence of exactly r operations, each deleting either two or three equal-valued elements from the current array, that removes all elements of nums.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_operations(nums) returns a result r, if r != -1 then every finite sequence of operations, each deleting either two or three equal-valued elements from the current array, that removes all elements of nums has length at least r.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_operations(nums) returns a result r and min_operations(nums') returns a result r', we have r = r'.",
+    "preconditions": "nums and nums' are arrays satisfying the same constraints as in spec_1, and for every integer x the number of occurrences of x in nums' equals the number of occurrences of x in nums."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_operations(nums) returns a result r and min_operations(nums') returns a result r', we have r = r' + ceil(c/3), where ceil(c/3) is the least integer >= c/3.",
+    "preconditions": "nums satisfies the constraints of spec_1, every value occurring in nums occurs at least twice, x is a value occurring in nums with c(x) = c, and nums' is obtained from nums by deleting every position i with nums[i] = x. Assume len(nums') >= 2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_operations(nums) returns a result r and min_operations(nums') returns a result r', we have r' = r + 1.",
+    "preconditions": "nums satisfies the constraints of spec_1 and every value occurring in nums occurs at least twice. Let x be any integer with 1 <= x <= 1000000, and let nums' be the array obtained by appending three copies of x to nums. Assume len(nums) + 3 <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperations.spec_12",
+    "negation": "AegisSpec.MinOperations.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_operations(nums) returns a result r, if r = -1 then there does not exist a finite sequence of operations, each deleting either two or three equal-valued elements from the current array, that removes all elements of nums.",
+    "preconditions": "2 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  }
+]

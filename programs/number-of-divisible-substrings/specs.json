@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_1",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(word). For a lowercase byte c, define digit(c) by a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9 (equivalently digit(c) = (c - 97 + 4) / 3 with integer division). Whenever count_divisible_substrings(word) returns a result r, r is exactly the number of pairs (i,j) with 0 <= i <= j < n such that digit(word[i]) + digit(word[i+1]) + ... + digit(word[j]) is divisible by j - i + 1. Each such pair denotes the non-empty contiguous substring word[i..j] of length j-i+1.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_2",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such word, count_divisible_substrings(word) returns a result r; in particular, it does not fail, panic, or produce an out-of-range arithmetic result.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_3",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(word). Whenever count_divisible_substrings(word) returns a result r, we have r >= n.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_4",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(word). Whenever count_divisible_substrings(word) returns a result r, we have r <= n*(n+1)/2, the total number of non-empty contiguous substrings of word.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_5",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_divisible_substrings(word) returns a result r, r = 1.",
+    "preconditions": "len(word) = 1 and the byte word[0] is a lowercase English letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_6",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(word). Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, if digit(word[i]) = digit(word[0]) for every 0 <= i < n, then whenever count_divisible_substrings(word) returns a result r, r = n*(n+1)/2.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_7",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, whenever count_divisible_substrings(word) returns a result r, r = 3 if digit(word[0]) + digit(word[1]) is even, and r = 2 otherwise.",
+    "preconditions": "len(word) = 2 and both bytes are lowercase English letters."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_8",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(word) and let rev(word) be the length-n word with rev(word)[i] = word[n-1-i] for every 0 <= i < n. If count_divisible_substrings(word) returns r and count_divisible_substrings(rev(word)) returns r', then r = r'.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_9",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, if len(u) = len(v) and digit(u[i]) = digit(v[i]) for every 0 <= i < len(u), then whenever count_divisible_substrings(u) returns r_u and count_divisible_substrings(v) returns r_v, r_u = r_v.",
+    "preconditions": "u and v are words with 1 <= len(u), len(v) <= 2000 and all bytes lowercase English letters."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_10",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(word). Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, whenever count_divisible_substrings(word) returns a result r, r = n if and only if for every pair (i,j) with 0 <= i < j < n, digit(word[i]) + ... + digit(word[j]) is not divisible by j - i + 1.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_11",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(word) and let w' be the length n+1 word with w'[i] = word[i] for every 0 <= i < n and w'[n] = c. Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, whenever count_divisible_substrings(word) returns r and count_divisible_substrings(w') returns r', we have r' = r + m, where m is the number of indices i with 0 <= i <= n such that the substring w'[i..n] is divisible, i.e. digit(w'[i]) + ... + digit(w'[n]) is divisible by n - i + 1.",
+    "preconditions": "1 <= len(word) <= 1999 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122); c is a lowercase English letter."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_12",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(word). Using the digit mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9, whenever count_divisible_substrings(word) returns a result r, r = n*(n+1)/2 if and only if every non-empty contiguous substring of word is divisible, i.e. for every 0 <= i <= j < n, digit(word[i]) + ... + digit(word[j]) is divisible by j - i + 1.",
+    "preconditions": "1 <= len(word) <= 2000 and every byte word[i] is a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountDivisibleSubstrings.spec_13",
+    "negation": "AegisSpec.CountDivisibleSubstrings.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_divisible_substrings(u) returns r_u and count_divisible_substrings(v) returns r_v, we have r_u = r_v. For any substring length L, adding the constant k to every digit adds k*L to the digit sum, which preserves divisibility by L.",
+    "preconditions": "1 <= len(u) = len(v) <= 2000, all bytes of u and v are lowercase English letters, and there exists an integer k such that digit(v[i]) = digit(u[i]) + k for every 0 <= i < len(u), where digit is the mapping a,b -> 1; c,d,e -> 2; f,g,h -> 3; i,j,k -> 4; l,m,n -> 5; o,p,q -> 6; r,s,t -> 7; u,v,w -> 8; x,y,z -> 9."
+  }
+]

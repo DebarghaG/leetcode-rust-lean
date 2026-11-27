@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let G be the undirected multigraph whose vertices are 0,...,n-1 and which has one edge between edges[j][0] and edges[j][1] of weight edges[j][2] for every j with 0 <= j < len(edges). For a walk W in G, let cost(W) be the bitwise AND of the weights of all edges traversed by W, counting repetitions. Whenever the function returns a result r, it holds that len(r) = len(query) and, for every i with 0 <= i < len(query), writing s = query[i][0] and t = query[i][1], if there exists a walk from s to t in G then r[i] is the minimum of cost(W) over all walks W from s to t in G, and if there is no walk from s to t in G then r[i] = -1.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r, and does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(query), either r[i] = -1 or 0 <= r[i] <= 100000.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected multigraph whose vertices are 0,...,n-1 and which has an edge between edges[j][0] and edges[j][1] of weight edges[j][2] for every j with 0 <= j < len(edges). Whenever the function returns a result r, for every i with 0 <= i < len(query), let s = query[i][0], t = query[i][1], and let C be the connected component of G containing s. If t is also in C, then r[i] equals the bitwise AND of edges[j][2] over all j with 0 <= j < len(edges) such that both edges[j][0] and edges[j][1] belong to C.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let G be the undirected multigraph whose vertices are 0,...,n-1 and which has an edge between edges[j][0] and edges[j][1] of weight edges[j][2] for every j with 0 <= j < len(edges). Whenever the function returns a result r, for every i with 0 <= i < len(query) and r[i] != -1, there exists a walk W in G from query[i][0] to query[i][1] such that cost(W) = r[i], where cost(W) is the bitwise AND of the weights of the edges traversed by W.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected multigraph whose vertices are 0,...,n-1 and which has an edge between edges[j][0] and edges[j][1] of weight edges[j][2] for every j with 0 <= j < len(edges). Whenever the function returns a result r, for every i with 0 <= i < len(query) and r[i] != -1, every walk W in G from query[i][0] to query[i][1] satisfies r[i] <= cost(W), comparing the integer values, where cost(W) is the bitwise AND of the weights of the edges traversed by W.",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let G be the undirected multigraph whose vertices are 0,...,n-1 and which has an edge between edges[j][0] and edges[j][1] of weight edges[j][2] for every j with 0 <= j < len(edges). Whenever the function returns a result r, for every i,j with 0 <= i,j < len(query), if query[i][0] = query[j][1] and query[i][1] = query[j][0], then r[i] = r[j].",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (n, edges, query) and returns r' on (n, edges', query), it holds that len(r) = len(r') and r[i] = r'[i] for every i with 0 <= i < len(query).",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]. Let edges' be any permutation of the vectors in edges; edges' satisfies the same bounds."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (n, edges, query) and returns r' on (n, edges, query'), it holds that r'[i] = r[pi(i)] for every i with 0 <= i < len(query).",
+    "preconditions": "n is an integer with 2 <= n <= 100000. len(edges) <= 100000, and for every j with 0 <= j < len(edges), len(edges[j]) = 3, 0 <= edges[j][0] <= n-1, 0 <= edges[j][1] <= n-1, edges[j][0] != edges[j][1], and 0 <= edges[j][2] <= 100000. Also 1 <= len(query) <= 100000, and for every i with 0 <= i < len(query), len(query[i]) = 2, 0 <= query[i][0] <= n-1, 0 <= query[i][1] <= n-1, and query[i][0] != query[i][1]. Let query' be any permutation of the vectors in query, and let pi be a bijection on {0,...,len(query)-1} such that query'[i] = query[pi(i)] for every i."
+  }
+]

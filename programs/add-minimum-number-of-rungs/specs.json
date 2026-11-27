@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AddRungs.spec_1",
+    "negation": "AegisSpec.AddRungs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = (rungs[0] - 1) / dist + sum_{i=1}^{len(rungs)-1} ((rungs[i] - rungs[i-1] - 1) / dist), where / denotes integer division (floor for nonnegative operands).",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing (rungs[i] < rungs[i+1] for 0 <= i < len(rungs)-1); 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AddRungs.spec_2",
+    "negation": "AegisSpec.AddRungs.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= rungs[len(rungs)-1] - len(rungs).",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AddRungs.spec_3",
+    "negation": "AegisSpec.AddRungs.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = (rungs[0] - 1) / dist, where / denotes integer division.",
+    "preconditions": "len(rungs) = 1; 1 <= rungs[0] <= 1000000000; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AddRungs.spec_4",
+    "negation": "AegisSpec.AddRungs.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = rungs[len(rungs)-1] - len(rungs).",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; dist = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AddRungs.spec_5",
+    "negation": "AegisSpec.AddRungs.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r = 0 if and only if rungs[0] <= dist and for every i with 1 <= i < len(rungs), rungs[i] - rungs[i-1] <= dist.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AddRungs.spec_6",
+    "negation": "AegisSpec.AddRungs.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a finite set S of positive integers such that S is disjoint from {rungs[0], ..., rungs[len(rungs)-1]}, |S| = r, and if L is the sorted list of the union of S and the rungs, then L[0] <= dist and every adjacent difference L[j+1] - L[j] <= dist for 0 <= j < len(L)-1.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AddRungs.spec_7",
+    "negation": "AegisSpec.AddRungs.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and for every finite set S of positive integers disjoint from the rungs, if inserting S makes the ladder climbable (i.e., in the sorted union L, L[0] <= dist and every adjacent difference L[j+1] - L[j] <= dist), then |S| >= r.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AddRungs.spec_8",
+    "negation": "AegisSpec.AddRungs.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not overflow, panic, or go out of bounds).",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AddRungs.spec_9",
+    "negation": "AegisSpec.AddRungs.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 for (rungs, dist1) and r2 for (rungs, dist2), then r2 <= r1.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; let dist1 and dist2 be integers with 1 <= dist1 <= dist2 <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AddRungs.spec_10",
+    "negation": "AegisSpec.AddRungs.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rungs' = rungs ++ [h]. If the function returns r for (rungs, dist) and r' for (rungs', dist), then r' = r.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000; let h be an integer with rungs[len(rungs)-1] < h <= rungs[len(rungs)-1] + dist and h <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AddRungs.spec_11",
+    "negation": "AegisSpec.AddRungs.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rungs' be a strictly increasing array of positive integers, each at most 1000000000, such that every element of rungs occurs in rungs' and rungs'[len(rungs')-1] = rungs[len(rungs)-1]. If the function returns r for (rungs, dist) and r' for (rungs', dist), then r' <= r.",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000; rungs' is strictly increasing; every element of rungs' is a positive integer <= 1000000000; rungs is a subsequence of rungs'; and rungs'[len(rungs')-1] = rungs[len(rungs)-1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AddRungs.spec_12",
+    "negation": "AegisSpec.AddRungs.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= the number of indices i with 0 <= i < len(rungs) such that g_i > dist, where g_0 = rungs[0] and g_i = rungs[i] - rungs[i-1] for 1 <= i < len(rungs).",
+    "preconditions": "len(rungs) >= 1; for every i with 0 <= i < len(rungs), 1 <= rungs[i] <= 1000000000; rungs is strictly increasing; 1 <= dist <= 1000000000."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FixedRatio.spec_1",
+    "negation": "AegisSpec.FixedRatio.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns a result r, r equals the number of pairs (i,j) of integers with 0 <= i < j <= n such that, letting z(i,j) = #{p | i <= p < j and s[p] = 48} and o(i,j) = #{p | i <= p < j and s[p] = 49}, we have z(i,j) * num2 = o(i,j) * num1. Equivalently, r is the number of non-empty contiguous substrings s[i..j-1] whose number of 0-bytes and number of 1-bytes are in the ratio num1 : num2.",
+    "preconditions": "Let n = len(s). The string s is binary: for every p with 0 <= p < n, s[p] is either 48 ('0') or 49 ('1'). Also 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n. (No coprimality assumption is made in this specification; the ratio is expressed by cross multiplication.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FixedRatio.spec_2",
+    "negation": "AegisSpec.FixedRatio.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s, num1, num2 satisfying the preconditions, fixed_ratio(s,num1,num2) returns a result (it does not panic or overflow).",
+    "preconditions": "Let n = len(s). s is binary: every byte is 48 ('0') or 49 ('1'). Also 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FixedRatio.spec_3",
+    "negation": "AegisSpec.FixedRatio.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns r, 0 <= r <= n * (n + 1) / 2, where n = len(s).",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FixedRatio.spec_4",
+    "negation": "AegisSpec.FixedRatio.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns r, r = 0.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n. Additionally, s contains no byte equal to 48 ('0') or s contains no byte equal to 49 ('1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FixedRatio.spec_5",
+    "negation": "AegisSpec.FixedRatio.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let g = gcd(num1,num2), a = num1 / g, b = num2 / g, and L = a + b. Whenever fixed_ratio(s,num1,num2) returns r, r <= sum_{k=1}^{floor(n/L)} (n - k*L + 1). If floor(n/L) = 0, the sum is 0.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FixedRatio.spec_6",
+    "negation": "AegisSpec.FixedRatio.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns r, r = 1 if s has exactly a bytes equal to 48 ('0') and exactly b bytes equal to 49 ('1'), and r = 0 otherwise.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n. Let g = gcd(num1,num2), a = num1 / g, b = num2 / g, and assume n = a + b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FixedRatio.spec_7",
+    "negation": "AegisSpec.FixedRatio.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns r, r equals the number of pairs (i,j) with 0 <= i < j <= n such that the substring s[i..j-1] contains the same number of '0' bytes and '1' bytes.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, 1 <= num2 <= n, and num1 = num2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FixedRatio.spec_8",
+    "negation": "AegisSpec.FixedRatio.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever fixed_ratio(s,num1,num2) returns r and fixed_ratio(s,c*num1,c*num2) returns r_c, we have r = r_c.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, 1 <= num2 <= n. Also c is a positive integer with c*num1 <= n and c*num2 <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FixedRatio.spec_9",
+    "negation": "AegisSpec.FixedRatio.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the length-n byte array t with t[i] = s[n-1-i] for 0 <= i < n. Whenever fixed_ratio(s,num1,num2) returns r and fixed_ratio(rev(s),num1,num2) returns r_rev, we have r = r_rev.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FixedRatio.spec_10",
+    "negation": "AegisSpec.FixedRatio.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let comp(s) be the length-n byte array obtained from s by replacing every '0' (48) with '1' (49) and every '1' (49) with '0' (48). Whenever fixed_ratio(s,num1,num2) returns r and fixed_ratio(comp(s),num2,num1) returns r_comp, we have r = r_comp.",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FixedRatio.spec_11",
+    "negation": "AegisSpec.FixedRatio.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = max(num1,num2). For every integer k with M <= k <= n, let P_k = s[0..k). If fixed_ratio(P_k,num1,num2) returns r_p and fixed_ratio(s,num1,num2) returns r, then r_p <= r. For every integer k with 0 <= k <= n - M, let S_k = s[k..n). If fixed_ratio(S_k,num1,num2) returns r_s and fixed_ratio(s,num1,num2) returns r, then r_s <= r.",
+    "preconditions": "Let n = len(s). The string s is binary: for every p with 0 <= p < n, s[p] is either 48 ('0') or 49 ('1'). Also 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FixedRatio.spec_12",
+    "negation": "AegisSpec.FixedRatio.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer k with max(num1,num2) <= k <= n - max(num1,num2), let A = s[0..k) and B = s[k..n). Let C(k) be the number of pairs (i,j) with 0 <= i < k < j <= n such that, with z_s(i,j) and o_s(i,j) computed in s, z_s(i,j) * num2 = o_s(i,j) * num1. Whenever fixed_ratio(A,num1,num2) returns r_A, fixed_ratio(B,num1,num2) returns r_B, and fixed_ratio(s,num1,num2) returns r, we have r = r_A + r_B + C(k).",
+    "preconditions": "Let n = len(s). s is binary, 1 <= n <= 100000, 1 <= num1 <= n, and 1 <= num2 <= n."
+  }
+]

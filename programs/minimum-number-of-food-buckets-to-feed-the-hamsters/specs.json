@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumBuckets.spec_1",
+    "negation": "AegisSpec.MinimumBuckets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(hamsters). A bucket placement is a set S of indices such that 0 <= j < n and hamsters[j] = '.' for every j in S. Such a placement feeds all hamsters if for every i with 0 <= i < n and hamsters[i] = 'H', either (i > 0 and i-1 in S) or (i+1 < n and i+1 in S). Let C be the set of cardinalities |S| of all bucket placements that feed all hamsters. The function returns a result r and: if C is empty, then r = -1; otherwise r = min(C).",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumBuckets.spec_2",
+    "negation": "AegisSpec.MinimumBuckets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumBuckets.spec_3",
+    "negation": "AegisSpec.MinimumBuckets.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r, we have r = -1 if and only if there exists an index i with 0 <= i < n and hamsters[i] = 'H' such that both possible neighbors are unusable empty indices: (i = 0 or hamsters[i-1] != '.') and (i+1 = n or hamsters[i+1] != '.'). Equivalently, r != -1 exactly when every index i with hamsters[i] = 'H' has at least one in-range neighbor whose byte is '.'.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumBuckets.spec_4",
+    "negation": "AegisSpec.MinimumBuckets.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1, or 0 <= r <= E, where E is the number of indices i with 0 <= i < len(hamsters) and hamsters[i] = '.'.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumBuckets.spec_5",
+    "negation": "AegisSpec.MinimumBuckets.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 0, let H be the number of indices i with hamsters[i] = 'H'. Then 2*r >= H, equivalently r >= ceil(H/2).",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumBuckets.spec_6",
+    "negation": "AegisSpec.MinimumBuckets.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 0, r <= H, where H is the number of indices i with hamsters[i] = 'H'.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumBuckets.spec_7",
+    "negation": "AegisSpec.MinimumBuckets.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there is no index i with 0 <= i < len(hamsters) and hamsters[i] = 'H'.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumBuckets.spec_8",
+    "negation": "AegisSpec.MinimumBuckets.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r with r >= 0, there exists a set S of indices such that: (a) 0 <= j < n and hamsters[j] = '.' for every j in S; (b) |S| = r; and (c) for every i with hamsters[i] = 'H', either (i > 0 and i-1 in S) or (i+1 < n and i+1 in S).",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumBuckets.spec_9",
+    "negation": "AegisSpec.MinimumBuckets.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r with r >= 0, every set S of indices with 0 <= j < n and hamsters[j] = '.' for every j in S, and with the property that every i with hamsters[i] = 'H' has either (i > 0 and i-1 in S) or (i+1 < n and i+1 in S), satisfies |S| >= r.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumBuckets.spec_10",
+    "negation": "AegisSpec.MinimumBuckets.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r with r >= 0, let S be any set of empty indices that feeds all hamsters and has |S| = r: all j in S satisfy hamsters[j] = '.', and every i with hamsters[i] = 'H' has an adjacent index in S. Then for every j in S there exists an index i with hamsters[i] = 'H' such that (i = j-1 or i = j+1), and for every k in S with k != j, neither k = i-1 nor k = i+1.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumBuckets.spec_11",
+    "negation": "AegisSpec.MinimumBuckets.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r with r >= 0, consider any index i with hamsters[i] = 'H' for which exactly one index e in {i-1, i+1} lies in [0,n) and has hamsters[e] = '.'. Then every bucket placement S that feeds all hamsters contains e.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumBuckets.spec_12",
+    "negation": "AegisSpec.MinimumBuckets.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(hamsters). Whenever the function returns a result r with r >= 0, every maximal contiguous block [a,b] of indices such that hamsters[t] = 'H' for all a <= t <= b (with a = 0 or hamsters[a-1] != 'H', and with b+1 = n or hamsters[b+1] != 'H') has length 1 or 2. If its length is 1, then at least one of the existing neighbors a-1 (when a > 0) or b+1 (when b+1 < n) is '.'. If its length is 2, then a > 0, b+1 < n, hamsters[a-1] = '.', and hamsters[b+1] = '.'.",
+    "preconditions": "1 <= len(hamsters) <= 100000, and for every i with 0 <= i < len(hamsters), hamsters[i] is the ASCII byte for 'H' (72) or for '.' (46)."
+  }
+]

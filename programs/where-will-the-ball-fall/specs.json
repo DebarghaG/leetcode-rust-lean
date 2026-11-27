@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindBall.spec_1",
+    "negation": "AegisSpec.FindBall.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(grid) and n = len(grid[0]). Say the ball starting at column i exits at column k if there exist columns c_0,...,c_m such that c_0 = i, c_m = k, and for every r with 0 <= r < m: 0 <= c_r < n; if grid[r][c_r] = 1 then c_r < n-1, grid[r][c_r+1] = 1, and c_{r+1} = c_r+1; if grid[r][c_r] = -1 then c_r > 0, grid[r][c_r-1] = -1, and c_{r+1} = c_r-1. Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n: ans[i] = -1 if and only if there is no k with 0 <= k < n such that the ball starting at column i exits at column k; and for every k with 0 <= k < n, if the ball starting at column i exits at column k then ans[i] = k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindBall.spec_2",
+    "negation": "AegisSpec.FindBall.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (does not fail) for every grid satisfying the preconditions.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindBall.spec_3",
+    "negation": "AegisSpec.FindBall.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result ans, for every i with 0 <= i < len(ans), ans[i] = -1 or (0 <= ans[i] < len(grid[0])).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindBall.spec_4",
+    "negation": "AegisSpec.FindBall.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n: if i > 0 and grid[0][i] = -1 and grid[0][i-1] = -1 then ans[i] = i-1; if i < n-1 and grid[0][i] = 1 and grid[0][i+1] = 1 then ans[i] = i+1; in every other case ans[i] = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1. Additionally, m = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindBall.spec_5",
+    "negation": "AegisSpec.FindBall.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n, if either (grid[0][i] = 1 and (i = n-1 or (i < n-1 and grid[0][i+1] = -1))) or (grid[0][i] = -1 and (i = 0 or (i > 0 and grid[0][i-1] = 1))), then ans[i] = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindBall.spec_6",
+    "negation": "AegisSpec.FindBall.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n: if i + m <= n-1 then ans[i] = i + m, otherwise ans[i] = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1. Additionally, for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindBall.spec_7",
+    "negation": "AegisSpec.FindBall.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n: if i >= m then ans[i] = i - m, otherwise ans[i] = -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1. Additionally, for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = -1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindBall.spec_8",
+    "negation": "AegisSpec.FindBall.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define H by H[r][c] = -grid[r][n-1-c] for 0 <= r < m and 0 <= c < n. Whenever the function returns ans on grid and ansH on H, len(ans) = n, len(ansH) = n, and for every i with 0 <= i < n: if ans[i] = -1 then ansH[n-1-i] = -1; and if ans[i] = k with 0 <= k < n then ansH[n-1-i] = n-1-k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindBall.spec_9",
+    "negation": "AegisSpec.FindBall.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n, if ans[i] = k and k >= 0 then |k - i| <= m.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindBall.spec_10",
+    "negation": "AegisSpec.FindBall.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n, if ans[i] = k and k >= 0 then (k - i - m) is even.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindBall.spec_11",
+    "negation": "AegisSpec.FindBall.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i, j with 0 <= i < j < n, if ans[i] >= 0 and ans[j] >= 0 then ans[i] < ans[j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindBall.spec_12",
+    "negation": "AegisSpec.FindBall.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n, if ans[i] = k and k >= 0, then there exist columns c_0,...,c_m such that c_0 = i, c_m = k, and for every r with 0 <= r < m: 0 <= c_r < n; if grid[r][c_r] = 1 then c_r < n-1, grid[r][c_r+1] = 1, and c_{r+1} = c_r+1; if grid[r][c_r] = -1 then c_r > 0, grid[r][c_r-1] = -1, and c_{r+1} = c_r-1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindBall.spec_13",
+    "negation": "AegisSpec.FindBall.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result ans, len(ans) = n and for every i with 0 <= i < n, if ans[i] = -1, then there exist r with 0 <= r < m and columns c_0,...,c_r such that c_0 = i, for every q with 0 <= q < r: 0 <= c_q < n and either (grid[q][c_q] = 1 and c_q < n-1 and grid[q][c_q+1] = 1 and c_{q+1} = c_q+1) or (grid[q][c_q] = -1 and c_q > 0 and grid[q][c_q-1] = -1 and c_{q+1} = c_q-1), and at row r the ball is stuck: 0 <= c_r < n and either (grid[r][c_r] = 1 and (c_r = n-1 or (c_r < n-1 and grid[r][c_r+1] = -1))) or (grid[r][c_r] = -1 and (c_r = 0 or (c_r > 0 and grid[r][c_r-1] = 1))).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). The parameters satisfy m >= 1, n >= 1, m <= 100, n <= 100, every row of grid has length n, and for every r, c with 0 <= r < m and 0 <= c < n, grid[r][c] = 1 or grid[r][c] = -1."
+  }
+]

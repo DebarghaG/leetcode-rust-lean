@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ScheduleCourse.spec_1",
+    "negation": "AegisSpec.ScheduleCourse.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, r is the maximum length k of a sequence of distinct indices i_1, ..., i_k from {0, ..., n-1} such that for every j with 1 <= j <= k, sum_{m=1}^j d_{i_m} <= l_{i_j}. The empty sequence with k = 0 is allowed.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ScheduleCourse.spec_2",
+    "negation": "AegisSpec.ScheduleCourse.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, schedule_course(courses) returns a result r and does not fail; in particular, there is no arithmetic overflow and no out-of-bounds access to a course pair.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ScheduleCourse.spec_3",
+    "negation": "AegisSpec.ScheduleCourse.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever schedule_course(courses) returns a result r, 0 <= r <= len(courses).",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ScheduleCourse.spec_4",
+    "negation": "AegisSpec.ScheduleCourse.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever schedule_course(courses) returns a result r, r is at most the number of indices i with 0 <= i < len(courses) and courses[i][0] <= courses[i][1].",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ScheduleCourse.spec_5",
+    "negation": "AegisSpec.ScheduleCourse.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, there exist r distinct indices i_1, ..., i_r from {0, ..., n-1} (the empty sequence if r = 0) such that for every j with 1 <= j <= r, sum_{m=1}^j d_{i_m} <= l_{i_j}.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ScheduleCourse.spec_6",
+    "negation": "AegisSpec.ScheduleCourse.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, for every k and every sequence of k distinct indices i_1, ..., i_k from {0, ..., n-1}, if for every j with 1 <= j <= k we have sum_{m=1}^j d_{i_m} <= l_{i_j}, then k <= r.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ScheduleCourse.spec_7",
+    "negation": "AegisSpec.ScheduleCourse.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, r = 0 if and only if for every i with 0 <= i < n, d_i > l_i.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ScheduleCourse.spec_8",
+    "negation": "AegisSpec.ScheduleCourse.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, r = n if and only if, for every permutation sigma of {0, ..., n-1} with l_{sigma(1)} <= ... <= l_{sigma(n)} (using 1-based positions in the sorted order), the inequality sum_{j=1}^k d_{sigma(j)} <= l_{sigma(k)} holds for every k with 1 <= k <= n.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ScheduleCourse.spec_9",
+    "negation": "AegisSpec.ScheduleCourse.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(courses), and for each valid j let d_j = courses[j][0] and l_j = courses[j][1]. Whenever schedule_course(courses) returns a result r, r equals the maximum length of a sequence of distinct indices from {0, ..., n-1} that does not include i and whose prefix sums satisfy sum_{m=1}^p d_{j_m} <= l_{j_p} for all p.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000. Fix an index i with 0 <= i < len(courses) and courses[i][0] > courses[i][1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ScheduleCourse.spec_10",
+    "negation": "AegisSpec.ScheduleCourse.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(courses). For any permutation pi of {0, ..., n-1}, let courses' be the array of length n with courses'[j] = courses[pi(j)] for every j with 0 <= j < n. Whenever schedule_course(courses) returns a result r and schedule_course(courses') returns a result r', we have r = r'.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ScheduleCourse.spec_11",
+    "negation": "AegisSpec.ScheduleCourse.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever schedule_course(courses) returns a result r and schedule_course(courses') returns a result r', we have r' >= r.",
+    "preconditions": "Both courses and courses' satisfy the common preconditions: len is between 1 and 10000 inclusive, every inner vector has length 2, and every duration and last day is between 1 and 10000 inclusive. Also len(courses) = len(courses'), and for every i with 0 <= i < len(courses), courses'[i][0] = courses[i][0] and courses'[i][1] >= courses[i][1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ScheduleCourse.spec_12",
+    "negation": "AegisSpec.ScheduleCourse.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(courses), and for each valid i let d_i = courses[i][0] and l_i = courses[i][1]. Whenever schedule_course(courses) returns a result r, there exist r distinct indices i_1, ..., i_r from {0, ..., n-1} (the empty sequence if r = 0) such that l_{i_1} <= ... <= l_{i_r} and for every j with 1 <= j <= r, sum_{m=1}^j d_{i_m} <= l_{i_j}.",
+    "preconditions": "len(courses) is between 1 and 10000 inclusive; for every i with 0 <= i < len(courses), len(courses[i]) = 2; and for every such i, 1 <= courses[i][0] <= 10000 and 1 <= courses[i][1] <= 10000."
+  }
+]

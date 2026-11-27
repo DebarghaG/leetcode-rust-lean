@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_1",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let an unlocking mask be any length-n binary list L' with L'[i] <= locked[i] for every 0 <= i < n. Let Sortable(nums,L') mean that there is a finite sequence of arrays a_0,...,a_k such that a_0 = nums, a_k is nondecreasing (a_k[i] <= a_k[i+1] for every 0 <= i < n-1), and each a_{t+1} is obtained from a_t by choosing an index i < n-1 with L'[i] = 0 and a_t[i] - a_t[i+1] = 1, then swapping a_t[i] and a_t[i+1]. The function returns a result r, and: if at least one unlocking mask L' makes Sortable(nums,L') true, then r is the minimum, over all such L', of the number of indices i with locked[i] = 1 and L'[i] = 0; if no unlocking mask makes Sortable(nums,L') true, then r = -1.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_2",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or go out of bounds on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_3",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, either r = -1, or 0 <= r <= n.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_4",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r and r >= 0, r is at most the number of indices i with 0 <= i < n and locked[i] = 1.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_5",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, r = -1 if and only if there exist indices i and j with 0 <= i < j < n, nums[i] = 3, and nums[j] = 1.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_6",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1; moreover nums is nondecreasing, meaning nums[i] <= nums[i+1] for every 0 <= i < n-1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_7",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0 if there do not exist indices i and j with 0 <= i < j < n, nums[i] = 3, and nums[j] = 1; otherwise the function returns -1.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_8",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r and r >= 0, r = 0 if and only if nums is sortable with the original mask locked, i.e., there is a finite sequence of allowed adjacent swaps using locked[i] = 0 as the permission condition that transforms nums into a nondecreasing array.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_9",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns r equal to the number of indices i such that 0 <= i < n, locked[i] = 1, and i is in R.",
+    "preconditions": "Let n = len(nums). n >= 1; len(locked) = n; for every i with 0 <= i < n, 1 <= nums[i] <= 3 and locked[i] is 0 or 1; there do not exist indices i and j with 0 <= i < j < n, nums[i] = 3, and nums[j] = 1. Let last1 be the largest index j with nums[j] = 1, or -1 if there is none. Let p1 be the smallest index i with nums[i] = 2 for which some j > i has nums[j] = 1, or n if there is no such i. Let last2 be the largest index j with nums[j] = 2, or -1 if there is none. Let p2 be the smallest index i with nums[i] = 3 for which some j > i has nums[j] = 2, or n if there is no such i. Let R = { i | 0 <= i < n and ( (p1 <= i and i < last1) or (p2 <= i and i < last2) ) }."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_10",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of the function on (nums,locked1) and r2 be the result on (nums,locked2). Whenever both calls return results, either r1 = r2 = -1, or r1 >= 0, r2 >= 0, and r2 <= r1.",
+    "preconditions": "Let n = len(nums). n >= 1; for every i with 0 <= i < n, 1 <= nums[i] <= 3. Let locked1 and locked2 be length-n binary masks. Assume locked2[i] <= locked1[i] for every 0 <= i < n, so locked2 is at least as unlocked as locked1 at every index."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinUnlockedIndices.spec_11",
+    "negation": "AegisSpec.MinUnlockedIndices.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r1 on (nums,locked1) and r2 on (nums,locked2), then r1 = r2, and this common value is the number of indices i in R with locked1[i] = 1 (equivalently, the number with locked2[i] = 1).",
+    "preconditions": "Let n = len(nums). n >= 1; for every i with 0 <= i < n, 1 <= nums[i] <= 3; there do not exist indices i and j with 0 <= i < j < n, nums[i] = 3, and nums[j] = 1. Let last1 be the largest index j with nums[j] = 1, or -1 if there is none. Let p1 be the smallest index i with nums[i] = 2 for which some j > i has nums[j] = 1, or n if there is no such i. Let last2 be the largest index j with nums[j] = 2, or -1 if there is none. Let p2 be the smallest index i with nums[i] = 3 for which some j > i has nums[j] = 2, or n if there is no such i. Let R = { i | 0 <= i < n and ( (p1 <= i and i < last1) or (p2 <= i and i < last2) ) }. Let locked1 and locked2 be length-n binary masks that agree on every index in R, i.e., locked1[i] = locked2[i] for every i in R."
+  }
+]

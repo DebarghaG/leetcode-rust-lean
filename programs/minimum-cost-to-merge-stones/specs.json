@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MergeStones.spec_1",
+    "negation": "AegisSpec.MergeStones.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and: if n = 1, then r = 0; if n > 1 and (n - 1) mod (k - 1) is nonzero, then r = -1; if n > 1 and (n - 1) mod (k - 1) is zero, then r = Opt(stones,k). Equivalently, r is the minimum possible total cost of merging all piles into one pile, or -1 exactly when no legal reduction exists.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; and 2 <= k <= 30. A legal move on a current list of pile sizes chooses an index j with 0 <= j and j + k <= len(current), replaces current[j],...,current[j+k-1] by their sum at that position, leaves the other entries in order, and has cost equal to that sum. A legal reduction is a finite sequence of legal moves ending with a one-element list; its total cost is the sum of the costs of its moves. Define Opt(stones,k) to be the minimum total cost among all legal reductions of stones using exactly k consecutive piles per move."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MergeStones.spec_2",
+    "negation": "AegisSpec.MergeStones.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by panic, out-of-bounds access, division by zero, or signed 64-bit overflow.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; and 2 <= k <= 30."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MergeStones.spec_3",
+    "negation": "AegisSpec.MergeStones.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r >= S.",
+    "preconditions": "Let n = len(stones), S = stones[0] + ... + stones[n-1]. Assume n > 1; 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; 2 <= k <= 30; and (n - 1) mod (k - 1) is zero."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MergeStones.spec_4",
+    "negation": "AegisSpec.MergeStones.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r <= M * S.",
+    "preconditions": "Let n = len(stones), S = stones[0] + ... + stones[n-1], and M = (n - 1) / (k - 1). Assume n > 1; 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; 2 <= k <= 30; and (n - 1) mod (k - 1) is zero."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MergeStones.spec_5",
+    "negation": "AegisSpec.MergeStones.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r > S.",
+    "preconditions": "Let n = len(stones), S = stones[0] + ... + stones[n-1]. Assume n > k; for every i with 0 <= i < n, 1 <= stones[i] <= 100; 2 <= k <= 30; and (n - 1) mod (k - 1) is zero."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MergeStones.spec_6",
+    "negation": "AegisSpec.MergeStones.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a value r with r >= 0, there exists a legal reduction of stones whose total cost is exactly r.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; and 2 <= k <= 30. A legal reduction is a finite sequence of legal moves, each merging exactly k consecutive current piles and costing their sum, ending with one pile."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MergeStones.spec_7",
+    "negation": "AegisSpec.MergeStones.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a value r with r >= 0, every legal reduction of stones has total cost at least r.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; and 2 <= k <= 30. A legal reduction is a finite sequence of legal moves, each merging exactly k consecutive current piles and costing their sum, ending with one pile."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MergeStones.spec_8",
+    "negation": "AegisSpec.MergeStones.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Suppose merge_stones(stones,k) returns r and merge_stones(stones_c,k) returns r_c. If r = -1, then r_c = -1; if r >= 0, then r_c = c * r, with multiplication interpreted over mathematical integers.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; for every i with 0 <= i < n, 1 <= stones[i] <= 100; and 2 <= k <= 30. Let c be a positive integer such that for every i with 0 <= i < n, 1 <= c * stones[i] <= 100, and let stones_c be the slice defined by stones_c[i] = c * stones[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MergeStones.spec_9",
+    "negation": "AegisSpec.MergeStones.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r_a = -1, then r_b = -1; if r_a >= 0, then r_b >= r_a.",
+    "preconditions": "Let n = len(stones). Assume 1 <= n <= 30; 2 <= k <= 30. Let a and b be two slices of length n with 1 <= a[i] <= b[i] <= 100 for every i with 0 <= i < n. Suppose merge_stones(a,k) returns r_a and merge_stones(b,k) returns r_b."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidSequence.spec_1",
+    "negation": "AegisSpec.ValidSequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. If there exists a valid sequence of indices for word1 and word2, then len(r) = m, r itself is a valid sequence, and r is lexicographically less than or equal to every valid sequence of length m. If no valid sequence exists, then r is the empty vector. A valid sequence s of length m is one with 0 <= s[0] < s[1] < ... < s[m-1] < n and with at most one i in 0..m-1 such that word1[s[i]] != word2[i]. Lexicographic comparison is on the integer arrays: for equal-length arrays a and b, a <=lex b means a = b, or there is k with 0 <= k < m such that a[i] = b[i] for all i < k and a[k] < b[k].",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidSequence.spec_2",
+    "negation": "AegisSpec.ValidSequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r rather than failing: for these inputs there is no overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidSequence.spec_3",
+    "negation": "AegisSpec.ValidSequence.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = 0 or len(r) = m; that is, the returned vector is either empty or has exactly len(word2) elements.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidSequence.spec_4",
+    "negation": "AegisSpec.ValidSequence.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), the integer r[i] is nonnegative: 0 <= r[i].",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidSequence.spec_5",
+    "negation": "AegisSpec.ValidSequence.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), r[i] < n; hence every returned value is a valid 0-based index into word1.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidSequence.spec_6",
+    "negation": "AegisSpec.ValidSequence.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, its entries are strictly increasing: for every i with 0 <= i and i+1 < len(r), r[i] < r[i+1].",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidSequence.spec_7",
+    "negation": "AegisSpec.ValidSequence.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with len(r) = m and 0 <= r[i] < n for all i in 0..m-1, the selected string x defined by x[i] = word1[r[i]] for 0 <= i < m differs from word2 in at most one position: the number of i with 0 <= i < m and word1[r[i]] != word2[i] is at most 1.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidSequence.spec_8",
+    "negation": "AegisSpec.ValidSequence.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 0 if and only if there does not exist a strictly increasing sequence s = (s[0],...,s[m-1]) with 0 <= s[0] < ... < s[m-1] < n and with at most one i in 0..m-1 such that word1[s[i]] != word2[i].",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidSequence.spec_9",
+    "negation": "AegisSpec.ValidSequence.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with len(r) = m, r is a valid sequence and r is lexicographically minimal among all valid sequences: 0 <= r[0] < ... < r[m-1] < n, at most one i in 0..m-1 has word1[r[i]] != word2[i], and for every valid sequence s = (s[0],...,s[m-1]) with 0 <= s[0] < ... < s[m-1] < n and at most one mismatch, either r = s or there exists k with 0 <= k < m such that r[i] = s[i] for all i < k and r[k] < s[k].",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidSequence.spec_10",
+    "negation": "AegisSpec.ValidSequence.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with len(r) = 0, every strictly increasing sequence s = (s[0],...,s[m-1]) with 0 <= s[0] < ... < s[m-1] < n has at least two mismatches: the number of i in 0..m-1 with word1[s[i]] != word2[i] is at least 2.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, and every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ValidSequence.spec_11",
+    "negation": "AegisSpec.ValidSequence.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the one-element vector [0]; that is, the result r has len(r) = 1 and r[0] = 0.",
+    "preconditions": "Let n = len(word1) and m = len(word2). We assume 1 <= m < n <= 300000, every byte of word1 and word2 is in the ASCII range 97..122 (lowercase English letters), and in addition m = 1."
+  }
+]

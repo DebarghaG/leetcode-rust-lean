@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountOfArrays.spec_1",
+    "negation": "AegisSpec.CountOfArrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let C(n,m,k) be the number of integer arrays arr of length n such that 1 <= arr[i] <= m for every i with 0 <= i < n, and such that the set { i | 0 <= i < n-1 and ((arr[i] * arr[i+1]) - arr[i] - arr[i+1]) is even } has exactly k elements. Whenever count_of_arrays n m k returns Result.ok r, r is the unique integer satisfying 0 <= r < 1000000007 and r = C(n,m,k) modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountOfArrays.spec_2",
+    "negation": "AegisSpec.CountOfArrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n, m, k satisfying the preconditions, the call count_of_arrays n m k does not fail: there exists an integer r such that count_of_arrays n m k returns Result.ok r; in particular there is no panic, out-of-bounds access, or machine-integer overflow.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountOfArrays.spec_3",
+    "negation": "AegisSpec.CountOfArrays.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_arrays n m k returns Result.ok r and n = 1 (so, under the preconditions, k = 0), r = m modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountOfArrays.spec_4",
+    "negation": "AegisSpec.CountOfArrays.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_arrays n m k returns Result.ok r and m = 1, r = 1 if k = 0, and r = 0 if k > 0.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountOfArrays.spec_5",
+    "negation": "AegisSpec.CountOfArrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_arrays n m k returns Result.ok r, n >= 2, and k = n - 1, r = (floor(m/2))^n modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountOfArrays.spec_6",
+    "negation": "AegisSpec.CountOfArrays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_arrays n m k returns Result.ok r, n = 2, and k = 0, r = (m^2 - (floor(m/2))^2) modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountOfArrays.spec_7",
+    "negation": "AegisSpec.CountOfArrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For fixed n and m, if for every j with 0 <= j <= n-1 the call count_of_arrays n m j returns Result.ok r_j, then (sum_{j=0}^{n-1} r_j) modulo 1000000007 equals (m^n) modulo 1000000007.",
+    "preconditions": "n and m are integer values represented by Std.I64 satisfying 1 <= n <= 750 and 1 <= m <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountOfArrays.spec_8",
+    "negation": "AegisSpec.CountOfArrays.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every n, m, k satisfying the preconditions, let C(n,m,k) be the number defined in spec_1. Then C(n,m,k) > 0 if and only if m >= 2 or k = 0. Consequently, whenever count_of_arrays n m k returns Result.ok r and m = 1 with k > 0, r = 0; in all other cases r is the residue modulo 1000000007 of a positive integer.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountOfArrays.spec_9",
+    "negation": "AegisSpec.CountOfArrays.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let F be defined by F_1 = 1, F_2 = 1, and F_t = F_{t-1} + F_{t-2} for t >= 3. Whenever count_of_arrays n m k returns Result.ok r, m = 2, and k = 0, r = F_{n+2} modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountOfArrays.spec_10",
+    "negation": "AegisSpec.CountOfArrays.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever count_of_arrays n m k returns Result.ok r, n >= 3, and k = n - 2, r = (2 * (m - floor(m/2)) * (floor(m/2))^(n-1)) modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountOfArrays.spec_11",
+    "negation": "AegisSpec.CountOfArrays.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let C(n,m,k) be as in spec_1, let e = floor(m/2), o = m - e, and adopt the convention binom(x,y)=0 when y<0 or y>x. Then C(n,m,k) = (if k = 0 then o^n else 0) + sum_{a=1}^{n} e^a o^{n-a} binom(a-1,k) binom(n-a+1,a-k). This is an integer identity, and hence the returned residue is this value modulo 1000000007.",
+    "preconditions": "n, m, k are integer values represented by Std.I64 satisfying 1 <= n <= 750, 1 <= m <= 1000, and 0 <= k <= n - 1."
+  }
+]

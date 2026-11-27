@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_1",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let A(s,k) be the maximum length of a contiguous substring of s whose set of byte values has cardinality at most k; the empty substring is allowed and has length 0, so A(s,k) is always defined. The function returns a result r and r = A(s,k). Equivalently, r is the largest integer such that there exist indices 0 <= i <= j <= len(s) with j - i = r and the set {s[t] : i <= t < j} has at most k elements, and every 0 <= i <= j <= len(s) with |{s[t] : i <= t < j}| <= k satisfies j - i <= r.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_2",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_3",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(s).",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_4",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices 0 <= i <= j <= len(s) such that j - i = r and the contiguous substring s[i..j) contains at most k distinct byte values.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_5",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every pair of indices 0 <= i <= j <= len(s) such that the contiguous substring s[i..j) contains at most k distinct byte values, we have j - i <= r.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_6",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D(s) be the number of distinct byte values appearing in s (D(s)=0 when len(s)=0). Whenever the function returns a result r, r = len(s) if and only if D(s) <= k.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_7",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every byte slice s and integers k1,k2 satisfying the preconditions, if the call on (s,k1) returns r1 and the call on (s,k2) returns r2, then r1 <= r2.",
+    "preconditions": "len(s) <= 50000 and 0 <= k1 <= k2 <= 50."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_8",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = len(s) if len(s) <= k, and m = k otherwise (so m is the smaller of len(s) and k). The function returns a result r and r >= m.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_9",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if k = 0 or len(s) = 0.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_10",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call on (t,k) returns r_t and the call on (s,k) returns r_s, then r_t <= r_s.",
+    "preconditions": "len(s) <= 50000, 0 <= k <= 50, and t is a contiguous substring of s (possibly empty), i.e., there exist 0 <= i <= j <= len(s) with len(t) = j - i and t[p] = s[i+p] for all 0 <= p < len(t)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_11",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call on (s,k) returns r_s and the call on (t,k) returns r_t, then r_s = r_t.",
+    "preconditions": "len(s) = len(t) <= 50000, 0 <= k <= 50, and for all indices 0 <= i,j < len(s), s[i] = s[j] if and only if t[i] = t[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_12",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every integer L with 0 <= L <= r there exist indices 0 <= i <= j <= len(s) such that j - i = L and the substring s[i..j) contains at most k distinct byte values.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_13",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call on (s,k) returns r and the call on (rev(s),k) returns r_rev, then r = r_rev.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50. Let rev(s) be the byte slice of length len(s) with rev(s)[i] = s[len(s)-1-i] for all 0 <= i < len(s)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_14",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist indices 0 <= i <= j <= len(s) such that j - i = r, the substring s[i..j) has at most k distinct byte values, and both of the following hold: (1) either i = 0 or the substring s[i-1..j) has more than k distinct byte values; (2) either j = len(s) or the substring s[i..j+1) has more than k distinct byte values.",
+    "preconditions": "len(s) <= 50000 and 0 <= k <= 50."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_15",
+    "negation": "AegisSpec.LengthOfLongestSubstringKDistinct.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let R(s) be the maximum length of a contiguous block of equal byte values in s, i.e., the maximum of j - i over 0 <= i <= j <= len(s) such that all bytes s[t] for i <= t < j are equal; R(s)=0 when len(s)=0. The function returns a result r and r >= R(s).",
+    "preconditions": "len(s) <= 50000 and 1 <= k <= 50."
+  }
+]

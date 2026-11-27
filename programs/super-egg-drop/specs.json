@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SuperEggDrop.spec_1",
+    "negation": "AegisSpec.SuperEggDrop.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever super_egg_drop(k,n) returns a result r (i.e. Result.ok r), r is the least integer m >= 1 such that F(k,m) >= n, where for integers e >= 0 and m >= 0, F(e,m) = sum_{i=1}^{min(e,m)} binom(m,i). Here binom(m,i) is the usual binomial coefficient (the number of i-element subsets of an m-element set, and 0 if i < 0 or i > m). Equivalently, F(e,m) is the maximum number N of floors such that the unknown break floor f in {0,...,N} can be determined with certainty using at most m drops and e eggs. Thus r is the minimum worst-case number of drops needed with k eggs on n floors.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SuperEggDrop.spec_2",
+    "negation": "AegisSpec.SuperEggDrop.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every pair (k,n) satisfying the preconditions, super_egg_drop(k,n) returns a result (Result.ok r) and does not fail; in particular there is no arithmetic overflow, panic, or out-of-bounds access.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SuperEggDrop.spec_3",
+    "negation": "AegisSpec.SuperEggDrop.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever super_egg_drop(k,n) returns r, 2^r >= n + 1. Equivalently, r is at least the least integer L with 2^L >= n+1.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SuperEggDrop.spec_4",
+    "negation": "AegisSpec.SuperEggDrop.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever super_egg_drop(k,n) returns r, r <= n.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SuperEggDrop.spec_5",
+    "negation": "AegisSpec.SuperEggDrop.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever super_egg_drop(1,n) returns r, r = n.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, with k = 1 and 1 <= n <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SuperEggDrop.spec_6",
+    "negation": "AegisSpec.SuperEggDrop.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever super_egg_drop(k,1) returns r, r = 1.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, with 1 <= k <= 100 and n = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SuperEggDrop.spec_7",
+    "negation": "AegisSpec.SuperEggDrop.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever super_egg_drop(2,n) returns r, r is the least integer m >= 1 with m(m+1)/2 >= n. Equivalently, r >= 1, r(r+1)/2 >= n, and (r-1)r/2 < n.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, with k = 2 and 1 <= n <= 10000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SuperEggDrop.spec_8",
+    "negation": "AegisSpec.SuperEggDrop.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever super_egg_drop(k,n) returns r, r = L(n).",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, with 1 <= n <= 10000, 1 <= k <= 100, and k >= L(n), where L(n) is the least integer m >= 0 with 2^m >= n+1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SuperEggDrop.spec_9",
+    "negation": "AegisSpec.SuperEggDrop.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let F(e,m) = sum_{i=1}^{min(e,m)} binom(m,i), where binom is the usual binomial coefficient. Whenever super_egg_drop(k,n) returns r, F(k,r) >= n; therefore r drops are sufficient: there exists a strategy using k eggs and at most r drops that determines f with certainty for every possible f in {0,...,n}.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SuperEggDrop.spec_10",
+    "negation": "AegisSpec.SuperEggDrop.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let F(e,m) = sum_{i=1}^{min(e,m)} binom(m,i), where binom is the usual binomial coefficient. Whenever super_egg_drop(k,n) returns r, for every integer m with 0 <= m < r, F(k,m) < n. Equivalently, no strategy with k eggs and at most r-1 drops can determine f with certainty for all f in {0,...,n}.",
+    "preconditions": "The parameters k and n are the mathematical integer values of the Std.I64 arguments, and 1 <= k <= 100 and 1 <= n <= 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SuperEggDrop.spec_11",
+    "negation": "AegisSpec.SuperEggDrop.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If super_egg_drop(k,n1) returns r1 and super_egg_drop(k,n2) returns r2, then r1 <= r2.",
+    "preconditions": "The parameters k, n1, and n2 are mathematical integer values of Std.I64 arguments, with 1 <= k <= 100 and 1 <= n1 <= n2 <= 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SuperEggDrop.spec_12",
+    "negation": "AegisSpec.SuperEggDrop.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If super_egg_drop(k1,n) returns r1 and super_egg_drop(k2,n) returns r2, then r2 <= r1.",
+    "preconditions": "The parameters n, k1, and k2 are mathematical integer values of Std.I64 arguments, with 1 <= n <= 10000 and 1 <= k1 <= k2 <= 100."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SuperEggDrop.spec_13",
+    "negation": "AegisSpec.SuperEggDrop.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If super_egg_drop(k1,n) returns r and k1 >= r, then if super_egg_drop(k2,n) returns r2, we have r2 = r.",
+    "preconditions": "The parameters n, k1, and k2 are mathematical integer values of Std.I64 arguments, with 1 <= n <= 10000 and 1 <= k1 <= k2 <= 100."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SuperEggDrop.spec_14",
+    "negation": "AegisSpec.SuperEggDrop.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let T(n) be the least integer m >= 1 with m(m+1)/2 >= n. Whenever super_egg_drop(k,n) returns r, r <= T(n).",
+    "preconditions": "The parameters k and n are mathematical integer values of Std.I64 arguments, with 2 <= k <= 100 and 1 <= n <= 10000."
+  }
+]

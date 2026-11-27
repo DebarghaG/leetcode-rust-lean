@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_1",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let an assignment be any function A from {0,...,len(jobs)-1} to {0,...,k-1}. For a worker w with 0 <= w < k, define load(A,w) = sum of jobs[i] over all i with A(i)=w, using the empty sum 0 if no job is assigned to w, and define maxload(A) = max over 0 <= w < k of load(A,w). The function returns a result r and r = min over all assignments A of maxload(A).",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_2",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail, overflow, panic, access out of bounds, or otherwise produce an error.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_3",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(jobs), r >= jobs[i]. Equivalently, r is at least the largest job time.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_4",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, k * r >= sum_{i=0}^{len(jobs)-1} jobs[i].",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_5",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{len(jobs)-1} jobs[i].",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_6",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 <= i < len(jobs)} jobs[i], and let m be the least integer such that m * k >= len(jobs). Whenever the function returns a result r, r <= m * M.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_7",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an assignment A from {0,...,len(jobs)-1} to {0,...,k-1} such that, defining load(A,w) as the sum of jobs[i] over all i with A(i)=w (empty sum 0), max_{0 <= w < k} load(A,w) = r.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_8",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every assignment A from {0,...,len(jobs)-1} to {0,...,k-1}, if load(A,w) is the sum of jobs[i] over all i with A(i)=w (empty sum 0), then max_{0 <= w < k} load(A,w) >= r.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_9",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let s = sum_{i=0}^{len(jobs)-1} jobs[i] and let m = min_{0 <= i < len(jobs)} jobs[i]. Whenever the function returns a result r, r <= s - (k - 1) * m.",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumTimeRequired.spec_10",
+    "negation": "AegisSpec.MinimumTimeRequired.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every permutation pi of the index set {0,...,len(jobs)-1}, r is equal to the minimum over all assignments A from {0,...,len(jobs)-1} to {0,...,k-1} of max_{0 <= w < k} (sum of jobs[pi(i)] over all i with A(i)=w).",
+    "preconditions": "len(jobs) >= 1, 1 <= k <= len(jobs) <= 12, and for every i with 0 <= i < len(jobs), 1 <= jobs[i] <= 10^7."
+  }
+]

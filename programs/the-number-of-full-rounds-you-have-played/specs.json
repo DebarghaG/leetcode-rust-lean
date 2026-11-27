@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfRounds.spec_1",
+    "negation": "AegisSpec.NumberOfRounds.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals the number of integers k such that: if tL < tO, then tL <= 15*k and 15*k + 15 <= tO; if tL > tO, then tL <= 15*k and 15*k + 15 <= 1440 + tO. Equivalently, r is exactly the number of full 15-minute chess rounds completely contained in the played interval from loginTime forward to logoutTime, wrapping past midnight exactly when tL > tO.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfRounds.spec_2",
+    "negation": "AegisSpec.NumberOfRounds.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfRounds.spec_3",
+    "negation": "AegisSpec.NumberOfRounds.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 95.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfRounds.spec_4",
+    "negation": "AegisSpec.NumberOfRounds.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let D = tO - tL when tL < tO, and D = 1440 + tO - tL when tL > tO. Whenever the function returns a result r, 15*r <= D, equivalently r <= floor15(D).",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfRounds.spec_5",
+    "negation": "AegisSpec.NumberOfRounds.spec_5_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (evaluation is Ok r) and does not fail: there is no overflow, no out-of-bounds access, and no panic for any input satisfying the preconditions.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfRounds.spec_6",
+    "negation": "AegisSpec.NumberOfRounds.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D = tO - tL when tL < tO, and D = 1440 + tO - tL when tL > tO. If D < 15, then the function returns a result r with r = 0.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfRounds.spec_7",
+    "negation": "AegisSpec.NumberOfRounds.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If tL < tO and both tL and tO are divisible by 15, then the function returns r = (tO - tL) / 15.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfRounds.spec_8",
+    "negation": "AegisSpec.NumberOfRounds.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of number_of_rounds(L, O1) and r2 be the result of number_of_rounds(L, O2). Whenever both calls return results, r1 <= r2.",
+    "preconditions": "L, O1, O2 are byte slices of length 5; for each such slice s, s[2] is byte 58, s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57, hh(s) = 10*(s[0]-48)+(s[1]-48) <= 23, mm(s) = 10*(s[3]-48)+(s[4]-48) <= 59, and t(s)=60*hh(s)+mm(s). Let tL=t(L), tO1=t(O1), tO2=t(O2). Require tL < tO1 <= tO2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfRounds.spec_9",
+    "negation": "AegisSpec.NumberOfRounds.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c, let Lc and Oc be the unique byte strings in hh:mm format with t(Lc) = (tL + 15*c) mod 1440 and t(Oc) = (tO + 15*c) mod 1440. Then number_of_rounds(Lc, Oc) returns the same result as number_of_rounds(loginTime, logoutTime).",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumberOfRounds.spec_10",
+    "negation": "AegisSpec.NumberOfRounds.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exists an integer k such that: either tL < tO and tL <= 15*k and 15*k + 15 <= tO, or tL > tO and tL <= 15*k and 15*k + 15 <= 1440 + tO.",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumberOfRounds.spec_11",
+    "negation": "AegisSpec.NumberOfRounds.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If tL > tO, then the function returns r = (96 - ceil15(tL)) + floor15(tO).",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumberOfRounds.spec_12",
+    "negation": "AegisSpec.NumberOfRounds.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If tL = 0, then the function returns r = floor15(tO).",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumberOfRounds.spec_13",
+    "negation": "AegisSpec.NumberOfRounds.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If tL < tO, then the function returns r = max(0, floor15(tO) - ceil15(tL)).",
+    "preconditions": "loginTime and logoutTime are byte slices of length 5. In each slice s, s[2] is the colon byte 58, and s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57. Let hh(s) = 10*(s[0]-48) + (s[1]-48) and mm(s) = 10*(s[3]-48) + (s[4]-48). Require hh(s) <= 23 and mm(s) <= 59. Let t(s) = 60*hh(s)+mm(s), the minute after midnight. Let tL = t(loginTime) and tO = t(logoutTime), and require tL != tO. Write floor15(x) for the greatest integer q with 15*q <= x, and ceil15(x) for the least integer q with 15*q >= x."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.NumberOfRounds.spec_14",
+    "negation": "AegisSpec.NumberOfRounds.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of number_of_rounds(L1, O) and r2 be the result of number_of_rounds(L2, O). Whenever both calls return results, r2 <= r1.",
+    "preconditions": "L1, L2, O are byte slices of length 5; for each such slice s, s[2] is byte 58, s[0], s[1], s[3], s[4] are ASCII digit bytes in 48..57, hh(s) = 10*(s[0]-48)+(s[1]-48) <= 23, mm(s) = 10*(s[3]-48)+(s[4]-48) <= 59, and t(s)=60*hh(s)+mm(s). Let tL1=t(L1), tL2=t(L2), tO=t(O). Require tL1 <= tL2 < tO."
+  }
+]

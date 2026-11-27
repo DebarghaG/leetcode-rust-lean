@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SortJumbled.spec_1",
+    "negation": "AegisSpec.SortJumbled.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define mapval(n) for a nonnegative integer n as follows: write n in decimal without leading zeros, except write 0 as the single digit 0; if the digits from most significant to least significant are d_k,...,d_0, then mapval(n) = sum_{j=0}^{k} mapping[d_j] * 10^j. Whenever the function returns a result r, let L = len(nums); for each integer v, let I_v be the increasing list of indices i with 0 <= i < L and mapval(nums[i]) = v; let V be the increasing list of all v for which I_v is nonempty. Then len(r) = L and r is exactly the concatenation, over v in V, of the lists [nums[i] for i in I_v].",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SortJumbled.spec_2",
+    "negation": "AegisSpec.SortJumbled.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every mapping and nums satisfying the preconditions, the function returns a result r (the Result is successful; it does not panic, overflow, go out of bounds, or otherwise fail).",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SortJumbled.spec_3",
+    "negation": "AegisSpec.SortJumbled.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(nums).",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SortJumbled.spec_4",
+    "negation": "AegisSpec.SortJumbled.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every p with 0 <= p < len(r), 0 <= r[p] < 10^9.",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SortJumbled.spec_5",
+    "negation": "AegisSpec.SortJumbled.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every integer x, the number of indices p with 0 <= p < len(r) and r[p] = x equals the number of indices i with 0 <= i < len(nums) and nums[i] = x.",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SortJumbled.spec_6",
+    "negation": "AegisSpec.SortJumbled.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, every entry of r is an input number (so 0 <= r[p] < 10^9 for every p), and for all p and q with 0 <= p < q < len(r), mapval(r[p]) <= mapval(r[q]).",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SortJumbled.spec_7",
+    "negation": "AegisSpec.SortJumbled.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, there exists a bijection f from {0,...,len(r)-1} to {0,...,len(nums)-1} such that r[p] = nums[f(p)] for every p, and for all p and q with 0 <= p < q < len(r), if mapval(r[p]) = mapval(r[q]), then f(p) < f(q).",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SortJumbled.spec_8",
+    "negation": "AegisSpec.SortJumbled.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, len(r) = len(nums) and every entry of r is an input number; let m = min { mapval(nums[i]) | 0 <= i < len(nums) }. Then mapval(r[0]) = m, and if i0 is the smallest index with 0 <= i0 < len(nums) and mapval(nums[i0]) = m, then r[0] = nums[i0].",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SortJumbled.spec_9",
+    "negation": "AegisSpec.SortJumbled.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, len(r) = len(nums) and every entry of r is an input number; let M = max { mapval(nums[i]) | 0 <= i < len(nums) }. Then mapval(r[len(r)-1]) = M, and if iM is the largest index with 0 <= iM < len(nums) and mapval(nums[iM]) = M, then r[len(r)-1] = nums[iM].",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SortJumbled.spec_10",
+    "negation": "AegisSpec.SortJumbled.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, every entry of r is an input number; for every integer v, the number of positions p with 0 <= p < len(r) and mapval(r[p]) = v equals the number of indices i with 0 <= i < len(nums) and mapval(nums[i]) = v.",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SortJumbled.spec_11",
+    "negation": "AegisSpec.SortJumbled.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, every entry of r is an input number; for every integer v, the set { p | 0 <= p < len(r) and mapval(r[p]) = v } is a contiguous interval of integers (possibly empty).",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SortJumbled.spec_12",
+    "negation": "AegisSpec.SortJumbled.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define mapval as in spec_1. Whenever the function returns a result r, len(r) = len(nums) and every entry of r is an input number; for every integer t, let k be the number of indices i with 0 <= i < len(nums) and mapval(nums[i]) <= t. Then for every p with 0 <= p < k, mapval(r[p]) <= t, and for every p with k <= p < len(r), mapval(r[p]) > t.",
+    "preconditions": "len(mapping) = 10; for every i with 0 <= i < 10, 0 <= mapping[i] <= 9; mapping[0],...,mapping[9] are pairwise distinct; let L = len(nums); 1 <= L <= 30000; for every i with 0 <= i < L, 0 <= nums[i] < 10^9."
+  }
+]

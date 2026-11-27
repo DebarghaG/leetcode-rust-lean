@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MostPoints.spec_1",
+    "negation": "AegisSpec.MostPoints.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the maximum, over all sets S subset of {0,...,n-1} such that for every i,j in S with i < j we have j > i + b_i, of the sum of p_i over i in S. The empty set is allowed and has sum 0. Equivalently, r is the maximum total points obtainable by choosing solved questions in order, where solving i forbids solving any j with i < j <= i + b_i.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MostPoints.spec_2",
+    "negation": "AegisSpec.MostPoints.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail: no overflow, out-of-bounds access, panic, or other failure).",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MostPoints.spec_3",
+    "negation": "AegisSpec.MostPoints.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r >= p_i.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MostPoints.spec_4",
+    "negation": "AegisSpec.MostPoints.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{n-1} p_i.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MostPoints.spec_5",
+    "negation": "AegisSpec.MostPoints.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if n = 1 then r = p_0.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MostPoints.spec_6",
+    "negation": "AegisSpec.MostPoints.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if n = 2 then r = p_0 + p_1 if b_0 = 0, and r = max(p_0, p_1) otherwise.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MostPoints.spec_7",
+    "negation": "AegisSpec.MostPoints.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if b_i = 0 for every i with 0 <= i < n, then r = sum_{i=0}^{n-1} p_i.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MostPoints.spec_8",
+    "negation": "AegisSpec.MostPoints.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if b_i >= n - 1 for every i with 0 <= i < n, then r = max_{0 <= i < n} p_i.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MostPoints.spec_9",
+    "negation": "AegisSpec.MostPoints.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever most_points(questions) returns r and most_points(questions') returns r', we have r = r'.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n. Let questions' be another input satisfying the same shape and bounds, with len(questions') = n, and let p'_i = questions'[i][0] and b'_i = questions'[i][1]. Assume that for every i with 0 <= i < n-1, p'_i = p_i and b'_i = b_i, and that p'_{n-1} = p_{n-1}, while b'_{n-1} is any integer with 0 <= b'_{n-1} <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MostPoints.spec_10",
+    "negation": "AegisSpec.MostPoints.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever most_points(questions) returns r and most_points(questions') returns r', we have r <= r'.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n. Let questions' be another input satisfying the same shape and bounds, with len(questions') = n, and let p'_i = questions'[i][0] and b'_i = questions'[i][1]. Assume that for every i with 0 <= i < n, b'_i = b_i and p_i <= p'_i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MostPoints.spec_11",
+    "negation": "AegisSpec.MostPoints.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever most_points(questions) returns r and most_points(questions') returns r', we have r >= r'.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n. Let questions' be another input satisfying the same shape and bounds, with len(questions') = n, and let p'_i = questions'[i][0] and b'_i = questions'[i][1]. Assume that for every i with 0 <= i < n, p'_i = p_i and b_i <= b'_i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MostPoints.spec_12",
+    "negation": "AegisSpec.MostPoints.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set S subset of {0,...,n-1} such that for every i,j in S with i < j we have j > i + b_i, and sum_{i in S} p_i = r.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MostPoints.spec_13",
+    "negation": "AegisSpec.MostPoints.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if p_i = c for every i with 0 <= i < n and b_i = 1 for every i with 0 <= i < n, then r = c * ceil(n/2), where ceil(n/2) is the least integer m with m >= n/2 (equivalently, c * ((n+1) div 2) using integer division).",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MostPoints.spec_14",
+    "negation": "AegisSpec.MostPoints.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever most_points(questions) returns r and most_points(questions') returns r', we have r' >= r.",
+    "preconditions": "Let n = len(questions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(questions[i]) = 2. Let p_i = questions[i][0] and b_i = questions[i][1]. Assume 1 <= p_i <= 100000 and 0 <= b_i <= 100000 for every i with 0 <= i < n. Assume n < 100000. Let questions' be another valid input with len(questions') = n+1, questions'[i] = questions[i] for every 0 <= i < n, and for the appended index n let p'_n = questions'[n][0] and b'_n = questions'[n][1] satisfy 1 <= p'_n <= 100000 and 0 <= b'_n <= 100000."
+  }
+]

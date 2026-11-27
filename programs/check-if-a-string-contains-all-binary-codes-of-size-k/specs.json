@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasAllCodes.spec_1",
+    "negation": "AegisSpec.HasAllCodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Write P(s,k) for: for every sequence w_0,...,w_{k-1} with each w_i in {0,1}, there exists an index j with 0 <= j <= len(s)-k such that for every i with 0 <= i < k, s[j+i] = 48 + w_i. The function returns a result r, and r = true if and only if P(s,k) holds; otherwise r = false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasAllCodes.spec_2",
+    "negation": "AegisSpec.HasAllCodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail) for these inputs.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasAllCodes.spec_3",
+    "negation": "AegisSpec.HasAllCodes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If len(s) < 2^k + k - 1, then the function returns a result r and r = false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasAllCodes.spec_4",
+    "negation": "AegisSpec.HasAllCodes.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, then the function returns a result r, and r = true if and only if there exist indices i and j with 0 <= i < len(s), 0 <= j < len(s), s[i] = 48, and s[j] = 49.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and k = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasAllCodes.spec_5",
+    "negation": "AegisSpec.HasAllCodes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If every byte of s equals 48, or if every byte of s equals 49, then the function returns a result r and r = false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasAllCodes.spec_6",
+    "negation": "AegisSpec.HasAllCodes.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Write P(s,m) for: for every sequence w_0,...,w_{m-1} with each w_i in {0,1}, there exists an index j with 0 <= j <= len(s)-m such that for every i with 0 <= i < m, s[j+i] = 48 + w_i. If the function returns r and r = true, then for every integer m with 1 <= m <= k, P(s,m) holds.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HasAllCodes.spec_7",
+    "negation": "AegisSpec.HasAllCodes.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every byte slice t with 1 <= len(t) <= 500000 and every byte of t equal to 48 or 49, if there exists an index d with 0 <= d and d + len(s) <= len(t) and t[d+i] = s[i] for every 0 <= i < len(s), then the call has_all_codes(s,k) returns a result r_s, the call has_all_codes(t,k) returns a result r_t, and r_s = true implies r_t = true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HasAllCodes.spec_8",
+    "negation": "AegisSpec.HasAllCodes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the slice of length len(s) with rev(s)[i] = s[len(s)-1-i] for 0 <= i < len(s). The call on s returns a result r, the call on rev(s) with the same k returns a result r_rev, and r = r_rev.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HasAllCodes.spec_9",
+    "negation": "AegisSpec.HasAllCodes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let comp(s) be the slice of length len(s) with comp(s)[i] = 49 if s[i] = 48, and comp(s)[i] = 48 if s[i] = 49. The call on s returns a result r, the call on comp(s) with the same k returns a result r_comp, and r = r_comp.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HasAllCodes.spec_10",
+    "negation": "AegisSpec.HasAllCodes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns r and r = false, then there exists a sequence w_0,...,w_{k-1} with each w_i in {0,1} such that for every index j with 0 <= j <= len(s)-k, there is some i with 0 <= i < k and s[j+i] != 48 + w_i. Equivalently, some binary word of length k does not occur in s.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.HasAllCodes.spec_11",
+    "negation": "AegisSpec.HasAllCodes.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice t with 1 <= len(t) <= 500000 and every byte of t equal to 48 or 49, if for every binary word w_0,...,w_{k-1} with w_i in {0,1}, w occurs in s if and only if w occurs in t (where w occurs in a slice u iff there is j with 0 <= j <= len(u)-k and u[j+i] = 48 + w_i for all 0 <= i < k), then the call on s and the call on t return the same Boolean result.",
+    "preconditions": "len(s) >= 1 and len(s) <= 500000; for every i with 0 <= i < len(s), s[i] is 48 or 49; and 1 <= k <= 20."
+  }
+]

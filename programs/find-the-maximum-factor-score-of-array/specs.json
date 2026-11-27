@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxScore.spec_1",
+    "negation": "AegisSpec.MaxScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = max_{B in S} factor_score(B), where S = { nums } ∪ { nums with element i removed for 0 <= i < len(nums) }, and for a non-empty array B, factor_score(B) = gcd(B) * lcm(B) with gcd(B) the greatest common divisor of the elements of B and lcm(B) the least common multiple of the elements of B; for the empty array, factor_score = 0.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined below), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxScore.spec_2",
+    "negation": "AegisSpec.MaxScore.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= factor_score(nums), where factor_score(nums) = gcd(nums) * lcm(nums) (nums is non-empty, so this is well-defined).",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxScore.spec_3",
+    "negation": "AegisSpec.MaxScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every i with 0 <= i < len(nums), r >= factor_score(nums without element i), where factor_score(B) = gcd(B) * lcm(B) for non-empty B, and factor_score(empty) = 0.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxScore.spec_4",
+    "negation": "AegisSpec.MaxScore.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and there exists B in S such that r = factor_score(B), where S = { nums } ∪ { nums with element i removed for 0 <= i < len(nums) }, and factor_score is defined as gcd * lcm for non-empty B and 0 for empty B.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxScore.spec_5",
+    "negation": "AegisSpec.MaxScore.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= 1.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxScore.spec_6",
+    "negation": "AegisSpec.MaxScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = nums[0] * nums[0].",
+    "preconditions": "len(nums) = 1; nums[0] >= 1; and for the array nums itself, lcm(nums) <= 2^63 - 1 and gcd(nums)*lcm(nums) <= 2^63 - 1 (i.e., nums[0] <= 2^63 - 1 and nums[0]*nums[0] <= 2^63 - 1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxScore.spec_7",
+    "negation": "AegisSpec.MaxScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = max(nums[0], nums[1]) * max(nums[0], nums[1]).",
+    "preconditions": "len(nums) = 2; nums[0] >= 1; nums[1] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxScore.spec_8",
+    "negation": "AegisSpec.MaxScore.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any permutation π of {0, 1, ..., len(nums)-1}, let nums' be the slice defined by nums'[k] = nums[π(k)] for 0 <= k < len(nums). If the function is called on nums' and returns r', then r' = r, where r is the result on nums.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1. The same precondition holds for any permutation of nums."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxScore.spec_9",
+    "negation": "AegisSpec.MaxScore.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = v * v.",
+    "preconditions": "len(nums) >= 1; there exists a value v such that for all i with 0 <= i < len(nums), nums[i] = v; v >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1 (i.e., v <= 2^63 - 1 and v*v <= 2^63 - 1)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxScore.spec_10",
+    "negation": "AegisSpec.MaxScore.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r <= product of all elements of nums, i.e., r <= nums[0] * nums[1] * ... * nums[len(nums)-1].",
+    "preconditions": "len(nums) >= 3; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxScore.spec_11",
+    "negation": "AegisSpec.MaxScore.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= lcm(nums), where lcm(nums) is the least common multiple of all elements of nums.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxScore.spec_12",
+    "negation": "AegisSpec.MaxScore.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and r is divisible by (gcd(nums))^2, where gcd(nums) is the greatest common divisor of all elements of nums.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxScore.spec_13",
+    "negation": "AegisSpec.MaxScore.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on nums and r' on nums', then r' = c * c * r.",
+    "preconditions": "nums satisfies the precondition P: len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S, if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1. Let c be a positive integer. Let nums' be the slice of the same length with nums'[i] = c * nums[i] for all i. Assume nums' also satisfies the precondition P (with S' defined analogously)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxScore.spec_14",
+    "negation": "AegisSpec.MaxScore.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r <= max(nums) * lcm(nums), where max(nums) is the maximum element of nums and lcm(nums) is the least common multiple of all elements of nums.",
+    "preconditions": "len(nums) >= 1; for every i with 0 <= i < len(nums), nums[i] >= 1; and for every array B in S (defined as in spec_1), if B is non-empty then lcm(B) <= 2^63 - 1 and gcd(B)*lcm(B) <= 2^63 - 1."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RearrangeSticks.spec_1",
+    "negation": "AegisSpec.RearrangeSticks.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the canonical residue modulo M = 1000000007 of the number C(n,k) of permutations p of {1,2,...,n} that have exactly k visible sticks from the left, i.e. exactly k indices i with 0 <= i < n such that p[i] > p[j] for every j with 0 <= j < i. Thus 0 <= r <= M - 1 and r ≡ C(n,k) (mod M).",
+    "preconditions": "n and k are integers with 1 <= n <= 1000 and 1 <= k <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RearrangeSticks.spec_2",
+    "negation": "AegisSpec.RearrangeSticks.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever n and k satisfy 1 <= n <= 1000 and 1 <= k <= n, the call rearrange_sticks(n,k) returns some result r (a successful Result.ok value); it does not fail, panic, or return an error.",
+    "preconditions": "n and k are integers with 1 <= n <= 1000 and 1 <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RearrangeSticks.spec_3",
+    "negation": "AegisSpec.RearrangeSticks.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r for inputs satisfying 1 <= n <= 1000 and 1 <= k <= n, the returned integer r satisfies 0 <= r <= 1000000006.",
+    "preconditions": "n and k are integers with 1 <= n <= 1000 and 1 <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RearrangeSticks.spec_4",
+    "negation": "AegisSpec.RearrangeSticks.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1.",
+    "preconditions": "n is an integer with 1 <= n <= 1000 and k = n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RearrangeSticks.spec_5",
+    "negation": "AegisSpec.RearrangeSticks.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = ((n-1)! mod 1000000007), represented as the canonical residue in [0,1000000006], where 0! = 1.",
+    "preconditions": "n is an integer with 1 <= n <= 1000 and k = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RearrangeSticks.spec_6",
+    "negation": "AegisSpec.RearrangeSticks.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = (n*(n-1)/2) mod 1000000007, represented as the canonical residue in [0,1000000006].",
+    "preconditions": "n is an integer with 2 <= n <= 1000 and k = n - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RearrangeSticks.spec_7",
+    "negation": "AegisSpec.RearrangeSticks.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let S = sum_{i=1}^{n-1} ((n-1)! / i), where each division is the exact integer quotient. The function returns r = (S mod 1000000007), represented as the canonical residue in [0,1000000006].",
+    "preconditions": "n is an integer with 2 <= n <= 1000 and k = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RearrangeSticks.spec_8",
+    "negation": "AegisSpec.RearrangeSticks.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of rearrange_sticks(n,k), let r_prev_1 be the result of rearrange_sticks(n-1,k-1), and let r_prev_2 be the result of rearrange_sticks(n-1,k). Then r = (r_prev_1 + (n-1)*r_prev_2) mod 1000000007, represented as the canonical residue in [0,1000000006].",
+    "preconditions": "n and k are integers with 2 <= n <= 1000 and 2 <= k <= n - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RearrangeSticks.spec_9",
+    "negation": "AegisSpec.RearrangeSticks.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every k with 1 <= k <= n, let r_k be the result of rearrange_sticks(n,k). Then (sum_{k=1}^{n} r_k) mod 1000000007 = (n! mod 1000000007), and both sides are interpreted as canonical residues in [0,1000000006].",
+    "preconditions": "n is an integer with 1 <= n <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RearrangeSticks.spec_10",
+    "negation": "AegisSpec.RearrangeSticks.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let binom(a,b) denote the binomial coefficient, with binom(a,b) = 0 when b < 0 or b > a. The function returns r = (2*binom(n,3) + 3*binom(n,4)) mod 1000000007, represented as the canonical residue in [0,1000000006].",
+    "preconditions": "n is an integer with 3 <= n <= 1000 and k = n - 2."
+  }
+]

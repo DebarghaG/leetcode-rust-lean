@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_1",
+    "negation": "AegisSpec.GetLonelyNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns Result.ok r, and the multiset of entries of r is exactly the multiset of values of all lonely node occurrences in root. Here a node occurrence is identified by its path from the root (the empty path is the root); an occurrence is lonely iff its path is nonempty and its parent has exactly one non-null child, namely this occurrence. Equivalently, for every integer x, the number of indices i with 0 <= i < len(r) and r[i] = x equals the number of lonely node occurrences in root whose stored value is x. Multiplicity counts duplicate values.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_2",
+    "negation": "AegisSpec.GetLonelyNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns Result.ok r for some vector r; it does not panic, overflow, or return an error.",
+    "preconditions": "root is any finite Tree (possibly Null) with at most 1000 nodes; its stored values may be arbitrary 64-bit integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_3",
+    "negation": "AegisSpec.GetLonelyNodes.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, len(r) equals the number of lonely node occurrences in root, where a node occurrence is lonely exactly when it is a non-root node whose parent has exactly one non-null child.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_4",
+    "negation": "AegisSpec.GetLonelyNodes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, for every index i with 0 <= i < len(r), the entry r[i] is an integer satisfying 1 <= r[i] <= 10^6.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_5",
+    "negation": "AegisSpec.GetLonelyNodes.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, for every index i with 0 <= i < len(r) there exists a lonely node occurrence in root whose stored value is r[i], where a node occurrence is lonely exactly when it is a non-root node whose parent has exactly one non-null child.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_6",
+    "negation": "AegisSpec.GetLonelyNodes.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, for every lonely node occurrence p in root there exists an index i with 0 <= i < len(r) such that r[i] equals the value stored at p. Here lonely means non-root and the only non-null child of its parent.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_7",
+    "negation": "AegisSpec.GetLonelyNodes.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_lonely_nodes Null returns Result.ok r, len(r) = 0.",
+    "preconditions": "root = Null, which is outside the problem's stated nonempty-tree constraints but is a value of the Lean Tree type."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_8",
+    "negation": "AegisSpec.GetLonelyNodes.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, len(r) <= N - 1, where N is the number of nodes in root.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_9",
+    "negation": "AegisSpec.GetLonelyNodes.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(root) be the tree obtained recursively by mirror(Null)=Null and mirror(Node(v,L,R))=Node(v,mirror(R),mirror(L)). Whenever get_lonely_nodes root returns Result.ok r and get_lonely_nodes (mirror(root)) returns Result.ok r', the multiset of entries of r equals the multiset of entries of r'.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, and every node value is an integer v with 1 <= v <= 10^6."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_10",
+    "negation": "AegisSpec.GetLonelyNodes.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, the multiset of entries of r is the multiset union, with multiplicity, of the multiset of values of all lonely node occurrences in L, where L is regarded as a tree with its own root not lonely, and the corresponding multiset for R.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, every node value is an integer v with 1 <= v <= 10^6, and root = Node(v,L,R) with L and R both non-null."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetLonelyNodes.spec_11",
+    "negation": "AegisSpec.GetLonelyNodes.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_lonely_nodes root returns Result.ok r, the multiset of entries of r is obtained from the multiset of values of all lonely node occurrences in C, where C is regarded as a tree with its own root not lonely, by adding one additional occurrence of w.",
+    "preconditions": "root is a non-null finite binary tree with between 1 and 1000 nodes, every node value is an integer v with 1 <= v <= 10^6, and either root = Node(v,L,Null) with L = Node(w,LL,LR), or root = Node(v,Null,R) with R = Node(w,RL,RR). Let C be the unique non-null child and let w be its root value."
+  }
+]

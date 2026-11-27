@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_1",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For a non-empty binary string s, a 1-block is a maximal contiguous substring consisting only of 1s, and a 0-block is a maximal contiguous substring consisting only of 0s. Call s good if len(s) is in [minLength,maxLength], every 1-block of s has size t with t = k * oneGroup for some integer k >= 0, and every 0-block of s has size u with u = l * zeroGroup for some integer l >= 0. Let N be the number of good binary strings. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns a result r, r is the least non-negative residue of N modulo M; equivalently, 0 <= r < M and N = q * M + r for some integer q >= 0.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_2",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every choice of the four arguments satisfying the preconditions, the call good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns a result r; it does not fail due to arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_3",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = 1000000007. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns a result r, we have 0 <= r < M.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_4",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned by good_binary_strings(minLength,maxLength,oneGroup,zeroGroup), and let r' be the result returned by good_binary_strings(minLength,maxLength,zeroGroup,oneGroup). Then r = r'.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_5",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let M = 1000000007. For each integer n with minLength <= n <= maxLength, let C(n) be the number of binary strings s of length n such that every maximal contiguous run of 1s in s has size k * oneGroup for some integer k >= 0 and every maximal contiguous run of 0s in s has size l * zeroGroup for some integer l >= 0. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r is the least non-negative residue modulo M of the sum of C(n) over all n in [minLength,maxLength].",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_6",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r is the least non-negative residue modulo M of the sum of 2^n over all integers n with minLength <= n <= maxLength.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, 1 <= zeroGroup <= maxLength, oneGroup = 1, and zeroGroup = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_7",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r = 2.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, 1 <= zeroGroup <= maxLength, oneGroup = maxLength, and zeroGroup = maxLength."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_8",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r = maxLength - minLength + 2.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, 1 <= zeroGroup <= maxLength, oneGroup = maxLength, and zeroGroup = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_9",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let N be the number of good binary strings, where good means a non-empty binary string s whose length is in [minLength,maxLength], every maximal contiguous run of 1s has size k * oneGroup for some integer k >= 0, and every maximal contiguous run of 0s has size l * zeroGroup for some integer l >= 0. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r = N as an ordinary integer.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, 1 <= zeroGroup <= maxLength, and maxLength <= 10."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_10",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever good_binary_strings(2,3,1,2) returns r, r = 5.",
+    "preconditions": "The arguments are minLength = 2, maxLength = 3, oneGroup = 1, and zeroGroup = 2, which satisfy the problem constraints."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_11",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever good_binary_strings(5,5,4,3) returns r, r = 0.",
+    "preconditions": "The arguments are minLength = 5, maxLength = 5, oneGroup = 4, and zeroGroup = 3, which satisfy the problem constraints."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GoodBinaryStrings.spec_12",
+    "negation": "AegisSpec.GoodBinaryStrings.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Define E(0) = 1 and, for every n >= 1, let E(n) = (if n >= oneGroup then E(n-oneGroup) else 0) + (if n >= zeroGroup then E(n-zeroGroup) else 0). Then E(n) is the number of binary strings of length n (with E(0)=1 counting the empty string) whose every 1-block has size a multiple of oneGroup and every 0-block has size a multiple of zeroGroup. Whenever good_binary_strings(minLength,maxLength,oneGroup,zeroGroup) returns r, r is the least non-negative residue modulo M of the sum of E(n) over all integers n with minLength <= n <= maxLength.",
+    "preconditions": "minLength, maxLength, oneGroup, and zeroGroup satisfy 1 <= minLength <= maxLength <= 100000, 1 <= oneGroup <= maxLength, and 1 <= zeroGroup <= maxLength."
+  }
+]

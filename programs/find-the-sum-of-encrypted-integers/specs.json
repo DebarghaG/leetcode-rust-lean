@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_1",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{len(nums)-1} enc(nums[i]), where for a positive integer x, enc(x) is defined as follows: let d be the number of decimal digits in the usual decimal representation of x (no leading zeros) and let m be the largest of those d digits; then enc(x) is the d-digit integer all of whose decimal digits equal m, equivalently enc(x) = m * (10^d - 1) / 9.",
+    "preconditions": "1 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_2",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns some result r; it does not fail by arithmetic overflow, out-of-bounds access, panic, or any other error.",
+    "preconditions": "1 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_3",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(nums) <= r <= 1111 * len(nums).",
+    "preconditions": "1 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_4",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{len(nums)-1} nums[i].",
+    "preconditions": "1 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_5",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on nums and r2 on nums2, r = r2.",
+    "preconditions": "Let L = len(nums). Assume 1 <= L <= 50, every entry of nums and nums2 lies in 1..1000, len(nums2) = L, and there is a permutation p of {0,...,L-1} such that nums2[i] = nums[p(i)] for every i with 0 <= i < L."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_6",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ra on a, rb on b, and rc on c, rc = ra + rb.",
+    "preconditions": "a and b are nonempty slices with every entry in 1..1000, and len(a) + len(b) <= 50. Let c be the concatenation of a followed by b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_7",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r is divisible by R_d = (10^d - 1) / 9. More exactly, r = R_d * sum_{i=0}^{len(nums)-1} M(nums[i]), where M(x) denotes the largest decimal digit of x.",
+    "preconditions": "1 <= len(nums) <= 50, every nums[i] lies in 1..1000, and there exists an integer d with 1 <= d <= 4 such that every nums[i] has exactly d decimal digits."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_8",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on nums and r2 on nums2, r2 = r.",
+    "preconditions": "1 <= len(nums) <= 50, every nums[i] lies in 1..999, and nums2 is a slice of length len(nums) such that nums2[i] = enc(nums[i]) for every i, where enc(x) replaces every decimal digit of x by the largest decimal digit of x."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_9",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= 999 * len(nums).",
+    "preconditions": "1 <= len(nums) <= 50 and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 999."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumOfEncryptedInt.spec_10",
+    "negation": "AegisSpec.SumOfEncryptedInt.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = m * sum_{i=0}^{len(nums)-1} ((10^{d_i} - 1) / 9), where d_i is the number of decimal digits of nums[i].",
+    "preconditions": "1 <= len(nums) <= 50, every nums[i] lies in 1..1000, and there exists an integer m with 1 <= m <= 9 such that for every i, the largest decimal digit of nums[i] is m."
+  }
+]

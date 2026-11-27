@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDays.spec_1",
+    "negation": "AegisSpec.MinDays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). For an integer d, define B(d) to be the maximum number of pairwise disjoint intervals [s, s+k-1] of indices with 0 <= s and s+k-1 < n such that bloomDay[i] <= d for every i with s <= i <= s+k-1. Equivalently, B(d) is the sum, over all maximal contiguous runs of indices i for which bloomDay[i] <= d, of floor(run_length / k). If there exists a nonnegative integer d with B(d) >= m, then r is the least such d; otherwise r = -1.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDays.spec_2",
+    "negation": "AegisSpec.MinDays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: no arithmetic overflow, no out-of-bounds slice access, and no panic occur.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDays.spec_3",
+    "negation": "AegisSpec.MinDays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For an integer d, define B(d) as the maximum number of pairwise disjoint intervals [s, s+k-1] with 0 <= s and s+k-1 < n such that bloomDay[i] <= d for every i in the interval; equivalently, B(d) is the sum over maximal runs of available indices of floor(run_length/k), where available means bloomDay[i] <= d. Whenever the function returns a result r with r != -1, we have B(r) >= m.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDays.spec_4",
+    "negation": "AegisSpec.MinDays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For an integer d, define B(d) as the maximum number of pairwise disjoint intervals [s, s+k-1] with 0 <= s and s+k-1 < n such that bloomDay[i] <= d for every i in the interval; equivalently, B(d) is the sum over maximal runs of available indices of floor(run_length/k), where available means bloomDay[i] <= d. Whenever the function returns a result r with r != -1, for every integer d with 0 <= d < r, we have B(d) < m.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDays.spec_5",
+    "negation": "AegisSpec.MinDays.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r = -1 if and only if len(bloomDay) < m * k.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDays.spec_6",
+    "negation": "AegisSpec.MinDays.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, r >= min_{0 <= i < n} bloomDay[i].",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDays.spec_7",
+    "negation": "AegisSpec.MinDays.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, r <= max_{0 <= i < n} bloomDay[i].",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDays.spec_8",
+    "negation": "AegisSpec.MinDays.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists an index i with 0 <= i < n such that r = bloomDay[i].",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDays.spec_9",
+    "negation": "AegisSpec.MinDays.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If m = 1, then the function returns a result r and r = min_{0 <= s <= n-k} max_{s <= i < s+k} bloomDay[i].",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDays.spec_10",
+    "negation": "AegisSpec.MinDays.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = 1, let cnt(d) be the number of indices i with 0 <= i < n and bloomDay[i] <= d. If m <= n, then the function returns a result r with r = min { d >= 0 | cnt(d) >= m }; if m > n, then the function returns r = -1.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDays.spec_11",
+    "negation": "AegisSpec.MinDays.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is an integer B such that bloomDay[i] = B for every i with 0 <= i < n, then the function returns r = B when n >= m * k, and returns r = -1 when n < m * k.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDays.spec_12",
+    "negation": "AegisSpec.MinDays.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If k = n, then the function returns r = max_{0 <= i < n} bloomDay[i] when m = 1, and returns r = -1 when m > 1.",
+    "preconditions": "Let n = len(bloomDay). 1 <= n <= 100000; for every integer i with 0 <= i < n, 1 <= bloomDay[i] <= 1000000000; 1 <= m <= 1000000; 1 <= k <= n."
+  }
+]

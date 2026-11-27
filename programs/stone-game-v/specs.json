@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StoneGameV.spec_1",
+    "negation": "AegisSpec.StoneGameV.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let sum(l,r) = Σ_{i=l}^{r-1} stoneValue[i] for 0 <= l < r <= n. Define best(l,r) for 0 <= l < r <= n as follows. If r - l = 1, then best(l,r) = 0. If r - l >= 2, then for each k with l < k < r let L = sum(l,k) and R = sum(k,r), and let value(l,r,k) be: L + best(l,k) when L < R; R + best(k,r) when R < L; and L + max(best(l,k), best(k,r)) when L = R. Then best(l,r) = max{value(l,r,k) | l < k < r}. The function returns a result r and r = best(0,n).",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StoneGameV.spec_2",
+    "negation": "AegisSpec.StoneGameV.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StoneGameV.spec_3",
+    "negation": "AegisSpec.StoneGameV.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StoneGameV.spec_4",
+    "negation": "AegisSpec.StoneGameV.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = Σ_{i=0}^{n-1} stoneValue[i] and let m = min{stoneValue[i] | 0 <= i < n}. Whenever the function returns a result r, r <= S - m.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StoneGameV.spec_5",
+    "negation": "AegisSpec.StoneGameV.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies n = 1 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StoneGameV.spec_6",
+    "negation": "AegisSpec.StoneGameV.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(stoneValue[0], stoneValue[1]).",
+    "preconditions": "Let n = len(stoneValue). The input satisfies n = 2 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StoneGameV.spec_7",
+    "negation": "AegisSpec.StoneGameV.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let sum(l,r) = Σ_{i=l}^{r-1} stoneValue[i]. A legal play is a finite sequence of intervals [l_0,r_0),...,[l_t,r_t) such that [l_0,r_0)=[0,n), r_t-l_t=1, and for each j<t there is k_j with l_j<k_j<r_j for which: if sum(l_j,k_j) < sum(k_j,r_j) then [l_{j+1},r_{j+1})=[l_j,k_j); if sum(l_j,k_j) > sum(k_j,r_j) then [l_{j+1},r_{j+1})=[k_j,r_j); if the two sums are equal then [l_{j+1},r_{j+1}) is either [l_j,k_j) or [k_j,r_j). Its accumulated score is Σ_{j=0}^{t-1} min(sum(l_j,k_j), sum(k_j,r_j)). Whenever the function returns a result r, there exists a legal play whose accumulated score is exactly r.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StoneGameV.spec_8",
+    "negation": "AegisSpec.StoneGameV.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every sequence of choices that follows the game rules starting from the whole row [0,n) and ending when one stone remains, the sum of the smaller-side sums obtained at the rounds, with either side allowed when the two sums are equal, is at most r.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StoneGameV.spec_9",
+    "negation": "AegisSpec.StoneGameV.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let sum(l,r) = Σ_{i=l}^{r-1} stoneValue[i]. Whenever the function returns a result r, for every integer k with 1 <= k < n, r >= min(sum(0,k), sum(k,n)).",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StoneGameV.spec_10",
+    "negation": "AegisSpec.StoneGameV.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the list of length n with rev[i] = stoneValue[n-1-i] for every i with 0 <= i < n. If the function returns r on stoneValue and returns r_rev on rev, then r = r_rev.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StoneGameV.spec_11",
+    "negation": "AegisSpec.StoneGameV.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on stoneValue and returns r_c on the list whose i-th entry is c*stoneValue[i], then r_c = c*r.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000. Let c be a positive integer such that 1 <= c*stoneValue[i] <= 1000000 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.StoneGameV.spec_12",
+    "negation": "AegisSpec.StoneGameV.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S = Σ_{i=0}^{n-1} stoneValue[i]. Whenever the function returns a result r, for every legal play whose accumulated score equals r, if f is the value of the single stone remaining at the end of that play, then r + f <= S.",
+    "preconditions": "Let n = len(stoneValue). The input satisfies 1 <= n <= 500 and, for every i with 0 <= i < n, 1 <= stoneValue[i] <= 1000000."
+  }
+]

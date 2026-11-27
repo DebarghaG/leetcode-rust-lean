@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SplitString.spec_1",
+    "negation": "AegisSpec.SplitString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (i.e., split_string s = ok r for some Boolean r) and r = true if and only if there exists a valid split of s; otherwise r = false.",
+    "preconditions": "Let n = len(s). We have 1 <= n <= 20. For every i with 0 <= i < n, s[i] is an ASCII digit (48 <= s[i] <= 57). For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. A valid split of s is a sequence of indices 0 = p_0 < p_1 < ... < p_k = n with k >= 2 such that for every j with 1 <= j < k, V(p_{j-1}, p_j) = V(p_j, p_{j+1}) + 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SplitString.spec_2",
+    "negation": "AegisSpec.SplitString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists a Boolean b such that split_string s = ok b.",
+    "preconditions": "Let n = len(s). We have 1 <= n <= 20. For every i with 0 <= i < n, s[i] is an ASCII digit (48 <= s[i] <= 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SplitString.spec_3",
+    "negation": "AegisSpec.SplitString.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "split_string s = ok false.",
+    "preconditions": "n = len(s) = 1 and s[0] is an ASCII digit."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SplitString.spec_4",
+    "negation": "AegisSpec.SplitString.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "split_string s = ok (a = b + 1).",
+    "preconditions": "n = len(s) = 2. Let a = s[0]-48 and b = s[1]-48. Both are digits."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SplitString.spec_5",
+    "negation": "AegisSpec.SplitString.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every Boolean b, split_string t = ok b if and only if split_string s = ok b.",
+    "preconditions": "Let s be a digit string with 1 <= len(s) <= 20. Let k be an integer with 0 <= k and len(s) + k <= 20. Let t be the string of length len(s)+k such that for 0 <= i < k, t[i] = 48 (the ASCII code for '0'), and for 0 <= i < len(s), t[k+i] = s[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SplitString.spec_6",
+    "negation": "AegisSpec.SplitString.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every valid split of s (with cut indices 0 = p_0 < p_1 < ... < p_k = n, k >= 2, and V(p_{j-1}, p_j) = V(p_j, p_{j+1}) + 1 for 1 <= j < k), the numerical value of the first segment satisfies V(p_0, p_1) >= 1.",
+    "preconditions": "Let n = len(s), 1 <= n <= 20, all s[i] digits. For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. Assume split_string s = ok true."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SplitString.spec_7",
+    "negation": "AegisSpec.SplitString.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every valid split of s with k parts and numerical values v_j = V(p_{j-1}, p_j) for 1 <= j <= k, we have v_1 = v_k + (k - 1).",
+    "preconditions": "Let n = len(s), 1 <= n <= 20, all s[i] digits. For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. Assume split_string s = ok true."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SplitString.spec_8",
+    "negation": "AegisSpec.SplitString.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid split of s with k parts, the numerical value v_1 of the first segment satisfies v_1 >= k - 1.",
+    "preconditions": "Let n = len(s), 1 <= n <= 20, all s[i] digits. For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. Assume split_string s = ok true."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SplitString.spec_9",
+    "negation": "AegisSpec.SplitString.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "split_string s = ok true.",
+    "preconditions": "Let n = len(s), 1 <= n <= 20, all s[i] digits. For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. Suppose there exists an integer p with 0 < p < n such that V(0,p) = V(p,n) + 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SplitString.spec_10",
+    "negation": "AegisSpec.SplitString.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "split_string s = ok ((10*a + b = c + 1) or (a = 10*b + c + 1) or (a = b + 1 and b = c + 1)).",
+    "preconditions": "n = len(s) = 3. Let a = s[0]-48, b = s[1]-48, c = s[2]-48. All are digits."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SplitString.spec_11",
+    "negation": "AegisSpec.SplitString.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid split of s with cut indices 0 = p_0 < p_1 < ... < p_k = n (k >= 2) and V(p_{j-1},p_j) = V(p_j,p_{j+1}) + 1 for 1 <= j < k, the first segment length satisfies 2*p_1 <= n + 1 (equivalently p_1 <= (n+1)/2).",
+    "preconditions": "Let n = len(s), 1 <= n <= 20, and all s[i] are ASCII digits. For 0 <= l < r <= n, let V(l,r) = sum_{i=l}^{r-1} (s[i]-48) * 10^{r-1-i}. Assume split_string s = ok true."
+  }
+]

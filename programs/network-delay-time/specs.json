@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_1",
+    "negation": "AegisSpec.NetworkDelayTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define, for any nodes a,b in {1,...,n}, d(a,b) to be the least value of the sum of weights over all finite sequences of edges e_1,...,e_m from times (m >= 0) such that e_1.source = a, e_m.target = b, and e_j.target = e_{j+1}.source for 1 <= j < m; when m=0 this sequence is allowed only if a=b and its sum is 0. If no such sequence exists, d(a,b) is undefined. The function returns a result r and: if d(k,v) is defined for every v in {1,...,n}, then r = max_{1 <= v <= n} d(k,v); otherwise r = -1.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_2",
+    "negation": "AegisSpec.NetworkDelayTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_3",
+    "negation": "AegisSpec.NetworkDelayTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and either r = -1 or 0 <= r <= 100*(n-1).",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_4",
+    "negation": "AegisSpec.NetworkDelayTime.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let reach(a,b) mean that there exists a finite sequence of edges from times forming a directed path from a to b; reach(a,a) is true via the empty path. The function returns a result r and r = -1 if and only if there exists v in {1,...,n} such that reach(k,v) is false.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_5",
+    "negation": "AegisSpec.NetworkDelayTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and if r != -1 then for every v in {1,...,n} there exists a finite sequence of edges from times forming a directed path from k to v whose total weight is at most r.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_6",
+    "negation": "AegisSpec.NetworkDelayTime.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let d(a,b) be the shortest-path distance from a to b using edges in times, defined as the minimum total weight of a directed path from a to b (empty path for a=b), or +infinity if no path exists. The function returns a result r and if r != -1 then there exists a node v in {1,...,n} with d(k,v) = r.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_7",
+    "negation": "AegisSpec.NetworkDelayTime.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and if r != -1 then for every integer T with 0 <= T < r there exists a node v in {1,...,n} such that every directed path from k to v using edges in times has total weight strictly greater than T; equivalently, not all nodes can be reached from k within time T.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_8",
+    "negation": "AegisSpec.NetworkDelayTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every integer T >= 0, if for every v in {1,...,n} there exists a directed path from k to v using edges in times with total weight at most T, then r != -1 and r <= T.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_9",
+    "negation": "AegisSpec.NetworkDelayTime.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and if n > 1 and no edge in times has source k, then r = -1.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_10",
+    "negation": "AegisSpec.NetworkDelayTime.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice times' that is a permutation of times (same length and same multiset of triples), if r = network_delay_time(times, n, k) and r' = network_delay_time(times', n, k), then r = r'.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_11",
+    "negation": "AegisSpec.NetworkDelayTime.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if and only if every node v in {1,...,n} is reachable from k by a directed path using edges in times whose total weight is 0.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NetworkDelayTime.spec_12",
+    "negation": "AegisSpec.NetworkDelayTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every triple e = [u,v,w] with 1 <= u,v <= n, u != v, 0 <= w <= 100, (u,v) not among the ordered pairs of times, and len(times) < 6000, let times' be the slice obtained by appending e to times and let r' be the result of network_delay_time(times', n, k). Then r != -1 implies r' != -1 and r' <= r.",
+    "preconditions": "n and k denote the integer values of the corresponding arguments; 1 <= k <= n <= 100; len(times) is an integer with 1 <= len(times) <= 6000; for every i with 0 <= i < len(times), the Vec times[i] has length 3 and, writing times[i] = [u_i, v_i, w_i], we have 1 <= u_i, v_i <= n, u_i != v_i, and 0 <= w_i <= 100; all ordered pairs (u_i, v_i) are pairwise distinct."
+  }
+]

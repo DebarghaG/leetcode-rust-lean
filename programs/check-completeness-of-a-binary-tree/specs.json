@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsCompleteTree.spec_1",
+    "negation": "AegisSpec.IsCompleteTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r : Bool, and r = true if and only if root is a complete binary tree. Equivalently, assign heap indices by giving the root index 1, the left child of a node with index i index 2*i, and the right child index 2*i+1; let I(root) be the set of indices of all nodes. Then r = true iff I(root) = {1, 2, ..., n}.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsCompleteTree.spec_2",
+    "negation": "AegisSpec.IsCompleteTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such root, is_complete_tree(root) returns a result (an Ok Bool); it does not panic, overflow, or otherwise fail.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsCompleteTree.spec_3",
+    "negation": "AegisSpec.IsCompleteTree.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r : Bool, and r = true if and only if there exists an integer h >= 0 such that: (i) no node has depth greater than h; (ii) for every depth d with 0 <= d < h, all 2^d positions at depth d are occupied (positions at a depth are numbered left-to-right starting at 0); and (iii) at depth h the occupied positions are exactly 0, 1, ..., m-1 for some integer m with 1 <= m <= 2^h.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsCompleteTree.spec_4",
+    "negation": "AegisSpec.IsCompleteTree.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r : Bool, and r = true if and only if the following holds in the breadth-first listing of node slots. Start with the root. Whenever a Node is listed, append its left child slot and right child slot at the end of the listing (each slot is either a Node or Null). Whenever a Null slot is listed, append nothing. Then no Node slot occurs after the first Null slot in this listing.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsCompleteTree.spec_5",
+    "negation": "AegisSpec.IsCompleteTree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r : Bool, and r = false.",
+    "preconditions": "root is a finite Tree satisfying the problem constraints: it has n nodes with 1 <= n <= 100 and all node values in [1,1000]. Additionally, root contains at least one node x whose left child is Null and whose right child is a Node."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsCompleteTree.spec_6",
+    "negation": "AegisSpec.IsCompleteTree.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r = is_complete_tree(root) and r2 = is_complete_tree(root2). Both calls return results, and r = r2.",
+    "preconditions": "root and root2 are finite Trees that have the same shape and both satisfy the problem constraints: each has n nodes with 1 <= n <= 100 and all node values in [1,1000]. Here same shape means root2 is obtained from root by replacing each node value by some value in [1,1000] while keeping the Null/Node structure and the left/right child positions unchanged."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsCompleteTree.spec_7",
+    "negation": "AegisSpec.IsCompleteTree.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever is_complete_tree(root) returns r = true, every node of root has a heap index i (root index 1, left child of index i has index 2*i, right child has index 2*i+1) satisfying 1 <= i <= n. Equivalently, no node has heap index greater than n.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsCompleteTree.spec_8",
+    "negation": "AegisSpec.IsCompleteTree.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_complete_tree(root) returns r = false, there exist heap indices j and k (defined by root index 1, left child 2*i, right child 2*i+1) such that 1 <= j < k, j is not the index of any node of root, and k is the index of some node of root.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsCompleteTree.spec_9",
+    "negation": "AegisSpec.IsCompleteTree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever is_complete_tree(root) returns r = true, let h be the maximum depth of a node in root (the root has depth 0). Then h = floor(log2(n)), where n is the number of nodes. For every depth d with 0 <= d < h, the number of nodes at depth d is exactly 2^d. The number of nodes at depth h is n - (2^h - 1), and it satisfies 1 <= n - (2^h - 1) <= 2^h.",
+    "preconditions": "root is a finite Tree built from Null and Node(v, left, right). Let n be the number of Node constructors in root. The problem constraints hold: 1 <= n <= 100, and every node value v satisfies 1 <= v <= 1000."
+  }
+]

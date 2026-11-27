@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasPath.spec_1",
+    "negation": "AegisSpec.HasPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a position be a pair (r,c) with 0 <= r < m and 0 <= c < n. A cell is empty if maze[r][c] = 0. For a position p and a direction d ∈ {(-1,0),(1,0),(0,-1),(0,1)}, we say that q is obtained by rolling from p in direction d if: (1) p + d is within bounds and maze[p + d] = 0; (2) there exists an integer k >= 1 such that q = p + k*d, for all i with 0 <= i <= k, p + i*d is within bounds and maze[p + i*d] = 0, and either p + (k+1)*d is out of bounds or maze[p + (k+1)*d] = 1. The function returns true if and only if there exists a finite sequence of positions p0, p1, ..., pt (t >= 1) such that p0 = start, pt = destination, and for each i from 0 to t-1, p_{i+1} is obtained by rolling from p_i in some direction d. Otherwise, it returns false.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasPath.spec_2",
+    "negation": "AegisSpec.HasPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For all inputs satisfying the preconditions, the function returns a result (either true or false) and does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasPath.spec_3",
+    "negation": "AegisSpec.HasPath.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns true, then there exists a finite sequence of positions p0, p1, ..., pk (k >= 1) such that p0 = start, pk = destination, each pi (0 <= i <= k) is within the maze bounds and maze[pi] = 0, and for each i from 0 to k-1, p_{i+1} is obtained by rolling from p_i in one of the four directions (as defined in spec_1).",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasPath.spec_4",
+    "negation": "AegisSpec.HasPath.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no direction d ∈ {(-1,0),(1,0),(0,-1),(0,1)} such that the cell destination + d is either out of bounds or maze[destination + d] = 1, and the cell destination - d is within bounds and maze[destination - d] = 0, then the function returns false.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasPath.spec_5",
+    "negation": "AegisSpec.HasPath.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every direction d ∈ {(-1,0),(1,0),(0,-1),(0,1)}, the cell start + d is either out of bounds or maze[start + d] = 1, then the function returns false.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasPath.spec_6",
+    "negation": "AegisSpec.HasPath.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is no finite sequence of rolls from start to destination (as defined in spec_1), then the function returns false.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HasPath.spec_7",
+    "negation": "AegisSpec.HasPath.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns true, then there exists a finite sequence of positions p0, p1, ..., pk (k >= 1) as in spec_3 such that all positions p0, p1, ..., pk are distinct.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HasPath.spec_8",
+    "negation": "AegisSpec.HasPath.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns true, then there exists a finite sequence of rolls from start to destination of length at most E, where E = |{(r,c) | 0 <= r < m, 0 <= c < n, maze[r][c] = 0}| (the number of empty cells in the maze).",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HasPath.spec_9",
+    "negation": "AegisSpec.HasPath.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let maze' be the maze obtained by reflecting maze horizontally: for all 0 <= i < m, 0 <= j < n, maze'[i][j] = maze[i][n-1-j]. Let start' = (start[0], n-1-start[1]) and destination' = (destination[0], n-1-destination[1]). Then has_path(maze, start, destination) = has_path(maze', start', destination').",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HasPath.spec_10",
+    "negation": "AegisSpec.HasPath.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let maze' be the maze obtained by reflecting maze vertically: for all 0 <= i < m, 0 <= j < n, maze'[i][j] = maze[m-1-i][j]. Let start' = (m-1-start[0], start[1]) and destination' = (m-1-destination[0], destination[1]). Then has_path(maze, start, destination) = has_path(maze', start', destination').",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.HasPath.spec_11",
+    "negation": "AegisSpec.HasPath.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let maze' be the transpose of maze: it has dimensions n × m, and for all 0 <= i < n, 0 <= j < m, maze'[i][j] = maze[j][i]. Let start' = (start[1], start[0]) and destination' = (destination[1], destination[0]). Then has_path(maze, start, destination) = has_path(maze', start', destination').",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.HasPath.spec_12",
+    "negation": "AegisSpec.HasPath.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let S be any set of positions (pairs (r,c) with 0 <= r < m, 0 <= c < n) such that start is in S and S is closed under rolling: for every p in S, every direction d in {(-1,0),(1,0),(0,-1),(0,1)} and every q obtained by rolling from p in direction d (as defined in spec_1), q is in S. Then if destination is not in S the function returns false; equivalently, every position reachable from start by a finite roll sequence (as in spec_1) belongs to every such S (the reachable set is the least fixed point).",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.HasPath.spec_13",
+    "negation": "AegisSpec.HasPath.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let E = |{(r,c) | 0 <= r < m, 0 <= c < n, maze[r][c] = 0}|. For every position q that is the endpoint of a finite roll sequence starting at start (as defined in spec_1), q is the endpoint of such a sequence with at most E-1 rolls; consequently at most E positions are reachable by rolling from start. In particular, if the function returns true then there is a roll sequence from start to destination of length at most E-1.",
+    "preconditions": "maze is an m x n rectangular grid of 0/1 with 1 <= m,n <= 100. start and destination are [row,col] with 0 <= row < m, 0 <= col < n. maze[start] = 0, maze[destination] = 0, start != destination. There are at least 2 empty cells."
+  }
+]

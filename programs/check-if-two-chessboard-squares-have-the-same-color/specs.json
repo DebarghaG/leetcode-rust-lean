@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_1",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r, r = true if and only if ((coordinate1[0] - 'a') + (coordinate1[1] - '1')) mod 2 = ((coordinate2[0] - 'a') + (coordinate2[1] - '1')) mod 2. Here coordinate[0] - 'a' is the 0-based column index and coordinate[1] - '1' is the 0-based row index; squares have the same color exactly when these parity values are equal.",
+    "preconditions": "len(coordinate1) = 2 and len(coordinate2) = 2 and 'a' ≤ coordinate1[0] ≤ 'h' and '1' ≤ coordinate1[1] ≤ '8' and 'a' ≤ coordinate2[0] ≤ 'h' and '1' ≤ coordinate2[1] ≤ '8' (all comparisons on ASCII byte codes)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_2",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists a Boolean r such that check_two_chessboards coordinate1 coordinate2 = Result.ok r. In particular, on these valid inputs the function does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "len(coordinate1) = 2 and len(coordinate2) = 2 and 'a' ≤ coordinate1[0] ≤ 'h' and '1' ≤ coordinate1[1] ≤ '8' and 'a' ≤ coordinate2[0] ≤ 'h' and '1' ≤ coordinate2[1] ≤ '8' (all comparisons on ASCII byte codes)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_3",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r1 and check_two_chessboards coordinate2 coordinate1 returns Result.ok r2, we have r1 = r2. Thus the answer is symmetric in its two arguments.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates: len(coordinate1) = len(coordinate2) = 2, 'a' ≤ coordinate1[0] ≤ 'h', '1' ≤ coordinate1[1] ≤ '8', 'a' ≤ coordinate2[0] ≤ 'h', and '1' ≤ coordinate2[1] ≤ '8' (ASCII byte codes)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_4",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r12, check_two_chessboards coordinate2 coordinate3 returns Result.ok r23, and check_two_chessboards coordinate1 coordinate3 returns Result.ok r13, if r12 = true and r23 = true then r13 = true. That is, the same-color relation computed by the function is transitive on valid squares.",
+    "preconditions": "coordinate1, coordinate2, and coordinate3 are valid chessboard coordinates: each has length 2, its first byte is between 'a' and 'h', and its second byte is between '1' and '8' (ASCII byte codes)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_5",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1 coordinate2' returns Result.ok r', we have r' = not r. Thus moving exactly one column to the right reverses whether the two squares have the same color.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, and coordinate2[0] < 'h' (ASCII byte code). Let coordinate2' be the coordinate with coordinate2'[0] = coordinate2[0] + 1 and coordinate2'[1] = coordinate2[1]; this coordinate2' is also valid."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_6",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1 coordinate2' returns Result.ok r', we have r' = not r. Thus moving exactly one row upward reverses whether the two squares have the same color.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, and coordinate2[1] < '8' (ASCII byte code). Let coordinate2' be the coordinate with coordinate2'[0] = coordinate2[0] and coordinate2'[1] = coordinate2[1] + 1; this coordinate2' is also valid."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_7",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1 coordinate2' returns Result.ok r', we have r = r'. Thus moving one square of the pair exactly two columns right does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, and coordinate2[0] ≤ 'f' (ASCII byte code). Let coordinate2' be the coordinate with coordinate2'[0] = coordinate2[0] + 2 and coordinate2'[1] = coordinate2[1]; this coordinate2' is also valid."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_8",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1 coordinate2' returns Result.ok r', we have r = r'. Thus moving one square of the pair exactly two rows up does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, and coordinate2[1] ≤ '6' (ASCII byte code). Let coordinate2' be the coordinate with coordinate2'[0] = coordinate2[0] and coordinate2'[1] = coordinate2[1] + 2; this coordinate2' is also valid."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_9",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1' coordinate2' returns Result.ok r', we have r = r'. Thus translating both squares exactly one column right does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, coordinate1[0] < 'h', and coordinate2[0] < 'h' (ASCII byte codes). Let coordinate1' and coordinate2' be the coordinates obtained from coordinate1 and coordinate2 by adding 1 to their column letter and leaving their row digit unchanged; both are valid."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_10",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1' coordinate2' returns Result.ok r', we have r = r'. Thus translating both squares exactly one row up does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, coordinate1[1] < '8', and coordinate2[1] < '8' (ASCII byte codes). Let coordinate1' and coordinate2' be the coordinates obtained from coordinate1 and coordinate2 by adding 1 to their row digit and leaving their column letter unchanged; both are valid."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_11",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards coordinate1 coordinate2' returns Result.ok r', we have r = r'. Thus moving one square of the pair one step northeast (one column right and one row up) does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates, coordinate2[0] < 'h', and coordinate2[1] < '8' (ASCII byte codes). Let coordinate2' be the coordinate obtained from coordinate2 by adding 1 to its column letter and adding 1 to its row digit, leaving the other fields unchanged; coordinate2' is valid."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_12",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards transpose(coordinate1) transpose(coordinate2) returns Result.ok r', we have r = r'. Thus reflecting both squares across the main diagonal of the chessboard does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates. For a valid coordinate x, define transpose(x) to be the valid coordinate with transpose(x)[0] = 'a' + (x[1] - '1') and transpose(x)[1] = '1' + (x[0] - 'a')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_13",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards mirror_col(coordinate1) mirror_col(coordinate2) returns Result.ok r', we have r = r'. Thus reflecting both squares across the vertical middle of the board does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates. For a valid coordinate x, define mirror_col(x) to be the valid coordinate obtained by replacing x's column letter using a ↔ h, b ↔ g, c ↔ f, d ↔ e, e ↔ d, f ↔ c, g ↔ b, h ↔ a, and leaving the row digit unchanged."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CheckTwoChessboards.spec_14",
+    "negation": "AegisSpec.CheckTwoChessboards.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever check_two_chessboards coordinate1 coordinate2 returns Result.ok r and check_two_chessboards mirror_row(coordinate1) mirror_row(coordinate2) returns Result.ok r', we have r = r'. Thus reflecting both squares across the horizontal middle of the board does not change the answer.",
+    "preconditions": "coordinate1 and coordinate2 are valid chessboard coordinates. For a valid coordinate x, define mirror_row(x) to be the valid coordinate obtained by replacing x's row digit using 1 ↔ 8, 2 ↔ 7, 3 ↔ 6, 4 ↔ 5, 5 ↔ 4, 6 ↔ 3, 7 ↔ 2, 8 ↔ 1, and leaving the column letter unchanged."
+  }
+]

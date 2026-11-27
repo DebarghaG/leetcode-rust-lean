@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasPathSum.spec_1",
+    "negation": "AegisSpec.HasPathSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if there exists a root-to-leaf path P in root such that the sum of the values of the nodes on P equals targetSum. A root-to-leaf path is a nonempty sequence of nodes n_0, ..., n_{k-1} (k >= 1) with n_0 the root of root, each n_{i+1} the left or right child of n_i, and n_{k-1} a leaf (a Node whose left and right children are both Null). If root = Null there is no such path, so r = false.",
+    "preconditions": "The tree rooted at root has at most 5000 nodes; every node value is in [-1000,1000]; -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasPathSum.spec_2",
+    "negation": "AegisSpec.HasPathSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail).",
+    "preconditions": "The tree rooted at root has at most 5000 nodes; every node value is in [-1000,1000]; -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasPathSum.spec_3",
+    "negation": "AegisSpec.HasPathSum.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = true if and only if there exists a child c in {left, right} with c != Null and there exists a root-to-leaf path Q in the subtree c (Q starts at the root of c and ends at a leaf of c) such that the sum of the values of the nodes on Q equals targetSum - v.",
+    "preconditions": "root = Node(v, left, right) for some i64 v with -1000 <= v <= 1000, and at least one of left and right is not Null; every node value in root is in [-1000,1000]; -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasPathSum.spec_4",
+    "negation": "AegisSpec.HasPathSum.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for (root, targetSum), r = true if and only if there exists a root-to-leaf path P in root_c such that the sum of the values of the nodes on P, taken in the mathematical integers (unbounded), equals t_c.",
+    "preconditions": "Let c be any integer with c != 0. Let root_c be the tree obtained from root by replacing every node value x with c*x, and let t_c = c*targetSum. Assume root satisfies the problem constraints (at most 5000 nodes; every node value in [-1000,1000]); -1000 <= targetSum <= 1000; every c*x for node values x is representable as i64; and c*targetSum is representable as i64. Path sums in root_c are interpreted as mathematical integers, not checked i64 arithmetic."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasPathSum.spec_5",
+    "negation": "AegisSpec.HasPathSum.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let mirror(root) be the tree defined by mirror(Null) = Null and mirror(Node(v, l, r)) = Node(v, mirror(r), mirror(l)). Whenever the function returns a result r for (root, targetSum), r = true if and only if there exists a root-to-leaf path P in mirror(root) such that the sum of the values of the nodes on P equals targetSum.",
+    "preconditions": "root satisfies the problem constraints (at most 5000 nodes, values in [-1000,1000]); -1000 <= targetSum <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasPathSum.spec_6",
+    "negation": "AegisSpec.HasPathSum.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for (root, targetSum), r = true if and only if there exists a root-to-leaf path P in root' such that the sum of the values of the nodes on P equals targetSum.",
+    "preconditions": "root is not Null; let root' = Node(0, root, Null); root satisfies the problem constraints (at most 5000 nodes, values in [-1000,1000]); -1000 <= targetSum <= 1000."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RangeAddQueries.spec_1",
+    "negation": "AegisSpec.RangeAddQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that len(r) = n and, for every x with 0 <= x < n, len(r[x]) = n; moreover, for every x,y with 0 <= x < n and 0 <= y < n, r[x][y] is the number of indices k with 0 <= k < len(queries) for which queries[k][0] <= x <= queries[k][2] and queries[k][1] <= y <= queries[k][3]. Equivalently, r is exactly the n by n matrix obtained from the all-zero matrix by adding 1, for each k, to every cell in the inclusive rectangle [queries[k][0]..queries[k][2]] times [queries[k][1]..queries[k][3]].",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n. All coordinates are 0-based row and column indices."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RangeAddQueries.spec_2",
+    "negation": "AegisSpec.RangeAddQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the inputs satisfy the preconditions, the function returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RangeAddQueries.spec_3",
+    "negation": "AegisSpec.RangeAddQueries.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r has exactly n rows and every row has exactly n entries: len(r) = n and, for every i with 0 <= i < n, len(r[i]) = n.",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RangeAddQueries.spec_4",
+    "negation": "AegisSpec.RangeAddQueries.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every x,y with 0 <= x < n and 0 <= y < n, 0 <= r[x][y].",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RangeAddQueries.spec_5",
+    "negation": "AegisSpec.RangeAddQueries.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every x,y with 0 <= x < n and 0 <= y < n, r[x][y] <= len(queries).",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RangeAddQueries.spec_6",
+    "negation": "AegisSpec.RangeAddQueries.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the sum of all entries of r equals the total area covered by all queries: Σ_{x=0}^{n-1} Σ_{y=0}^{n-1} r[x][y] = Σ_{k=0}^{len(queries)-1} (queries[k][2] - queries[k][0] + 1) * (queries[k][3] - queries[k][1] + 1).",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RangeAddQueries.spec_7",
+    "negation": "AegisSpec.RangeAddQueries.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every x with 0 <= x < n, Σ_{y=0}^{n-1} r[x][y] = Σ_{k: 0 <= k < len(queries) and queries[k][0] <= x <= queries[k][2]} (queries[k][3] - queries[k][1] + 1).",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RangeAddQueries.spec_8",
+    "negation": "AegisSpec.RangeAddQueries.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every y with 0 <= y < n, Σ_{x=0}^{n-1} r[x][y] = Σ_{k: 0 <= k < len(queries) and queries[k][1] <= y <= queries[k][3]} (queries[k][2] - queries[k][0] + 1).",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RangeAddQueries.spec_9",
+    "negation": "AegisSpec.RangeAddQueries.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every x,y with 0 <= x < n and 0 <= y < n, if there is no k with 0 <= k < len(queries) such that queries[k][0] <= x <= queries[k][2] and queries[k][1] <= y <= queries[k][3], then r[x][y] = 0.",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RangeAddQueries.spec_10",
+    "negation": "AegisSpec.RangeAddQueries.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every x,y with 0 <= x < n and 0 <= y < n, if for every k with 0 <= k < len(queries) we have queries[k][0] <= x <= queries[k][2] and queries[k][1] <= y <= queries[k][3], then r[x][y] = len(queries).",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RangeAddQueries.spec_11",
+    "negation": "AegisSpec.RangeAddQueries.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every x,y with 0 <= x < n and 0 <= y < n, if r[x][y] > 0 then there exists k with 0 <= k < len(queries) such that queries[k][0] <= x <= queries[k][2] and queries[k][1] <= y <= queries[k][3].",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.RangeAddQueries.spec_12",
+    "negation": "AegisSpec.RangeAddQueries.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all x1,y1,x2,y2 with 0 <= x1,y1,x2,y2 < n, if for every k with 0 <= k < len(queries), the condition (queries[k][0] <= x1 <= queries[k][2] and queries[k][1] <= y1 <= queries[k][3]) implies the condition (queries[k][0] <= x2 <= queries[k][2] and queries[k][1] <= y2 <= queries[k][3]), then r[x1][y1] <= r[x2][y2].",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.RangeAddQueries.spec_13",
+    "negation": "AegisSpec.RangeAddQueries.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all x1,y1,x2,y2 with 0 <= x1,y1,x2,y2 < n, if for every k with 0 <= k < len(queries), the two conditions (queries[k][0] <= x1 <= queries[k][2] and queries[k][1] <= y1 <= queries[k][3]) and (queries[k][0] <= x2 <= queries[k][2] and queries[k][1] <= y2 <= queries[k][3]) are equivalent, then r[x1][y1] = r[x2][y2].",
+    "preconditions": "n is an integer with 1 <= n <= 500. queries is a slice with 1 <= len(queries) <= 10000. For every k with 0 <= k < len(queries), len(queries[k]) = 4, and if queries[k] = [row1_k, col1_k, row2_k, col2_k], then 0 <= row1_k <= row2_k < n and 0 <= col1_k <= col2_k < n."
+  }
+]

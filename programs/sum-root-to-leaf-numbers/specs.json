@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumNumbers.spec_1",
+    "negation": "AegisSpec.SumNumbers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a root-to-leaf path of root as a sequence of nodes n0,...,nk such that n0 is the root of root, for each i<k the node n_{i+1} is either the left child or the right child of n_i, and nk is a leaf (its left and right children are both Null). For such a path let value(n0,...,nk) = Σ_{i=0}^{k} v(n_i) * 10^{k-i}, where v(n) is the integer stored in node n. Whenever sum_numbers(root) returns a result r, r is exactly the sum of value(P) over all root-to-leaf paths P of root, with each root-to-leaf path counted once.",
+    "preconditions": "root is a non-null binary tree (root ≠ Null); every Node value is an integer in the range 0..9; the number of nodes of root is in [1,1000]; every root-to-leaf path of root has at most 10 nodes; and the sum of the numbers represented by all root-to-leaf paths of root fits in the signed 32-bit integer range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumNumbers.spec_2",
+    "negation": "AegisSpec.SumNumbers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "sum_numbers(root) returns Ok(r) for some r : Std.I64; equivalently, it does not return Err, panic, access an out-of-bounds part of the tree, or overflow an i64.",
+    "preconditions": "root is a non-null binary tree (root ≠ Null); every Node value is an integer in the range 0..9; the number of nodes of root is in [1,1000]; every root-to-leaf path of root has at most 10 nodes; and the sum of the numbers represented by all root-to-leaf paths of root fits in the signed 32-bit integer range."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumNumbers.spec_3",
+    "negation": "AegisSpec.SumNumbers.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_numbers(root) returns r, 0 ≤ r < 10^13.",
+    "preconditions": "root is a non-null binary tree (root ≠ Null); every Node value is an integer in the range 0..9; the number of nodes of root is in [1,1000]; every root-to-leaf path of root has at most 10 nodes; and the sum of the numbers represented by all root-to-leaf paths of root fits in the signed 32-bit integer range."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumNumbers.spec_4",
+    "negation": "AegisSpec.SumNumbers.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_numbers(root) returns r, if L is the number of leaf nodes of root, then 0 ≤ r ≤ L * (10^10 - 1).",
+    "preconditions": "root is a non-null binary tree (root ≠ Null); every Node value is an integer in the range 0..9; the number of nodes of root is in [1,1000]; every root-to-leaf path of root has at most 10 nodes; and the sum of the numbers represented by all root-to-leaf paths of root fits in the signed 32-bit integer range."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumNumbers.spec_5",
+    "negation": "AegisSpec.SumNumbers.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_numbers(root) returns r, r = d.",
+    "preconditions": "root = Node(d, Null, Null) for some integer d with 0 ≤ d ≤ 9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumNumbers.spec_6",
+    "negation": "AegisSpec.SumNumbers.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_numbers(root) returns r, r = 10*d + e.",
+    "preconditions": "root is either Node(d, Node(e, Null, Null), Null) or Node(d, Null, Node(e, Null, Null)) for integers d and e with 0 ≤ d ≤ 9 and 0 ≤ e ≤ 9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumNumbers.spec_7",
+    "negation": "AegisSpec.SumNumbers.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sum_numbers(root) returns r, r = 0.",
+    "preconditions": "root is a non-null binary tree, every Node value is 0, the number of nodes is in [1,1000], and every root-to-leaf path has at most 10 nodes."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumNumbers.spec_8",
+    "negation": "AegisSpec.SumNumbers.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define, for a non-null tree T, len(Q) and value(Q) for a root-to-leaf path Q = q0,...,qm of T by len(Q)=m+1 and value(Q)=Σ_{i=0}^{m} v(q_i)*10^{m-i}, where v(q) is the integer stored at q. For a tree U (possibly Null) and integer d, define S(U,d)=0 if U=Null, and otherwise S(U,d)=Σ_{Q} (d*10^(len(Q)) + value(Q)) over all root-to-leaf paths Q of U. Whenever sum_numbers(root) returns r, r = (if L=Null and R=Null then d else 0) + S(L,d) + S(R,d).",
+    "preconditions": "root = Node(d, L, R) for some integer d with 0 ≤ d ≤ 9; every node value in L and R is in 0..9; the tree has 1..1000 nodes; every root-to-leaf path of root has at most 10 nodes; the total sum fits in the signed 32-bit integer range."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumNumbers.spec_9",
+    "negation": "AegisSpec.SumNumbers.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sum_numbers(root) returns r and sum_numbers(root') returns r', r = r'.",
+    "preconditions": "root is a non-null binary tree satisfying the usual constraints (values in 0..9, 1..1000 nodes, every root-to-leaf path at most 10 nodes, sum fits in signed 32-bit integer). root' is obtained from root by exchanging the left and right children of any collection of its nodes, leaving all node values unchanged."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumNumbers.spec_10",
+    "negation": "AegisSpec.SumNumbers.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let P be the unique root-to-leaf path of root, and let value(P) be the integer represented by the sequence of node values along P. Whenever sum_numbers(root) returns r, r = value(P).",
+    "preconditions": "root is a non-null binary tree satisfying the usual constraints (values in 0..9, 1..1000 nodes, every root-to-leaf path at most 10 nodes, sum fits in signed 32-bit integer), and root has exactly one leaf node."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumNumbers.spec_11",
+    "negation": "AegisSpec.SumNumbers.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let P and Q be the two root-to-leaf paths of root, and let value(P) and value(Q) be the integers represented by their node-value sequences. Whenever sum_numbers(root) returns r, r = value(P) + value(Q).",
+    "preconditions": "root is a non-null binary tree satisfying the usual constraints (values in 0..9, 1..1000 nodes, every root-to-leaf path at most 10 nodes, sum fits in signed 32-bit integer), and root has exactly two leaf nodes."
+  }
+]

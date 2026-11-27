@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_1",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is exactly the list of all states obtainable from s by one valid move, each appearing once, in arbitrary order. More precisely, call an index i a valid move index of s when 0 <= i, i+1 < n, and s[i] = s[i+1] = '+'. For a valid move index i, define flip(s,i) to be the byte array v of length n with v[i] = v[i+1] = '-' and v[j] = s[j] for every j with 0 <= j < n and j not in {i,i+1}. Then: (1) for every k with 0 <= k < len(r), there is a unique valid move index i of s such that r[k] = flip(s,i); and (2) for every valid move index i of s, there is a unique k with 0 <= k < len(r) such that r[k] = flip(s,i). In particular, if s has no valid move index then r is the empty list.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_2",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns some result r; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_3",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every element v of r is a byte array with len(v) = n.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_4",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, every element v of r is a one-move successor of s: len(v) = n, and there exists an index i with 0 <= i, i+1 < n, and s[i] = s[i+1] = '+', such that v[i] = v[i+1] = '-', and v[j] = s[j] for every j with 0 <= j < n and j not in {i,i+1}.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_5",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every index i with 0 <= i, i+1 < n, and s[i] = s[i+1] = '+', there exists k with 0 <= k < len(r) such that r[k] is the flip of s at i: len(r[k]) = n, r[k][i] = r[k][i+1] = '-', and r[k][j] = s[j] for every j with 0 <= j < n and j not in {i,i+1}.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_6",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) equals the number of indices i such that 0 <= i, i+1 < n, and s[i] = s[i+1] = '+'.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_7",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the elements of r are pairwise distinct: for every k1 and k2 with 0 <= k1 < k2 < len(r), r[k1] != r[k2].",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_8",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every element v of r, len(v) = n and the number of indices j with 0 <= j < n and v[j] = '+' equals the number of indices j with 0 <= j < n and s[j] = '+' minus 2.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_9",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every element v of r, len(v) = n and the set of indices j with 0 <= j < n and v[j] != s[j] is exactly {i,i+1} for some index i with 0 <= i, i+1 < n, and s[i] = s[i+1] = '+'. At those two positions, v[i] = v[i+1] = '-' and s[i] = s[i+1] = '+'.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_10",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is the empty list if and only if s has no valid move index, i.e., there is no i with 0 <= i, i+1 < n, and s[i] = s[i+1] = '+'.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_11",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if s has exactly one valid move index i (0 <= i, i+1 < n, s[i] = s[i+1] = '+'), then len(r) = 1, and the unique element r[0] satisfies len(r[0]) = n, r[0][i] = r[0][i+1] = '-', and r[0][j] = s[j] for every j with 0 <= j < n and j not in {i,i+1}.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_12",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every element v of r and every j with 0 <= j < len(v), v[j] is either byte 43 ('+') or byte 45 ('-').",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-'). Write '+' for byte 43 and '-' for byte 45."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GeneratePossibleNextMoves.spec_13",
+    "negation": "AegisSpec.GeneratePossibleNextMoves.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= len(r) <= len(s) - 1.",
+    "preconditions": "Let s = currentState and n = len(s). Assume 1 <= n <= 500, and for every i with 0 <= i < n, s[i] is either byte 43 ('+') or byte 45 ('-')."
+  }
+]

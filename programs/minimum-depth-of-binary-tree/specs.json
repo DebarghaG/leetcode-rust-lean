@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinDepth.spec_1",
+    "negation": "AegisSpec.MinDepth.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let D(t) be defined by D(Null)=0 and, for non-null t, D(t)=min{k | t contains a leaf whose path from the root of t contains exactly k nodes}, where a leaf is a Node(v, Null, Null). The function returns a result r and r = D(root).",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, and every node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinDepth.spec_2",
+    "negation": "AegisSpec.MinDepth.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n be the number of Node constructors in root. Whenever min_depth(root) returns a result r, 0 <= r <= n; moreover, if root is non-null then 1 <= r <= n.",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, and every node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinDepth.spec_3",
+    "negation": "AegisSpec.MinDepth.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If root is non-null and min_depth(root) returns a result r, then root contains a leaf (a node Node(v, Null, Null)) whose path from the root of root contains exactly r nodes.",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, and every node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinDepth.spec_4",
+    "negation": "AegisSpec.MinDepth.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If root is non-null and min_depth(root) returns a result r, then for every leaf occurrence l in root, the path from the root of root to l contains at least r nodes.",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, and every node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinDepth.spec_5",
+    "negation": "AegisSpec.MinDepth.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result 0.",
+    "preconditions": "root = Null."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinDepth.spec_6",
+    "negation": "AegisSpec.MinDepth.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result 1.",
+    "preconditions": "root = Node(v, Null, Null) for some i64 v with -1000 <= v <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinDepth.spec_7",
+    "negation": "AegisSpec.MinDepth.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_depth(root) returns a result r, r = 1 if and only if root = Node(v, Null, Null) for some i64 value v.",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, every node value is in [-1000,1000], and root is non-null."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinDepth.spec_8",
+    "negation": "AegisSpec.MinDepth.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns the result k.",
+    "preconditions": "For some integer k with 1 <= k <= 100000, root is the right chain C_k, where C_0 = Null and C_{j+1} = Node(v_j, Null, C_j) for j = 0,...,k-1, and each v_j satisfies -1000 <= v_j <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinDepth.spec_9",
+    "negation": "AegisSpec.MinDepth.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let D(t) be D(Null)=0 and, for non-null t, D(t) be the minimum number of nodes on a path from the root of t to a leaf of t. If l = Null and r is non-null, then whenever min_depth(root) returns a result q, q = 1 + D(r). Symmetrically, if r = Null and l is non-null, then q = 1 + D(l).",
+    "preconditions": "root = Node(v, l, r) where -1000 <= v <= 1000, exactly one of l and r is Null, and the whole tree has at most 100000 nodes with all values in [-1000,1000]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinDepth.spec_10",
+    "negation": "AegisSpec.MinDepth.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let D(t) be D(Null)=0 and, for non-null t, D(t) be the minimum number of nodes on a path from the root of t to a leaf of t. Whenever min_depth(root) returns a result q, q = 1 + min(D(l), D(r)).",
+    "preconditions": "root = Node(v, l, r) with -1000 <= v <= 1000, both l and r non-null, at most 100000 nodes total, and all values in [-1000,1000]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinDepth.spec_11",
+    "negation": "AegisSpec.MinDepth.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let min_depth(root) return r and min_depth(root2) return r2. Then r = r2.",
+    "preconditions": "root and root2 are finite trees with identical shape: there is a bijection between their node occurrences that preserves the root, left-child, right-child, and Null positions. Both satisfy the node-count and value constraints."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinDepth.spec_12",
+    "negation": "AegisSpec.MinDepth.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define mirror(Null)=Null and mirror(Node(v,l,r)) = Node(v, mirror(r), mirror(l)). Then min_depth(root) returns r and min_depth(mirror(root)) returns r2 with r = r2.",
+    "preconditions": "root is a finite Tree satisfying the node-count and value constraints: at most 100000 Node constructors and all node values in [-1000,1000]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinDepth.spec_13",
+    "negation": "AegisSpec.MinDepth.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_depth(Node(v,l,r)) returns a result q1 and min_depth(Node(v,r,l)) returns a result q2, q1 = q2.",
+    "preconditions": "v is an i64 with -1000 <= v <= 1000, and l and r are finite subtrees such that Node(v,l,r) has at most 100000 nodes and all values in [-1000,1000]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinDepth.spec_14",
+    "negation": "AegisSpec.MinDepth.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_depth(root) returns a result r, r = 0 if and only if root = Null.",
+    "preconditions": "root is a finite Tree with at most 100000 Node constructors, and every node value v satisfies -1000 <= v <= 1000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinDepth.spec_15",
+    "negation": "AegisSpec.MinDepth.spec_15_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result for every such root; it does not fail, panic, or overflow.",
+    "preconditions": "root is any finite Tree with at most 100000 Node constructors; node values are arbitrary i64 values."
+  }
+]

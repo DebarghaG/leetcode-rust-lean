@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PlacedCoins.spec_1",
+    "negation": "AegisSpec.PlacedCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever placed_coins returns a result r, len(r) = n and for every i with 0 <= i < n the following holds. Let S_i = { j | 0 <= j < n and i lies on the unique simple path from 0 to j in the tree }; this is the subtree of i when the tree is rooted at 0. If |S_i| < 3, then r[i] = 1. If |S_i| >= 3, let P_i = max{ cost[a] * cost[b] * cost[c] | a,b,c are pairwise distinct nodes in S_i }; then r[i] = max(0, P_i).",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with both entries in {0,...,n-1}; the undirected graph on vertices {0,...,n-1} whose edges are the pairs {edges[k][0], edges[k][1]} for 0 <= k < n-1 is a tree; and for every i with 0 <= i < n, 1 <= |cost[i]| <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PlacedCoins.spec_2",
+    "negation": "AegisSpec.PlacedCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, placed_coins returns a result r; it does not fail due to arithmetic overflow, out-of-bounds indexing, or a panic.",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with both entries in {0,...,n-1}; the undirected graph on vertices {0,...,n-1} whose edges are the pairs {edges[k][0], edges[k][1]} for 0 <= k < n-1 is a tree; and for every i with 0 <= i < n, 1 <= |cost[i]| <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PlacedCoins.spec_3",
+    "negation": "AegisSpec.PlacedCoins.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever placed_coins returns a result r, len(r) = n. Equivalently, there is exactly one coin entry for each node label 0,1,...,n-1.",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with both entries in {0,...,n-1}; the graph formed by edges is a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PlacedCoins.spec_4",
+    "negation": "AegisSpec.PlacedCoins.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever placed_coins returns a result r, for every i with 0 <= i < n, 0 <= r[i] <= 1000000000000 (10^12).",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PlacedCoins.spec_5",
+    "negation": "AegisSpec.PlacedCoins.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever placed_coins returns a result r, for every i with 0 <= i < n and |S_i| >= 3, for all pairwise distinct nodes a,b,c in S_i, cost[a] * cost[b] * cost[c] <= r[i].",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PlacedCoins.spec_6",
+    "negation": "AegisSpec.PlacedCoins.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever placed_coins returns a result r, for every i with 0 <= i < n, if |S_i| >= 3 and r[i] > 0, then there exist pairwise distinct nodes a,b,c in S_i such that cost[a] * cost[b] * cost[c] = r[i].",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PlacedCoins.spec_7",
+    "negation": "AegisSpec.PlacedCoins.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever placed_coins returns a result r, for every i with 0 <= i < n and |S_i| >= 3, r[i] = 0 if and only if for every pairwise distinct a,b,c in S_i, cost[a] * cost[b] * cost[c] < 0.",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PlacedCoins.spec_8",
+    "negation": "AegisSpec.PlacedCoins.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever placed_coins edges cost returns r and placed_coins edges' cost returns r', we have r = r'.",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i. Also assume edges' is any permutation of the list edges (so edges' describes the same undirected tree)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PlacedCoins.spec_9",
+    "negation": "AegisSpec.PlacedCoins.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever placed_coins returns a result r, for all nodes i,j with 0 <= i,j < n, if i lies on the unique path from 0 to j (i is an ancestor of j, possibly i = j), |S_i| >= 3, and |S_j| >= 3, then r[i] >= r[j].",
+    "preconditions": "Let n = len(cost). Assume 2 <= n <= 20000; len(edges) = n - 1; each edges[k] is a vector of length 2 with entries in {0,...,n-1}; edges form a tree on {0,...,n-1}; and 1 <= |cost[i]| <= 10000 for every i."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSubsequence.spec_1",
+    "negation": "AegisSpec.MaxSubsequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that: (1) len(r) = k; (2) r is a subsequence of nums, i.e. there exist indices i_0 < i_1 < ... < i_{k-1} with 0 <= i_j < len(nums) and r[j] = nums[i_j] for every j with 0 <= j < k; and (3) Sum(r) is maximal among all length-k subsequences of nums: for every length-k subsequence s of nums, Sum(r) >= Sum(s), where Sum(x) = x[0] + ... + x[len(x)-1] as a mathematical integer. Equivalently, Sum(r) equals the maximum possible sum of a subsequence of nums of length k.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000. Here k is interpreted as the natural number equal to its integer value, which is within the stated bounds."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSubsequence.spec_2",
+    "negation": "AegisSpec.MaxSubsequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, out-of-bounds access, panic, or other error).",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSubsequence.spec_3",
+    "negation": "AegisSpec.MaxSubsequence.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = k.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSubsequence.spec_4",
+    "negation": "AegisSpec.MaxSubsequence.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist integers i_0, i_1, ..., i_{k-1} such that 0 <= i_0 < i_1 < ... < i_{k-1} < len(nums) and, for every j with 0 <= j < k, r[j] = nums[i_j]. Thus r is a length-k subsequence of nums, preserving the original relative order.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSubsequence.spec_5",
+    "negation": "AegisSpec.MaxSubsequence.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every choice of indices j_0 < j_1 < ... < j_{k-1} with 0 <= j_t < len(nums), we have Sum(r) >= nums[j_0] + nums[j_1] + ... + nums[j_{k-1}], where Sum(r) is the mathematical sum of the elements of r. Equivalently, Sum(r) is the maximum possible sum of a length-k subsequence of nums.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSubsequence.spec_6",
+    "negation": "AegisSpec.MaxSubsequence.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let a_0 >= a_1 >= ... >= a_{len(nums)-1} be the elements of nums sorted in nonincreasing order with multiplicity preserved. Then Sum(r) = a_0 + a_1 + ... + a_{k-1}. In other words, Sum(r) is the sum of the k largest elements of nums, counted with multiplicity.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSubsequence.spec_7",
+    "negation": "AegisSpec.MaxSubsequence.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the multiset of elements of r is exactly the multiset of the k largest elements of nums counted with multiplicity. Equivalently, for every integer v, the number of occurrences of v in r equals the number of occurrences of v among the first k elements of a nonincreasing ordering of nums.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSubsequence.spec_8",
+    "negation": "AegisSpec.MaxSubsequence.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, there exists a witnessing index sequence i_0 < ... < i_{k-1} with r[j] = nums[i_j] for all j, such that for every j in [0, k-1] and every b in [0, len(nums)-1] that is not equal to any i_t, we have nums[b] <= nums[i_j]. In words, every selected element is at least as large as every unselected element.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSubsequence.spec_9",
+    "negation": "AegisSpec.MaxSubsequence.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let t be the k-th largest element of nums, counting multiplicity (so t is the element at index k-1 in a nonincreasing ordering of nums). Whenever the function returns a result r, for every j with 0 <= j < len(r), we have t <= r[j] <= max_{0 <= i < len(nums)} nums[i].",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSubsequence.spec_10",
+    "negation": "AegisSpec.MaxSubsequence.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 1 and r[0] = max_{0 <= i < len(nums)} nums[i]. If the maximum value occurs multiple times, any occurrence may be chosen.",
+    "preconditions": "1 <= len(nums) <= 1000; k = 1; for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSubsequence.spec_11",
+    "negation": "AegisSpec.MaxSubsequence.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = len(nums) and for every j with 0 <= j < len(nums), r[j] = nums[j]. Thus r is exactly nums.",
+    "preconditions": "1 <= len(nums) <= 1000; k = len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSubsequence.spec_12",
+    "negation": "AegisSpec.MaxSubsequence.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < k, r[j] = nums[len(nums)-k+j]. Thus r is the suffix of nums of length k.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000; for every i with 0 <= i < len(nums)-1, nums[i] <= nums[i+1]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxSubsequence.spec_13",
+    "negation": "AegisSpec.MaxSubsequence.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < k, r[j] = nums[j]. Thus r is the prefix of nums of length k.",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000; for every i with 0 <= i < len(nums)-1, nums[i] >= nums[i+1]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxSubsequence.spec_14",
+    "negation": "AegisSpec.MaxSubsequence.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice p that is a permutation of nums (so len(p) = len(nums) and p has the same multiset of elements as nums), if max_subsequence(nums,k) returns r and max_subsequence(p,k) returns s, then for every integer v, the number of occurrences of v in r equals the number of occurrences of v in s. In particular, Sum(r) = Sum(s).",
+    "preconditions": "1 <= len(nums) <= 1000; 1 <= k <= len(nums); for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  }
+]

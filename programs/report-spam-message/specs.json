@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ReportSpam.spec_1",
+    "negation": "AegisSpec.ReportSpam.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let C be the number of indices i with 0 <= i < len(message) such that there exists an index j with 0 <= j < len(bannedWords) for which message[i] is byte-equal to bannedWords[j], where byte-equal means same length and same byte at every index. Then r = true if and only if C >= 2; otherwise r = false.",
+    "preconditions": "The problem constraints hold: 1 <= len(message) <= 100000 and 1 <= len(bannedWords) <= 100000; every word in message and bannedWords has length between 1 and 15 and consists only of lowercase ASCII letters (bytes 97 through 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ReportSpam.spec_2",
+    "negation": "AegisSpec.ReportSpam.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a Boolean result and does not fail: no arithmetic overflow, no out-of-bounds access, and no panic occurs.",
+    "preconditions": "The problem constraints hold: 1 <= len(message) <= 100000 and 1 <= len(bannedWords) <= 100000; every word in message and bannedWords has length between 1 and 15 and consists only of lowercase ASCII letters (bytes 97 through 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ReportSpam.spec_3",
+    "negation": "AegisSpec.ReportSpam.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, we have len(message) >= 2.",
+    "preconditions": "The problem constraints hold: 1 <= len(message) <= 100000 and 1 <= len(bannedWords) <= 100000; every word in message and bannedWords has length between 1 and 15 and consists only of lowercase ASCII letters (bytes 97 through 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ReportSpam.spec_4",
+    "negation": "AegisSpec.ReportSpam.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = true, there exist two distinct indices i and k with 0 <= i < k < len(message) and indices p and q with 0 <= p < len(bannedWords) and 0 <= q < len(bannedWords) such that message[i] is byte-equal to bannedWords[p] and message[k] is byte-equal to bannedWords[q].",
+    "preconditions": "The problem constraints hold: 1 <= len(message) <= 100000 and 1 <= len(bannedWords) <= 100000; every word in message and bannedWords has length between 1 and 15 and consists only of lowercase ASCII letters (bytes 97 through 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ReportSpam.spec_5",
+    "negation": "AegisSpec.ReportSpam.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = false, for every pair of distinct indices i and k with 0 <= i < k < len(message), it is not the case that both message[i] matches some word of bannedWords and message[k] matches some word of bannedWords. Equivalently, at most one message position is banned-matching.",
+    "preconditions": "The problem constraints hold: 1 <= len(message) <= 100000 and 1 <= len(bannedWords) <= 100000; every word in message and bannedWords has length between 1 and 15 and consists only of lowercase ASCII letters (bytes 97 through 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ReportSpam.spec_6",
+    "negation": "AegisSpec.ReportSpam.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The Boolean result of the function on (message, b2) is the same as the Boolean result on (message, bannedWords).",
+    "preconditions": "The problem constraints hold for message and bannedWords; let b2 be any slice of byte-vectors satisfying the same constraints as bannedWords and being a permutation of bannedWords (same length and the same multiset of byte-equal words)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ReportSpam.spec_7",
+    "negation": "AegisSpec.ReportSpam.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The Boolean result of the function on (m2, bannedWords) is the same as the Boolean result on (message, bannedWords).",
+    "preconditions": "The problem constraints hold for message and bannedWords; let m2 be any slice of byte-vectors satisfying the same constraints as message and being a permutation of message (same length and the same multiset of byte-equal words)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ReportSpam.spec_8",
+    "negation": "AegisSpec.ReportSpam.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function on (message, bannedWords) returns true, then the function on (message, b2) returns true.",
+    "preconditions": "The problem constraints hold for message, bannedWords, and b2, and b2 contains every word of bannedWords up to byte-equality: for every j with 0 <= j < len(bannedWords), there exists q with 0 <= q < len(b2) such that bannedWords[j] is byte-equal to b2[q]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ReportSpam.spec_9",
+    "negation": "AegisSpec.ReportSpam.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both function calls return results, the Boolean result on (message, bannedWords) equals the Boolean result on (m2, bannedWords).",
+    "preconditions": "The problem constraints hold. Let m2 be the subsequence of message consisting exactly of those entries message[i] for which there exists j with 0 <= j < len(bannedWords) and message[i] byte-equal to bannedWords[j], kept in their original order."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ReportSpam.spec_10",
+    "negation": "AegisSpec.ReportSpam.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function on (message, bannedWords) returns true, then the function on (m2, bannedWords) returns true.",
+    "preconditions": "The problem constraints hold for message and m2, and message is a subsequence of m2 (m2 is obtained from message by inserting additional words)."
+  }
+]

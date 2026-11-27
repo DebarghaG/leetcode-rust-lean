@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumCost.spec_1",
+    "negation": "AegisSpec.MinimumCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let V = {1,...,n}. For each index i with 0 <= i < len(connections), let a_i = connections[i][0], b_i = connections[i][1], and c_i = connections[i][2]. A subset S of the index set {0,...,len(connections)-1} is feasible if, for every pair of cities u,v in V, there is a walk using only selected connections: there exist m >= 0 and vertices p_0,...,p_m such that p_0 = u, p_m = v, and for each j = 1,...,m there is an index t_j in S such that the unordered pair {p_{j-1}, p_j} equals {a_{t_j}, b_{t_j}}. For such S, let Cost(S) = sum over i in S of c_i. The function returns a result r and: if some feasible S exists, then r is the minimum of Cost(S) over all feasible S, meaning there is a feasible S0 with Cost(S0) = r and r <= Cost(T) for every feasible T; if no feasible S exists, then r = -1.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5. All quantities fit in 64-bit integers."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumCost.spec_2",
+    "negation": "AegisSpec.MinimumCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists an integer r such that minimum_cost n connections evaluates to Result.ok r. The function does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5. All quantities fit in 64-bit integers."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumCost.spec_3",
+    "negation": "AegisSpec.MinimumCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r != -1 then 0 <= r.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumCost.spec_4",
+    "negation": "AegisSpec.MinimumCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r != -1 then r <= sum over i from 0 to len(connections)-1 of connections[i][2].",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumCost.spec_5",
+    "negation": "AegisSpec.MinimumCost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if no subset S of the connection indices connects all cities in {1,...,n}; here a subset connects all cities when every pair of cities can be joined by a path whose edges are exactly the connections with indices in S, and the empty subset is allowed.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumCost.spec_6",
+    "negation": "AegisSpec.MinimumCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if n > 1 and len(connections) < n - 1, then r = -1.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumCost.spec_7",
+    "negation": "AegisSpec.MinimumCost.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r != -1 then there exists a subset S of the connection indices such that S connects all cities in {1,...,n} and the sum of connections[i][2] over i in S equals r.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumCost.spec_8",
+    "negation": "AegisSpec.MinimumCost.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r != -1 then for every subset T of the connection indices that connects all cities in {1,...,n}, r <= sum over i in T of connections[i][2].",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumCost.spec_9",
+    "negation": "AegisSpec.MinimumCost.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r != -1 then there exists a subset S of the connection indices such that S connects all cities in {1,...,n}, the cardinality of S is exactly n - 1, and the sum of connections[i][2] over i in S equals r.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumCost.spec_10",
+    "negation": "AegisSpec.MinimumCost.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists a subset S of the connection indices such that S connects all cities in {1,...,n} and the sum of connections[i][2] over i in S is 0.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumCost.spec_11",
+    "negation": "AegisSpec.MinimumCost.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both calls return results r and r_prime, we have r = r_prime.",
+    "preconditions": "Both (n, connections) and (n, connections_prime) satisfy the problem constraints, and connections_prime is any permutation of the entries of connections; equivalently, connections_prime has the same length and the same multiset of triples as connections."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumCost.spec_12",
+    "negation": "AegisSpec.MinimumCost.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m be the minimum of connections[i][2] over all 0 <= i < len(connections). Whenever the function returns a result r, if r != -1 then r >= (n - 1) * m.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumCost.spec_13",
+    "negation": "AegisSpec.MinimumCost.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M be the maximum of connections[i][2] over all 0 <= i < len(connections). Whenever the function returns a result r, if r != -1 then r <= (n - 1) * M.",
+    "preconditions": "n and connections satisfy the problem constraints: 1 <= n <= 10^4; 1 <= len(connections) <= 10^4; for every i with 0 <= i < len(connections), len(connections[i]) = 3, 1 <= connections[i][0] <= n, 1 <= connections[i][1] <= n, connections[i][0] != connections[i][1], and 0 <= connections[i][2] <= 10^5."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumCost.spec_14",
+    "negation": "AegisSpec.MinimumCost.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = sum over i from 0 to len(connections)-1 of connections[i][2].",
+    "preconditions": "n and connections satisfy the problem constraints, and additionally len(connections) = n - 1 and the graph using all given connections connects all cities in {1,...,n}."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinimumCost.spec_15",
+    "negation": "AegisSpec.MinimumCost.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both calls return results r and r_prime, either r = -1 and r_prime = -1, or r != -1, r_prime != -1, and r <= r_prime.",
+    "preconditions": "Both (n, connections) and (n, connections_prime) satisfy the problem constraints. They have the same length, and for every i with 0 <= i < len(connections): connections_prime[i][0] = connections[i][0], connections_prime[i][1] = connections[i][1], and connections[i][2] <= connections_prime[i][2]."
+  }
+]

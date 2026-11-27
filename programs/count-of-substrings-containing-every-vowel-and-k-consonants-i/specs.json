@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_1",
+    "negation": "AegisSpec.CountOfSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let V = {'a','e','i','o','u'}. For an interval [i,j] with 0 <= i <= j < n, call it valid when (1) for every v in V there exists p with i <= p <= j and word[p] = v, and (2) the number of p with i <= p <= j and word[p] not in V is exactly k. The function returns a result r such that r is the number of valid intervals [i,j]. Substrings are non-empty, contiguous, and identified by 0-based inclusive endpoints; the empty substring is not counted.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter (a byte with ASCII code between 'a' and 'z'). 0 <= k <= n - 5, treating the I64 parameter k as the mathematical integer it denotes."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_2",
+    "negation": "AegisSpec.CountOfSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word and k satisfying the preconditions, the function does not fail: it returns a result r and does not overflow, index out of bounds, or panic.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_3",
+    "negation": "AegisSpec.CountOfSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= ((n - k - 4) * (n - k - 3)) / 2, where n = len(word). The right-hand side is the number of substrings of length at least k+5.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_4",
+    "negation": "AegisSpec.CountOfSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there are no indices i,j with 0 <= i <= j < n such that word[i..j] contains each of the five vowels 'a','e','i','o','u' at least once and contains exactly k consonant bytes (bytes not in {'a','e','i','o','u'}).",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_5",
+    "negation": "AegisSpec.CountOfSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if the whole word contains each of the five vowels 'a','e','i','o','u' exactly once, and r = 0 otherwise. Equivalently, r = 1 iff word[0..n-1] has exactly n-5 consonant bytes and contains every vowel at least once.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. k = n - 5."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_6",
+    "negation": "AegisSpec.CountOfSubstrings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5. There exists v in {'a','e','i','o','u'} such that word[i] != v for every 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_7",
+    "negation": "AegisSpec.CountOfSubstrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n with rev[i] = word[n-1-i] for 0 <= i < n. If the function returns r for (word,k) and returns r_rev for (rev,k), then r = r_rev.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_8",
+    "negation": "AegisSpec.CountOfSubstrings.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for (word,k) and returns r2 for (word2,k), then r = r2.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5. Let V = {'a','e','i','o','u'}. Let word2 be any slice of length n of lowercase English letters such that for every i, if word[i] is in V then word2[i] = word[i], and if word[i] is not in V then word2[i] is not in V."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_9",
+    "negation": "AegisSpec.CountOfSubstrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r equals the number of intervals [i,j] with 0 <= i <= j < n such that (a) for every p with 0 <= p < n and word[p] not in V, i <= p <= j, and (b) for every v in V there exists q with i <= q <= j and word[q] = v.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5. Let V = {'a','e','i','o','u'}. Let C = #{i | 0 <= i < n and word[i] not in V}. C = k."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountOfSubstrings.spec_10",
+    "negation": "AegisSpec.CountOfSubstrings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r >= 1.",
+    "preconditions": "Let n = len(word). 5 <= n <= 250. For every i with 0 <= i < n, word[i] is a lowercase English letter. 0 <= k <= n - 5. The entire interval [0,n-1] contains each of the five vowels at least once and contains exactly k consonant bytes."
+  }
+]

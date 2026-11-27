@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.JobScheduling.spec_1",
+    "negation": "AegisSpec.JobScheduling.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns a result r, r is the maximum of the set of all sums sum_{i in S} profit[i] over subsets S of {0,...,n-1} such that for every two distinct indices i,j in S, endTime[i] <= startTime[j] or endTime[j] <= startTime[i]. The empty subset is allowed and contributes 0.",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.JobScheduling.spec_2",
+    "negation": "AegisSpec.JobScheduling.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, job_scheduling(startTime, endTime, profit) returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.JobScheduling.spec_3",
+    "negation": "AegisSpec.JobScheduling.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns a result r, r <= sum_{i=0}^{n-1} profit[i].",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.JobScheduling.spec_4",
+    "negation": "AegisSpec.JobScheduling.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns a result r, for every i with 0 <= i < n we have r >= profit[i].",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.JobScheduling.spec_5",
+    "negation": "AegisSpec.JobScheduling.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every two distinct indices i,j with 0 <= i,j < n we have startTime[i] < endTime[j] and startTime[j] < endTime[i] (every two jobs overlap in positive time), then whenever job_scheduling(startTime, endTime, profit) returns a result r, r = max_{0 <= i < n} profit[i].",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.JobScheduling.spec_6",
+    "negation": "AegisSpec.JobScheduling.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every two distinct indices i,j with 0 <= i,j < n we have endTime[i] <= startTime[j] or endTime[j] <= startTime[i] (all jobs are pairwise compatible), then whenever job_scheduling(startTime, endTime, profit) returns a result r, r = sum_{i=0}^{n-1} profit[i].",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.JobScheduling.spec_7",
+    "negation": "AegisSpec.JobScheduling.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit1) returns r1 and job_scheduling(startTime, endTime, profit2) returns r2, we have r1 <= r2.",
+    "preconditions": "Let n = len(startTime) = len(endTime) = len(profit1) = len(profit2). We require 1 <= n <= 50000. Both (startTime, endTime, profit1) and (startTime, endTime, profit2) satisfy the problem constraints: for every i with 0 <= i < n, 1 <= startTime[i] < endTime[i] <= 10^9, 1 <= profit1[i] <= 10^4, 1 <= profit2[i] <= 10^4, and profit1[i] <= profit2[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.JobScheduling.spec_8",
+    "negation": "AegisSpec.JobScheduling.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns r and job_scheduling(startTime', endTime', profit') returns r', we have r = r'.",
+    "preconditions": "Let n = len(startTime) = len(endTime) = len(profit). We require 1 <= n <= 50000 and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4. Let π be any permutation of {0,...,n-1}. Define startTime', endTime', profit' of length n by startTime'[k] = startTime[π(k)], endTime'[k] = endTime[π(k)], profit'[k] = profit[π(k)] for 0 <= k < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.JobScheduling.spec_9",
+    "negation": "AegisSpec.JobScheduling.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns r and job_scheduling(startTime', endTime', profit) returns r', we have r = r'.",
+    "preconditions": "Let n = len(startTime) = len(endTime) = len(profit). We require 1 <= n <= 50000 and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4. Let c be an integer such that for every i with 0 <= i < n, 1 <= startTime[i] + c and endTime[i] + c <= 10^9. Define startTime'[i] = startTime[i] + c and endTime'[i] = endTime[i] + c for 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.JobScheduling.spec_10",
+    "negation": "AegisSpec.JobScheduling.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns r and job_scheduling(startTime, endTime, profit') returns r', we have r' = k * r.",
+    "preconditions": "Let n = len(startTime) = len(endTime) = len(profit). We require 1 <= n <= 50000 and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4. Let k be a positive integer such that for every i with 0 <= i < n, 1 <= k * profit[i] <= 10^4. Define profit'[i] = k * profit[i] for 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.JobScheduling.spec_11",
+    "negation": "AegisSpec.JobScheduling.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns r and job_scheduling(startTime', endTime', profit') returns r', we have r' >= r.",
+    "preconditions": "Let n = len(startTime) = len(endTime) = len(profit). We require 1 <= n <= 49999 (so that n+1 <= 50000) and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4. Let s,e,p be integers with 1 <= s < e <= 10^9 and 1 <= p <= 10^4. Define startTime', endTime', profit' of length n+1 by startTime'[i] = startTime[i], endTime'[i] = endTime[i], profit'[i] = profit[i] for 0 <= i < n, and startTime'[n] = s, endTime'[n] = e, profit'[n] = p."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.JobScheduling.spec_12",
+    "negation": "AegisSpec.JobScheduling.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever job_scheduling(startTime, endTime, profit) returns a result r, there exists a subset S of {0,...,n-1} such that (a) for every two distinct indices i,j in S, endTime[i] <= startTime[j] or endTime[j] <= startTime[i], and (b) sum_{i in S} profit[i] = r.",
+    "preconditions": "Let n = len(startTime). We require len(startTime) = len(endTime) = len(profit) = n, 1 <= n <= 50000, and for every i with 0 <= i < n: 1 <= startTime[i] < endTime[i] <= 10^9 and 1 <= profit[i] <= 10^4."
+  }
+]

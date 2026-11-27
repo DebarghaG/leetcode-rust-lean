@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinSkips.spec_1",
+    "negation": "AegisSpec.MinSkips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(dist), s = speed, H = hoursBefore. For a subset S of {0,1,...,n-2}, let A(S) be the arrival time when exactly the rests indexed by S are skipped, defined as follows. Set tau = 0. For i = 0,1,...,n-1: set tau := tau + dist[i]/s, where division is exact real division; if i < n-1 and i is not in S, set tau := ceil(tau), where ceil(x) is the least integer >= x; if i < n-1 and i is in S, leave tau unchanged. After processing i = n-1, A(S) is the final value of tau. The function returns a result r, and: if there exists S subset of {0,1,...,n-2} with A(S) <= H, then r = min { |S| : S subset of {0,1,...,n-2} and A(S) <= H }; otherwise r = -1.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinSkips.spec_2",
+    "negation": "AegisSpec.MinSkips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinSkips.spec_3",
+    "negation": "AegisSpec.MinSkips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "When the function returns a result r, either r = -1 or 0 <= r <= n-1, where n = len(dist).",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinSkips.spec_4",
+    "negation": "AegisSpec.MinSkips.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "When the function returns a result r, r = -1 if and only if sum_{i=0}^{n-1} dist[i] > hoursBefore * speed, where n = len(dist).",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinSkips.spec_5",
+    "negation": "AegisSpec.MinSkips.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(dist), s = speed, H = hoursBefore, and let A(empty) be the arrival time when no rests are skipped, computed by the recurrence in the main specification with S = empty. When the function returns a result r, r = 0 if and only if A(empty) <= H.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinSkips.spec_6",
+    "negation": "AegisSpec.MinSkips.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(dist), s = speed, H = hoursBefore, and define A(S) as in the main specification. When the function returns a result r and r >= 0, there exists a subset S of {0,1,...,n-2} such that |S| = r and A(S) <= H.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinSkips.spec_7",
+    "negation": "AegisSpec.MinSkips.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(dist), s = speed, H = hoursBefore, and define A(S) as in the main specification. When the function returns a result r and r >= 0, for every subset S of {0,1,...,n-2} with |S| < r, we have A(S) > H.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinSkips.spec_8",
+    "negation": "AegisSpec.MinSkips.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = len(dist) = 1, then when the function returns a result r, r = 0 if dist[0] <= hoursBefore * speed, and r = -1 if dist[0] > hoursBefore * speed.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinSkips.spec_9",
+    "negation": "AegisSpec.MinSkips.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(dist), s = speed, H = hoursBefore, define A(S) as in the main specification, and let S_all = {0,1,...,n-2}. When the function returns a result r, r = n-1 if and only if A(S_all) <= H and for every subset S of {0,1,...,n-2} with |S| < n-1, A(S) > H.",
+    "preconditions": "n = len(dist); 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= dist[i] <= 100000; 1 <= speed <= 1000000; 1 <= hoursBefore <= 10000000. All integers are 64-bit signed integers within the stated ranges."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinSkips.spec_10",
+    "negation": "AegisSpec.MinSkips.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r(H) denote the result of min_skips(dist, speed, H) for H in [1, 10000000]. When both calls min_skips(dist, speed, H1) and min_skips(dist, speed, H2) return results r1 and r2, either r1 = -1, or (r2 != -1 and r2 <= r1).",
+    "preconditions": "dist is a slice of n Int64 values with n = len(dist), 1 <= n <= 1000, and 1 <= dist[i] <= 100000 for every 0 <= i < n; speed is an integer with 1 <= speed <= 1000000; H1 and H2 are integers with 1 <= H1 <= H2 <= 10000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinSkips.spec_11",
+    "negation": "AegisSpec.MinSkips.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r(s) denote the result of min_skips(dist, s, H) for s in [1, 1000000]. When both calls min_skips(dist, s1, H) and min_skips(dist, s2, H) return results r1 and r2, either r1 = -1, or (r2 != -1 and r2 <= r1).",
+    "preconditions": "dist is a slice of n Int64 values with n = len(dist), 1 <= n <= 1000, and 1 <= dist[i] <= 100000 for every 0 <= i < n; H is an integer with 1 <= H <= 10000000; s1 and s2 are integers with 1 <= s1 <= s2 <= 1000000."
+  }
+]

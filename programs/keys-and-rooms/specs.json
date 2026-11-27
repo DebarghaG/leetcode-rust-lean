@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_1",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r = true if and only if every index j with 0 <= j < len(rooms) belongs to Reach(rooms), where Reach(rooms) is the smallest set S of indices such that 0 ∈ S and, for every i ∈ S, every key k in rooms[i] also belongs to S.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_2",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (a Bool); it does not fail under these preconditions.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_3",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct; and for every j with 1 <= j < len(rooms), j ∈ rooms[0]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_4",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns false.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct; and len(rooms[0]) = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_5",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same Bool on rooms and on rooms': can_visit_all_rooms(rooms) = can_visit_all_rooms(rooms').",
+    "preconditions": "rooms and rooms' both satisfy: 2 <= len <= 1000; for every i with 0 <= i < len, 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len; for every i with 0 <= i < len, all entries of rooms[i] are pairwise distinct. Additionally, len(rooms) = len(rooms') = n, and for every i with 0 <= i < n, rooms'[i] is a permutation of rooms[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_6",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "can_visit_all_rooms(rooms) = can_visit_all_rooms(rooms').",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct. Let rooms' be obtained from rooms by removing every occurrence of the value 0 from every rooms[i]. Assume rooms' also satisfies the constraints (in particular the total number of remaining keys is at least 1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_7",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of inputs rooms and rooms' satisfying the preconditions, both calls return a Bool (they do not fail), and if can_visit_all_rooms(rooms) returns true, then can_visit_all_rooms(rooms') returns true.",
+    "preconditions": "rooms and rooms' both satisfy: 2 <= len <= 1000; for every i with 0 <= i < len, 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len; for every i with 0 <= i < len, all entries of rooms[i] are pairwise distinct. Additionally, len(rooms) = len(rooms') = n, and for every i with 0 <= i < n, every key in rooms[i] is also in rooms'[i] (i.e., rooms[i] ⊆ rooms'[i] as sets)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_8",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns false, there exists a set S ⊆ {0, 1, ..., len(rooms)-1} such that 0 ∈ S, S ≠ {0, 1, ..., len(rooms)-1} (i.e., there is some j with 0 <= j < len(rooms) and j ∉ S), and for every i ∈ S, every key k in rooms[i] also belongs to S.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_9",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns false if and only if there exists a set S ⊆ {0, 1, ..., len(rooms)-1} such that 0 ∈ S, S ≠ {0, 1, ..., len(rooms)-1}, and for every i ∈ S, every key k in rooms[i] also belongs to S.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanVisitAllRooms.spec_10",
+    "negation": "AegisSpec.CanVisitAllRooms.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns true if and only if there exists a permutation (i_0, i_1, ..., i_{n-1}) of {0, 1, ..., n-1}, where n = len(rooms) and i_0 = 0, such that for every t with 1 <= t < n, i_t belongs to the union of the sets rooms[i_s] over all s with 0 <= s < t.",
+    "preconditions": "2 <= len(rooms) <= 1000; for every i with 0 <= i < len(rooms), 0 <= len(rooms[i]) <= 1000; 1 <= sum_{i=0}^{len(rooms)-1} len(rooms[i]) <= 3000; for every i with 0 <= i < len(rooms) and every j with 0 <= j < len(rooms[i]), 0 <= rooms[i][j] < len(rooms); for every i with 0 <= i < len(rooms), all entries of rooms[i] are pairwise distinct."
+  }
+]

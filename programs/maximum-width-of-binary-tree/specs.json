@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_1",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, r = W(root), where: the root has depth 0 and position 1; for a node at position p, its left child (if present) has position 2p and its right child (if present) has position 2p+1; for each depth d that contains at least one node, LevelWidth(d) = (maximum position among nodes at depth d) - (minimum position among nodes at depth d) + 1; and W(root) = the maximum of LevelWidth(d) over all depths d that contain at least one node.",
+    "preconditions": "root is a non-null Tree (it contains at least one Node constructor); the number of Node constructors in root is between 1 and 3000 inclusive; every Node payload is in [-100,100]; the mathematical maximum width W(root) defined in the statement is at most 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_2",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every such root, width_of_binary_tree(root) returns a result r; it does not fail due to arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "root is a non-null Tree (it contains at least one Node constructor); the number of Node constructors in root is between 1 and 3000 inclusive; every Node payload is in [-100,100]; the mathematical maximum width W(root) defined in S1 is at most 2^31 - 1; and the height H of root (the largest depth of any node, with the root at depth 0) is at most 62, so every position defined by root position 1 and children at 2p and 2p+1 fits in a signed 64-bit integer."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_3",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, there exists a depth d >= 0 such that root has at least one node at depth d and, using root position 1 and children of position p at positions 2p and 2p+1, r = (maximum position among nodes of root at depth d) - (minimum position among nodes of root at depth d) + 1.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_4",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, for every depth d >= 0 that contains at least one node of root, (maximum position among nodes of root at depth d) - (minimum position among nodes of root at depth d) + 1 <= r, using root position 1 and children of position p at positions 2p and 2p+1.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_5",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, r >= 1.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_6",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, r <= 2^H.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]. Let H be the largest depth of any node in root, with the root at depth 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_7",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "width_of_binary_tree(root) returns a result r and r = 1.",
+    "preconditions": "root = Node(v, Null, Null) for some i64 v with -100 <= v <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_8",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "width_of_binary_tree(root) returns a result r and r = 2.",
+    "preconditions": "root = Node(v, Node(lv, Null, Null), Node(rv, Null, Null)) with v, lv, rv in [-100,100]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_9",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, r = 1.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]; and every Node in root has at most one non-null child (the tree is a single path)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_10",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "width_of_binary_tree(root) returns a result r and r = 2^h.",
+    "preconditions": "root is a perfect binary tree of height h >= 0, meaning all levels 0 through h are full; the number of nodes is 2^{h+1}-1 <= 3000; all node payloads are in [-100,100]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_11",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If width_of_binary_tree(root) returns r and width_of_binary_tree(mirror(root)) returns r', then r = r'.",
+    "preconditions": "root is a non-null Tree with between 1 and 3000 Node constructors; every Node payload is in [-100,100]; mirror(root) is obtained by recursively swapping the left and right subtrees at every Node."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_12",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If width_of_binary_tree(root) returns r and width_of_binary_tree(root') returns r', then r = r'.",
+    "preconditions": "root and root' are non-null trees with the same shape (the same pattern of Null and Node constructors, so corresponding nodes have the same depths and positions) and with between 1 and 3000 Node constructors each; all node payloads in both trees are in [-100,100]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_13",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever width_of_binary_tree(root) returns a result r, r >= 2.",
+    "preconditions": "root = Node(v, L, R) with both L and R non-null; the tree has between 1 and 3000 Node constructors; all node payloads are in [-100,100]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.WidthOfBinaryTree.spec_14",
+    "negation": "AegisSpec.WidthOfBinaryTree.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If width_of_binary_tree(root1) returns r1 and width_of_binary_tree(root2) returns r2, then r2 >= r1.",
+    "preconditions": "root1 and root2 are non-null trees with between 1 and 3000 Node constructors each; all node payloads are in [-100,100]; root2 is obtained from root1 by replacing zero or more Null subtrees of root1 by arbitrary non-null trees, so every Node of root1 remains at the same depth and position in root2."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RemoveComments.spec_1",
+    "negation": "AegisSpec.RemoveComments.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let S be the byte string obtained by concatenating source[0], a newline byte, source[1], a newline byte, ..., a newline byte, source[len(source)-1]. Scan S from left to right starting in state NORMAL and building a byte string C initially empty. In NORMAL: if the next two bytes are '/' '/' then consume them and switch to LINE; otherwise if the next two bytes are '/' '*' then consume them and switch to BLOCK; otherwise append the next byte to C and advance one byte. In LINE: if the next byte is a newline then append it to C, advance, and switch to NORMAL; otherwise consume the next byte without appending. In BLOCK: if the next two bytes are '*' '/' then consume them and switch to NORMAL; otherwise consume the next byte without appending (including a newline byte). A two-byte test fails if fewer than two bytes remain. The scan stops when all of S is consumed (it never stops in BLOCK by the precondition). Let r be the list of byte strings obtained by splitting C at every newline byte and then deleting all empty byte strings, preserving order. The function returns r.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RemoveComments.spec_2",
+    "negation": "AegisSpec.RemoveComments.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no panic, overflow, or out-of-bounds access).",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RemoveComments.spec_3",
+    "negation": "AegisSpec.RemoveComments.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let r be the result of remove_comments(source). Then for every i with 0 <= i < len(r), len(r[i]) >= 1.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RemoveComments.spec_4",
+    "negation": "AegisSpec.RemoveComments.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result of remove_comments(source). Then len(r) <= len(source).",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RemoveComments.spec_5",
+    "negation": "AegisSpec.RemoveComments.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result of remove_comments(source). Then sum_{i=0}^{len(r)-1} len(r[i]) <= sum_{i=0}^{len(source)-1} len(source[i]).",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RemoveComments.spec_6",
+    "negation": "AegisSpec.RemoveComments.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result of remove_comments(source). Then len(r) <= the number of indices i with 0 <= i < len(source) and len(source[i]) > 0.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RemoveComments.spec_7",
+    "negation": "AegisSpec.RemoveComments.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of remove_comments(source). For every i with 0 <= i < len(r), there is no j with 0 <= j < len(r[i]) - 1 such that r[i][j] = '/' and r[i][j+1] = '/'.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RemoveComments.spec_8",
+    "negation": "AegisSpec.RemoveComments.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of remove_comments(source). For every i with 0 <= i < len(r), there is no j with 0 <= j < len(r[i]) - 1 such that r[i][j] = '/' and r[i][j+1] = '*'.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RemoveComments.spec_9",
+    "negation": "AegisSpec.RemoveComments.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of remove_comments(source). Then remove_comments(r) returns r.",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RemoveComments.spec_10",
+    "negation": "AegisSpec.RemoveComments.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let r be the result of remove_comments(source). For every i with 0 <= i < len(r) and every j with 0 <= j < len(r[i]), r[i][j] != 10 (the newline byte).",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.RemoveComments.spec_11",
+    "negation": "AegisSpec.RemoveComments.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let S be the byte string obtained by concatenating source[0], a newline byte, source[1], ..., a newline byte, source[len(source)-1], and let r be the result of remove_comments(source). If the scan of S never enters LINE or BLOCK, then r is exactly the list [source[i] | 0 <= i < len(source) and len(source[i]) > 0].",
+    "preconditions": "1 <= len(source) <= 100; for every i with 0 <= i < len(source), len(source[i]) <= 80; every block comment opened during the scan of source is eventually closed (equivalently, the scan never ends in the block-comment state)."
+  }
+]

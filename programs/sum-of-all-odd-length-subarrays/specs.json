@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_1",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let n = len(arr). Then r is the sum, over every pair of indices (i, j) with 0 <= i <= j < n and j - i even, of the contiguous subarray sum arr[i] + arr[i+1] + ... + arr[j]. Equivalently, r is the sum of the sums of all nonempty contiguous subarrays of arr whose length is odd; each such subarray is counted exactly once.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_2",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every arr satisfying the preconditions, the call sum_odd_length_subarrays(arr) returns a result r; it does not panic, go out of bounds, or overflow.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_3",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{len(arr)-1} arr[i].",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_4",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let n = len(arr) and let A(n) = sum over odd L with 1 <= L <= n of L * (n - L + 1). Then r <= 1000 * A(n).",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_5",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let n = len(arr). For each i with 0 <= i < n, let c_i be the number of pairs (l, u) such that 0 <= l <= i <= u < n and u - l is even. Then r = sum_{i=0}^{n-1} arr[i] * c_i.",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_6",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let n = len(arr). Then r = sum_{i=0}^{n-1} arr[i] * ( (floor(i/2) + 1) * (floor((n-1-i)/2) + 1) + ceil(i/2) * ceil((n-1-i)/2) ).",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_7",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for arr and s for rev, r = s.",
+    "preconditions": "arr satisfies 1 <= len(arr) <= 100 and entries in [1, 1000]. Let n = len(arr), and let rev be the slice of length n with rev[i] = arr[n-1-i] for 0 <= i < n; rev also satisfies the same constraints."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_8",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for arr and s for brr, r <= s.",
+    "preconditions": "Both arr and brr satisfy 1 <= len(arr) = len(brr) = n <= 100 and entries in [1, 1000], and arr[i] <= brr[i] for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_9",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for arr and s for brr, s = k * r.",
+    "preconditions": "arr satisfies 1 <= len(arr) <= 100 and entries in [1, 1000]. Let n = len(arr), let k be an integer with k >= 1, and let brr be a slice of length n with brr[i] = k * arr[i] for every 0 <= i < n, such that brr also satisfies 1 <= brr[i] <= 1000 for all i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_10",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let n = len(arr) and let A(n) = sum over odd L with 1 <= L <= n of L * (n - L + 1). Then r >= A(n).",
+    "preconditions": "len(arr) is an integer with 1 <= len(arr) <= 100, and for every i with 0 <= i < len(arr), 1 <= arr[i] <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SumOddLengthSubarrays.spec_11",
+    "negation": "AegisSpec.SumOddLengthSubarrays.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r for arr and s for brr, s = r + c * A(n), where A(n) = sum over odd L with 1 <= L <= n of L * (n - L + 1).",
+    "preconditions": "arr and brr both satisfy 1 <= len(arr) = len(brr) = n <= 100 and entries in [1, 1000], and there is an integer c such that brr[i] = arr[i] + c for every 0 <= i < n."
+  }
+]

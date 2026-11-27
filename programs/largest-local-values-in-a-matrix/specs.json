@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestLocal.spec_1",
+    "negation": "AegisSpec.LargestLocal.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever largest_local(grid) returns a result r, we have len(r) = n - 2, len(r[i]) = n - 2 for every i with 0 <= i < n - 2, and for every i,j with 0 <= i,j < n - 2, r[i][j] = max{ grid[p][q] | i <= p <= i + 2 and j <= q <= j + 2 }.",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestLocal.spec_2",
+    "negation": "AegisSpec.LargestLocal.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever largest_local(grid) returns a result r, len(r) = n - 2.",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestLocal.spec_3",
+    "negation": "AegisSpec.LargestLocal.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever largest_local(grid) returns a result r, for every i with 0 <= i < len(r), len(r[i]) = n - 2.",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestLocal.spec_4",
+    "negation": "AegisSpec.LargestLocal.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever largest_local(grid) returns a result r and r has len(r) = n - 2 and len(r[i]) = n - 2 for every 0 <= i < n - 2, then for every i,j with 0 <= i,j < n - 2 and every a,b with 0 <= a,b < 3, r[i][j] >= grid[i + a][j + b].",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestLocal.spec_5",
+    "negation": "AegisSpec.LargestLocal.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever largest_local(grid) returns a result r and r has len(r) = n - 2 and len(r[i]) = n - 2 for every 0 <= i < n - 2, then for every i,j with 0 <= i,j < n - 2, there exist a,b with 0 <= a,b < 3 such that r[i][j] = grid[i + a][j + b].",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestLocal.spec_6",
+    "negation": "AegisSpec.LargestLocal.spec_6_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, largest_local(grid) returns a result; it does not fail, overflow, or panic.",
+    "preconditions": "Let n = len(grid). grid is square: len(grid) = n and len(grid[i]) = n for every i with 0 <= i < n. Also 3 <= n <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestLocal.spec_7",
+    "negation": "AegisSpec.LargestLocal.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever largest_local(grid1) returns r1 and largest_local(grid2) returns r2, with len(r1) = len(r2) = n - 2 and all row lengths equal to n - 2, then for every i,j with 0 <= i,j < n - 2, r1[i][j] <= r2[i][j].",
+    "preconditions": "Let n = len(grid1). grid1 and grid2 are square n by n with 3 <= n <= 100, and for every p,q with 0 <= p,q < n, grid1[p][q] <= grid2[p][q]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestLocal.spec_8",
+    "negation": "AegisSpec.LargestLocal.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_local(grid) returns r and largest_local(gridT) returns rT, with both r and rT having dimensions (n - 2) by (n - 2), then for every i,j with 0 <= i,j < n - 2, rT[i][j] = r[j][i].",
+    "preconditions": "Let n = len(grid). grid is square n by n with 3 <= n <= 100. Define gridT[p][q] = grid[q][p] for 0 <= p,q < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestLocal.spec_9",
+    "negation": "AegisSpec.LargestLocal.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_local(grid) returns r and largest_local(gridC) returns rC, with both r and rC having dimensions (n - 2) by (n - 2), then for every i,j with 0 <= i,j < n - 2, rC[i][j] = r[i][j] + c.",
+    "preconditions": "Let n = len(grid). grid is square n by n with 3 <= n <= 100. Let c be an I64 value such that for every p,q with 0 <= p,q < n, the sum grid[p][q] + c lies in the I64 range [-2^63, 2^63 - 1]. Define gridC[p][q] = grid[p][q] + c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestLocal.spec_10",
+    "negation": "AegisSpec.LargestLocal.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_local(grid) returns r and largest_local(gridR) returns rR, with both r and rR having dimensions (n - 2) by (n - 2), then for every i,j with 0 <= i,j < n - 2, rR[i][j] = r[n - 3 - i][n - 3 - j].",
+    "preconditions": "Let n = len(grid). grid is square n by n with 3 <= n <= 100. Define gridR[p][q] = grid[n - 1 - p][n - 1 - q] for 0 <= p,q < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestLocal.spec_11",
+    "negation": "AegisSpec.LargestLocal.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever largest_local(grid) returns r and largest_local(gridH) returns rH, with both r and rH having dimensions (n - 2) by (n - 2), then for every i,j with 0 <= i,j < n - 2, rH[i][j] = r[n - 3 - i][j].",
+    "preconditions": "Let n = len(grid). grid is square n by n with 3 <= n <= 100. Define gridH[p][q] = grid[n - 1 - p][q] for 0 <= p,q < n."
+  }
+]

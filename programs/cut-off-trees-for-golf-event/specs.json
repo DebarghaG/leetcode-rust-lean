@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CutOffTree.spec_1",
+    "negation": "AegisSpec.CutOffTree.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P_1,...,P_t be the tree cells (cells with forest value > 1) ordered so that forest[P_1] < forest[P_2] < ... < forest[P_t]. For k = 1,...,t define d_k as follows. d_1 is the least L >= 0 such that there are cells C_0 = (0,0), C_1,...,C_L = P_1 where, for every s >= 1, C_s is in bounds and forest[C_s] != 0, and consecutive cells differ by one unit in one coordinate. For k >= 2, d_k is the least L >= 0 such that there are cells C_0 = P_{k-1}, C_1,...,C_L = P_k where, for every s >= 1, C_s is in bounds and forest[C_s] != 0, and consecutive cells differ by one unit in one coordinate. If no such L exists, set d_k = infinity. The function returns a result r and: if some d_k is infinite, then r = -1; otherwise r = d_1 + d_2 + ... + d_t.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CutOffTree.spec_2",
+    "negation": "AegisSpec.CutOffTree.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every forest satisfying the preconditions, the function returns a result r; it does not fail, overflow, index out of bounds, or panic.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CutOffTree.spec_3",
+    "negation": "AegisSpec.CutOffTree.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let t be the number of cells with forest[i][j] > 1. Whenever the function returns a result r, either r = -1 or 0 <= r <= t * (m*n - 1).",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CutOffTree.spec_4",
+    "negation": "AegisSpec.CutOffTree.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let P_1,...,P_t be the tree cells ordered by increasing height. For k = 1,...,t, let d_k be the shortest admissible path length from (0,0) to P_1 when k = 1 and from P_{k-1} to P_k when k >= 2, or infinity if no such path exists; an admissible path is a cell sequence whose every cell after the first is in bounds and has forest value != 0, with consecutive cells differing by one unit in one coordinate. Whenever the function returns a result r, r = -1 if and only if at least one d_k is infinite.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CutOffTree.spec_5",
+    "negation": "AegisSpec.CutOffTree.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let t be the number of cells with forest[i][j] > 1. Whenever the function returns a result r, r = 0 if and only if t = 1 and the unique tree cell is (0,0).",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CutOffTree.spec_6",
+    "negation": "AegisSpec.CutOffTree.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with r != -1, we have r >= 1.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, all values forest[i][j] > 1 are pairwise distinct, and forest[0][0] <= 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CutOffTree.spec_7",
+    "negation": "AegisSpec.CutOffTree.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let P_1,...,P_t be the tree cells ordered by increasing height, and set P_0 = (0,0). Whenever the function returns a result r, r != -1 and r = sum over k = 1,...,t of ( abs(row(P_{k-1}) - row(P_k)) + abs(col(P_{k-1}) - col(P_k)) ), where row(P) and col(P) are the 0-based coordinates of cell P.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, all values forest[i][j] > 1 are pairwise distinct, and forest[i][j] != 0 for every i,j."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CutOffTree.spec_8",
+    "negation": "AegisSpec.CutOffTree.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_A be the result of the function on A and r_B the result on B. Whenever both calls return results, if r_A = -1 then r_B = -1; if r_A != -1 then either r_B = -1 or r_B >= r_A.",
+    "preconditions": "Let A be an m x n matrix represented as a slice of vectors of 64-bit integers, where 1 <= m,n <= 50, every row has length n, 0 <= A[i][j] <= 10^9 for all i,j, the set of cells with A[i][j] > 1 is nonempty, and all values A[i][j] > 1 are pairwise distinct. Let B be an m x n matrix of the same dimensions such that B[i][j] = A[i][j] whenever A[i][j] != 1, and for every cell with A[i][j] = 1, B[i][j] is either 0 or 1. (Then B has the same nonempty set of tree cells and the same tree heights as A.)"
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CutOffTree.spec_9",
+    "negation": "AegisSpec.CutOffTree.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r_A be the result of the function on A and r_B the result on B. Whenever both calls return results, if r_A != -1 then r_B != -1 and r_B <= r_A.",
+    "preconditions": "Let A be an m x n matrix represented as a slice of vectors of 64-bit integers, where 1 <= m,n <= 50, every row has length n, 0 <= A[i][j] <= 10^9 for all i,j, the set of cells with A[i][j] > 1 is nonempty, and all values A[i][j] > 1 are pairwise distinct. Let B be an m x n matrix of the same dimensions such that B[i][j] = A[i][j] whenever A[i][j] != 0, and for every cell with A[i][j] = 0, B[i][j] is either 0 or 1. (Then B has the same nonempty set of tree cells and the same tree heights as A.)"
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CutOffTree.spec_10",
+    "negation": "AegisSpec.CutOffTree.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r_A be the result of the function on A and r_B the result on B. Whenever both calls return results, r_A = r_B.",
+    "preconditions": "Let A and B be two m x n matrices represented as slices of vectors of 64-bit integers, where 1 <= m,n <= 50, every row has length n, every entry is in [0,10^9], each matrix has at least one cell with value > 1, and all values > 1 in each matrix are pairwise distinct. Assume for every cell (i,j): A[i][j] = 0 if and only if B[i][j] = 0; A[i][j] > 1 if and only if B[i][j] > 1; and for every two tree cells x,y, A[x] < A[y] if and only if B[x] < B[y]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CutOffTree.spec_11",
+    "negation": "AegisSpec.CutOffTree.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let T_1,...,T_t be the tree cells ordered by increasing height. Whenever the function returns a result r with r != -1, there exists a finite sequence of cells C_0,...,C_r such that C_0 = (0,0), for every s = 1,...,r the cell C_s is in bounds and forest[C_s] != 0, consecutive cells differ by one unit in one coordinate, and T_1,...,T_t occur in the sequence as a subsequence in that order: there are indices 0 <= i_1 < i_2 < ... < i_t <= r with C_{i_k} = T_k for every k.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CutOffTree.spec_12",
+    "negation": "AegisSpec.CutOffTree.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P_1 be the shortest tree cell. Whenever the function returns a result r with r != -1, r >= row(P_1) + col(P_1), where row(P_1) and col(P_1) are the 0-based coordinates of P_1.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CutOffTree.spec_13",
+    "negation": "AegisSpec.CutOffTree.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P_1,...,P_t be the tree cells ordered by increasing height and set P_0 = (0,0). Whenever the function returns a result r with r != -1, r >= sum_{k=1}^t ( |row(P_{k-1}) - row(P_k)| + |col(P_{k-1}) - col(P_k)| ), where row(P) and col(P) are the 0-based coordinates of cell P.",
+    "preconditions": "Let m = len(forest) and n = len(forest[0]). Assume 1 <= m,n <= 50, every row of forest has length n, every entry forest[i][j] is an integer with 0 <= forest[i][j] <= 10^9, the set of cells with forest[i][j] > 1 is nonempty, and all values forest[i][j] > 1 are pairwise distinct."
+  }
+]

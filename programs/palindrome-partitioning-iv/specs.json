@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckPartitioning.spec_1",
+    "negation": "AegisSpec.CheckPartitioning.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true exactly when there exist integers i and j with 0 < i < j < len(s) such that the three contiguous segments s[0:i], s[i:j], and s[j:len(s)] are all palindromic. A segment s[a:b] with 0 <= a <= b <= len(s) is palindromic iff for every k with 0 <= k < b-a, s[a+k] = s[b-1-k]. These conditions make the three segments non-empty, in order, and covering all of s.",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (s consists of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckPartitioning.spec_2",
+    "negation": "AegisSpec.CheckPartitioning.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckPartitioning.spec_3",
+    "negation": "AegisSpec.CheckPartitioning.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = true.",
+    "preconditions": "len(s) = 3, and for every i with 0 <= i < 3, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckPartitioning.spec_4",
+    "negation": "AegisSpec.CheckPartitioning.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = true if and only if s[0] = s[1] or s[1] = s[2] or s[2] = s[3].",
+    "preconditions": "len(s) = 4, and for every i with 0 <= i < 4, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckPartitioning.spec_5",
+    "negation": "AegisSpec.CheckPartitioning.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the reversed byte sequence of s: len(t) = len(s) and t[k] = s[len(s)-1-k] for every 0 <= k < len(s). The function returns a result r, and r = true if and only if the same partition property holds for t: there exist integers i and j with 0 < i < j < len(t) such that t[0:i], t[i:j], and t[j:len(t)] are all palindromic. Consequently, a string and its reverse have the same answer.",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckPartitioning.spec_6",
+    "negation": "AegisSpec.CheckPartitioning.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r for s, and r = true if and only if the partition property holds for u: there exist integers i and j with 0 < i < j < len(u) such that u[0:i], u[i:j], and u[j:len(u)] are all palindromic. Equivalently, any bijective renaming of the lowercase alphabet preserves splittability.",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, every byte of s is in 97..122, and pi is any bijection of the set {97,...,122} to itself. Let u be the sequence with len(u) = len(s) and u[k] = pi(s[k]) for every k."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckPartitioning.spec_7",
+    "negation": "AegisSpec.CheckPartitioning.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, there exist integers a and b with 0 <= a < b <= len(s) such that b - a >= ceil(len(s)/3) and the segment s[a:b] is palindromic: for every k with 0 <= k < b-a, s[a+k] = s[b-1-k].",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckPartitioning.spec_8",
+    "negation": "AegisSpec.CheckPartitioning.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = true, there exists an integer i with 1 <= i <= len(s)-2 such that the prefix s[0:i] is palindromic: for every k with 0 <= k < i, s[k] = s[i-1-k].",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckPartitioning.spec_9",
+    "negation": "AegisSpec.CheckPartitioning.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r = true, there exists an integer j with 2 <= j <= len(s)-1 such that the suffix s[j:len(s)] is palindromic: for every k with 0 <= k < len(s)-j, s[j+k] = s[len(s)-1-k].",
+    "preconditions": "len(s) >= 3, len(s) <= 2000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_1",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Consider the collision process in which robot i initially has position positions[i] and health healths[i] and moves at unit speed right if directions[i] is 82 ('R') and left if it is 76 ('L'). At each earliest future time at which two currently alive robots meet, if their current healths differ then the robot with smaller current health is removed and the other current health is decreased by one; if their current healths are equal both are removed. A surviving robot continues in its original direction. Meetings at the same time involving disjoint pairs are resolved independently; process them in any order. Repeat until no two alive robots would ever meet. Let S be the set of robots still alive after this process and let f(i) be the current health of i in S. Then the function returns a vector r such that len(r) = |S| and, writing the elements of S in increasing original-index order as i_0 < i_1 < ... < i_{|S|-1}, for every j with 0 <= j < |S| we have r[j] = f(i_j).",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_2",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail.",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_3",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) <= n.",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_4",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let S be the set of robots still alive after the collision process. For every i in S, if i is the k-th smallest index in S with 0-based counting, then 1 <= r[k] <= healths[i].",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_5",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r with len(r) = n and r[i] = healths[i] for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R'), and there do not exist indices i,j with 0 <= i,j < n such that directions[i] = 82 ('R'), directions[j] = 76 ('L'), and positions[i] < positions[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_6",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let S be the final survivor set. For every i with directions[i] = 76 ('L') such that there is no j with directions[j] = 82 ('R') and positions[j] < positions[i], robot i is in S and, if i is the k-th smallest index in S, r[k] = healths[i].",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_7",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let S be the final survivor set. For every i with directions[i] = 82 ('R') such that there is no j with directions[j] = 76 ('L') and positions[j] > positions[i], robot i is in S and, if i is the k-th smallest index in S, r[k] = healths[i].",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, and each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SurvivedRobotsHealths.spec_8",
+    "negation": "AegisSpec.SurvivedRobotsHealths.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[j] = H for every j with 0 <= j < len(r).",
+    "preconditions": "Let n = len(positions) = len(healths) = len(directions). We have 1 <= n <= 100000, positions[0],...,positions[n-1] are pairwise distinct, 1 <= positions[i] <= 1000000000 and 1 <= healths[i] <= 1000000000 for every i with 0 <= i < n, each directions[i] is either 76 (ASCII 'L') or 82 (ASCII 'R'), and there exists H such that healths[i] = H for every i with 0 <= i < n."
+  }
+]

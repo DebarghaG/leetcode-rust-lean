@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_1",
+    "negation": "AegisSpec.MaxEnvelopes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_envelopes(envelopes) returns a result r, r is the largest nonnegative integer k for which there exist pairwise distinct indices i_0, ..., i_{k-1} in {0, ..., len(envelopes)-1} such that, for every p and q with 0 <= p < q < k, both envelopes[i_p][0] < envelopes[i_q][0] and envelopes[i_p][1] < envelopes[i_q][1].",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_2",
+    "negation": "AegisSpec.MaxEnvelopes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every envelopes satisfying the preconditions, max_envelopes(envelopes) does not fail: it returns a result r (no panic, out-of-bounds index, or arithmetic overflow).",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_3",
+    "negation": "AegisSpec.MaxEnvelopes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_envelopes(envelopes) returns r, r >= 1.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_4",
+    "negation": "AegisSpec.MaxEnvelopes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_envelopes(envelopes) returns r, r <= len(envelopes).",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_5",
+    "negation": "AegisSpec.MaxEnvelopes.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_envelopes(envelopes) returns r, let W be the number of distinct values in { envelopes[i][0] | 0 <= i < len(envelopes) } and H be the number of distinct values in { envelopes[i][1] | 0 <= i < len(envelopes) }; then r <= W and r <= H.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_6",
+    "negation": "AegisSpec.MaxEnvelopes.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_envelopes(envelopes) returns r, r = 1 if and only if there do not exist distinct indices i and j with 0 <= i < len(envelopes) and 0 <= j < len(envelopes) such that envelopes[i][0] < envelopes[j][0] and envelopes[i][1] < envelopes[j][1].",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_7",
+    "negation": "AegisSpec.MaxEnvelopes.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every i and j with 0 <= i < len(envelopes) and 0 <= j < len(envelopes), let envelopes' be the slice obtained from envelopes by exchanging entries i and j. Whenever max_envelopes(envelopes) returns r and max_envelopes(envelopes') returns r', we have r = r'.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_8",
+    "negation": "AegisSpec.MaxEnvelopes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any such i and j, let envelopes' be the slice obtained by deleting entry j. Whenever max_envelopes(envelopes) returns r and max_envelopes(envelopes') returns r', we have r' = r.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000; there exist i and j with 0 <= i < j < len(envelopes) such that envelopes[i][0] = envelopes[j][0] and envelopes[i][1] = envelopes[j][1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_9",
+    "negation": "AegisSpec.MaxEnvelopes.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integers w and h with 1 <= w <= 100000 and 1 <= h <= 100000, let envelopes' be envelopes with the single entry [w, h] appended. Whenever max_envelopes(envelopes) returns r and max_envelopes(envelopes') returns r', we have r' >= r.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) < 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_10",
+    "negation": "AegisSpec.MaxEnvelopes.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_envelopes(envelopes) returns r, r = len(envelopes) if and only if there exists a permutation pi of {0, ..., len(envelopes)-1} such that, for every p and q with 0 <= p < q < len(envelopes), envelopes[pi(p)][0] < envelopes[pi(q)][0] and envelopes[pi(p)][1] < envelopes[pi(q)][1].",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_11",
+    "negation": "AegisSpec.MaxEnvelopes.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_envelopes(envelopes) returns r, there exist pairwise distinct indices i_0, ..., i_{r-1} in {0, ..., len(envelopes)-1} such that, for every p and q with 0 <= p < q < r, envelopes[i_p][0] < envelopes[i_q][0] and envelopes[i_p][1] < envelopes[i_q][1].",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxEnvelopes.spec_12",
+    "negation": "AegisSpec.MaxEnvelopes.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_envelopes(envelopes) returns r, for every nonnegative integer k and every sequence of pairwise distinct indices i_0, ..., i_{k-1} in {0, ..., len(envelopes)-1}, if for all p and q with 0 <= p < q < k we have envelopes[i_p][0] < envelopes[i_q][0] and envelopes[i_p][1] < envelopes[i_q][1], then k <= r.",
+    "preconditions": "envelopes is a nonempty slice with len(envelopes) <= 100000; for every i with 0 <= i < len(envelopes), len(envelopes[i]) = 2, and 1 <= envelopes[i][0] <= 100000 and 1 <= envelopes[i][1] <= 100000."
+  }
+]

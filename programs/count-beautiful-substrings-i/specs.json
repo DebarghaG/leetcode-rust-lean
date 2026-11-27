@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_1",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For 0 <= i < j <= n, let v(i,j) be the number of indices t with i <= t < j and s[t] in {'a','e','i','o','u'}, and let c(i,j) = (j-i) - v(i,j). The function returns a result r and r equals the number of pairs (i,j) with 0 <= i < j <= n such that v(i,j) = c(i,j) and (v(i,j) * c(i,j)) mod k = 0.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_2",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and k satisfying the preconditions, the function returns a result r; it does not panic, overflow, or access out of bounds.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_3",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). Whenever the function returns a result r, 0 <= r <= n*(n+1)/2.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_4",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns 0.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000; either there is no index t with 0 <= t < len(s) and s[t] in {'a','e','i','o','u'}, or there is no index t with 0 <= t < len(s) and s[t] not in {'a','e','i','o','u'}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_5",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of beautiful_substrings(s, k1) and r2 be the result of beautiful_substrings(s, k2). Both calls return results, and r1 >= r2.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k1 <= 1000; 1 <= k2 <= 1000; k1 divides k2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_6",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The calls beautiful_substrings(s1,k) and beautiful_substrings(s2,k) both return results r1 and r2, and r1 = r2.",
+    "preconditions": "len(s1) = len(s2) <= 1000; every byte of s1 and s2 is an ASCII lowercase letter 'a'..'z'; for every i with 0 <= i < len(s1), s1[i] in {'a','e','i','o','u'} if and only if s2[i] in {'a','e','i','o','u'}; 1 <= k <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_7",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(s) and let rev(s) be the sequence of length n with rev(s)[i] = s[n-1-i] for every 0 <= i < n. The calls beautiful_substrings(s,k) and beautiful_substrings(rev(s),k) both return results r and r', and r = r'.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_8",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(s). For 0 <= i < j <= n, let v(i,j) be the number of indices t with i <= t < j and s[t] in {'a','e','i','o','u'}, and let c(i,j) = (j-i) - v(i,j). If the function returns r, then r = 0 if and only if there is no pair (i,j) with 0 <= i < j <= n such that v(i,j) = c(i,j) and (v(i,j)*c(i,j)) mod k = 0.",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_9",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s' be the sequence of length len(s)+1 with s'[i] = s[i] for 0 <= i < len(s) and s'[len(s)] = ch. The calls beautiful_substrings(s,k) and beautiful_substrings(s',k) both return results r and r', and r <= r'.",
+    "preconditions": "len(s) <= 999; every byte of s is an ASCII lowercase letter 'a'..'z'; ch is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BeautifulSubstrings.spec_10",
+    "negation": "AegisSpec.BeautifulSubstrings.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r <= floor(n*n/4).",
+    "preconditions": "len(s) <= 1000; every byte of s is an ASCII lowercase letter 'a'..'z'; 1 <= k <= 1000."
+  }
+]

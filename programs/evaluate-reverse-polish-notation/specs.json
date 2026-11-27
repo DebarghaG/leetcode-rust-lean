@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EvalRpn.spec_1",
+    "negation": "AegisSpec.EvalRpn.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let E be the unique binary expression tree whose postorder traversal is exactly tokens. Define V on such trees by: V(leaf with numeric token representing n) = n; V(node with operator '+' and left/right values x,y) = x + y; V(node with operator '-' and left/right values x,y) = x - y; V(node with operator '*' and left/right values x,y) = x * y; V(node with operator '/' and left/right values x,y) = trunc(x/y), where trunc(x/y) is the integer obtained from the rational number x/y by truncating toward zero (so trunc(13/5)=2 and trunc(-13/5)=-2), and y != 0. Then eval_rpn tokens returns a result r and r = V(E).",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EvalRpn.spec_2",
+    "negation": "AegisSpec.EvalRpn.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "eval_rpn tokens returns a result r; equivalently, the evaluation does not fail. In particular, no signed 64-bit integer overflow, array index out of bounds, division by zero, or panic occurs.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EvalRpn.spec_3",
+    "negation": "AegisSpec.EvalRpn.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever eval_rpn tokens returns a result r, -2147483648 <= r <= 2147483647.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EvalRpn.spec_4",
+    "negation": "AegisSpec.EvalRpn.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let x be the RPN value of A and y be the RPN value of B, where the RPN value of a valid token sequence is the value of its unique expression tree using the operator meanings +, -, *, and / with division truncated toward zero. Then eval_rpn tokens returns a result r and r = x + y.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, tokens is the concatenation A ++ B ++ [\"+\"], where A and B are nonempty valid reverse Polish token sequences."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EvalRpn.spec_5",
+    "negation": "AegisSpec.EvalRpn.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let x be the RPN value of A and y be the RPN value of B, where the RPN value of a valid token sequence is the value of its unique expression tree using the operator meanings +, -, *, and / with division truncated toward zero. Then eval_rpn tokens returns a result r and r = x - y.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, tokens is the concatenation A ++ B ++ [\"-\"], where A and B are nonempty valid reverse Polish token sequences."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EvalRpn.spec_6",
+    "negation": "AegisSpec.EvalRpn.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let x be the RPN value of A and y be the RPN value of B, where the RPN value of a valid token sequence is the value of its unique expression tree using the operator meanings +, -, *, and / with division truncated toward zero. Then eval_rpn tokens returns a result r and r = x * y.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, tokens is the concatenation A ++ B ++ [\"*\"], where A and B are nonempty valid reverse Polish token sequences."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EvalRpn.spec_7",
+    "negation": "AegisSpec.EvalRpn.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let x be the RPN value of A and y be the RPN value of B, where the RPN value of a valid token sequence is the value of its unique expression tree using the operator meanings +, -, *, and / with division truncated toward zero. Then eval_rpn tokens returns a result r and r = trunc(x/y), the integer obtained from the rational number x/y by truncating toward zero.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, tokens is the concatenation A ++ B ++ [\"/\"], where A and B are nonempty valid reverse Polish token sequences, and the RPN value y of B is nonzero."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EvalRpn.spec_8",
+    "negation": "AegisSpec.EvalRpn.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let x be the RPN value of A and y be the RPN value of B. Whenever eval_rpn tokens returns a result r, there exists an integer m such that x = r*y + m, |m| < |y|, and either m = 0 or m has the same sign as x.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, tokens is the concatenation A ++ B ++ [\"/\"], where A and B are nonempty valid reverse Polish token sequences, and the RPN value y of B is nonzero."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EvalRpn.spec_9",
+    "negation": "AegisSpec.EvalRpn.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "eval_rpn tokens returns a result r and r >= 0.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]. In addition, every numeric token represents a nonnegative integer, and no token is the one-byte operator string \"-\"."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EvalRpn.spec_10",
+    "negation": "AegisSpec.EvalRpn.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever eval_rpn tokens returns a result r, there exists a binary expression tree E such that: (i) the postorder traversal of E is exactly tokens; (ii) each leaf of E is labeled by the integer represented by the corresponding numeric token in tokens; (iii) each internal node of E is labeled by the corresponding operator token in tokens; and (iv) the value of E, computed using +, -, *, and / with division truncated toward zero, is r.",
+    "preconditions": "tokens is a nonempty finite slice of byte vectors. Each element is either (i) one of the four one-byte ASCII operator strings \"+\", \"-\", \"*\", \"/\", or (ii) the ASCII decimal representation of an integer n with -200 <= n <= 200 (an optional leading '-' followed by one or more decimal digits; the one-byte string \"-\" is the operator, not a numeral). The sequence tokens is a valid reverse Polish expression: it is the postorder traversal of a binary expression tree whose leaves are the numeric tokens and whose internal nodes are the operator tokens, with the left subtree's tokens appearing before the right subtree's tokens and the operator token after both. No division by zero occurs when this tree is evaluated. The final value and every intermediate value fit in the signed 32-bit integer range [-2147483648, 2147483647]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EvalRpn.spec_11",
+    "negation": "AegisSpec.EvalRpn.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If eval_rpn tokens1 returns r1 and eval_rpn tokens2 returns r2, then r1 = r2.",
+    "preconditions": "A and B are nonempty valid reverse Polish token sequences whose tokens are either the one-byte operators \"+\", \"-\", \"*\", \"/\" or ASCII decimal integers in [-200,200], with no division by zero in their evaluations. op is either \"+\" or \"*\". Let tokens1 = A ++ B ++ [op] and tokens2 = B ++ A ++ [op]. Both tokens1 and tokens2 satisfy the standing input constraints, including that all final and intermediate values fit in signed 32-bit integers."
+  }
+]

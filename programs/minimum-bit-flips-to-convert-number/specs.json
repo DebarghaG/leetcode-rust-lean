@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinBitFlips.spec_1",
+    "negation": "AegisSpec.MinBitFlips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, r equals the number of nonnegative integers i such that the i-th least significant bit of start differs from the i-th least significant bit of goal. Formally, with bit_i(x) = (x / 2^i) mod 2 for x >= 0, r = |{ i in Nat | bit_i(start) != bit_i(goal) }|. Bits above the highest set bit are treated as 0.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinBitFlips.spec_2",
+    "negation": "AegisSpec.MinBitFlips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every start and goal satisfying the preconditions, min_bit_flips(start, goal) returns Result.ok r for some i64 r; it does not panic, overflow, or otherwise fail.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinBitFlips.spec_3",
+    "negation": "AegisSpec.MinBitFlips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, 0 <= r.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinBitFlips.spec_4",
+    "negation": "AegisSpec.MinBitFlips.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, r <= 30.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinBitFlips.spec_5",
+    "negation": "AegisSpec.MinBitFlips.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, r = 0 if and only if start = goal.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinBitFlips.spec_6",
+    "negation": "AegisSpec.MinBitFlips.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every start and goal satisfying the preconditions, if min_bit_flips(start, goal) returns Result.ok r1 and min_bit_flips(goal, start) returns Result.ok r2, then r1 = r2.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinBitFlips.spec_7",
+    "negation": "AegisSpec.MinBitFlips.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_bit_flips(start, goal) returns Result.ok r and min_bit_flips(2*start, 2*goal) returns Result.ok r', then r = r'.",
+    "preconditions": "0 <= start <= 10^9, 0 <= goal <= 10^9, 2*start <= 10^9, and 2*goal <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinBitFlips.spec_8",
+    "negation": "AegisSpec.MinBitFlips.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_bit_flips(start, goal) returns Result.ok r and min_bit_flips(start + 2^k, goal + 2^k) returns Result.ok r', then r = r'.",
+    "preconditions": "0 <= start <= 10^9, 0 <= goal <= 10^9, k is a nonnegative integer, bit_k(start) = 0, bit_k(goal) = 0, start + 2^k <= 10^9, and goal + 2^k <= 10^9, where bit_k(x) = (x / 2^k) mod 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinBitFlips.spec_9",
+    "negation": "AegisSpec.MinBitFlips.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_bit_flips(a, b) returns Result.ok rab, min_bit_flips(b, c) returns Result.ok rbc, and min_bit_flips(a, c) returns Result.ok rac, then rac <= rab + rbc.",
+    "preconditions": "0 <= a <= 10^9, 0 <= b <= 10^9, and 0 <= c <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinBitFlips.spec_10",
+    "negation": "AegisSpec.MinBitFlips.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, there exists a finite sequence of exactly r single-bit flips that transforms start into goal. A single-bit flip chooses a nonnegative bit position i and replaces a number x by x + 2^i if the i-th bit of x is 0, or by x - 2^i if the i-th bit of x is 1.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinBitFlips.spec_11",
+    "negation": "AegisSpec.MinBitFlips.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_bit_flips(start, goal) returns Result.ok r, there is no finite sequence of fewer than r single-bit flips that transforms start into goal, where a single-bit flip chooses a nonnegative bit position i and replaces a number x by x + 2^i if the i-th bit of x is 0, or by x - 2^i if the i-th bit of x is 1.",
+    "preconditions": "0 <= start <= 10^9 and 0 <= goal <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinBitFlips.spec_12",
+    "negation": "AegisSpec.MinBitFlips.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_bit_flips(start, goal) returns Result.ok r and min_bit_flips((2^m - 1) - start, (2^m - 1) - goal) returns Result.ok r', then r = r'.",
+    "preconditions": "m is a nonnegative integer with 2^m - 1 <= 10^9, 0 <= start < 2^m, and 0 <= goal < 2^m."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinBitFlips.spec_13",
+    "negation": "AegisSpec.MinBitFlips.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If min_bit_flips(start, goal) returns Result.ok r and min_bit_flips(start', goal') returns Result.ok r', then r = r'.",
+    "preconditions": "0 <= start <= 10^9, 0 <= goal <= 10^9, 0 <= start' <= 10^9, 0 <= goal' <= 10^9, and (start XOR goal) = (start' XOR goal'), where XOR is bitwise exclusive or on nonnegative integers."
+  }
+]

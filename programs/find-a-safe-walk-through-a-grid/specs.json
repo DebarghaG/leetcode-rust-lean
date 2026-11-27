@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindSafeWalk.spec_1",
+    "negation": "AegisSpec.FindSafeWalk.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(grid) and n = len(grid[0]). The function returns a result r and r = true if and only if there exists a finite sequence of distinct cells p_0, ..., p_k such that p_0 = (0,0), p_k = (m-1,n-1), for every t with 0 <= t < k the cells p_t and p_{t+1} share an edge (one coordinate differs by 1 and the other is equal) and both lie inside the grid, and health - (sum_{t=0}^k grid[p_t.0][p_t.1]) >= 1. The sum includes the starting cell and the final cell; because all grid entries are non-negative, requiring the cells to be distinct loses no valid walk.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindSafeWalk.spec_2",
+    "negation": "AegisSpec.FindSafeWalk.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result (either true or false) and does not fail: it does not overflow, index out of bounds, or panic.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindSafeWalk.spec_3",
+    "negation": "AegisSpec.FindSafeWalk.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If health >= m+n, then whenever the function returns a result r, r = true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindSafeWalk.spec_4",
+    "negation": "AegisSpec.FindSafeWalk.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If health = 1, then whenever the function returns a result r, r = true if and only if there exists a finite sequence of distinct cells p_0, ..., p_k such that p_0 = (0,0), p_k = (m-1,n-1), consecutive cells share an edge, and grid[p_t.0][p_t.1] = 0 for every t with 0 <= t <= k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindSafeWalk.spec_5",
+    "negation": "AegisSpec.FindSafeWalk.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any two integers h and h' such that 1 <= h <= h' and both are representable as signed 64-bit integers, if find_safe_walk(grid, h) returns true, then find_safe_walk(grid, h') returns true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindSafeWalk.spec_6",
+    "negation": "AegisSpec.FindSafeWalk.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let grid' be any m by n matrix with entries in {0,1} satisfying grid'[i][j] <= grid[i][j] for every 0 <= i < m and 0 <= j < n. If find_safe_walk(grid, health) returns true, then find_safe_walk(grid', health) returns true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindSafeWalk.spec_7",
+    "negation": "AegisSpec.FindSafeWalk.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If m = 1, let S = sum_{j=0}^{n-1} grid[0][j]; if n = 1, let S = sum_{i=0}^{m-1} grid[i][0]. Whenever the function returns a result r, r = true if and only if health - S >= 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1. Assume m = 1 or n = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindSafeWalk.spec_8",
+    "negation": "AegisSpec.FindSafeWalk.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists a finite sequence of distinct cells p_0, ..., p_k such that p_0 = (0,0), p_k = (m-1,n-1), consecutive cells share an edge, and grid[p_t.0][p_t.1] = 0 for every t with 0 <= t <= k, then whenever the function returns a result r, r = true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindSafeWalk.spec_9",
+    "negation": "AegisSpec.FindSafeWalk.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridT be the n by m matrix defined by gridT[j][i] = grid[i][j] for 0 <= i < m and 0 <= j < n. For every health >= 1, find_safe_walk(grid, health) and find_safe_walk(gridT, health) return the same Boolean result.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindSafeWalk.spec_10",
+    "negation": "AegisSpec.FindSafeWalk.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let gridR be the m by n matrix defined by gridR[i][j] = grid[m-1-i][n-1-j] for 0 <= i < m and 0 <= j < n. For every health >= 1, find_safe_walk(grid, health) and find_safe_walk(gridR, health) return the same Boolean result.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindSafeWalk.spec_11",
+    "negation": "AegisSpec.FindSafeWalk.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let C = grid[0][0] + grid[1][1] + min(grid[0][1], grid[1][0]). Whenever the function returns a result r, r = true if and only if health - C >= 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n >= 2, health >= 1, and for every 0 <= i < m and 0 <= j < n, grid[i][j] is either 0 or 1. Assume m = 2 and n = 2."
+  }
+]

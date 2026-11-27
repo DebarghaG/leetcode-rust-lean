@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinProcessingTime.spec_1",
+    "negation": "AegisSpec.MinProcessingTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a = processorTime and t = tasks. A valid assignment is a function f from task indices {0,...,m-1} to processor indices {0,...,n-1} such that for every p with 0 <= p < n, exactly 4 task indices j satisfy f(j)=p. For a valid assignment f define C(f) = max_{0 <= p < n} ( a[p] + max_{0 <= j < m, f(j)=p} t[j] ). The function returns a result r and r = min { C(f) | f is a valid assignment }.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinProcessingTime.spec_2",
+    "negation": "AegisSpec.MinProcessingTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinProcessingTime.spec_3",
+    "negation": "AegisSpec.MinProcessingTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result. Then r >= (max_{0 <= i < n} processorTime[i]) + (min_{0 <= j < m} tasks[j]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinProcessingTime.spec_4",
+    "negation": "AegisSpec.MinProcessingTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result. Then r >= (min_{0 <= i < n} processorTime[i]) + (max_{0 <= j < m} tasks[j]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinProcessingTime.spec_5",
+    "negation": "AegisSpec.MinProcessingTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the result. Then r <= (max_{0 <= i < n} processorTime[i]) + (max_{0 <= j < m} tasks[j]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinProcessingTime.spec_6",
+    "negation": "AegisSpec.MinProcessingTime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1, then the result r equals processorTime[0] + (max_{0 <= j < m} tasks[j]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinProcessingTime.spec_7",
+    "negation": "AegisSpec.MinProcessingTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is an integer c such that tasks[j] = c for every j with 0 <= j < m, then the result r equals (max_{0 <= i < n} processorTime[i]) + c.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinProcessingTime.spec_8",
+    "negation": "AegisSpec.MinProcessingTime.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there is an integer a such that processorTime[i] = a for every i with 0 <= i < n, then the result r equals a + (max_{0 <= j < m} tasks[j]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinProcessingTime.spec_9",
+    "negation": "AegisSpec.MinProcessingTime.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the result. There exist indices p with 0 <= p < n and j with 0 <= j < m such that r = processorTime[p] + tasks[j].",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinProcessingTime.spec_10",
+    "negation": "AegisSpec.MinProcessingTime.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the result. Define a valid assignment f and its completion C(f) as in spec_1: f maps task indices {0,...,m-1} to processor indices {0,...,n-1} with exactly four task indices mapped to each processor, and C(f) = max_{0 <= p < n} ( processorTime[p] + max_{0 <= j < m, f(j)=p} tasks[j] ). Then there exists a valid assignment f with C(f) = r such that for every p,q with 0 <= p,q < n and processorTime[p] < processorTime[q], and every j,k with 0 <= j,k < m, f(j)=p and f(k)=q imply tasks[j] >= tasks[k].",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinProcessingTime.spec_11",
+    "negation": "AegisSpec.MinProcessingTime.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on the given input. For every slice b with len(b) = n such that b is a permutation of processorTime (there is a bijection pi on {0,...,n-1} with b[i] = processorTime[pi(i)] for all i), the call min_processing_time(b, tasks) returns the same value r.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinProcessingTime.spec_12",
+    "negation": "AegisSpec.MinProcessingTime.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on the given input. For every slice c with len(c) = m such that c is a permutation of tasks (there is a bijection pi on {0,...,m-1} with c[j] = tasks[pi(j)] for all j), the call min_processing_time(processorTime, c) returns the same value r.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinProcessingTime.spec_13",
+    "negation": "AegisSpec.MinProcessingTime.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result on the given input. For every slice b with len(b) = n satisfying 0 <= b[i] <= 10^9 for all i and b[i] >= processorTime[i] for all i, if r_b is the result of min_processing_time(b, tasks), then r_b >= r.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinProcessingTime.spec_14",
+    "negation": "AegisSpec.MinProcessingTime.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result on the given input. For every slice c with len(c) = m satisfying 1 <= c[j] <= 10^9 for all j and c[j] >= tasks[j] for all j, if r_c is the result of min_processing_time(processorTime, c), then r_c >= r.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinProcessingTime.spec_15",
+    "negation": "AegisSpec.MinProcessingTime.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let ps be a slice of length n that is a permutation of processorTime and is sorted nondecreasing, and let ts be a slice of length m that is a permutation of tasks and is sorted nonincreasing. Then the result r equals max_{0 <= i < n} (ps[i] + ts[4*i]).",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinProcessingTime.spec_16",
+    "negation": "AegisSpec.MinProcessingTime.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let b be the slice of length n with b[i] = processorTime[i] + c for every i. If r is the result on (processorTime, tasks) and r_b is the result on (b, tasks), then r_b = r + c.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9. Let c be an integer with 0 <= c <= 10^9 - max_{0 <= i < n} processorTime[i]."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MinProcessingTime.spec_17",
+    "negation": "AegisSpec.MinProcessingTime.spec_17_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d be the slice of length m with d[j] = tasks[j] + c for every j. If r is the result on (processorTime, tasks) and r_d is the result on (processorTime, d), then r_d = r + c.",
+    "preconditions": "Let n = len(processorTime) and m = len(tasks). Assume 1 <= n <= 25000, m = 4*n, for every i with 0 <= i < n, 0 <= processorTime[i] <= 10^9, and for every j with 0 <= j < m, 1 <= tasks[j] <= 10^9. Let c be an integer with 0 <= c <= 10^9 - max_{0 <= j < m} tasks[j]."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_1",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For 0 <= p <= n, let C(p), R(p), O(p), A(p), K(p) be the numbers of occurrences of 'c', 'r', 'o', 'a', 'k' among s[0], ..., s[p-1]. Call s valid when C(p) >= R(p) >= O(p) >= A(p) >= K(p) for every p with 0 <= p <= n, and C(n) = R(n) = O(n) = A(n) = K(n). Whenever min_number_of_frogs s returns a result r: if s is valid, then r = max{ C(p) - K(p) | 0 <= p <= n }; otherwise r = -1.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000 (the problem's 10^5 bound) and that for every i with 0 <= i < n, s[i] is one of the ASCII bytes for 'c', 'r', 'o', 'a', 'k'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_2",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "There exists an i64 r such that min_number_of_frogs s = Result.ok r; in particular the call does not return Err and does not panic, overflow, or access out of bounds.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000 and that for every i with 0 <= i < n, s[i] is one of the ASCII bytes for 'c', 'r', 'o', 'a', 'k'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_3",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_number_of_frogs s returns a result r, we have 1 <= r <= C(n), where C(n) is the total number of 'c' bytes in s. Since s is valid and nonempty, equivalently C(n) = n/5.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000, all bytes of s are in {'c','r','o','a','k'}, and s is valid in the sense of S1 (prefix counts C(p) >= R(p) >= O(p) >= A(p) >= K(p), and all five total counts are equal)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_4",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_number_of_frogs s returns a result r, for every p with 0 <= p <= n we have C(p) - K(p) <= r.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000, all bytes of s are in {'c','r','o','a','k'}, and s is valid in the sense of spec_1, with C(p) and K(p) the counts of 'c' and 'k' in the first p bytes."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_5",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If C(n), R(n), O(n), A(n), K(n) are not all equal, then whenever min_number_of_frogs s returns a result r, r = -1.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000 and all bytes of s are in {'c','r','o','a','k'}. Let C(n), R(n), O(n), A(n), K(n) be the total counts of 'c', 'r', 'o', 'a', 'k' in s."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_6",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists p with 0 <= p <= n such that C(p) < R(p) or R(p) < O(p) or O(p) < A(p) or A(p) < K(p), then whenever min_number_of_frogs s returns a result r, r = -1.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000 and all bytes of s are in {'c','r','o','a','k'}. For 0 <= p <= n, let C(p), R(p), O(p), A(p), K(p) be the prefix counts of 'c', 'r', 'o', 'a', 'k' among the first p bytes."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_7",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_number_of_frogs s returns a result r, r = 1 if and only if n is a positive multiple of 5 and for every j with 0 <= j < n/5, s[5j] = 'c', s[5j+1] = 'r', s[5j+2] = 'o', s[5j+3] = 'a', and s[5j+4] = 'k'.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000 and all bytes of s are in {'c','r','o','a','k'}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_8",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For this s, min_number_of_frogs s returns a result r and r = m.",
+    "preconditions": "There is an integer m with 1 <= m and 5m <= 100000, and s has length 5m with s[i] = 'c' for 0 <= i < m, s[i] = 'r' for m <= i < 2m, s[i] = 'o' for 2m <= i < 3m, s[i] = 'a' for 3m <= i < 4m, and s[i] = 'k' for 4m <= i < 5m."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_9",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If min_number_of_frogs s returns a result r, then the index set {0, ..., n-1} can be partitioned into r nonempty subsets P_1, ..., P_r such that for each j, when the indices in P_j are listed in increasing order, the corresponding bytes spell 'c','r','o','a','k','c','r','o','a','k', ... , i.e. a positive number of complete 'croak' blocks.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000, all bytes of s are in {'c','r','o','a','k'}, and s is valid in the sense of spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_10",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If min_number_of_frogs s returns a result r, then for every integer q with 0 <= q < r, there is no partition of {0, ..., n-1} into q nonempty subsets such that each subset, read in increasing index order, spells a positive number of complete 'croak' blocks.",
+    "preconditions": "Let s = croakOfFrogs and n = len(s). Assume 1 <= n <= 100000, all bytes of s are in {'c','r','o','a','k'}, and s is valid in the sense of spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_11",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_number_of_frogs s returns r, min_number_of_frogs u returns r_u, and min_number_of_frogs v returns r_v, we have r = max(r_u, r_v).",
+    "preconditions": "Let u and v be byte slices, each of length at least 1, with len(u) + len(v) <= 100000 and all bytes in {'c','r','o','a','k'}. Assume u and v are both valid in the sense of spec_1. Let s be the concatenation of u followed by v."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinNumberOfFrogs.spec_12",
+    "negation": "AegisSpec.MinNumberOfFrogs.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_number_of_frogs s returns r and min_number_of_frogs t returns r_t, we have r_t = r.",
+    "preconditions": "Let s be a byte slice satisfying the S1 preconditions and assume s is valid. Let q >= 1 with len(s) + 5q <= 100000, and let t be the concatenation of s followed by q copies of the string 'croak'."
+  }
+]

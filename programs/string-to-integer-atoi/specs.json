@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MyAtoi.spec_1",
+    "negation": "AegisSpec.MyAtoi.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every byte slice s satisfying the preconditions, the function returns a result r (it does not fail) and r = val(s), where val(s) is defined as follows. Let n = len(s). Let k be the smallest index in [0, n] such that k = n or s[k] != 32 (space); thus s[0..k) are all spaces. Let p = k. If p < n and (s[p] == 43 ('+') or s[p] == 45 ('-')), let sign = -1 if s[p] == 45 else +1, and let q = p + 1; otherwise let sign = +1 and q = p. Let m be the smallest index in [q, n] such that m = n or s[m] is not a digit (i.e., not (48 <= s[m] <= 57)). If m = q, set val(s) = 0. Otherwise let N = sum_{j=q}^{m-1} (s[j] - 48) * 10^(m-1-j) (a mathematical non-negative integer). Then if sign = +1, val(s) = min(N, 2147483647); if sign = -1, val(s) = max(-N, -2147483648).",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MyAtoi.spec_2",
+    "negation": "AegisSpec.MyAtoi.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every byte slice s satisfying the preconditions, the function returns a result r (i.e., it does not fail).",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MyAtoi.spec_3",
+    "negation": "AegisSpec.MyAtoi.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every byte slice s satisfying the preconditions, whenever the function returns a result r, -2147483648 <= r <= 2147483647.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MyAtoi.spec_4",
+    "negation": "AegisSpec.MyAtoi.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s) and let k be the smallest index in [0, n] with k = n or s[k] != 32. If k = n, or if s[k] is not a digit and s[k] != 43 ('+') and s[k] != 45 ('-'), or if (s[k] == 43 or s[k] == 45) and (k+1 = n or s[k+1] is not a digit), then the function returns r = 0.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MyAtoi.spec_5",
+    "negation": "AegisSpec.MyAtoi.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s) and let k be the smallest index in [0, n] with k = n or s[k] != 32. If k < n and s[k] == 45 ('-'), then the returned r satisfies r <= 0. If k < n and (s[k] == 43 ('+') or s[k] is a digit), then r >= 0. If k = n or s[k] is neither 43, 45, nor a digit, then r = 0.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MyAtoi.spec_6",
+    "negation": "AegisSpec.MyAtoi.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s); let k be the smallest index in [0, n] with k = n or s[k] != 32; if k < n and (s[k] == 43 or s[k] == 45), let sign = -1 if s[k] == 45 else +1 and q = k+1, else sign = +1 and q = k; let m be the smallest index in [q, n] with m = n or s[m] not in [48, 57]; if m > q, let N = sum_{j=q}^{m-1} (s[j]-48)*10^(m-1-j); if m = q, let N = 0. If sign = -1 and N > 2147483648, then the returned r equals -2147483648.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MyAtoi.spec_7",
+    "negation": "AegisSpec.MyAtoi.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every byte slice s satisfying the preconditions, with n, k, sign, q, m, N as defined in spec_6, if sign = +1 and N > 2147483647, then the returned r equals 2147483647.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MyAtoi.spec_8",
+    "negation": "AegisSpec.MyAtoi.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every byte slice s satisfying the preconditions, with n, k, sign, q, m, N as defined in spec_6, if m > q and either (sign = +1 and N <= 2147483647) or (sign = -1 and N <= 2147483648), then the returned r equals N if sign = +1, and r equals -N if sign = -1.",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MyAtoi.spec_9",
+    "negation": "AegisSpec.MyAtoi.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s) and let k be the smallest index in [0, n] with k = n or s[k] != 32. Then the result of my_atoi(s) equals the result of my_atoi(s[k..n]) (the suffix obtained by removing all leading spaces).",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MyAtoi.spec_10",
+    "negation": "AegisSpec.MyAtoi.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s); let k be the smallest index in [0, n] with k = n or s[k] != 32; if k < n and (s[k] == 43 or s[k] == 45), let q = k+1, else let q = k; let m be the smallest index in [q, n] with m = n or s[m] not in [48, 57]. If m < n, then for every byte slice u such that s ++ u satisfies the preconditions, the result of my_atoi(s ++ u) equals the result of my_atoi(s).",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MyAtoi.spec_11",
+    "negation": "AegisSpec.MyAtoi.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice s satisfying the preconditions, let n = len(s); let k be the smallest index in [0, n] with k = n or s[k] != 32; if k < n and (s[k] == 43 or s[k] == 45), let q = k+1, else let q = k; let m be the smallest index in [q, n] with m = n or s[m] not in [48, 57]. If m > q, s[q] == 48 ('0'), and (q > k or m > q + 1), then the result of my_atoi(s) equals the result of my_atoi(s with the byte at index q removed).",
+    "preconditions": "0 <= len(s) <= 200 and every byte of s is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MyAtoi.spec_12",
+    "negation": "AegisSpec.MyAtoi.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function satisfies: my_atoi(\"42\") = 42, my_atoi(\" -042\") = -42, my_atoi(\"1337c0d3\") = 1337, my_atoi(\"0-1\") = 0, my_atoi(\"words and 987\") = 0.",
+    "preconditions": "The listed input strings each satisfy 0 <= len(s) <= 200 and consist only of allowed characters."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MyAtoi.spec_13",
+    "negation": "AegisSpec.MyAtoi.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function satisfies: my_atoi(\"2147483647\") = 2147483647, my_atoi(\"2147483648\") = 2147483647, my_atoi(\"-2147483648\") = -2147483648, my_atoi(\"-2147483649\") = -2147483648, my_atoi(\"20000000000000000000000000000000000000000\") = 2147483647.",
+    "preconditions": "The listed input strings each satisfy 0 <= len(s) <= 200 and consist only of allowed characters."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MyAtoi.spec_14",
+    "negation": "AegisSpec.MyAtoi.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any two byte slices s and t satisfying the preconditions, let the parsing data for s be (k_s, sign_s, q_s, m_s, N_s) and for t be (k_t, sign_t, q_t, m_t, N_t), defined as follows: for a slice x, let n_x = len(x); let k_x be the smallest index in [0, n_x] with k_x = n_x or x[k_x] != 32; if k_x < n_x and (x[k_x] == 43 or x[k_x] == 45), let sign_x = -1 if x[k_x] == 45 else +1 and q_x = k_x+1, else sign_x = +1 and q_x = k_x; let m_x be the smallest index in [q_x, n_x] with m_x = n_x or x[m_x] not in [48, 57]; if m_x > q_x, let N_x = sum_{j=q_x}^{m_x-1} (x[j]-48)*10^(m_x-1-j); if m_x = q_x, let N_x = 0. If N_s = N_t and either N_s = 0 or sign_s = sign_t, then my_atoi(s) = my_atoi(t).",
+    "preconditions": "Both s and t are byte slices with 0 <= len(s) <= 200, 0 <= len(t) <= 200, and every byte of s and t is one of: an English letter (a-z, A-Z), a digit '0'-'9', a space ' ', a plus '+', a minus '-', or a period '.'."
+  }
+]

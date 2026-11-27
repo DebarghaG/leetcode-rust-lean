@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_1",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max { sum_{i in T} power[i] | T is a subset of {0,...,len(power)-1} and for all distinct i,j in T, either power[i] = power[j] or |power[i] - power[j]| >= 3 }. Equivalently, a legal cast set is any set of spell indices T in which two chosen spells with different damage values must have damage values differing by at least 3, while any number of spells with the same damage value may be chosen together; r is the largest possible sum of power[i] over a legal cast set T. The maximum is taken over all legal T; no particular optimal T is required.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_2",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_2_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a subset T of {0,...,len(power)-1} such that sum_{i in T} power[i] = r and, for all distinct i,j in T, either power[i] = power[j] or |power[i] - power[j]| >= 3.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_3",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every subset T of {0,...,len(power)-1} such that for all distinct i,j in T either power[i] = power[j] or |power[i] - power[j]| >= 3, we have sum_{i in T} power[i] <= r.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_4",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and there exists a subset T of {0,...,len(power)-1} such that sum_{i in T} power[i] = r, T is legal (for all distinct i,j in T, either power[i] = power[j] or |power[i] - power[j]| >= 3), and T is closed under equal damage values: for every i in T and every j with 0 <= j < len(power), if power[j] = power[i] then j is in T.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_5",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every legal subset T of {0,...,len(power)-1} with sum_{i in T} power[i] = r is inclusion-maximal among legal subsets: there is no index k with 0 <= k < len(power) and k not in T such that T union {k} is legal. Here legal means that for all distinct i,j in T, either power[i] = power[j] or |power[i] - power[j]| >= 3.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_6",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max { c_v * v | v is an integer that occurs in power }, where c_v is the number of indices i with 0 <= i < len(power) and power[i] = v.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, every power[i] is between 1 and 1000000000 inclusive, and max_{0 <= i < len(power)} power[i] - min_{0 <= i < len(power)} power[i] <= 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_7",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = sum_{i=0}^{len(power)-1} power[i].",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, every power[i] is between 1 and 1000000000 inclusive, and for every i,j with 0 <= i < len(power) and 0 <= j < len(power), if i != j and power[i] != power[j], then |power[i] - power[j]| >= 3."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_8",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r for input power; for every slice q satisfying the preconditions, the function returns a result s for input q and r = s.",
+    "preconditions": "power and q are slices of i64 with len(power) = len(q) between 1 and 100000 inclusive, every entry of power and of q is between 1 and 1000000000 inclusive, and q is a permutation of power: for every integer v, the number of indices i with q[i] = v equals the number of indices i with power[i] = v."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_9",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r on input power and a result r' on input power'; then r' = r + v.",
+    "preconditions": "power is a slice of i64 with 1 <= len(power) <= 99999, every power[i] is between 1 and 1000000000 inclusive, v is an integer with 1 <= v <= 1000000000, for every i with 0 <= i < len(power), |power[i] - v| >= 3, and power' is the slice of length len(power)+1 such that power'[i] = power[i] for 0 <= i < len(power) and power'[len(power)] = v."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_10",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r on input power and a result r0 on input power0; if c_v is the number of indices i with 0 <= i < len(power) and power[i] = v, then r = r0 + c_v * v.",
+    "preconditions": "power is a slice of i64 with 2 <= len(power) <= 100000, every power[i] is between 1 and 1000000000 inclusive, v is an integer that occurs in power, for every i with 0 <= i < len(power) and power[i] != v, |power[i] - v| >= 3, and power0 is the slice obtained from power by deleting all entries equal to v (so 1 <= len(power0) < len(power))."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumTotalDamage.spec_11",
+    "negation": "AegisSpec.MaximumTotalDamage.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail); in particular, no arithmetic overflow and no out-of-bounds access occurs.",
+    "preconditions": "len(power) is between 1 and 100000 inclusive, and for every i with 0 <= i < len(power), 1 <= power[i] <= 1000000000."
+  }
+]

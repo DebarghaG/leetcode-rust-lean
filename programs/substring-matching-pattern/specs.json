@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasMatch.spec_1",
+    "negation": "AegisSpec.HasMatch.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is true exactly when there exist integers L and i such that: (1) a + b <= L <= len(s); (2) 0 <= i <= len(s) - L; (3) for every j with 0 <= j < a, s[i + j] = p[j]; and (4) for every j with 0 <= j < b, s[i + L - b + j] = p[k + 1 + j]. Here L is the length of a contiguous substring of s that matches p, and the star is replaced by the L - a - b bytes between the prefix and suffix.",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasMatch.spec_2",
+    "negation": "AegisSpec.HasMatch.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s and p satisfying the preconditions, the call has_match s p does not fail: it returns some Boolean value (Result.ok true or Result.ok false).",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasMatch.spec_3",
+    "negation": "AegisSpec.HasMatch.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is true.",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Moreover, len(p) = 1 and p[0] = '*'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasMatch.spec_4",
+    "negation": "AegisSpec.HasMatch.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is true exactly when the suffix B = p[1..len(p)) occurs as a contiguous substring of s: there exists an integer q with 0 <= q, q + b <= len(s), and for every j with 0 <= j < b, s[q + j] = p[1 + j].",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Moreover, p[0] = '*' and len(p) > 1. Let b = len(p) - 1; the unique star is at index 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasMatch.spec_5",
+    "negation": "AegisSpec.HasMatch.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is true exactly when the prefix A = p[0..len(p) - 1) occurs as a contiguous substring of s: there exists an integer i with 0 <= i, i + a <= len(s), and for every j with 0 <= j < a, s[i + j] = p[j].",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Moreover, p[len(p) - 1] = '*' and len(p) > 1. Let a = len(p) - 1; the unique star is at the last index."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasMatch.spec_6",
+    "negation": "AegisSpec.HasMatch.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is true exactly when s is the concatenation of the pattern parts around the star: for every j with 0 <= j < a, s[j] = p[j], and for every j with 0 <= j < b, s[a + j] = p[k + 1 + j].",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1; assume len(s) = a + b."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HasMatch.spec_7",
+    "negation": "AegisSpec.HasMatch.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever has_match s p returns a Boolean value r, r is false.",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1; assume a + b > len(s)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HasMatch.spec_8",
+    "negation": "AegisSpec.HasMatch.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever has_match s p returns a Boolean value r, if there exist integers i and q such that 0 <= i, i + a <= q, q + b <= len(s), for every j with 0 <= j < a, s[i + j] = p[j], and for every j with 0 <= j < b, s[q + j] = p[k + 1 + j], then r is true.",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HasMatch.spec_9",
+    "negation": "AegisSpec.HasMatch.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever has_match s p returns a Boolean value r and r is true, the prefix A = p[0..k) occurs as a contiguous substring of s: there exists an integer i with 0 <= i, i + a <= len(s), and for every j with 0 <= j < a, s[i + j] = p[j].",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1; assume a > 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HasMatch.spec_10",
+    "negation": "AegisSpec.HasMatch.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever has_match s p returns a Boolean value r and r is true, the suffix B = p[k+1..len(p)) occurs as a contiguous substring of s: there exists an integer q with 0 <= q, q + b <= len(s), and for every j with 0 <= j < b, s[q + j] = p[k + 1 + j].",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Let k be the unique index with p[k] = '*'; let a = k and b = len(p) - k - 1; assume b > 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.HasMatch.spec_11",
+    "negation": "AegisSpec.HasMatch.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If has_match s p returns true, then whenever has_match s' p returns a Boolean value r, r is true.",
+    "preconditions": "s and p are byte arrays of ASCII codes with 1 <= len(s) <= 50 and 1 <= len(p) <= 50. s contains only lowercase English letters. p contains only lowercase English letters and exactly one '*' (byte 42). Also u and v are byte arrays consisting only of lowercase English letters, with 1 <= len(u) + len(s) + len(v) <= 50. Let s' = u ++ s ++ v (concatenation)."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CalculateScore.spec_1",
+    "negation": "AegisSpec.CalculateScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = score_n, where score_n is defined by the following left-to-right marking process. For i = 0, ..., n let U_i be a set of indices and score_i an integer. Set U_0 = the empty set and score_0 = 0. For each i with 0 <= i < n, let E_i = { j | j is in U_i and s[j] = 219 - s[i] } (these are exactly the unmarked earlier indices whose character is the mirror of s[i]). If E_i is nonempty, let j_i = max E_i; set U_{i+1} = U_i without j_i and score_{i+1} = score_i + (i - j_i). If E_i is empty, set U_{i+1} = U_i union {i} and score_{i+1} = score_i. Then r = score_n.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122 (s consists of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CalculateScore.spec_2",
+    "negation": "AegisSpec.CalculateScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CalculateScore.spec_3",
+    "negation": "AegisSpec.CalculateScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CalculateScore.spec_4",
+    "negation": "AegisSpec.CalculateScore.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= floor(n / 2) * (n - floor(n / 2)), where floor(n / 2) is integer division by 2.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CalculateScore.spec_5",
+    "negation": "AegisSpec.CalculateScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 1, then whenever the function returns a result r, r = 0.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CalculateScore.spec_6",
+    "negation": "AegisSpec.CalculateScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for all indices j and i with 0 <= j < i < n, s[j] != 219 - s[i].",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CalculateScore.spec_7",
+    "negation": "AegisSpec.CalculateScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 2, then whenever the function returns a result r, r = 1 if s[1] = 219 - s[0], and r = 0 otherwise.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CalculateScore.spec_8",
+    "negation": "AegisSpec.CalculateScore.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte string of length n with t[i] = 219 - s[i] for every 0 <= i < n. If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CalculateScore.spec_9",
+    "negation": "AegisSpec.CalculateScore.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every k with 1 <= k <= n, let p_k be the prefix slice s[0..k). If the function returns r on s and r_k on p_k, then r >= r_k.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CalculateScore.spec_10",
+    "negation": "AegisSpec.CalculateScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be an index with 1 <= k < n, let x = s[0..k), and let y = s[k..n). Suppose that for every a and b with 0 <= a < k <= b < n, s[b] != 219 - s[a]. If the function returns r on s, r_x on x, and r_y on y, then r = r_x + r_y.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CalculateScore.spec_11",
+    "negation": "AegisSpec.CalculateScore.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n is even and for every k with 0 <= k < n / 2 we have s[2*k + 1] = 219 - s[2*k], then whenever the function returns a result r, r = n / 2.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CalculateScore.spec_12",
+    "negation": "AegisSpec.CalculateScore.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exist indices j and i with 0 <= j < i < n such that s[j] = 219 - s[i] and 1 <= i - j <= r.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CalculateScore.spec_13",
+    "negation": "AegisSpec.CalculateScore.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If for every k with 0 <= k < floor(n / 2) we have s[2*k + 1] = 219 - s[2*k], then whenever the function returns a result r, r = floor(n / 2).",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CalculateScore.spec_14",
+    "negation": "AegisSpec.CalculateScore.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For each c with 97 <= c <= 109, let P_c = {c, 219 - c}. Let I_c be the increasing list of indices i with s[i] in P_c, and let u_c be the string u_c[t] = s[I_c[t]] for 0 <= t < len(I_c). Run the same left-to-right marking process on u_c, but when a pair is formed at positions a < b in u_c, add the original distance I_c[b] - I_c[a] instead of b - a. Let r_c be the total score for this pair. If the function returns r on s, then r = sum_{c=97}^{109} r_c.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CalculateScore.spec_15",
+    "negation": "AegisSpec.CalculateScore.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the byte string of length n with t[i] = f(s[i]) for every 0 <= i < n. If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "Let n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, 97 <= s[i] <= 122. Let f be a permutation of {97, ..., 122} such that f(219 - c) = 219 - f(c) for every c with 97 <= c <= 122."
+  }
+]

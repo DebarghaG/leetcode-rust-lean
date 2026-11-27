@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_1",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the number of equivalence classes of the following relation on the index set {0,1,...,n-1}: indices i and k are related if and only if, for every lowercase letter c, the number of even positions j with 0 <= j < m and words[i][j] = c equals the corresponding number for words[k], and the number of odd positions j with 0 <= j < m and words[i][j] = c equals the corresponding number for words[k]. Equivalently, r is the number of distinct pairs (E,O), where E is the multiset of even-indexed characters of some words[i] and O is the multiset of odd-indexed characters of that same words[i].",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_2",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no panic, out-of-bounds access, or arithmetic overflow).",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_3",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r.",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_4",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= D, where D is the number of distinct byte strings among words[0], words[1], ..., words[n-1].",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_5",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if every two indices i,j with 0 <= i < n and 0 <= j < n are special-equivalent; here special-equivalent means that for every lowercase letter c, the number of occurrences of c at even positions of words[i] equals that of words[j], and the number of occurrences of c at odd positions of words[i] equals that of words[j].",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_6",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If for every pair of distinct indices i,j with 0 <= i < j < n, words[i] and words[j] are not special-equivalent (that is, for some lowercase letter c their even-position counts differ or their odd-position counts differ), then whenever the function returns a result r, r = n.",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_7",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the number of distinct byte values among the characters words[0][0], words[1][0], ..., words[n-1][0].",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, every byte is an ASCII lowercase letter 'a'..'z', and m = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_8",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the number of distinct two-byte strings among words[0], words[1], ..., words[n-1], i.e. the number of distinct pairs (words[i][0], words[i][1]).",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, every byte is an ASCII lowercase letter 'a'..'z', and m = 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_9",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on words and r' on words', r' = r if w is special-equivalent to at least one words[i] with 0 <= i < n, and r' = r + 1 otherwise. Here special-equivalent means the even-position and odd-position letter counts of w equal those of words[i] for every lowercase letter.",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, every byte is an ASCII lowercase letter 'a'..'z', and n < 1000. Let w be any byte string of length m with lowercase letters, and let words' be the array of length n+1 obtained by appending w after all words."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_10",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose there is a bijection p on {0,1,...,n-1} such that words'[i] is byte-for-byte equal to words[p(i)] for every i < n. Whenever the function returns r on words and r' on words', r = r'.",
+    "preconditions": "Let words and words' both satisfy the common preconditions with the same n = len(words) = len(words') and the same m = len(words[0]) = len(words'[0]): 1 <= n <= 1000, 1 <= m <= 20, all strings have length m, and all bytes are ASCII lowercase 'a'..'z'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_11",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every i < n, words'[i] and words[i] are special-equivalent, meaning that for every lowercase letter c the number of occurrences of c at even positions of words'[i] equals that of words[i], and the number of occurrences of c at odd positions of words'[i] equals that of words[i]. Whenever the function returns r on words and r' on words', r = r'.",
+    "preconditions": "Let words and words' both satisfy the common preconditions with the same n = len(words) = len(words') and the same m = len(words[0]) = len(words'[0]): 1 <= n <= 1000, 1 <= m <= 20, all strings have length m, and all bytes are ASCII lowercase 'a'..'z'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumSpecialEquivGroups.spec_12",
+    "negation": "AegisSpec.NumSpecialEquivGroups.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set R of exactly r indices with 0 <= i < n such that: (1) for any two distinct indices i,k in R, words[i] and words[k] are not special-equivalent; and (2) for every index k with 0 <= k < n, there is an index i in R such that words[k] and words[i] are special-equivalent. Special-equivalent has the usual meaning: equal counts of every lowercase letter at even positions and equal counts of every lowercase letter at odd positions.",
+    "preconditions": "Let n = len(words) and m = len(words[0]). Assume 1 <= n <= 1000, 1 <= m <= 20, every words[i] has length m, and every byte of every words[i] is an ASCII lowercase letter 'a'..'z'."
+  }
+]

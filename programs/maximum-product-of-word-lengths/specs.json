@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProduct.spec_1",
+    "negation": "AegisSpec.MaxProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Let letters(w) be the set of bytes occurring in w. Then r is the maximum of the set {0} ∪ { len(words[i]) * len(words[j]) | 0 <= i < j < len(words) and letters(words[i]) ∩ letters(words[j]) = ∅ }. Equivalently: (a) for every i and j with 0 <= i < j < len(words) and letters(words[i]) ∩ letters(words[j]) = ∅, len(words[i]) * len(words[j]) <= r; and (b) either r = 0 and there is no such pair (i,j), or there exist i and j with 0 <= i < j < len(words), letters(words[i]) ∩ letters(words[j]) = ∅, and len(words[i]) * len(words[j]) = r.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProduct.spec_2",
+    "negation": "AegisSpec.MaxProduct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProduct.spec_3",
+    "negation": "AegisSpec.MaxProduct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProduct.spec_4",
+    "negation": "AegisSpec.MaxProduct.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= L1 * L2, where L1 and L2 are the two largest values in the multiset { len(words[i]) | 0 <= i < len(words) } counted with multiplicity (so L1 >= L2 and every other length is <= L2).",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProduct.spec_5",
+    "negation": "AegisSpec.MaxProduct.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i and j with 0 <= i < j < len(words) such that letters(words[i]) ∩ letters(words[j]) = ∅, we have len(words[i]) * len(words[j]) <= r; here letters(w) denotes the set of bytes occurring in w.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProduct.spec_6",
+    "negation": "AegisSpec.MaxProduct.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and 0 < r, there exist i and j with 0 <= i < j < len(words) such that letters(words[i]) ∩ letters(words[j]) = ∅ and len(words[i]) * len(words[j]) = r; here letters(w) denotes the set of bytes occurring in w.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProduct.spec_7",
+    "negation": "AegisSpec.MaxProduct.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every i and j with 0 <= i < j < len(words), letters(words[i]) ∩ letters(words[j]) ≠ ∅ (i.e., every two distinct words share at least one byte); here letters(w) denotes the set of bytes occurring in w.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProduct.spec_8",
+    "negation": "AegisSpec.MaxProduct.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122). There exists a byte c with 97 <= c <= 122 such that for every i with 0 <= i < len(words), c ∈ letters(words[i]), where letters(w) denotes the set of bytes occurring in w."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProduct.spec_9",
+    "negation": "AegisSpec.MaxProduct.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if letters(words[0]) ∩ letters(words[1]) = ∅ then r = len(words[0]) * len(words[1]), and otherwise r = 0; here letters(w) denotes the set of bytes occurring in w.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122). len(words) = 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProduct.spec_10",
+    "negation": "AegisSpec.MaxProduct.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if there exist i and j with 0 <= i < j < len(words) and words[i][0] ≠ words[j][0]; otherwise r = 0.",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122). For every i with 0 <= i < len(words), len(words[i]) = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProduct.spec_11",
+    "negation": "AegisSpec.MaxProduct.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = L1 * L2, where L1 and L2 are the two largest values in the multiset { len(words[i]) | 0 <= i < len(words) } counted with multiplicity (L1 >= L2).",
+    "preconditions": "2 <= len(words) <= 1000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 1000 and every byte of words[i] is a lowercase English letter (97 <= byte <= 122). For every i and j with 0 <= i < j < len(words), letters(words[i]) ∩ letters(words[j]) = ∅, where letters(w) denotes the set of bytes occurring in w."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxProduct.spec_12",
+    "negation": "AegisSpec.MaxProduct.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such pair of inputs, if max_product(words) returns r and max_product(words') returns r', then r = r'.",
+    "preconditions": "words and words' are two slices each satisfying: 2 <= len <= 1000; every word has length between 1 and 1000; every byte is a lowercase English letter (97..122). Additionally, len(words') = len(words) and there is a bijection π from {0,...,len(words)-1} to {0,...,len(words)-1} such that for every k with 0 <= k < len(words), words'[k] = words[π(k)]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxProduct.spec_13",
+    "negation": "AegisSpec.MaxProduct.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let words' be the array obtained by appending w to words. If max_product(words) returns r and max_product(words') returns r', then r' >= r.",
+    "preconditions": "words is a slice satisfying: 2 <= len(words) <= 1000; every word has length between 1 and 1000; every byte is a lowercase English letter (97..122). Also len(words) < 1000. w is a Vec U8 with 1 <= len(w) <= 1000 and every byte of w is a lowercase English letter (97..122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxProduct.spec_14",
+    "negation": "AegisSpec.MaxProduct.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let words' be the array obtained by appending w to words. If max_product(words) returns r and max_product(words') returns r', then r' = r.",
+    "preconditions": "words is a slice satisfying: 2 <= len(words) <= 1000; every word has length between 1 and 1000; every byte is a lowercase English letter (97..122). Also len(words) < 1000. w is a Vec U8 equal to words[k] for some k with 0 <= k < len(words)."
+  }
+]

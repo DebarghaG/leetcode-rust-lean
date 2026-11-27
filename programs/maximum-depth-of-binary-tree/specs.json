@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxDepth.spec_1",
+    "negation": "AegisSpec.MaxDepth.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a leaf as a node Node(v, Null, Null), and define a root-to-leaf path in root as a sequence of nodes T0,...,Tk such that T0 = root, each T_{i+1} is the left or right child of T_i, and T_k is a leaf; its length is k+1, the number of nodes. If root = Null, there is no root-to-leaf path and define MaxDepth(root) = 0. If root is non-null, define MaxDepth(root) as the maximum length of any root-to-leaf path in root (such a path always exists). Then max_depth(root) returns a result r and r = MaxDepth(root).",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxDepth.spec_2",
+    "negation": "AegisSpec.MaxDepth.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, the call max_depth(root) returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxDepth.spec_3",
+    "negation": "AegisSpec.MaxDepth.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every root satisfying the preconditions, max_depth(root) returns a result r and 0 <= r <= nodes(root), where nodes(root) is the number of Node constructors in root.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxDepth.spec_4",
+    "negation": "AegisSpec.MaxDepth.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every root satisfying the preconditions with root = Node(v,l,r), if max_depth(l) returns dl and max_depth(r) returns dr, then max_depth(root) returns d and d = 1 + max(dl, dr). Here max is the usual maximum of two i64 values, and max_depth(Null) is 0 by the empty-tree case.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxDepth.spec_5",
+    "negation": "AegisSpec.MaxDepth.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "max_depth(root) returns a result r and there exists a leaf L of root such that the distance from root to L, the number of edges on the unique path from root down to L, is r - 1.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100, and root is non-null."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxDepth.spec_6",
+    "negation": "AegisSpec.MaxDepth.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "max_depth(root) returns a result r and for every root-to-leaf path P in root, the length of P, defined as the number of nodes in P, is at most r. If root = Null, there are no root-to-leaf paths and the condition is vacuous.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxDepth.spec_7",
+    "negation": "AegisSpec.MaxDepth.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "max_depth(root) returns a result r and for every node u of root, if u is at distance d from root, meaning the number of edges on the unique path from root down to u, with d = 0 for the root itself, then d + 1 <= r.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxDepth.spec_8",
+    "negation": "AegisSpec.MaxDepth.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "max_depth(root) returns a result r. For every tree T such that either T = root or T is the subtree rooted at some node of root (including a Null child of a leaf), if max_depth(T) returns d, then d <= r.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxDepth.spec_9",
+    "negation": "AegisSpec.MaxDepth.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define same_shape recursively by: same_shape(Null, Null) = true; same_shape(Node(_, l1, r1), Node(_, l2, r2)) = (same_shape(l1, l2) and same_shape(r1, r2)); same_shape(T1, T2) = false in all other cases. For every two trees root1 and root2, if same_shape(root1, root2) holds, and if max_depth(root1) returns r1 and max_depth(root2) returns r2, then r1 = r2.",
+    "preconditions": "For two trees root1 and root2, each satisfies nodes(.) <= 10000, and every label v in any Node(v,_,_) of either tree satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxDepth.spec_10",
+    "negation": "AegisSpec.MaxDepth.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define mirror(Null) = Null and mirror(Node(v,l,r)) = Node(v, mirror(r), mirror(l)). For every root satisfying the preconditions, if max_depth(root) returns r and max_depth(mirror(root)) returns r', then r = r'.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxDepth.spec_11",
+    "negation": "AegisSpec.MaxDepth.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every root satisfying the preconditions, max_depth(root) returns a result r and r = 0 if and only if root = Null; equivalently, r > 0 exactly when root is non-null.",
+    "preconditions": "Let nodes(T) be the number of Node constructors in T. The input root satisfies nodes(root) <= 10000, and every label v in any Node(v,_,_) of root satisfies -100 <= v <= 100."
+  }
+]

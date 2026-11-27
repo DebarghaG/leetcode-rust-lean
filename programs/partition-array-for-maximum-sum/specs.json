@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_1",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the maximum of S(P) over all valid partitions P of arr into contiguous blocks of length at most k. A valid partition P is a sequence of positive block lengths b_1, ..., b_m (m >= 1) such that 1 <= b_j <= k for all j and sum_{j=1}^m b_j = len(arr). For such a partition, let start_1 = 0 and start_{j+1} = start_j + b_j for 1 <= j < m. Define M_j = max { arr[t] | start_j <= t < start_j + b_j } (the maximum over the j-th block). Then S(P) = sum_{j=1}^m b_j * M_j.",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_2",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, overflow, or panic).",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_3",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{i=0}^{len(arr)-1} arr[i].",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_4",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(arr) * max { arr[i] | 0 <= i < len(arr) }.",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_5",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum_{i=0}^{len(arr)-1} arr[i].",
+    "preconditions": "len(arr) >= 1; k = 1; for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_6",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(arr) * max { arr[i] | 0 <= i < len(arr) }.",
+    "preconditions": "len(arr) >= 1; k = len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_7",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r = len(arr) * c.",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); there exists an integer c such that for every i with 0 <= i < len(arr), arr[i] = c, and 0 <= c <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_8",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of max_sum_after_partitioning(arr, k1) and r2 be the result of max_sum_after_partitioning(arr, k2). Whenever both calls return results, r1 <= r2.",
+    "preconditions": "len(arr) >= 1; 1 <= k1 <= k2 <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_9",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of max_sum_after_partitioning(arr, k) and r' be the result of max_sum_after_partitioning(arr', k). Whenever both calls return results, r <= r'.",
+    "preconditions": "len(arr) = len(arr') = n >= 1; 1 <= k <= n; for every i with 0 <= i < n, 0 <= arr[i] <= arr'[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_10",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists a valid partition P of arr into contiguous blocks of length at most k such that S(P) = r, where valid partition and S are defined as in the main specification.",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_11",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and for every valid partition P of arr into contiguous blocks of length at most k, S(P) <= r, where valid partition and S are defined as in the main specification.",
+    "preconditions": "len(arr) >= 1; 1 <= k <= len(arr); for every i with 0 <= i < len(arr), 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_12",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of max_sum_after_partitioning(arr, k) and r' be the result of max_sum_after_partitioning(arr', k), where arr'[i] = arr[i] + c for all i. Whenever both calls return results, r' = r + c * n.",
+    "preconditions": "len(arr) = n >= 1; 1 <= k <= n; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9; let c be an integer such that for every i with 0 <= i < n, 0 <= arr[i] + c <= 10^9."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_13",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of max_sum_after_partitioning(arr, k). Whenever the function returns a result r, r >= rA + rB.",
+    "preconditions": "len(arr) = n >= 2; 1 <= k <= n; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9; let s be an integer with 1 <= s < n. Let A = arr[0..s-1] and B = arr[s..n-1]. Let rA be the maximum sum for A with block size at most k (defined as in the main specification), and rB be the maximum sum for B with block size at most k."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_14",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of max_sum_after_partitioning(arr, k) and r' be the result of max_sum_after_partitioning(arr_rev, k), where arr_rev[i] = arr[n-1-i] for all i. Whenever both calls return results, r = r'.",
+    "preconditions": "len(arr) = n >= 1; 1 <= k <= n; for every i with 0 <= i < n, 0 <= arr[i] <= 10^9."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_15",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let F(A,q) be the maximum of S(P) over all partitions P of A into contiguous blocks of length at most q, with F(empty,q)=0, where S(P) is defined as in the main specification. The function returns a result r, and r = max_{1<=b<=min(k,n)} ( b * max{arr[t] | 0<=t<b} + F(arr[b..n-1], k) ).",
+    "preconditions": "len(arr)=n>=1; 1<=k<=n; for every i with 0<=i<n, 0<=arr[i]<=10^9."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_16",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= k * max { arr[i] | 0 <= i < len(arr) }.",
+    "preconditions": "len(arr)=n>=1; 1<=k<=n; for every i with 0<=i<n, 0<=arr[i]<=10^9."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaxSumAfterPartitioning.spec_17",
+    "negation": "AegisSpec.MaxSumAfterPartitioning.spec_17_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of max_sum_after_partitioning(arr, k) and r' be the result of max_sum_after_partitioning(arr_scaled, k), where arr_scaled[i]=alpha*arr[i] for all i. Whenever both calls return results, r' = alpha * r.",
+    "preconditions": "len(arr)=n>=1; 1<=k<=n; for every i with 0<=i<n, 0<=arr[i]<=10^9; let alpha be an integer with alpha>=0 and 0<=alpha*arr[i]<=10^9 for every i."
+  }
+]

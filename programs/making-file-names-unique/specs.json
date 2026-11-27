@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetFolderNames.spec_1",
+    "negation": "AegisSpec.GetFolderNames.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever get_folder_names returns a result r, len(r) = len(names), and for every i with 0 <= i < len(names): if there is no j with 0 <= j < i and r[j] = names[i], then r[i] = names[i]; otherwise r[i] = names[i] ++ '(' ++ decimal(k) ++ ')' where k is the least positive integer such that names[i] ++ '(' ++ decimal(k) ++ ')' is not equal to r[j] for every j with 0 <= j < i. Here decimal(k) is the canonical base-10 representation of positive integer k without leading zeros, and ++ denotes concatenation of byte strings.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetFolderNames.spec_2",
+    "negation": "AegisSpec.GetFolderNames.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function get_folder_names returns a result r (it does not fail) for every input satisfying the preconditions.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetFolderNames.spec_3",
+    "negation": "AegisSpec.GetFolderNames.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_folder_names returns a result r, len(r) = len(names).",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetFolderNames.spec_4",
+    "negation": "AegisSpec.GetFolderNames.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_folder_names returns a result r, for every i and j with 0 <= i < j < len(names), r[i] != r[j].",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetFolderNames.spec_5",
+    "negation": "AegisSpec.GetFolderNames.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names), either r[i] = names[i], or there exists a positive integer k such that r[i] = names[i] ++ '(' ++ decimal(k) ++ ')', where decimal(k) is the canonical base-10 representation of k without leading zeros.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetFolderNames.spec_6",
+    "negation": "AegisSpec.GetFolderNames.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names), if names[i] is not equal to r[j] for every j with 0 <= j < i, then r[i] = names[i].",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetFolderNames.spec_7",
+    "negation": "AegisSpec.GetFolderNames.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names), if there exists j with 0 <= j < i and r[j] = names[i], then there exists a positive integer k such that r[i] = names[i] ++ '(' ++ decimal(k) ++ ')', where decimal(k) is the canonical base-10 representation of k without leading zeros.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetFolderNames.spec_8",
+    "negation": "AegisSpec.GetFolderNames.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names) and every positive integer k, if r[i] = names[i] ++ '(' ++ decimal(k) ++ ')', then for every positive integer m with 1 <= m < k there exists j with 0 <= j < i and r[j] = names[i] ++ '(' ++ decimal(m) ++ ')'. Here decimal is the canonical base-10 representation without leading zeros.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetFolderNames.spec_9",
+    "negation": "AegisSpec.GetFolderNames.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names) and every j with 0 <= j <= i, there exists t with 0 <= t <= i such that r[t] = names[j].",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetFolderNames.spec_10",
+    "negation": "AegisSpec.GetFolderNames.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_folder_names returns a result r, for every i and j with 0 <= j < i < len(names), r[i] != names[j].",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetFolderNames.spec_11",
+    "negation": "AegisSpec.GetFolderNames.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names), len(names[i]) <= len(r[i]) <= len(names[i]) + 7.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetFolderNames.spec_12",
+    "negation": "AegisSpec.GetFolderNames.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_folder_names returns a result r, for every i with 0 <= i < len(names) and every positive integer k, if r[i] = names[i] ++ '(' ++ decimal(k) ++ ')', then k <= i + 1. Here decimal is the canonical base-10 representation without leading zeros.",
+    "preconditions": "names is a slice of byte-vector strings with 1 <= len(names) <= 50000. For every i with 0 <= i < len(names), 1 <= len(names[i]) <= 20, and every byte of names[i] is the ASCII code of a lowercase English letter, a digit, an opening round bracket, or a closing round bracket."
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_1",
+    "negation": "AegisSpec.MinEdgeReversals.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r with len(r) = n, and for every i with 0 ≤ i < n: r[i] is the minimum, over all subsets S of {0,...,n-2}, of |S| such that in the directed graph obtained from the original directed edges edges[j] = (edges[j][0] → edges[j][1]) by reversing every edge whose index lies in S, node i can reach every node of {0,...,n-1} by following zero or more directed edges. This minimum is well defined because the set being minimized over is nonempty (reversing exactly the edges currently pointing toward i's side achieves reachability of all nodes from i).",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} whose edges are the unordered pairs {edges[j][0], edges[j][1]} for 0 ≤ j < n-1 is a tree (connected and acyclic)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_2",
+    "negation": "AegisSpec.MinEdgeReversals.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every i with 0 ≤ i < n: 0 ≤ r[i] ≤ n-1.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_3",
+    "negation": "AegisSpec.MinEdgeReversals.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For each edge index j with 0 ≤ j < n-1 let a = edges[j][0] and b = edges[j][1]; deleting edge j from the tree T splits {0,...,n-1} into two components, and let side_j(b) denote the component that contains b. Then for every i with 0 ≤ i < n: r[i] = |{ j : 0 ≤ j < n-1 and i ∈ side_j(b) }|, i.e. r[i] equals the number of input edges whose direction points toward the side of i (the number of edges a→b for which i lies on b's side after the edge is removed).",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_4",
+    "negation": "AegisSpec.MinEdgeReversals.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every edge index j with 0 ≤ j < n-1, letting u = edges[j][0] and v = edges[j][1]: r[v] = r[u] + 1.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_5",
+    "negation": "AegisSpec.MinEdgeReversals.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every i with 0 ≤ i < n: r[i] = 0 if and only if, using only the original directed edges edges[j] = (edges[j][0] → edges[j][1]) with no reversals at all, node i can reach every node of {0,...,n-1}.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_6",
+    "negation": "AegisSpec.MinEdgeReversals.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every i with 0 ≤ i < n and every subset S of {0,...,n-2} with |S| < r[i]: in the directed graph obtained by reversing exactly the edges whose indices lie in S, node i cannot reach every node of {0,...,n-1}; that is, at least one node is unreachable from i.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_7",
+    "negation": "AegisSpec.MinEdgeReversals.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every i with 0 ≤ i < n define T_i = { j : 0 ≤ j < n-1 and i lies in the component containing edges[j][1] when edge j is deleted from T } (the input edges currently pointing toward i's side). Then |T_i| = r[i], and after reversing exactly the edges whose indices lie in T_i, node i can reach every node of {0,...,n-1} via directed edges.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_8",
+    "negation": "AegisSpec.MinEdgeReversals.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions the function returns a result r (it never fails: no arithmetic overflow, no out-of-bounds access, no panic), and len(r) = n.",
+    "preconditions": "n ≥ 2; len(edges) = n-1; for every j with 0 ≤ j < n-1: len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1]; and the undirected graph T on {0,...,n-1} with edges {edges[j][0], edges[j][1]} is a tree."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinEdgeReversals.spec_9",
+    "negation": "AegisSpec.MinEdgeReversals.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The returned answer vector is invariant under reordering of the input edges: the vector r produced for (n, edges) equals, componentwise, the vector produced for (n, edges').",
+    "preconditions": "n ≥ 2; len(edges) = n-1; both (n, edges) and (n, edges') satisfy: for every j with 0 ≤ j < n-1, len(edges[j]) = 2, 0 ≤ edges[j][0] < n, 0 ≤ edges[j][1] < n, edges[j][0] ≠ edges[j][1], the undirected graph with these edges is a tree, and edges' is a permutation of edges (there is a permutation π of {0,...,n-2} with edges'[k] = edges[π(k)] for all k)."
+  }
+]

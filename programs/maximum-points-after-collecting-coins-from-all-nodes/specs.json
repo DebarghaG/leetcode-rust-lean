@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumPoints.spec_1",
+    "negation": "AegisSpec.MaximumPoints.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever maximum_points returns a result r, r equals the maximum, over all functions m from {0,...,n-1} to {0,1}, of Sum_{i=0}^{n-1} f_i(m), where for each node i, A_i(m) is the set of strict ancestors of i in the tree rooted at 0, h_i(m) is the number of a in A_i(m) with m(a)=1, and f_i(m) = floor(coins[i] / 2^{h_i(m)}) - k if m(i)=0, while f_i(m) = floor(coins[i] / 2^{h_i(m)+1}) if m(i)=1. Here m(i)=0 means collect node i by the first way and m(i)=1 means collect node i by the second way; floor is integer floor division and the value is 0 once the power of 2 exceeds coins[i]. The maximum is over all 2^n assignments and is attained.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumPoints.spec_2",
+    "negation": "AegisSpec.MaximumPoints.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, maximum_points returns a result r (it does not fail by overflow, out-of-bounds access, division by zero, or panic).",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumPoints.spec_3",
+    "negation": "AegisSpec.MaximumPoints.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_points returns r, r >= Sum_{i=0}^{n-1} coins[i] - n*k.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumPoints.spec_4",
+    "negation": "AegisSpec.MaximumPoints.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_points returns r, r <= Sum_{i=0}^{n-1} max(coins[i] - k, floor(coins[i]/2)).",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumPoints.spec_5",
+    "negation": "AegisSpec.MaximumPoints.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_points returns r, r = Sum_{i=0}^{n-1} coins[i].",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; k = 0. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumPoints.spec_6",
+    "negation": "AegisSpec.MaximumPoints.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_points returns r, r = 0.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, coins[i] = 0; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumPoints.spec_7",
+    "negation": "AegisSpec.MaximumPoints.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_points(edges, coins, k1) returns r1 and maximum_points(edges, coins, k2) returns r2, r1 >= r2.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k1 <= k2 <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumPoints.spec_8",
+    "negation": "AegisSpec.MaximumPoints.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_points(edges, coins, k) returns r and maximum_points(edges', coins, k) returns r', r = r'.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. Let edges' be any list of length n-1 of ordered pairs of vertices in {0,...,n-1} such that the multiset of unordered pairs {e'[0], e'[1]} over e' in edges' equals the multiset of unordered pairs {e[0], e[1]} over e in edges. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumPoints.spec_9",
+    "negation": "AegisSpec.MaximumPoints.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_points returns r, r >= Sum_{i=0}^{n-1} floor(coins[i] / 2^{depth(i)+1}), where depth(i) is the number of edges on the unique path from root 0 to node i.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumPoints.spec_10",
+    "negation": "AegisSpec.MaximumPoints.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever maximum_points returns r, there exists a function m from {0,...,n-1} to {0,1} (m(i)=0 for the first way, m(i)=1 for the second way) such that the total score obtained by processing the tree top-down with these choices equals r. The score of m is Sum_i f_i(m), with f_i(m) = floor(coins[i]/2^{h_i(m)}) - k if m(i)=0 and f_i(m) = floor(coins[i]/2^{h_i(m)+1}) if m(i)=1, where h_i(m) is the number of strict ancestors a of i with m(a)=1.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumPoints.spec_11",
+    "negation": "AegisSpec.MaximumPoints.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_points returns r, for every function m from {0,...,n-1} to {0,1} (m(i)=0 for the first way, m(i)=1 for the second way), the score of m is at most r. The score of m is Sum_i f_i(m), with f_i(m) = floor(coins[i]/2^{h_i(m)}) - k if m(i)=0 and f_i(m) = floor(coins[i]/2^{h_i(m)+1}) if m(i)=1, where h_i(m) is the number of strict ancestors a of i with m(a)=1.",
+    "preconditions": "Let n = len(coins). Assume 2 <= n <= 100000; len(edges) = n-1; every e in edges has len(e) = 2, 0 <= e[0] < n, and 0 <= e[1] < n; the undirected graph on {0,...,n-1} with an edge between e[0] and e[1] for each e in edges is a tree (connected and acyclic); for every i with 0 <= i < n, 0 <= coins[i] <= 10000; and 0 <= k <= 10000. All values are 64-bit machine integers and the stated inequalities are within range."
+  }
+]

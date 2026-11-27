@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PartitionString.spec_1",
+    "negation": "AegisSpec.PartitionString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every s satisfying the preconditions, partition_string(s) returns a result r, and r is the minimum k >= 1 for which there exist cut positions 0 = p_0 < p_1 < ... < p_k = n such that for every j with 1 <= j <= k and every a,b with p_{j-1} <= a < b < p_j, we have s[a] != s[b]. Equivalently, the k contiguous nonempty substrings s[p_{j-1}..p_j) cover s in order and each substring has all characters distinct.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s consists of English lowercase letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PartitionString.spec_2",
+    "negation": "AegisSpec.PartitionString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions and every i,j with 0 <= i < j <= n, the call partition_string on the contiguous substring s[i..j) returns a result (it does not fail: no panic, out-of-bounds, or arithmetic overflow).",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PartitionString.spec_3",
+    "negation": "AegisSpec.PartitionString.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever partition_string(s) returns a result r, 1 <= r <= n.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PartitionString.spec_4",
+    "negation": "AegisSpec.PartitionString.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever partition_string(s) returns a result r, r >= ceil(n / 26), where ceil(x) is the least integer greater than or equal to x.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PartitionString.spec_5",
+    "negation": "AegisSpec.PartitionString.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever partition_string(s) returns a result r, for every byte value c, r >= freq(c), where freq(c) is the number of indices i with 0 <= i < n and s[i] = c. Equivalently, r >= max_c freq(c).",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PartitionString.spec_6",
+    "negation": "AegisSpec.PartitionString.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever partition_string(s) returns a result r, there exist cut positions 0 = p_0 < p_1 < ... < p_r = n such that: (i) for every j with 1 <= j <= r, the substring s[p_{j-1}..p_j) has all characters distinct; and (ii) for every j with 1 <= j < r, there is an index a with p_{j-1} <= a < p_j and s[a] = s[p_j], so the next character after the j-th part would repeat a character already in that part.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PartitionString.spec_7",
+    "negation": "AegisSpec.PartitionString.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever partition_string(s) returns a result r, for every k >= 1 and every choice of cut positions 0 = q_0 < q_1 < ... < q_k = n such that each substring s[q_{j-1}..q_j) has all characters distinct, we have r <= k.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PartitionString.spec_8",
+    "negation": "AegisSpec.PartitionString.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever partition_string(s) returns a result r, r <= 2 if and only if either (a) for all i,j with 0 <= i < j < n, s[i] != s[j] (the whole string has all characters distinct), or (b) there exists p with 1 <= p < n such that both substrings s[0..p) and s[p..n) individually have all characters distinct.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PartitionString.spec_9",
+    "negation": "AegisSpec.PartitionString.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever partition_string(s) returns a result r, r = 1 if and only if for all i,j with 0 <= i < j < n, s[i] != s[j].",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PartitionString.spec_10",
+    "negation": "AegisSpec.PartitionString.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever partition_string(s) returns a result r, r = n if and only if for every i with 0 <= i < n, s[i] = s[0] (all characters of s are equal).",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PartitionString.spec_11",
+    "negation": "AegisSpec.PartitionString.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever partition_string(s) returns a result r, for every i,j with 0 <= i < j <= n, let t be the contiguous substring s[i..j). Whenever partition_string(t) returns a result r_t, we have r_t <= r.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PartitionString.spec_12",
+    "negation": "AegisSpec.PartitionString.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever partition_string(s) returns a result r, for every p with 1 <= p < n, if a = s[0..p) and b = s[p..n) and partition_string(a) returns r_a and partition_string(b) returns r_b, then r <= r_a + r_b.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.PartitionString.spec_13",
+    "negation": "AegisSpec.PartitionString.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever partition_string(s) returns a result r_s and partition_string(t) returns a result r_t, we have r_s = r_t.",
+    "preconditions": "len(s) = len(t) = n, 1 <= n <= 100000, all bytes of s and t are in 97..122, and for all i,j with 0 <= i < n and 0 <= j < n, s[i] = s[j] if and only if t[i] = t[j]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.PartitionString.spec_14",
+    "negation": "AegisSpec.PartitionString.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever partition_string(s) returns a result r, let rev(s) be the byte slice of length n with rev(s)[i] = s[n-1-i] for every i with 0 <= i < n. Whenever partition_string(rev(s)) returns a result r_rev, we have r_rev = r.",
+    "preconditions": "len(s) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  }
+]

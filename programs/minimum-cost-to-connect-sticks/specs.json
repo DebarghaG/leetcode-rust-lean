@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ConnectSticks.spec_1",
+    "negation": "AegisSpec.ConnectSticks.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "connect_sticks(sticks) returns a result r and r is the minimum possible total merge cost for sticks. Formally, a complete merge sequence starts with the multiset of the n stick lengths, consists of n-1 steps, each step chooses two current lengths x and y, removes them, inserts x+y, and adds x+y to a running total; for n=1 the empty sequence has cost 0. The value r equals the minimum of the running total over all complete merge sequences.",
+    "preconditions": "Let n = len(sticks). 1 <= n <= 10000 and for every i with 0 <= i < n, 1 <= sticks[i] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ConnectSticks.spec_2",
+    "negation": "AegisSpec.ConnectSticks.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "connect_sticks(sticks) returns a result r and does not fail (no i64 overflow, panic, or out-of-bounds access).",
+    "preconditions": "Let n = len(sticks). n >= 1, for every i with 0 <= i < n, sticks[i] >= 1, and (n-1) * sum_{i=0}^{n-1} sticks[i] <= 9223372036854775807."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ConnectSticks.spec_3",
+    "negation": "AegisSpec.ConnectSticks.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "connect_sticks(sticks) returns a result r and r = 0.",
+    "preconditions": "len(sticks) = 1 and sticks[0] >= 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ConnectSticks.spec_4",
+    "negation": "AegisSpec.ConnectSticks.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "connect_sticks(sticks) returns a result r and r = sticks[0] + sticks[1].",
+    "preconditions": "len(sticks) = 2, sticks[0] >= 1, sticks[1] >= 1, and sticks[0] + sticks[1] <= 9223372036854775807."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ConnectSticks.spec_5",
+    "negation": "AegisSpec.ConnectSticks.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, r >= sum_{i=0}^{n-1} sticks[i].",
+    "preconditions": "Let n = len(sticks). n >= 2 and for every i with 0 <= i < n, sticks[i] >= 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ConnectSticks.spec_6",
+    "negation": "AegisSpec.ConnectSticks.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, r <= (n-1) * sum_{i=0}^{n-1} sticks[i].",
+    "preconditions": "Let n = len(sticks). n >= 1 and for every i with 0 <= i < n, sticks[i] >= 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ConnectSticks.spec_7",
+    "negation": "AegisSpec.ConnectSticks.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, r >= S + (n-1) * m.",
+    "preconditions": "Let n = len(sticks). n >= 3, for every i with 0 <= i < n, sticks[i] >= 1. Let S = sum_{i=0}^{n-1} sticks[i] and let m = min_{0 <= i < n} sticks[i]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ConnectSticks.spec_8",
+    "negation": "AegisSpec.ConnectSticks.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, let S = sticks[0] + sticks[1] + sticks[2] and M = max(sticks[0], sticks[1], sticks[2]); then r = 2 * S - M.",
+    "preconditions": "len(sticks) = 3 and sticks[0] >= 1, sticks[1] >= 1, sticks[2] >= 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ConnectSticks.spec_9",
+    "negation": "AegisSpec.ConnectSticks.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever connect_sticks(sticks) returns a result r and connect_sticks(sticks') returns a result r', we have r = r'.",
+    "preconditions": "Let n = len(sticks). n >= 1 and for every i with 0 <= i < n, sticks[i] >= 1. Let pi be any permutation of {0, ..., n-1}, and define sticks' by sticks'[i] = sticks[pi(i)] for 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ConnectSticks.spec_10",
+    "negation": "AegisSpec.ConnectSticks.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever connect_sticks(sticks) returns a result r and connect_sticks(sticks') returns a result r', we have r' = c * r.",
+    "preconditions": "Let n = len(sticks). n >= 1, for every i with 0 <= i < n, sticks[i] >= 1, and let c >= 1 be an integer. Define sticks'[i] = c * sticks[i] for 0 <= i < n, and assume c * sticks[i] <= 9223372036854775807 for every i."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ConnectSticks.spec_11",
+    "negation": "AegisSpec.ConnectSticks.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever connect_sticks(a) returns a result r_a and connect_sticks(b) returns a result r_b, we have r_a <= r_b.",
+    "preconditions": "Let n >= 1. Let a and b be two slices of length n with a[i] >= 1 and b[i] >= 1 for every 0 <= i < n, and a[i] <= b[i] for every 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ConnectSticks.spec_12",
+    "negation": "AegisSpec.ConnectSticks.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, there exists a complete sequence of n-1 pairwise merges of the sticks whose total accumulated merge cost is exactly r.",
+    "preconditions": "Let n = len(sticks). n >= 1 and for every i with 0 <= i < n, sticks[i] >= 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ConnectSticks.spec_13",
+    "negation": "AegisSpec.ConnectSticks.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever connect_sticks(sticks) returns a result r, r <= C.",
+    "preconditions": "Let n = len(sticks). n >= 2 and for every i with 0 <= i < n, sticks[i] >= 1. Let a0 <= a1 <= ... <= a_{n-1} be the nondecreasing sorted version of sticks, and define C = (n-1)*(a0+a1) + sum_{i=2}^{n-1} (n-i)*a_i (the sum is empty when n=2)."
+  }
+]

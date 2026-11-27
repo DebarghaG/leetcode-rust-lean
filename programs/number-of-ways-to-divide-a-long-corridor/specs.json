@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfWays.spec_1",
+    "negation": "AegisSpec.NumberOfWays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. Let m be the number of indices i with 0 <= i < len(corridor) and corridor[i] = 83, and let p_0 < p_1 < ... < p_{m-1} be those indices in increasing order. Let MOD = 1000000007. If m = 0 or m is odd, then r = 0. If m is even and m >= 2, then r is the unique integer with 0 <= r < MOD and r is congruent modulo MOD to the product over j = 1 to m/2 - 1 of (p_{2j} - p_{2j-1}); the empty product, when m = 2, is 1.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, and for every i with 0 <= i < len(corridor), corridor[i] = 80 ('P') or corridor[i] = 83 ('S')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfWays.spec_2",
+    "negation": "AegisSpec.NumberOfWays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail by arithmetic overflow, panic, or out-of-bounds access.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, and for every i with 0 <= i < len(corridor), corridor[i] = 80 ('P') or corridor[i] = 83 ('S')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfWays.spec_3",
+    "negation": "AegisSpec.NumberOfWays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, and for every i with 0 <= i < len(corridor), corridor[i] = 80 ('P') or corridor[i] = 83 ('S')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfWays.spec_4",
+    "negation": "AegisSpec.NumberOfWays.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, every corridor[i] is 80 ('P') or 83 ('S'), and the number m of indices i with corridor[i] = 83 is odd."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfWays.spec_5",
+    "negation": "AegisSpec.NumberOfWays.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 1.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, every corridor[i] is 80 ('P') or 83 ('S'), and the number m of indices i with corridor[i] = 83 is positive and even."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfWays.spec_6",
+    "negation": "AegisSpec.NumberOfWays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, every corridor[i] is 80 ('P') or 83 ('S'), and the number m of indices i with corridor[i] = 83 is exactly 2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfWays.spec_7",
+    "negation": "AegisSpec.NumberOfWays.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every j with 1 <= j <= m/2 - 1, let d = p_{2j} - p_{2j-1}, and let corridor' be obtained by inserting one byte 80 ('P') at a position k with p_{2j-1} < k <= p_{2j} (insertion before the old index k). If number_of_ways(corridor) returns r and number_of_ways(corridor') returns r', then r' is congruent modulo 1000000007 to r * (d + 1) * d^{-1}, where d^{-1} denotes the inverse of d modulo 1000000007.",
+    "preconditions": "The input corridor is valid: 1 <= len(corridor) < 100000, every byte is 80 ('P') or 83 ('S'), and the number m of seats is positive even with m >= 4. Let p_0 < ... < p_{m-1} be the seat positions."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfWays.spec_8",
+    "negation": "AegisSpec.NumberOfWays.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exists a set D subset of {1, 2, ..., len(corridor) - 1} such that, writing the elements of D union {0, len(corridor)} in increasing order as d_0 < d_1 < ... < d_t with d_0 = 0 and d_t = len(corridor), for every k with 0 <= k < t the segment of indices i satisfying d_k <= i < d_{k+1} contains exactly two indices i with corridor[i] = 83.",
+    "preconditions": "The input is a valid corridor: 1 <= len(corridor) <= 100000, and for every i with 0 <= i < len(corridor), corridor[i] = 80 ('P') or corridor[i] = 83 ('S')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfWays.spec_9",
+    "negation": "AegisSpec.NumberOfWays.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever number_of_ways(corridor) returns r and number_of_ways(corridor') returns r', we have r = r'.",
+    "preconditions": "corridor and corridor' are valid inputs: each has length between 1 and 100000 and every byte is 80 ('P') or 83 ('S'). Deleting all leading bytes equal to 80 and all trailing bytes equal to 80 from corridor yields the same byte sequence as deleting all leading bytes equal to 80 and all trailing bytes equal to 80 from corridor'."
+  }
+]

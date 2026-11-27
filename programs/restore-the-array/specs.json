@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfArrays.spec_1",
+    "negation": "AegisSpec.NumberOfArrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the unique integer such that 0 <= r < 1000000007 and r is congruent modulo 1000000007 to C(s,k), where C(s,k) is the number of finite sequences A = (a_1, ..., a_m) with m >= 1, each a_j an integer satisfying 1 <= a_j <= k, such that the concatenation of the standard decimal representations of a_1, ..., a_m (each written without leading zeros) is exactly s.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfArrays.spec_2",
+    "negation": "AegisSpec.NumberOfArrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic) for every input satisfying the preconditions.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfArrays.spec_3",
+    "negation": "AegisSpec.NumberOfArrays.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if (s[0] - 48) <= k, and r = 0 otherwise.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000; len(s) = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfArrays.spec_4",
+    "negation": "AegisSpec.NumberOfArrays.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if for every i with 0 <= i < len(s) we have 1 <= (s[i] - 48) <= k; otherwise r = 0.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfArrays.spec_5",
+    "negation": "AegisSpec.NumberOfArrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let d0 = s[0] - 48 and d1 = s[1] - 48. Then r = A + B, where A = 1 if 10*d0 + d1 <= k and A = 0 otherwise, and B = 1 if d0 <= k and 1 <= d1 <= k and B = 0 otherwise.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000; len(s) = 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfArrays.spec_6",
+    "negation": "AegisSpec.NumberOfArrays.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r = (2^z) mod 1000000007, where z is the number of indices p with 1 <= p < len(s) and s[p] != 48.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000; len(s) <= 9 and k >= 10^len(s) - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfArrays.spec_7",
+    "negation": "AegisSpec.NumberOfArrays.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let C(s,k) be the number of valid arrays, i.e. finite sequences of integers in [1,k] whose standard decimal representations concatenate to s. Whenever the function returns a result r, 0 <= C(s,k) <= 2^(len(s)-1), and r is the residue of C(s,k) modulo 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfArrays.spec_8",
+    "negation": "AegisSpec.NumberOfArrays.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let C(s,k) be the number of valid arrays for the same string s. If the function returns r1 on input (s,k1) and r2 on input (s,k2), then r1 and r2 are residues modulo 1000000007 of C(s,k1) and C(s,k2), and C(s,k1) <= C(s,k2).",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is an ASCII digit (48 <= s[i] <= 57); s[0] != 48 (no leading zero); 1 <= k1 <= k2 <= 1000000000."
+  }
+]

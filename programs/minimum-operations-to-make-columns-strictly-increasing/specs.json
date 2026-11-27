@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumOperations.spec_1",
+    "negation": "AegisSpec.MinimumOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is equal to the minimum, over all m x n integer matrices A such that (i) A[i][j] >= grid[i][j] for every 0 <= i < m and 0 <= j < n, and (ii) A[i][j] > A[i-1][j] for every 1 <= i < m and 0 <= j < n, of the total increment sum Σ_{i=0}^{m-1} Σ_{j=0}^{n-1} (A[i][j] - grid[i][j]).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumOperations.spec_2",
+    "negation": "AegisSpec.MinimumOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumOperations.spec_3",
+    "negation": "AegisSpec.MinimumOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every grid satisfying the preconditions, the returned result r satisfies r <= n * (Σ_{i=0}^{m-1} (2500 + i)) - Σ_{i=0}^{m-1} Σ_{j=0}^{n-1} grid[i][j].",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumOperations.spec_4",
+    "negation": "AegisSpec.MinimumOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each column j, let C_j be the minimum, over all length-m integer sequences b with b[i] >= grid[i][j] for every 0 <= i < m and b[i] > b[i-1] for every 1 <= i < m, of Σ_{i=0}^{m-1} (b[i] - grid[i][j]). Then the function returns a result r and r = Σ_{j=0}^{n-1} C_j.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumOperations.spec_5",
+    "negation": "AegisSpec.MinimumOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r and r = 0 if and only if grid[i][j] > grid[i-1][j] for every 1 <= i < m and every 0 <= j < n.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumOperations.spec_6",
+    "negation": "AegisSpec.MinimumOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r and r = n * m * (m - 1) / 2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n. Also assume that for each column j there is an integer x_j such that grid[i][j] = x_j for every 0 <= i < m."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumOperations.spec_7",
+    "negation": "AegisSpec.MinimumOperations.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result on grid and r' be the result on grid'. The function returns both results and r = r'.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n. Let k_0,...,k_{n-1} be integers and define grid'[i][j] = grid[i][j] + k_j. Assume grid' also satisfies the same standing constraints: every row has length n and 0 <= grid'[i][j] < 2500 for all i,j."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumOperations.spec_8",
+    "negation": "AegisSpec.MinimumOperations.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every grid satisfying the preconditions, the returned result r satisfies r >= max({0} ∪ {grid[i-1][j] + 1 - grid[i][j] | 1 <= i < m and 0 <= j < n}).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumOperations.spec_9",
+    "negation": "AegisSpec.MinimumOperations.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists an m x n integer matrix A such that: (i) A[i][j] >= grid[i][j] for all i,j; (ii) A[i][j] > A[i-1][j] for all 1 <= i < m and all j; (iii) Σ_{i=0}^{m-1} Σ_{j=0}^{n-1} (A[i][j] - grid[i][j]) = r; (iv) A[0][j] = grid[0][j] for every column j; and (v) for every 1 <= i < m and every column j, either A[i][j] = grid[i][j] or A[i][j] = A[i-1][j] + 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumOperations.spec_10",
+    "negation": "AegisSpec.MinimumOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every m x n integer matrix A satisfying A[i][j] >= grid[i][j] for all i,j and A[i][j] > A[i-1][j] for all 1 <= i < m and all j, we have Σ_{i=0}^{m-1} Σ_{j=0}^{n-1} (A[i][j] - grid[i][j]) >= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumOperations.spec_11",
+    "negation": "AegisSpec.MinimumOperations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r, r1, r2 be the results of the function on grid, G1, G2 respectively. The function returns all three results and r = r1 + r2.",
+    "preconditions": "Let m,n1,n2 be positive integers with m,n1,n2 <= 50 and n1 + n2 <= 50. Let G1 be an m x n1 grid and G2 be an m x n2 grid, each satisfying the entry bounds 0 <= G1[i][j] < 2500 and 0 <= G2[i][j] < 2500 for all valid i,j. Let grid be the m x (n1+n2) horizontal concatenation: grid[i][j] = G1[i][j] for 0 <= j < n1, and grid[i][n1+j] = G2[i][j] for 0 <= j < n2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumOperations.spec_12",
+    "negation": "AegisSpec.MinimumOperations.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For each column j define b[0][j] = grid[0][j] and b[i][j] = max(grid[i][j], b[i-1][j] + 1) for 1 <= i < m. Then the function returns a result r and r = Σ_{i=0}^{m-1} Σ_{j=0}^{n-1} (b[i][j] - grid[i][j]).",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume m and n are positive integers with 1 <= m,n <= 50, every row grid[i] has length n, and 0 <= grid[i][j] < 2500 for all 0 <= i < m and 0 <= j < n."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinNumberOperations.spec_1",
+    "negation": "AegisSpec.MinNumberOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every target satisfying the preconditions, whenever min_number_operations target returns Result.ok r, r is the least nonnegative integer k for which there exists a sequence of k operations, each operation choosing indices 0 <= L <= R < n and adding 1 to every position i with L <= i <= R, such that applying the sequence to the all-zero array of length n produces target.",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinNumberOperations.spec_2",
+    "negation": "AegisSpec.MinNumberOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every target satisfying the preconditions, min_number_operations target returns Result.ok r for some integer r; it does not fail (no overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinNumberOperations.spec_3",
+    "negation": "AegisSpec.MinNumberOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_number_operations target returns Result.ok r, r >= max_{0 <= i < n} target[i].",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinNumberOperations.spec_4",
+    "negation": "AegisSpec.MinNumberOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_number_operations target returns Result.ok r, r <= sum_{i=0}^{n-1} target[i].",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinNumberOperations.spec_5",
+    "negation": "AegisSpec.MinNumberOperations.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n with rev[i] = target[n-1-i] for every i with 0 <= i < n. If min_number_operations target returns Result.ok r and min_number_operations rev returns Result.ok r_rev, then r = r_rev.",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinNumberOperations.spec_6",
+    "negation": "AegisSpec.MinNumberOperations.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_number_operations target returns Result.ok r and min_number_operations target' returns Result.ok r', then r' = r + c.",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000 and 1 <= target[i] <= 100000 for every i with 0 <= i < n. Let c be an integer with c >= 0. Define target'[i] = target[i] + c for 0 <= i < n. Assume target' also satisfies 1 <= target'[i] <= 100000 for every i and that its promised minimum number of operations is at most 2^31 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinNumberOperations.spec_7",
+    "negation": "AegisSpec.MinNumberOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_number_operations target returns Result.ok r and min_number_operations target' returns Result.ok r', then r' = r + max(0, x - target[n-1]).",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000 and 1 <= target[i] <= 100000 for every i with 0 <= i < n. Let x be an integer with 1 <= x <= 100000. Define target' of length n+1 by target'[i] = target[i] for 0 <= i < n and target'[n] = x. Assume n+1 <= 100000 and the promised minimum number of operations for target' is at most 2^31 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinNumberOperations.spec_8",
+    "negation": "AegisSpec.MinNumberOperations.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_number_operations target returns Result.ok r, there exists a sequence of exactly r subarray-increment operations (each choosing 0 <= L <= R < n and adding 1 to positions L through R) that transforms the all-zero array of length n into target.",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinNumberOperations.spec_9",
+    "negation": "AegisSpec.MinNumberOperations.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_number_operations target returns Result.ok r, for every integer k with 0 <= k < r, there does not exist a sequence of k subarray-increment operations (each choosing 0 <= L <= R < n and adding 1 to positions L through R) that transforms the all-zero array of length n into target.",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinNumberOperations.spec_10",
+    "negation": "AegisSpec.MinNumberOperations.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever min_number_operations target returns Result.ok r, r = target[0] + sum_{i=1}^{n-1} max(0, target[i] - target[i-1]).",
+    "preconditions": "Let n = len(target). The slice target satisfies 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= target[i] <= 100000. The promised minimum number of operations for target is at most 2^31 - 1."
+  }
+]

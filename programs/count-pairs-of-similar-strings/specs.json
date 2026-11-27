@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SimilarPairs.spec_1",
+    "negation": "AegisSpec.SimilarPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of pairs of indices (i, j) with 0 <= i < j < n such that words[i] and words[j] are similar, where two byte arrays u, v are similar exactly when they contain the same set of bytes, i.e. { b : b occurs in u } = { b : b occurs in v }.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122 (lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SimilarPairs.spec_2",
+    "negation": "AegisSpec.SimilarPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (no arithmetic overflow and no out-of-bounds access).",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SimilarPairs.spec_3",
+    "negation": "AegisSpec.SimilarPairs.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever similar_pairs(words) returns r and similar_pairs(words') returns r', we have r = r'.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122. Additionally, words' is any list of length n that is a permutation of words, i.e. there is a bijection pi on {0,...,n-1} with words'[i] = words[pi(i)] for every 0 <= i < n (so words' satisfies the same constraints)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SimilarPairs.spec_4",
+    "negation": "AegisSpec.SimilarPairs.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever similar_pairs(words) returns r and similar_pairs(words') returns r', we have r' = r + m, where m is the number of indices i with 0 <= i < n such that { b : b occurs in words[i] } = { b : b occurs in w }.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122. Additionally n < 100, w is a byte array with 1 <= len(w) <= 100 and all bytes lowercase, and words' is the list of length n+1 obtained by appending w, i.e. words'[i] = words[i] for 0 <= i < n and words'[n] = w."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SimilarPairs.spec_5",
+    "negation": "AegisSpec.SimilarPairs.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= n - k, where k = the number of distinct character sets among the words, i.e. k = the cardinality of { { b : b occurs in words[i] } : 0 <= i < n }.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SimilarPairs.spec_6",
+    "negation": "AegisSpec.SimilarPairs.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for each byte set S let c(S) be the number of indices i with 0 <= i < n such that { b : b occurs in words[i] } = S. Then r = sum over all distinct character sets S occurring among the words of c(S)*(c(S)-1)/2.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SimilarPairs.spec_7",
+    "negation": "AegisSpec.SimilarPairs.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if the character sets { b : b occurs in words[i] } are pairwise distinct; equivalently, no two distinct indices i < j have similar words.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SimilarPairs.spec_8",
+    "negation": "AegisSpec.SimilarPairs.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r = n*(n-1)/2 if and only if all words have the same character set, i.e. there exists a byte set S such that for every 0 <= i < n, { b : b occurs in words[i] } = S.",
+    "preconditions": "n = len(words); 1 <= n <= 100; for every i with 0 <= i < n, 1 <= len(words[i]) <= 100, and every byte b occurring in words[i] satisfies 97 <= b <= 122."
+  }
+]

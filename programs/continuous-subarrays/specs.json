@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_1",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). The function returns a result r, and r is exactly the number of pairs (a,b) such that 0 <= a <= b < n and for every i,j with a <= i <= b and a <= j <= b, |nums[i] - nums[j]| <= 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_2",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, access out of bounds, or overflow in 64-bit arithmetic.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_3",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and r >= len(nums).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_4",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and r <= len(nums) * (len(nums) + 1) / 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_5",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and r = len(nums) * (len(nums) + 1) / 2 if and only if (max over 0 <= i < len(nums) of nums[i]) - (min over 0 <= i < len(nums) of nums[i]) <= 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_6",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and r = len(nums) if and only if for every i with 0 <= i < len(nums)-1, |nums[i+1] - nums[i]| > 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_7",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r and, for every a,b with 0 <= a <= b < len(nums), if nums[a..b] is continuous (meaning for all i,j with a <= i <= b and a <= j <= b, |nums[i] - nums[j]| <= 2), then r >= (b-a+1) * (b-a+2) / 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_8",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(nums). For each a with 0 <= a < n, let e(a) be the largest b with a <= b < n such that nums[a..b] is continuous (where nums[a..b] is continuous iff for all i,j with a <= i <= b and a <= j <= b, |nums[i] - nums[j]| <= 2). Such e(a) exists because b = a always works. The function returns r, and for every a,b with 0 <= a <= b < n, nums[a..b] is continuous if and only if b <= e(a). Equivalently, for each a the continuous subarrays starting at a are exactly nums[a..b] for a <= b <= e(a). Moreover, r = sum over a = 0 to n-1 of (e(a) - a + 1).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_9",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice with len(rev) = len(nums) and rev[i] = nums[len(nums)-1-i] for every 0 <= i < len(nums). The function returns the same result on nums and on rev.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_10",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let shifted be the slice with len(shifted) = len(nums) and shifted[i] = nums[i] + c for every 0 <= i < len(nums). The function returns the same result on nums and on shifted.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; c is an integer such that for every i with 0 <= i < len(nums), 1 <= nums[i] + c <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_11",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r and r is exactly the number of pairs (a,b) with 0 <= a <= b < len(nums) and nums[b] - nums[a] <= 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000; nums is nondecreasing, i.e. for every i with 0 <= i < len(nums)-1, nums[i] <= nums[i+1]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ContinuousSubarrays.spec_12",
+    "negation": "AegisSpec.ContinuousSubarrays.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(nums). For each b with 0 <= b < n, let s(b) be the smallest a with 0 <= a <= b such that nums[a..b] is continuous (where nums[a..b] is continuous iff for all i,j with a <= i <= b and a <= j <= b, |nums[i] - nums[j]| <= 2). Such s(b) exists because a = b always works. Then for every a,b with 0 <= a <= b < n, nums[a..b] is continuous if and only if a >= s(b), and the function returns r with r = sum over b = 0 to n-1 of (b - s(b) + 1).",
+    "preconditions": "len(nums) >= 1; len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000000."
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanChoose.spec_1",
+    "negation": "AegisSpec.CanChoose.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "can_choose(groups, nums) returns a result r, and r = true if and only if there exist integers s_0, ..., s_{n-1} such that: (1) for every i with 0 <= i < n, 0 <= s_i and s_i + len(groups[i]) <= len(nums); (2) for every i with 0 <= i < n and every j with 0 <= j < len(groups[i]), nums[s_i + j] = groups[i][j]; (3) for every i with 1 <= i < n, s_{i-1} + len(groups[i-1]) <= s_i. Equivalently, r = false exactly when no such tuple of start indices exists.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanChoose.spec_2",
+    "negation": "AegisSpec.CanChoose.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "can_choose(groups, nums) returns a result r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanChoose.spec_3",
+    "negation": "AegisSpec.CanChoose.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sum_{i=0}^{n-1} len(groups[i]) > len(nums), can_choose(groups, nums) returns a result r and r = false.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanChoose.spec_4",
+    "negation": "AegisSpec.CanChoose.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, for every i with 0 <= i < n there exists an integer p_i such that 0 <= p_i, p_i + len(groups[i]) <= len(nums), and for every j with 0 <= j < len(groups[i]), nums[p_i + j] = groups[i][j].",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanChoose.spec_5",
+    "negation": "AegisSpec.CanChoose.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, there exist integers p_0, ..., p_{n-1} such that 0 <= p_0 < p_1 < ... < p_{n-1} < len(nums) and nums[p_i] = groups[i][0] for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanChoose.spec_6",
+    "negation": "AegisSpec.CanChoose.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let offset_i = sum_{h=0}^{i-1} len(groups[h]) for 0 <= i < n. Then can_choose(groups, nums) returns a result r, and r = true if and only if for every i with 0 <= i < n and every j with 0 <= j < len(groups[i]), nums[offset_i + j] = groups[i][j]. Equivalently, nums is exactly the concatenation groups[0] ++ groups[1] ++ ... ++ groups[n-1].",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7. Additionally assume sum_{i=0}^{n-1} len(groups[i]) = len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanChoose.spec_7",
+    "negation": "AegisSpec.CanChoose.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "can_choose(groups, nums) returns a result r, and r = true if and only if there exist integers p_0, ..., p_{n-1} such that 0 <= p_0 < p_1 < ... < p_{n-1} < len(nums) and nums[p_i] = groups[i][0] for every i with 0 <= i < n.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, len(groups[i]) = 1; 1 <= len(nums) <= 1000; and for every valid i, k, -10^7 <= groups[i][0] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanChoose.spec_8",
+    "negation": "AegisSpec.CanChoose.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exists an integer p such that 0 <= p, p + sum_{i=0}^{n-1} len(groups[i]) <= len(nums), and for every i with 0 <= i < n and every j with 0 <= j < len(groups[i]), nums[p + offset_i + j] = groups[i][j], where offset_i = sum_{h=0}^{i-1} len(groups[h]), then can_choose(groups, nums) returns a result r and r = true.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanChoose.spec_9",
+    "negation": "AegisSpec.CanChoose.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, for every finite list pre of 64-bit integers such that len(pre) + len(nums) <= 1000 and every entry of pre lies in [-10^7, 10^7], can_choose(groups, pre ++ nums) returns a result r' with r' = true.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanChoose.spec_10",
+    "negation": "AegisSpec.CanChoose.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, for every finite list suf of 64-bit integers such that len(nums) + len(suf) <= 1000 and every entry of suf lies in [-10^7, 10^7], can_choose(groups, nums ++ suf) returns a result r' with r' = true.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CanChoose.spec_11",
+    "negation": "AegisSpec.CanChoose.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let V be the set of all integers occurring in groups or nums. For every function f from 64-bit integers to 64-bit integers that is injective on V and satisfies -10^7 <= f(x) <= 10^7 for every x in V, let groups_f be obtained from groups by replacing every element x by f(x), and let nums_f be obtained from nums by replacing every element x by f(x). Then can_choose(groups, nums) returns a result r, can_choose(groups_f, nums_f) returns a result r_f, and r = r_f.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CanChoose.spec_12",
+    "negation": "AegisSpec.CanChoose.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, let p be the least integer such that 0 <= p, p + len(groups[0]) <= len(nums), and nums[p + j] = groups[0][j] for every j with 0 <= j < len(groups[0]). Then such p exists, and there exist integers s_1, ..., s_{n-1} such that, setting s_0 = p, the tuple s_0, ..., s_{n-1} satisfies: for every i with 0 <= i < n, 0 <= s_i and s_i + len(groups[i]) <= len(nums); for every i, j with 0 <= i < n and 0 <= j < len(groups[i]), nums[s_i + j] = groups[i][j]; and for every i with 1 <= i < n, s_{i-1} + len(groups[i-1]) <= s_i.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CanChoose.spec_13",
+    "negation": "AegisSpec.CanChoose.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, there exist integers s_0, ..., s_{n-1} satisfying 0 <= s_i, s_i + len(groups[i]) <= len(nums), nums[s_i + j] = groups[i][j] for every 0 <= j < len(groups[i]), and s_{i-1} + len(groups[i-1]) <= s_i for every 1 <= i < n. For every list nums' with len(nums') = len(nums), every entry in [-10^7, 10^7], and nums'[k] = nums[k] for every k that belongs to at least one interval {s_i, s_i+1, ..., s_i+len(groups[i])-1}, can_choose(groups, nums') returns a result r' with r' = true.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CanChoose.spec_14",
+    "negation": "AegisSpec.CanChoose.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, there exist integers s_0, ..., s_{n-1} such that: for every i with 0 <= i < n, 0 <= s_i and s_i + len(groups[i]) <= len(nums); for every i, j with 0 <= i < n and 0 <= j < len(groups[i]), nums[s_i + j] = groups[i][j]; for every i with 1 <= i < n, s_{i-1} + len(groups[i-1]) <= s_i; and moreover s_0 is the least q with 0 <= q, q + len(groups[0]) <= len(nums), and nums[q + j] = groups[0][j] for all j, while for every i with 1 <= i < n, s_i is the least q with s_{i-1} + len(groups[i-1]) <= q, q + len(groups[i]) <= len(nums), and nums[q + j] = groups[i][j] for all j.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CanChoose.spec_15",
+    "negation": "AegisSpec.CanChoose.spec_15_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever can_choose(groups, nums) returns a result r with r = true, for every k with 1 <= k <= n, can_choose(groups[0..k], nums) returns a result r_k with r_k = true, where groups[0..k] denotes the prefix consisting of the first k groups.",
+    "preconditions": "Let n = len(groups). Assume 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= len(groups[i]); sum_{i=0}^{n-1} len(groups[i]) <= 1000; 1 <= len(nums) <= 1000; and for every valid i, j, k, -10^7 <= groups[i][j] <= 10^7 and -10^7 <= nums[k] <= 10^7."
+  }
+]

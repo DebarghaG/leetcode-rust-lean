@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TriangleNumber.spec_1",
+    "negation": "AegisSpec.TriangleNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the call triangle_number(nums) returns a result r, r is the number of triples (i,j,k) of indices such that 0 <= i < j < k < len(nums) and the three mathematical integers nums[i], nums[j], nums[k] satisfy all three strict triangle inequalities: nums[i] + nums[j] > nums[k], nums[i] + nums[k] > nums[j], and nums[j] + nums[k] > nums[i]. Equivalently, r = |{ (i,j,k) : 0 <= i < j < k < len(nums) and the three displayed inequalities hold }|.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 1000, and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TriangleNumber.spec_2",
+    "negation": "AegisSpec.TriangleNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, the call triangle_number(nums) returns a result; it does not fail, panic, or overflow.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 1000, and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TriangleNumber.spec_3",
+    "negation": "AegisSpec.TriangleNumber.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let p be the number of indices i with 0 <= i < len(nums) and nums[i] > 0. Whenever triangle_number(nums) returns a result r, r <= p*(p-1)*(p-2)/6, which is C(p,3) with the convention that this value is 0 when p < 3.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 1000, and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TriangleNumber.spec_4",
+    "negation": "AegisSpec.TriangleNumber.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever triangle_number(nums) returns a result r, r = 0.",
+    "preconditions": "1 <= len(nums) <= 2 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TriangleNumber.spec_5",
+    "negation": "AegisSpec.TriangleNumber.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever triangle_number(nums) returns a result r, r = 1 if nums[0] + nums[1] > nums[2] and nums[0] + nums[2] > nums[1] and nums[1] + nums[2] > nums[0], and r = 0 otherwise.",
+    "preconditions": "len(nums) = 3 and for every i with 0 <= i < 3, 0 <= nums[i] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TriangleNumber.spec_6",
+    "negation": "AegisSpec.TriangleNumber.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever triangle_number(nums) returns a result r, r = len(nums)*(len(nums)-1)*(len(nums)-2)/6, which equals C(len(nums),3) and is 0 when len(nums) < 3.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 1000, and there exists an integer c with 1 <= c <= 1000 such that nums[i] = c for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TriangleNumber.spec_7",
+    "negation": "AegisSpec.TriangleNumber.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m be the number of indices i with 0 <= i < len(nums) and nums[i] = 1. Whenever triangle_number(nums) returns a result r, r = m*(m-1)*(m-2)/6, which equals C(m,3) and is 0 when m < 3.",
+    "preconditions": "1 <= len(nums) <= 1000 and for every i with 0 <= i < len(nums), nums[i] = 0 or nums[i] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TriangleNumber.spec_8",
+    "negation": "AegisSpec.TriangleNumber.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever triangle_number(nums) returns r and triangle_number(nums') returns r', we have r = r'.",
+    "preconditions": "Both nums and nums' satisfy the problem constraints: 1 <= len(nums) = len(nums') <= 1000 and all entries are between 0 and 1000. There exists a bijection p from {0,...,len(nums)-1} to itself such that nums'[i] = nums[p(i)] for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TriangleNumber.spec_9",
+    "negation": "AegisSpec.TriangleNumber.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever triangle_number(nums) returns r and triangle_number(nums') returns r', r' = r + q, where q is the number of pairs (i,j) with 0 <= i < j < n such that nums[i] + nums[j] > x, nums[i] + x > nums[j], and nums[j] + x > nums[i].",
+    "preconditions": "Let n = len(nums). We have 1 <= n <= 999, len(nums') = n+1, nums'[i] = nums[i] for every 0 <= i < n, nums'[n] = x, and all entries of nums and nums' are between 0 and 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TriangleNumber.spec_10",
+    "negation": "AegisSpec.TriangleNumber.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever triangle_number(nums) returns a result r, r = |{ (i,j,k) : 0 <= i < j < k < len(b) and b[i] + b[j] > b[k] }|. For nondecreasing nonnegative b, a triple i<j<k satisfies all three strict triangle inequalities exactly when b[i] + b[j] > b[k].",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000; b is a nondecreasing reordering of nums."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TriangleNumber.spec_11",
+    "negation": "AegisSpec.TriangleNumber.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever triangle_number(nums) returns a result r, every counted index triple (i,j,k) has nums[i] > 0, nums[j] > 0, and nums[k] > 0. Consequently, if at most two entries of nums are positive, r = 0.",
+    "preconditions": "1 <= len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000."
+  }
+]

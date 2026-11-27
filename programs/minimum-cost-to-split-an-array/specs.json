@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCost.spec_1",
+    "negation": "AegisSpec.MinCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For any integers l,r with 0 <= l < r <= n, define TL(l,r) to be the number of indices i with l <= i < r such that the value nums[i] occurs at least twice among nums[l], nums[l+1], ..., nums[r-1]. A split of nums is a choice of cut positions 0 = p0 < p1 < ... < pm = n for some m >= 1; its j-th part is the subarray nums[p_{j-1}], ..., nums[p_j - 1], and its cost is the sum over j = 1..m of (k + TL(p_{j-1}, p_j)). The function returns a result r, and r is the minimum cost among all splits of nums.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCost.spec_2",
+    "negation": "AegisSpec.MinCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums and k satisfying the preconditions, the function returns a result r and does not fail.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCost.spec_3",
+    "negation": "AegisSpec.MinCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned result. For every split of nums into contiguous non-empty subarrays covering nums in order, let C be the sum over its parts P of (k + TL(P)), where TL(P) is the number of positions in P whose value occurs at least twice in P. Then r <= C.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCost.spec_4",
+    "negation": "AegisSpec.MinCost.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the returned result. There exists a split of nums into contiguous non-empty subarrays covering nums in order such that its cost, defined as the sum over its parts P of (k + TL(P)) with TL(P) the number of positions in P whose value occurs at least twice in P, is exactly r.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCost.spec_5",
+    "negation": "AegisSpec.MinCost.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let r be the returned result. Then r >= k.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCost.spec_6",
+    "negation": "AegisSpec.MinCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under this additional precondition, the returned result r satisfies r = k.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); 1 <= k <= 10^9; and for every i,j with 0 <= i < j < len(nums), nums[i] != nums[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCost.spec_7",
+    "negation": "AegisSpec.MinCost.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under this additional precondition, the returned result r satisfies r = len(nums) when k = 1, and r = len(nums) + k when k >= 2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); 1 <= k <= 10^9; len(nums) >= 2; and nums[0] = nums[1] = ... = nums[len(nums)-1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCost.spec_8",
+    "negation": "AegisSpec.MinCost.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under this additional precondition, the returned result r satisfies r = min(2*k, k + (2 if nums[0] = nums[1] else 0)), where min is the smaller of the two integers.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); 1 <= k <= 10^9; and len(nums) = 2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCost.spec_9",
+    "negation": "AegisSpec.MinCost.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under this additional precondition, the returned result r satisfies r = k + T, where T is the number of indices i with 0 <= i < len(nums) such that nums[i] occurs at least twice in the whole array nums.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); 1 <= k <= 10^9; and k >= len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCost.spec_10",
+    "negation": "AegisSpec.MinCost.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let n = len(nums). Define rev to be the array of length n with rev[i] = nums[n-1-i] for every 0 <= i < n. Whenever the function returns a result r for nums and k, and a result r_rev for rev and k, we have r = r_rev.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and 1 <= k <= 10^9."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCost.spec_11",
+    "negation": "AegisSpec.MinCost.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Under this additional precondition, whenever the function returns a result r for nums and k, and a result r2 for nums2 and k, we have r = r2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); 1 <= k <= 10^9; let nums2 be any array of 64-bit integers with len(nums2) = len(nums), 0 <= nums2[i] < len(nums2) for all i, and for all i,j with 0 <= i,j < len(nums), nums[i] = nums[j] iff nums2[i] = nums2[j]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCost.spec_12",
+    "negation": "AegisSpec.MinCost.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r1 for nums and k1, and a result r2 for nums and k2, we have r1 <= r2.",
+    "preconditions": "len(nums) >= 1; len(nums) <= 1000; for every i with 0 <= i < len(nums), 0 <= nums[i] < len(nums); and let k1 and k2 be integers with 1 <= k1 <= k2 <= 10^9."
+  }
+]

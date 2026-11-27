@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumLength.spec_1",
+    "negation": "AegisSpec.MaximumLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r for input (nums, k), r is the maximum value of x over all x for which a valid index sequence of length x exists, where an increasing index sequence (i_0, i_1, ..., i_{x-1}) with 0 <= i_0 < i_1 < ... < i_{x-1} < len(nums) is called valid iff x <= 1 or, for every j with 0 <= j <= x-2, (nums[i_j] + nums[i_{j+1}]) mod k = (nums[i_0] + nums[i_1]) mod k. Equivalently, r is the length of a longest valid subsequence of nums.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7. Here a mod k denotes the least non-negative remainder of a modulo k, so 0 <= a mod k < k."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumLength.spec_2",
+    "negation": "AegisSpec.MaximumLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "On every input satisfying the preconditions the function returns a result; it does not fail (no 64-bit overflow, no out-of-bounds indexing, no panic).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumLength.spec_3",
+    "negation": "AegisSpec.MaximumLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 2 <= r <= len(nums).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumLength.spec_4",
+    "negation": "AegisSpec.MaximumLength.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a valid index sequence of length r: indices 0 <= i_0 < i_1 < ... < i_{r-1} < len(nums) such that for every j with 0 <= j <= r-2, (nums[i_j] + nums[i_{j+1}]) mod k equals (nums[i_0] + nums[i_1]) mod k.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumLength.spec_5",
+    "negation": "AegisSpec.MaximumLength.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every valid index sequence has length at most r: for every increasing index sequence 0 <= i_0 < i_1 < ... < i_{x-1} < len(nums) whose consecutive pair sums (nums[i_j] + nums[i_{j+1}]) mod k are all equal, we have x <= r.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumLength.spec_6",
+    "negation": "AegisSpec.MaximumLength.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if the whole index sequence (0, 1, ..., len(nums)-1) is valid — that is, all the values (nums[j] + nums[j+1]) mod k for 0 <= j <= len(nums)-2 are equal to each other — then r = len(nums).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumLength.spec_7",
+    "negation": "AegisSpec.MaximumLength.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (nums, k) and r2 on (nums2, k), if nums[i] mod k = nums2[i] mod k for every i with 0 <= i < len(nums), then r = r2.",
+    "preconditions": "nums and nums2 each satisfy: len >= 2, len <= 1000, and all entries in [1, 10^7]; 1 <= k <= 1000; len(nums) = len(nums2)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumLength.spec_8",
+    "negation": "AegisSpec.MaximumLength.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (nums, k) and r2 on (sub, k), we have r2 <= r.",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 1000, entries in [1, 10^7]; k in [1, 1000]; sub satisfies len(sub) >= 2, entries in [1, 10^7]; and sub is a subsequence of nums: there are indices 0 <= j_0 < j_1 < ... < j_{m-1} < len(nums) with m = len(sub) and sub[t] = nums[j_t] for all 0 <= t < m."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumLength.spec_9",
+    "negation": "AegisSpec.MaximumLength.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (nums, k) and r2 on (nums2, k), we have r <= r2 <= r + 1.",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 999, entries in [1, 10^7]; k in [1, 1000]; v in [1, 10^7]; and nums2 is nums with v appended at the end (len(nums2) = len(nums)+1, nums2[i] = nums[i] for 0 <= i < len(nums), and nums2[len(nums)] = v)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumLength.spec_10",
+    "negation": "AegisSpec.MaximumLength.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= max over a with 0 <= a < k of cnt(a), where cnt(a) is the number of indices i with 0 <= i < len(nums) and nums[i] mod k = a.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumLength.spec_11",
+    "negation": "AegisSpec.MaximumLength.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= M1 + M2, where cnt(a) for 0 <= a < k is the number of indices i with 0 <= i < len(nums) and nums[i] mod k = a, and M1 >= M2 are the two largest values among the counts cnt(0), cnt(1), ..., cnt(k-1) (when k = 1, take M2 = 0).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 1000, and 1 <= k <= 1000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 10^7."
+  }
+]

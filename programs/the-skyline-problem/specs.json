@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetSkyline.spec_1",
+    "negation": "AegisSpec.GetSkyline.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (a vector of vectors of i64) and r satisfies the following. Let L = min_{0 <= i < len(buildings)} left_i and R = max_{0 <= i < len(buildings)} right_i. For real x, define H(x) = max({0} ∪ {height_i | 0 <= i < len(buildings) and left_i <= x < right_i}). Let m = len(r). Then: (a) m >= 2; (b) for every j with 0 <= j < m, len(r[j]) = 2; (c) writing x_j = r[j][0] and y_j = r[j][1], we have x_0 = L; (d) x_{m-1} = R and y_{m-1} = 0; (e) for every j with 0 <= j < m-1, x_j < x_{j+1}; (f) for every j with 0 <= j < m, y_j = H(x_j); (g) for every j with 0 <= j < m-1 and every real x with x_j <= x < x_{j+1}, H(x) = y_j; (h) for every j with 0 <= j < m-1, y_j != y_{j+1}.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetSkyline.spec_2",
+    "negation": "AegisSpec.GetSkyline.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), len(r[j]) = 2.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetSkyline.spec_3",
+    "negation": "AegisSpec.GetSkyline.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r)-1, r[j][0] < r[j+1][0].",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetSkyline.spec_4",
+    "negation": "AegisSpec.GetSkyline.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let L = min_{0 <= i < len(buildings)} left_i. Then len(r) > 0, r[0][0] = L, and r[0][1] = max({height_i | 0 <= i < len(buildings) and left_i = L}).",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetSkyline.spec_5",
+    "negation": "AegisSpec.GetSkyline.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, let R = max_{0 <= i < len(buildings)} right_i. Then len(r) > 0, r[len(r)-1][0] = R, and r[len(r)-1][1] = 0.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetSkyline.spec_6",
+    "negation": "AegisSpec.GetSkyline.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r), r[j][1] = H(r[j][0]), where H(x) = max({0} ∪ {height_i | 0 <= i < len(buildings) and left_i <= x < right_i}) for real x.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetSkyline.spec_7",
+    "negation": "AegisSpec.GetSkyline.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r)-1 and every real x with r[j][0] <= x < r[j+1][0], H(x) = r[j][1], where H(x) = max({0} ∪ {height_i | 0 <= i < len(buildings) and left_i <= x < right_i}).",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetSkyline.spec_8",
+    "negation": "AegisSpec.GetSkyline.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(r)-1, r[j][1] != r[j+1][1].",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetSkyline.spec_9",
+    "negation": "AegisSpec.GetSkyline.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let Hmax = max({0} ∪ {height_i | 0 <= i < len(buildings)}). Then for every j with 0 <= j < len(r), 0 <= r[j][1] <= Hmax.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetSkyline.spec_10",
+    "negation": "AegisSpec.GetSkyline.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let L = min_{0 <= i < len(buildings)} left_i and R = max_{0 <= i < len(buildings)} right_i. Then for every j with 0 <= j < len(r), L <= r[j][0] <= R.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetSkyline.spec_11",
+    "negation": "AegisSpec.GetSkyline.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, let L = min_i left_i and R = max_i right_i. For real x, define H(x) = max({0} ∪ {height_i | left_i <= x < right_i}) and H^-(x) = max({0} ∪ {height_i | left_i < x <= right_i}). Then for every real x with L < x < R, x is equal to r[j][0] for some j with 0 <= j < len(r) if and only if H(x) != H^-(x).",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetSkyline.spec_12",
+    "negation": "AegisSpec.GetSkyline.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For any index i with 0 <= i < len(buildings), if len(buildings) > 1 and there exists an index j with 0 <= j < len(buildings), j != i, such that left_j <= left_i, right_i <= right_j, and height_i <= height_j, then let buildings' be the slice obtained from buildings by deleting the element at index i. The result returned by get_skyline on buildings equals the result returned by get_skyline on buildings'.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetSkyline.spec_13",
+    "negation": "AegisSpec.GetSkyline.spec_13_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail (no overflow, panic, or out-of-bounds access).",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.GetSkyline.spec_14",
+    "negation": "AegisSpec.GetSkyline.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, let L = min_i left_i, R = max_i right_i, and x_j = r[j][0] for 0 <= j < len(r). Then x_0 = L, x_{len(r)-1} = R, and the half-open intervals [x_j, x_{j+1}) for j = 0, 1, ..., len(r)-2 are pairwise disjoint and their union is exactly the real interval [L, R).",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.GetSkyline.spec_15",
+    "negation": "AegisSpec.GetSkyline.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, let L = min_i left_i, R = max_i right_i, and H(x) = max({0} ∪ {height_i | left_i <= x < right_i}) for real x. For every real x with L < x < R such that H(x) = 0 and there exists epsilon > 0 with H(z) > 0 for all z in (x - epsilon, x), there exists an index j with 0 <= j < len(r) such that r[j][0] = x and r[j][1] = 0.",
+    "preconditions": "buildings is a nonempty slice of vectors of i64 with len(buildings) >= 1 and len(buildings) <= 10^4. For every i with 0 <= i < len(buildings), buildings[i] has length 3; write left_i = buildings[i][0], right_i = buildings[i][1], height_i = buildings[i][2]. For every i, 0 <= left_i < right_i <= 2^31 - 1 and 1 <= height_i <= 2^31 - 1. The buildings are sorted by left coordinate in non-decreasing order: for every i with 0 <= i < len(buildings)-1, left_i <= left_{i+1}."
+  }
+]

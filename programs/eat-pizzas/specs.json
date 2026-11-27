@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxWeight.spec_1",
+    "negation": "AegisSpec.MaxWeight.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_weight returns a result r, the following holds. Let b be the nondecreasing list obtained by sorting pizzas, so len(b) = n and b is a permutation of pizzas. Put d = n/4, o = ceil(d/2) = (d+1) div 2, and e = floor(d/2) = d div 2. Then, as an ordinary integer, the value of r is Sum_{i=0}^{o-1} b[n-1-i] + Sum_{j=1}^{e} b[n-o-2j]. The second sum is empty if e = 0.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxWeight.spec_2",
+    "negation": "AegisSpec.MaxWeight.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every pizzas satisfying the preconditions, max_weight returns a result r; it does not fail, panic, perform an out-of-bounds access, or overflow.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxWeight.spec_3",
+    "negation": "AegisSpec.MaxWeight.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_weight returns a result r, as an integer r >= max_{0 <= i < n} pizzas[i].",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxWeight.spec_4",
+    "negation": "AegisSpec.MaxWeight.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_weight returns a result r, r <= (n/4) * max_{0 <= i < n} pizzas[i].",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxWeight.spec_5",
+    "negation": "AegisSpec.MaxWeight.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_weight returns a result r, r <= Sum_{i=0}^{n-1} pizzas[i].",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxWeight.spec_6",
+    "negation": "AegisSpec.MaxWeight.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_weight returns a result r, r = (n/4) * w.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Also assume there is an integer w such that pizzas[i] = w for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxWeight.spec_7",
+    "negation": "AegisSpec.MaxWeight.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_weight returns a result r, r = max_{0 <= i < 4} pizzas[i].",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Also assume n = 4."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxWeight.spec_8",
+    "negation": "AegisSpec.MaxWeight.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_weight returns r for pizzas and returns r' for q, r = r'.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Let q be another slice of length n satisfying the same bounds, and assume q is a permutation of pizzas, meaning that for every integer v, the number of positions i with pizzas[i] = v equals the number of positions i with q[i] = v."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxWeight.spec_9",
+    "negation": "AegisSpec.MaxWeight.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_weight returns r for pizzas and returns r' for q, r' = r + (n/4) * c.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Let q be another slice of length n satisfying the same bounds, and assume there is an integer c such that q[i] = pizzas[i] + c for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxWeight.spec_10",
+    "negation": "AegisSpec.MaxWeight.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_weight returns r for pizzas and returns r' for q, r <= r'.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Let q be another slice of length n satisfying the same bounds, and assume pizzas[i] <= q[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxWeight.spec_11",
+    "negation": "AegisSpec.MaxWeight.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_weight returns r for pizzas and returns r' for q, r' = c * r.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000. Let q be another slice of length n satisfying the same bounds, and assume there is an integer c >= 1 such that q[i] = c * pizzas[i] for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxWeight.spec_12",
+    "negation": "AegisSpec.MaxWeight.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_weight returns a result r, there exist d = n/4 pairwise disjoint 4-element subsets G_1, ..., G_d of {0, ..., n-1} whose union is {0, ..., n-1}, and a set O of exactly o = ceil(d/2) of these groups, such that, writing the four weights in each group G in nondecreasing order as W_G <= X_G <= Y_G <= Z_G, one has r = Sum_{G in O} Z_G + Sum_{G not in O} Y_G.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxWeight.spec_13",
+    "negation": "AegisSpec.MaxWeight.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_weight returns a result r, for every choice of d = n/4 pairwise disjoint 4-element subsets G_1, ..., G_d of {0, ..., n-1} whose union is {0, ..., n-1}, and every set O of exactly o = ceil(d/2) of these groups, if W_G <= X_G <= Y_G <= Z_G are the sorted weights of group G, then Sum_{G in O} Z_G + Sum_{G not in O} Y_G <= r.",
+    "preconditions": "Let n = len(pizzas). Assume 4 <= n <= 200000, n is a multiple of 4, and for every i with 0 <= i < n, 1 <= pizzas[i] <= 100000."
+  }
+]

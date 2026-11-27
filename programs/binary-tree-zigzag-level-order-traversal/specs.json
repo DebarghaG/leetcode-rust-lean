@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_1",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r : Vec (Vec i64), r is exactly the zigzag level order of root. Define L(t,d) for t : Tree and d >= 0 by L(Null,d)=[]; L(Node(v,l,r),0)=[v]; and for d>0, L(Node(v,l,r),d)=L(l,d-1) ++ L(r,d-1). Define H(Null)=0 and H(Node(v,l,r))=1+max(H(l),H(r)). Then len(r)=H(root), and for every d with 0 <= d < len(r), r[d] = L(root,d) if d is even, and r[d] = reverse(L(root,d)) if d is odd. Here reverse is list reversal and ++ is list concatenation.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_2",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r, len(r) equals H(root), where H(Null)=0 and H(Node(v,l,r))=1+max(H(l),H(r)); equivalently, r has exactly one row for each depth d from 0 through the maximum node depth of root, and no rows beyond that.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_3",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, for every d with 0 <= d < len(r), len(r[d]) equals the number of nodes of root at depth d. Equivalently, len(r[d]) = len(L(root,d)), where L(Null,d)=[]; L(Node(v,l,r),0)=[v]; and L(Node(v,l,r),d+1)=L(l,d) ++ L(r,d).",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_4",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, for every d with 0 <= d < len(r) and every j with 0 <= j < len(r[d]), there exists a node x of root at depth d whose value is r[d][j].",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_5",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, for every d with 0 <= d < len(r) and every integer x, the number of indices j with 0 <= j < len(r[d]) and r[d][j] = x equals the number of nodes of root at depth d whose value is x.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_6",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, for every integer x, the total number of occurrences of x in the concatenation of all rows r[0] ++ r[1] ++ ... ++ r[len(r)-1] equals the number of nodes of root whose value is x. If len(r)=0, that concatenation is empty.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_7",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, if root = Null then len(r)=0; if root is not Null then 1 <= len(r) <= n(root). In particular, under the precondition n(root) <= 2000, len(r) <= 2000.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_8",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, for every d with 0 <= d < len(r) and every j with 0 <= j < len(r[d]), -100 <= r[d][j] <= 100.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_9",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define L(Null,d)=[]; L(Node(v,l,r),0)=[v]; L(Node(v,l,r),d+1)=L(l,d) ++ L(r,d); and H(Null)=0, H(Node(v,l,r))=1+max(H(l),H(r)). Let B(root) be the ordinary left-to-right level-order traversal, so len(B(root))=H(root) and B(root)[d]=L(root,d) for every d < H(root). Whenever the function returns r, len(r)=len(B(root)), and for every d with 0 <= d < len(r), r[d] = B(root)[d] if d is even, and r[d] = reverse(B(root)[d]) if d is odd.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_10",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns r, for every d with 0 <= d < len(r), len(r[d]) > 0.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ZigzagLevelOrder.spec_11",
+    "negation": "AegisSpec.ZigzagLevelOrder.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r : Vec (Vec i64); it does not fail with overflow, out-of-bounds, or panic on any tree satisfying the preconditions.",
+    "preconditions": "Let n(root) be the number of Node constructors in root. The tree satisfies 0 <= n(root) <= 2000, and every node value v of root satisfies -100 <= v <= 100."
+  }
+]

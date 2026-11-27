@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxStarSum.spec_1",
+    "negation": "AegisSpec.MaxStarSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define Adj(a,b) to hold iff there is some j with 0 <= j < len(edges) such that (edges[j][0] = a and edges[j][1] = b) or (edges[j][0] = b and edges[j][1] = a). For a node c and a finite set S of node indices, call (c,S) a valid star if 0 <= c < n, every s in S satisfies 0 <= s < n and Adj(c,s), and |S| <= k. Its star sum is vals[c] + sum over s in S of vals[s]. Let M be the maximum star sum over all valid stars, where the empty set S is allowed. Whenever max_star_sum(vals, edges, k) returns a result r, r = M.",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxStarSum.spec_2",
+    "negation": "AegisSpec.MaxStarSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, max_star_sum(vals, edges, k) returns a result; it does not panic, go out of bounds, or overflow.",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxStarSum.spec_3",
+    "negation": "AegisSpec.MaxStarSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_star_sum(vals, edges, k) returns a result r, for every node i with 0 <= i < n we have r >= vals[i].",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxStarSum.spec_4",
+    "negation": "AegisSpec.MaxStarSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_star_sum(vals, edges, k) returns a result r, r <= sum over i from 0 to n-1 of max(vals[i], 0).",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxStarSum.spec_5",
+    "negation": "AegisSpec.MaxStarSum.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Define Adj(a,b) to hold iff there is some j with 0 <= j < len(edges) such that (edges[j][0] = a and edges[j][1] = b) or (edges[j][0] = b and edges[j][1] = a). Whenever max_star_sum(vals, edges, k) returns a result r, there exist a center c and a finite set S of node indices such that 0 <= c < n, every s in S satisfies 0 <= s < n, vals[s] > 0, and Adj(c,s), |S| <= k, and r = vals[c] + sum over s in S of vals[s].",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxStarSum.spec_6",
+    "negation": "AegisSpec.MaxStarSum.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define Adj(a,b) to hold iff there is some j with 0 <= j < len(edges) such that (edges[j][0] = a and edges[j][1] = b) or (edges[j][0] = b and edges[j][1] = a). Whenever max_star_sum(vals, edges, k) returns a result r, for every center c with 0 <= c < n and every finite set S of node indices such that every s in S satisfies 0 <= s < n and Adj(c,s), and |S| <= k, we have vals[c] + sum over s in S of vals[s] <= r.",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxStarSum.spec_7",
+    "negation": "AegisSpec.MaxStarSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_star_sum(vals, edges, k) returns a result r, r = max over i with 0 <= i < n of vals[i].",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], 0 <= k <= n-1, and k = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxStarSum.spec_8",
+    "negation": "AegisSpec.MaxStarSum.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Define Adj(a,b) to hold iff there is some j with 0 <= j < len(edges) such that (edges[j][0] = a and edges[j][1] = b) or (edges[j][0] = b and edges[j][1] = a). Whenever max_star_sum(vals, edges, k) returns a result r, r = max over c with 0 <= c < n of ( vals[c] + sum over s with 0 <= s < n, Adj(c,s), and vals[s] > 0 of vals[s] ).",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and k = n-1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxStarSum.spec_9",
+    "negation": "AegisSpec.MaxStarSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_star_sum(vals, edges, k1) returns a result r1 and max_star_sum(vals, edges, k2) returns a result r2, we have r1 <= r2.",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k1 <= k2 <= n-1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxStarSum.spec_10",
+    "negation": "AegisSpec.MaxStarSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_star_sum(vals, edges, k) returns a result r and max_star_sum(vals', edges, k) returns a result r', we have r <= r'.",
+    "preconditions": "Let n = len(vals) = len(vals'). Assume 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= vals'[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxStarSum.spec_11",
+    "negation": "AegisSpec.MaxStarSum.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_star_sum(vals, edges, k) returns a result r and max_star_sum(vals, edges', k) returns a result r', we have r = r'.",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, 0 <= k <= n-1, and both edges and edges' satisfy: len(edges) <= min(n*(n-1)/2, 100000), len(edges') <= min(n*(n-1)/2, 100000), every edge vector has length 2, every endpoint is in [0,n), and every edge has distinct endpoints. Also assume edges' is a permutation of edges: len(edges') = len(edges) and there exists a bijection pi on {0,...,len(edges)-1} such that edges'[j] = edges[pi(j)] for every j."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxStarSum.spec_12",
+    "negation": "AegisSpec.MaxStarSum.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define Adj(a,b) to hold iff there is some j with 0 <= j < len(edges) such that (edges[j][0] = a and edges[j][1] = b) or (edges[j][0] = b and edges[j][1] = a). For each center c with 0 <= c < n, let P_c be the finite set of s such that 0 <= s < n, Adj(c,s), and vals[s] > 0. Let d_c = min(k, |P_c|). Let L_c be the sum of vals[s] over any subset S of P_c with |S| = d_c and vals[s] >= vals[t] for every s in S and t in P_c \\ S. Then whenever max_star_sum(vals, edges, k) returns a result r, r = max over c with 0 <= c < n of (vals[c] + L_c).",
+    "preconditions": "Let n = len(vals). Assume n = len(vals), 1 <= n <= 100000, for every i with 0 <= i < n we have -10000 <= vals[i] <= 10000, len(edges) <= min(n*(n-1)/2, 100000), for every j with 0 <= j < len(edges) we have len(edges[j]) = 2, 0 <= edges[j][0] < n, 0 <= edges[j][1] < n, and edges[j][0] != edges[j][1], and 0 <= k <= n-1."
+  }
+]

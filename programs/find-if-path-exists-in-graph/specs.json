@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidPath.spec_1",
+    "negation": "AegisSpec.ValidPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever valid_path n edges source destination returns a result r, r = true if and only if there exist an integer m >= 0 and vertices v_0, ..., v_m such that (1) 0 <= v_j < n for every j with 0 <= j <= m, (2) v_0 = source, (3) v_m = destination, and (4) for every j with 0 <= j < m, the unordered pair {v_j, v_{j+1}} equals the unordered pair {edges[i][0], edges[i][1]} for some i with 0 <= i < len(edges). Equivalently, r = false exactly when no such sequence exists.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; and 0 <= source < n and 0 <= destination < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidPath.spec_2",
+    "negation": "AegisSpec.ValidPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n, edges, source, destination satisfying the preconditions, valid_path n edges source destination returns a result (Ok true or Ok false); it does not fail by arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; and 0 <= source < n and 0 <= destination < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidPath.spec_3",
+    "negation": "AegisSpec.ValidPath.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever valid_path n edges source destination returns r and valid_path n edges destination source returns r', we have r = r'.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; and 0 <= source < n and 0 <= destination < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidPath.spec_4",
+    "negation": "AegisSpec.ValidPath.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever valid_path n edges source destination returns r and valid_path n edges' source destination returns r', we have r = r'.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; 0 <= source < n and 0 <= destination < n; and edges' is a list of the same length as edges such that for every i with 0 <= i < len(edges), edges'[i] is either [edges[i][0], edges[i][1]] or [edges[i][1], edges[i][0]], and edges' satisfies the same constraints for n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidPath.spec_5",
+    "negation": "AegisSpec.ValidPath.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever valid_path n edges source destination returns r and valid_path n' edges source destination returns r', we have r = r'.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; 0 <= source < n and 0 <= destination < n; and n <= n' <= 200000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidPath.spec_6",
+    "negation": "AegisSpec.ValidPath.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If valid_path n edges source destination returns true, then valid_path n edges' source destination returns true.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; 0 <= source < n and 0 <= destination < n; and edges' satisfies the same constraints for n and contains every edge of edges, meaning that for every i with 0 <= i < len(edges) there exists j with 0 <= j < len(edges') such that the unordered pair {edges'[j][0], edges'[j][1]} equals the unordered pair {edges[i][0], edges[i][1]}."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidPath.spec_7",
+    "negation": "AegisSpec.ValidPath.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever valid_path n edges source destination returns true, there exist an integer m >= 0 and vertices v_0, ..., v_m such that (1) 0 <= v_j < n for every j with 0 <= j <= m, (2) v_0 = source, (3) v_m = destination, (4) for every j with 0 <= j < m the unordered pair {v_j, v_{j+1}} is an edge of edges, and (5) v_0, ..., v_m are pairwise distinct.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; and 0 <= source < n and 0 <= destination < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidPath.spec_8",
+    "negation": "AegisSpec.ValidPath.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever valid_path n edges source destination returns Ok false, there exists a set S ⊆ {0, ..., n-1} such that source ∈ S, destination ∉ S, and for every i with 0 <= i < len(edges), either (edges[i][0] ∈ S and edges[i][1] ∈ S) or (edges[i][0] ∉ S and edges[i][1] ∉ S).",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; and 0 <= source < n and 0 <= destination < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidPath.spec_9",
+    "negation": "AegisSpec.ValidPath.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If valid_path n edges source source2 returns true, then whenever valid_path n edges source destination returns r and valid_path n edges source2 destination returns r', we have r = r'.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; 0 <= source < n and 0 <= destination < n; and 0 <= source2 < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidPath.spec_10",
+    "negation": "AegisSpec.ValidPath.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever valid_path n edges source destination returns r and valid_path n edges' source' destination' returns r', we have r = r'.",
+    "preconditions": "1 <= n <= 200000; 0 <= len(edges) <= 200000; for every i with 0 <= i < len(edges), len(edges[i]) = 2, 0 <= edges[i][0] < n, 0 <= edges[i][1] < n, and edges[i][0] != edges[i][1]; for every i,j with 0 <= i < j < len(edges), the unordered pair {edges[i][0], edges[i][1]} is not equal to the unordered pair {edges[j][0], edges[j][1]}; 0 <= source < n and 0 <= destination < n; p is a bijection from {0, ..., n-1} to itself; edges' is a list of the same length as edges such that edges'[i][0] = p(edges[i][0]) and edges'[i][1] = p(edges[i][1]) for every i with 0 <= i < len(edges); and source' = p(source), destination' = p(destination)."
+  }
+]

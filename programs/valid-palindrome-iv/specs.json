@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MakePalindrome.spec_1",
+    "negation": "AegisSpec.MakePalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever make_palindrome(s) returns a result r, r = true if and only if the number of indices i with 0 <= i < n/2 (integer division, i.e. 0 <= i < floor(n/2)) and s[i] != s[n-1-i] is at most 2.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] for 0 <= i < n is a lowercase ASCII letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MakePalindrome.spec_2",
+    "negation": "AegisSpec.MakePalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MakePalindrome.spec_3",
+    "negation": "AegisSpec.MakePalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever make_palindrome(s) returns a result r, if r = false then the number of indices i with 0 <= i < n/2 and s[i] != s[n-1-i] is at least 3.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MakePalindrome.spec_4",
+    "negation": "AegisSpec.MakePalindrome.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let rev(s) be the byte slice of length n defined by rev(s)[i] = s[n-1-i] for all 0 <= i < n. Whenever make_palindrome(s) returns r1 and make_palindrome(rev(s)) returns r2, we have r1 = r2.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MakePalindrome.spec_5",
+    "negation": "AegisSpec.MakePalindrome.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every lowercase ASCII byte c, let t be the byte slice of length n with t[n/2] = c (integer division gives the middle index) and t[i] = s[i] for all i != n/2. Whenever make_palindrome(s) returns r1 and make_palindrome(t) returns r2, we have r1 = r2.",
+    "preconditions": "s is a byte slice with n = len(s), n is odd, 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MakePalindrome.spec_6",
+    "negation": "AegisSpec.MakePalindrome.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Assume that for every i with 0 <= i < n/2, (s[i] = s[n-1-i]) if and only if (t[i] = t[n-1-i]). Then whenever make_palindrome(s) returns r1 and make_palindrome(t) returns r2, we have r1 = r2.",
+    "preconditions": "s and t are byte slices with n = len(s) = len(t), 1 <= n <= 100000, and all bytes of s and t are lowercase ASCII letters."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MakePalindrome.spec_7",
+    "negation": "AegisSpec.MakePalindrome.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Assume that the number of indices i with 0 <= i < n/2 and s[i] != s[n-1-i] equals the number of indices i with 0 <= i < n/2 and t[i] != t[n-1-i]. Then whenever make_palindrome(s) returns r1 and make_palindrome(t) returns r2, we have r1 = r2.",
+    "preconditions": "s and t are byte slices with n = len(s) = len(t), 1 <= n <= 100000, and all bytes are lowercase ASCII letters."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MakePalindrome.spec_8",
+    "negation": "AegisSpec.MakePalindrome.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever make_palindrome(s) returns true, there exists a byte slice t of length n such that: (a) every byte of t is a lowercase ASCII letter; (b) t is a palindrome, i.e. t[i] = t[n-1-i] for all 0 <= i < n; and (c) the number of indices i with 0 <= i < n and s[i] != t[i] is either 1 or 2.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MakePalindrome.spec_9",
+    "negation": "AegisSpec.MakePalindrome.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever make_palindrome(s) returns false, for every byte slice t of length n such that every byte of t is a lowercase ASCII letter and t is a palindrome (t[i] = t[n-1-i] for all 0 <= i < n), the number of indices i with 0 <= i < n and s[i] != t[i] is neither 1 nor 2.",
+    "preconditions": "s is a byte slice with n = len(s), 1 <= n <= 100000, and every byte s[i] is a lowercase ASCII letter."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MakePalindrome.spec_10",
+    "negation": "AegisSpec.MakePalindrome.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Assume that make_palindrome(s) returns true, and that for every i with 0 <= i < n/2, if t[i] != t[n-1-i] then s[i] != s[n-1-i] (every mismatched pair of t is also a mismatched pair of s). Then whenever make_palindrome(t) returns a result r, r = true.",
+    "preconditions": "s and t are byte slices with n = len(s) = len(t), 1 <= n <= 100000, and all bytes are lowercase ASCII letters."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MakePalindrome.spec_11",
+    "negation": "AegisSpec.MakePalindrome.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Assume that make_palindrome(s) returns false, and that for every i with 0 <= i < n/2, if s[i] != s[n-1-i] then t[i] != t[n-1-i] (every mismatched pair of s is also a mismatched pair of t). Then whenever make_palindrome(t) returns a result r, r = false.",
+    "preconditions": "s and t are byte slices with n = len(s) = len(t), 1 <= n <= 100000, and all bytes are lowercase ASCII letters."
+  }
+]

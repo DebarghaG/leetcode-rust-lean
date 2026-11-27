@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindScore.spec_1",
+    "negation": "AegisSpec.FindScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). Consider the deterministic marking process on indices 0,...,n-1. Initially no index is marked and score = 0. While an unmarked index remains, let i be the unmarked index satisfying both: nums[i] is minimal among all unmarked indices, and among all unmarked indices with that minimal value, i is the smallest index. Add nums[i] to the score, then mark i and every index j with 0 <= j < n and |j-i| <= 1. Let T be the number of iterations before all indices are marked, and let i_0,...,i_{T-1} be the chosen indices in order. The function returns a result r and r = sum_{k=0}^{T-1} nums[i_k], with the sum taken as a mathematical integer; this value fits in i64.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindScore.spec_2",
+    "negation": "AegisSpec.FindScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every valid nums, the function returns a result r and does not fail (no panic and no 64-bit overflow). In particular, the exact score is at most 100000 * 1000000 = 100000000000, which is below 2^63-1, so the final sum and all intermediate cumulative scores fit in i64.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindScore.spec_3",
+    "negation": "AegisSpec.FindScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, min_{0 <= i < len(nums)} nums[i] <= r <= sum_{i=0}^{len(nums)-1} nums[i], where the minimum and sum are mathematical integers.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindScore.spec_4",
+    "negation": "AegisSpec.FindScore.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = nums[0].",
+    "preconditions": "nums is a valid input and len(nums) = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindScore.spec_5",
+    "negation": "AegisSpec.FindScore.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(nums[0], nums[1]), the smaller of the two values; if they are equal, their common value.",
+    "preconditions": "nums is a valid input and len(nums) = 2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindScore.spec_6",
+    "negation": "AegisSpec.FindScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = c * ceil(len(nums) / 2), where ceil is integer ceiling.",
+    "preconditions": "nums is a valid input and there is a constant c with 1 <= c <= 1000000 such that nums[i] = c for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindScore.spec_7",
+    "negation": "AegisSpec.FindScore.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = sum over all integers k with 0 <= k and 2k < len(nums) of nums[2k], i.e. the sum of the values at even indices 0,2,4,... .",
+    "preconditions": "nums is a valid input and, for every i with 0 <= i < len(nums)-1, nums[i] <= nums[i+1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindScore.spec_8",
+    "negation": "AegisSpec.FindScore.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever find_score(nums) returns a result r, let S be the set of indices chosen by the marking process whose values sum to r. Then S is independent on the path: for all distinct i,j in S, |i-j| >= 2. Equivalently, no two chosen indices are adjacent.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindScore.spec_9",
+    "negation": "AegisSpec.FindScore.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever find_score(nums) returns a result r, let S be the set of indices chosen by the marking process whose values sum to r. Then S dominates every index: for every t with 0 <= t < len(nums), there exists s in S with |t-s| <= 1.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindScore.spec_10",
+    "negation": "AegisSpec.FindScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). Let i be the smallest index attaining m = min_{0 <= j < n} nums[j]. Let L be the contiguous sequence nums[0],...,nums[i-2] (empty if i < 2), and let R be nums[i+2],...,nums[n-1] (empty if i+2 >= n). Let score(L) and score(R) be the scores produced by the same marking algorithm on these sequences, with score(empty) = 0. Whenever find_score(nums) returns r, r = nums[i] + score(L) + score(R).",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindScore.spec_11",
+    "negation": "AegisSpec.FindScore.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let S be the set of indices chosen by the marking process for nums. Whenever find_score(nums) returns r and find_score(nums') returns r', r' = r + c * |S|, where |S| is the number of chosen indices for nums.",
+    "preconditions": "nums is a valid input, and c is an integer such that for every i with 0 <= i < len(nums), 1 <= nums[i] + c <= 1000000. Let nums' be defined by nums'[i] = nums[i] + c for all i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindScore.spec_12",
+    "negation": "AegisSpec.FindScore.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever find_score(nums) returns a result r, let S be the set of indices chosen by the marking process whose values sum to r, and let n = len(nums). Then ceil(n/3) <= |S| <= ceil(n/2). Equivalently, (n+2) div 3 <= |S| <= (n+1) div 2 for integer division.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindScore.spec_13",
+    "negation": "AegisSpec.FindScore.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let m = min_{0 <= i < len(nums)} nums[i], and let i0 be the smallest index with nums[i0] = m. In the marking process, the first chosen index is i0, and the first value added to the score is m. Consequently, whenever find_score(nums) returns r, the selected-index sequence whose values sum to r begins with i0 and has first contribution m.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindScore.spec_14",
+    "negation": "AegisSpec.FindScore.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let i satisfy 0 <= i < len(nums). Suppose i is a strict local minimum, meaning (i = 0 or nums[i] < nums[i-1]) and (i = len(nums)-1 or nums[i] < nums[i+1]). Then i belongs to the set S of indices chosen by the marking process for nums. In particular, whenever find_score(nums) returns r, nums[i] is one of the summands in the sum over S that equals r.",
+    "preconditions": "nums is a valid input: 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000."
+  }
+]

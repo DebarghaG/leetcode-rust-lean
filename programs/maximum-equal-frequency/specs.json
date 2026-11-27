@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_1",
+    "negation": "AegisSpec.MaxEqualFreq.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For an integer k with 1 <= k <= n, call the prefix nums[0..k) admissible if there exists an index j with 0 <= j < k such that, after deleting the single entry nums[j] from this prefix, every integer value that still occurs among the remaining k-1 entries occurs the same positive number of times (the condition is vacuously true when nothing remains, i.e. when k=1). The function returns a result r and r = max { k | 1 <= k <= n and nums[0..k) is admissible }.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_2",
+    "negation": "AegisSpec.MaxEqualFreq.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and 1 <= r <= len(nums).",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_3",
+    "negation": "AegisSpec.MaxEqualFreq.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= min(len(nums), 3). Equivalently, r >= len(nums) when len(nums) <= 3, and r >= 3 when len(nums) >= 3.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_4",
+    "negation": "AegisSpec.MaxEqualFreq.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists an index j with 0 <= j < r such that, after deleting nums[j] from the prefix nums[0..r), every integer value still occurring among the remaining r-1 entries occurs the same positive number of times.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_5",
+    "negation": "AegisSpec.MaxEqualFreq.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and for every integer k with r < k <= len(nums), the prefix nums[0..k) is not admissible: that is, for every index j with 0 <= j < k, after deleting nums[j] from nums[0..k) there exist two integer values that still occur among the remaining k-1 entries with different positive occurrence counts.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_6",
+    "negation": "AegisSpec.MaxEqualFreq.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums[i] = nums[0] for every i with 0 <= i < len(nums), then the function returns a result r with r = len(nums).",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_7",
+    "negation": "AegisSpec.MaxEqualFreq.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums[i] != nums[j] for every pair of indices i,j with 0 <= i < j < len(nums), then the function returns a result r with r = len(nums).",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_8",
+    "negation": "AegisSpec.MaxEqualFreq.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = len(nums) if and only if there exists an index j with 0 <= j < len(nums) such that, after deleting nums[j] from the whole array nums[0..len(nums)), every integer value still occurring among the remaining len(nums)-1 entries occurs the same positive number of times. Equivalently, if no such j exists then r < len(nums).",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_9",
+    "negation": "AegisSpec.MaxEqualFreq.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_equal_freq(nums) returns r and max_equal_freq(nums') returns r', we have r = r'.",
+    "preconditions": "nums and nums' are slices of i64, each satisfying 2 <= len <= 100000 and all entries between 1 and 100000, with len(nums)=len(nums'), and for all i,j with 0 <= i,j < len(nums), nums[i]=nums[j] if and only if nums'[i]=nums'[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_10",
+    "negation": "AegisSpec.MaxEqualFreq.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every nums satisfying the preconditions; it never fails, i.e. it does not panic, access out of bounds, or overflow the i64 arithmetic.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxEqualFreq.spec_11",
+    "negation": "AegisSpec.MaxEqualFreq.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 4, then the function returns r = 3 exactly when there are exactly two distinct values v and w (v != w) such that v occurs exactly twice and w occurs exactly twice among the four entries; in every other length-4 case it returns r = 4.",
+    "preconditions": "nums is a slice of i64 with 2 <= len(nums) <= 100000, and 1 <= nums[i] <= 100000 for every i with 0 <= i < len(nums)."
+  }
+]

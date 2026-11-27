@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_1",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a cell to be a pair (i,j) with 0 <= i < m and 0 <= j < n. Define a legal move as either ((i,j),(i,k)) with j < k < n and k - j <= grid[i][j], or ((i,j),(k,j)) with i < k < m and k - i <= grid[i][j]. Define a path as a finite sequence of cells (i_0,j_0),...,(i_t,j_t) with t >= 0, (i_0,j_0) = (0,0), (i_t,j_t) = (m-1,n-1), such that every consecutive pair is a legal move; its visited-cell count is t+1. The function returns a result r and: if at least one such path exists, then r is the minimum visited-cell count over all such paths; if no such path exists, then r = -1.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_2",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: there is no panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_3",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or 1 <= r <= m*n.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_4",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != -1, r <= m + n - 1.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_5",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define a legal move as either from (i,j) to (i,k) with j < k < n and k - j <= grid[i][j], or from (i,j) to (k,j) with i < k < m and k - i <= grid[i][j]. The function returns a result r and r = -1 if and only if no finite sequence of cells (i_0,j_0),...,(i_t,j_t) exists with t >= 0, (i_0,j_0) = (0,0), (i_t,j_t) = (m-1,n-1), and every consecutive pair a legal move.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_6",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever m > 1, n > 1, and the function returns a result r with r != -1, we have r >= 3.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_7",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists a finite sequence of cells (i_0,j_0),...,(i_t,j_t) such that t >= 0, t+1 = r, every (i_q,j_q) satisfies 0 <= i_q < m and 0 <= j_q < n, (i_0,j_0) = (0,0), (i_t,j_t) = (m-1,n-1), and for each q < t either i_{q+1} = i_q, j_q < j_{q+1}, and j_{q+1} - j_q <= grid[i_q][j_q], or j_{q+1} = j_q, i_q < i_{q+1}, and i_{q+1} - i_q <= grid[i_q][j_q].",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumVisitedCells.spec_8",
+    "negation": "AegisSpec.MinimumVisitedCells.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != -1, every finite sequence of cells (i_0,j_0),...,(i_t,j_t) with t >= 0, all cells inside the m by n grid, (i_0,j_0) = (0,0), (i_t,j_t) = (m-1,n-1), and each consecutive pair either being on the same row with increasing column and column increase at most grid[i_q][j_q], or on the same column with increasing row and row increase at most grid[i_q][j_q], satisfies t+1 >= r.",
+    "preconditions": "Let m = len(grid). The slice is nonempty, so let n = len(grid[0]). Assume m >= 1, n >= 1, every row of grid has length n, m*n <= 100000, for every i with 0 <= i < m and every j with 0 <= j < n we have 0 <= grid[i][j] < m*n, and grid[m-1][n-1] = 0."
+  }
+]

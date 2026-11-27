@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_1",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the minimum total cost of a valid connection: there exists a finite set S of pairs (i,j) with 0 <= i < m and 0 <= j < n such that (1) for every i with 0 <= i < m there is some j with (i,j) in S, (2) for every j with 0 <= j < n there is some i with (i,j) in S, (3) r = sum over (i,j) in S of cost[i][j], with each pair counted once, and (4) for every finite set T of pairs (i,j) with 0 <= i < m and 0 <= j < n that satisfies (1) and (2), the sum over (i,j) in T of cost[i][j] is at least r.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n. (The problem statement also promises m >= n; the specification is stated on the weaker rectangular domain and is valid on the promised domain.)"
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_2",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by panic, out-of-bounds access, or arithmetic overflow.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_3",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (sum for i = 0 to m-1 of cost[i][0]) + (sum for j = 1 to n-1 of cost[0][j]).",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_4",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum for j = 0 to n-1 of (min over 0 <= i < m of cost[i][j]).",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_5",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum for i = 0 to m-1 of (min over 0 <= j < n of cost[i][j]).",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_6",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = (max(m,n)) * c.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n. There exists an integer c with 0 <= c <= 100 such that cost[i][j] = c for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_7",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = sum for i = 0 to m-1 of cost[i][0].",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n. Also n = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_8",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for cost and r' for cost', then r = r'.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). Both cost and cost' have m rows and n columns; 1 <= m <= 12, 1 <= n <= 12; all entries of both matrices are in [0,100]. There is a permutation pi of {0,...,m-1} such that cost'[i][j] = cost[pi(i)][j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_9",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for cost and r' for cost', then r <= r'.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). Both cost and cost' have m rows and n columns; 1 <= m <= 12, 1 <= n <= 12; all entries of both matrices are in [0,100]. There are indices i0,j0 with 0 <= i0 < m and 0 <= j0 < n such that cost'[i0][j0] >= cost[i0][j0] and cost'[i][j] = cost[i][j] for every other pair (i,j)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_10",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r for cost and r' for cost', then r' = c * r.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). Both cost and cost' have m rows and n columns; 1 <= m <= 12, 1 <= n <= 12; all entries of both matrices are in [0,100]. There is a nonnegative integer c such that cost'[i][j] = c * cost[i][j] for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_11",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set S of pairs (i,j) with 0 <= i < m and 0 <= j < n such that (1) for every i with 0 <= i < m there is some j with (i,j) in S, (2) for every j with 0 <= j < n there is some i with (i,j) in S, (3) r = sum over (i,j) in S of cost[i][j], and (4) the number of pairs in S is at most m + n - 1.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_12",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns r, r = min over all functions f : {0,...,m-1} -> {0,...,n-1} of [ sum_{i=0}^{m-1} cost[i][f(i)] + sum_{j=0}^{n-1} (if j is not in the image of f then min_{0<=i<m} cost[i][j] else 0) ].",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ConnectTwoGroups.spec_13",
+    "negation": "AegisSpec.ConnectTwoGroups.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for cost and rT for costT, then r = rT.",
+    "preconditions": "Let m = len(cost) and n = len(cost[0]). 1 <= m <= 12, 1 <= n <= 12, every row cost[i] for 0 <= i < m has length n, and 0 <= cost[i][j] <= 100 for every 0 <= i < m and 0 <= j < n. Let costT be the n x m matrix defined by costT[j][i] = cost[i][j]."
+  }
+]

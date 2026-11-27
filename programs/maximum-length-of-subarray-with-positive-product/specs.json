@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetMaxLen.spec_1",
+    "negation": "AegisSpec.GetMaxLen.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r is the maximum of the set S = { L | 0 <= L <= len(nums) and (L = 0 or there exist indices i, j with 0 <= i < j <= len(nums), j - i = L, nums[k] != 0 for every k with i <= k < j, and the number of k with i <= k < j and nums[k] < 0 is even) }. Equivalently, r is the greatest length of a contiguous subarray whose product is positive, where the empty subarray of length 0 is allowed as a fallback; if no nonempty subarray has positive product, r = 0.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetMaxLen.spec_2",
+    "negation": "AegisSpec.GetMaxLen.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail (in particular, no arithmetic overflow, no out-of-bounds indexing, and no panic) for every input satisfying the preconditions.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetMaxLen.spec_3",
+    "negation": "AegisSpec.GetMaxLen.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let M be the maximum length of a contiguous subarray of nums containing no zero: M = max { j - i | 0 <= i <= j <= len(nums) and nums[k] != 0 for every k with i <= k < j }. Then 0 <= r <= M <= len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetMaxLen.spec_4",
+    "negation": "AegisSpec.GetMaxLen.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r > 0 then there exist indices i and j such that 0 <= i < j <= len(nums), j - i = r, nums[k] != 0 for every k with i <= k < j, and the number of k with i <= k < j and nums[k] < 0 is even; if r = 0, the empty subarray of length 0 is allowed and no nonempty witness is required.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetMaxLen.spec_5",
+    "negation": "AegisSpec.GetMaxLen.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of indices i, j with 0 <= i < j <= len(nums) and j - i > r, the subarray nums[i..j) does not have positive product; equivalently, either there exists k with i <= k < j and nums[k] = 0, or the number of k with i <= k < j and nums[k] < 0 is odd.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetMaxLen.spec_6",
+    "negation": "AegisSpec.GetMaxLen.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(nums) if and only if nums[k] != 0 for every k with 0 <= k < len(nums) and the number of k with 0 <= k < len(nums) and nums[k] < 0 is even.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetMaxLen.spec_7",
+    "negation": "AegisSpec.GetMaxLen.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every index z with 0 <= z < len(nums) and nums[z] = 0, define L(z) = max({0} union { j - i | 0 <= i < j <= z, nums[k] != 0 for every k with i <= k < j, and the number of k with i <= k < j and nums[k] < 0 is even }) and R(z) = max({0} union { j - i | z + 1 <= i < j <= len(nums), nums[k] != 0 for every k with i <= k < j, and the number of k with i <= k < j and nums[k] < 0 is even }). Then r = max(L(z), R(z)).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetMaxLen.spec_8",
+    "negation": "AegisSpec.GetMaxLen.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_max_len(nums) returns r and get_max_len(other) returns r2, we have r = r2.",
+    "preconditions": "Both nums and other are slices of i64 with 1 <= len(nums) = len(other) <= 100000; for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000 and -1000000000 <= other[i] <= 1000000000; and for every i with 0 <= i < len(nums), nums[i] = 0 if and only if other[i] = 0, and nums[i] < 0 if and only if other[i] < 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetMaxLen.spec_9",
+    "negation": "AegisSpec.GetMaxLen.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let the maximal contiguous zero-free blocks of nums be the intervals [a,b) with 0 <= a < b <= len(nums) such that nums[k] != 0 for every k with a <= k < b, (a = 0 or nums[a-1] = 0), and (b = len(nums) or nums[b] = 0). For each such block B = [a,b), let neg(B) be the number of k with a <= k < b and nums[k] < 0, and define val(B) = b - a if neg(B) is even; if neg(B) is odd, let first(B) = min { k | a <= k < b and nums[k] < 0 } and last(B) = max { k | a <= k < b and nums[k] < 0 }, and val(B) = (b - a) - min(first(B) - a + 1, b - last(B)). Then the function returns a result r and r = max({0} union { val(B) | B is a maximal contiguous zero-free block of nums }).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), -1000000000 <= nums[i] <= 1000000000."
+  }
+]

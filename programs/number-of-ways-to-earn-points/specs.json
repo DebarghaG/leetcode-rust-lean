@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_1",
+    "negation": "AegisSpec.WaysToReachTarget.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r, interpreted as an integer, is the unique integer in [0, 1000000007) congruent modulo 1000000007 to the number of choices of integers k_i, one for each 0 <= i < len(types), such that 0 <= k_i <= types[i][0] for every i and sum_{i=0}^{len(types)-1} k_i * types[i][1] = target. Equivalently, if W is that number of choices and M = 1000000007, then 0 <= r < M and r is congruent to W modulo M.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies the problem constraints: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50. Types[i][0] is count_i and types[i][1] is marks_i; all values are interpreted as mathematical integers within these ranges."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_2",
+    "negation": "AegisSpec.WaysToReachTarget.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, ways_to_reach_target returns a result (an ok value): there is no failure from arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_3",
+    "negation": "AegisSpec.WaysToReachTarget.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever ways_to_reach_target returns a result r, the integer value of r satisfies 0 <= r < 1000000007.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_4",
+    "negation": "AegisSpec.WaysToReachTarget.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If target > sum_{i=0}^{len(types)-1} types[i][0] * types[i][1], then the function returns 0.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_5",
+    "negation": "AegisSpec.WaysToReachTarget.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let g = gcd(types[0][1], types[1][1], ..., types[len(types)-1][1]). If g does not divide target, then the function returns 0.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_6",
+    "negation": "AegisSpec.WaysToReachTarget.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If types[i][1] > target for every i with 0 <= i < len(types), then the function returns 0.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_7",
+    "negation": "AegisSpec.WaysToReachTarget.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If target = sum_{i=0}^{len(types)-1} types[i][0] * types[i][1], then the function returns 1.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_8",
+    "negation": "AegisSpec.WaysToReachTarget.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If len(types) = 1, let count0 = types[0][0] and mark0 = types[0][1]. Then the function returns 1 if mark0 divides target and target / mark0 <= count0, and returns 0 otherwise.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_9",
+    "negation": "AegisSpec.WaysToReachTarget.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If target = 1, then the function returns the number of indices i with 0 <= i < len(types) and types[i][1] = 1.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_10",
+    "negation": "AegisSpec.WaysToReachTarget.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose len(types) >= 2 and for some index j with 0 <= j < len(types), types[j][1] > target. Let types' be the slice obtained by deleting the j-th entry of types. Then ways_to_reach_target target types and ways_to_reach_target target types' return the same result.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_11",
+    "negation": "AegisSpec.WaysToReachTarget.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Assume types[i][1] <= target for every i with 0 <= i < len(types). For each i let c_i = floor(target / types[i][1]), and let types' be obtained from types by replacing types[i][0] with min(types[i][0], c_i), leaving all marks unchanged. Then ways_to_reach_target target types and ways_to_reach_target target types' return the same result.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_12",
+    "negation": "AegisSpec.WaysToReachTarget.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice types' that is a permutation of the entries of types (same length and same multiset of [count, marks] vectors), the function returns the same result on (target, types) and on (target, types').",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_13",
+    "negation": "AegisSpec.WaysToReachTarget.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a nonzero result r, there exists at least one choice of integers k_i, one for each 0 <= i < len(types), such that 0 <= k_i <= types[i][0] for every i and sum_{i=0}^{len(types)-1} k_i * types[i][1] = target.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.WaysToReachTarget.spec_14",
+    "negation": "AegisSpec.WaysToReachTarget.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let W be the number of choices of integers k_i, one for each 0 <= i < len(types), such that 0 <= k_i <= types[i][0] for every i and sum_{i=0}^{len(types)-1} k_i * types[i][1] = target. If W < 1000000007, then the returned result r equals W as an integer.",
+    "preconditions": "target is an i64 and types is a slice of i64 vectors. The input satisfies: 1 <= target <= 1000; 1 <= len(types) <= 50; for every i with 0 <= i < len(types), len(types[i]) = 2, 1 <= types[i][0] <= 50, and 1 <= types[i][1] <= 50."
+  }
+]

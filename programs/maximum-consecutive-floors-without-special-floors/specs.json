@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxConsecutive.spec_1",
+    "negation": "AegisSpec.MaxConsecutive.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is the maximum number of consecutive non-special floors inside the rented interval [bottom, top]. Formally, call an integer x special iff there exists j with 0 <= j < len(special) and special[j] = x. Then r = 0 if every integer x with bottom <= x <= top is special; otherwise r is the largest integer L >= 1 for which there exist integers l and u with bottom <= l <= u <= top, u - l + 1 = L, and every integer x with l <= x <= u is not special.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxConsecutive.spec_2",
+    "negation": "AegisSpec.MaxConsecutive.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxConsecutive.spec_3",
+    "negation": "AegisSpec.MaxConsecutive.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= (top - bottom + 1) - len(special).",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxConsecutive.spec_4",
+    "negation": "AegisSpec.MaxConsecutive.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and r > 0, there exist integers l and u such that bottom <= l <= u <= top, u - l + 1 = r, and for every integer x with l <= x <= u, x is not special (that is, there is no j with 0 <= j < len(special) and special[j] = x).",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxConsecutive.spec_5",
+    "negation": "AegisSpec.MaxConsecutive.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for all integers l and u with bottom <= l <= u <= top such that every integer x with l <= x <= u is not special, we have u - l + 1 <= r.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxConsecutive.spec_6",
+    "negation": "AegisSpec.MaxConsecutive.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if every integer x with bottom <= x <= top is special (i.e. for every such x there exists j with 0 <= j < len(special) and special[j] = x).",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxConsecutive.spec_7",
+    "negation": "AegisSpec.MaxConsecutive.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let s be the sequence of length len(special) whose entries are exactly the entries of special in strictly increasing order (well defined because all special values are distinct and lie in [bottom, top]). Whenever the function returns a result r, r equals the maximum of the set containing 0, s[0] - bottom, top - s[len(special)-1], and every value s[i+1] - s[i] - 1 for 0 <= i < len(special)-1. Equivalently, r is the largest number of floors in any of the ranges before the first special floor, after the last special floor, and between consecutive special floors.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxConsecutive.spec_8",
+    "negation": "AegisSpec.MaxConsecutive.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice special' with len(special') = len(special) and with the same multiset of entries as special (equivalently, special' is a permutation of special), whenever the function returns r on (bottom, top, special) and r' on (bottom, top, special'), we have r = r'.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxConsecutive.spec_9",
+    "negation": "AegisSpec.MaxConsecutive.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on (bottom, top, special) and r' on (bottom', top', special'), we have r = r'.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]. Also, k is an integer such that the shifted parameters bottom' = bottom + k, top' = top + k, and special' with len(special') = len(special) and special'[i] = special[i] + k for every 0 <= i < len(special) still satisfy 1 <= bottom' <= top' <= 1000000000 and bottom' <= special'[i] <= top' for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxConsecutive.spec_10",
+    "negation": "AegisSpec.MaxConsecutive.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at least the greatest integer c such that c * (len(special) + 1) <= top - bottom + 1.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxConsecutive.spec_11",
+    "negation": "AegisSpec.MaxConsecutive.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on (bottom, top, special) and r' on (bottom, top, special'), we have r' <= r.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]. Also, special' is a slice satisfying the same constraints (1 <= len(special') <= 100000, all entries in [bottom, top], and all entries distinct), and every entry of special occurs as an entry of special'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxConsecutive.spec_12",
+    "negation": "AegisSpec.MaxConsecutive.spec_12_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every bottom, top, and special satisfying the preconditions, the function returns a result: there exists an I64 value r such that max_consecutive bottom top special = Result.ok r. It does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "bottom, top, and special are I64 values; 1 <= bottom <= top <= 1000000000; 1 <= len(special) <= 100000; for every i with 0 <= i < len(special), bottom <= special[i] <= top; and for all 0 <= i < j < len(special), special[i] != special[j]."
+  }
+]

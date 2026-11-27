@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxFreq.spec_1",
+    "negation": "AegisSpec.MaxFreq.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let distinct(t) be the number of distinct byte values in a byte string t. Let occ(t) be the number of indices i with 0 <= i <= len(s)-len(t) such that s[i+j] = t[j] for every j with 0 <= j < len(t). The function returns a result r and r = max { occ(t) | t is a byte string, minSize <= len(t) <= maxSize, distinct(t) <= maxLetters }. This maximum is taken over a finite set; if no valid substring occurs in s, it is 0.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxFreq.spec_2",
+    "negation": "AegisSpec.MaxFreq.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail with arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxFreq.spec_3",
+    "negation": "AegisSpec.MaxFreq.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= len(s) - minSize + 1.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxFreq.spec_4",
+    "negation": "AegisSpec.MaxFreq.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r. Whenever r > 0, there exist an integer L and a start i such that minSize <= L <= maxSize, 0 <= i <= len(s)-L, the substring s[i..i+L) has at most maxLetters distinct byte values, and r equals the number of starts j with 0 <= j <= len(s)-L for which s[j..j+L) = s[i..i+L).",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxFreq.spec_5",
+    "negation": "AegisSpec.MaxFreq.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = max { count(b) | b is a byte value }, where count(b) is the number of indices i with 0 <= i < len(s) and s[i] = b.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; minSize = 1; 1 <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxFreq.spec_6",
+    "negation": "AegisSpec.MaxFreq.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(s) - minSize + 1.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter; there exists a byte b such that s[i] = b for every i with 0 <= i < len(s)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxFreq.spec_7",
+    "negation": "AegisSpec.MaxFreq.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. Let d be the number of distinct byte values in s. Then r = 1 if d <= maxLetters, and r = 0 otherwise.",
+    "preconditions": "len(s) is between 1 and 26 inclusive; 1 <= maxLetters <= 26; minSize = maxSize = len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxFreq.spec_8",
+    "negation": "AegisSpec.MaxFreq.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For a byte b, let R_1,...,R_k be the lengths of the maximal contiguous blocks of positions in s all equal to b, where a block is a maximal interval [p,q) with s[i] = b for all p <= i < q. Let score(b) = sum over these blocks of max(0, R_j - minSize + 1). The function returns a result r and r = max over all byte values b of score(b).",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; maxLetters = 1; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxFreq.spec_9",
+    "negation": "AegisSpec.MaxFreq.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of max_freq(s, maxLetters1, minSize, maxSize) and r2 be the result of max_freq(s, maxLetters2, minSize, maxSize). Both calls return results, and r1 <= r2.",
+    "preconditions": "For each of the two calls, len(s) is between 1 and 100000 inclusive; 1 <= maxLetters_i <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter; and maxLetters1 <= maxLetters2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxFreq.spec_10",
+    "negation": "AegisSpec.MaxFreq.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of max_freq(s, maxLetters, minSize, maxSize1) and r2 be the result of max_freq(s, maxLetters, minSize, maxSize2). Both calls return results, and r1 <= r2.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize1 <= maxSize2 <= 26; maxSize2 <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxFreq.spec_11",
+    "negation": "AegisSpec.MaxFreq.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of max_freq(s, maxLetters, minSize1, maxSize) and r2 be the result of max_freq(s, maxLetters, minSize2, maxSize). Both calls return results, and r2 <= r1.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize1 <= minSize2 <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxFreq.spec_12",
+    "negation": "AegisSpec.MaxFreq.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let occ(p) be the number of starts j with 0 <= j <= len(s)-len(p) and s[j..j+len(p)) = p. The function returns a result r and r = max { occ(p) | p is a substring of s with len(p) = minSize }.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter; maxLetters >= d, where d is the number of distinct byte values in s."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxFreq.spec_13",
+    "negation": "AegisSpec.MaxFreq.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both calls return results and max_freq(s1, maxLetters, minSize, maxSize) = max_freq(s2, maxLetters, minSize, maxSize).",
+    "preconditions": "Let s1 and s2 be byte strings and phi a bijection from the set of ASCII lowercase letters to itself. Both parameter sets (s1,maxLetters,minSize,maxSize) and (s2,maxLetters,minSize,maxSize) satisfy: len(s1) = len(s2) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s1); every byte of s1 and s2 is an ASCII lowercase letter; and s2[i] = phi(s1[i]) for every i with 0 <= i < len(s1)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxFreq.spec_14",
+    "negation": "AegisSpec.MaxFreq.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = 0 if and only if for every start i and every length L with minSize <= L <= maxSize and 0 <= i <= len(s)-L, the substring s[i..i+L) contains more than maxLetters distinct byte values.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxFreq.spec_15",
+    "negation": "AegisSpec.MaxFreq.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let distinct(t) be the number of distinct byte values in t, and let occ(t) be the number of starts i with 0 <= i <= len(s)-len(t) and s[i+j] = t[j] for every 0 <= j < len(t). The function returns a result r and r = max { occ(t) | t is a byte string, len(t) = minSize, distinct(t) <= maxLetters }. Equivalently, the maximum over all valid substrings is always attained at length minSize.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize <= 26; maxSize <= len(s); every byte of s is an ASCII lowercase letter."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxFreq.spec_16",
+    "negation": "AegisSpec.MaxFreq.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r1 = max_freq(s, maxLetters, minSize, maxSize1) and r2 = max_freq(s, maxLetters, minSize, maxSize2). Both calls return results and r1 = r2.",
+    "preconditions": "len(s) is between 1 and 100000 inclusive; 1 <= maxLetters <= 26; 1 <= minSize <= maxSize1 <= maxSize2 <= 26; maxSize2 <= len(s); every byte of s is an ASCII lowercase letter."
+  }
+]

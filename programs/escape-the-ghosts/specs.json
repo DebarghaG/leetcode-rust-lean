@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EscapeGhosts.spec_1",
+    "negation": "AegisSpec.EscapeGhosts.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if for every i with 0 <= i < len(ghosts), |ghosts[i][0] - target[0]| + |ghosts[i][1] - target[1]| > |target[0]| + |target[1]|. Equivalently, r = false if and only if there exists i with 0 <= i < len(ghosts) such that |ghosts[i][0] - target[0]| + |ghosts[i][1] - target[1]| <= |target[0]| + |target[1]|.",
+    "preconditions": "len(target) = 2; 1 <= len(ghosts) <= 100; for every i with 0 <= i < len(ghosts), len(ghosts[i]) = 2; every coordinate appearing in target or in any ghosts[i] lies in the interval [-10000, 10000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EscapeGhosts.spec_2",
+    "negation": "AegisSpec.EscapeGhosts.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not overflow, panic, or perform an out-of-bounds access.",
+    "preconditions": "len(target) = 2; 1 <= len(ghosts) <= 100; for every i with 0 <= i < len(ghosts), len(ghosts[i]) = 2; every coordinate appearing in target or in any ghosts[i] lies in the interval [-10000, 10000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EscapeGhosts.spec_3",
+    "negation": "AegisSpec.EscapeGhosts.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If escape_ghosts(ghosts, target) returns true, then escape_ghosts(ghosts2, target) returns a result equal to true.",
+    "preconditions": "len(target) = 2; 1 <= len(ghosts) <= 100; 1 <= len(ghosts2) <= 100; len(ghosts) = len(ghosts2); for every i with 0 <= i < len(ghosts), len(ghosts[i]) = 2 and len(ghosts2[i]) = 2; every coordinate appearing in target, ghosts, or ghosts2 lies in [-10000, 10000]; for every i with 0 <= i < len(ghosts), |ghosts2[i][0] - target[0]| + |ghosts2[i][1] - target[1]| >= |ghosts[i][0] - target[0]| + |ghosts[i][1] - target[1]|."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EscapeGhosts.spec_4",
+    "negation": "AegisSpec.EscapeGhosts.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever escape_ghosts(ghosts, target) returns r1 and escape_ghosts(ghosts2, target) returns r2, r1 = r2.",
+    "preconditions": "len(target) = 2; len(ghosts) = len(ghosts2) = n with 1 <= n <= 100; for every i with 0 <= i < n, len(ghosts[i]) = 2 and len(ghosts2[i]) = 2; every coordinate appearing in target, ghosts, or ghosts2 lies in [-10000, 10000]; there exists a permutation pi of {0, ..., n-1} such that ghosts2[i][0] = ghosts[pi(i)][0] and ghosts2[i][1] = ghosts[pi(i)][1] for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EscapeGhosts.spec_5",
+    "negation": "AegisSpec.EscapeGhosts.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let target' = [target[1], target[0]] and for each i let ghosts'[i] = [ghosts[i][1], ghosts[i][0]]. Whenever escape_ghosts(ghosts, target) returns r1 and escape_ghosts(ghosts', target') returns r2, r1 = r2.",
+    "preconditions": "len(target) = 2; 1 <= len(ghosts) <= 100; for every i with 0 <= i < len(ghosts), len(ghosts[i]) = 2; every coordinate appearing in target or in any ghosts[i] lies in [-10000, 10000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EscapeGhosts.spec_6",
+    "negation": "AegisSpec.EscapeGhosts.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let target' = [target[0], -target[1]] and for each i let ghosts'[i] = [ghosts[i][0], -ghosts[i][1]]. Whenever escape_ghosts(ghosts, target) returns r1 and escape_ghosts(ghosts', target') returns r2, r1 = r2.",
+    "preconditions": "len(target) = 2; 1 <= len(ghosts) <= 100; for every i with 0 <= i < len(ghosts), len(ghosts[i]) = 2; every coordinate appearing in target or in any ghosts[i] lies in [-10000, 10000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EscapeGhosts.spec_7",
+    "negation": "AegisSpec.EscapeGhosts.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever escape_ghosts(ghosts, target) returns r1 and escape_ghosts(ghosts', target) returns r2, r1 = r2.",
+    "preconditions": "len(target) = 2; len(ghosts) = n with 1 <= n <= 99; for every i with 0 <= i < n, len(ghosts[i]) = 2; every coordinate appearing in target or in any ghosts[i] lies in [-10000, 10000]; let ghosts' be the slice of length n+1 obtained by appending one additional copy of ghosts[i] for some fixed i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EscapeGhosts.spec_8",
+    "negation": "AegisSpec.EscapeGhosts.spec_8_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever escape_ghosts(ghosts, target) returns r1 and escape_ghosts(ghosts', target) returns r2, r2 = true if and only if r1 = true and |g[0] - target[0]| + |g[1] - target[1]| > |target[0]| + |target[1]|. Equivalently, appending one ghost preserves escape exactly when its distance to the target is strictly larger than the player's distance, and otherwise forces false.",
+    "preconditions": "len(target)=2; 1 <= len(ghosts) <= 99; for every i with 0 <= i < len(ghosts), len(ghosts[i])=2; len(g)=2; every coordinate appearing in target, in any ghosts[i], or in g lies in [-10000,10000]; ghosts' is the slice of length len(ghosts)+1 obtained by appending g to ghosts."
+  }
+]

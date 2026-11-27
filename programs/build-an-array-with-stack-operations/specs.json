@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BuildArray.spec_1",
+    "negation": "AegisSpec.BuildArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r is a valid answer in the following complete sense. Let PushBytes be [80,117,115,104] and PopBytes be [80,111,112]. Every entry of r is exactly PushBytes or exactly PopBytes. Execute r from an empty stack: scan entries left to right; a Push entry appends the next unused integer from the stream 1,2,...,n (the first Push appends 1, the second appends 2, and so on), and a Pop entry removes the current top element. This execution is legal: no Push attempts to append an integer greater than n, and no Pop is applied to an empty stack. After executing all entries of r, the stack from bottom to top is exactly target (same length and same elements in the same order). Finally, for every k with 0 <= k < len(r), after executing only the first k entries of r the stack is not equal to target; so target is first reached exactly at the end of r.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BuildArray.spec_2",
+    "negation": "AegisSpec.BuildArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; that is, there exists an r with build_array target n = Result.ok r. In particular, on every input satisfying the preconditions the function does not fail, overflow, or panic.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BuildArray.spec_3",
+    "negation": "AegisSpec.BuildArray.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever build_array target n returns a result r, for every j with 0 <= j < len(r), the entry r[j] is either the byte vector [80,117,115,104] (ASCII Push) or the byte vector [80,111,112] (ASCII Pop). No other bytes or lengths occur.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BuildArray.spec_4",
+    "negation": "AegisSpec.BuildArray.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever build_array target n returns a result r, interpret entries as Push = [80,117,115,104] and Pop = [80,111,112] and execute r as described in the problem (the k-th Push appends k; Pop removes the top). Then this execution is legal: for every prefix of r, the number of Pop entries in that prefix is at most the number of Push entries in that prefix, and the total number of Push entries in r is at most n. Equivalently, no Pop is applied to an empty stack and no Push reads an integer larger than n.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BuildArray.spec_5",
+    "negation": "AegisSpec.BuildArray.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever build_array target n returns a result r, with entries interpreted as Push = [80,117,115,104] and Pop = [80,111,112] and executed legally from the empty stack (the k-th Push appends k; Pop removes the top), the final stack is exactly target: its length is len(target), and for every i with 0 <= i < len(target), the i-th element from the bottom equals target[i].",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BuildArray.spec_6",
+    "negation": "AegisSpec.BuildArray.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever build_array target n returns a result r, no proper prefix of r builds target. That is, for every k with 0 <= k < len(r), if the first k entries of r are executed legally under the standard Push/Pop interpretation, the resulting stack is not equal to target. Hence target is reached for the first time only after the whole sequence r has been executed.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BuildArray.spec_7",
+    "negation": "AegisSpec.BuildArray.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever build_array target n returns a result r, r is nonempty and its last entry r[len(r)-1] is the Push byte vector [80,117,115,104].",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BuildArray.spec_8",
+    "negation": "AegisSpec.BuildArray.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever build_array target n returns a result r, the number of entries of r equal to the Push byte vector [80,117,115,104] is exactly target[len(target)-1], which is the largest element of target.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BuildArray.spec_9",
+    "negation": "AegisSpec.BuildArray.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever build_array target n returns a result r, the number of entries of r equal to the Pop byte vector [80,111,112] is exactly target[len(target)-1] - len(target) (as a mathematical integer).",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BuildArray.spec_10",
+    "negation": "AegisSpec.BuildArray.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever build_array target n returns a result r, execute r legally with Push = [80,117,115,104] and Pop = [80,111,112] (the k-th Push appends k). For every integer v with 1 <= v <= target[len(target)-1], v is removed by a Pop exactly once if v is not an entry of target, and v is never removed by a Pop if v is an entry of target.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BuildArray.spec_11",
+    "negation": "AegisSpec.BuildArray.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever build_array target n returns a result r, execute r legally as above. For every k with 0 <= k < len(target), immediately before the unique Push operation that appends the value target[k], the stack from bottom to top is exactly [target[0], target[1], ..., target[k-1]] (the empty stack when k=0).",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BuildArray.spec_12",
+    "negation": "AegisSpec.BuildArray.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever build_array target n returns a result r, execute any prefix of r legally under the Push/Pop interpretation (the k-th Push appends k). After that prefix, the stack elements from bottom to top are strictly increasing; the empty stack is vacuously strictly increasing.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BuildArray.spec_13",
+    "negation": "AegisSpec.BuildArray.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever build_array target n returns a result r, the number of operations in r is exactly 2*target[len(target)-1] - len(target).",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BuildArray.spec_14",
+    "negation": "AegisSpec.BuildArray.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever build_array target n returns a result r, every Push in r appends some integer v with 1 <= v <= target[len(target)-1]. Consequently, for every integer n' with target[len(target)-1] <= n', the same r is still a legal operation sequence that first builds target against the stream 1,2,...,n'.",
+    "preconditions": "target is a list with 1 <= len(target) <= 100; 1 <= n <= 100; for every i with 0 <= i < len(target), 1 <= target[i] <= n; and target is strictly increasing (for every i,j with 0 <= i < j < len(target), target[i] < target[j])."
+  }
+]

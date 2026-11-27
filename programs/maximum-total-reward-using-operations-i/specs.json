@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTotalReward.spec_1",
+    "negation": "AegisSpec.MaxTotalReward.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let an admissible sequence be a finite sequence of indices i_1, ..., i_k (k >= 0) with each index in [0, n-1], all indices pairwise distinct, and for every j with 1 <= j <= k, rewardValues[i_j] > rewardValues[i_1] + ... + rewardValues[i_{j-1}]. The function returns a result r, and r is the greatest attainable total: there exists an admissible sequence whose total rewardValues[i_1] + ... + rewardValues[i_k] equals r, and every admissible sequence has total at most r.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTotalReward.spec_2",
+    "negation": "AegisSpec.MaxTotalReward.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, no out-of-bounds access, and no 64-bit overflow) for any rewardValues satisfying the preconditions.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTotalReward.spec_3",
+    "negation": "AegisSpec.MaxTotalReward.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 <= i < n} rewardValues[i]. The function returns a result r, and r >= M.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTotalReward.spec_4",
+    "negation": "AegisSpec.MaxTotalReward.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 <= i < n} rewardValues[i]. The function returns a result r, and r <= 2 * M - 1.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTotalReward.spec_5",
+    "negation": "AegisSpec.MaxTotalReward.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{i=0}^{n-1} rewardValues[i]. The function returns a result r, and r <= S.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTotalReward.spec_6",
+    "negation": "AegisSpec.MaxTotalReward.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = rewardValues[0].",
+    "preconditions": "Let n = len(rewardValues). n = 1 and 1 <= rewardValues[0] <= 2000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTotalReward.spec_7",
+    "negation": "AegisSpec.MaxTotalReward.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = v.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, every rewardValues[i] satisfies 1 <= rewardValues[i] <= 2000, and there exists an integer v such that rewardValues[i] = v for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTotalReward.spec_8",
+    "negation": "AegisSpec.MaxTotalReward.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let a = rewardValues[0] and b = rewardValues[1]. The function returns a result r, and r = a + b.",
+    "preconditions": "Let n = len(rewardValues). n = 2, 1 <= rewardValues[0] <= 2000, 1 <= rewardValues[1] <= 2000, and rewardValues[0] != rewardValues[1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxTotalReward.spec_9",
+    "negation": "AegisSpec.MaxTotalReward.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = max_{0 <= j < n} rewardValues[j] and let L = max{ rewardValues[i] | 0 <= i < n and rewardValues[i] < M }. The function returns a result r, and r >= M + L.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, every rewardValues[i] satisfies 1 <= rewardValues[i] <= 2000, and there exists an index i with rewardValues[i] < M, where M = max_{0 <= j < n} rewardValues[j]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxTotalReward.spec_10",
+    "negation": "AegisSpec.MaxTotalReward.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = sum_{t=0}^{n-1} rewardValues[t].",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, every rewardValues[i] satisfies 1 <= rewardValues[i] <= 2000, rewardValues is nondecreasing (rewardValues[i] <= rewardValues[i+1] for every 0 <= i < n-1), and for every j with 1 <= j < n, rewardValues[j] > sum_{t=0}^{j-1} rewardValues[t]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxTotalReward.spec_11",
+    "negation": "AegisSpec.MaxTotalReward.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let ys be the array obtained by deleting index m from rewardValues. The function returns a result r on rewardValues and a result s on ys, and r = M + s.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, every rewardValues[i] satisfies 1 <= rewardValues[i] <= 2000, n >= 2, and there is an index m with rewardValues[m] = M where M = max_{0 <= i < n} rewardValues[i] and M > sum_{0 <= i < n, i != m} rewardValues[i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxTotalReward.spec_12",
+    "negation": "AegisSpec.MaxTotalReward.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r. For every array ys of i64 with 1 <= len(ys) <= 2000 and 1 <= ys[k] <= 2000 for every valid k, if the set of values occurring in ys equals the set of values occurring in rewardValues, then the function returns a result r_ys on ys and r = r_ys.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxTotalReward.spec_13",
+    "negation": "AegisSpec.MaxTotalReward.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r on rewardValues. For every integer v with 1 <= v <= 2000 and len(rewardValues) + 1 <= 2000, let a be the array obtained by appending v to rewardValues; the function returns a result r_v on a and r <= r_v.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, and for every i with 0 <= i < n, 1 <= rewardValues[i] <= 2000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxTotalReward.spec_14",
+    "negation": "AegisSpec.MaxTotalReward.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = M + 1.",
+    "preconditions": "Let n = len(rewardValues). 1 <= n <= 2000, every rewardValues[i] satisfies 1 <= rewardValues[i] <= 2000, and there exists an integer M > 1 such that every element of rewardValues is either 1 or M, with at least one element equal to 1 and at least one element equal to M."
+  }
+]

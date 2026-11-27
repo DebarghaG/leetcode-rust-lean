@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetSum.spec_1",
+    "negation": "AegisSpec.GetSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For any slice x, call a subarray x[l..r] (0 <= l <= r < len(x)) consecutive if either (a) for every k with l <= k < r, x[k+1] = x[k] + 1, or (b) for every k with l <= k < r, x[k+1] = x[k] - 1; when l = r both conditions are vacuous, so length-1 subarrays are consecutive. Let T(x) be the sum, over all consecutive subarrays x[l..r] of x, of sum_{k=l}^{r} x[k]. Whenever get_sum nums returns a result r, r = T(nums) mod M, where mod M denotes the unique integer in [0, M-1] congruent to T(nums) modulo M.",
+    "preconditions": "Let M = 1000000007. 1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetSum.spec_2",
+    "negation": "AegisSpec.GetSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "get_sum nums does not fail: it returns Result.ok r for some i64 r.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetSum.spec_3",
+    "negation": "AegisSpec.GetSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_sum nums returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetSum.spec_4",
+    "negation": "AegisSpec.GetSum.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_sum nums returns a result r, r = nums[0].",
+    "preconditions": "len(nums) = 1 and 1 <= nums[0] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetSum.spec_5",
+    "negation": "AegisSpec.GetSum.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_sum nums returns a result r, r = nums[0] + nums[1] if |nums[1] - nums[0]| != 1, and r = 2 * (nums[0] + nums[1]) if |nums[1] - nums[0]| = 1.",
+    "preconditions": "len(nums) = 2 and 1 <= nums[0] <= 100000 and 1 <= nums[1] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetSum.spec_6",
+    "negation": "AegisSpec.GetSum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_sum nums returns a result r, r = (sum_{k=0}^{len(nums)-1} nums[k] * (k+1) * (len(nums)-k)) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000, and either (for every i with 0 <= i < len(nums)-1, nums[i+1] = nums[i] + 1) or (for every i with 0 <= i < len(nums)-1, nums[i+1] = nums[i] - 1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetSum.spec_7",
+    "negation": "AegisSpec.GetSum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_sum nums returns a result r, r = (sum_{k=0}^{len(nums)-1} nums[k]) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000, and for every i with 0 <= i < len(nums)-1, nums[i+1] - nums[i] is neither 1 nor -1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetSum.spec_8",
+    "negation": "AegisSpec.GetSum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_sum nums returns a result r, r is congruent modulo 1000000007 to T(nums[0..p]) + T(nums[p+1..len(nums)-1]), where for any slice x, T(x) is the sum over all consecutive subarrays x[l..r] of x of sum_{k=l}^{r} x[k].",
+    "preconditions": "len(nums) >= 2, for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100000, and p is an integer with 0 <= p < len(nums)-1 and |nums[p+1] - nums[p]| != 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetSum.spec_9",
+    "negation": "AegisSpec.GetSum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_sum nums returns a result r and get_sum rev returns a result r', r = r'.",
+    "preconditions": "nums satisfies the constraints of spec_1, and rev is a slice with len(rev) = len(nums) and rev[i] = nums[len(nums)-1-i] for every i with 0 <= i < len(nums)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetSum.spec_10",
+    "negation": "AegisSpec.GetSum.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let L(a) be the sum of (r-l+1) over all pairs (l,r) with 0 <= l <= r < len(a) such that a[l..r] is consecutive, i.e. all adjacent differences in a[l..r] are +1 or all are -1. Whenever get_sum a returns r_a and get_sum b returns r_b, r_b ≡ r_a + c * L(a) (mod 1000000007).",
+    "preconditions": "a and b both satisfy 1 <= len <= 100000 and element values in [1, 100000], len(a) = len(b), and there exists an integer c such that b[i] = a[i] + c for every i with 0 <= i < len(a)."
+  }
+]

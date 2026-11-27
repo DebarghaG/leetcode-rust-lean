@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinLength.spec_1",
+    "negation": "AegisSpec.MinLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For any byte string t, say that t is obtainable from s if there are k >= 0 and byte strings s0, s1, ..., sk with s0 = s, sk = t, and for each j < k, s(j+1) is obtained from sj by deleting two adjacent bytes that are either (65,66) or (67,68), then concatenating the part before them with the part after them. The function returns a result r such that, viewing r as an integer, r = min{ len(t) | t is obtainable from s }. Consequently some obtainable t has len(t) = r, and no obtainable t has len(t) < r.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinLength.spec_2",
+    "negation": "AegisSpec.MinLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r and does not fail: there is no panic, no arithmetic overflow, and no out-of-bounds access.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinLength.spec_3",
+    "negation": "AegisSpec.MinLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and 0 <= r <= len(s).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinLength.spec_4",
+    "negation": "AegisSpec.MinLength.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and len(s) - r is even; equivalently, r and len(s) have the same parity.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinLength.spec_5",
+    "negation": "AegisSpec.MinLength.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and for every byte string t obtainable from s by zero or more allowed deletions, if t contains no adjacent pair (65,66) and no adjacent pair (67,68), then len(t) = r.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinLength.spec_6",
+    "negation": "AegisSpec.MinLength.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and for every byte string t obtained from s by exactly one allowed deletion, the minimum possible length over all byte strings obtainable from t by zero or more allowed deletions is also r.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinLength.spec_7",
+    "negation": "AegisSpec.MinLength.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(s) if and only if for every i with 0 <= i < len(s)-1 it is not the case that (s[i] = 65 and s[i+1] = 66) or (s[i] = 67 and s[i+1] = 68).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinLength.spec_8",
+    "negation": "AegisSpec.MinLength.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 0 if and only if there exists a finite sequence of zero or more allowed deletions reducing s to the empty byte string.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinLength.spec_9",
+    "negation": "AegisSpec.MinLength.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let N be the number of indices i with 0 <= i < len(s) such that s[i] is not one of 65, 66, 67, 68. Let a = (number of occurrences of 65 in s) - (number of occurrences of 66 in s), and let c = (number of occurrences of 67 in s) - (number of occurrences of 68 in s). The function returns a result r, and r >= N + abs(a) + abs(c).",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinLength.spec_10",
+    "negation": "AegisSpec.MinLength.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and for every byte string t obtainable from s by zero or more allowed deletions, the difference (number of occurrences of 65 in t) - (number of occurrences of 66 in t) equals the same difference in s, and the difference (number of occurrences of 67 in t) - (number of occurrences of 68 in t) equals the same difference in s.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinLength.spec_11",
+    "negation": "AegisSpec.MinLength.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r, and for every byte string t obtainable from s by zero or more allowed deletions, every byte of s whose value is not one of 65, 66, 67, 68 occurs in t in the same relative order as in s.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinLength.spec_12",
+    "negation": "AegisSpec.MinLength.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. For any byte string u formed by inserting the contiguous pair (65,66) or the contiguous pair (67,68) at any position of s, the minimum possible length over all byte strings obtainable from u by zero or more allowed deletions is also r.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinLength.spec_13",
+    "negation": "AegisSpec.MinLength.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and there exists a finite sequence of exactly (len(s)-r)/2 allowed deletions that starts from s and ends at a byte string t with len(t) = r.",
+    "preconditions": "1 <= len(s) <= 100; for every i with 0 <= i < len(s), 65 <= s[i] <= 90."
+  }
+]

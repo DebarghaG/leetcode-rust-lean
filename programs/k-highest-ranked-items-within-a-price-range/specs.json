@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_1",
+    "negation": "AegisSpec.HighestRankedKItems.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define S to be the set of cells (i,j) with 0 <= i < m, 0 <= j < n, low <= grid[i][j] <= high, that are reachable from (sr,sc) by a path of adjacent cells all having grid > 0. For (i,j) in S let d(i,j) be the length (number of steps) of a shortest such path. For distinct a=(r1,c1) and b=(r2,c2) in S, write rank_better(a,b) iff the tuple (d(a), grid[r1][c1], r1, c1) is lexicographically smaller than the tuple (d(b), grid[r2][c2], r2, c2). The function returns a result r such that: (1) len(r) = min(k, |S|); (2) for every t with 0 <= t < len(r), r[t] is a vector of length 2 and cell(r[t]) = (r[t][0], r[t][1]) belongs to S; (3) the cells cell(r[0]), ..., cell(r[len(r)-1]) are pairwise distinct; (4) for every t with 0 <= t < len(r)-1, rank_better(cell(r[t]), cell(r[t+1])); (5) for every cell x in S that is not equal to any cell(r[t]) with 0 <= t < len(r), and for every t with 0 <= t < len(r), rank_better(cell(r[t]), x).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_2",
+    "negation": "AegisSpec.HighestRankedKItems.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds access, or panic) on any input satisfying the preconditions.",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_3",
+    "negation": "AegisSpec.HighestRankedKItems.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and for every t with 0 <= t < len(r), len(r[t]) = 2.",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_4",
+    "negation": "AegisSpec.HighestRankedKItems.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every t with 0 <= t < len(r), 0 <= r[t][0] < m and 0 <= r[t][1] < n.",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_5",
+    "negation": "AegisSpec.HighestRankedKItems.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let low = pricing[0] and high = pricing[1]. The function returns a result r and for every t with 0 <= t < len(r), the cell (r[t][0], r[t][1]) is valid (0 <= r[t][0] < m and 0 <= r[t][1] < n) and low <= grid[r[t][0]][r[t][1]] <= high.",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_6",
+    "negation": "AegisSpec.HighestRankedKItems.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define a cell (i,j) to be valid if 0 <= i < m and 0 <= j < n, and passable if it is valid and grid[i][j] > 0. Define a cell (i,j) to be reachable from (sr,sc) if there is a finite sequence of valid passable cells starting at (sr,sc), ending at (i,j), with consecutive cells adjacent (Manhattan distance 1). The function returns a result r and for every t with 0 <= t < len(r), the cell (r[t][0], r[t][1]) is valid and reachable from (sr,sc).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_7",
+    "negation": "AegisSpec.HighestRankedKItems.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let cell(r[t]) = (r[t][0], r[t][1]). The function returns a result r and for every i and j with 0 <= i < j < len(r), cell(r[i]) != cell(r[j]).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_8",
+    "negation": "AegisSpec.HighestRankedKItems.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Define S to be the set of cells (i,j) with 0 <= i < m, 0 <= j < n, low <= grid[i][j] <= high, that are reachable from (sr,sc) by a path of adjacent cells all having grid > 0. The function returns a result r and len(r) = min(k, |S|).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_9",
+    "negation": "AegisSpec.HighestRankedKItems.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define S to be the set of cells (i,j) with 0 <= i < m, 0 <= j < n, low <= grid[i][j] <= high, that are reachable from (sr,sc) by a path of adjacent cells all having grid > 0. For (i,j) in S let d(i,j) be the length of a shortest such path. For distinct a=(r1,c1) and b=(r2,c2) in S, write rank_better(a,b) iff (d(a), grid[r1][c1], r1, c1) is lexicographically smaller than (d(b), grid[r2][c2], r2, c2). The function returns a result r such that for every t with 0 <= t < len(r), r[t] is a vector of length 2 and cell(r[t]) = (r[t][0], r[t][1]) belongs to S, and for every t with 0 <= t < len(r)-1, cell(r[t]) != cell(r[t+1]) and rank_better(cell(r[t]), cell(r[t+1])).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.HighestRankedKItems.spec_10",
+    "negation": "AegisSpec.HighestRankedKItems.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define S to be the set of cells (i,j) with 0 <= i < m, 0 <= j < n, low <= grid[i][j] <= high, that are reachable from (sr,sc) by a path of adjacent cells all having grid > 0. For (i,j) in S let d(i,j) be the length of a shortest such path. For distinct a=(r1,c1) and b=(r2,c2) in S, write rank_better(a,b) iff (d(a), grid[r1][c1], r1, c1) is lexicographically smaller than (d(b), grid[r2][c2], r2, c2). The function returns a result r such that for every t with 0 <= t < len(r), r[t] is a vector of length 2 and cell(r[t]) = (r[t][0], r[t][1]) belongs to S; and for every cell x in S that is not equal to cell(r[t]) for any t with 0 <= t < len(r), and for every t with 0 <= t < len(r), rank_better(cell(r[t]), x).",
+    "preconditions": "m = len(grid) >= 1; there exists n >= 1 such that every row grid[i] (0 <= i < m) has length n and 1 <= m*n <= 100000; every grid[i][j] satisfies 0 <= grid[i][j] <= 100000; len(pricing) = 2, low = pricing[0], high = pricing[1], and 2 <= low <= high <= 100000; len(start) = 2, sr = start[0], sc = start[1], with 0 <= sr < m, 0 <= sc < n, and grid[sr][sc] > 0; 1 <= k <= m*n."
+  }
+]

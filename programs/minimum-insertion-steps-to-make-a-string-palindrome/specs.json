@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinInsertions.spec_1",
+    "negation": "AegisSpec.MinInsertions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_insertions(s) returns a result r, r is the least nonnegative integer k such that there exists a byte string t with len(t) = len(s) + k, t is a palindrome (for every j with 0 <= j < len(t), t[j] = t[len(t)-1-j]), and s is a subsequence of t (there exist indices 0 <= j_0 < j_1 < ... < j_{len(s)-1} < len(t) with t[j_i] = s[i] for every i with 0 <= i < len(s)).",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (s[i] is the ASCII code of a lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinInsertions.spec_2",
+    "negation": "AegisSpec.MinInsertions.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, min_insertions(s) returns a result r (the Result is ok); it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinInsertions.spec_3",
+    "negation": "AegisSpec.MinInsertions.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_insertions(s) returns a result r, 0 <= r <= len(s) - 1.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinInsertions.spec_4",
+    "negation": "AegisSpec.MinInsertions.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_insertions(s) returns a result r, r = 0 if and only if s is a palindrome (for every i with 0 <= i < len(s), s[i] = s[len(s)-1-i]).",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinInsertions.spec_5",
+    "negation": "AegisSpec.MinInsertions.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_insertions(s) returns a result r, r = len(s) - L, where L is the largest integer m for which there exist indices 0 <= i_0 < i_1 < ... < i_{m-1} < len(s) such that s[i_a] = s[i_{m-1-a}] for every a with 0 <= a < m.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinInsertions.spec_6",
+    "negation": "AegisSpec.MinInsertions.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_insertions(s) returns a result r and min_insertions(t) returns a result q, r = q.",
+    "preconditions": "1 <= len(s) <= 500; 1 <= len(t) <= 500; len(t) = len(s); for every i with 0 <= i < len(s), s[i] and t[i] are lowercase English ASCII codes; and for every i with 0 <= i < len(s), t[i] = s[len(s)-1-i] (t is the reversal of s)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinInsertions.spec_7",
+    "negation": "AegisSpec.MinInsertions.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let u be the slice of length len(s)-2 with u[i] = s[i+1] for every i with 0 <= i < len(s)-2. Whenever min_insertions(s) returns a result r and min_insertions(u) returns a result q, r = q.",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; len(s) >= 3; and s[0] = s[len(s)-1]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinInsertions.spec_8",
+    "negation": "AegisSpec.MinInsertions.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a be the slice of length len(s)-1 with a[i] = s[i+1] for every i with 0 <= i < len(s)-1, and let b be the slice of length len(s)-1 with b[i] = s[i] for every i with 0 <= i < len(s)-1. Whenever min_insertions(s) returns r, min_insertions(a) returns ra, and min_insertions(b) returns rb, we have r = 1 + min(ra, rb).",
+    "preconditions": "1 <= len(s) <= 500; for every i with 0 <= i < len(s), 97 <= s[i] <= 122; len(s) >= 2; and s[0] != s[len(s)-1]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinInsertions.spec_9",
+    "negation": "AegisSpec.MinInsertions.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_insertions(s) returns a result r, r = len(s) - C, where C is the largest integer m for which there exist indices 0 <= i_0 < i_1 < ... < i_{m-1} < len(s) and 0 <= j_0 < j_1 < ... < j_{m-1} < len(s) such that s[i_a] = s[len(s)-1-j_a] for every a with 0 <= a < m.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

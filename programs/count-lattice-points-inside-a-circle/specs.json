@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountLatticePoints.spec_1",
+    "negation": "AegisSpec.CountLatticePoints.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_lattice_points returns a result r (i.e. evaluates to Result.ok r), r equals the number of distinct lattice points (a,b) in Z^2 for which there exists an index i with 0 <= i < len(circles) such that (a - x_i)^2 + (b - y_i)^2 <= r_i^2. Thus a point is counted if it lies inside or on the circumference of at least one circle, and a point lying inside several circles is counted only once.",
+    "preconditions": "circles is a slice of vectors of 64-bit integers such that 1 <= len(circles) <= 200, and for every i with 0 <= i < len(circles), len(circles[i]) = 3. Write x_i = circles[i][0], y_i = circles[i][1], r_i = circles[i][2]. The constraints are 1 <= x_i <= 100, 1 <= y_i <= 100, and 1 <= r_i <= min(x_i, y_i)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountLatticePoints.spec_2",
+    "negation": "AegisSpec.CountLatticePoints.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, count_lattice_points returns a result: there exists a 64-bit integer r such that the function evaluates to Result.ok r. It does not panic, fail, or overflow on these inputs.",
+    "preconditions": "The same problem constraints as in spec_1: 1 <= len(circles) <= 200, each len(circles[i]) = 3, and for every i, 1 <= x_i <= 100, 1 <= y_i <= 100, 1 <= r_i <= min(x_i, y_i)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountLatticePoints.spec_3",
+    "negation": "AegisSpec.CountLatticePoints.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever count_lattice_points returns Result.ok r, 0 <= r <= 201*201 = 40401. Moreover, every lattice point (a,b) that is counted lies in the square 0 <= a <= 200 and 0 <= b <= 200; hence r cannot exceed the 40401 lattice points in that square.",
+    "preconditions": "circles is a slice of vectors of 64-bit integers such that 1 <= len(circles) <= 200, and for every i with 0 <= i < len(circles), len(circles[i]) = 3. Write x_i = circles[i][0], y_i = circles[i][1], r_i = circles[i][2]. The constraints are 1 <= x_i <= 100, 1 <= y_i <= 100, and 1 <= r_i <= min(x_i, y_i)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountLatticePoints.spec_4",
+    "negation": "AegisSpec.CountLatticePoints.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_lattice_points returns a result r, r >= max over all i with 0 <= i < len(circles) of (2*(circles[i][2])^2 + 2*circles[i][2] + 1).",
+    "preconditions": "The same problem constraints as in spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountLatticePoints.spec_5",
+    "negation": "AegisSpec.CountLatticePoints.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If count_lattice_points returns r on circles and returns r2 on circles2, then r = r2.",
+    "preconditions": "circles is valid as in spec_1. circles2 is any permutation of the rows of circles; hence circles2 is also valid and has the same length."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountLatticePoints.spec_6",
+    "negation": "AegisSpec.CountLatticePoints.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If count_lattice_points returns r on circles and returns r2 on circles2, then r <= r2.",
+    "preconditions": "circles is valid as in spec_1, and len(circles) < 200. Let d = [x,y,R] be a row satisfying 1 <= x <= 100, 1 <= y <= 100, and 1 <= R <= min(x,y). Let circles2 be obtained from circles by inserting d at any position. Then circles2 is also a valid input."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountLatticePoints.spec_7",
+    "negation": "AegisSpec.CountLatticePoints.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_lattice_points returns r, let C_i be the number of lattice points (a,b) in Z^2 with (a - circles[i][0])^2 + (b - circles[i][1])^2 <= (circles[i][2])^2, for each i with 0 <= i < len(circles). Then r <= sum over i from 0 to len(circles)-1 of C_i.",
+    "preconditions": "The same problem constraints as in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountLatticePoints.spec_8",
+    "negation": "AegisSpec.CountLatticePoints.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If count_lattice_points returns r_A on A, r_B on B, and r_C on C, then r_C = r_A + r_B.",
+    "preconditions": "Let A and B be valid inputs as in spec_1 with len(A) + len(B) <= 200. Assume that no lattice point is inside at least one circle of A and also inside at least one circle of B: for every (a,b) in Z^2 there do not exist i < len(A) and j < len(B) with (a - A[i][0])^2 + (b - A[i][1])^2 <= A[i][2]^2 and (a - B[j][0])^2 + (b - B[j][1])^2 <= B[j][2]^2. Let C be the concatenation A ++ B, which is a valid input."
+  }
+]

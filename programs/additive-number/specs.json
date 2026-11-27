@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_1",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true if and only if there exist an integer k >= 3 and indices 0 = i_0 < i_1 < ... < i_k = len(num) such that, for each j with 0 <= j < k, the bytes num[i_j], num[i_j+1], ..., num[i_{j+1}-1] form a nonempty decimal numeral a_j with no leading zero (if i_{j+1}-i_j > 1 then num[i_j] != 48), and for every j with 2 <= j < k, a_j = a_{j-1} + a_{j-2}. Here a_j is the usual base-10 value of that byte substring. Otherwise r = false.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_2",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, is_additive_number num returns Result.ok b for some Boolean b; it does not panic, return an error, or fail because of arithmetic overflow.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_3",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns Result.ok false.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57. Also len(num) < 3."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_4",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d_0 = num[0] - 48, d_1 = num[1] - 48, and d_2 = num[2] - 48. The function returns Result.ok true if and only if d_0 + d_1 = d_2.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57. Also len(num) = 3."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_5",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns Result.ok true.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57. Also len(num) >= 3, and num[i] = 48 for every i with 0 <= i < len(num)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_6",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns Result.ok b with b = true, len(num) >= 3.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_7",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns Result.ok true and num[0] = 48 ('0'), there exists a valid additive partition of num (a split of the whole byte string into at least three nonempty decimal numbers, none with a leading zero except a one-byte 0, with each number from the third equal to the sum of the previous two) whose first number is the one-byte substring num[0..1), i.e. the number 0.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_8",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns Result.ok true if and only if num[i] = 48 ('0') for every i with 0 <= i < len(num).",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57. Also len(num) >= 3, num[0] = 48, and num[1] = 48."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_9",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d_i = num[i] - 48 for i = 0,1,2,3. The function returns Result.ok true if and only if either (A) d_2 != 0 and d_0 + d_1 = 10*d_2 + d_3, or (B) d_0 + d_1 = d_2 and d_1 + d_2 = d_3.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57. Also len(num) = 4."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_10",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Result.ok true and num[0] = 48 ('0'), there exists a valid additive partition of num (as described in spec_7) whose second and third numbers are equal.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_11",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Result.ok true, there exists a valid additive partition of num with at least three numbers such that its last number equals the sum of its two immediately preceding numbers.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_12",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns Result.ok true, there exists a valid additive partition of num whose numeric values a_0, a_1, ..., a_{k-1} (with k >= 3) satisfy a_2 <= a_3 <= ... <= a_{k-1}.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsAdditiveNumber.spec_13",
+    "negation": "AegisSpec.IsAdditiveNumber.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns Result.ok true, there exist integers k and i_0, i_1, ..., i_k such that k >= 3, 0 = i_0 < i_1 < ... < i_k = len(num), and each part length i_{j+1} - i_j (for 0 <= j < k) is at least 1 and at most len(num) - 2.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(num) <= 35, and for every i with 0 <= i < len(num), num[i] is an ASCII decimal digit, i.e. 48 <= num[i] <= 57."
+  }
+]

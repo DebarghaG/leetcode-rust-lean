@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSubarrays.spec_1",
+    "negation": "AegisSpec.CountSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For 0 <= l <= r < n define mn(l,r) = min{nums[i] | l <= i <= r} and mx(l,r) = max{nums[i] | l <= i <= r}. Let F be the number of pairs (l,r) with 0 <= l <= r < n such that mn(l,r) = minK and mx(l,r) = maxK. Whenever count_subarrays(nums, minK, maxK) returns a result r, the integer r is equal to F.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSubarrays.spec_2",
+    "negation": "AegisSpec.CountSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums, minK, and maxK satisfying the preconditions, count_subarrays(nums, minK, maxK) returns a result r (it does not fail, panic, overflow, or index outside the slice).",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSubarrays.spec_3",
+    "negation": "AegisSpec.CountSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_subarrays(nums, minK, maxK) returns a result r, we have 0 <= r.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSubarrays.spec_4",
+    "negation": "AegisSpec.CountSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums). Whenever count_subarrays(nums, minK, maxK) returns a result r, we have r <= n*(n+1)/2, the total number of non-empty contiguous subarrays of nums.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSubarrays.spec_5",
+    "negation": "AegisSpec.CountSubarrays.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums). Let C be the number of pairs (l,r) with 0 <= l <= r < n such that for every i with l <= i <= r, minK <= nums[i] <= maxK. Whenever count_subarrays(nums, minK, maxK) returns a result r, we have r <= C.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSubarrays.spec_6",
+    "negation": "AegisSpec.CountSubarrays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If minK > maxK, then whenever count_subarrays(nums, minK, maxK) returns a result r, we have r = 0.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSubarrays.spec_7",
+    "negation": "AegisSpec.CountSubarrays.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If either there is no index i with 0 <= i < len(nums) and nums[i] = minK, or there is no index i with 0 <= i < len(nums) and nums[i] = maxK, then whenever count_subarrays(nums, minK, maxK) returns a result r, we have r = 0.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSubarrays.spec_8",
+    "negation": "AegisSpec.CountSubarrays.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Assume minK = maxK, and let v = minK. Whenever count_subarrays(nums, minK, maxK) returns a result r, r is equal to the number of pairs (l,r) with 0 <= l <= r < len(nums) such that nums[i] = v for every i with l <= i <= r.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSubarrays.spec_9",
+    "negation": "AegisSpec.CountSubarrays.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Assume minK <= maxK, every element nums[i] satisfies minK <= nums[i] <= maxK, and there exist indices i and j with nums[i] = minK and nums[j] = maxK. Whenever count_subarrays(nums, minK, maxK) returns a result r, we have r >= 1.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSubarrays.spec_10",
+    "negation": "AegisSpec.CountSubarrays.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Assume minK != maxK. Let n = len(nums). Whenever count_subarrays(nums, minK, maxK) returns a result r, we have r <= n*(n-1)/2.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSubarrays.spec_11",
+    "negation": "AegisSpec.CountSubarrays.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length len(nums) with rev[i] = nums[len(nums)-1-i] for 0 <= i < len(nums). Whenever count_subarrays(nums, minK, maxK) returns a result r, and count_subarrays(rev, minK, maxK) returns a result r', we have r = r'.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountSubarrays.spec_12",
+    "negation": "AegisSpec.CountSubarrays.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c be any integer such that for every i with 0 <= i < len(nums), 1 <= nums[i] + c <= 1000000, and also 1 <= minK + c <= 1000000 and 1 <= maxK + c <= 1000000. Define nums2 by nums2[i] = nums[i] + c for all i. Whenever count_subarrays(nums, minK, maxK) returns a result r, and count_subarrays(nums2, minK + c, maxK + c) returns a result r', we have r = r'.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountSubarrays.spec_13",
+    "negation": "AegisSpec.CountSubarrays.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). Fix an index s with 0 <= s < n such that nums[s] < minK or nums[s] > maxK. Let L be the number of pairs (l,r) with 0 <= l <= r < s such that min{nums[i] | l <= i <= r} = minK and max{nums[i] | l <= i <= r} = maxK. Let R be the number of pairs (u,v) with s+1 <= u <= v < n such that min{nums[i] | u <= i <= v} = minK and max{nums[i] | u <= i <= v} = maxK. Whenever count_subarrays(nums, minK, maxK) returns a result r, we have r = L + R.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountSubarrays.spec_14",
+    "negation": "AegisSpec.CountSubarrays.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(nums). Call an interval [a,b] with 0 <= a <= b < n a maximal valid segment if minK <= nums[i] <= maxK for every i with a <= i <= b, and the interval cannot be extended left or right while keeping this property. Whenever count_subarrays(nums, minK, maxK) returns a result r, r is equal to the sum over all maximal valid segments [a,b] of the number of pairs (l,r) with a <= l <= r <= b such that min{nums[i] | l <= i <= r} = minK and max{nums[i] | l <= i <= r} = maxK.",
+    "preconditions": "nums is a slice of I64 with 2 <= len(nums) <= 100000; for every i with 0 <= i < len(nums), 1 <= nums[i] <= 1000000; 1 <= minK <= 1000000; 1 <= maxK <= 1000000."
+  }
+]

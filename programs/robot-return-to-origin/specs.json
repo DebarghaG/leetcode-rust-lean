@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.JudgeCircle.spec_1",
+    "negation": "AegisSpec.JudgeCircle.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let U, D, L, R be the numbers of indices i with 0 <= i < len(moves) such that moves[i] = 85 ('U'), moves[i] = 68 ('D'), moves[i] = 76 ('L'), and moves[i] = 82 ('R'), respectively. The function does not fail: there exists a Boolean b such that judge_circle(moves) = Result.ok b. Moreover, b = true if and only if U = D and L = R; equivalently, b = true if and only if the final horizontal displacement R - L and the final vertical displacement U - D are both zero.",
+    "preconditions": "moves is a nonempty byte slice with 1 <= len(moves) <= 20000, and for every i with 0 <= i < len(moves), moves[i] is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.JudgeCircle.spec_2",
+    "negation": "AegisSpec.JudgeCircle.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, there exists a Boolean b such that judge_circle(moves) = Result.ok b; the function never returns an error and does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "moves is a nonempty byte slice with 1 <= len(moves) <= 20000, and for every i with 0 <= i < len(moves), moves[i] is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.JudgeCircle.spec_3",
+    "negation": "AegisSpec.JudgeCircle.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For each sequence seq let U(seq), D(seq), L(seq), R(seq) be the numbers of indices i with 0 <= i < len(seq) for which seq[i] = 'U', seq[i] = 'D', seq[i] = 'L', and seq[i] = 'R', respectively. If U(moves) = U(moves'), D(moves) = D(moves'), L(moves) = L(moves'), and R(moves) = R(moves'), then judge_circle(moves) and judge_circle(moves') both return results and their Bool values are equal.",
+    "preconditions": "moves and moves' are byte slices such that 1 <= len(moves), len(moves') <= 20000, and every byte of both slices is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.JudgeCircle.spec_4",
+    "negation": "AegisSpec.JudgeCircle.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define flipLR(moves) by flipLR(moves)[i] = 'R' when moves[i] = 'L', flipLR(moves)[i] = 'L' when moves[i] = 'R', and flipLR(moves)[i] = moves[i] otherwise. Then judge_circle(moves) and judge_circle(flipLR(moves)) both return results and the returned Bool values are equal.",
+    "preconditions": "moves is a nonempty byte slice with 1 <= len(moves) <= 20000, and for every i with 0 <= i < len(moves), moves[i] is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.JudgeCircle.spec_5",
+    "negation": "AegisSpec.JudgeCircle.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define flipUD(moves) by flipUD(moves)[i] = 'D' when moves[i] = 'U', flipUD(moves)[i] = 'U' when moves[i] = 'D', and flipUD(moves)[i] = moves[i] otherwise. Then judge_circle(moves) and judge_circle(flipUD(moves)) both return results and the returned Bool values are equal.",
+    "preconditions": "moves is a nonempty byte slice with 1 <= len(moves) <= 20000, and for every i with 0 <= i < len(moves), moves[i] is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.JudgeCircle.spec_6",
+    "negation": "AegisSpec.JudgeCircle.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Define rot(moves) by replacing each 'U' with 'R', each 'R' with 'D', each 'D' with 'L', and each 'L' with 'U'. Then judge_circle(moves) and judge_circle(rot(moves)) both return results and the returned Bool values are equal.",
+    "preconditions": "moves is a nonempty byte slice with 1 <= len(moves) <= 20000, and for every i with 0 <= i < len(moves), moves[i] is one of the ASCII bytes 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.JudgeCircle.spec_7",
+    "negation": "AegisSpec.JudgeCircle.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function does not fail; it returns Result.ok false.",
+    "preconditions": "moves is a byte slice with 1 <= len(moves) <= 20000, len(moves) is odd, and every byte of moves is one of 85 ('U'), 68 ('D'), 76 ('L'), 82 ('R')."
+  }
+]

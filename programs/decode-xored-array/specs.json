@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Decode.spec_1",
+    "negation": "AegisSpec.Decode.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). The vector r has length len(encoded)+1. Its first element is r[0] = first. For every i with 0 <= i < len(encoded), the next element is r[i+1] = r[i] XOR encoded[i]. Equivalently, r satisfies r[0] = first and encoded[i] = r[i] XOR r[i+1] for every 0 <= i < len(encoded).",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Decode.spec_2",
+    "negation": "AegisSpec.Decode.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every encoded and first satisfying the preconditions, decode returns a result r; it never panics, overflows, or accesses an out-of-bounds index.",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Decode.spec_3",
+    "negation": "AegisSpec.Decode.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever decode returns a result r, len(r) = len(encoded) + 1. Consequently, since len(encoded) >= 1, r has at least two elements.",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Decode.spec_4",
+    "negation": "AegisSpec.Decode.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever decode returns a result r, for every i with 0 <= i <= len(encoded), the integer value of r[i] satisfies 0 <= r[i] <= 131071 (that is, 0 <= r[i] <= 2^17 - 1).",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Decode.spec_5",
+    "negation": "AegisSpec.Decode.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever decode returns a result r, for every i with 0 <= i < len(encoded), r[i] XOR r[i+1] = encoded[i].",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Decode.spec_6",
+    "negation": "AegisSpec.Decode.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever decode returns a result r, for every i with 0 <= i <= len(encoded), r[i] = first XOR encoded[0] XOR encoded[1] XOR ... XOR encoded[i-1], where the empty XOR (when i = 0) is 0. In other words, r[i] is the XOR of first with the prefix encoded[0..i-1].",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Decode.spec_7",
+    "negation": "AegisSpec.Decode.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever decode returns a result r, r[0] XOR r[len(encoded)] = encoded[0] XOR encoded[1] XOR ... XOR encoded[len(encoded)-1] (the XOR of all entries of encoded).",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Decode.spec_8",
+    "negation": "AegisSpec.Decode.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever decode returns a result r, for every sequence a of 64-bit integers with len(a) = len(encoded)+1, a[0] = first, and a[i] XOR a[i+1] = encoded[i] for every 0 <= i < len(encoded), we have a[i] = r[i] for every 0 <= i <= len(encoded). Thus r is the unique solution.",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Decode.spec_9",
+    "negation": "AegisSpec.Decode.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever decode returns a result r and len(encoded) = 1, r is exactly the two-element vector [first, first XOR encoded[0]].",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Decode.spec_10",
+    "negation": "AegisSpec.Decode.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever decode returns a result r and encoded[i] = 0 for every 0 <= i < len(encoded), then r[i] = first for every 0 <= i <= len(encoded).",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Decode.spec_11",
+    "negation": "AegisSpec.Decode.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever decode returns a result r and first = 0, then r[0] = 0 and for every i with 1 <= i <= len(encoded), r[i] = encoded[0] XOR encoded[1] XOR ... XOR encoded[i-1] (the XOR of the prefix of encoded of length i).",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Decode.spec_12",
+    "negation": "AegisSpec.Decode.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever decode returns a result r, for every i with 0 <= i < len(encoded), r[i] = r[i+1] if and only if encoded[i] = 0.",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Decode.spec_13",
+    "negation": "AegisSpec.Decode.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever decode returns a result r, for every i and j with 0 <= i <= j <= len(encoded), r[i] XOR r[j] = encoded[i] XOR encoded[i+1] XOR ... XOR encoded[j-1], where the empty XOR (when i = j) is 0. This general pairwise relation subsumes the endpoint case of spec_7 and the adjacent case of spec_5.",
+    "preconditions": "encoded is a slice of 64-bit integers with 1 <= len(encoded) <= 9999, and for every i with 0 <= i < len(encoded), 0 <= encoded[i] <= 100000. first is a 64-bit integer with 0 <= first <= 100000. XOR denotes bitwise exclusive-or on 64-bit integers; on these non-negative values it agrees with ordinary non-negative integer XOR."
+  }
+]

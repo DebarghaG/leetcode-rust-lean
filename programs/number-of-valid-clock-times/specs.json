@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountTime.spec_1",
+    "negation": "AegisSpec.CountTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let render(h,m) be the 5-byte sequence [48 + h div 10, 48 + h mod 10, 58, 48 + m div 10, 48 + m mod 10] for 0 <= h <= 23 and 0 <= m <= 59. Let C be the set of pairs (h,m) in that range such that for every i in {0,1,2,3,4}, either time[i] = 63 ('?') or time[i] = render(h,m)[i]. The function returns a result r and r = |C|, the number of elements of C.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountTime.spec_2",
+    "negation": "AegisSpec.CountTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountTime.spec_3",
+    "negation": "AegisSpec.CountTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r is an integer satisfying 1 <= r <= 1440.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountTime.spec_4",
+    "negation": "AegisSpec.CountTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let q be the number of indices i in {0,1,3,4} for which time[i] = 63 ('?'). The returned value r satisfies r <= 10^q.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountTime.spec_5",
+    "negation": "AegisSpec.CountTime.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals 1 if and only if none of time[0], time[1], time[3], time[4] is 63 ('?').",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountTime.spec_6",
+    "negation": "AegisSpec.CountTime.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals 1440 if and only if time[0] = time[1] = time[3] = time[4] = 63 ('?').",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountTime.spec_7",
+    "negation": "AegisSpec.CountTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M be the number of m with 0 <= m <= 59 such that (time[3] = 63 or time[3] = 48 + m div 10) and (time[4] = 63 or time[4] = 48 + m mod 10). If time[0] = 63 and time[1] = 63, then the returned value r equals 24 * M.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountTime.spec_8",
+    "negation": "AegisSpec.CountTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H be the number of h with 0 <= h <= 23 such that (time[0] = 63 or time[0] = 48 + h div 10) and (time[1] = 63 or time[1] = 48 + h mod 10). If time[3] = 63 and time[4] = 63, then the returned value r equals 60 * H.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountTime.spec_9",
+    "negation": "AegisSpec.CountTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M be the number of m with 0 <= m <= 59 such that (time[3] = 63 or time[3] = 48 + m div 10) and (time[4] = 63 or time[4] = 48 + m mod 10). If time[0] != 63 and time[1] != 63, then the returned value r equals M.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountTime.spec_10",
+    "negation": "AegisSpec.CountTime.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H be the number of h with 0 <= h <= 23 such that (time[0] = 63 or time[0] = 48 + h div 10) and (time[1] = 63 or time[1] = 48 + h mod 10). If time[3] != 63 and time[4] != 63, then the returned value r equals H.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountTime.spec_11",
+    "negation": "AegisSpec.CountTime.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M be the number of m with 0 <= m <= 59 such that (time[3] = 63 or time[3] = 48 + m div 10) and (time[4] = 63 or time[4] = 48 + m mod 10). If time[0] = 63 and time[1] is an ASCII digit d with 48 <= d <= 57, then the returned value r equals H * M, where H = 3 if 48 <= d <= 51, and H = 2 if 52 <= d <= 57.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountTime.spec_12",
+    "negation": "AegisSpec.CountTime.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M be the number of m with 0 <= m <= 59 such that (time[3] = 63 or time[3] = 48 + m div 10) and (time[4] = 63 or time[4] = 48 + m mod 10). If time[1] = 63 and time[0] is an ASCII digit a (under the preconditions a is 48, 49, or 50), then the returned value r equals H * M, where H = 10 if a is 48 or 49, and H = 4 if a = 50.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountTime.spec_13",
+    "negation": "AegisSpec.CountTime.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H be the number of h with 0 <= h <= 23 such that (time[0] = 63 or time[0] = 48 + h div 10) and (time[1] = 63 or time[1] = 48 + h mod 10). If time[3] = 63 and time[4] is an ASCII digit d with 48 <= d <= 57, then the returned value r equals 6 * H.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountTime.spec_14",
+    "negation": "AegisSpec.CountTime.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let H be the number of h with 0 <= h <= 23 such that (time[0] = 63 or time[0] = 48 + h div 10) and (time[1] = 63 or time[1] = 48 + h mod 10). If time[4] = 63 and time[3] is an ASCII digit a (under the preconditions a is in 48..53), then the returned value r equals 10 * H.",
+    "preconditions": "time is a 5-byte ASCII string satisfying the problem constraints: len(time) = 5; time[2] = 58 (':'); for each i in {0,1,3,4}, time[i] is either 63 ('?') or an ASCII digit in 48..57; and there exists at least one pair (h,m) with 0 <= h <= 23 and 0 <= m <= 59 whose zero-padded two-digit hh and mm agree with time at every non-'?' byte."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountTime.spec_15",
+    "negation": "AegisSpec.CountTime.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_time returns r for time and r' for time', we have r' <= r.",
+    "preconditions": "time and time' are two 5-byte ASCII strings both satisfying the problem constraints: len = 5; the third byte is 58 (':'); the other four bytes are each 63 ('?') or ASCII digits in 48..57; and each fixed pattern admits at least one valid clock time. For some j in {0,1,3,4}, time[j] = 63 and time' is obtained from time by replacing only that byte with an ASCII digit d in 48..57; all other bytes are equal."
+  }
+]

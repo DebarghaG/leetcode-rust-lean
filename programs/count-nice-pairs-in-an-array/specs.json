@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountNicePairs.spec_1",
+    "negation": "AegisSpec.CountNicePairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. For each non-negative integer x, let rev(x) be the integer obtained by writing x in decimal without leading zeros, reversing the resulting digit string, and interpreting it in decimal (so rev(0)=0, rev(123)=321, and rev(120)=21). Let C be the number of index pairs (i,j) such that 0 <= i < j < len(nums) and nums[i] + rev(nums[j]) = nums[j] + rev(nums[i]). Then count_nice_pairs(nums) returns a result r and r is the unique integer satisfying 0 <= r < M and r is congruent to C modulo M.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountNicePairs.spec_2",
+    "negation": "AegisSpec.CountNicePairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, count_nice_pairs(nums) returns a result; it does not fail, panic, or overflow.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountNicePairs.spec_3",
+    "negation": "AegisSpec.CountNicePairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every nums satisfying the preconditions, whenever count_nice_pairs(nums) returns a result r, 0 <= r <= 1000000006.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountNicePairs.spec_4",
+    "negation": "AegisSpec.CountNicePairs.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "count_nice_pairs(nums) returns 0.",
+    "preconditions": "nums is a slice of 64-bit signed integers with len(nums) = 1 and 0 <= nums[0] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountNicePairs.spec_5",
+    "negation": "AegisSpec.CountNicePairs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let rev be the decimal-digit reversal with rev(0)=0 and no leading zeros in the output. If nums[0] + rev(nums[1]) = nums[1] + rev(nums[0]), then count_nice_pairs(nums) returns 1; otherwise count_nice_pairs(nums) returns 0.",
+    "preconditions": "nums is a slice of 64-bit signed integers with len(nums) = 2 and, for i = 0 and i = 1, 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountNicePairs.spec_6",
+    "negation": "AegisSpec.CountNicePairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "count_nice_pairs(nums) returns (len(nums) * (len(nums) - 1) / 2) mod 1000000007.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000. In addition, there is an integer d such that nums[i] - rev(nums[i]) = d for every i with 0 <= i < len(nums), where rev is decimal-digit reversal."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountNicePairs.spec_7",
+    "negation": "AegisSpec.CountNicePairs.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_nice_pairs(nums) returns r and count_nice_pairs(other) returns s, r = s.",
+    "preconditions": "nums and other are slices of 64-bit signed integers, each satisfying 1 <= length <= 100000 and all elements between 0 and 1000000000 inclusive. Let rev be decimal-digit reversal. For every integer d, the number of indices i with 0 <= i < len(nums) and nums[i] - rev(nums[i]) = d equals the number of indices j with 0 <= j < len(other) and other[j] - rev(other[j]) = d."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountNicePairs.spec_8",
+    "negation": "AegisSpec.CountNicePairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007 and let rev be decimal-digit reversal. For each integer d, let c(d) be the number of indices i such that 0 <= i < len(nums) and nums[i] - rev(nums[i]) = d. Whenever count_nice_pairs(nums) returns r, r is the unique integer with 0 <= r < M and r is congruent modulo M to the sum over all integers d of c(d) * (c(d) - 1) / 2.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 100000 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountNicePairs.spec_9",
+    "negation": "AegisSpec.CountNicePairs.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let C be the number of index pairs (i,j) such that 0 <= i < j < len(nums) and nums[i] + rev(nums[j]) = nums[j] + rev(nums[i]), where rev is decimal-digit reversal. Then count_nice_pairs(nums) returns C.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 44721 and, for every i with 0 <= i < len(nums), 0 <= nums[i] <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountNicePairs.spec_10",
+    "negation": "AegisSpec.CountNicePairs.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007 and let rev be decimal-digit reversal. Let add be the number of indices i with 0 <= i < len(nums) such that nums[i] - rev(nums[i]) = x - rev(x). Whenever count_nice_pairs(nums) returns r and count_nice_pairs(ext) returns s, s is the unique integer with 0 <= s < M and s is congruent to r + add modulo M.",
+    "preconditions": "nums is a slice of 64-bit signed integers with 1 <= len(nums) <= 99999 and all elements between 0 and 1000000000 inclusive. The integer x satisfies 0 <= x <= 1000000000. Let ext be the slice of length len(nums)+1 with ext[i] = nums[i] for 0 <= i < len(nums) and ext[len(nums)] = x."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountNicePairs.spec_11",
+    "negation": "AegisSpec.CountNicePairs.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "count_nice_pairs(nums) returns 2.",
+    "preconditions": "nums is the slice of 64-bit signed integers [42, 11, 1, 97]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountNicePairs.spec_12",
+    "negation": "AegisSpec.CountNicePairs.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "count_nice_pairs(nums) returns 4.",
+    "preconditions": "nums is the slice of 64-bit signed integers [13, 10, 35, 24, 76]."
+  }
+]

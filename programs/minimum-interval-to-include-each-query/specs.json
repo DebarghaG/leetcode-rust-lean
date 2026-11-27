@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinInterval.spec_1",
+    "negation": "AegisSpec.MinInterval.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, len(r) = m and for every j with 0 <= j < m: if there exists i with 0 <= i < n and intervals[i][0] <= queries[j] <= intervals[i][1], then r[j] = min { intervals[i][1] - intervals[i][0] + 1 | 0 <= i < n and intervals[i][0] <= queries[j] <= intervals[i][1] }; otherwise r[j] = -1.",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinInterval.spec_2",
+    "negation": "AegisSpec.MinInterval.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "min_interval(intervals, queries) returns a result r; it does not fail, overflow, go out of bounds, or panic.",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinInterval.spec_3",
+    "negation": "AegisSpec.MinInterval.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, for every j with 0 <= j < m, either r[j] = -1 or 1 <= r[j] <= 10000000.",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinInterval.spec_4",
+    "negation": "AegisSpec.MinInterval.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, for every j with 0 <= j < m and r[j] != -1, there exists i with 0 <= i < n such that intervals[i][0] <= queries[j] <= intervals[i][1] and r[j] = intervals[i][1] - intervals[i][0] + 1.",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinInterval.spec_5",
+    "negation": "AegisSpec.MinInterval.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, for every j with 0 <= j < m and r[j] != -1, and for every i with 0 <= i < n, if intervals[i][0] <= queries[j] <= intervals[i][1], then r[j] <= intervals[i][1] - intervals[i][0] + 1.",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinInterval.spec_6",
+    "negation": "AegisSpec.MinInterval.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, for every a and b with 0 <= a < m and 0 <= b < m, if queries[a] = queries[b], then r[a] = r[b].",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinInterval.spec_7",
+    "negation": "AegisSpec.MinInterval.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every interval array intervals' satisfying the same preconditions with n' = len(intervals') = n and whose entries are a permutation of the entries of intervals, whenever min_interval(intervals, queries) returns r and min_interval(intervals', queries) returns r', we have len(r) = m and len(r') = m, and for every j with 0 <= j < m, r[j] = r'[j].",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinInterval.spec_8",
+    "negation": "AegisSpec.MinInterval.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every interval array intervals' satisfying the same preconditions such that every entry of intervals occurs in intervals' at least as many times as in intervals, whenever min_interval(intervals, queries) returns r and min_interval(intervals', queries) returns r', we have len(r) = m and len(r') = m, and for every j with 0 <= j < m: if r[j] = -1 then r'[j] = -1 or 1 <= r'[j]; and if r[j] != -1 then r'[j] != -1 and r'[j] <= r[j].",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinInterval.spec_9",
+    "negation": "AegisSpec.MinInterval.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_interval(intervals, queries) returns a result r, for every j with 0 <= j < m, every queries' satisfying the preconditions with len(queries') = m and queries'[j] = queries[j], and every result r' returned by min_interval(intervals, queries'), we have r[j] = r'[j].",
+    "preconditions": "Let n = len(intervals) and m = len(queries). The input satisfies: 1 <= n <= 100000, 1 <= m <= 100000; for every i with 0 <= i < n, len(intervals[i]) = 2, and writing intervals[i][0] and intervals[i][1] for its entries, 1 <= intervals[i][0] <= intervals[i][1] <= 10000000; for every j with 0 <= j < m, 1 <= queries[j] <= 10000000."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsConvex.spec_1",
+    "negation": "AegisSpec.IsConvex.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_convex(points) returns a result r, r = true if and only if either (for every i with 0 <= i < n, cross(i) >= 0) or (for every i with 0 <= i < n, cross(i) <= 0). Equivalently, r = false if and only if there exist i and j with 0 <= i, j < n such that cross(i) > 0 and cross(j) < 0.",
+    "preconditions": "Let n = len(points). Assume 3 <= n <= 10^4. For every i with 0 <= i < n, points[i] has length 2; write points[i] = [x_i, y_i]. Assume -10^4 <= x_i <= 10^4 and -10^4 <= y_i <= 10^4. Assume the points are pairwise distinct: for all i != j, (x_i, y_i) != (x_j, y_j). For 0 <= i < n, all subscripts in the definition of cross(i) are taken modulo n, and cross(i) = (x_{i+1} - x_i) * (y_{i+2} - y_i) - (y_{i+1} - y_i) * (x_{i+2} - x_i)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsConvex.spec_2",
+    "negation": "AegisSpec.IsConvex.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the precondition, is_convex(points) returns a result r (either true or false); it does not fail.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsConvex.spec_3",
+    "negation": "AegisSpec.IsConvex.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every such input, is_convex(points) returns true.",
+    "preconditions": "Assume the precondition of spec_1 and additionally n = 3."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsConvex.spec_4",
+    "negation": "AegisSpec.IsConvex.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If there exist i and j with 0 <= i, j < n such that cross(i) > 0 and cross(j) < 0, then is_convex(points) returns false.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsConvex.spec_5",
+    "negation": "AegisSpec.IsConvex.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If cross(i) >= 0 for every i with 0 <= i < n, then is_convex(points) returns true.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsConvex.spec_6",
+    "negation": "AegisSpec.IsConvex.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If cross(i) <= 0 for every i with 0 <= i < n, then is_convex(points) returns true.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsConvex.spec_7",
+    "negation": "AegisSpec.IsConvex.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_convex(points) returns false, there exist i and j with 0 <= i, j < n such that cross(i) > 0 and cross(j) < 0.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsConvex.spec_8",
+    "negation": "AegisSpec.IsConvex.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every k with 0 <= k < n, is_convex(points) and is_convex(rotated) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1. For an integer k with 0 <= k < n, define rotated[i] = points[(i+k) mod n] for 0 <= i < n; this is a slice of length n whose entries are the same Vec<i64> points in cyclic order."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsConvex.spec_9",
+    "negation": "AegisSpec.IsConvex.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(reversed) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1. Define reversed[i] = points[n-1-i] for 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsConvex.spec_10",
+    "negation": "AegisSpec.IsConvex.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(translated) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1. Let a and b be integers such that for every i with 0 <= i < n, the point (x_i + a, y_i + b) has coordinates in [-10^4, 10^4]. Define translated[i] = [x_i + a, y_i + b] for 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsConvex.spec_11",
+    "negation": "AegisSpec.IsConvex.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(scaled) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1. Let c be a positive integer such that for every i with 0 <= i < n, the point (c*x_i, c*y_i) has coordinates in [-10^4, 10^4]. Define scaled[i] = [c*x_i, c*y_i] for 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsConvex.spec_12",
+    "negation": "AegisSpec.IsConvex.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(points') both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1, including the definition of cross(i), and n < 10^4. Let i be an integer with 0 <= i < n. Let q = [x, y] be an integer point such that q is not equal to any points[j], q has coordinates in [-10^4, 10^4], and q lies strictly between points[i] and points[(i+1) mod n]: there exists a real t with 0 < t < 1 such that x = (1-t)*x_i + t*x_{i+1} and y = (1-t)*y_i + t*y_{i+1}, where the subscript i+1 is taken modulo n. Define points' to be the slice obtained by inserting q immediately after position i in points; thus len(points') = n+1 <= 10^4."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsConvex.spec_13",
+    "negation": "AegisSpec.IsConvex.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(transformed) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1. Let a, b, c, d, e, f be integers such that a*d - b*c != 0. For each i, let x'_i = a*x_i + b*y_i + e and y'_i = c*x_i + d*y_i + f, and assume -10^4 <= x'_i <= 10^4 and -10^4 <= y'_i <= 10^4. Define transformed[i] = [x'_i, y'_i] for 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsConvex.spec_14",
+    "negation": "AegisSpec.IsConvex.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "is_convex(points) and is_convex(removed) both return a Boolean result, and the two returned Booleans are equal.",
+    "preconditions": "Assume the precondition of spec_1 and n > 3. Let i be an integer with 0 <= i < n such that cross(i-1) = 0 and points[i] lies strictly between points[(i-1) mod n] and points[(i+1) mod n]: there exists a real t with 0 < t < 1 such that x_i = (1-t)*x_{i-1} + t*x_{i+1} and y_i = (1-t)*y_{i-1} + t*y_{i+1}, where subscripts are taken modulo n. Define removed to be the slice obtained by deleting position i from points; thus len(removed) = n-1."
+  }
+]

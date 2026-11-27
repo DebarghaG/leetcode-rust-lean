@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_1",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_good_substrings(s) returns a result r, r is the number of indices i such that 0 <= i and i+2 < len(s) and the three bytes s[i], s[i+1], s[i+2] are pairwise distinct, i.e. s[i] != s[i+1] and s[i] != s[i+2] and s[i+1] != s[i+2]. Each index i is counted separately, so equal textual length-3 substrings occurring at different positions contribute separately.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122 (so s is a nonempty string of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_2",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, count_good_substrings(s) returns a result (it does not fail: no panic, no out-of-bounds access, and no arithmetic overflow).",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_3",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_good_substrings(s) returns a result r, 0 <= r <= max(0, len(s)-2). Equivalently, r is at most the number of length-3 contiguous substrings of s, which is max(0, len(s)-2).",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_4",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(s) < 3 (so len(s) is 1 or 2 under the preconditions), then whenever count_good_substrings(s) returns a result r, r = 0.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_5",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_good_substrings(s) returns a result r, r > 0 if and only if there exists an index i with 0 <= i and i+2 < len(s) such that s[i], s[i+1], s[i+2] are pairwise distinct. Equivalently, r = 0 if and only if no such index i exists.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_6",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let t be the slice with len(t) = len(s) and t[j] = s[len(s)-1-j] for every j with 0 <= j < len(s) (the reversal of s). Whenever count_good_substrings(s) returns r and count_good_substrings(t) returns r', we have r = r'.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_7",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of valid slices s and t with len(s) = len(t) and with the same equality pattern, i.e. for all p,q with 0 <= p < len(s) and 0 <= q < len(s), s[p] = s[q] if and only if t[p] = t[q], whenever count_good_substrings(s) returns r and count_good_substrings(t) returns r', we have r = r'.",
+    "preconditions": "s and t each satisfy: 1 <= len <= 100, and for every index j in that slice, 97 <= value <= 122 (both are nonempty lowercase ASCII strings)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_8",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If for all p,q with 0 <= p < q < len(s), s[p] != s[q] (all bytes in s are pairwise distinct), then whenever count_good_substrings(s) returns a result r, r = max(0, len(s)-2).",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_9",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists a byte c such that s[j] = c for every j with 0 <= j < len(s) (s is constant), then whenever count_good_substrings(s) returns a result r, r = 0.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountGoodSubstrings.spec_10",
+    "negation": "AegisSpec.CountGoodSubstrings.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever count_good_substrings(s) returns a result r, r = max(0, len(s)-2) if and only if for every index i with 0 <= i and i+2 < len(s), the bytes s[i], s[i+1], s[i+2] are pairwise distinct.",
+    "preconditions": "1 <= len(s) <= 100, and for every j with 0 <= j < len(s), 97 <= s[j] <= 122."
+  }
+]

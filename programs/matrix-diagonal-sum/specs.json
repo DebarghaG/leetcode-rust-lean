@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DiagonalSum.spec_1",
+    "negation": "AegisSpec.DiagonalSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever diagonal_sum(mat) returns a result r, r = P + S - C, where P = sum over i from 0 to n-1 of mat[i][i], S = sum over i from 0 to n-1 of mat[i][n-1-i], and C = mat[(n-1)/2][(n-1)/2] if n is odd, or C = 0 if n is even.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. All indices below are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DiagonalSum.spec_2",
+    "negation": "AegisSpec.DiagonalSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under these preconditions, diagonal_sum(mat) returns a result r; it does not fail due to out-of-bounds indexing, arithmetic overflow, panic, or any other runtime error.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DiagonalSum.spec_3",
+    "negation": "AegisSpec.DiagonalSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = 2*n - (1 if n is odd else 0). Whenever diagonal_sum(mat) returns r, m <= r <= 100*m.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DiagonalSum.spec_4",
+    "negation": "AegisSpec.DiagonalSum.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let matT be the n by n matrix defined by matT[i][j] = mat[j][i] for 0 <= i,j < n. Whenever diagonal_sum(mat) returns r and diagonal_sum(matT) returns rT, r = rT.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. All indices below are 0-based."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DiagonalSum.spec_5",
+    "negation": "AegisSpec.DiagonalSum.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let matR be the n by n matrix defined by matR[i][j] = mat[n-1-i][n-1-j] for 0 <= i,j < n. Whenever diagonal_sum(mat) returns r and diagonal_sum(matR) returns rR, r = rR.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. All indices below are 0-based."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DiagonalSum.spec_6",
+    "negation": "AegisSpec.DiagonalSum.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let matRowsRev be the n by n matrix defined by matRowsRev[i][j] = mat[n-1-i][j] for 0 <= i,j < n. Whenever diagonal_sum(mat) returns r and diagonal_sum(matRowsRev) returns rRowsRev, r = rRowsRev.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. All indices below are 0-based."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DiagonalSum.spec_7",
+    "negation": "AegisSpec.DiagonalSum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever diagonal_sum(mat) returns r and diagonal_sum(mat2) returns r2, r = r2.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. Let mat2 be any slice of vectors with len(mat2)=n, len(mat2[i])=n for every 0 <= i < n, and 1 <= mat2[i][j] <= 100 for every 0 <= i,j < n. Suppose that for every i,j with 0 <= i < n and 0 <= j < n and (j = i or j = n-1-i), mat[i][j] = mat2[i][j]. All indices are 0-based."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DiagonalSum.spec_8",
+    "negation": "AegisSpec.DiagonalSum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever diagonal_sum(mat) returns r and diagonal_sum(mat2) returns r2, r <= r2.",
+    "preconditions": "Let n = len(mat). Assume 1 <= n <= 100; for every i with 0 <= i < n, len(mat[i]) = n; and for every i,j with 0 <= i < n and 0 <= j < n, 1 <= mat[i][j] <= 100. Let mat2 be any slice of vectors with len(mat2)=n, len(mat2[i])=n for every 0 <= i < n, and 1 <= mat2[i][j] <= 100 for every 0 <= i,j < n. Suppose that for every i,j with 0 <= i < n and 0 <= j < n and (j = i or j = n-1-i), mat[i][j] <= mat2[i][j]. All indices are 0-based."
+  }
+]

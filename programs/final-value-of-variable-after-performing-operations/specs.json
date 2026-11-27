@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_1",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r : I64 and r = sum_{i=0}^{n-1} d_i, where for each i, d_i = 1 if operations[i] is '++X' or 'X++', and d_i = -1 if operations[i] is '--X' or 'X--'.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is exactly one of the four byte vectors: '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_2",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r : I64 for every input satisfying the preconditions; it does not overflow, panic, or fail.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_3",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r : I64, -n <= r <= n, where n = len(operations). Equivalently, |r| <= len(operations).",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_4",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r : I64, r and n have the same parity; that is, r mod 2 = n mod 2.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_5",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let #inc be the number of indices i with 0 <= i < n such that operations[i] is '++X' or 'X++', and let #dec be the number of indices i with 0 <= i < n such that operations[i] is '--X' or 'X--'. Whenever the function returns a result r : I64, r = 0 if and only if #inc = #dec.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_6",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let #inc be the number of indices i with 0 <= i < n such that operations[i] is '++X' or 'X++', and let #dec be the number of indices i with 0 <= i < n such that operations[i] is '--X' or 'X--'. Whenever the function returns a result r : I64, r > 0 if and only if #inc > #dec, and r < 0 if and only if #inc < #dec.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_7",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such k, whenever the function returns r on operations, r_p on p, and r_q on q, we have r = r_p + r_q.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]. Also n >= 2. For every k with 0 < k < n, let p = operations[0..k] be the first k elements and q = operations[k..n] be the remaining n-k elements; p and q are nonempty valid operation lists."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_8",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on operations and r' on operations', we have r = r'.",
+    "preconditions": "Let operations and operations' both be valid operation lists of the same length n with 1 <= n <= 100, so every element of either list is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]. For each s in {'++X','X++','--X','X--'}, the number of indices i with operations[i] = s equals the number of indices i with operations'[i] = s."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_9",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r on operations and r' on operations', we have r' = -r.",
+    "preconditions": "Let operations be a valid operation list: len(operations) is between 1 and 100, and every operations[i] is one of '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]. Define operations' of the same length by replacing each operation by its opposite: '++X' -> '--X', 'X++' -> 'X--', '--X' -> '++X', and 'X--' -> 'X++'. Then operations' is also a valid operation list."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_10",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on operations and r_i on ops_i, r = r_i + d_i, where d_i = 1 if operations[i] is '++X' or 'X++', and d_i = -1 if operations[i] is '--X' or 'X--'.",
+    "preconditions": "Let operations be a valid operation list: n = len(operations) satisfies n >= 2 and n <= 100, and every operations[i] is one of '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]. Fix an index i with 0 <= i < n. Let ops_i be the list of length n-1 obtained by deleting operations[i] and keeping the other elements in their original order; ops_i is a valid operation list."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_11",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on operations and r' on operations', we have r' = r + 2.",
+    "preconditions": "Let operations be a valid operation list: n = len(operations) satisfies n >= 1 and n <= 100, and every operations[i] is one of '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]. Fix an index i with 0 <= i < n such that operations[i] is a decrement, i.e., '--X' or 'X--'. Let operations' be a valid operation list of the same length n such that operations'[i] is an increment ('++X' or 'X++') and operations'[j] = operations[j] for every j != i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FinalValueAfterOperations.spec_12",
+    "negation": "AegisSpec.FinalValueAfterOperations.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r : I64, if r > 0 then there exists an index i with 0 <= i < n such that operations[i] is '++X' or 'X++'; if r < 0 then there exists an index i with 0 <= i < n such that operations[i] is '--X' or 'X--'.",
+    "preconditions": "Let n = len(operations). The slice operations satisfies 1 <= n <= 100, and for every i with 0 <= i < n, operations[i] is one of the byte vectors '++X' = [43,43,88], 'X++' = [88,43,43], '--X' = [45,45,88], 'X--' = [88,45,45]."
+  }
+]

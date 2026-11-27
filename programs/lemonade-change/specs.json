@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LemonadeChange.spec_1",
+    "negation": "AegisSpec.LemonadeChange.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(bills). Call a sequence (f5(k), f10(k)) of pairs of nonnegative integers for k = 0,...,n a valid change strategy if f5(0)=f10(0)=0 and for every k with 0 <= k < n: (a) if bills[k]=5, then f5(k+1)=f5(k)+1 and f10(k+1)=f10(k); (b) if bills[k]=10, then f5(k)>=1, f5(k+1)=f5(k)-1, and f10(k+1)=f10(k)+1; (c) if bills[k]=20, then either (c1) f5(k)>=1 and f10(k)>=1 and f5(k+1)=f5(k)-1 and f10(k+1)=f10(k)-1, or (c2) f5(k)>=3 and f5(k+1)=f5(k)-3 and f10(k+1)=f10(k). The function returns a result r (it does not fail) and r=true if and only if such a valid change strategy for bills exists; otherwise r=false.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LemonadeChange.spec_2",
+    "negation": "AegisSpec.LemonadeChange.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, lemonade_change returns a result r (either true or false) and does not fail: no arithmetic overflow, no out-of-bounds access, and no panic occurs.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LemonadeChange.spec_3",
+    "negation": "AegisSpec.LemonadeChange.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r and r=true, then for every k with 0 <= k <= len(bills), writing a = count5(bills,k), b = count10(bills,k), c = count20(bills,k), where count5(bills,k) is the number of indices i with 0 <= i < k and bills[i]=5 and similarly for 10 and 20, we have a >= b + 3*c - 2*min(b,c).",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LemonadeChange.spec_4",
+    "negation": "AegisSpec.LemonadeChange.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If for every k with 0 <= k <= len(bills), writing a = count5(bills,k), b = count10(bills,k), c = count20(bills,k), we have a >= b + 3*c, then the function returns true.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LemonadeChange.spec_5",
+    "negation": "AegisSpec.LemonadeChange.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If bills[i] != 20 for every i with 0 <= i < len(bills), then the function returns a result r and r=true if and only if for every k with 0 <= k <= len(bills), count5(bills,k) >= count10(bills,k).",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LemonadeChange.spec_6",
+    "negation": "AegisSpec.LemonadeChange.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If bills[i] != 10 for every i with 0 <= i < len(bills), then the function returns a result r and r=true if and only if for every k with 0 <= k <= len(bills), count5(bills,k) >= 3*count20(bills,k).",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LemonadeChange.spec_7",
+    "negation": "AegisSpec.LemonadeChange.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If bills' is obtained from bills by appending one additional bill equal to 5 (so len(bills') = len(bills)+1, bills'[i]=bills[i] for 0 <= i < len(bills), and bills'[len(bills)]=5), then lemonade_change returns the same Boolean value on bills and on bills'.",
+    "preconditions": "bills and bills' are Slice Std.I64 values, each satisfying 1 <= len <= 100000 and all entries in {5,10,20}."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LemonadeChange.spec_8",
+    "negation": "AegisSpec.LemonadeChange.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If bills' extends bills (len(bills') >= len(bills) and bills'[i]=bills[i] for every i with 0 <= i < len(bills)) and lemonade_change(bills) returns false, then lemonade_change(bills') returns false.",
+    "preconditions": "bills and bills' are Slice Std.I64 values satisfying 1 <= len <= 100000 and all entries in {5,10,20}."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LemonadeChange.spec_9",
+    "negation": "AegisSpec.LemonadeChange.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If lemonade_change(bills) returns true, then for every k with 1 <= k <= len(bills), lemonade_change applied to the prefix slice bills[0..k) (the slice of length k containing bills[0],...,bills[k-1]) returns true.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LemonadeChange.spec_10",
+    "negation": "AegisSpec.LemonadeChange.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever lemonade_change(bills) returns true, there exists a valid change strategy for bills (as defined in spec_1). For any such strategy, let f5 and f10 be the nonnegative numbers of $5 and $10 bills held after all customers are served, and let t be the number of customers who pay with a $20 bill and receive one $10 bill plus one $5 bill as change. Then t is an integer with 0 <= t <= min(count10(bills,n), count20(bills,n)), f10 = count10(bills,n) - t, and f5 = count5(bills,n) - count10(bills,n) - 3*count20(bills,n) + 2*t, where n=len(bills) and count5, count10, count20 denote total counts in bills.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LemonadeChange.spec_11",
+    "negation": "AegisSpec.LemonadeChange.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever lemonade_change(bills) returns false, there exists an integer k with 1 <= k <= len(bills) such that the prefix bills[0..k) is not servable (there is no valid change strategy for that prefix, in the sense of spec_1), while every prefix bills[0..j) with 1 <= j < k is servable.",
+    "preconditions": "bills is a Slice Std.I64 with 1 <= len(bills) <= 100000, and for every i with 0 <= i < len(bills), bills[i] is either 5, 10, or 20."
+  }
+]

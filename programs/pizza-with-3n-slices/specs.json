@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_1",
+    "negation": "AegisSpec.MaxSizeSlices.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that r = max { sum_{i in S} slices[i] | S is a valid selection }, where a valid selection is a set S of indices {0,...,m-1} with |S| = n and for every i in S, neither (i+1) mod m nor (i-1) mod m is in S.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_2",
+    "negation": "AegisSpec.MaxSizeSlices.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not panic, overflow, or fail) for every input satisfying the preconditions.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_3",
+    "negation": "AegisSpec.MaxSizeSlices.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let Top be the sum of the n largest elements of the multiset { slices[i] | 0 <= i < m } (with multiplicity). Then the returned result r satisfies r <= Top.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_4",
+    "negation": "AegisSpec.MaxSizeSlices.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned result r satisfies r >= max { slices[i] | 0 <= i < m }.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_5",
+    "negation": "AegisSpec.MaxSizeSlices.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The returned result r satisfies r >= sum_{k=0}^{n-1} slices[3*k].",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_6",
+    "negation": "AegisSpec.MaxSizeSlices.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a valid selection S (as defined in the main specification) such that r = sum_{i in S} slices[i].",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_7",
+    "negation": "AegisSpec.MaxSizeSlices.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every valid selection S, sum_{i in S} slices[i] <= r.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_8",
+    "negation": "AegisSpec.MaxSizeSlices.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same result on rot as on slices: max_size_slices(rot) = max_size_slices(slices).",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000. Let k be any integer with 0 <= k < m, and define the rotated slice rot of length m by rot[i] = slices[(i+k) mod m]. The slice rot also satisfies the preconditions."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_9",
+    "negation": "AegisSpec.MaxSizeSlices.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "max_size_slices(rev) = max_size_slices(slices).",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000. Define the reversed slice rev of length m by rev[i] = slices[m-1-i]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_10",
+    "negation": "AegisSpec.MaxSizeSlices.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "max_size_slices(shifted) = max_size_slices(slices) + n * c.",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000. Let c be an integer such that for every i with 0 <= i < m, 1 <= slices[i] + c <= 1000. Define the shifted slice shifted[i] = slices[i] + c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_11",
+    "negation": "AegisSpec.MaxSizeSlices.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "max_size_slices(scaled) = k * max_size_slices(slices).",
+    "preconditions": "Let m = len(slices) and n = m/3. Assume m is divisible by 3, m >= 3, m <= 500, and for every i with 0 <= i < m, 1 <= slices[i] <= 1000. Let k be an integer with k >= 1 such that for every i with 0 <= i < m, 1 <= k * slices[i] <= 1000. Define the scaled slice scaled[i] = k * slices[i]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSizeSlices.spec_12",
+    "negation": "AegisSpec.MaxSizeSlices.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "max_size_slices(a) <= max_size_slices(b).",
+    "preconditions": "Let m = 3n with n >= 1 and m <= 500. Let a and b be two slices of length m, both satisfying 1 <= a[i] <= 1000 and 1 <= b[i] <= 1000 for all i with 0 <= i < m, and assume a[i] <= b[i] for every i with 0 <= i < m."
+  }
+]

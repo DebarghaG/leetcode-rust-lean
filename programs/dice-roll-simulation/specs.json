@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DieSimulator.spec_1",
+    "negation": "AegisSpec.DieSimulator.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. A length-n sequence s with entries in {1,2,3,4,5,6} is admissible when, for every face f in {1,2,3,4,5,6}, setting m = rollMax[f-1], there is no start position p with 0 <= p and p + m < n such that s[p] = s[p+1] = ... = s[p+m] = f; equivalently, no face f appears in a run of more than rollMax[f-1] consecutive positions. Let C be the number of admissible sequences. Whenever die_simulator(n, rollMax) returns a result r, r is the unique integer satisfying 0 <= r < M and r is congruent to C modulo M.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DieSimulator.spec_2",
+    "negation": "AegisSpec.DieSimulator.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, die_simulator(n, rollMax) returns a result; it does not panic, index out of bounds, or fail because of arithmetic overflow.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DieSimulator.spec_3",
+    "negation": "AegisSpec.DieSimulator.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever die_simulator(1, rollMax) returns a result r, r = 6.",
+    "preconditions": "n = 1; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DieSimulator.spec_4",
+    "negation": "AegisSpec.DieSimulator.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever die_simulator(2, rollMax) returns a result r, r = 36 - k, where k is the number of indices i with 0 <= i < 6 and rollMax[i] = 1.",
+    "preconditions": "n = 2; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DieSimulator.spec_5",
+    "negation": "AegisSpec.DieSimulator.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever die_simulator(n, rollMax) returns a result r, r is the canonical remainder of 6^n modulo 1000000007.",
+    "preconditions": "2 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15; for every i with 0 <= i < 6, n <= rollMax[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DieSimulator.spec_6",
+    "negation": "AegisSpec.DieSimulator.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever die_simulator(n, rollMax) returns a result r, r is the canonical remainder of 6 * 5^(n-1) modulo 1000000007.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, rollMax[i] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DieSimulator.spec_7",
+    "negation": "AegisSpec.DieSimulator.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever die_simulator(n, rollMax) returns r and die_simulator(n, rollMaxPi) returns rPi, we have r = rPi.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15; pi is a permutation of {0,1,2,3,4,5}; rollMaxPi is the length-6 slice with rollMaxPi[i] = rollMax[pi(i)] for every i with 0 <= i < 6."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DieSimulator.spec_8",
+    "negation": "AegisSpec.DieSimulator.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever die_simulator(n, rollMax) returns r and die_simulator(n, rollMaxCap) returns rCap, we have r = rCap.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= 15; rollMaxCap is the length-6 slice with rollMaxCap[i] = min(rollMax[i], n) for every i with 0 <= i < 6."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DieSimulator.spec_9",
+    "negation": "AegisSpec.DieSimulator.spec_9_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "C <= C2. Moreover, if C < 1000000007 and C2 < 1000000007, then whenever die_simulator(n, rollMax) returns r and die_simulator(n, rollMax2) returns r2, we have r <= r2.",
+    "preconditions": "1 <= n <= 5000; len(rollMax) = 6; len(rollMax2) = 6; for every i with 0 <= i < 6, 1 <= rollMax[i] <= rollMax2[i] <= 15. Let C and spec_9 be the true counts of admissible length-n sequences for rollMax and rollMax2 respectively."
+  }
+]

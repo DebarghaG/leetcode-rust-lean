@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever max_profit(prices) returns a result r, r equals the maximum over all plans of the plan's total profit, where a plan is either the empty sequence of transactions (profit 0), a single transaction (b, s) with 0 <= b <= s < len(prices) and profit prices[s] - prices[b], or two transactions (b1, s1) and (b2, s2) with 0 <= b1 <= s1 < len(prices), 0 <= b2 <= s2 < len(prices), s1 <= b2, and total profit (prices[s1] - prices[b1]) + (prices[s2] - prices[b2]).",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "max_profit(prices) returns a successful result (i.e., it does not fail, overflow, or panic) for every input satisfying the preconditions.",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_profit(prices) returns a result r, r <= sum_{i=0}^{len(prices)-2} max(0, prices[i+1] - prices[i]).",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_profit(prices) returns a result r, r = max(0, prices[1] - prices[0]).",
+    "preconditions": "len(prices) = 2, 0 <= prices[0] <= 100000, and 0 <= prices[1] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_profit(prices) returns a result r, r = 0.",
+    "preconditions": "1 <= len(prices) <= 100000, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000, and for every i with 0 <= i < len(prices)-1, prices[i] >= prices[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_profit(prices) returns a result r, r = prices[len(prices)-1] - prices[0].",
+    "preconditions": "1 <= len(prices) <= 100000, for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000, and for every i with 0 <= i < len(prices)-1, prices[i] <= prices[i+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, for every plan P (as defined in spec_1), the total profit of P is at most r.",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_profit(prices) returns a result r, there exists a plan P (as defined in spec_1) whose total profit equals r.",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that 0 <= prices[i] + c <= 100000 for every i with 0 <= i < len(prices), let prices' be the slice defined by prices'[i] = prices[i] + c. Then max_profit(prices) and max_profit(prices') return the same result.",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_profit(prices) returns a result r, r equals the maximum total profit over the set of plans (as defined in spec_1) in which every transaction (b, s) satisfies b < s and prices[s] > prices[b], together with the empty plan (total profit 0).",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfit.spec_11",
+    "negation": "AegisSpec.MaxProfit.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every positive integer c such that 0 <= c * prices[i] <= 100000 for every i with 0 <= i < len(prices), let prices' be the slice defined by prices'[i] = c * prices[i]. Then max_profit(prices') = c * max_profit(prices) (whenever both return results; by spec_2 they do).",
+    "preconditions": "1 <= len(prices) <= 100000, and for every i with 0 <= i < len(prices), 0 <= prices[i] <= 100000."
+  }
+]

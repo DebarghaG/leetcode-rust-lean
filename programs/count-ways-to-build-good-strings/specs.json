@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountGoodStrings.spec_1",
+    "negation": "AegisSpec.CountGoodStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (i.e., it does not fail), and r = N mod 1000000007, where N is the number of distinct binary strings s such that: (1) low <= len(s) <= high, and (2) s is constructible, meaning s is the concatenation of a finite (possibly empty) sequence of blocks, each block being either the string consisting of zero copies of '0' or the string consisting of one copies of '1'.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountGoodStrings.spec_2",
+    "negation": "AegisSpec.CountGoodStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (i.e., it does not panic, fail, or return an error).",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountGoodStrings.spec_3",
+    "negation": "AegisSpec.CountGoodStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, it holds that 0 <= r <= 1000000006.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountGoodStrings.spec_4",
+    "negation": "AegisSpec.CountGoodStrings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If zero = one = k (for some positive integer k), then the returned value r satisfies r = (sum over all integers j >= 0 with low <= j*k <= high of 2^j) mod 1000000007.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountGoodStrings.spec_5",
+    "negation": "AegisSpec.CountGoodStrings.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r1 be the value returned for parameters (low, high, zero, one) and r2 be the value returned for parameters (low, high, one, zero), both satisfying the preconditions. Then r1 = r2.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountGoodStrings.spec_6",
+    "negation": "AegisSpec.CountGoodStrings.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the value returned for (low, high, zero, one) and r_c be the value returned for (c*low, c*high, c*zero, c*one). Then r_c = r.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low, and c is a positive integer with c*high <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountGoodStrings.spec_7",
+    "negation": "AegisSpec.CountGoodStrings.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the returned value r is non-zero, then N > 0, where N is the true count (as in spec_1); equivalently, there exists at least one good string.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountGoodStrings.spec_8",
+    "negation": "AegisSpec.CountGoodStrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If low = high = zero, then the returned value r equals 2 if zero is a multiple of one (i.e., zero mod one = 0), and equals 1 otherwise.",
+    "preconditions": "1 <= low = high <= 100000, 1 <= zero = low, 1 <= one <= low."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountGoodStrings.spec_9",
+    "negation": "AegisSpec.CountGoodStrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let C(n) be the true number of constructible binary strings of length exactly n (before taking modulo). Then C(0) = 1, and for every integer n >= 1, C(n) = (if n >= zero then C(n - zero) else 0) + (if n >= one then C(n - one) else 0). Consequently, the returned value r is congruent to the sum of C(n) for n from low to high modulo 1000000007, with 0 <= r < 1000000007.",
+    "preconditions": "1 <= low <= high <= 100000, 1 <= zero <= low, 1 <= one <= low."
+  }
+]

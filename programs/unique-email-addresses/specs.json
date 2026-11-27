@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_1",
+    "negation": "AegisSpec.NumUniqueEmails.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every input emails satisfying the preconditions, the function returns a result r and r equals, as an i64, the number of distinct byte strings in the set { norm(emails[i]) | 0 <= i < len(emails) }, where: at(e) is the unique index with e[at(e)] = '@'; local(e) = e[0..at(e)-1]; domain(e) = e[at(e)+1..len(e)-1]; prefix(e) is local(e) if local(e) contains no '+' byte, otherwise local(e)[0..p-1] where p is the first index with local(e)[p] = '+'; norm_local(e) is prefix(e) with every '.' byte deleted; and norm(e) is the byte string norm_local(e) followed by the byte '@' followed by domain(e). Thus r is exactly the number of different addresses that actually receive mail after applying the local-name dot and plus rules and leaving the domain unchanged.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part (bytes before '@') and domain part (bytes after '@') are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5 so at least one byte precedes the .com suffix. The input emails is a valid input."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_2",
+    "negation": "AegisSpec.NumUniqueEmails.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input emails satisfying the preconditions, the function returns a result r; it does not fail due to overflow, out-of-bounds access, or panic. The value of r is not constrained by this specification.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part (bytes before '@') and domain part (bytes after '@') are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. The input emails is a valid input."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_3",
+    "negation": "AegisSpec.NumUniqueEmails.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input emails satisfying the preconditions, whenever the function returns a result r, 1 <= r <= len(emails).",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. The input emails is a valid input."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_4",
+    "negation": "AegisSpec.NumUniqueEmails.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such pair emails and emails', whenever the function returns r for emails and r' for emails', r = r'.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. Both emails and emails' are valid inputs. They have the same length, and for every i with 0 <= i < len(emails), emails'[i] is obtained from emails[i] by inserting or deleting any number of '.' bytes inside the local part (the bytes before the unique '@'), with no other byte changed, so the '@' and the whole domain are unchanged."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_5",
+    "negation": "AegisSpec.NumUniqueEmails.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such emails and e, whenever the function returns r for emails and r' for emails', r = r'.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. emails is a valid input with len(emails) < 100. e is a valid email byte array, and e has the same forwarded address as some emails[i]: after deleting all '.' bytes in its local part and ignoring everything from the first '+' onward in its local part if any, its local part equals the similarly treated local part of emails[i], and its domain part equals the domain part of emails[i]. Let emails' be emails with e appended."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_6",
+    "negation": "AegisSpec.NumUniqueEmails.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every such input emails, whenever the function returns r, r = 1.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. emails is a valid input, and all emails forward to the same address: for every i,j with 0 <= i,j < len(emails), after deleting all '.' bytes in the local part and ignoring everything from the first '+' onward in the local part if any, the local parts are equal, and the domain parts are equal."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_7",
+    "negation": "AegisSpec.NumUniqueEmails.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every such input emails, whenever the function returns r, r = len(emails).",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. emails is a valid input, and no two emails forward to the same address: for every i,j with 0 <= i < j < len(emails), after deleting all '.' bytes in the local part and ignoring everything from the first '+' onward in the local part if any, either the local parts differ or the domain parts differ."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_8",
+    "negation": "AegisSpec.NumUniqueEmails.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such emails, k, and emails', whenever the function returns r for emails and r' for emails', if there exists j != k with 0 <= j < len(emails) such that emails[j] and emails[k] forward to the same address under the local-name rules (delete all '.' in the local part, ignore everything from the first '+' onward in the local part, leave the domain unchanged), then r' = r; otherwise r' = r - 1.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. emails is a valid input with len(emails) >= 2, and k is an index with 0 <= k < len(emails). Let emails' be emails with the element at index k removed."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_9",
+    "negation": "AegisSpec.NumUniqueEmails.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input emails satisfying the preconditions, whenever the function returns r, the number of distinct domain parts domain(emails[i]) for 0 <= i < len(emails), where domain(e) is the non-empty byte string after the unique '@' in e, is at most r.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. The input emails is a valid input."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_10",
+    "negation": "AegisSpec.NumUniqueEmails.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every input emails satisfying the preconditions, whenever the function returns r, the number of distinct byte strings obtained from emails[i] by taking the part of its local name before the first '+' (or the whole local name if it has no '+') and deleting every '.' byte, for 0 <= i < len(emails), is at most r.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. The input emails is a valid input."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_11",
+    "negation": "AegisSpec.NumUniqueEmails.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every input emails satisfying the preconditions, whenever the function returns r, there exist r indices i_1, ..., i_r with 0 <= i_1 < ... < i_r < len(emails) such that their forwarded addresses (after deleting all '.' bytes in the local part, ignoring everything from the first '+' onward in that local part if any, and leaving the domain unchanged) are pairwise distinct, and for every index j with 0 <= j < len(emails), the forwarded address of emails[j] equals the forwarded address of emails[i_m] for some m in {1,...,r}.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. The input emails is a valid input."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_12",
+    "negation": "AegisSpec.NumUniqueEmails.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "For every such emails and e, whenever the function returns r for emails and r' for emails', r <= r' <= r + 1.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. emails is a valid input with len(emails) < 100; e is a valid email byte array satisfying the same per-email constraints as an element of a valid input (1 <= len(e) <= 100, bytes in 'a'..'z', '+', '.', '@', exactly one '@', non-empty local and domain, local[0] != '+', domain ends with '.com', len(domain) >= 5); emails' is emails with e appended."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.NumUniqueEmails.spec_13",
+    "negation": "AegisSpec.NumUniqueEmails.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r for emails and r' for emails', r = r'.",
+    "preconditions": "Let a valid input mean: len(emails) is between 1 and 100 inclusive; for every i with 0 <= i < len(emails), e = emails[i] has 1 <= len(e) <= 100; every byte of e is one of 'a'..'z', '+', '.', '@'; e contains exactly one byte '@'; the local part and domain part are both non-empty; local[0] != '+'; the domain ends with the four bytes '.', 'c', 'o', 'm'; and len(domain) >= 5. Both emails and emails' are valid inputs and have the same length. For every i with 0 <= i < len(emails), norm(emails[i]) = norm(emails'[i]), where norm(e) is defined as in the main specification: local(e) is the bytes before the unique '@', domain(e) is the bytes after it, take the prefix of local(e) before the first '+' if any (or all of local(e) if there is no '+'), delete every '.' byte from that prefix, and append '@' followed by domain(e)."
+  }
+]

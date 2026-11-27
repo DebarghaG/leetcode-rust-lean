@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCost.spec_1",
+    "negation": "AegisSpec.MinCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a sequence c[0..m-1] to be admissible if 1 <= c[i] <= n for every i and c[i] = houses[i] for every i with houses[i] != 0. Define its neighborhood count by N(c) = the number of indices i with 0 <= i < m and (i = 0 or c[i] != c[i-1]). Define its painting cost by C(c) = sum over i with houses[i] = 0 of cost[i][c[i]-1]. Let A be the set of admissible c with N(c) = target. Whenever min_cost(houses, cost, m, n, target) returns a result r, if A is nonempty then r = min { C(c) | c in A }, and if A is empty then r = -1.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCost.spec_2",
+    "negation": "AegisSpec.MinCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, min_cost(houses, cost, m, n, target) returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCost.spec_3",
+    "negation": "AegisSpec.MinCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let U = { i | 0 <= i < m and houses[i] = 0 }. Whenever min_cost(houses, cost, m, n, target) returns a result r with r != -1, sum_{i in U} min_{1 <= k <= n} cost[i][k-1] <= r <= sum_{i in U} max_{1 <= k <= n} cost[i][k-1].",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCost.spec_4",
+    "negation": "AegisSpec.MinCost.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_cost(houses, cost, m, n, target) returns a result r with r != -1, there exists a sequence c[0..m-1] such that 1 <= c[i] <= n for every i, c[i] = houses[i] for every i with houses[i] != 0, the number of indices i with (i = 0 or c[i] != c[i-1]) is exactly target, and sum over i with houses[i] = 0 of cost[i][c[i]-1] equals r.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCost.spec_5",
+    "negation": "AegisSpec.MinCost.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_cost(houses, cost, m, n, target) returns a result r, r = -1 if and only if there is no sequence c[0..m-1] such that 1 <= c[i] <= n for every i, c[i] = houses[i] for every i with houses[i] != 0, and the number of indices i with (i = 0 or c[i] != c[i-1]) is exactly target.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCost.spec_6",
+    "negation": "AegisSpec.MinCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let N0 be the number of indices i with 0 <= i < m and (i = 0 or houses[i] != houses[i-1]). Whenever min_cost(houses, cost, m, n, target) returns a result r, r = 0 if N0 = target, and r = -1 otherwise.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000, and for every i with 0 <= i < m, houses[i] != 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCost.spec_7",
+    "negation": "AegisSpec.MinCost.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_cost(houses, cost, m, n, target) returns a result r: if houses[0] != 0 then r = 0; if houses[0] = 0 then r = min_{1 <= k <= n} cost[0][k-1].",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000, and m = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCost.spec_8",
+    "negation": "AegisSpec.MinCost.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_cost(houses, cost, m, n, target) returns a result r: if target = 1 then r = sum over i with houses[i] = 0 of cost[i][0]; if target != 1 then r = -1.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000, and n = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCost.spec_9",
+    "negation": "AegisSpec.MinCost.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let K = { k | 1 <= k <= n and for every i with houses[i] != 0, houses[i] = k }. Whenever min_cost(houses, cost, m, n, target) returns a result r: if K is nonempty then r = min_{k in K} sum over i with houses[i] = 0 of cost[i][k-1]; if K is empty then r = -1.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000, and target = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCost.spec_10",
+    "negation": "AegisSpec.MinCost.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let B be the set of sequences c[0..m-1] such that 1 <= c[i] <= n for every i, c[i] = houses[i] for every i with houses[i] != 0, and c[i] != c[i-1] for every i with 1 <= i < m. Whenever min_cost(houses, cost, m, n, target) returns a result r: if B is nonempty then r = min_{c in B} sum over i with houses[i] = 0 of cost[i][c[i]-1]; if B is empty then r = -1.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000, and target = m."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCost.spec_11",
+    "negation": "AegisSpec.MinCost.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_cost(houses, cost, m, n, target) returns a result r and min_cost(houses, cost', m, n, target) returns a result r', we have r = r'.",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000. Let i0 be an index with 0 <= i0 < m and houses[i0] != 0. Let cost' be a slice of m vectors, each of length n, such that cost'[k][j] = cost[k][j] for every k != i0 and every 0 <= j < n, and 1 <= cost'[i0][j] <= 10000 for every 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCost.spec_12",
+    "negation": "AegisSpec.MinCost.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every sequence c[0..m-1] satisfying 1 <= c[i] <= n for every i, c[i] = houses[i] for every i with houses[i] != 0, and the number of indices i with (i = 0 or c[i] != c[i-1]) equal to target, whenever min_cost(houses, cost, m, n, target) returns a result r, we have r != -1 and r <= sum over i with houses[i] = 0 of cost[i][c[i]-1].",
+    "preconditions": "m = len(houses), m = len(cost), 1 <= m <= 100, 1 <= n <= 20, 1 <= target <= m, for every i with 0 <= i < m, len(cost[i]) = n and 0 <= houses[i] <= n, and for every i with 0 <= i < m and every j with 0 <= j < n, 1 <= cost[i][j] <= 10000."
+  }
+]

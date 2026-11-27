@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_1",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let dec(x), for an integer x with 0 <= x < 2^31, be the unique nonempty ASCII decimal digit string with no leading '0' except that dec(0) is the one-character string '0'. Call a vector g of i64 a valid Fibonacci split of num if: (1) len(g) >= 3; (2) for every i with 0 <= i < len(g), 0 <= g[i] < 2^31; (3) for every i with 0 <= i < len(g)-2, g[i] + g[i+1] = g[i+2] as ordinary integers; and (4) the byte string num is exactly the concatenation dec(g[0]) dec(g[1]) ... dec(g[len(g)-1]) encoded as ASCII, byte-for-byte. The function returns a result r and: if there exists at least one valid Fibonacci split of num, then r is a valid Fibonacci split of num; if no valid Fibonacci split of num exists, then r = [].",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_2",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, overflow, or panic, regardless of whether num admits a valid Fibonacci split.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_3",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r != [], the length of r is at least 3.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_4",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r != [], len(r) <= len(num).",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_5",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r != [], for every i with 0 <= i < len(r), 0 <= r[i] < 2^31.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_6",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != [], for every i with 0 <= i < len(r)-2, r[i] + r[i+1] = r[i+2] as ordinary integers, with no wrap-around.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_7",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != [], let dec(x) be the canonical decimal representation of x (no leading '0', except dec(0) is the one-character string '0'). Then the byte string num is exactly the concatenation of dec(r[0]), dec(r[1]), ..., dec(r[len(r)-1]), encoded as ASCII, with no extra bytes, separators, or leading zeroes beyond the canonical representations.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_8",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the function returns the empty vector r = [], then there does not exist any valid Fibonacci split g of num, where a valid split has len(g) >= 3, every g[i] in [0, 2^31), the recurrence g[i] + g[i+1] = g[i+2] for all 0 <= i < len(g)-2, and canonical decimal concatenation equal to num.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_9",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every vector g of i64, if g is a valid Fibonacci split of num (len(g) >= 3, every g[i] in [0, 2^31), g[i] + g[i+1] = g[i+2] for all 0 <= i < len(g)-2, and canonical decimal concatenation equal to num), then r is also a valid Fibonacci split of num.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_10",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(num) < 3, then the function returns r = [].",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_11",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose num consists of k bytes, all equal to the ASCII digit '0', so k = len(num), and k >= 3. Then the function returns r = [0, 0, ..., 0] with exactly k entries.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_12",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a nonempty result r and num[0] is the ASCII digit byte '0', then r[0] = 0.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_13",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_13_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a nonempty result r, there exist non-negative indices 0 = c[0] < c[1] < ... < c[k] = len(num), where k = len(r), such that for every i with 0 <= i < k, the byte substring num[c[i] .. c[i+1]) is the canonical decimal representation of r[i], with no leading '0' unless r[i] = 0.",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SplitIntoFibonacci.spec_14",
+    "negation": "AegisSpec.SplitIntoFibonacci.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a nonempty result r, for every i with 1 <= i < len(r)-1, r[i] <= r[i+1].",
+    "preconditions": "1 <= len(num) <= 200, and every byte of num is an ASCII digit byte ('0' = 48 through '9' = 57)."
+  }
+]

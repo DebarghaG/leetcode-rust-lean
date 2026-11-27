@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MergeTriplets.spec_1",
+    "negation": "AegisSpec.MergeTriplets.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Under the preconditions, the function returns a result r (a Boolean) and r = true if and only if for every coordinate k in {0,1,2} there exists an index i with 0 <= i < len(triplets) such that (for every j in {0,1,2}, triplets[i][j] <= target[j]) and triplets[i][k] = target[k]. Equivalently, r = false if and only if there is a coordinate k in {0,1,2} for which no index i with all coordinates <= target has triplets[i][k] = target[k].",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MergeTriplets.spec_2",
+    "negation": "AegisSpec.MergeTriplets.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result (it does not fail, panic, or perform an out-of-bounds access or arithmetic overflow); the result is either true or false.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MergeTriplets.spec_3",
+    "negation": "AegisSpec.MergeTriplets.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Under the preconditions, whenever the function returns r = true, there exists a nonempty finite set S of indices, each with 0 <= i < len(triplets), such that for every coordinate k in {0,1,2}, target[k] = max{ triplets[i][k] | i in S }.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MergeTriplets.spec_4",
+    "negation": "AegisSpec.MergeTriplets.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Under the preconditions, if there exists a nonempty finite set S of indices, each with 0 <= i < len(triplets), such that for every coordinate k in {0,1,2}, target[k] = max{ triplets[i][k] | i in S }, then the function returns r = true.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MergeTriplets.spec_5",
+    "negation": "AegisSpec.MergeTriplets.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Under the preconditions, whenever the function returns r = true, for every coordinate k in {0,1,2}, the set V_k = { triplets[i][k] | 0 <= i < len(triplets) and for every j in {0,1,2}, triplets[i][j] <= target[j] } is nonempty and its maximum is exactly target[k].",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MergeTriplets.spec_6",
+    "negation": "AegisSpec.MergeTriplets.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Under the preconditions, whenever the function returns r = false, there exists a coordinate k in {0,1,2} such that for every index i with 0 <= i < len(triplets), either triplets[i][k] != target[k] or there exists j in {0,1,2} with triplets[i][j] > target[j].",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MergeTriplets.spec_7",
+    "negation": "AegisSpec.MergeTriplets.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Under the preconditions, suppose u and v are both inadmissible for target: there exist coordinates p and q in {0,1,2} with u[p] > target[p] and v[q] > target[q]. Let A be the triplet array obtained from triplets by replacing its i-th entry by u, and let B be the triplet array obtained from triplets by replacing its i-th entry by v, leaving all other entries and target unchanged. Then the function returns the same Boolean on A and target as on B and target.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000. Additionally, i is an index with 0 <= i < len(triplets), and u and v are length-3 integer vectors with all entries in 1..1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MergeTriplets.spec_8",
+    "negation": "AegisSpec.MergeTriplets.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Under these preconditions, let A be the array obtained from triplets by deleting the i-th entry and preserving the order of all other entries. Then the function returns the same Boolean on A and target as on triplets and target.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000. Additionally, len(triplets) > 1, and there is an index i with 0 <= i < len(triplets) such that for some j in {0,1,2}, triplets[i][j] > target[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MergeTriplets.spec_9",
+    "negation": "AegisSpec.MergeTriplets.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Under the preconditions, the function returns r = true if and only if there exists a finite sequence of operations, each choosing distinct indices i and j with 0 <= i,j < len(triplets) and replacing the j-th triplet by the componentwise maximum of the i-th and j-th triplets, after which the target triplet occurs as an element of the resulting triplets array; otherwise r = false.",
+    "preconditions": "len(triplets) is an integer with 1 <= len(triplets) <= 100000; len(target) = 3; for every i with 0 <= i < len(triplets), len(triplets[i]) = 3; and for every i with 0 <= i < len(triplets) and every j in {0,1,2}, both triplets[i][j] and target[j] are integers in the inclusive range 1..1000."
+  }
+]

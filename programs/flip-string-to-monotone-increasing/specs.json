@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_1",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = min_{k=0..n} ( ones(s[0..k]) + zeros(s[k..n]) ), where ones(x) is the number of indices i with x[i] = 49 and zeros(x) is the number of indices i with x[i] = 48. Here s[0..k] denotes the prefix of length k (indices 0 <= i < k) and s[k..n] denotes the suffix of length n-k (indices k <= i < n).",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_2",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input s satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_3",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns r on s, then 0 <= r <= n.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_4",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns r on s, then r <= min(ones(s), zeros(s)), where ones(s) is the number of indices i with s[i] = 49 and zeros(s) is the number of indices i with s[i] = 48.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_5",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the function returns r on s, then r = 0 if and only if s is monotone increasing, i.e., there do not exist indices i and j with 0 <= i < j < n, s[i] = 49, and s[j] = 48.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_6",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists an integer a with 0 <= a <= n such that for all i with 0 <= i < a we have s[i] = 49, and for all i with a <= i < n we have s[i] = 48 (so s = 1^a 0^{n-a}), then the result r of the function on s satisfies r = min(a, n-a).",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_7",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on s and returns r' on t, then r = r'.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n < 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'). Let t be the slice of U8 of length n+1 with t[i] = s[i] for 0 <= i < n and t[n] = 49."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_8",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r on s and returns r' on t, then |r - r'| <= 1.",
+    "preconditions": "s and t are slices of U8 of the same length n, 1 <= n <= 100000. Both are valid binary strings: for every i with 0 <= i < n, s[i] and t[i] are each either 48 (ASCII '0') or 49 (ASCII '1'). They differ in exactly one position: there exists exactly one index i with 0 <= i < n such that s[i] != t[i]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_9",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the function returns r on s, then there exists an integer a with 0 <= a <= n such that the number of indices i with 0 <= i < n and s[i] != (48 if i < a else 49) is exactly r.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_10",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns r on s, then for every integer a with 0 <= a <= n, the number of indices i with 0 <= i < n and s[i] != (48 if i < a else 49) is at least r.",
+    "preconditions": "s is a slice of U8 with length n = len(s). 1 <= n <= 100000. For every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinFlipsMonoIncr.spec_11",
+    "negation": "AegisSpec.MinFlipsMonoIncr.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let ans(x) denote the result of the function on a valid binary string x. Then ans(uv) = min( ans(u) + zeros(v), ones(u) + ans(v) ), where zeros(v) is the number of indices j with v[j] = 48 and ones(u) is the number of indices i with u[i] = 49.",
+    "preconditions": "u and v are slices of U8 with lengths m = len(u) and l = len(v). 1 <= m, 1 <= l, and m+l <= 100000. For every i with 0 <= i < m, u[i] is either 48 (ASCII '0') or 49 (ASCII '1'); for every j with 0 <= j < l, v[j] is either 48 (ASCII '0') or 49 (ASCII '1'). Let uv be the concatenation of u and v, of length m+l."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_1",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let MOD = 1000000007. Let S be the set of all finite byte strings s such that: (1) s is nonempty; (2) every byte of s is '0' or '1'; (3) s is a subsequence of binary, meaning there exist indices 0 <= i_0 < i_1 < ... < i_{len(s)-1} < len(binary) with binary[i_j] = s[j] for every 0 <= j < len(s); and (4) either s is the one-byte string '0', or s[0] is the byte '1'. Let N = |S|. Whenever the function returns a result r, r = N mod MOD (as a nonnegative integer).",
+    "preconditions": "1 <= len(binary) <= 100000 and, for every i with 0 <= i < len(binary), binary[i] is the byte '0' (48) or the byte '1' (49)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_2",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every binary satisfying the preconditions; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(binary) <= 100000 and, for every i with 0 <= i < len(binary), binary[i] is the byte '0' (48) or the byte '1' (49)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_3",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "1 <= len(binary) <= 100000 and, for every i with 0 <= i < len(binary), binary[i] is the byte '0' (48) or the byte '1' (49)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_4",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = (n * (m + 1) + (if m > 0 then 1 else 0)) mod 1000000007.",
+    "preconditions": "The preconditions of spec_1 hold, and there exist integers n >= 0 and m >= 0 with n + m = len(binary) such that binary[i] = '1' for every 0 <= i < n and binary[i] = '0' for every n <= i < len(binary)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_5",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = (b + (if a > 0 then 1 else 0)) mod 1000000007.",
+    "preconditions": "The preconditions of spec_1 hold, and there exist integers a >= 0 and b >= 0 with a + b = len(binary) such that binary[i] = '0' for every 0 <= i < a and binary[i] = '1' for every a <= i < len(binary)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_6",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a be the number of indices i with 0 <= i < p and binary[i] = '0', and let b = len(binary) - p - 1. Whenever the function returns a result r, r = (b + 1 + (if a + b > 0 then 1 else 0)) mod 1000000007.",
+    "preconditions": "The preconditions of spec_1 hold, and there is exactly one index p with 0 <= p < len(binary) such that binary[p] = '1'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_7",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L = p and R = len(binary) - p - 1, and let n = L + R. Whenever the function returns a result r, r = (n + L * (R + 1) + 1) mod 1000000007.",
+    "preconditions": "The preconditions of spec_1 hold, and there is exactly one index p with 0 <= p < len(binary) such that binary[p] = '0'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_8",
+    "negation": "AegisSpec.NumberOfUniqueGoodSubsequences.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let k be the smallest index with 0 <= k < len(binary) and binary[k] = '1'; if there is no such index, let k = len(binary). Let tail be the finite byte string binary[k], binary[k+1], ..., binary[len(binary)-1] (possibly empty). For any finite byte string x, including the empty string, let C(x) be the number of distinct nonempty byte strings s over {'0','1'} that are subsequences of x and satisfy s = '0' or s[0] = '1'; set C(empty) = 0. Whenever the function returns a result r, r = (C(tail) + (if tail contains no byte '0' then 1 else 0)) mod 1000000007.",
+    "preconditions": "The preconditions of spec_1 hold, len(binary) >= 1, and binary[0] = '0'."
+  }
+]

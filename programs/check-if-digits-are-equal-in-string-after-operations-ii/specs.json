@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.HasSameDigits.spec_1",
+    "negation": "AegisSpec.HasSameDigits.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define P_0,...,P_{n-2} by: P_0 has length n and P_0[i] = d_i; for each t with 0 <= t <= n-3, P_{t+1} has length n-t-1 and P_{t+1}[i] = (P_t[i] + P_t[i+1]) mod 10 for every 0 <= i < n-t-1, where mod 10 gives the least nonnegative residue in {0,...,9}. Whenever has_same_digits(s) returns a result r, we have r = true if and only if P_{n-2}[0] = P_{n-2}[1]; equivalently r = false if and only if P_{n-2}[0] != P_{n-2}[1].",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57. Write d_i = s[i] - 48 for 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.HasSameDigits.spec_2",
+    "negation": "AegisSpec.HasSameDigits.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, evaluating has_same_digits(s) returns a result r (an Ok result containing a Bool); it does not fail, panic, access s out of bounds, or overflow a 64-bit integer while carrying out the computation.",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.HasSameDigits.spec_3",
+    "negation": "AegisSpec.HasSameDigits.spec_3_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever has_same_digits(s) returns a result r, we have r = true.",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57. Write d_i = s[i] - 48 for 0 <= i < n. Assume there is a digit c with 0 <= c <= 9 such that d_i = c for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.HasSameDigits.spec_4",
+    "negation": "AegisSpec.HasSameDigits.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If has_same_digits(s) returns a result r and has_same_digits(s') returns a result r', then r = r'.",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57. Write d_i = s[i] - 48 for 0 <= i < n. Let c be an integer, and let s' be the byte slice of length n with s'[i] = 48 + ((d_i + c) mod 10) for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.HasSameDigits.spec_5",
+    "negation": "AegisSpec.HasSameDigits.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If has_same_digits(s) returns a result r and has_same_digits(s_rev) returns a result r_rev, then r = r_rev.",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57. Let s_rev be the byte slice of length n with s_rev[i] = s[n-1-i] for every 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.HasSameDigits.spec_6",
+    "negation": "AegisSpec.HasSameDigits.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever has_same_digits(s) returns a result r, we have r = true if and only if the integer sum from j=0 to n-2 of C(n-2,j) * (d_j - d_{j+1}) is divisible by 10, where C(a,b) is the usual binomial coefficient. Equivalently, r = false if and only if that sum is not divisible by 10.",
+    "preconditions": "Let n = len(s). Assume 3 <= n <= 100000 and for every i with 0 <= i < n, 48 <= s[i] <= 57. Write d_i = s[i] - 48 for 0 <= i < n."
+  }
+]

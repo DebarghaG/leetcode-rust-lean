@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EvenProduct.spec_1",
+    "negation": "AegisSpec.EvenProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result q and q equals the number of pairs (l, u) of indices such that 0 <= l <= u < n and there exists an index k with l <= k <= u and nums[k] is even, i.e. divisible by 2. Equivalently, q is the number of nonempty contiguous subarrays nums[l..u] whose product is even.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EvenProduct.spec_2",
+    "negation": "AegisSpec.EvenProduct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result q; it does not fail through overflow, out-of-bounds access, or panic.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EvenProduct.spec_3",
+    "negation": "AegisSpec.EvenProduct.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result q, 0 <= q <= n*(n+1)/2.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EvenProduct.spec_4",
+    "negation": "AegisSpec.EvenProduct.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result q, for every index i with 0 <= i < n and nums[i] even, q >= (i+1)*(n-i).",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EvenProduct.spec_5",
+    "negation": "AegisSpec.EvenProduct.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result q, q = 0 if and only if every entry nums[i] is odd (not divisible by 2) for all i with 0 <= i < n.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EvenProduct.spec_6",
+    "negation": "AegisSpec.EvenProduct.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result q, q = n*(n+1)/2 if and only if every entry nums[i] is even for all i with 0 <= i < n.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EvenProduct.spec_7",
+    "negation": "AegisSpec.EvenProduct.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result q, q + O = n*(n+1)/2, where O is the number of pairs (l, u) with 0 <= l <= u < n such that every index k with l <= k <= u has nums[k] odd.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EvenProduct.spec_8",
+    "negation": "AegisSpec.EvenProduct.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L_1, ..., L_m be the lengths of the maximal intervals [a,b] with 0 <= a <= b < n such that every nums[k] for a <= k <= b is odd and the interval cannot be enlarged without including an even entry; if there are no odd entries then m = 0. Whenever the function returns a result q, q = n*(n+1)/2 - sum_{t=1}^m L_t*(L_t+1)/2.",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EvenProduct.spec_9",
+    "negation": "AegisSpec.EvenProduct.spec_9_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let p_1 < p_2 < ... < p_m be all indices i with 0 <= i < n such that nums[i] is even, and set p_0 = -1. If m = 0 the sum below is empty and equals 0. Whenever the function returns a result q, q = sum_{t=1}^m (p_t - p_{t-1}) * (n - p_t).",
+    "preconditions": "Let n = len(nums). The slice satisfies 1 <= n <= 100000 and, for every i with 0 <= i < n, 1 <= nums[i] <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EvenProduct.spec_10",
+    "negation": "AegisSpec.EvenProduct.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever even_product(nums) returns a result q and even_product(nums') returns a result q', we have q = q'.",
+    "preconditions": "Let nums and nums' be two slices, each satisfying 1 <= len(nums) = len(nums') = n <= 100000 and 1 <= value <= 100000 for every entry. Suppose that for every i with 0 <= i < n, nums[i] is even if and only if nums'[i] is even."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EvenProduct.spec_11",
+    "negation": "AegisSpec.EvenProduct.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever even_product(nums) returns a result q and even_product(rev) returns a result q', we have q = q'.",
+    "preconditions": "Let n = len(nums) and let rev be the slice of length n defined by rev[i] = nums[n-1-i] for 0 <= i < n. Suppose nums, and hence rev, satisfies 1 <= n <= 100000 and 1 <= nums[i] <= 100000 for all i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.EvenProduct.spec_12",
+    "negation": "AegisSpec.EvenProduct.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever even_product(nums) returns a result q and even_product(nums') returns a result q', we have q <= q'.",
+    "preconditions": "Let nums and nums' be two slices with len(nums) = len(nums') = n, each satisfying 1 <= n <= 100000 and 1 <= value <= 100000 for every entry. Suppose that for every i with 0 <= i < n, if nums[i] is even then nums'[i] is even; that is, the even positions of nums are a subset of the even positions of nums'."
+  }
+]

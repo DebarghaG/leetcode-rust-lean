@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CheckValidString.spec_1",
+    "negation": "AegisSpec.CheckValidString.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). The function returns a result r and does not fail on inputs satisfying the preconditions. It holds that r = true if and only if there exists a choice, for every index i with 0 <= i < n and s[i] = '*', of one of the three values L, R, or E, such that the following string t is a balanced parentheses string: start from the sequence s[0],...,s[n-1]; for each i with s[i] = '*', replace it by '(' if the choice is L, by ')' if the choice is R, and delete it if the choice is E; for every i with s[i] != '*', keep s[i] unchanged. A string t over '(' and ')' is called a balanced parentheses string when (1) t contains the same number of '(' and ')', and (2) for every k with 0 <= k <= len(t), the number of '(' among the first k bytes of t is greater than or equal to the number of ')' among the first k bytes of t. If no such choice exists, then r = false.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CheckValidString.spec_2",
+    "negation": "AegisSpec.CheckValidString.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r and does not fail: there is no arithmetic overflow, out-of-bounds indexing, panic, or other runtime failure.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CheckValidString.spec_3",
+    "negation": "AegisSpec.CheckValidString.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = true if and only if (1) the number of indices i with 0 <= i < len(s) and s[i] = '(' equals the number of indices i with 0 <= i < len(s) and s[i] = ')', and (2) for every k with 0 <= k <= len(s), the number of indices i with 0 <= i < k and s[i] = '(' is greater than or equal to the number of indices i with 0 <= i < k and s[i] = ')'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42), and there is no i with 0 <= i < len(s) and s[i] = '*'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CheckValidString.spec_4",
+    "negation": "AegisSpec.CheckValidString.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then the number of indices i with 0 <= i < len(s) and s[i] = ')' is at most the number of indices i with 0 <= i < len(s) and s[i] = '(' plus the number of indices i with 0 <= i < len(s) and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CheckValidString.spec_5",
+    "negation": "AegisSpec.CheckValidString.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then the number of indices i with 0 <= i < len(s) and s[i] = '(' is at most the number of indices i with 0 <= i < len(s) and s[i] = ')' plus the number of indices i with 0 <= i < len(s) and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CheckValidString.spec_6",
+    "negation": "AegisSpec.CheckValidString.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r = true then for every k with 0 <= k <= len(s), the number of indices i with 0 <= i < k and s[i] = ')' is at most the number of indices i with 0 <= i < k and s[i] = '(' plus the number of indices i with 0 <= i < k and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CheckValidString.spec_7",
+    "negation": "AegisSpec.CheckValidString.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if r = true then for every k with 0 <= k <= len(s), the number of indices i with k <= i < len(s) and s[i] = '(' is at most the number of indices i with k <= i < len(s) and s[i] = ')' plus the number of indices i with k <= i < len(s) and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CheckValidString.spec_8",
+    "negation": "AegisSpec.CheckValidString.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and r = true if and only if for every k with 0 <= k <= len(s), the number of indices i with k <= i < len(s) and s[i] = '(' is at most the number of indices i with k <= i < len(s) and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40) or '*' (42); in particular, no s[i] is ')'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CheckValidString.spec_9",
+    "negation": "AegisSpec.CheckValidString.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r, and r = true if and only if for every k with 0 <= k <= len(s), the number of indices i with 0 <= i < k and s[i] = ')' is at most the number of indices i with 0 <= i < k and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of ')' (41) or '*' (42); in particular, no s[i] is '('."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CheckValidString.spec_10",
+    "negation": "AegisSpec.CheckValidString.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let u be the byte slice of length len(s)+2 whose bytes are s[0],...,s[len(s)-1], followed by the ASCII code of '(' and then the ASCII code of ')'. Whenever the call check_valid_string(s) returns a result r with r = true, the call check_valid_string(u) returns a result r' with r' = true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 98, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CheckValidString.spec_11",
+    "negation": "AegisSpec.CheckValidString.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let u be the byte slice of length len(s)+2 whose first two bytes are the ASCII code of '(' and then the ASCII code of ')', followed by s[0],...,s[len(s)-1]. Whenever the call check_valid_string(s) returns a result r with r = true, the call check_valid_string(u) returns a result r' with r' = true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 98, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CheckValidString.spec_12",
+    "negation": "AegisSpec.CheckValidString.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(s). The function returns a result r and does not fail. It holds that r = true if and only if both of the following hold: (1) for every k with 0 <= k <= n, the number of indices i with 0 <= i < k and s[i] = ')' is at most the number of indices i with 0 <= i < k and s[i] = '(' plus the number of indices i with 0 <= i < k and s[i] = '*'; and (2) for every k with 0 <= k <= n, the number of indices i with k <= i < n and s[i] = '(' is at most the number of indices i with k <= i < n and s[i] = ')' plus the number of indices i with k <= i < n and s[i] = '*'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CheckValidString.spec_13",
+    "negation": "AegisSpec.CheckValidString.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every index j with 0 <= j <= len(s), let u be the byte slice of length len(s)+1 obtained by inserting the ASCII code of '*' (42) at position j: u[i] = s[i] for 0 <= i < j, u[j] = '*', and u[i] = s[i-1] for j < i <= len(s). Whenever check_valid_string(s) returns a result r with r = true, check_valid_string(u) returns a result r' with r' = true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 99, and for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CheckValidString.spec_14",
+    "negation": "AegisSpec.CheckValidString.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let u be the byte slice of length len(s) obtained from s by replacing s[j] with the ASCII code of '*' (42), leaving all other bytes unchanged. Whenever check_valid_string(s) returns a result r with r = true, check_valid_string(u) returns a result r' with r' = true.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100, for every i with 0 <= i < len(s), s[i] is the ASCII code of '(' (40), ')' (41), or '*' (42), and j is an index with 0 <= j < len(s) such that s[j] is the ASCII code of '(' or ')'."
+  }
+]

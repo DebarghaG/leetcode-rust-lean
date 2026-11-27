@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_1",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the maximum, over all pairs of nodes (a,b) of root such that a is a proper ancestor of b, of the absolute difference |value(a) - value(b)|. Here a is a proper ancestor of b means a != b and b occurs in the left or right subtree of a, equivalently a occurs on the path from the root to b and is not b.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_2",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, overflow, panic, or access an out-of-bounds position.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_3",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= maxVal(root) - minVal(root), where maxVal(root) and minVal(root) are the maximum and minimum values among all nodes of root.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_4",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist nodes a and b of root such that a is a proper ancestor of b and r = |value(a) - value(b)|.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_5",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair of nodes a and b of root such that a is a proper ancestor of b, we have |value(a) - value(b)| <= r.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_6",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if every node of root has the same value.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_7",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = maxVal(root) - minVal(root), where maxVal(root) and minVal(root) are the maximum and minimum values among all nodes of root.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, every node value is in [0, 100000], and root is a chain: every node has at most one non-null child."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_8",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r = max(|x - y|, |x - z|).",
+    "preconditions": "root is exactly Node(x, Node(y, Null, Null), Node(z, Null, Null)) for integers x, y, z in [0, 100000]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_9",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_ancestor_diff(root) returns r and max_ancestor_diff(root_c) returns r_c, we have r_c = r.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, every node value is in [0, 100000], c is an integer, and every node value v satisfies 0 <= v + c <= 100000. root_c is the tree obtained from root by replacing every node value v with v + c."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_10",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_ancestor_diff(root) returns r and max_ancestor_diff(mirror(root)) returns r_m, we have r_m = r.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]. mirror(root) is the tree with the same nodes obtained by recursively swapping the left and right child of every node."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_11",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_ancestor_diff(root) returns r and max_ancestor_diff(root_rev) returns r_rev, we have r_rev = r.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]. root_rev is the tree with the same shape obtained by replacing every node value v with 100000 - v."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_12",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_ancestor_diff(root) returns r and max_ancestor_diff(root') returns r', we have r' <= r.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]. root' is obtained from root by replacing one node with Null, deleting that node and all its descendants, and root' still has between 2 and 5000 nodes and all its values in [0, 100000]."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_13",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_ancestor_diff(root) returns r and max_ancestor_diff(root_plus) returns r_plus, we have r <= r_plus.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]. root_plus is obtained by replacing one Null child pointer in root with a new leaf Node(w, Null, Null), where 0 <= w <= 100000, and root_plus has at most 5000 nodes."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_14",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = maxVal(root) - x, where maxVal(root) is the maximum value among all nodes of root.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, every node value is in [0, 100000], and the root value x is equal to minVal(root), the minimum value among all nodes of root."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_15",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = x - minVal(root), where minVal(root) is the minimum value among all nodes of root.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, every node value is in [0, 100000], and the root value x is equal to maxVal(root), the maximum value among all nodes of root."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_16",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the maximum, over all root-to-leaf paths P of root, of maxVal(P) - minVal(P), where maxVal(P) and minVal(P) are the maximum and minimum node values on the path P.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaxAncestorDiff.spec_17",
+    "negation": "AegisSpec.MaxAncestorDiff.spec_17_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r equals the maximum, over all nodes b of root, of max(value(b) - minAncestor(b), maxAncestor(b) - value(b)), where minAncestor(b) and maxAncestor(b) are respectively the minimum and maximum values among the proper ancestors of b; for the root, whose set of proper ancestors is empty, the contribution is 0.",
+    "preconditions": "root has between 2 and 5000 nodes inclusive, and every node value is an integer in [0, 100000]."
+  }
+]

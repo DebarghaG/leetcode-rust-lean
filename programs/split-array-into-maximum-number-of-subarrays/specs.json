@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSubarrays.spec_1",
+    "negation": "AegisSpec.MaxSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For 0 <= l <= r < n let AND(l,r) denote the bitwise AND nums[l] & nums[l+1] & ... & nums[r]. A split into k >= 1 subarrays is a choice of indices 0 = p_0 < p_1 < ... < p_k = n, whose parts are nums[p_t .. p_{t+1}-1] for t = 0..k-1; the cost of such a split is the sum over t = 0..k-1 of AND(p_t, p_{t+1}-1). Let C be the minimum cost over all splits (the set is nonempty because the one-part split p_0 = 0, p_1 = n always exists). The function returns a result r such that r is the largest k for which some split into k subarrays has cost C; equivalently (i) there exists a split into r subarrays with cost C, and (ii) for every split into k subarrays with cost C, k <= r.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSubarrays.spec_2",
+    "negation": "AegisSpec.MaxSubarrays.spec_2_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = nums[0] & nums[1] & ... & nums[n-1] (the bitwise AND of all elements; well defined since n >= 1). If M != 0 then the function returns r = 1.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSubarrays.spec_3",
+    "negation": "AegisSpec.MaxSubarrays.spec_3_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let M = nums[0] & nums[1] & ... & nums[n-1]. If M = 0 then the function returns r equal to the largest k such that there exist indices 0 = p_0 < p_1 < ... < p_k = n with, for every t = 0..k-1, the bitwise AND of nums[p_t], nums[p_t+1], ..., nums[p_{t+1}-1] equal to 0. That is, r is the maximum number of contiguous nonempty subarrays in a partition of the whole array such that every subarray has bitwise AND 0.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSubarrays.spec_4",
+    "negation": "AegisSpec.MaxSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r with r >= 1.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSubarrays.spec_5",
+    "negation": "AegisSpec.MaxSubarrays.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r with r <= n.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSubarrays.spec_6",
+    "negation": "AegisSpec.MaxSubarrays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If nums[i] = 0 for every integer i with 0 <= i < n, then the function returns r = n.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSubarrays.spec_7",
+    "negation": "AegisSpec.MaxSubarrays.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If n >= 2 and the function returns r = n, then nums[i] = 0 for every integer i with 0 <= i < n.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSubarrays.spec_8",
+    "negation": "AegisSpec.MaxSubarrays.spec_8_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result (it does not overflow, panic, or otherwise fail).",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSubarrays.spec_9",
+    "negation": "AegisSpec.MaxSubarrays.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let C be the minimum cost over all splits of nums into contiguous nonempty parts, where the cost of a split is the sum of the bitwise ANDs of its parts. The function returns r, and there exists a split of nums into exactly r contiguous nonempty subarrays whose cost equals C.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSubarrays.spec_10",
+    "negation": "AegisSpec.MaxSubarrays.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r, and for every split of nums into k contiguous nonempty subarrays whose cost equals the minimum cost C over all splits, we have k <= r.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSubarrays.spec_11",
+    "negation": "AegisSpec.MaxSubarrays.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r, and the minimum cost C over all splits of nums into contiguous nonempty parts (the sum of the bitwise ANDs of the parts) equals M = nums[0] & nums[1] & ... & nums[n-1], the bitwise AND of all elements.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSubarrays.spec_12",
+    "negation": "AegisSpec.MaxSubarrays.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If n = 2, then the function returns r = 2 when nums[0] = 0 and nums[1] = 0, and returns r = 1 otherwise.",
+    "preconditions": "Let n = len(nums). The parameters satisfy 1 <= n <= 100000 and 0 <= nums[i] <= 1000000 for every integer i with 0 <= i < n."
+  }
+]

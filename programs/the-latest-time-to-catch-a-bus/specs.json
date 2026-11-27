@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_1",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = max{ t ∈ Z : t <= limit and t != passengers[j] for all j with 0 <= j < m }, where B, S, k, L, limit are defined as follows. Let B = max(buses). Define the boarding assignment by processing buses in increasing order of departure time; for each bus departure d, among passengers with arrival <= d not yet assigned, assign up to capacity passengers with the earliest arrival times. Let S be the set of passengers assigned to the bus departing at B, k = |S|, and if k > 0 let L = max{ passengers[j] : j in S }. Set limit = B if k < capacity, and limit = L - 1 if k = capacity. Equivalently, r <= limit, r != passengers[j] for all j, and for every integer t with r < t <= limit there exists j such that t = passengers[j].",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_2",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, panic, or overflow).",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_3",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= max(buses).",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_4",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every j with 0 <= j < len(passengers), r != passengers[j].",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_5",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if we add a new passenger with arrival time r to the array passengers (keeping buses and capacity unchanged) and run the boarding assignment (process buses in increasing departure order, each bus takes up to capacity earliest-arriving unboarded passengers with arrival <= departure), then the new passenger is assigned to some bus.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_6",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t such that r < t <= max(buses) and t != passengers[j] for all j with 0 <= j < len(passengers), if we add a new passenger with arrival time t to passengers and run the boarding assignment, then the new passenger is not assigned to any bus (misses all buses).",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_7",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any arrays buses' and passengers' that are permutations of buses and passengers respectively (so len(buses') = len(buses) and len(passengers') = len(passengers)), if the function returns r on (buses, passengers, capacity) and r' on (buses', passengers', capacity), then r = r'.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_8",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Using the notation B, S, k, L, limit defined as in spec_1, whenever the function returns a result r, either r = limit, or there exists j with 0 <= j < len(passengers) such that r + 1 = passengers[j].",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_9",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Using the notation limit defined as in spec_1, whenever the function returns a result r, limit - len(passengers) <= r <= limit.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_10",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Using the notation B, S, k from spec_1, assume k < capacity (the last bus has spare capacity). If B is not equal to any passenger arrival (B != passengers[j] for all j), then whenever the function returns a result r, r = B.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_11",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Using the notation B, S, k, L from spec_1, assume k = capacity (the last bus is full). If L - 1 is not equal to any passenger arrival, then whenever the function returns a result r, r = L - 1.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_12",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_12_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the maximum integer t such that (i) t != passengers[j] for all j with 0 <= j < len(passengers), and (ii) if we add a new passenger with arrival time t to passengers and run the boarding assignment, the new passenger is assigned to some bus.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_13",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Using the notation B, S, k from spec_1, assume k = capacity (the last bus is full). Whenever the function returns a result r, r < B, where B = max(buses).",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_14",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns r1 on (buses, passengers, c1) and r2 on (buses, passengers, c2), then r1 <= r2.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The arrays satisfy the problem Constraints: n >= 1, m >= 1, 2 <= buses[i] <= 1000000000 for all i, 2 <= passengers[j] <= 1000000000 for all j, all buses distinct, all passengers distinct. Let c1 and c2 be integers with 1 <= c1 <= c2 <= 100000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_15",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on (buses, passengers, capacity) and r' on (buses', passengers', capacity), then r' = r + d.",
+    "preconditions": "Let n = len(buses) and m = len(passengers). Assume n >= 1, m >= 1, n <= 100000, m <= 100000, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for all i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for all j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct. Let d be an integer with d >= 0 such that buses[i] + d <= 1000000000 for all i and passengers[j] + d <= 1000000000 for all j. Define buses'[i] = buses[i] + d and passengers'[j] = passengers[j] + d."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.LatestTimeCatchTheBus.spec_16",
+    "negation": "AegisSpec.LatestTimeCatchTheBus.spec_16_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either r = max(buses), or there exists j with 0 <= j < len(passengers) such that r + 1 = passengers[j].",
+    "preconditions": "Let n = len(buses) and m = len(passengers). The parameters satisfy the problem Constraints: n >= 1, m >= 1, 1 <= capacity <= 100000, 2 <= buses[i] <= 1000000000 for every i with 0 <= i < n, 2 <= passengers[j] <= 1000000000 for every j with 0 <= j < m, all elements of buses are pairwise distinct, and all elements of passengers are pairwise distinct."
+  }
+]

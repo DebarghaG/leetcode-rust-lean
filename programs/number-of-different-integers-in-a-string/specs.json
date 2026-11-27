@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_1",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The call num_different_integers(word) returns Result.ok r (it does not fail), and r equals the number of distinct integer values represented by the maximal digit runs of word. A digit byte is a byte b with 48 <= b <= 57. A maximal digit run is a nonempty contiguous segment word[l..u] (0 <= l <= u < len(word)) consisting entirely of digit bytes such that either l=0 or word[l-1] is not a digit byte, and either u=len(word)-1 or word[u+1] is not a digit byte. The integer value of a run is obtained by deleting all leading bytes equal to 48 ('0'); if nothing remains, the value is represented by the single byte 48 ('0'); otherwise by the remaining digit bytes. Two runs represent the same integer exactly when these canonical representations are equal. If word has no digit bytes there are no runs and r=0.",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_2",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every word satisfying the preconditions, the call num_different_integers(word) returns Result.ok r for some Std.I64 r; it does not fail by overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_3",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m be the number of maximal digit runs of word (the nonempty maximal contiguous segments consisting of digit bytes, where a digit byte is in 48..57). Whenever num_different_integers(word) returns Result.ok r, r <= m.",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_4",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r, r = 0 if and only if word contains no digit byte (no i with 0 <= i < len(word) and 48 <= word[i] <= 57).",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_5",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r, if word contains at least one digit byte and every maximal digit run of word has the same canonical decimal representation (after deleting leading 48 bytes, with an all-zero run represented by the single byte 48), then r = 1.",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_6",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r and r = 1, all maximal digit runs of word have the same canonical decimal representation (after deleting leading 48 bytes, with an all-zero run represented by the single byte 48).",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_7",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r, r equals the number of distinct byte sequences that occur as maximal digit runs of word; two runs are considered the same here exactly when they have the same length and the same bytes in the same order.",
+    "preconditions": "1 <= len(word) <= 1000, every byte of word is either a digit byte (48..57) or a lowercase English letter (97..122), and for every i with 0 <= i < len(word), word[i] != 48."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_8",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r, r equals the number of distinct byte values d with 48 <= d <= 57 such that d occurs in word.",
+    "preconditions": "1 <= len(word) <= 1000, every byte of word is either a digit byte (48..57) or a lowercase English letter (97..122), and for every i with 0 <= i + 1 < len(word), it is not the case that both word[i] and word[i+1] are digit bytes (48..57)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_9",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r and num_different_integers(other) returns Result.ok r', r = r'.",
+    "preconditions": "word and other are two byte arrays, each satisfying: 1 <= len <= 1000 and every byte is either a digit byte (48..57) or a lowercase English letter (97..122). Also len(word) = len(other), and for every i with 0 <= i < len(word): if word[i] is a digit byte (48..57) then other[i] = word[i], and if word[i] is not a digit byte then other[i] is not a digit byte."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_10",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r and num_different_integers(inserted) returns Result.ok r', r = r'.",
+    "preconditions": "word satisfies: 1 <= len(word) <= 1000 and every byte is either a digit byte (48..57) or a lowercase English letter (97..122). Also len(word) < 1000, c is a byte with 97 <= c <= 122, and p is an integer with 0 <= p <= len(word). It is not the case that 0 < p < len(word) and word[p-1] is a digit byte (48..57) and word[p] is a digit byte. Let inserted be the byte array of length len(word)+1 with inserted[i]=word[i] for 0 <= i < p, inserted[p]=c, and inserted[i]=word[i-1] for p < i <= len(word)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_11",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r and num_different_integers(modified) returns Result.ok r', r = r'.",
+    "preconditions": "word satisfies: 1 <= len(word) <= 1000 and every byte is either a digit byte (48..57) or a lowercase English letter (97..122). Let l,u be indices of a maximal digit run of word, so all word[l..u] are digit bytes (48..57), and the run is maximal (l=0 or word[l-1] is not a digit byte; u=len(word)-1 or word[u+1] is not a digit byte). Let s be a nonempty byte sequence of digit bytes. Assume s and word[l..u] have the same canonical decimal representation: delete all leading 48 bytes from each, and if the result is empty replace it by the single byte 48; the two resulting sequences are equal. Let modified be the byte array obtained by replacing the segment word[l..u] with s and leaving all other bytes in order. Assume len(modified) <= 1000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumDifferentIntegers.spec_12",
+    "negation": "AegisSpec.NumDifferentIntegers.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever num_different_integers(word) returns Result.ok r, if r is a nonnegative integer k (so r = k), then there exist k maximal digit runs R_1,...,R_k of word such that for every i and j with 1 <= i < j <= k, the canonical decimal representations of R_i and R_j are different. For k=0 the list is empty. A canonical representation is obtained by deleting leading 48 bytes, with an all-zero run represented by the single byte 48.",
+    "preconditions": "1 <= len(word) <= 1000 and for every i with 0 <= i < len(word), word[i] is either a digit byte (48 <= word[i] <= 57) or a lowercase English letter (97 <= word[i] <= 122)."
+  }
+]

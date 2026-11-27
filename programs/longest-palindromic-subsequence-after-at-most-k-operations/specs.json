@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_1",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For a lowercase byte c let val(c) = code(c) - 97. For lowercase bytes c,d let dist(c,d) = min(|val(c)-val(d)|, 26 - |val(c)-val(d)|). For an integer L with 1 <= L <= len(s) and indices i_0 < i_1 < ... < i_{L-1} in [0,len(s)), define pcost(i_0,...,i_{L-1}) = sum_{t=0}^{floor(L/2)-1} dist(s[i_t], s[i_{L-1-t}]). The function returns a result r, and r is the largest such L for which there exist indices i_0 < ... < i_{L-1} satisfying pcost(i_0,...,i_{L-1}) <= k.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_2",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail by overflow, out-of-bounds access, or panic).",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_3",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(s).",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_4",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For a lowercase byte c let val(c) = code(c) - 97, and for lowercase bytes c,d let dist(c,d) = min(|val(c)-val(d)|, 26 - |val(c)-val(d)|). Let W = sum_{t=0}^{floor(len(s)/2)-1} dist(s[t], s[len(s)-1-t]). Whenever the function returns a result r, r = len(s) if and only if W <= k.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_5",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For a lowercase byte c let val(c) = code(c) - 97, and for lowercase bytes c,d let dist(c,d) = min(|val(c)-val(d)|, 26 - |val(c)-val(d)|). Whenever the function returns a result r, r = 1 if and only if for every pair of indices i,j with 0 <= i < j < len(s), dist(s[i], s[j]) > k.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_6",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For a lowercase byte c let val(c) = code(c) - 97, and for lowercase bytes c,d let dist(c,d) = min(|val(c)-val(d)|, 26 - |val(c)-val(d)|). Whenever the function returns a result r, there exist indices i_0 < i_1 < ... < i_{r-1} in [0,len(s)) such that sum_{t=0}^{floor(r/2)-1} dist(s[i_t], s[i_{r-1-t}]) <= k.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_7",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For a lowercase byte c let val(c) = code(c) - 97, and for lowercase bytes c,d let dist(c,d) = min(|val(c)-val(d)|, 26 - |val(c)-val(d)|). Whenever the function returns a result r, for every integer L with r < L <= len(s) and every choice of indices i_0 < i_1 < ... < i_{L-1} in [0,len(s)), we have sum_{t=0}^{floor(L/2)-1} dist(s[i_t], s[i_{L-1-t}]) > k.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_8",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result returned by the function on input (s,k1), and let r2 be the result returned on input (s,k2). Whenever both calls return, r1 <= r2.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, and k1,k2 are i64 values with 1 <= k1 <= k2 <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_9",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte array of length len(s) with rev(s)[i] = s[len(s)-1-i] for 0 <= i < len(s). The value returned by the function on (s,k) equals the value returned on (rev(s),k) whenever both calls return.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_10",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let val(c) = code(c) - 97 for a lowercase byte c, and let shift(s) be the byte array with shift(s)[i] = 'a' + ((val(s[i]) + 1) mod 26) for 0 <= i < len(s). The value returned by the function on (s,k) equals the value returned on (shift(s),k) whenever both calls return.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_11",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if k >= 13 * floor(len(s)/2), then r = len(s).",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, and for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindromicSubsequence.spec_12",
+    "negation": "AegisSpec.LongestPalindromicSubsequence.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t be the slice consisting of s[l], s[l+1], ..., s[u]. Let r_t be the result returned by the function on input (t,k), and let r_s be the result returned on input (s,k). Whenever both calls return, r_t <= r_s.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 200, k is an i64 with 1 <= k <= 200, for every i with 0 <= i < len(s), s[i] is an ASCII lowercase letter ('a'..'z', codes 97..122), and 0 <= l <= u < len(s)."
+  }
+]

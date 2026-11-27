@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Count.spec_1",
+    "negation": "AegisSpec.Count.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = N mod M, i.e. 0 <= r < M and r is congruent to N modulo M.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x (digit_sum(0)=0). Assume: num1 and num2 are non-empty byte slices, every byte is an ASCII decimal digit (48..57), neither has a leading zero, len(num1) <= 31 and len(num2) <= 31, val(num1) >= 1, val(num1) <= val(num2), and 1 <= min_sum <= max_sum <= 400. Define N = |{ x in Z : val(num1) <= x <= val(num2) and min_sum <= digit_sum(x) <= max_sum }|."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Count.spec_2",
+    "negation": "AegisSpec.Count.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. Assume: num1 and num2 are non-empty byte slices, every byte is an ASCII decimal digit (48..57), neither has a leading zero, len(num1) <= 31 and len(num2) <= 31, val(num1) >= 1, val(num1) <= val(num2), and 1 <= min_sum <= max_sum <= 400."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Count.spec_3",
+    "negation": "AegisSpec.Count.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 if min_sum <= digit_sum(val(num1)) <= max_sum, and r = 0 otherwise.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1, and additionally val(num1) = val(num2)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Count.spec_4",
+    "negation": "AegisSpec.Count.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r is the unique integer with 0 <= r < M and r congruent to (val(num2) - val(num1) + 1) modulo M.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1, and additionally min_sum <= 1 and max_sum >= 9 * len(num2)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Count.spec_5",
+    "negation": "AegisSpec.Count.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1, and additionally min_sum > 9 * len(num2)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Count.spec_6",
+    "negation": "AegisSpec.Count.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is the unique integer with 0 <= r < M such that r is congruent modulo M to |{ e in Z : e >= 0 and val(num1) <= 10^e <= val(num2) }|.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1, and additionally min_sum = 1 and max_sum = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Count.spec_7",
+    "negation": "AegisSpec.Count.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r != 0 then N >= 1; equivalently, if r != 0 then there exists an integer x with val(num1) <= x <= val(num2) and min_sum <= digit_sum(x) <= max_sum.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1, and let N = |{ x in Z : val(num1) <= x <= val(num2) and min_sum <= digit_sum(x) <= max_sum }|."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Count.spec_8",
+    "negation": "AegisSpec.Count.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= val(num2) - val(num1) + 1.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. Assume the common preconditions from spec_1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Count.spec_9",
+    "negation": "AegisSpec.Count.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r be the result of the function on (num1, num2, min_sum, max_sum), and let r' be the result on (num1, num2, min_sum, L). Whenever both calls return results, r = r'.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1. Let L = 9 * len(num2), and assume min_sum <= L < max_sum."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Count.spec_10",
+    "negation": "AegisSpec.Count.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r on the first input and r' on the second input, r = N mod M, r' = N' mod M, and N <= N'.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1 hold for (num1, num2, min_sum, max_sum) and also for (num1, num2', min_sum, max_sum), with val(num2) <= val(num2'). Let N be the count for the first input and N' the count for the second input, defined as in spec_1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Count.spec_11",
+    "negation": "AegisSpec.Count.spec_11_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns r1 on the first input and r2 on the second input, r1 = N1 mod M, r2 = N2 mod M, and N1 <= N2.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1 hold for (num1, num2, min_sum, max_sum1) and for (num1, num2, min_sum, max_sum2), with max_sum1 <= max_sum2. For i in {1,2}, let Ni = |{ x in Z : val(num1) <= x <= val(num2) and min_sum <= digit_sum(x) <= max_sum_i }|."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Count.spec_12",
+    "negation": "AegisSpec.Count.spec_12_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns r1 on the first input and r2 on the second input, r1 = N1 mod M, r2 = N2 mod M, and N2 <= N1.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1 hold for (num1, num2, min_sum1, max_sum) and for (num1, num2, min_sum2, max_sum), with min_sum1 <= min_sum2. For i in {1,2}, let Ni = |{ x in Z : val(num1) <= x <= val(num2) and min_sum_i <= digit_sum(x) <= max_sum }|."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.Count.spec_13",
+    "negation": "AegisSpec.Count.spec_13_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever the function returns r on the first input and r' on the second input, r = N mod M, r' = N' mod M, and N' <= N.",
+    "preconditions": "Let M = 1000000007. For a byte slice s of ASCII decimal digits, let val(s) be the integer represented by s in base 10. For x >= 0, let digit_sum(x) be the sum of the decimal digits of x. Assume the common preconditions from spec_1 hold for (num1, num2, min_sum, max_sum) and for (num1', num2, min_sum, max_sum), with val(num1) <= val(num1'). Let N be the count for the first input and N' the count for the second input, defined as in spec_1."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPalindrome.spec_1",
+    "negation": "AegisSpec.LongestPalindrome.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is exactly the maximum, over all byte sequences a and b with len(a) >= 1, len(b) >= 1, a a subsequence of word1, b a subsequence of word2, and a++b a palindrome, of len(a)+len(b); if there are no such sequences a and b, then r = 0. Here a subsequence of s means a sequence obtainable from s by deleting zero or more bytes without changing order (equivalently, there are indices 0 <= i_0 < i_1 < ... < i_{len(t)-1} < len(s) with t[j] = s[i_j] for all j), ++ denotes concatenation, and a byte sequence p is a palindrome if for every j with 0 <= j < len(p), p[j] = p[len(p)-1-j].",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122 (lowercase English letters). All positions mentioned are 0-based."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPalindrome.spec_2",
+    "negation": "AegisSpec.LongestPalindrome.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function does not fail: there exists an integer r of type Std.I64 such that the function returns Ok(r).",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPalindrome.spec_3",
+    "negation": "AegisSpec.LongestPalindrome.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(word1) + len(word2).",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPalindrome.spec_4",
+    "negation": "AegisSpec.LongestPalindrome.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, either r = 0 or r >= 2; in particular, the function never returns 1.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPalindrome.spec_5",
+    "negation": "AegisSpec.LongestPalindrome.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r > 0 then there exist non-empty byte sequences a and b such that a is a subsequence of word1, b is a subsequence of word2, a++b is a palindrome, and len(a)+len(b) = r.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPalindrome.spec_6",
+    "negation": "AegisSpec.LongestPalindrome.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every non-empty byte sequence a that is a subsequence of word1 and every non-empty byte sequence b that is a subsequence of word2, if a++b is a palindrome then len(a)+len(b) <= r.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPalindrome.spec_7",
+    "negation": "AegisSpec.LongestPalindrome.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there is no byte value c such that c occurs in word1 and c also occurs in word2. A byte c occurs in a string s if there is an index i with 0 <= i < len(s) and s[i] = c.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPalindrome.spec_8",
+    "negation": "AegisSpec.LongestPalindrome.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every byte value c that occurs in both word1 and word2, r >= count(word1,c) + count(word2,c), where count(s,c) is the number of indices i with 0 <= i < len(s) and s[i] = c.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPalindrome.spec_9",
+    "negation": "AegisSpec.LongestPalindrome.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = len(word1) + len(word2) if and only if word1++word2 is a palindrome, where word1++word2 is the concatenation of the two byte strings.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPalindrome.spec_10",
+    "negation": "AegisSpec.LongestPalindrome.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at most L, where L is the greatest length of a possibly empty palindrome that is a subsequence of the concatenated byte string word1++word2.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPalindrome.spec_11",
+    "negation": "AegisSpec.LongestPalindrome.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair of non-empty byte strings u1 and u2 satisfying the same length and lowercase constraints as word1 and word2, if u1 is a subsequence of word1 and u2 is a subsequence of word2, then whenever longest_palindrome(u1,u2) returns r' and longest_palindrome(word1,word2) returns r, one has r' <= r.",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPalindrome.spec_12",
+    "negation": "AegisSpec.LongestPalindrome.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever longest_palindrome(word1,word2) returns r and longest_palindrome(reverse(word2),reverse(word1)) returns r', we have r = r'. Here reverse(s) is the byte string of length len(s) whose i-th byte is s[len(s)-1-i].",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPalindrome.spec_13",
+    "negation": "AegisSpec.LongestPalindrome.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r and r is exactly the maximum, over all byte sequences p such that p is a palindrome, p is a subsequence of word1++word2, and p uses at least one byte from word1 and at least one byte from word2, of len(p); if no such p exists, then r = 0. Here p uses a byte from word1 if some selected index is < len(word1), and from word2 if some selected index is >= len(word1).",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122 (lowercase English letters). All positions mentioned are 0-based."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LongestPalindrome.spec_14",
+    "negation": "AegisSpec.LongestPalindrome.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every non-empty byte sequence z that is a palindrome and is a subsequence of both word1 and word2, r >= 2*len(z).",
+    "preconditions": "word1 and word2 are byte slices (ASCII strings) with 1 <= len(word1) <= 1000 and 1 <= len(word2) <= 1000, and every byte of word1 and word2 lies in the inclusive range 97 through 122 (lowercase English letters). All positions mentioned are 0-based."
+  }
+]

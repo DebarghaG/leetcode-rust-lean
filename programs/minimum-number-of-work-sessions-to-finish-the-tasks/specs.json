@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinSessions.spec_1",
+    "negation": "AegisSpec.MinSessions.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum integer k >= 1 such that there exist nonempty sets S_1, ..., S_k satisfying: (a) the sets S_1, ..., S_k are pairwise disjoint and their union is {0, 1, ..., len(tasks)-1}; and (b) for every j with 1 <= j <= k, sum_{i in S_j} tasks[i] <= sessionTime. Equivalently, r is the smallest number of work sessions needed to finish all tasks, where tasks may be grouped in any order, no task is split between sessions, and the total time in each session is at most sessionTime.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinSessions.spec_2",
+    "negation": "AegisSpec.MinSessions.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinSessions.spec_3",
+    "negation": "AegisSpec.MinSessions.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= len(tasks).",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinSessions.spec_4",
+    "negation": "AegisSpec.MinSessions.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r * sessionTime >= sum_{i=0}^{len(tasks)-1} tasks[i].",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinSessions.spec_5",
+    "negation": "AegisSpec.MinSessions.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if sum_{i=0}^{len(tasks)-1} tasks[i] <= sessionTime.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinSessions.spec_6",
+    "negation": "AegisSpec.MinSessions.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if tasks[i] = sessionTime for every i with 0 <= i < len(tasks), then r = len(tasks).",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinSessions.spec_7",
+    "negation": "AegisSpec.MinSessions.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r >= |{ i | 0 <= i < len(tasks) and 2 * tasks[i] > sessionTime }|.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinSessions.spec_8",
+    "negation": "AegisSpec.MinSessions.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(tasks) if and only if for every pair of indices i, j with 0 <= i < j < len(tasks), tasks[i] + tasks[j] > sessionTime.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinSessions.spec_9",
+    "negation": "AegisSpec.MinSessions.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any two inputs (tasks, sessionTime) and (tasks', sessionTime') satisfying the preconditions, if sessionTime' = sessionTime and tasks' is a permutation of tasks (that is, len(tasks') = len(tasks) and there exists a bijection pi on {0, ..., len(tasks)-1} such that tasks'[i] = tasks[pi(i)] for every i), then whenever min_sessions(tasks, sessionTime) returns r and min_sessions(tasks', sessionTime') returns r', we have r = r'.",
+    "preconditions": "For both calls considered: each input satisfies 1 <= len(tasks) <= 14; for every index i, 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinSessions.spec_10",
+    "negation": "AegisSpec.MinSessions.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; in particular, it does not fail by arithmetic overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinSessions.spec_11",
+    "negation": "AegisSpec.MinSessions.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist nonempty sets S_1, ..., S_r such that (a) they are pairwise disjoint and their union is {0, 1, ..., len(tasks)-1}; and (b) for every j with 1 <= j <= r, sum_{i in S_j} tasks[i] <= sessionTime.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinSessions.spec_12",
+    "negation": "AegisSpec.MinSessions.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k with 1 <= k < r, there do not exist nonempty sets S_1, ..., S_k satisfying: (a) they are pairwise disjoint and their union is {0, 1, ..., len(tasks)-1}; and (b) for every j with 1 <= j <= k, sum_{i in S_j} tasks[i] <= sessionTime.",
+    "preconditions": "1 <= len(tasks) <= 14; for every i with 0 <= i < len(tasks), 1 <= tasks[i] <= 10 and tasks[i] <= sessionTime; and sessionTime <= 15."
+  }
+]

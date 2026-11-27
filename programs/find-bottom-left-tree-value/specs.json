@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_1",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every root satisfying the preconditions, the function returns a result r and r is the bottom-left value of root, defined as follows. A node occurrence is a root-to-node path over {L,R}; its depth is the number of edges on that path. Let D be the maximum depth of any node occurrence of root. Consider all node occurrences at depth D and order their paths lexicographically with L < R, so this is the left-to-right order of that row. The bottom-left value is the stored i64 value at the unique occurrence at depth D whose path is lexicographically least; r equals that value.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_2",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every root satisfying the preconditions, the function returns a result r; it does not fail, panic, or return an error.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_3",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r for root, there exists a node occurrence n of root such that depth(n) = D(root), where D(root) is the maximum depth of any node occurrence of root, and the stored value at n is r.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_4",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r for root, let mn be the minimum stored value among all node occurrences of root and let mx be the maximum stored value among all node occurrences of root; then mn <= r <= mx.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_5",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r for root, if exactly one node occurrence of root has depth D(root), where D(root) is the maximum depth of any node occurrence of root, then r equals the stored value at that unique occurrence.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_6",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r for root, there exists a node occurrence l of root whose stored value is r and whose left child and right child are both Null.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_7",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for root, r equals the bottom-left value of L, defined within L as the stored value at the maximum-depth node occurrence of L whose root-to-node path within L is lexicographically least over {L,R} with L < R.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, every stored value is in [-2^31, 2^31-1], and root is Node(v, L, R) for some i64 v and subtrees L and R such that L is not Null and H(L) >= H(R), where H(Null) = -1 and H(Node(_, a, b)) = 1 + max(H(a), H(b))."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_8",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r for root, r equals the bottom-left value of R, defined within R as the stored value at the maximum-depth node occurrence of R whose root-to-node path within R is lexicographically least over {L,R} with L < R.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, every stored value is in [-2^31, 2^31-1], and root is Node(v, L, R) for some i64 v and subtrees L and R such that R is not Null and H(R) > H(L), where H(Null) = -1 and H(Node(_, a, b)) = 1 + max(H(a), H(b))."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_9",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns result r for T and result r' for T', we have r = r'.",
+    "preconditions": "T and T' are finite binary trees, each with between 1 and 10000 node occurrences and all stored values in [-2^31, 2^31-1], and T and T' have the same shape (both are Null, or both are Node with same-shaped left subtrees and same-shaped right subtrees). Let p be the lexicographically least root-to-node path among node occurrences of T at maximum depth D(T), where paths are ordered lexicographically with L < R. Assume T and T' store the same i64 value at path p, which exists in T' because the shapes agree."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_10",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r for root, if every node occurrence of root at depth D(root) has the same stored value v, where D(root) is the maximum depth of any node occurrence of root, then r = v.",
+    "preconditions": "root is a finite binary tree with between 1 and 10000 node occurrences, and every stored value is in [-2^31, 2^31-1]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindBottomLeftValue.spec_11",
+    "negation": "AegisSpec.FindBottomLeftValue.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns result r for T and result r' for T', we have r != r'.",
+    "preconditions": "T and T' are finite binary trees, each with between 1 and 10000 node occurrences and all stored values in [-2^31, 2^31-1], and T and T' have the same shape (both are Null, or both are Node with same-shaped left subtrees and same-shaped right subtrees). Let p be the lexicographically least root-to-node path among node occurrences of T at maximum depth D(T), where paths are ordered lexicographically with L < R. Assume T and T' store different i64 values at path p, which exists in T' because the shapes agree."
+  }
+]

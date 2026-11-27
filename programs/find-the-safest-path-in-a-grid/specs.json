@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_1",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = max { safe(P) : P is a path from (0,0) to (n-1,n-1) }. Here d(i,j) = min { |i-a| + |j-b| : 0 <= a,b < n and grid[a][b] = 1 } for every cell (i,j) in the grid. A path P is a finite sequence of cells p_0,...,p_k with k >= 0, p_0 = (0,0), p_k = (n-1,n-1), every p_t in the grid, no cell repeated in the sequence, and p_{t+1} adjacent to p_t (that is, |r_{t+1}-r_t| + |c_{t+1}-c_t| = 1) for every 0 <= t < k. safe(P) = min { d(p_t) : 0 <= t <= k }. Equivalently, r is the largest integer s >= 0 for which there exists a path from (0,0) to (n-1,n-1) such that d(q) >= s for every cell q on the path.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_2",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail: no arithmetic overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_3",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_4",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= n - 1.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_5",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d(i,j) = min { |i-a| + |j-b| : 0 <= a,b < n and grid[a][b] = 1 }. The function returns a result r and r <= d(0,0).",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_6",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d(i,j) = min { |i-a| + |j-b| : 0 <= a,b < n and grid[a][b] = 1 }. The function returns a result r and r <= d(n-1,n-1).",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_7",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "With d(i,j) = min { |i-a| + |j-b| : 0 <= a,b < n and grid[a][b] = 1 } and paths defined as finite sequences p_0,...,p_k with p_0=(0,0), p_k=(n-1,n-1), all cells in the grid, no repeated cell, consecutive cells adjacent by Manhattan distance 1, and safe(P) = min { d(p_t) : 0 <= t <= k }, the function returns a result r and there exists a path P from (0,0) to (n-1,n-1) such that safe(P) = r.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_8",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With the same definitions of d and paths as in the main specification, the function returns a result r and for every path P from (0,0) to (n-1,n-1), safe(P) <= r.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_9",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d(i,j) = min { |i-a| + |j-b| : 0 <= a,b < n and grid[a][b] = 1 }. The function returns a result r and for every integer s, s <= r if and only if there exists a path P from (0,0) to (n-1,n-1) (a finite sequence of cells with p_0=(0,0), p_k=(n-1,n-1), all cells in the grid, no repeated cell, and consecutive cells adjacent by Manhattan distance 1) such that d(q) >= s for every cell q occurring in P.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_10",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1, and grid[0][0] = 1 or grid[n-1][n-1] = 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_11",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid^T be the n by n grid with grid^T[i][j] = grid[j][i] for 0 <= i,j < n. Let r be the result returned by maximum_safeness_factor(grid) and let r^T be the result returned by maximum_safeness_factor(grid^T). Then both calls return results and r = r^T.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_12",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid^R be the n by n grid with grid^R[i][j] = grid[n-1-j][n-1-i] for 0 <= i,j < n. Let r be the result returned by maximum_safeness_factor(grid) and let r^R be the result returned by maximum_safeness_factor(grid^R). Then both calls return results and r = r^R.",
+    "preconditions": "Assume n = len(grid), 1 <= n <= 400, len(grid[i]) = n for every i with 0 <= i < n, grid[i][j] is 0 or 1 for every 0 <= i,j < n, and there exists at least one pair (a,b) with 0 <= a,b < n and grid[a][b] = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumSafenessFactor.spec_13",
+    "negation": "AegisSpec.MaximumSafenessFactor.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned by maximum_safeness_factor(grid) and let r2 be the result returned by maximum_safeness_factor(grid2). Then both calls return results and r2 <= r.",
+    "preconditions": "Assume n = len(grid) = len(grid2), 1 <= n <= 400, len(grid[i]) = len(grid2[i]) = n for every 0 <= i < n, all entries of grid and grid2 are 0 or 1, grid contains at least one 1, and grid[i][j] <= grid2[i][j] for every 0 <= i,j < n."
+  }
+]

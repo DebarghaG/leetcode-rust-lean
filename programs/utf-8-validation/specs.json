@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidUtf8.spec_1",
+    "negation": "AegisSpec.ValidUtf8.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail) and r = true if and only if data[0..len(data)-1] is a valid UTF-8 encoding. A valid UTF-8 encoding is a concatenation of one or more UTF-8 characters, where a UTF-8 character is exactly one of: (1) a single byte b with 0 <= b < 128; (2) a byte b with 192 <= b < 224 followed by exactly one byte c with 128 <= c < 192; (3) a byte b with 224 <= b < 240 followed by exactly two bytes c1, c2 with 128 <= c1 < 192 and 128 <= c2 < 192; (4) a byte b with 240 <= b < 248 followed by exactly three bytes c1, c2, c3 with 128 <= c1 < 192, 128 <= c2 < 192, and 128 <= c3 < 192. No other bytes may appear, and the concatenation must cover the entire array (the characters partition data in order). Equivalently, r = true iff the recursive predicate valid(data, 0) is true, where valid(data, i) is true if i = len(data), and otherwise: if data[i] < 128 then valid(data, i+1); if 192 <= data[i] < 224 then i+1 < len(data) and 128 <= data[i+1] < 192 and valid(data, i+2); if 224 <= data[i] < 240 then i+2 < len(data) and 128 <= data[i+1] < 192 and 128 <= data[i+2] < 192 and valid(data, i+3); if 240 <= data[i] < 248 then i+3 < len(data) and 128 <= data[i+1] < 192 and 128 <= data[i+2] < 192 and 128 <= data[i+3] < 192 and valid(data, i+4); otherwise false.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidUtf8.spec_2",
+    "negation": "AegisSpec.ValidUtf8.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no overflow, out-of-bounds, or panic).",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidUtf8.spec_3",
+    "negation": "AegisSpec.ValidUtf8.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] < 128."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidUtf8.spec_4",
+    "negation": "AegisSpec.ValidUtf8.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns false.",
+    "preconditions": "1 <= len(data) <= 20000, for every i with 0 <= i < len(data), 0 <= data[i] <= 255, and 128 <= data[0] < 192."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidUtf8.spec_5",
+    "negation": "AegisSpec.ValidUtf8.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If the function returns true, then data[len(data)-1] < 192.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidUtf8.spec_6",
+    "negation": "AegisSpec.ValidUtf8.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns true, then either data[0] < 128 or 192 <= data[0] < 248.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidUtf8.spec_7",
+    "negation": "AegisSpec.ValidUtf8.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "When both calls return results r1 and r2, valid_utf8(c ++ data) and valid_utf8(data) have the same result (r1 = r2).",
+    "preconditions": "For some k in {1,2,3,4}, c is a sequence of length k that is a single valid UTF-8 character (k=1: 0 <= c[0] < 128; k=2: 192 <= c[0] < 224 and 128 <= c[1] < 192; k=3: 224 <= c[0] < 240 and 128 <= c[1],c[2] < 192; k=4: 240 <= c[0] < 248 and 128 <= c[1],c[2],c[3] < 192), 1 <= len(data) <= 20000 - k, and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidUtf8.spec_8",
+    "negation": "AegisSpec.ValidUtf8.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "When both calls return results r1 and r2, valid_utf8(data ++ [b]) and valid_utf8(data) have the same result (r1 = r2).",
+    "preconditions": "1 <= len(data) <= 19999, for every i with 0 <= i < len(data), 0 <= data[i] <= 255, and 0 <= b < 128."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidUtf8.spec_9",
+    "negation": "AegisSpec.ValidUtf8.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = true if and only if there exist an integer k >= 1 and indices 0 = i_0 < i_1 < ... < i_k = len(data) such that for every j with 1 <= j <= k, the block data[i_{j-1}..i_j-1] is a valid UTF-8 character (as defined in spec_1). In other words, r = true iff data can be partitioned into a sequence of valid UTF-8 characters covering exactly all elements.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ValidUtf8.spec_10",
+    "negation": "AegisSpec.ValidUtf8.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let L2 = #{i | 0 <= i < len(data) and 192 <= data[i] < 224}, L3 = #{i | 0 <= i < len(data) and 224 <= data[i] < 240}, L4 = #{i | 0 <= i < len(data) and 240 <= data[i] < 248}, and C = #{i | 0 <= i < len(data) and 128 <= data[i] < 192}. If the function returns true, then C = L2 + 2*L3 + 3*L4.",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ValidUtf8.spec_11",
+    "negation": "AegisSpec.ValidUtf8.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns true if and only if for every i with 1 <= i < n, 128 <= data[i] < 192.",
+    "preconditions": "Let n = len(data). Then n is in {1,2,3,4}, for every i with 0 <= i < n, 0 <= data[i] <= 255, and data[0] is an n-byte leading byte: 0 <= data[0] < 128 if n=1, 192 <= data[0] < 224 if n=2, 224 <= data[0] < 240 if n=3, and 240 <= data[0] < 248 if n=4."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ValidUtf8.spec_12",
+    "negation": "AegisSpec.ValidUtf8.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the function returns true, then for every i with 0 <= i <= len(data) such that the prefix data[0..i-1] is a valid UTF-8 encoding (using the definition from spec_1, with the empty prefix being valid), the suffix data[i..len(data)-1] is also a valid UTF-8 encoding (with the empty suffix being valid).",
+    "preconditions": "1 <= len(data) <= 20000 and for every i with 0 <= i < len(data), 0 <= data[i] <= 255."
+  }
+]

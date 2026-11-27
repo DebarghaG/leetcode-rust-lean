@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindTarget.spec_1",
+    "negation": "AegisSpec.FindTarget.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns Result.ok r for some Boolean r, and r = true if and only if there exist two distinct node occurrences u and v in root (u is not the same occurrence as v) such that value(u) + value(v) = k, where value(p) is the i64 stored at node occurrence p. Addition here is mathematical integer addition; the preconditions ensure the compared sums are within i64 range.",
+    "preconditions": "root is a valid non-empty binary search tree: it has between 1 and 10^4 node occurrences, every node value is an i64 in [-10^4, 10^4], and for every node all values in its left subtree are strictly less than its value and all values in its right subtree are strictly greater than its value; k is an i64 with -10^5 <= k <= 10^5."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindTarget.spec_2",
+    "negation": "AegisSpec.FindTarget.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, find_target root k returns Result.ok r for some Boolean r; in particular it does not return an error and does not panic or overflow.",
+    "preconditions": "root is a valid non-empty binary search tree: it has between 1 and 10^4 node occurrences, every node value is an i64 in [-10^4, 10^4], and for every node all values in its left subtree are strictly less than its value and all values in its right subtree are strictly greater than its value; k is an i64 with -10^5 <= k <= 10^5."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindTarget.spec_3",
+    "negation": "AegisSpec.FindTarget.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever find_target root k returns Result.ok true, there exist two distinct node occurrences u and v in root with value(u) + value(v) = k.",
+    "preconditions": "root is a valid non-empty binary search tree: it has between 1 and 10^4 node occurrences, every node value is an i64 in [-10^4, 10^4], and for every node all values in its left subtree are strictly less than its value and all values in its right subtree are strictly greater than its value; k is an i64 with -10^5 <= k <= 10^5."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindTarget.spec_4",
+    "negation": "AegisSpec.FindTarget.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever there exist two distinct node occurrences u and v in root with value(u) + value(v) = k, find_target root k returns Result.ok true.",
+    "preconditions": "root is a valid non-empty binary search tree: it has between 1 and 10^4 node occurrences, every node value is an i64 in [-10^4, 10^4], and for every node all values in its left subtree are strictly less than its value and all values in its right subtree are strictly greater than its value; k is an i64 with -10^5 <= k <= 10^5."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindTarget.spec_5",
+    "negation": "AegisSpec.FindTarget.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "find_target root1 k and find_target root2 k both return Result.ok, and their Boolean results are equal.",
+    "preconditions": "root1 and root2 are valid non-empty binary search trees, each with between 1 and 10^4 nodes and node values in [-10^4, 10^4], and they have the same multiset of node values: for every integer x, the number of node occurrences with value x is the same in root1 and root2; k is an i64 with -10^5 <= k <= 10^5."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindTarget.spec_6",
+    "negation": "AegisSpec.FindTarget.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "find_target root k and find_target (reflectNeg(root)) (-k) both return Result.ok, and their Boolean results are equal.",
+    "preconditions": "root is a valid non-empty binary search tree with between 1 and 10^4 nodes and node values in [-10^4, 10^4]; k is an i64 with -10^5 <= k <= 10^5. Let reflectNeg(root) be the tree obtained by replacing every node Node(v,L,R) with Node(-v, reflectNeg(R), reflectNeg(L)), negating every value and swapping left and right subtrees."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindTarget.spec_7",
+    "negation": "AegisSpec.FindTarget.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "find_target root k and find_target (addC(root,c)) (k+2c) both return Result.ok, and their Boolean results are equal.",
+    "preconditions": "root is a valid non-empty binary search tree with between 1 and 10^4 nodes and node values in [-10^4, 10^4]; k is an i64 with -10^5 <= k <= 10^5; c is an integer such that for every node value v of root, v+c is in [-10^4, 10^4], and k+2c is in [-10^5, 10^5]. Let addC(root,c) be the tree obtained by replacing every node Node(v,L,R) with Node(v+c, addC(L,c), addC(R,c))."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindTarget.spec_8",
+    "negation": "AegisSpec.FindTarget.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "find_target root k and find_target (scale(root,c)) (c*k) both return Result.ok, and their Boolean results are equal.",
+    "preconditions": "root is a valid non-empty binary search tree with between 1 and 10^4 nodes and node values in [-10^4, 10^4]; k is an i64 with -10^5 <= k <= 10^5; c is a positive integer such that for every node value v of root, c*v is in [-10^4, 10^4], and c*k is in [-10^5, 10^5]. Let scale(root,c) be the tree obtained by replacing every node Node(v,L,R) with Node(c*v, scale(L,c), scale(R,c))."
+  }
+]

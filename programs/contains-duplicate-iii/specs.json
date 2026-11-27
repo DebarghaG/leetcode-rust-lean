@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_1",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exist indices i and j such that 0 <= i < n, 0 <= j < n, i != j, |i - j| <= indexDiff, and |nums[i] - nums[j]| <= valueDiff. Here nums[i] is the mathematical integer represented by the i-th I64 entry, |x| is mathematical absolute value, and comparisons with indexDiff and valueDiff are mathematical integer comparisons.",
+    "preconditions": "Let n = len(nums). The mathematical values of indexDiff and valueDiff satisfy indexDiff >= 0 and valueDiff >= 0. No upper bound on n or on the elements of nums is assumed for this specification."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_2",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, overflow, or go out of bounds).",
+    "preconditions": "Let n = len(nums). We have 0 <= n <= 100000; for every i with 0 <= i < n, -2147483648 <= nums[i] <= 2147483647; 0 <= indexDiff <= 100000; and 0 <= valueDiff <= 4294967294."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_3",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true, there exist indices i and j with 0 <= i < j < n, j - i <= indexDiff, and |nums[j] - nums[i]| <= valueDiff.",
+    "preconditions": "Let n = len(nums). Assume indexDiff >= 0 and valueDiff >= 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_4",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns false, for every pair of indices i and j with 0 <= i < n, 0 <= j < n, and i != j, if |i - j| <= indexDiff then |nums[i] - nums[j]| > valueDiff.",
+    "preconditions": "Let n = len(nums). Assume indexDiff >= 0 and valueDiff >= 0."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_5",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = false.",
+    "preconditions": "Let n = len(nums). Assume n < 2, indexDiff >= 0, and valueDiff >= 0."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_6",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exist indices i and j with 0 <= i < j < n, j - i <= indexDiff, and nums[i] = nums[j].",
+    "preconditions": "Let n = len(nums). Assume indexDiff >= 0 and valueDiff = 0."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_7",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever both calls return results, r1 = true implies r2 = true (equivalently, r2 = false implies r1 = false).",
+    "preconditions": "Let n = len(nums). Fix a slice nums of length n and integers k1, k2, t with 0 <= k1 <= k2 and t >= 0. Let r1 be the result of the call on (nums, k1, t) and r2 the result of the call on (nums, k2, t)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_8",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever both calls return results, r = r'.",
+    "preconditions": "Let n = len(nums). Assume indexDiff >= 0 and valueDiff >= 0. Let c be an integer and let nums' be any slice of length n such that, for every i with 0 <= i < n, nums'[i] = nums[i] + c holds in mathematical integers (so each nums'[i] is an I64 value). Let r be the result of the call on (nums, indexDiff, valueDiff) and r' the result of the call on (nums', indexDiff, valueDiff)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_9",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exist indices i and j with 0 <= i < j < n and |nums[i] - nums[j]| <= valueDiff.",
+    "preconditions": "Let n = len(nums). Assume n >= 1, indexDiff >= n - 1, and valueDiff >= 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_10",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is true if and only if there exists an index i with 0 <= i < n - 1 and |nums[i] - nums[i+1]| <= valueDiff.",
+    "preconditions": "Let n = len(nums). Assume indexDiff = 1 and valueDiff >= 0."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_11",
+    "negation": "AegisSpec.ContainsNearbyAlmostDuplicate.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r = true.",
+    "preconditions": "Let n = len(nums). Assume n >= 2, indexDiff >= 1, valueDiff >= 0, and valueDiff >= max{ |nums[i]-nums[j]| : 0 <= i < n and 0 <= j < n }."
+  }
+]

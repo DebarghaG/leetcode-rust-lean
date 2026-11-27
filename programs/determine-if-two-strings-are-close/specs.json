@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CloseStrings.spec_1",
+    "negation": "AegisSpec.CloseStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever close_strings(word1, word2) returns a result r, r = true if and only if all three conditions hold: (a) len(word1) = len(word2); (b) for every lowercase letter c, c occurs in word1 if and only if c occurs in word2; (c) for every integer k >= 1, the number of lowercase letters occurring exactly k times in word1 equals the number of lowercase letters occurring exactly k times in word2. Thus r = false exactly when at least one of (a), (b), (c) fails. An occurrence of c in a slice w means an index i with 0 <= i < len(w) and w[i] = c.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CloseStrings.spec_2",
+    "negation": "AegisSpec.CloseStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The call close_strings(word1, word2) returns a result (a Bool) and does not fail, panic, overflow, or go out of bounds for every word1 and word2 satisfying the preconditions.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122 (lowercase English letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CloseStrings.spec_3",
+    "negation": "AegisSpec.CloseStrings.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever close_strings(word1, word2) returns a result r, r = false.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122; len(word1) != len(word2)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CloseStrings.spec_4",
+    "negation": "AegisSpec.CloseStrings.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever close_strings(word1, word2) returns true, for every lowercase letter c, c occurs in word1 if and only if c occurs in word2.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CloseStrings.spec_5",
+    "negation": "AegisSpec.CloseStrings.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever close_strings(word1, word2) returns true, for every integer k >= 1, the number of lowercase letters occurring exactly k times in word1 equals the number of lowercase letters occurring exactly k times in word2.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CloseStrings.spec_6",
+    "negation": "AegisSpec.CloseStrings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever close_strings(word1, word2) returns a result r, r = true.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122; for every lowercase letter c, the number of occurrences of c in word1 equals the number of occurrences of c in word2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CloseStrings.spec_7",
+    "negation": "AegisSpec.CloseStrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever close_strings(word1, word2) returns r and close_strings(word2, word1) returns r', we have r = r'.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CloseStrings.spec_8",
+    "negation": "AegisSpec.CloseStrings.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice word1' with 1 <= len(word1') <= 100000, all bytes in 97..122, len(word1') = len(word1), and the same number of occurrences of every lowercase letter as word1, whenever close_strings(word1, word2) returns r and close_strings(word1', word2) returns r', we have r = r'.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CloseStrings.spec_9",
+    "negation": "AegisSpec.CloseStrings.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice word2' with 1 <= len(word2') <= 100000, all bytes in 97..122, len(word2') = len(word2), and the same number of occurrences of every lowercase letter as word2, whenever close_strings(word1, word2) returns r and close_strings(word1, word2') returns r', we have r = r'.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CloseStrings.spec_10",
+    "negation": "AegisSpec.CloseStrings.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every bijection sigma from the set of lowercase letter bytes {97,...,122} to itself, let word1' and word2' be the slices defined by len(word1') = len(word1), len(word2') = len(word2), word1'[i] = sigma(word1[i]) for 0 <= i < len(word1), and word2'[j] = sigma(word2[j]) for 0 <= j < len(word2). Whenever close_strings(word1, word2) returns r and close_strings(word1', word2') returns r', we have r = r'.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CloseStrings.spec_11",
+    "negation": "AegisSpec.CloseStrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of distinct lowercase letters c and d that both occur in word1, let word1' be obtained from word1 by replacing every occurrence of c with d and every occurrence of d with c, leaving all other bytes unchanged. Whenever close_strings(word1, word2) returns r and close_strings(word1', word2) returns r', we have r = r'.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CloseStrings.spec_12",
+    "negation": "AegisSpec.CloseStrings.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever close_strings(word1, word2) returns a result r, r = true if and only if c = d and len(word1) = len(word2).",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122; there exist lowercase letters c and d such that every byte of word1 equals c and every byte of word2 equals d."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CloseStrings.spec_13",
+    "negation": "AegisSpec.CloseStrings.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever close_strings(word1, word2) returns true, let S be the set of lowercase letters occurring in word1. Then S is also the set of lowercase letters occurring in word2, and there exists a bijection f from S to S such that, for every c in S, the number of occurrences of f(c) in word2 equals the number of occurrences of c in word1.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CloseStrings.spec_14",
+    "negation": "AegisSpec.CloseStrings.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever close_strings(word1, word2) returns a result r, r = true if and only if for every integer k >= 1, the number of lowercase letters occurring exactly k times in word1 equals the number of lowercase letters occurring exactly k times in word2.",
+    "preconditions": "1 <= len(word1) <= 100000 and 1 <= len(word2) <= 100000; every byte of word1 and word2 lies in the inclusive range 97..122; len(word1) = len(word2); for every lowercase letter c, c occurs in word1 if and only if c occurs in word2."
+  }
+]

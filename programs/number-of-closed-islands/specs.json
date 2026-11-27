@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ClosedIsland.spec_1",
+    "negation": "AegisSpec.ClosedIsland.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r equals the number of closed islands of grid, defined as follows. A cell is a pair (i,j) with 0 <= i < R and 0 <= j < C; it is land if grid[i][j] = 0 and water if grid[i][j] = 1. Two cells (i,j) and (i',j') are 4-adjacent if |i-i'| + |j-j'| = 1. A set S of cells is 4-connected if for every a,b in S there is a finite sequence a = c_0, c_1, ..., c_k = b of cells in S such that c_t and c_{t+1} are 4-adjacent for every 0 <= t < k (and k = 0 when a = b). A land island is a maximal 4-connected set of land cells: S is a land island if S is a nonempty 4-connected set of land cells and no land cell outside S is 4-adjacent to any cell in S. A cell (i,j) is interior if 1 <= i <= R-2 and 1 <= j <= C-2; otherwise it lies on the grid boundary (i=0 or i=R-1 or j=0 or j=C-1). A land island is closed if every cell in it is interior. Then r is the number of closed islands.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ClosedIsland.spec_2",
+    "negation": "AegisSpec.ClosedIsland.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r of type i64; it does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ClosedIsland.spec_3",
+    "negation": "AegisSpec.ClosedIsland.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, 0 <= r.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ClosedIsland.spec_4",
+    "negation": "AegisSpec.ClosedIsland.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, r <= I, where I is defined by I = 0 if R < 2 or C < 2, and I = (R-2)*(C-2) otherwise.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ClosedIsland.spec_5",
+    "negation": "AegisSpec.ClosedIsland.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if R <= 2 or C <= 2 then r = 0.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ClosedIsland.spec_6",
+    "negation": "AegisSpec.ClosedIsland.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if grid[i][j] = 1 for every valid cell (i,j), then r = 0.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ClosedIsland.spec_7",
+    "negation": "AegisSpec.ClosedIsland.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if grid[i][j] = 0 for every valid cell (i,j), then r = 0.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ClosedIsland.spec_8",
+    "negation": "AegisSpec.ClosedIsland.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, if grid[i][j] = 1 for every boundary cell (every (i,j) with 0 <= i < R, 0 <= j < C, and (i=0 or i=R-1 or j=0 or j=C-1)), then r equals the total number of land islands of grid, where a land island is a maximal 4-connected set of land cells as defined in spec_1 without the closedness condition.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ClosedIsland.spec_9",
+    "negation": "AegisSpec.ClosedIsland.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns r, r = 0 if and only if every land cell is connected to some boundary cell by a path of land cells; that is, for every land cell (i,j) there exists a sequence (i_0,j_0), ..., (i_k,j_k) of land cells with (i_0,j_0)=(i,j), each consecutive pair 4-adjacent, and the last cell (i_k,j_k) satisfying i_k=0 or i_k=R-1 or j_k=0 or j_k=C-1.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ClosedIsland.spec_10",
+    "negation": "AegisSpec.ClosedIsland.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, if there is exactly one cell (i0,j0) with grid[i0][j0] = 0, and 1 <= i0 <= R-2 and 1 <= j0 <= C-2, then r = 1.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ClosedIsland.spec_11",
+    "negation": "AegisSpec.ClosedIsland.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns r, if there is exactly one cell (i0,j0) with grid[i0][j0] = 0, and (i0=0 or i0=R-1 or j0=0 or j0=C-1), then r = 0.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ClosedIsland.spec_12",
+    "negation": "AegisSpec.ClosedIsland.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid^T be the C-row, R-column grid defined by len(grid^T) = C, len(grid^T[j]) = R for every 0 <= j < C, and grid^T[j][i] = grid[i][j] for every 0 <= i < R and 0 <= j < C. Whenever the function returns r on grid, r equals the number of closed islands of grid^T, where closed islands of grid^T are defined by the same definition as in spec_1 with grid^T in place of grid.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ClosedIsland.spec_13",
+    "negation": "AegisSpec.ClosedIsland.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid^R be the R-row, C-column grid defined by grid^R[i][j] = grid[R-1-i][C-1-j] for every 0 <= i < R and 0 <= j < C. Whenever the function returns r on grid, r equals the number of closed islands of grid^R, where closed islands of grid^R are defined by the same definition as in spec_1 with grid^R in place of grid.",
+    "preconditions": "Let R = len(grid) and C = len(grid[0]). Assume 1 <= R <= 100, 1 <= C <= 100, len(grid[i]) = C for every 0 <= i < R, and grid[i][j] ∈ {0,1} for every 0 <= i < R and 0 <= j < C."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_1",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). Define val(a) for an array a of length n as the sum over i from 0 to n-2 of |a[i+1] - a[i]|. Define reverse(nums, l, q) for 0 <= l <= q < n as the array obtained from nums by reversing the contiguous subarray from index l to index q inclusive. The function returns Result.ok R where R = max { val(reverse(nums, l, q)) | 0 <= l <= q < n }.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_2",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_3",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r >= val(nums), where val(nums) is the original value of the array, i.e., the sum over i from 0 to len(nums)-2 of |nums[i+1] - nums[i]|.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_4",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r <= (len(nums) - 1) * (max(nums) - min(nums)), where max(nums) is the maximum element of nums and min(nums) is the minimum element of nums.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_5",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals |nums[0] - nums[1]|.",
+    "preconditions": "len(nums) = 2, and for i=0,1, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_6",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The returned value r equals 0 if and only if all elements of nums are equal (i.e., there exists an integer c such that nums[i] = c for all 0 <= i < len(nums)).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_7",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(nums). If the function returns Result.ok R, then for every pair of indices l, q with 0 <= l <= q < n, val(reverse(nums, l, q)) <= R, where val and reverse are defined as in spec_1.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_8",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value R satisfies -2^31 <= R <= 2^31 - 1.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000, and the problem's answer (the maximum value over all allowed subarray reversals) fits in a signed 32-bit integer, i.e. is at most 2^31 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_9",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of max_value_after_reverse(b) equals the result of max_value_after_reverse(nums).",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 30000, and for every i, -100000 <= nums[i] <= 100000. Let c be an integer such that the array b defined by b[i] = nums[i] + c for all i with 0 <= i < len(nums) also satisfies len(b) = len(nums) and -100000 <= b[i] <= 100000 for all i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_10",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev_nums be the array of length len(nums) with rev_nums[i] = nums[len(nums)-1-i] for 0 <= i < len(nums). Then max_value_after_reverse(rev_nums) = max_value_after_reverse(nums).",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 30000, and for every i, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_11",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let neg_nums be the array with neg_nums[i] = -nums[i] for 0 <= i < len(nums). Then max_value_after_reverse(neg_nums) = max_value_after_reverse(nums).",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 30000, and for every i, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_12",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r <= val(nums) + 2 * (max(nums) - min(nums)), where val(nums) is the original value (sum of absolute adjacent differences), and max(nums), min(nums) are the maximum and minimum elements of nums.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_13",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r >= max(nums) - min(nums), where max(nums) and min(nums) are the maximum and minimum elements of nums.",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_14",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The result of max_value_after_reverse(b) equals c * max_value_after_reverse(nums).",
+    "preconditions": "nums satisfies len(nums) >= 2, len(nums) <= 30000, and for every i, -100000 <= nums[i] <= 100000. Let c be a non-negative integer such that the array b defined by b[i] = c * nums[i] for all i with 0 <= i < len(nums) also satisfies -100000 <= b[i] <= 100000 for all i."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_15",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals max( |nums[0]-nums[1]| + |nums[0]-nums[2]|, |nums[0]-nums[2]| + |nums[1]-nums[2]|, |nums[0]-nums[1]| + |nums[1]-nums[2]| ).",
+    "preconditions": "len(nums) = 3, and for i=0,1,2, -100000 <= nums[i] <= 100000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxValueAfterReverse.spec_16",
+    "negation": "AegisSpec.MaxValueAfterReverse.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(nums), base = sum_{i=0}^{n-2} |nums[i+1]-nums[i]|, M = max_{0 <= i <= n-2} min(nums[i], nums[i+1]), m = min_{0 <= i <= n-2} max(nums[i], nums[i+1]), g_pre = max_{0 <= i <= n-2} (|nums[0]-nums[i+1]| - |nums[i]-nums[i+1]|), and g_suf = max_{0 <= i <= n-2} (|nums[i]-nums[n-1]| - |nums[i]-nums[i+1]|). Then the returned value R equals base + max(0, 2*max(0, M-m), g_pre, g_suf).",
+    "preconditions": "len(nums) >= 2, len(nums) <= 30000, and for every i with 0 <= i < len(nums), -100000 <= nums[i] <= 100000."
+  }
+]

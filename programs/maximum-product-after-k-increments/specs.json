@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumProduct.spec_1",
+    "negation": "AegisSpec.MaximumProduct.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P* be the maximum, over all integer vectors (d_0,...,d_{n-1}) with d_i >= 0 for every i and sum_{i=0}^{n-1} d_i <= k, of the ordinary integer product product_{i=0}^{n-1} (nums[i] + d_i). Under the preconditions, the call maximum_product(nums,k) returns a result r and r is the least nonnegative residue of P* modulo M: 0 <= r < M and r is congruent to P* modulo M. The maximum is taken before the modulo operation.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumProduct.spec_2",
+    "negation": "AegisSpec.MaximumProduct.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the call maximum_product(nums,k) returns a value of the form Result.ok r; it does not fail. In particular, no panic, out-of-bounds access, or 64-bit arithmetic overflow occurs in the computation.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumProduct.spec_3",
+    "negation": "AegisSpec.MaximumProduct.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(nums) = 1, then whenever maximum_product(nums,k) returns r, r = (nums[0] + k) mod M, where the residue is the least nonnegative one.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumProduct.spec_4",
+    "negation": "AegisSpec.MaximumProduct.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let z = number of indices i with 0 <= i < len(nums) such that nums[i] = 0. If z > k, then whenever maximum_product(nums,k) returns r, r = 0.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumProduct.spec_5",
+    "negation": "AegisSpec.MaximumProduct.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose nums[i] = c for every i with 0 <= i < n = len(nums). Let q = k / n using integer division and s = k mod n. Then whenever maximum_product(nums,k) returns r, r = ((c + q + 1)^s * (c + q)^(n-s)) mod M. The exponentiation and multiplication on the left are the ordinary integer product before the final least nonnegative residue modulo M.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumProduct.spec_6",
+    "negation": "AegisSpec.MaximumProduct.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose n = len(nums) = 2. Write a = nums[0], b = nums[1], and S = a + b + k. Define P by: if a > b + k then P = a * (b + k); else if b > a + k then P = (a + k) * b; else P = floor(S^2 / 4). Whenever maximum_product(nums,k) returns r, r = P mod M, with the least nonnegative residue.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumProduct.spec_7",
+    "negation": "AegisSpec.MaximumProduct.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation sigma of the index set {0,...,n-1}, define nums' by nums'[i] = nums[sigma(i)] for 0 <= i < n. Whenever maximum_product(nums,k) returns r and maximum_product(nums',k) returns r', we have r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumProduct.spec_8",
+    "negation": "AegisSpec.MaximumProduct.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let E be the maximum, over all integer vectors (d_0,...,d_{n-1}) with d_i >= 0 for every i and sum_{i=0}^{n-1} d_i = k, of the ordinary integer product product_{i=0}^{n-1} (nums[i] + d_i). Whenever maximum_product(nums,k) returns r, r is the least nonnegative residue of E modulo M.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumProduct.spec_9",
+    "negation": "AegisSpec.MaximumProduct.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For j in {1,2}, let P_j be the maximum, over all nonnegative integer vectors d = (d_0,...,d_{n-1}) with sum_{i=0}^{n-1} d_i <= k_j, of the ordinary integer product product_{i=0}^{n-1} (nums[i] + d_i). Then P_1 <= P_2. Moreover, if P_2 < M, then whenever the calls maximum_product(nums,k1) and maximum_product(nums,k2) return r1 and r2 respectively, we have r1 = P_1, r2 = P_2, and r1 <= r2.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k1 <= k2 <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumProduct.spec_10",
+    "negation": "AegisSpec.MaximumProduct.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let P be the maximum, over all nonnegative integer vectors d with sum_i d_i <= k, of product_{i=0}^{n-1} (nums[i] + d_i), and let P' be the analogous maximum with nums'[i] in place of nums[i]. Then P <= P'. Moreover, if P' < M, then whenever maximum_product(nums,k) returns r and maximum_product(nums',k) returns r', we have r = P, r' = P', and r <= r'.",
+    "preconditions": "Let n = len(nums). Assume nums and nums' are slices of length n with 1 <= n <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= nums'[i] <= 1000000. Let k satisfy 1 <= k <= 100000 and M = 1000000007."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumProduct.spec_11",
+    "negation": "AegisSpec.MaximumProduct.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever maximum_product(nums,k) returns r, there exist nonnegative integers d_0,...,d_{n-1} with sum_{i=0}^{n-1} d_i <= k such that product_{i=0}^{n-1} (nums[i] + d_i) is congruent to r modulo M.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumProduct.spec_12",
+    "negation": "AegisSpec.MaximumProduct.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let B = product_{i=0}^{n-1} nums[i] as an ordinary integer, and let P* be the maximum, over all nonnegative integer vectors d with sum_i d_i <= k, of product_{i=0}^{n-1} (nums[i] + d_i). Then P* > B. Consequently, if P* < M, then whenever maximum_product(nums,k) returns r, r = P* and r > B.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and 1 <= nums[i] <= 1000000 for every i with 0 <= i < n. Let M = 1000000007."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumProduct.spec_13",
+    "negation": "AegisSpec.MaximumProduct.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever maximum_product(nums,k) returns r, there exist nonnegative integers d_0,...,d_{n-1} with sum_{i=0}^{n-1} d_i <= k such that product_{i=0}^{n-1} (nums[i] + d_i) is congruent to r modulo M, and for every nonnegative integer vector e = (e_0,...,e_{n-1}) with sum_{i=0}^{n-1} e_i <= k, product_{i=0}^{n-1} (nums[i] + e_i) <= product_{i=0}^{n-1} (nums[i] + d_i).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 100000, 1 <= k <= 100000, and for every i with 0 <= i < n, 0 <= nums[i] <= 1000000. Let M = 1000000007."
+  }
+]

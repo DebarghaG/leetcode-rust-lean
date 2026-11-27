@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShortestPath.spec_1",
+    "negation": "AegisSpec.ShortestPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following holds. Let a walk be a finite sequence of cells p_0,...,p_L inside the grid such that p_0=(0,0), p_L=(m-1,n-1), and for every t with 0 <= t < L the cells p_t and p_{t+1} are orthogonally adjacent (the sum of the absolute row difference and absolute column difference is 1). The obstacle count of the walk is the number of distinct cells (i,j) with 0 <= i < m, 0 <= j < n, grid[i][j]=1, and p_t=(i,j) for some t. The walk is feasible if its obstacle count is at most k. Then r is the minimum length L over all feasible walks if at least one feasible walk exists, and r = -1 if no feasible walk exists.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShortestPath.spec_2",
+    "negation": "AegisSpec.ShortestPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result (Result.ok) for every valid input; it does not fail due to arithmetic overflow, out-of-bounds indexing, or panic. The returned value may be -1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShortestPath.spec_3",
+    "negation": "AegisSpec.ShortestPath.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or both 0 <= r and r <= m*n - 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShortestPath.spec_4",
+    "negation": "AegisSpec.ShortestPath.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r != -1 then r >= m + n - 2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShortestPath.spec_5",
+    "negation": "AegisSpec.ShortestPath.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r != -1, there exists a sequence p_0,...,p_r of cells inside the grid such that p_0=(0,0), p_r=(m-1,n-1), consecutive cells are orthogonally adjacent, and the number of distinct cells among p_0,...,p_r with grid value 1 is at most k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShortestPath.spec_6",
+    "negation": "AegisSpec.ShortestPath.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r != -1, every sequence p_0,...,p_L of cells inside the grid with p_0=(0,0), p_L=(m-1,n-1), consecutive cells orthogonally adjacent, and at most k distinct visited cells having grid value 1 satisfies L >= r.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShortestPath.spec_7",
+    "negation": "AegisSpec.ShortestPath.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if there is no sequence p_0,...,p_L of cells inside the grid with p_0=(0,0), p_L=(m-1,n-1), consecutive cells orthogonally adjacent, and at most k distinct visited cells having grid value 1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShortestPath.spec_8",
+    "negation": "AegisSpec.ShortestPath.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r != -1, every sequence p_0,...,p_r of cells inside the grid with p_0=(0,0), p_r=(m-1,n-1), consecutive cells orthogonally adjacent, and at most k distinct visited cells with grid value 1 has all its cells p_0,...,p_r pairwise distinct.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShortestPath.spec_9",
+    "negation": "AegisSpec.ShortestPath.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r with r != -1, r and m+n-2 have the same parity; equivalently, r - (m+n-2) is even.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShortestPath.spec_10",
+    "negation": "AegisSpec.ShortestPath.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c be the number of cells (i,j) with 0 <= i < m, 0 <= j < n and grid[i][j] = 1. If k >= c, then the function returns a result r and r = m+n-2.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ShortestPath.spec_11",
+    "negation": "AegisSpec.ShortestPath.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c be the number of columns j with 0 <= j < n and grid[0][j] = 1. The function returns a result r, and r = n-1 if c <= k, while r = -1 if c > k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n. In addition, m = 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ShortestPath.spec_12",
+    "negation": "AegisSpec.ShortestPath.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c be the number of rows i with 0 <= i < m and grid[i][0] = 1. The function returns a result r, and r = m-1 if c <= k, while r = -1 if c > k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n. In addition, n = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ShortestPath.spec_13",
+    "negation": "AegisSpec.ShortestPath.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = m+n-2 if and only if there exists a sequence p_0,...,p_{m+n-2} of cells inside the grid such that p_0=(0,0), p_{m+n-2}=(m-1,n-1), every step is either (i,j) to (i+1,j) or (i,j) to (i,j+1), and the number of distinct cells among p_0,...,p_{m+n-2} with grid value 1 is at most k.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ShortestPath.spec_14",
+    "negation": "AegisSpec.ShortestPath.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any two bounds k1 and k2 with 0 <= k1 <= k2 <= m*n, let r1 be the result of shortest_path(grid,k1) and r2 the result of shortest_path(grid,k2). Whenever both evaluations return results, if r1 != -1 then r2 != -1 and r2 <= r1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k1 <= k2 <= m*n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.ShortestPath.spec_15",
+    "negation": "AegisSpec.ShortestPath.spec_15_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r != -1, every sequence p_0,...,p_r of cells inside the grid with p_0=(0,0), p_r=(m-1,n-1), and consecutive cells orthogonally adjacent has exactly (r + m + n - 2)/2 steps t for which (row(p_{t+1}) + col(p_{t+1})) - (row(p_t) + col(p_t)) = 1, and exactly (r - (m + n - 2))/2 steps t for which this difference is -1. Here row(p) and col(p) denote the row and column indices of cell p.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Preconditions: 1 <= m, n <= 40; every row of grid has length n; grid[i][j] is 0 or 1 for every 0 <= i < m and 0 <= j < n; grid[0][0] = grid[m-1][n-1] = 0; and 0 <= k <= m*n."
+  }
+]

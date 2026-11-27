@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ShipWithinDays.spec_1",
+    "negation": "AegisSpec.ShipWithinDays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r. Define an integer capacity c to be feasible if there exist an integer k and indices 0 = p[0] < p[1] < ... < p[k] = len(weights) with 1 <= k <= days such that for every j with 1 <= j <= k, the sum of weights[i] over all i with p[j-1] <= i < p[j] is at most c. Then for every integer c in the range of Std.I64, capacity c is feasible if and only if r <= c.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ShipWithinDays.spec_2",
+    "negation": "AegisSpec.ShipWithinDays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r and does not fail, panic, overflow, or access an out-of-bounds index.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ShipWithinDays.spec_3",
+    "negation": "AegisSpec.ShipWithinDays.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, capacity r is feasible: there exist an integer k and indices 0 = p[0] < p[1] < ... < p[k] = len(weights) with 1 <= k <= days such that for every j with 1 <= j <= k, the sum of weights[i] over all i with p[j-1] <= i < p[j] is at most r.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ShipWithinDays.spec_4",
+    "negation": "AegisSpec.ShipWithinDays.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, no smaller capacity is feasible: for every integer c in the range of Std.I64 with c < r, there do not exist an integer k and indices 0 = p[0] < p[1] < ... < p[k] = len(weights) with 1 <= k <= days such that every block sum over p[j-1] <= i < p[j] is at most c.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ShipWithinDays.spec_5",
+    "negation": "AegisSpec.ShipWithinDays.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(weights), weights[i] <= r. Equivalently, r is at least the maximum package weight.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ShipWithinDays.spec_6",
+    "negation": "AegisSpec.ShipWithinDays.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r is at most the sum of all weights[i] for 0 <= i < len(weights).",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ShipWithinDays.spec_7",
+    "negation": "AegisSpec.ShipWithinDays.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, days * r is at least the sum of all weights[i] for 0 <= i < len(weights). Equivalently, r >= ceiling(total_weight / days), where total_weight is the sum of all weights[i].",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ShipWithinDays.spec_8",
+    "negation": "AegisSpec.ShipWithinDays.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= M * ceiling(len(weights) / days), where M is the maximum of weights[i] over 0 <= i < len(weights).",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ShipWithinDays.spec_9",
+    "negation": "AegisSpec.ShipWithinDays.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and days = 1, r equals the sum of all weights[i] for 0 <= i < len(weights).",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.ShipWithinDays.spec_10",
+    "negation": "AegisSpec.ShipWithinDays.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and days = len(weights), r equals the maximum of weights[i] over 0 <= i < len(weights).",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.ShipWithinDays.spec_11",
+    "negation": "AegisSpec.ShipWithinDays.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and there is an integer w such that weights[i] = w for every i with 0 <= i < len(weights), then r = w * ceiling(len(weights) / days).",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.ShipWithinDays.spec_12",
+    "negation": "AegisSpec.ShipWithinDays.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, there exist indices a and b with 0 <= a < b <= len(weights) such that r equals the sum of weights[i] over all i with a <= i < b.",
+    "preconditions": "1 <= days <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.ShipWithinDays.spec_13",
+    "negation": "AegisSpec.ShipWithinDays.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever ship_within_days(weights, d1) returns r1 and ship_within_days(weights, d2) returns r2, we have r2 <= r1.",
+    "preconditions": "For every weights and every d1 and d2 such that 1 <= d1 <= d2 <= len(weights) <= 50000, and for every i with 0 <= i < len(weights), 1 <= weights[i] <= 500."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.ShipWithinDays.spec_14",
+    "negation": "AegisSpec.ShipWithinDays.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever ship_within_days(weights, days) returns r and ship_within_days(rev, days) returns r_rev, we have r = r_rev.",
+    "preconditions": "For every weights and days satisfying 1 <= days <= len(weights) <= 50000 and every weights[i] in [1,500]; let rev be the array of length len(weights) with rev[i] = weights[len(weights)-1-i] for 0 <= i < len(weights)."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.ShipWithinDays.spec_15",
+    "negation": "AegisSpec.ShipWithinDays.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever ship_within_days(weights, days) returns r and ship_within_days(weights2, days) returns r2, we have r <= r2.",
+    "preconditions": "For every two arrays weights and weights2 of the same length n with 1 <= days <= n <= 50000, all entries of weights and weights2 in [1,500], and weights[i] <= weights2[i] for every i with 0 <= i < n."
+  }
+]

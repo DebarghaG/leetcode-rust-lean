@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinLength.spec_1",
+    "negation": "AegisSpec.MinLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For a byte array t of length n with t[i] in {48,49} for every 0 <= i < n, let R(t) be the maximum of b-a+1 over all integers a,b with 0 <= a <= b < n and t[i] = t[a] for every i with a <= i <= b. Let H(s,t) be the number of indices i with 0 <= i < n and s[i] != t[i]. The function returns a result r, i.e. min_length(s, numOps) = Result.ok r, such that r = min { R(t) | len(t)=n, t[i] in {48,49} for every i with 0 <= i < n, and H(s,t) <= numOps }.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinLength.spec_2",
+    "negation": "AegisSpec.MinLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function does not fail: there exists an integer r such that min_length(s, numOps) = Result.ok r.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinLength.spec_3",
+    "negation": "AegisSpec.MinLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 1 <= r <= n.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinLength.spec_4",
+    "negation": "AegisSpec.MinLength.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r equals the maximum of b-a+1 over all integers a,b with 0 <= a <= b < n and s[i] = s[a] for every i with a <= i <= b.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); numOps = 0 and 0 <= numOps <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinLength.spec_5",
+    "negation": "AegisSpec.MinLength.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); numOps = n and 0 <= numOps <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinLength.spec_6",
+    "negation": "AegisSpec.MinLength.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s). For b in {0,1}, define alt_b as the byte array of length n by alt_b[i] = 48+b if i is even, and alt_b[i] = 49-b if i is odd. Let H(s,alt_b) be the number of indices i with 0 <= i < n and s[i] != alt_b[i]. The returned value r satisfies r = 1 if and only if H(s,alt_0) <= numOps or H(s,alt_1) <= numOps.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinLength.spec_7",
+    "negation": "AegisSpec.MinLength.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(s). The returned value r equals n if and only if n = 1 or (numOps = 0 and for every i with 0 <= i < n, s[i] = s[0]).",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinLength.spec_8",
+    "negation": "AegisSpec.MinLength.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exists a byte array t of length n such that t[i] in {48,49} for every 0 <= i < n, the number of indices i with s[i] != t[i] is at most numOps, and R(t) = r, where R(t) is the maximum of b-a+1 over all 0 <= a <= b < n with t[i] = t[a] for every a <= i <= b.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinLength.spec_9",
+    "negation": "AegisSpec.MinLength.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every byte array t of length n with t[i] in {48,49} for every 0 <= i < n and with at most numOps indices i where s[i] != t[i], we have R(t) >= r, where R(t) is the maximum of b-a+1 over all 0 <= a <= b < n with t[i] = t[a] for every a <= i <= b.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinLength.spec_10",
+    "negation": "AegisSpec.MinLength.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r <= R(s), where R(s) is the maximum of b-a+1 over all 0 <= a <= b < n with s[i] = s[a] for every a <= i <= b.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinLength.spec_11",
+    "negation": "AegisSpec.MinLength.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result for budget numOps. For every integer k with numOps <= k <= n, if r_k is the result of min_length(s, k), then r_k <= r. In words, increasing the allowed number of flips cannot increase the minimum achievable longest equal-character run.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinLength.spec_12",
+    "negation": "AegisSpec.MinLength.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let comp(s) be the byte array of length n with comp(s)[i] = 49 if s[i] = 48, and comp(s)[i] = 48 if s[i] = 49. If the function returns r for s, then min_length(comp(s), numOps) also returns r.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinLength.spec_13",
+    "negation": "AegisSpec.MinLength.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte array of length n with rev(s)[i] = s[n-1-i]. If the function returns r for s, then min_length(rev(s), numOps) also returns r.",
+    "preconditions": "Let n = len(s). 1 <= n <= 1000; for every i with 0 <= i < n, s[i] is either 48 (character '0') or 49 (character '1'); 0 <= numOps <= n."
+  }
+]

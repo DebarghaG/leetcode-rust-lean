@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinChanges.spec_1",
+    "negation": "AegisSpec.MinChanges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_changes(nums, k) returns a result r, r is the minimum, over all arrays b of length n of 64-bit integers satisfying: for every left with 0 <= left <= n-k, the XOR of b[left], b[left+1], ..., b[left+k-1] is 0, of the number of indices i with 0 <= i < n and b[i] != nums[i].",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinChanges.spec_2",
+    "negation": "AegisSpec.MinChanges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, there exists a 64-bit integer r such that min_changes(nums, k) returns the successful result `ok r`; in particular, the call never returns an error.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinChanges.spec_3",
+    "negation": "AegisSpec.MinChanges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_changes(nums, k) returns a result r, 0 <= r <= len(nums).",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinChanges.spec_4",
+    "negation": "AegisSpec.MinChanges.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_changes(nums, k) returns a result r, there exists an array b of length n of 64-bit integers such that every length-k contiguous segment of b has XOR equal to 0, and exactly r indices i with 0 <= i < n satisfy b[i] != nums[i].",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinChanges.spec_5",
+    "negation": "AegisSpec.MinChanges.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_changes(nums, k) returns a result r, every array b of length n of 64-bit integers whose every length-k contiguous segment has XOR equal to 0 satisfies: the number of indices i with 0 <= i < n and b[i] != nums[i] is at least r.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinChanges.spec_6",
+    "negation": "AegisSpec.MinChanges.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_changes(nums, k) returns a result r, there exist integers c_0, ..., c_{k-1} such that c_0 XOR c_1 XOR ... XOR c_{k-1} = 0 and the array b of length n defined by b[i] = c_(i mod k) for every 0 <= i < n has exactly r indices i with b[i] != nums[i]. Moreover, every array defined this way from such c_0, ..., c_{k-1} has XOR 0 on every length-k contiguous segment.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinChanges.spec_7",
+    "negation": "AegisSpec.MinChanges.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_changes(nums, 1) returns a result r, r is the number of indices i with 0 <= i < len(nums) and nums[i] != 0.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, 0 <= nums[i] < 1024 for every i with 0 <= i < n, and k = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinChanges.spec_8",
+    "negation": "AegisSpec.MinChanges.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let X = nums[0] XOR nums[1] XOR ... XOR nums[n-1]. Whenever min_changes(nums, k) returns a result r, r = 0 if X = 0, and r = 1 if X != 0.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, 0 <= nums[i] < 1024 for every i with 0 <= i < n, and k = n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinChanges.spec_9",
+    "negation": "AegisSpec.MinChanges.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_changes(nums, k) returns a result r, r = 0.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, 0 <= nums[i] < 1024 for every i with 0 <= i < n, and nums itself already satisfies: every contiguous segment of length k has XOR equal to 0."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinChanges.spec_10",
+    "negation": "AegisSpec.MinChanges.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_changes(nums, k) returns a result r: if c = 0 or k is even, then r = 0; if c != 0 and k is odd, then r = floor(n / k).",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, 0 <= nums[i] < 1024 for every i with 0 <= i < n, and there exists an integer c such that nums[i] = c for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinChanges.spec_11",
+    "negation": "AegisSpec.MinChanges.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For each a with 0 <= a < k, let M_a be the maximum, over all integers v, of the number of indices i such that 0 <= i < n, i mod k = a, and nums[i] = v. Whenever min_changes(nums, k) returns a result r, r >= n - (M_0 + M_1 + ... + M_{k-1}).",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinChanges.spec_12",
+    "negation": "AegisSpec.MinChanges.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M be the maximum, over all integers v, of the number of indices i with 0 <= i < n and nums[i] = v. Whenever min_changes(nums, k) returns a result r, r = n - M.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, 0 <= nums[i] < 1024 for every i with 0 <= i < n, and k = 2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinChanges.spec_13",
+    "negation": "AegisSpec.MinChanges.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length n defined by rev[i] = nums[n-1-i] for 0 <= i < n. Whenever min_changes(nums, k) returns r and min_changes(rev, k) returns r_rev, we have r = r_rev.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinChanges.spec_14",
+    "negation": "AegisSpec.MinChanges.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every a with 0 <= a < k, the multiset of values nums[i] over indices i with 0 <= i < n and i mod k = a equals the multiset of values nums2[i] over the same residue class. Whenever min_changes(nums, k) returns r and min_changes(nums2, k) returns r2, we have r = r2.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n. Let nums2 be any array of length n with 0 <= nums2[i] < 1024 for every 0 <= i < n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinChanges.spec_15",
+    "negation": "AegisSpec.MinChanges.spec_15_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever min_changes(nums, k) returns a result r, there exists an array b of length n such that every length-k contiguous segment of b has XOR equal to 0, exactly r indices i satisfy b[i] != nums[i], and 0 <= b[i] < 1024 for every 0 <= i < n.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MinChanges.spec_16",
+    "negation": "AegisSpec.MinChanges.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever min_changes(nums, k) returns a result r, r = 0 if and only if the original array nums already satisfies: every contiguous segment of length k has XOR equal to 0.",
+    "preconditions": "Let n = len(nums). 1 <= k <= n, n <= 2000, and 0 <= nums[i] < 1024 for every i with 0 <= i < n."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxCoins.spec_1",
+    "negation": "AegisSpec.MaxCoins.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "A burst order is a permutation p of {0,...,n-1}, written p[0],...,p[n-1] in the order the balloons are burst. For 0 <= k < n let remaining_k = {p[k], p[k+1], ..., p[n-1]}. Define left_k = nums[j] for the largest j in remaining_k with j < p[k], and left_k = 1 if no such j exists. Define right_k = nums[j] for the smallest j in remaining_k with j > p[k], and right_k = 1 if no such j exists. Let total(p) = sum_{k=0}^{n-1} left_k * nums[p[k]] * right_k. Then max_coins(nums) returns a result r and r = max { total(p) : p is a permutation of {0,...,n-1} }.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxCoins.spec_2",
+    "negation": "AegisSpec.MaxCoins.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying these preconditions, max_coins(nums) returns a result r and does not fail by panic, out-of-bounds access, or 64-bit arithmetic overflow.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxCoins.spec_3",
+    "negation": "AegisSpec.MaxCoins.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_coins(nums) returns a result r, r >= sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxCoins.spec_4",
+    "negation": "AegisSpec.MaxCoins.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max_{0 <= i < n} nums[i] and S = sum_{i=0}^{n-1} nums[i]. Whenever max_coins(nums) returns a result r, r <= M^2 * S.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxCoins.spec_5",
+    "negation": "AegisSpec.MaxCoins.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_coins(nums) returns a result r, r >= max { nums[i] * nums[j] : 0 <= i < j < n }.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxCoins.spec_6",
+    "negation": "AegisSpec.MaxCoins.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_coins(nums) returns a result r, r >= max { nums[i] * nums[j] * nums[k] : 0 <= i < j < k < n }.",
+    "preconditions": "Let n = len(nums). Assume 3 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxCoins.spec_7",
+    "negation": "AegisSpec.MaxCoins.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_coins(a) returns a result r_a and max_coins(b) returns a result r_b, r_a <= r_b.",
+    "preconditions": "Let a and b be slices of the same length n with 1 <= n <= 300, and for every i with 0 <= i < n, 0 <= a[i] <= b[i] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxCoins.spec_8",
+    "negation": "AegisSpec.MaxCoins.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the slice of length n defined by rev[i] = nums[n-1-i] for 0 <= i < n. Whenever max_coins(nums) returns a result r and max_coins(rev) returns a result r_rev, r = r_rev.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxCoins.spec_9",
+    "negation": "AegisSpec.MaxCoins.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let pos be the subsequence of nums consisting exactly of the entries nums[i] with nums[i] > 0, in their original order. Whenever max_coins(nums) returns a result r: if pos is empty then r = 0; if pos is nonempty and max_coins(pos) returns a result r_pos, then r = r_pos.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxCoins.spec_10",
+    "negation": "AegisSpec.MaxCoins.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_coins(nums) returns a result r and max_coins(nums') returns a result r', r' >= r.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 299, for every i with 0 <= i < n, 0 <= nums[i] <= 100, let x satisfy 0 <= x <= 100, and let k satisfy 0 <= k <= n. Let nums' be the slice of length n+1 obtained by inserting x at position k, so nums'[i] = nums[i] for i < k, nums'[k] = x, and nums'[i] = nums[i-1] for i > k."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxCoins.spec_11",
+    "negation": "AegisSpec.MaxCoins.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_coins(nums) returns a result r, r = nums[0].",
+    "preconditions": "len(nums) = 1 and 0 <= nums[0] <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxCoins.spec_12",
+    "negation": "AegisSpec.MaxCoins.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_coins(nums) returns a result r, r = sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, nums[i] = 0 or nums[i] = 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxCoins.spec_13",
+    "negation": "AegisSpec.MaxCoins.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_coins(nums) returns a result r, r = nums[k].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300, for every i with 0 <= i < n, 0 <= nums[i] <= 100, and there exists exactly one index k with 0 <= k < n such that nums[k] > 0."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxCoins.spec_14",
+    "negation": "AegisSpec.MaxCoins.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_coins(nums) returns a result r, r = a * b + max(a, b).",
+    "preconditions": "len(nums) = 2, nums[0] = a, nums[1] = b, and 0 <= a <= 100, 0 <= b <= 100."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxCoins.spec_15",
+    "negation": "AegisSpec.MaxCoins.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_coins(nums) returns a result r, r >= max { nums[i] * nums[j] + max(nums[i], nums[j]) : 0 <= i < j < n }.",
+    "preconditions": "Let n = len(nums). Assume 2 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxCoins.spec_16",
+    "negation": "AegisSpec.MaxCoins.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_coins(nums) returns a result r and max_coins(sub) returns a result r_sub, r >= r_sub.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 300 and for every i with 0 <= i < n, 0 <= nums[i] <= 100. Let sub be a nonempty slice formed by a subsequence of nums in the same order, so len(sub) >= 1."
+  }
+]

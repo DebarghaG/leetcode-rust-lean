@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ValidStrings.spec_1",
+    "negation": "AegisSpec.ValidStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever valid_strings(n) returns a result r, r is exactly the collection of all valid binary strings of length n, in some order. More precisely, call a byte vector s a valid binary string of length n when: len(s) = n; every byte s[i] with 0 <= i < len(s) is either 48 ('0') or 49 ('1'); and for every i with 0 <= i < len(s)-1, it is not the case that s[i] = 48 and s[i+1] = 48. Then: (1) every element s of r is a valid binary string of length n; (2) every valid binary string s of length n occurs exactly once in r, meaning there is exactly one index k with 0 <= k < len(r) and r[k] = s.",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ValidStrings.spec_2",
+    "negation": "AegisSpec.ValidStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "valid_strings(n) returns a result r; in particular, it does not panic, overflow, or otherwise fail.",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ValidStrings.spec_3",
+    "negation": "AegisSpec.ValidStrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever valid_strings(n) returns a result r, len(r) = F(n+2), where F is the Fibonacci sequence defined by F(1)=1, F(2)=1, and F(k)=F(k-1)+F(k-2) for k >= 3. Equivalently, len(r) is the number of byte vectors s with len(s)=n, every byte equal to 48 or 49, and no two consecutive bytes both equal to 48.",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ValidStrings.spec_4",
+    "negation": "AegisSpec.ValidStrings.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever valid_strings(n) returns a result r, r has no duplicate elements: for every i and j with 0 <= i < j < len(r), r[i] != r[j].",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ValidStrings.spec_5",
+    "negation": "AegisSpec.ValidStrings.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever valid_strings(n) returns a result r, every element s of r is a valid binary string of length n: len(s)=n; every byte s[i] with 0 <= i < len(s) is 48 or 49; and for every i with 0 <= i < len(s)-1, not (s[i]=48 and s[i+1]=48).",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ValidStrings.spec_6",
+    "negation": "AegisSpec.ValidStrings.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever valid_strings(n) returns a result r, every valid binary string s of length n occurs at least once in r. Here 'valid binary string of length n' means len(s)=n, every byte of s is 48 or 49, and no two consecutive bytes of s are both 48.",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ValidStrings.spec_7",
+    "negation": "AegisSpec.ValidStrings.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever valid_strings(n) returns a result r, for every element s of r, the reverse vector rev(s), defined by len(rev(s))=len(s) and rev(s)[i]=s[len(s)-1-i] for all 0 <= i < len(s), also occurs exactly once in r.",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ValidStrings.spec_8",
+    "negation": "AegisSpec.ValidStrings.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever valid_strings(n) returns a result r, every element s of r has at most (n+1) div 2 occurrences of the byte 48 ('0').",
+    "preconditions": "n is an integer with 1 <= n <= 18."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ValidStrings.spec_9",
+    "negation": "AegisSpec.ValidStrings.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever valid_strings(n) returns a result r and valid_strings(n-1) returns a result rprev, for every element s of r, the prefix of s of length n-1 is an element of rprev, and the suffix of s of length n-1 is an element of rprev. Here the prefix of s of length k is the vector t with len(t)=k and t[i]=s[i] for 0 <= i < k; the suffix of s of length k is the vector u with len(u)=k and u[i]=s[len(s)-k+i] for 0 <= i < k.",
+    "preconditions": "n is an integer with 2 <= n <= 18."
+  }
+]

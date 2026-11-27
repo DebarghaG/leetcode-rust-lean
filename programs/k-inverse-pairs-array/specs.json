@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.KInversePairs.spec_1",
+    "negation": "AegisSpec.KInversePairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let MOD = 1000000007. Let P(n,k) be the number of arrays a of length n such that a is a permutation of {1,2,...,n} (every integer from 1 to n occurs exactly once among a[0],...,a[n-1]) and the number of inverse pairs (i,j) with 0 <= i < j < n and a[i] > a[j] is exactly k. Whenever k_inverse_pairs(n,k) returns a result r, r is an integer satisfying 0 <= r < MOD and r ≡ P(n,k) (mod MOD).",
+    "preconditions": "1 <= n <= 1000 and 0 <= k <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.KInversePairs.spec_2",
+    "negation": "AegisSpec.KInversePairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every n and k with 1 <= n <= 1000 and 0 <= k <= 1000, the call k_inverse_pairs(n,k) returns a result (it does not fail, overflow, panic, or get stuck).",
+    "preconditions": "1 <= n <= 1000 and 0 <= k <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.KInversePairs.spec_3",
+    "negation": "AegisSpec.KInversePairs.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_inverse_pairs(n,0) returns a result r, r = 1.",
+    "preconditions": "1 <= n <= 1000 and k = 0."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.KInversePairs.spec_4",
+    "negation": "AegisSpec.KInversePairs.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_inverse_pairs(n,1) returns a result r, r = n - 1.",
+    "preconditions": "1 <= n <= 1000 and k = 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.KInversePairs.spec_5",
+    "negation": "AegisSpec.KInversePairs.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_inverse_pairs(n,k) returns a result r, r = 0.",
+    "preconditions": "1 <= n <= 1000, 0 <= k <= 1000, and k > n*(n-1)/2."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.KInversePairs.spec_6",
+    "negation": "AegisSpec.KInversePairs.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_inverse_pairs(n,k) returns a result r, r = 1.",
+    "preconditions": "1 <= n <= 1000, n*(n-1)/2 <= 1000, and k = n*(n-1)/2."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.KInversePairs.spec_7",
+    "negation": "AegisSpec.KInversePairs.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let M = n*(n-1)/2. Whenever k_inverse_pairs(n,k) returns r and k_inverse_pairs(n,M-k) returns s, r = s.",
+    "preconditions": "1 <= n <= 1000, 0 <= k <= 1000, and 0 <= n*(n-1)/2 - k <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.KInversePairs.spec_8",
+    "negation": "AegisSpec.KInversePairs.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = n*(n-1)/2. For each integer t with 0 <= t <= M, let f(t) be the result returned by k_inverse_pairs(n,t). Then (Σ_{t=0}^{M} f(t)) mod 1000000007 = (n!) mod 1000000007.",
+    "preconditions": "1 <= n <= 1000 and n*(n-1)/2 <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.KInversePairs.spec_9",
+    "negation": "AegisSpec.KInversePairs.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P(n,k) be the number of permutations a of {1,2,...,n} (arrays of length n containing each of 1,2,...,n exactly once) with exactly k inverse pairs (i,j) where 0 <= i < j < n and a[i] > a[j]. Whenever k_inverse_pairs(n,k) returns a result r, r = P(n,k) as an ordinary integer (not merely a congruence modulo 1000000007).",
+    "preconditions": "1 <= n <= 12 and 0 <= k <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.KInversePairs.spec_10",
+    "negation": "AegisSpec.KInversePairs.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever k_inverse_pairs(n,M-1) returns a result r, r = n - 1.",
+    "preconditions": "2 <= n <= 1000, M = n*(n-1)/2, and 0 <= M-1 <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.KInversePairs.spec_11",
+    "negation": "AegisSpec.KInversePairs.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let f(m,t) denote the result returned by k_inverse_pairs(m,t) when 0 <= t <= 1000, and define f(m,t)=0 when t < 0. Then f(n,k) ≡ Σ_{i=0}^{min(k,n-1)} f(n-1,k-i) (mod 1000000007).",
+    "preconditions": "2 <= n <= 1000 and 0 <= k <= 1000."
+  }
+]

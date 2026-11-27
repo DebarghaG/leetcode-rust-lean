@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximizeSum.spec_1",
+    "negation": "AegisSpec.MaximizeSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = k*M + (k*(k-1))/2, where M is the maximum value in nums: there exists p with 0 <= p < len(nums) such that nums[p] = M and nums[i] <= M for every 0 <= i < len(nums).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100, 1 <= k <= 100, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximizeSum.spec_2",
+    "negation": "AegisSpec.MaximizeSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not panic or overflow for any input satisfying the preconditions.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100, 1 <= k <= 100, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximizeSum.spec_3",
+    "negation": "AegisSpec.MaximizeSum.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r and there exists an index p with 0 <= p < len(nums) such that nums[i] <= nums[p] for every 0 <= i < len(nums), and r = sum_{j=0}^{k-1} (nums[p] + j).",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100, 1 <= k <= 100, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximizeSum.spec_4",
+    "negation": "AegisSpec.MaximizeSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and, for every choice of nonnegative integers t_0, ..., t_{len(nums)-1} satisfying sum_{i=0}^{len(nums)-1} t_i = k, we have sum_{i=0}^{len(nums)-1} ( t_i*nums[i] + (t_i*(t_i-1))/2 ) <= r.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100, 1 <= k <= 100, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximizeSum.spec_5",
+    "negation": "AegisSpec.MaximizeSum.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For admissible nums and k with 1 <= k < 100, if maximize_sum nums k = Result.ok r and maximize_sum nums (k+1) = Result.ok r', then r' = r + M + k, where M is the maximum value in nums.",
+    "preconditions": "len(nums) >= 1, len(nums) <= 100, 1 <= k < 100, and for every i with 0 <= i < len(nums), 1 <= nums[i] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximizeSum.spec_6",
+    "negation": "AegisSpec.MaximizeSum.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If maximize_sum nums k = Result.ok r and maximize_sum nums' k = Result.ok r', then r = r'.",
+    "preconditions": "nums and nums' are nonempty slices, each of length at most 100; 1 <= k <= 100; every element of nums and of nums' lies in [1,100]; and max(nums) = max(nums')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximizeSum.spec_7",
+    "negation": "AegisSpec.MaximizeSum.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If maximize_sum nums k = Result.ok r and maximize_sum nums' k = Result.ok r', then r' = r + k*c.",
+    "preconditions": "nums and nums' are nonempty slices of the same length at most 100; 1 <= k <= 100; every element of both slices lies in [1,100]; and there is an integer c such that nums'[i] = nums[i] + c for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximizeSum.spec_8",
+    "negation": "AegisSpec.MaximizeSum.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If maximize_sum nums k = Result.ok r and maximize_sum nums' k = Result.ok r', then r' = c*r - (c-1)*(k*(k-1))/2.",
+    "preconditions": "nums and nums' are nonempty slices of the same length at most 100; 1 <= k <= 100; every element of both slices lies in [1,100]; and there is an integer c >= 1 such that nums'[i] = c*nums[i] for every 0 <= i < len(nums)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximizeSum.spec_9",
+    "negation": "AegisSpec.MaximizeSum.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If maximize_sum nums k = Result.ok r and maximize_sum nums' k = Result.ok r', then r < r'.",
+    "preconditions": "nums and nums' are nonempty slices, each of length at most 100; 1 <= k <= 100; every element of both slices lies in [1,100]; and max(nums) < max(nums')."
+  }
+]

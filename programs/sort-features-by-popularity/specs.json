@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SortFeatures.spec_1",
+    "negation": "AegisSpec.SortFeatures.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let pop(f), for any byte array f, be the number of indices j with 0 <= j < len(responses) such that f occurs as a space-delimited word in responses[j]; a space-delimited word is a maximal contiguous block of non-space bytes (32 is space), and if f occurs more than once in the same responses[j] it still contributes only 1. The function returns a result r such that: (1) len(r) = len(features); (2) for every j with 0 <= j < len(features) there is exactly one i with 0 <= i < len(r) for which r[i] is byte-for-byte equal to features[j]; and (3) for every i with 0 <= i+1 < len(r), either pop(r[i]) > pop(r[i+1]), or pop(r[i]) = pop(r[i+1]) and the unique index j with r[i] = features[j] is less than the unique index k with r[i+1] = features[k].",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SortFeatures.spec_2",
+    "negation": "AegisSpec.SortFeatures.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access an out-of-bounds index on any input satisfying the preconditions.",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SortFeatures.spec_3",
+    "negation": "AegisSpec.SortFeatures.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every byte array x, the number of indices i with 0 <= i < len(r) and r[i] byte-for-byte equal to x equals the number of indices j with 0 <= j < len(features) and features[j] byte-for-byte equal to x.",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SortFeatures.spec_4",
+    "negation": "AegisSpec.SortFeatures.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every output position i with 0 <= i < len(r) and every response index j with 0 <= j < len(responses), if r[i] occurs as a space-delimited word in responses[j], then responses[j] contributes exactly 1 to the popularity of r[i], even if r[i] occurs two or more times as a word in responses[j]; it never contributes more than 1 from the same response.",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SortFeatures.spec_5",
+    "negation": "AegisSpec.SortFeatures.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every output position i with 0 <= i < len(r) and every response index j with 0 <= j < len(responses), responses[j] contributes to the popularity of r[i] if and only if r[i] is byte-for-byte equal to one complete space-delimited word of responses[j], where a word is a maximal contiguous block of bytes different from space (32). In particular, an occurrence of r[i] only as a proper contiguous substring of a longer word (for example 'lock' inside 'locker') contributes 0.",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SortFeatures.spec_6",
+    "negation": "AegisSpec.SortFeatures.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair i,k with 0 <= i < k < len(r), pop(r[i]) >= pop(r[k]), where pop(f) for a byte array f is the number of indices j with 0 <= j < len(responses) such that f occurs as a space-delimited word in responses[j] (repeated occurrences in one response count once).",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SortFeatures.spec_7",
+    "negation": "AegisSpec.SortFeatures.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every pair i,k with 0 <= i < k < len(r), if pop(r[i]) = pop(r[k]), then the unique index j with 0 <= j < len(features) and features[j] = r[i] is less than the unique index l with 0 <= l < len(features) and features[l] = r[k], where pop(f) is the number of responses containing f as a space-delimited word (repeated occurrences in one response count once).",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SortFeatures.spec_8",
+    "negation": "AegisSpec.SortFeatures.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns Ok r and len(r) > 0, there exists p with 0 <= p < len(features) such that features[p] = r[0], and for every j with 0 <= j < len(features), pop(r[0]) >= pop(features[j]) and (if pop(features[j]) = pop(r[0]) then p <= j), where pop(f) is the number of responses containing f as a space-delimited word (repeated occurrences in one response count once).",
+    "preconditions": "features is a slice of byte-array strings and responses is a slice of byte-array strings. 1 <= len(features) <= 10^4. For every i with 0 <= i < len(features), 1 <= len(features[i]) <= 10, every byte of features[i] is an ASCII lowercase letter (97..122), and no two entries of features are equal as byte arrays. 1 <= len(responses) <= 10^2. For every j with 0 <= j < len(responses), 1 <= len(responses[j]) <= 10^3, every byte of responses[j] is either an ASCII lowercase letter or a space (32), responses[j] has no leading space, no trailing space, and no two consecutive spaces."
+  }
+]

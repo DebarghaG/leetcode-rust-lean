@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxPower.spec_1",
+    "negation": "AegisSpec.MaxPower.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, the following hold. (a) r >= 1. (b) There exist integers l with 0 <= l and l + r <= len(s) such that s[j] = s[l] for every j with l <= j < l + r. (c) For every l and L with 0 <= l, 1 <= L, and l + L <= len(s), if s[j] = s[l] for every j with l <= j < l + L, then L <= r. Equivalently, r is the maximum length of a non-empty contiguous substring of s whose bytes are all equal.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxPower.spec_2",
+    "negation": "AegisSpec.MaxPower.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r <= len(s).",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxPower.spec_3",
+    "negation": "AegisSpec.MaxPower.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists an index l such that 0 <= l, l + r <= len(s), s[j] = s[l] for every j with l <= j < l + r, and the block is maximal: either l = 0 or s[l-1] != s[l], and either l + r = len(s) or s[l+r] != s[l]. Thus r is the length of some maximal run of equal consecutive bytes.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxPower.spec_4",
+    "negation": "AegisSpec.MaxPower.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every l and L with 0 <= l, 1 <= L, and l + L <= len(s), if s[j] = s[l] for every j with l <= j < l + L, then L <= r. In other words, no constant contiguous substring of s is longer than r.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxPower.spec_5",
+    "negation": "AegisSpec.MaxPower.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if and only if for every i with 0 <= i < len(s) - 1, s[i] != s[i+1].",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxPower.spec_6",
+    "negation": "AegisSpec.MaxPower.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every k with 1 <= k <= r there exists an index l such that 0 <= l, l + k <= len(s), and s[j] = s[l] for every j with l <= j < l + k. Thus every length from 1 through r occurs as a constant contiguous substring.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxPower.spec_7",
+    "negation": "AegisSpec.MaxPower.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s with len(s) >= 2 and s[len(s)-2] != s[len(s)-1], if the function returns r on s and r' on the prefix slice s[0:len(s)-1], then r = r'.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxPower.spec_8",
+    "negation": "AegisSpec.MaxPower.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every slice t satisfying 1 <= len(t) <= 500 and 97 <= t[i] <= 122 for all i with 0 <= i < len(t), if len(t) = len(s) and t[i] = s[len(s)-1-i] for every i with 0 <= i < len(s), and if the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxPower.spec_9",
+    "negation": "AegisSpec.MaxPower.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every bijection f from the set {97,98,...,122} to itself, let t be the slice with len(t) = len(s) and t[i] = f(s[i]) for every i with 0 <= i < len(s). If the function returns r on s and r' on t, then r = r'.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxPower.spec_10",
+    "negation": "AegisSpec.MaxPower.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result for every input satisfying the preconditions; it does not fail due to overflow, out-of-bounds indexing, or panic.",
+    "preconditions": "1 <= len(s) <= 500 and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

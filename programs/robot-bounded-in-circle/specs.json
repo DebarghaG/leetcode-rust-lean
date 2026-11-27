@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsRobotBounded.spec_1",
+    "negation": "AegisSpec.IsRobotBounded.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true if and only if there exists a nonnegative real number R such that, in the infinite execution starting at (0,0) facing north where at time t >= 0 the robot executes instructions[t mod len(instructions)], every reached position (x_t, y_t) satisfies x_t^2 + y_t^2 <= R^2. In other words, r = true exactly when the robot never leaves some circle in the plane.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsRobotBounded.spec_2",
+    "negation": "AegisSpec.IsRobotBounded.spec_2_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let (X,Y) be the position after executing instructions once from (0,0) facing north, and let F be the facing after that one pass. Whenever the function returns a result r, r = true if and only if (X = 0 and Y = 0) or F is not north.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsRobotBounded.spec_3",
+    "negation": "AegisSpec.IsRobotBounded.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every instructions satisfying the preconditions, the function returns a result (it does not fail, panic, or overflow).",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsRobotBounded.spec_4",
+    "negation": "AegisSpec.IsRobotBounded.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If instructions[i] is not 'G' for every i with 0 <= i < len(instructions) (that is, the input contains only 'L' and 'R'), then whenever the function returns a result r, r = true.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsRobotBounded.spec_5",
+    "negation": "AegisSpec.IsRobotBounded.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If instructions[i] = 'G' for every i with 0 <= i < len(instructions), then whenever the function returns a result r, r = false.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsRobotBounded.spec_6",
+    "negation": "AegisSpec.IsRobotBounded.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer k with 0 <= k < len(instructions), let rot be the slice of length len(instructions) defined by rot[i] = instructions[(i+k) mod len(instructions)] for 0 <= i < len(instructions). Whenever the function returns r on instructions and r' on rot, we have r = r'.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsRobotBounded.spec_7",
+    "negation": "AegisSpec.IsRobotBounded.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every pair of byte slices u and v with instructions = u ++ v, and for c equal to the two-byte slice 'LR' or the two-byte slice 'RL', if u ++ c ++ v also has length at most 100 (and therefore satisfies the same instruction constraints), then whenever the function returns r on u ++ v and r' on u ++ c ++ v, we have r = r'.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsRobotBounded.spec_8",
+    "negation": "AegisSpec.IsRobotBounded.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte slice s containing only 'L' and 'R' such that the number of 'L' bytes in s minus the number of 'R' bytes in s is divisible by 4, and such that len(instructions) + len(s) <= 100, whenever the function returns r on instructions and r' on instructions ++ s, we have r = r'.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsRobotBounded.spec_9",
+    "negation": "AegisSpec.IsRobotBounded.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with r = true, the set of positions { (x_t, y_t) : t >= 0 } reached in the infinite execution (where at time t >= 0 the robot executes instructions[t mod len(instructions)] from the initial state (0,0) facing north) is finite.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsRobotBounded.spec_10",
+    "negation": "AegisSpec.IsRobotBounded.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let (X,Y) be the position and F the facing after executing instructions once from (0,0) facing north. If F is north and (X,Y) is not (0,0), then whenever the function returns a result r, r = false, and for every integer k >= 0 the position after exactly k*len(instructions) executed instructions is (k*X, k*Y) with facing north; hence for every real R there exists k with k*sqrt(X^2 + Y^2) > R.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsRobotBounded.spec_11",
+    "negation": "AegisSpec.IsRobotBounded.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, every position (x_t, y_t) reached in the infinite execution satisfies x_t^2 + y_t^2 <= (4*len(instructions))^2.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsRobotBounded.spec_12",
+    "negation": "AegisSpec.IsRobotBounded.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let L be the number of indices i with instructions[i] = 'L', and let R be the number of indices i with instructions[i] = 'R'. Whenever the function returns a result r, r = true if and only if (L - R) is not divisible by 4.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'. Also, exactly one index i has instructions[i] = 'G'."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsRobotBounded.spec_13",
+    "negation": "AegisSpec.IsRobotBounded.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let swap(instructions) be the slice obtained by replacing every 'L' with 'R', every 'R' with 'L', and leaving every 'G' unchanged. Whenever the function returns r on instructions and r' on swap(instructions), we have r = r'.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsRobotBounded.spec_14",
+    "negation": "AegisSpec.IsRobotBounded.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail), and r = true if and only if after exactly 4*len(instructions) executed instructions the robot is again at (0,0) facing north.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.IsRobotBounded.spec_15",
+    "negation": "AegisSpec.IsRobotBounded.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r = true, the set { (x_t, y_t) : t >= 0 } of positions at instruction boundaries has at most 4*len(instructions) distinct elements.",
+    "preconditions": "instructions is a slice of bytes with 1 <= len(instructions) <= 100, and for every i with 0 <= i < len(instructions), instructions[i] is the ASCII code of 'G', 'L', or 'R'."
+  }
+]

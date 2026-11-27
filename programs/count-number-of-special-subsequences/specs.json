@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_1",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Let N be the number of sets I subset of {0,...,len(nums)-1} such that, when the elements of I are written in increasing order as i_1 < ... < i_k, there exist positive integers p,q,s with k = p+q+s and: nums[i_j] = 0 for 1 <= j <= p; nums[i_j] = 1 for p < j <= p+q; nums[i_j] = 2 for p+q < j <= p+q+s. The function returns a result r (it does not fail) and r = N mod M.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_2",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail (no panic, out-of-bounds access, or 64-bit overflow occurs).",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_3",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r < M, where M = 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_4",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let z = #{i | 0 <= i < len(nums) and nums[i]=0}, o = #{i | 0 <= i < len(nums) and nums[i]=1}, and t = #{i | 0 <= i < len(nums) and nums[i]=2}. The function returns a result r and r <= (2^z - 1)*(2^o - 1)*(2^t - 1). Here the right-hand side is an ordinary mathematical integer, not evaluated with 64-bit wrap-around.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_5",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. There exists v in {0,1,2} such that for every i with 0 <= i < len(nums), nums[i] != v."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_6",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 if nums[0]=0 and nums[1]=1 and nums[2]=2, and r = 0 otherwise.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. len(nums) = 3."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_7",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let z, o, t be the numbers of occurrences of 0, 1, 2 in nums, respectively. The function returns a result r and r = ((2^z - 1)*(2^o - 1)*(2^t - 1)) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. For every i,j with 0 <= i < j < len(nums), nums[i] <= nums[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_8",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let a be the smallest index with nums[a]=0 and b be the largest index with nums[b]=2. If a < b, then the function returns r and r = count_special_subsequences(nums[a..b]), where nums[a..b] is the slice containing exactly the indices a,a+1,...,b inclusive. If a > b, then the function returns r and r = 0.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. There exists i with nums[i]=0 and there exists i with nums[i]=2."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_9",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let t = #{k | b < k < len(nums) and nums[k]=2}. The function returns a result r and r = (2^t - 1) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. There is exactly one index a with nums[a]=0, there is exactly one index b with nums[b]=1, and a < b."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_10",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let z = #{i | 0 <= i < b and nums[i]=0}. The function returns a result r and r = (2^z - 1) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. There is exactly one index b with nums[b]=1, there is exactly one index c with nums[c]=2, and b < c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountSpecialSubsequences.spec_11",
+    "negation": "AegisSpec.CountSpecialSubsequences.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let o = #{i | a < i < c and nums[i]=1}. The function returns a result r and r = (2^o - 1) mod 1000000007.",
+    "preconditions": "1 <= len(nums) <= 100000 and for every i with 0 <= i < len(nums), nums[i] in {0,1,2}. There is exactly one index a with nums[a]=0, there is exactly one index c with nums[c]=2, and a < c."
+  }
+]

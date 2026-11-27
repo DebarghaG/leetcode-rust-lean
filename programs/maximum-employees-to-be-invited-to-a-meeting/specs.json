@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumInvitations.spec_1",
+    "negation": "AegisSpec.MaximumInvitations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the largest integer k for which there exists a set S of employees with S subset of {0,...,n-1}, |S| = k, and a circular seating of S such that every x in S has favorite[x] in S and adjacent to x. A circular seating of a finite set S is a bijection seat : S -> {0,...,|S|-1}; for |S| >= 3, two employees x and y are adjacent iff seat(y) = (seat(x)+1) mod |S| or seat(y) = (seat(x)-1) mod |S|; for |S| = 2 the two employees are adjacent to each other; for |S| = 1 no two distinct employees are adjacent. The maximum is over all such S, including the empty set, but the empty set never affects the value because at least two employees can always be seated.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumInvitations.spec_2",
+    "negation": "AegisSpec.MaximumInvitations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; no call on an input satisfying the preconditions fails (there is no arithmetic overflow, out-of-bounds access, or panic).",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumInvitations.spec_3",
+    "negation": "AegisSpec.MaximumInvitations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 2 <= r <= n.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumInvitations.spec_4",
+    "negation": "AegisSpec.MaximumInvitations.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set S of employees with |S| = r and a circular seating of S, using the circular-table adjacency convention of spec_1, such that for every x in S, favorite[x] is in S and is adjacent to x in that seating.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumInvitations.spec_5",
+    "negation": "AegisSpec.MaximumInvitations.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every set S of employees that admits a circular seating, using the circular-table adjacency convention of spec_1, in which every x in S is adjacent to favorite[x], we have |S| <= r.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumInvitations.spec_6",
+    "negation": "AegisSpec.MaximumInvitations.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every directed cycle v_0,...,v_{c-1} of favorite with c >= 2 (distinct employees and favorite[v_i] = v_{(i+1) mod c} for all i), we have r >= c.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumInvitations.spec_7",
+    "negation": "AegisSpec.MaximumInvitations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r equals the maximum length c of a directed cycle of favorite (a sequence v_0,...,v_{c-1} of distinct employees, with c >= 3, such that favorite[v_i] = v_{(i+1) mod c} for all i).",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i. In addition, there is no employee i with favorite[favorite[i]] = i (equivalently, there is no directed cycle of length 2)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumInvitations.spec_8",
+    "negation": "AegisSpec.MaximumInvitations.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let L_a be the largest m >= 0 for which there exist distinct employees x_1,...,x_m, none equal to a or b, such that favorite[x_i] = x_{i+1} for 1 <= i < m and, if m > 0, favorite[x_m] = a. Define L_b similarly with b in place of a. Then r = 2 + L_a + L_b.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i. In addition, there exist employees a and b such that favorite[a] = b, favorite[b] = a, and the only directed cycle of favorite is this 2-cycle."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumInvitations.spec_9",
+    "negation": "AegisSpec.MaximumInvitations.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every mutual pair a,b (favorite[a] = b and favorite[b] = a) and every sequence x_1,...,x_p of pairwise distinct employees, none equal to a or b, with favorite[x_i] = x_{i+1} for 1 <= i < p and, if p > 0, favorite[x_p] = a, and every sequence y_1,...,y_q of pairwise distinct employees, none equal to a or b or any x_i, with favorite[y_j] = y_{j+1} for 1 <= j < q and, if q > 0, favorite[y_q] = b, we have r >= 2 + p + q.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumInvitations.spec_10",
+    "negation": "AegisSpec.MaximumInvitations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, if q is the number of unordered pairs {a,b} of distinct employees with favorite[a] = b and favorite[b] = a, then r >= 2*q.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i. In addition, every directed cycle of favorite has length 2."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumInvitations.spec_11",
+    "negation": "AegisSpec.MaximumInvitations.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let n = len(favorite). For each unordered mutual pair {a,b} with favorite[a]=b and favorite[b]=a, let L_{a,b} be the largest m >= 0 for which there exist distinct employees x_1,...,x_m, none equal to a or b, such that favorite[x_i]=x_{i+1} for 1 <= i < m and, if m > 0, favorite[x_m]=a; define L_{b,a} similarly with b in place of a. Let T be the sum over all unordered mutual pairs {a,b} of (2 + L_{a,b} + L_{b,a}). Let M be the maximum length c of a directed cycle v_0,...,v_{c-1} of favorite with c >= 3 (distinct employees and favorite[v_i]=v_{(i+1) mod c}), or M=0 if no such cycle exists. Whenever the function returns a result r, r = max(M,T).",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumInvitations.spec_12",
+    "negation": "AegisSpec.MaximumInvitations.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, with L_{a,b} and L_{b,a} defined as above for every mutual pair {a,b}, r >= sum over all unordered mutual pairs {a,b} of (2 + L_{a,b} + L_{b,a}). Thus all 2-cycle components, each with its two longest feeding chains, can be seated simultaneously.",
+    "preconditions": "Let n = len(favorite). The input satisfies 2 <= n <= 100000; for every i with 0 <= i < n, 0 <= favorite[i] <= n-1 and favorite[i] != i."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxProfit.spec_1",
+    "negation": "AegisSpec.MaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(prices). A trade sequence is a finite sequence ((b_1,s_1),...,(b_k,s_k)) with k >= 0 such that for every j with 1 <= j <= k, 0 <= b_j < s_j < n, and for every j with 1 <= j < k, s_j < b_{j+1}. Its net profit is sum_{j=1}^k (prices[s_j] - prices[b_j] - fee), and the empty sequence has net profit 0. The function returns a result r and r is the maximum net profit over all such trade sequences.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxProfit.spec_2",
+    "negation": "AegisSpec.MaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail because of arithmetic overflow, out-of-bounds access, or panic.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxProfit.spec_3",
+    "negation": "AegisSpec.MaxProfit.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxProfit.spec_4",
+    "negation": "AegisSpec.MaxProfit.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{i=0}^{len(prices)-2} max(0, prices[i+1] - prices[i]), where the empty sum is 0 when len(prices)=1 and max(0,x) is x when x>0 and 0 otherwise.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxProfit.spec_5",
+    "negation": "AegisSpec.MaxProfit.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000; for every i with 0 <= i < len(prices)-1, prices[i] >= prices[i+1]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxProfit.spec_6",
+    "negation": "AegisSpec.MaxProfit.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000; let maxP = max_{0 <= i < len(prices)} prices[i] and minP = min_{0 <= i < len(prices)} prices[i]; fee >= maxP - minP."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxProfit.spec_7",
+    "negation": "AegisSpec.MaxProfit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = sum_{i=0}^{len(prices)-2} max(0, prices[i+1] - prices[i]), where the empty sum is 0 when len(prices)=1.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; fee = 0."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxProfit.spec_8",
+    "negation": "AegisSpec.MaxProfit.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a trade sequence T = ((b_1,s_1),...,(b_k,s_k)) with k >= 0, 0 <= b_j < s_j < len(prices) for all j, and s_j < b_{j+1} for all j < k, such that T has net profit r and every transaction (b_j,s_j) in T satisfies prices[s_j] - prices[b_j] - fee > 0.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxProfit.spec_9",
+    "negation": "AegisSpec.MaxProfit.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every b and s with 0 <= b < s < len(prices), r >= max(0, prices[s] - prices[b] - fee).",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxProfit.spec_10",
+    "negation": "AegisSpec.MaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every pair fee1, fee2 with 0 <= fee1 <= fee2 < 50000, if max_profit(prices, fee1) returns r1 and max_profit(prices, fee2) returns r2, then r2 <= r1.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; for every pair of integers fee1, fee2 with 0 <= fee1 <= fee2 < 50000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxProfit.spec_11",
+    "negation": "AegisSpec.MaxProfit.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q be the slice of the same length as prices with q[i] = prices[i] + c for every i. If max_profit(prices, fee) returns r and max_profit(q, fee) returns r', then r = r'.",
+    "preconditions": "len(prices) >= 1 and len(prices) <= 50000; for every i with 0 <= i < len(prices), 1 <= prices[i] < 50000; 0 <= fee < 50000; c is an integer such that for every i with 0 <= i < len(prices), 1 <= prices[i] + c < 50000."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.RectangleArea.spec_1",
+    "negation": "AegisSpec.RectangleArea.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let M = 1000000007. Let U = { (x,y) in R x R | there exists i with 0 <= i < len(rectangles), x1_i <= x <= x2_i, and y1_i <= y <= y2_i }, and let A be the ordinary planar area of U. Whenever rectangle_area rectangles returns a result r, r is the unique integer such that 0 <= r < M and r is congruent to A modulo M.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.RectangleArea.spec_2",
+    "negation": "AegisSpec.RectangleArea.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, rectangle_area rectangles returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.RectangleArea.spec_3",
+    "negation": "AegisSpec.RectangleArea.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever rectangle_area rectangles returns a result r, 0 <= r < 1000000007.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.RectangleArea.spec_4",
+    "negation": "AegisSpec.RectangleArea.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007 and let S = Sum_{i=0}^{len(rectangles)-1} (x2_i - x1_i) * (y2_i - y1_i). Whenever rectangle_area rectangles returns a result r, r is the unique integer such that 0 <= r < M and r is congruent to S modulo M.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000; (iv) for every pair i < j, the two rectangles have disjoint interiors, meaning x2_i <= x1_j or x2_j <= x1_i or y2_i <= y1_j or y2_j <= y1_i."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.RectangleArea.spec_5",
+    "negation": "AegisSpec.RectangleArea.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever rectangle_area rectangles returns a result r and rectangle_area rectangles' returns a result r', we have r = r'.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000. Choose k with 0 <= k < len(rectangles). Let rectangles' be obtained by inserting an additional copy of rectangles[k] at any position, and assume len(rectangles') <= 200."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.RectangleArea.spec_6",
+    "negation": "AegisSpec.RectangleArea.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let M = 1000000007. Whenever rectangle_area rectangles returns a result r and rectangle_area rectangles' returns a result r', r' is the unique integer such that 0 <= r' < M and r' is congruent to k*k*r modulo M.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000. Let k >= 1 be an integer, and define rectangles'[i] = [k*x1_i, k*y1_i, k*x2_i, k*y2_i]. Assume rectangles' satisfies the same length and coordinate conditions (i)-(iii)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.RectangleArea.spec_7",
+    "negation": "AegisSpec.RectangleArea.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let M = 1000000007. Whenever rectangle_area rectangles returns a result r, r is the unique integer such that 0 <= r < M and r is congruent to (v-u)*(z-w) modulo M.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000. Let u = min_i x1_i, v = max_i x2_i, w = min_i y1_i, and z = max_i y2_i. Assume every point of the bounding box [u,v] x [w,z] is covered by at least one rectangle: for every real x,y with u <= x <= v and w <= y <= z there exists i with x1_i <= x <= x2_i and y1_i <= y <= y2_i."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.RectangleArea.spec_8",
+    "negation": "AegisSpec.RectangleArea.spec_8_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Let U and U' be the unions of rectangles and rectangles', respectively, and let A and A' be their ordinary planar areas. Whenever rectangle_area rectangles returns a result r and rectangle_area rectangles' returns a result r', we have A <= A', r is the unique integer such that 0 <= r < 1000000007 and r is congruent to A modulo 1000000007, and r' is the unique integer such that 0 <= r' < 1000000007 and r' is congruent to A' modulo 1000000007.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) < 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000. Let q = [a1,b1,a2,b2] with 0 <= a1 < a2 <= 2000000000 and 0 <= b1 < b2 <= 2000000000, and let rectangles' be rectangles with q appended."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.RectangleArea.spec_9",
+    "negation": "AegisSpec.RectangleArea.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let U be the union of the rectangles and A its ordinary planar area. Let S = Sum_{i=0}^{len(rectangles)-1} (x2_i - x1_i) * (y2_i - y1_i). Whenever rectangle_area rectangles returns a result r, r is the unique integer such that 0 <= r < 1000000007 and r is congruent to A modulo 1000000007, and A <= S.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.RectangleArea.spec_10",
+    "negation": "AegisSpec.RectangleArea.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let U1 be the union of rectangles[0],...,rectangles[m-1] and U2 the union of rectangles[m],...,rectangles[len(rectangles)-1], and let A1 and A2 be their ordinary planar areas. Whenever rectangle_area rectangles returns a result r, r is the unique integer such that 0 <= r < 1000000007 and r is congruent to A1 + A2 modulo 1000000007; under the separation assumption the total union area is exactly A1 + A2.",
+    "preconditions": "Assume: (i) 1 <= len(rectangles) <= 200; (ii) for every i with 0 <= i < len(rectangles), len(rectangles[i]) = 4; (iii) writing rectangles[i] = [x1_i, y1_i, x2_i, y2_i], for every such i we have 0 <= x1_i < x2_i <= 2000000000 and 0 <= y1_i < y2_i <= 2000000000. Choose m with 1 <= m < len(rectangles). Assume either max_{0 <= i < m} x2_i <= min_{m <= j < len(rectangles)} x1_j or max_{0 <= i < m} y2_i <= min_{m <= j < len(rectangles)} y1_j."
+  }
+]

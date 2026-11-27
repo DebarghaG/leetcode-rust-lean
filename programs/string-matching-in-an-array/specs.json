@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StringMatching.spec_1",
+    "negation": "AegisSpec.StringMatching.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that: (1) for every i with 0 <= i < len(r), there exists k with 0 <= k < len(words) such that r[i] = words[k], and there exists j with 0 <= j < len(words) such that words[j] != r[i] and is_substring(r[i], words[j]); (2) for every k with 0 <= k < len(words), if there exists j with 0 <= j < len(words) such that words[j] != words[k] and is_substring(words[k], words[j]), then there exists exactly one i with 0 <= i < len(r) such that r[i] = words[k]. Here is_substring(s, t) means there exists k with 0 <= k and k + len(s) <= len(t) such that for every j with 0 <= j < len(s), s[j] = t[k+j].",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StringMatching.spec_2",
+    "negation": "AegisSpec.StringMatching.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever words satisfies the preconditions, the function returns a result r (it does not fail, overflow, or panic).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StringMatching.spec_3",
+    "negation": "AegisSpec.StringMatching.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every i with 0 <= i < len(r), there exists k with 0 <= k < len(words) such that r[i] = words[k].",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StringMatching.spec_4",
+    "negation": "AegisSpec.StringMatching.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i < len(r), there exists j with 0 <= j < len(words) such that words[j] != r[i] and is_substring(r[i], words[j]).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StringMatching.spec_5",
+    "negation": "AegisSpec.StringMatching.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every k with 0 <= k < len(words), if there exists j with 0 <= j < len(words) such that words[j] != words[k] and is_substring(words[k], words[j]), then there exists i with 0 <= i < len(r) such that r[i] = words[k].",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StringMatching.spec_6",
+    "negation": "AegisSpec.StringMatching.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "len(r) = |{ i : 0 <= i < len(words) and there exists j with 0 <= j < len(words), j != i, and is_substring(words[i], words[j]) }|.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StringMatching.spec_7",
+    "negation": "AegisSpec.StringMatching.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "len(r) = 0.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j; and for every i,j with 0 <= i < len(words), 0 <= j < len(words), if i != j then not is_substring(words[i], words[j])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StringMatching.spec_8",
+    "negation": "AegisSpec.StringMatching.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every i,j with 0 <= i < len(r), 0 <= j < len(r), if r[i] = r[j] then i = j.",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StringMatching.spec_9",
+    "negation": "AegisSpec.StringMatching.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every i with 0 <= i < len(r), there exists j with 0 <= j < len(words) such that words[j] != r[i] and is_substring(r[i], words[j]) and len(words[j]) > len(r[i]).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StringMatching.spec_10",
+    "negation": "AegisSpec.StringMatching.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "len(r) < len(words).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StringMatching.spec_11",
+    "negation": "AegisSpec.StringMatching.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every i with 0 <= i < len(r), len(r[i]) < max_{0 <= k < len(words)} len(words[k]).",
+    "preconditions": "len(words) >= 1 and len(words) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 30 and every byte of words[i] is in the range 97..122; for every i,j with 0 <= i < len(words), 0 <= j < len(words), if words[i] = words[j] then i = j."
+  }
+]

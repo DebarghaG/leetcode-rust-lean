@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCostSetTime.spec_1",
+    "negation": "AegisSpec.MinCostSetTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let P range over all finite sequences of digits with length k such that 1 <= k <= 4 and each P[i] is in {0,1,...,9}. For such P, let D be the length-4 sequence obtained by prepending 4-k zeroes to P, and define T(P) = 60*(10*D[0]+D[1]) + (10*D[2]+D[3]) and C(P) = pushCost*k + moveCost*sum_{i=0}^{k-1} delta_i, where delta_0 = 1 if P[0] != startAt and 0 otherwise, and for i>0 delta_i = 1 if P[i] != P[i-1] and 0 otherwise. Then the function returns a result r and r is the minimum of C(P) over all such P with T(P)=targetSeconds.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCostSetTime.spec_2",
+    "negation": "AegisSpec.MinCostSetTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every startAt, moveCost, pushCost, targetSeconds satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCostSetTime.spec_3",
+    "negation": "AegisSpec.MinCostSetTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every digit sequence P with length k, 1 <= k <= 4, each P[i] in {0,1,...,9}, and T(P)=targetSeconds, where T(P) is computed by prepending 4-k zeroes to P and interpreting the first two digits as minutes and the last two as seconds, the cost C(P) = pushCost*k + moveCost*sum_{i=0}^{k-1} delta_i satisfies C(P) >= r, with delta_0 = 1 if P[0] != startAt and 0 otherwise, and for i>0 delta_i = 1 if P[i] != P[i-1] and 0 otherwise.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCostSetTime.spec_4",
+    "negation": "AegisSpec.MinCostSetTime.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a digit sequence P of length k with 1 <= k <= 4 and each P[i] in {0,1,...,9} such that: after prepending 4-k zeroes to P, the first two digits m and the last two digits s satisfy 60*m+s = targetSeconds; and pushCost*k + moveCost*(indicator(P[0] != startAt) + sum_{i=1}^{k-1} indicator(P[i] != P[i-1])) = r, where indicator(true)=1 and indicator(false)=0.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCostSetTime.spec_5",
+    "negation": "AegisSpec.MinCostSetTime.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= pushCost.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCostSetTime.spec_6",
+    "negation": "AegisSpec.MinCostSetTime.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let m = min(99, floor(targetSeconds/60)) and s = targetSeconds - 60*m. Let D0 = floor(m/10), D1 = m mod 10, D2 = floor(s/10), D3 = s mod 10. Then r <= 4*pushCost + moveCost*(indicator(D0 != startAt) + indicator(D1 != D0) + indicator(D2 != D1) + indicator(D3 != D2)), where indicator(true)=1 and indicator(false)=0.",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 6039."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCostSetTime.spec_7",
+    "negation": "AegisSpec.MinCostSetTime.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = pushCost + (if startAt = targetSeconds then 0 else moveCost).",
+    "preconditions": "startAt, moveCost, pushCost, targetSeconds are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and 1 <= targetSeconds <= 9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCostSetTime.spec_8",
+    "negation": "AegisSpec.MinCostSetTime.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 4*pushCost + (if startAt = 9 then 0 else moveCost).",
+    "preconditions": "startAt, moveCost, pushCost are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and targetSeconds = 6039."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCostSetTime.spec_9",
+    "negation": "AegisSpec.MinCostSetTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of min_cost_set_time(startAt, moveCost1, pushCost, targetSeconds) and let r2 be the result of min_cost_set_time(startAt, moveCost2, pushCost, targetSeconds). Then both calls return results and r1 <= r2.",
+    "preconditions": "startAt, pushCost, targetSeconds, moveCost1, moveCost2 are integers with 0 <= startAt <= 9, 1 <= pushCost <= 100000, 1 <= targetSeconds <= 6039, and 1 <= moveCost1 <= moveCost2 <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCostSetTime.spec_10",
+    "negation": "AegisSpec.MinCostSetTime.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of min_cost_set_time(startAt, moveCost, pushCost1, targetSeconds) and let r2 be the result of min_cost_set_time(startAt, moveCost, pushCost2, targetSeconds). Then both calls return results and r1 <= r2.",
+    "preconditions": "startAt, moveCost, targetSeconds, pushCost1, pushCost2 are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= targetSeconds <= 6039, and 1 <= pushCost1 <= pushCost2 <= 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCostSetTime.spec_11",
+    "negation": "AegisSpec.MinCostSetTime.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 4*pushCost + moveCost*(2 + (if startAt = 9 then 0 else 1)).",
+    "preconditions": "startAt, moveCost, pushCost are integers with 0 <= startAt <= 9, 1 <= moveCost <= 100000, 1 <= pushCost <= 100000, and targetSeconds = 6000."
+  }
+]

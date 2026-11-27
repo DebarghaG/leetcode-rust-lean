@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_1",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every byte sequence T, T occurs as an element of r (there is j with 0 <= j < len(r) and r[j] = T byte-for-byte) if and only if T is an admissible original coordinate for s. T is admissible exactly when T = '(' + X + ', ' + Y + ')' for some nonempty byte strings X and Y such that: (1) X and Y are valid number representations, where a valid number representation is a nonempty string of ASCII digits with at most one '.', whose integer part is either exactly the one-byte string '0' or begins with a digit '1'..'9', which has at least one digit on each side of any '.', and whose fractional part (if a '.' is present) does not end with '0'; and (2) deleting from T every byte equal to ',' , '.' or ' ' gives exactly s (equivalently, the digit bytes of X followed by the digit bytes of Y are exactly D). Each such T occurs exactly once in r (no duplicates). The order of elements in r is unrestricted.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'. Let D be the byte sequence s[1], s[2], ..., s[len(s)-2], and let L = len(s)-2."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_2",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the function returns a result r and does not fail (no panic, overflow, or out-of-bounds failure).",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_3",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), the element t = r[i] has exactly the delimiter shape: its first byte is '(', its last byte is ')', it contains exactly one ',' byte and exactly one ' ' byte, that ' ' byte occurs immediately after that ',' byte, and it contains no other ',' , ' ' , '(' or ')' bytes.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_4",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), if t = r[i], then deleting from t every byte equal to ',' , '.' or ' ' yields the byte sequence s exactly.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_5",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), let t = r[i] and let X be the byte sequence of t strictly between its first byte '(' and its unique ',' byte. Then X is a valid number representation: it is nonempty, consists only of ASCII digits and at most one '.', its integer part is either exactly '0' or begins with a digit '1'..'9', any '.' has at least one digit before and after it, and if a '.' is present its fractional part does not end in '0'.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_6",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), let t = r[i] and let Y be the byte sequence of t strictly between its unique ' ' byte after the comma and its last byte ')'. Then Y is a valid number representation: it is nonempty, consists only of ASCII digits and at most one '.', its integer part is either exactly '0' or begins with a digit '1'..'9', any '.' has at least one digit before and after it, and if a '.' is present its fractional part does not end in '0'.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_7",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), let t = r[i], let X be the coordinate before the comma, and let Y be the coordinate after the space; let digits(X) and digits(Y) be obtained by deleting '.' from X and Y. Then there exists an integer k with 1 <= k < L such that digits(X) = D[0..k] (the first k bytes of D) and digits(Y) = D[k..L] (the remaining L-k bytes of D).",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'. Let D be the byte sequence s[1], s[2], ..., s[len(s)-2], and let L = len(s)-2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_8",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, for every byte sequence T of the form '(' + X + ', ' + Y + ')' where X and Y are valid number representations (nonempty digit strings with at most one '.', integer part exactly '0' or starting with '1'..'9', at least one digit on each side of any '.', and no trailing '0' in a fractional part) and deleting ',' , '.' and ' ' from T gives exactly s, there exists an index j with 0 <= j < len(r) such that r[j] = T.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_9",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for all i and j with 0 <= i < len(r) and 0 <= j < len(r), if r[i] = r[j] byte-for-byte then i = j.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_10",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r) = 0 if and only if there is no byte sequence T of the form '(' + X + ', ' + Y + ')' with X and Y valid number representations (nonempty digit strings with at most one '.', integer part exactly '0' or starting with '1'..'9', at least one digit on each side of any '.', and no trailing '0' in a fractional part) such that the digit bytes of X followed by the digit bytes of Y are exactly D.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'. Let D be the byte sequence s[1], s[2], ..., s[len(s)-2]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_11",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), let t = r[i] and let d be the number of '.' bytes in t; then len(t) = len(s) + 2 + d. Consequently len(t) is len(s)+2, len(s)+3, or len(s)+4.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_12",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, len(r) <= L*(L-1)*(L+1)/6, and in particular len(r) <= 165.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'. Let L = len(s)-2."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_13",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if len(s) = 4, then len(r) = 1 and the unique element r[0] is the byte string '(' + s[1] + ', ' + s[2] + ')'.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_14",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every byte of every element of r is one of the following: an ASCII digit '0'..'9', '(', ')', ',', '.', or ' '.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.AmbiguousCoordinates.spec_15",
+    "negation": "AegisSpec.AmbiguousCoordinates.spec_15_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), the element t = r[i] contains at most two '.' bytes, and each of its two coordinate substrings (the part before the comma and the part after the space) contains at most one '.' byte.",
+    "preconditions": "len(s) is between 4 and 12 inclusive; s[0] is the byte '('; s[len(s)-1] is the byte ')'; for every i with 1 <= i < len(s)-1, s[i] is an ASCII digit byte '0'..'9'."
+  }
+]

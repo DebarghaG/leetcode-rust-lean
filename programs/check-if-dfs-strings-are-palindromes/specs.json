@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindAnswer.spec_1",
+    "negation": "AegisSpec.FindAnswer.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and len(r) = n. For each x with 0 <= x < n, let children(x) = { y | 0 <= y < n and parent[y] = x }, and let D(x) be the byte string obtained by concatenating D(y) for all y in children(x) in increasing numerical order and then appending the one-byte string s[x]. Then for every i with 0 <= i < n, r[i] = true if and only if D(i) is a palindrome, meaning that for every k with 0 <= k < len(D(i)), D(i)[k] = D(i)[len(D(i)) - 1 - k].",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindAnswer.spec_2",
+    "negation": "AegisSpec.FindAnswer.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = n = len(parent) = len(s).",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindAnswer.spec_3",
+    "negation": "AegisSpec.FindAnswer.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (an ok value); it does not fail.",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindAnswer.spec_4",
+    "negation": "AegisSpec.FindAnswer.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if there is no j with 0 <= j < n and parent[j] = i, then r[i] = true.",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindAnswer.spec_5",
+    "negation": "AegisSpec.FindAnswer.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if every node x in the subtree rooted at i (the set of nodes whose repeated parent steps reach i, including i itself) has the same character s[x], then r[i] = true.",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindAnswer.spec_6",
+    "negation": "AegisSpec.FindAnswer.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if r[i] = true then the first character of D(i) equals the last character of D(i). The last character of D(i) is s[i]. The first character is s[f(i)], where f(i) is defined recursively by f(i)=i if i has no children, and by f(i)=f(c) for the smallest child c of i otherwise. Thus r[i] = true implies s[f(i)] = s[i].",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindAnswer.spec_7",
+    "negation": "AegisSpec.FindAnswer.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if r[i] = false then there exists an integer k with 0 <= k < len(D(i)) / 2 such that D(i)[k] != D(i)[len(D(i)) - 1 - k], where D(i) is the postorder DFS string of the subtree rooted at i (children taken in increasing order, character s[x] appended after all children).",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindAnswer.spec_8",
+    "negation": "AegisSpec.FindAnswer.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if i has exactly one child c and c has no children, then r[i] = true if and only if s[i] = s[c].",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindAnswer.spec_9",
+    "negation": "AegisSpec.FindAnswer.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if i has exactly two children c1 and c2 with c1 < c2, and both c1 and c2 have no children, then r[i] = true if and only if s[c1] = s[i].",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindAnswer.spec_10",
+    "negation": "AegisSpec.FindAnswer.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if i has exactly one child c, c has exactly one child d, and d has no children, then r[i] = true if and only if s[i] = s[d].",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindAnswer.spec_11",
+    "negation": "AegisSpec.FindAnswer.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if n = 1 then len(r) = 1 and r[0] = true.",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindAnswer.spec_12",
+    "negation": "AegisSpec.FindAnswer.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, if r[i] = true then among the characters of D(i) at most one character occurs an odd number of times. Here D(i) is the postorder DFS string of the subtree rooted at i.",
+    "preconditions": "n = len(parent) = len(s); 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; parent represents a valid tree rooted at node 0 (the directed graph with edges parent[i] -> i for 1 <= i < n has no cycles and every node reaches 0 by repeatedly following parent); for every i with 0 <= i < n, 97 <= s[i] <= 122."
+  }
+]

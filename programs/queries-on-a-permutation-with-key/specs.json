@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.ProcessQueries.spec_1",
+    "negation": "AegisSpec.ProcessQueries.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). Let P_0 be the length-m sequence [1,2,...,m], so P_0[j] = j+1 for 0 <= j < m. For each i with 0 <= i < n, let p_i be the unique index with 0 <= p_i < m and P_i[p_i] = queries[i], and let P_{i+1} be the length-m sequence obtained by moving the element at index p_i of P_i to the front: P_{i+1}[0] = queries[i], P_{i+1}[j] = P_i[j-1] for 1 <= j <= p_i, and P_{i+1}[j] = P_i[j] for p_i < j < m. Then len(r) = n and for every i with 0 <= i < n, r[i] = p_i.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.ProcessQueries.spec_2",
+    "negation": "AegisSpec.ProcessQueries.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; in particular, it does not fail with a panic, arithmetic overflow, or out-of-bounds access on these inputs.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.ProcessQueries.spec_3",
+    "negation": "AegisSpec.ProcessQueries.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = len(queries).",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.ProcessQueries.spec_4",
+    "negation": "AegisSpec.ProcessQueries.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(r), 0 <= r[i] < m.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.ProcessQueries.spec_5",
+    "negation": "AegisSpec.ProcessQueries.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[0] = queries[0] - 1.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.ProcessQueries.spec_6",
+    "negation": "AegisSpec.ProcessQueries.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every i with 1 <= i < len(queries), if queries[i] = queries[i-1], then r[i] = 0.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.ProcessQueries.spec_7",
+    "negation": "AegisSpec.ProcessQueries.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries), if queries[i] does not occur among queries[0],...,queries[i-1], then r[i] = (queries[i] - 1) + D_i, where D_i is the number of distinct values v with queries[i] < v <= m that occur among queries[0],...,queries[i-1].",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.ProcessQueries.spec_8",
+    "negation": "AegisSpec.ProcessQueries.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < len(queries) such that q = queries[i] occurs earlier in queries, let j be the largest index with 0 <= j < i and queries[j] = q. Then r[i] equals the number of distinct values that occur among queries[j+1],...,queries[i-1]; this number is 0 when j+1 > i-1.",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.ProcessQueries.spec_9",
+    "negation": "AegisSpec.ProcessQueries.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(queries) and define P_0,...,P_n by the move-to-front rule starting from P_0 = [1,2,...,m]. Whenever the function returns a result r, for every i with 0 <= i < n, r[i] is a valid index into P_i and P_i[r[i]] = queries[i].",
+    "preconditions": "m is an integer with 1 <= m <= 1000; n = len(queries) satisfies 1 <= n <= m; and for every i with 0 <= i < n, 1 <= queries[i] <= m."
+  }
+]

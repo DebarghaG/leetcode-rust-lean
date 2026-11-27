@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.OrangesRotting.spec_1",
+    "negation": "AegisSpec.OrangesRotting.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(grid) and let n be the common row length from the preconditions. For every integer t >= 0 define R_t by: R_0 = { (i,j) | 0 <= i < m and 0 <= j < n and grid[i][j] = 2 }, and R_{t+1} = R_t union { (i,j) | 0 <= i < m and 0 <= j < n and grid[i][j] = 1 and there exists (a,b) in R_t with |i-a| + |j-b| = 1 }. Let F = { (i,j) | 0 <= i < m and 0 <= j < n and grid[i][j] = 1 }. The function returns a result r (it does not fail) such that: if the set { t | t >= 0 and F is a subset of R_t } is nonempty, then r is its least element; otherwise r = -1.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.OrangesRotting.spec_2",
+    "negation": "AegisSpec.OrangesRotting.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the function returns a result r (that is, a Result.ok value); it does not panic, perform an out-of-bounds access, or overflow during the computation.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.OrangesRotting.spec_3",
+    "negation": "AegisSpec.OrangesRotting.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, either r = -1 or (0 <= r and r <= fresh_count), where fresh_count is the number of pairs (i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j] = 1.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.OrangesRotting.spec_4",
+    "negation": "AegisSpec.OrangesRotting.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there is no pair (i,j) with 0 <= i < m, 0 <= j < n, and grid[i][j] = 1.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.OrangesRotting.spec_5",
+    "negation": "AegisSpec.OrangesRotting.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = -1 if and only if there exists a fresh cell c = (i,j) with grid[i][j] = 1 for which there is no path p_0, p_1, ..., p_k (k >= 0) such that p_0 is initially rotten (grid[p_0] = 2), p_k = c, every p_l is a cell of the grid, consecutive positions are 4-directionally adjacent (Manhattan distance 1), and every p_l has original value 1 or 2.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.OrangesRotting.spec_6",
+    "negation": "AegisSpec.OrangesRotting.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with r >= 0, every initially fresh cell (i,j), meaning grid[i][j] = 1, belongs to R_r, where R_t is the rotting process defined in spec_1.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.OrangesRotting.spec_7",
+    "negation": "AegisSpec.OrangesRotting.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exists an initially fresh cell (i,j) with grid[i][j] = 1 that does not belong to R_{r-1}, where R_t is the rotting process defined in spec_1.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.OrangesRotting.spec_8",
+    "negation": "AegisSpec.OrangesRotting.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with r >= 0, for each initially fresh cell c define d(c) to be the least k >= 0 for which there is a path p_0, ..., p_k with p_0 initially rotten, p_k = c, consecutive positions 4-directionally adjacent, and every p_l having original value 1 or 2. Then every fresh cell has a finite d(c), and r = max { d(c) | c is an initially fresh cell }, with the convention that the maximum over an empty set is 0.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.OrangesRotting.spec_9",
+    "negation": "AegisSpec.OrangesRotting.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid' be the m x n grid defined by grid'[i][j] = grid[i][n-1-j] for all 0 <= i < m and 0 <= j < n. Whenever oranges_rotting(grid) returns r and oranges_rotting(grid') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.OrangesRotting.spec_10",
+    "negation": "AegisSpec.OrangesRotting.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid' be the m x n grid defined by grid'[i][j] = grid[m-1-i][j] for all 0 <= i < m and 0 <= j < n. Whenever oranges_rotting(grid) returns r and oranges_rotting(grid') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.OrangesRotting.spec_11",
+    "negation": "AegisSpec.OrangesRotting.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid' be the n x m grid defined by grid'[j][i] = grid[i][j] for all 0 <= i < m and 0 <= j < n. Whenever oranges_rotting(grid) returns r and oranges_rotting(grid') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.OrangesRotting.spec_12",
+    "negation": "AegisSpec.OrangesRotting.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid' be the (m+1) x n grid obtained by appending one row of zeros after the last row of grid: grid'[i][j] = grid[i][j] for 0 <= i < m and 0 <= j < n, and grid'[m][j] = 0 for 0 <= j < n. Whenever oranges_rotting(grid) returns r and oranges_rotting(grid') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n. Additionally, m + 1 <= 10."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.OrangesRotting.spec_13",
+    "negation": "AegisSpec.OrangesRotting.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let grid' be the m x (n+1) grid obtained by appending one column of zeros after the last column of grid: grid'[i][j] = grid[i][j] for 0 <= i < m and 0 <= j < n, and grid'[i][n] = 0 for 0 <= i < m. Whenever oranges_rotting(grid) returns r and oranges_rotting(grid') returns r', we have r = r'.",
+    "preconditions": "Let m = len(grid). There exists an integer n such that 1 <= m <= 10, 1 <= n <= 10, len(grid[i]) = n for every 0 <= i < m, and grid[i][j] is the I64 encoding of 0, 1, or 2 for every 0 <= i < m and 0 <= j < n. Additionally, n + 1 <= 10."
+  }
+]

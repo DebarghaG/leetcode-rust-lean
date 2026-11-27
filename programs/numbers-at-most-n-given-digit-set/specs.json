@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_1",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let D be the set of decimal digits represented by digits: D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. The function returns a result r (it does not fail) and r is exactly the number of positive integers m with 1 <= m <= n whose ordinary decimal representation (base 10, without leading zeros) has every digit in D.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_2",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_3",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_4",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= n.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_5",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if there exists an index i with 0 <= i < len(digits) and digits[i][0] - 48 <= n, then r >= 1. In that case the one-digit integer digits[i][0] - 48 is counted.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_6",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, let L be the number of decimal digits of n, so 10^(L-1) <= n <= 10^L - 1. Then r = (sum_{k=1}^{L-1} |D|^k) + B, where B is the number of integers m with 10^(L-1) <= m <= n whose decimal representation uses only digits in D.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_7",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, r = |{ d in D | d <= n }|.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 10."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_8",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let d = digits[0][0] - 48. Whenever the function returns a result r, r = |{ k in the natural numbers | k >= 1 and d * (10^k - 1)/9 <= n }|. The expression d * (10^k - 1)/9 is the k-digit integer whose decimal representation consists of k copies of d.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000; len(digits) = 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_9",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. For the q with n = 10^q, whenever the function returns a result r, r = sum_{k=1}^{q} |D|^k.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; there exists an integer q with 1 <= q <= 9 and n = 10^q."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_10",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. For the q with n = 10^q - 1, whenever the function returns a result r, r = sum_{k=1}^{q} |D|^k.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; there exists an integer q with 1 <= q <= 9 and n = 10^q - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_11",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. If the function returns r1 on input (digits, n1) and r2 on input (digits, n2), then r1 <= r2.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n1 <= n2 <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_12",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. If the function returns r1 on input (digits, n1) and r2 on input (digits, n2), and if for every integer m with n1 < m <= n2 the decimal representation of m contains at least one digit not in D, then r1 = r2.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n1 <= n2 <= 1000000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_13",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, let L be the number of decimal digits of n. Then r <= sum_{k=1}^{L} |D|^k.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_14",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, r = 0 if and only if for every i with 0 <= i < len(digits), digits[i][0] - 48 > n.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_15",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, r >= |{ d in D | d <= n }|.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.AtMostNGivenDigitSet.spec_16",
+    "negation": "AegisSpec.AtMostNGivenDigitSet.spec_16_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let D = { d in {1,...,9} | there exists i with 0 <= i < len(digits) and digits[i][0] = 48 + d }. Whenever the function returns a result r, r <= sum_{k=1}^{9} |D|^k <= 435848049.",
+    "preconditions": "1 <= len(digits) <= 9; for every i with 0 <= i < len(digits), len(digits[i]) = 1 and 49 <= digits[i][0] <= 57; the byte values digits[i][0] are pairwise distinct and non-decreasing in i; 1 <= n <= 1000000000."
+  }
+]

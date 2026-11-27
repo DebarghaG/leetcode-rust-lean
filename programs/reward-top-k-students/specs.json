@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TopStudents.spec_1",
+    "negation": "AegisSpec.TopStudents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define a word of report[i] to be a maximal contiguous run of non-space bytes. For each student ID s = student_id[i], define points(s) = 3 * (number of words of report[i] that are byte-equal to some element of positive_feedback) - (number of words of report[i] that are byte-equal to some element of negative_feedback); this is well-defined because the student_id values are pairwise distinct. Say that a student ID s outranks a student ID t iff points(s) > points(t), or points(s) = points(t) and s < t. Whenever top_students returns a result r, all of the following hold: (1) len(r) = k; (2) every entry r[j] equals student_id[i] for some i with 0 <= i < n; (3) the entries r[0..k-1] are pairwise distinct; (4) for all 0 <= a < b < k, r[a] outranks r[b]; (5) for every 0 <= a < k and every student ID s that occurs among student_id[0..n-1] but does not occur among r[0..k-1], r[a] outranks s. These conditions uniquely determine r: it is exactly the sequence of the k highest-ranked students, ordered by non-increasing points with ties broken by smaller student ID.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TopStudents.spec_2",
+    "negation": "AegisSpec.TopStudents.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, top_students returns a result r and does not fail: no 64-bit integer overflow, no out-of-bounds indexing or slicing, and no panic occur.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TopStudents.spec_3",
+    "negation": "AegisSpec.TopStudents.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever top_students returns a result r, len(r) = k. Since 1 <= k <= len(student_id), it also follows that 1 <= len(r) <= len(student_id).",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TopStudents.spec_4",
+    "negation": "AegisSpec.TopStudents.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever top_students returns a result r, for every j with 0 <= j < len(r) there exists an index i with 0 <= i < len(student_id) such that r[j] = student_id[i]. In other words, each returned value is one of the input student IDs and has a witnessing index in student_id.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TopStudents.spec_5",
+    "negation": "AegisSpec.TopStudents.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever top_students returns a result r, for all a and b with 0 <= a < b < len(r), r[a] != r[b]. That is, the returned vector has no repeated entry.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TopStudents.spec_6",
+    "negation": "AegisSpec.TopStudents.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever top_students returns a result r, for all a and b with 0 <= a < b < len(r), points(r[a]) >= points(r[b]), where for a student ID s = student_id[i], points(s) = 3 * (number of words of report[i] that are byte-equal to some element of positive_feedback) - (number of words of report[i] that are byte-equal to some element of negative_feedback), a word being a maximal contiguous run of non-space bytes.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TopStudents.spec_7",
+    "negation": "AegisSpec.TopStudents.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever top_students returns a result r, for all a and b with 0 <= a < b < len(r), if points(r[a]) = points(r[b]) then r[a] < r[b], where for a student ID s = student_id[i], points(s) = 3 * (number of words of report[i] that are byte-equal to some element of positive_feedback) - (number of words of report[i] that are byte-equal to some element of negative_feedback), a word being a maximal contiguous run of non-space bytes.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TopStudents.spec_8",
+    "negation": "AegisSpec.TopStudents.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever top_students returns a result r, for every a with 0 <= a < len(r) and every i with 0 <= i < len(student_id) such that student_id[i] does not occur among the entries of r, r[a] outranks student_id[i], where outranks(s, t) means points(s) > points(t), or points(s) = points(t) and s < t, and for a student ID s = student_id[j], points(s) = 3 * (number of words of report[j] that are byte-equal to some element of positive_feedback) - (number of words of report[j] that are byte-equal to some element of negative_feedback), with words being maximal contiguous runs of non-space bytes.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TopStudents.spec_9",
+    "negation": "AegisSpec.TopStudents.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever top_students returns a result r and k = len(student_id) = n, the entries r[0..len(r)-1] are exactly the n pairwise-distinct values student_id[0..n-1]: the map j |-> r[j] is a bijection from {0, ..., n-1} onto the set of student IDs, and len(r) = n.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TopStudents.spec_10",
+    "negation": "AegisSpec.TopStudents.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever top_students returns a result r, if all student IDs occurring in student_id have the same points, where for a student ID s = student_id[i], points(s) = 3 * (number of words of report[i] that are byte-equal to some element of positive_feedback) - (number of words of report[i] that are byte-equal to some element of negative_feedback) (words are maximal contiguous runs of non-space bytes), then r is strictly increasing, r[0] < r[1] < ... < r[k-1], and every entry of r is strictly smaller than every student ID that does not occur among the entries of r.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TopStudents.spec_11",
+    "negation": "AegisSpec.TopStudents.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every reordering positive_feedback' of positive_feedback and every reordering negative_feedback' of negative_feedback (i.e., the same elements in a possibly different order), the call top_students(positive_feedback', negative_feedback', report, student_id, k) and the call top_students(positive_feedback, negative_feedback, report, student_id, k) both return and return the same vector.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TopStudents.spec_12",
+    "negation": "AegisSpec.TopStudents.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of {0, ..., n-1}, let report' and student_id' satisfy report'[i] = report[pi(i)] and student_id'[i] = student_id[pi(i)] for 0 <= i < n. Then top_students(positive_feedback, negative_feedback, report', student_id', k) and top_students(positive_feedback, negative_feedback, report, student_id, k) both return and return the same vector.",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.TopStudents.spec_13",
+    "negation": "AegisSpec.TopStudents.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever top_students returns a result r (which is non-empty because len(r) = k and k >= 1), the first entry r[0] is a student ID attaining the maximum points over all student IDs occurring in student_id, and among all students attaining that maximum, r[0] is the smallest ID; equivalently, r[0] outranks every other student, where for a student ID s = student_id[i], points(s) = 3 * (number of words of report[i] that are byte-equal to some element of positive_feedback) - (number of words of report[i] that are byte-equal to some element of negative_feedback) (words are maximal contiguous runs of non-space bytes) and outranks(s, t) means points(s) > points(t) or (points(s) = points(t) and s < t).",
+    "preconditions": "Let n = len(report) = len(student_id). Constraints: 1 <= n <= 10^4; 1 <= len(positive_feedback) and 1 <= len(negative_feedback); every word in positive_feedback and negative_feedback is a non-empty byte string of lowercase ASCII letters of length <= 100; no byte string occurs in both positive_feedback and negative_feedback; every report[i] is a non-empty byte string of lowercase letters and spaces of length <= 100, with exactly one space between consecutive words and no leading or trailing space; every student_id[i] satisfies 1 <= student_id[i] <= 10^9; the values student_id[0..n-1] are pairwise distinct; 1 <= k <= n."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.TopStudents.spec_14",
+    "negation": "AegisSpec.TopStudents.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "Whenever top_students(..., k) returns r and top_students(..., k') returns r', then len(r) = k, len(r') = k', and r[j] = r'[j] for all 0 <= j < k. Equivalently, increasing k only appends the next students in rank order.",
+    "preconditions": "Same as spec_1, with 1 <= k <= k' <= n."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.TopStudents.spec_15",
+    "negation": "AegisSpec.TopStudents.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever top_students returns r, for every returned student r[j] with 0 <= j < len(r), -50 <= points(r[j]) <= 150, where points is defined as in spec_1.",
+    "preconditions": "Same as spec_1."
+  }
+]

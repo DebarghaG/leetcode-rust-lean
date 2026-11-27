@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.VerticalTraversal.spec_1",
+    "negation": "AegisSpec.VerticalTraversal.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is exactly the vertical order traversal of root. Define row(x) and col(x) recursively: row(root)=0 and col(root)=0; if y is the left child of x then row(y)=row(x)+1 and col(y)=col(x)-1; if z is the right child of x then row(z)=row(x)+1 and col(z)=col(x)+1. Let cmin and cmax be the minimum and maximum of col(x) over all nodes x of root. Then len(r)=cmax-cmin+1. For every integer c with cmin <= c <= cmax, let L=r[c-cmin], and let N_c be the nodes x of root with col(x)=c ordered by increasing row(x) and, for nodes with equal row(x), by increasing value(x), with arbitrary order among equal values. Then len(L)=len(N_c) and for every j with 0 <= j < len(L), L[j] equals the value of N_c[j].",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.VerticalTraversal.spec_2",
+    "negation": "AegisSpec.VerticalTraversal.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever root satisfies the preconditions, vertical_traversal returns a result r; it does not overflow, panic, go out of bounds, or fail. Nothing else about r is claimed by this specification.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.VerticalTraversal.spec_3",
+    "negation": "AegisSpec.VerticalTraversal.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, let cmin and cmax be the minimum and maximum column of any node of root, where the column of a node is defined recursively from the root at column 0, a left child decreasing the column by 1 and a right child increasing the column by 1. Then len(r) = cmax - cmin + 1.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.VerticalTraversal.spec_4",
+    "negation": "AegisSpec.VerticalTraversal.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) > 0 and every inner list is nonempty: for every i with 0 <= i < len(r), len(r[i]) > 0.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.VerticalTraversal.spec_5",
+    "negation": "AegisSpec.VerticalTraversal.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the sum of the lengths of all inner lists equals the number of nodes of root: sum_{i=0}^{len(r)-1} len(r[i]) = number_of_nodes(root), where number_of_nodes(root) is the number of Node constructors in root.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.VerticalTraversal.spec_6",
+    "negation": "AegisSpec.VerticalTraversal.spec_6_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, define col(x) recursively by col(root)=0, the left child of x has column col(x)-1, and the right child of x has column col(x)+1. Let cmin and cmax be the minimum and maximum col(x) over all nodes x of root. For every integer column c with cmin <= c <= cmax, the multiset of values in r[c-cmin] equals the multiset of values value(x) over all nodes x of root with col(x)=c.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.VerticalTraversal.spec_7",
+    "negation": "AegisSpec.VerticalTraversal.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, define row(x) and col(x) recursively from root with row(root)=0 and col(root)=0, a left child increasing row by 1 and decreasing column by 1, and a right child increasing row by 1 and increasing column by 1. Let cmin and cmax be the minimum and maximum col(x) over all nodes x of root. For every integer column c with cmin <= c <= cmax, there exists a bijection phi from the index set {j | 0 <= j < len(r[c-cmin])} to the set of nodes x of root with col(x)=c such that r[c-cmin][j] equals value(phi(j)) for every j, and for all j,k with 0 <= j < k < len(r[c-cmin]), row(phi(j)) <= row(phi(k)).",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.VerticalTraversal.spec_8",
+    "negation": "AegisSpec.VerticalTraversal.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, define row(x) and col(x) recursively from root with row(root)=0 and col(root)=0, a left child increasing row by 1 and decreasing column by 1, and a right child increasing row by 1 and increasing column by 1. Let cmin and cmax be the minimum and maximum col(x) over all nodes x of root. For every integer column c with cmin <= c <= cmax, there exists a bijection phi from the index set {j | 0 <= j < len(r[c-cmin])} to the set of nodes x of root with col(x)=c such that r[c-cmin][j] equals value(phi(j)) for every j, and for all j,k with 0 <= j < k < len(r[c-cmin]) and row(phi(j)) = row(phi(k)), value(phi(j)) <= value(phi(k)).",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.VerticalTraversal.spec_9",
+    "negation": "AegisSpec.VerticalTraversal.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, define col(x) recursively by col(root)=0, the left child of x has column col(x)-1, and the right child of x has column col(x)+1. Let cmin be the minimum col(x) over all nodes x of root. Then 0 <= -cmin < len(r), the inner list r[-cmin] is nonempty, and its first entry equals the value of root: r[-cmin][0] = value(root).",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.VerticalTraversal.spec_10",
+    "negation": "AegisSpec.VerticalTraversal.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r has exactly one inner list and that inner list has exactly one entry, equal to v.",
+    "preconditions": "root = Node(v, Null, Null) for some integer v with 0 <= v <= 1000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.VerticalTraversal.spec_11",
+    "negation": "AegisSpec.VerticalTraversal.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r)=n and for every i with 0 <= i < n, r[i] is the singleton list whose only entry is v_{n-1-i}. Equivalently, r is [[v_{n-1}], [v_{n-2}], ..., [v1], [v0]].",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, every node value lies in [0,1000], and no node has a right child. Thus the nodes form a single left-descending chain; let v0, v1, ..., v_{n-1} be the node values from the root downward, where n is the number of nodes."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.VerticalTraversal.spec_12",
+    "negation": "AegisSpec.VerticalTraversal.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, len(r)=n and for every i with 0 <= i < n, r[i] is the singleton list whose only entry is v_i. Equivalently, r is [[v0], [v1], ..., [v_{n-1}]].",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, every node value lies in [0,1000], and no node has a left child. Thus the nodes form a single right-descending chain; let v0, v1, ..., v_{n-1} be the node values from the root downward, where n is the number of nodes."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.VerticalTraversal.spec_13",
+    "negation": "AegisSpec.VerticalTraversal.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Define mirror(root) recursively by mirror(Null)=Null and mirror(Node(v,L,R))=Node(v, mirror(R), mirror(L)). Whenever vertical_traversal(root) returns r and vertical_traversal(mirror(root)) returns r', we have len(r') = len(r) and for every i with 0 <= i < len(r), r'[i] = r[len(r)-1-i].",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.VerticalTraversal.spec_14",
+    "negation": "AegisSpec.VerticalTraversal.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every entry of every inner list lies between 0 and 1000 inclusive: for all i,j with 0 <= i < len(r) and 0 <= j < len(r[i]), 0 <= r[i][j] <= 1000.",
+    "preconditions": "root is a finite binary tree with between 1 and 1000 nodes inclusive, and every node value v satisfies 0 <= v <= 1000."
+  }
+]

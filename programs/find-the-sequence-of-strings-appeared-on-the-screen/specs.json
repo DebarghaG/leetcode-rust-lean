@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StringSequence.spec_1",
+    "negation": "AegisSpec.StringSequence.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(target). For each i with 0 <= i < n, let c_i = target[i] - 97. Define S_0 = 0 and for k = 0, ..., n-1, S_{k+1} = S_k + (c_k + 1). Whenever string_sequence(target) returns a result r, the following holds: len(r) = S_n; and for every k with 0 <= k < n and every t with 0 <= t <= c_k, the element r[S_k + t] is the byte string of length k+1 such that for all j with 0 <= j < k, r[S_k + t][j] = target[j], and r[S_k + t][k] = 97 + t.",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122 (so target[i] is the ASCII code of a lowercase English letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StringSequence.spec_2",
+    "negation": "AegisSpec.StringSequence.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every target satisfying the preconditions, string_sequence(target) returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StringSequence.spec_3",
+    "negation": "AegisSpec.StringSequence.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever string_sequence(target) returns a result r, len(r) = Σ_{i=0}^{n-1} (target[i] - 96), where n = len(target). Equivalently, len(r) = n + Σ_{i=0}^{n-1} (target[i] - 97).",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StringSequence.spec_4",
+    "negation": "AegisSpec.StringSequence.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever string_sequence(target) returns a result r, for every index p with 0 <= p < len(r), let L = len(r[p]). Then: (1) 1 <= L <= n; (2) for every j with 0 <= j < L-1, r[p][j] = target[j]; (3) 97 <= r[p][L-1] <= target[L-1].",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StringSequence.spec_5",
+    "negation": "AegisSpec.StringSequence.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever string_sequence(target) returns a result r, for every p with 1 <= p < len(r), exactly one of the following holds: (a) len(r[p]) = len(r[p-1]) + 1, r[p][j] = r[p-1][j] for all j with 0 <= j < len(r[p-1]), and r[p][len(r[p-1])] = 97; or (b) len(r[p]) = len(r[p-1]), r[p][j] = r[p-1][j] for all j with 0 <= j < len(r[p]) - 1, and r[p][len(r[p]) - 1] = r[p-1][len(r[p-1]) - 1] + 1.",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StringSequence.spec_6",
+    "negation": "AegisSpec.StringSequence.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever string_sequence(target) returns a result r, the elements of r are pairwise distinct: for every i, j with 0 <= i < j < len(r), r[i] ≠ r[j].",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StringSequence.spec_7",
+    "negation": "AegisSpec.StringSequence.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever string_sequence(target) returns a result r, for each k with 0 <= k < n, the number of indices p in [0, len(r)-1] such that len(r[p]) = k+1 is exactly (target[k] - 97) + 1.",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StringSequence.spec_8",
+    "negation": "AegisSpec.StringSequence.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever string_sequence(target) returns a result r, every byte in every string of r is a lowercase English letter: for every p with 0 <= p < len(r) and every j with 0 <= j < len(r[p]), 97 <= r[p][j] <= 122.",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StringSequence.spec_9",
+    "negation": "AegisSpec.StringSequence.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever string_sequence(target) returns a result r, the lengths of the strings in r are nondecreasing: for every p with 0 <= p < len(r)-1, len(r[p]) <= len(r[p+1]).",
+    "preconditions": "target is a byte slice with 1 <= len(target) <= 400, and for every i with 0 <= i < len(target), 97 <= target[i] <= 122."
+  }
+]

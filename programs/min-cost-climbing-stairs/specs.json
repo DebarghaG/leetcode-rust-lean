@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_1",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). A valid path is a sequence of indices p_0, p_1, ..., p_k with k >= 0 such that: (1) p_0 = 0 or p_0 = 1; (2) for every j with 0 <= j < k, p_{j+1} - p_j is either 1 or 2; (3) p_k = n-1 or p_k = n-2. The cost of a valid path is the sum of cost[p_j] for 0 <= j <= k. Then r is the minimum cost among all valid paths.",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_2",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies 0 <= r <= 999 * len(cost).",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_3",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S_even = sum of cost[i] for all even i with 0 <= i < len(cost), and S_odd = sum of cost[i] for all odd i with 0 <= i < len(cost). The returned value r satisfies r <= S_even and r <= S_odd.",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_4",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r >= min(cost[0], cost[1]).",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_5",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "min_cost_climbing_stairs(cost) = min_cost_climbing_stairs(cost').",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999. Let cost' be the reverse of cost: len(cost') = len(cost) and cost'[i] = cost[len(cost)-1-i] for all i. (cost' also satisfies the problem constraints.)"
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_6",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "min_cost_climbing_stairs(cost) <= min_cost_climbing_stairs(cost').",
+    "preconditions": "cost and cost' are slices of 64-bit integers with len(cost) = len(cost'). Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999, 0 <= cost'[i] <= 999, and cost[i] <= cost'[i]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_7",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exists a valid path (as defined in spec_1) whose total cost equals r.",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_8",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every valid path (as defined in spec_1), its total cost is greater than or equal to r.",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_9",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals min(cost[0], cost[1]).",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999. Additionally, len(cost) = 2."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_10",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals 0.",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999. Additionally, cost[i] = 0 for all i with 0 <= i < len(cost)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_11",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The returned value r equals min(cost[1], cost[0] + cost[2]).",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have n = 3, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinCostClimbingStairs.spec_12",
+    "negation": "AegisSpec.MinCostClimbingStairs.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The returned value r satisfies r >= min(cost[n-1], cost[n-2]).",
+    "preconditions": "cost is a slice of 64-bit integers. Let n = len(cost). We have 2 <= n <= 1000, and for every i with 0 <= i < n, 0 <= cost[i] <= 999."
+  }
+]

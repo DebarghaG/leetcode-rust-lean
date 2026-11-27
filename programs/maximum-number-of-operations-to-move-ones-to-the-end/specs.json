@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxOperations.spec_1",
+    "negation": "AegisSpec.MaxOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and the integer value of r is exactly the maximum number of allowed operations that can be performed on s. Equivalently, it is the sum, over every maximal contiguous block of '0' bytes in s, of the number of '1' bytes strictly before the start of that block. Formally, for each such zero-run let a be its start index and let c(a) = |{ j | 0 ≤ j < a and s[j] = '1' }|; then r = Σ c(a), with the empty sum equal to 0 if s contains no '0'. An allowed operation chooses an index i with i+1 < len(s), s[i] = '1', and s[i+1] = '0', and moves that '1' to the right across the maximal block of zeros starting at i+1, stopping immediately before the next '1' if one exists or at the end of the string if none exists.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxOperations.spec_2",
+    "negation": "AegisSpec.MaxOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, the evaluation of max_operations s returns a result r and does not fail: there is no arithmetic overflow, no out-of-bounds slice access, and no panic.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxOperations.spec_3",
+    "negation": "AegisSpec.MaxOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_operations s returns a result r, the integer value of r is at most I(s), where I(s) is the number of pairs (i,j) such that 0 ≤ i < j < len(s), s[i] = '1', and s[j] = '0'.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxOperations.spec_4",
+    "negation": "AegisSpec.MaxOperations.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_operations s returns a result r, the integer value of r is at least Zplus(s), where Zplus(s) is the number of maximal contiguous blocks of '0' bytes whose start index a satisfies a > 0.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxOperations.spec_5",
+    "negation": "AegisSpec.MaxOperations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever max_operations s returns a result r, the integer value of r is 0 if and only if there is no index i with 0 ≤ i < len(s)-1 such that s[i] = '1' and s[i+1] = '0'.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxOperations.spec_6",
+    "negation": "AegisSpec.MaxOperations.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_operations s returns a result r, the integer value of r equals c.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, every byte of s is '0' or '1', and s has exactly one maximal contiguous block of '0' bytes. Let a be the start index of that block and let c be the number of indices j with 0 ≤ j < a and s[j] = '1'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxOperations.spec_7",
+    "negation": "AegisSpec.MaxOperations.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever max_operations s returns a result r, the integer value of r is 1.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, every byte of s is '0' or '1', s contains exactly one '1' byte, and the index i of that byte satisfies i < len(s)-1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxOperations.spec_8",
+    "negation": "AegisSpec.MaxOperations.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever max_operations s returns a result r_s and max_operations t returns a result r_t, the integer values are equal: r_t = r_s.",
+    "preconditions": "s satisfies len(s) ≥ 1 and len(s) ≤ 100000, and every byte of s is '0' or '1'. k is a nonnegative integer. t is the slice consisting of k copies of '0' followed by s. t satisfies len(t) ≤ 100000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxOperations.spec_9",
+    "negation": "AegisSpec.MaxOperations.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_operations s returns a result r_s and max_operations t returns a result r_t, if the last byte of s is '1' then r_t = r_s + o(s), and if the last byte of s is '0' then r_t = r_s, where o(s) is the number of '1' bytes in s.",
+    "preconditions": "s satisfies len(s) ≥ 1 and len(s) ≤ 100000, and every byte of s is '0' or '1'. k is an integer with k ≥ 1. t is the slice consisting of s followed by k copies of '0'. t satisfies len(t) ≤ 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxOperations.spec_10",
+    "negation": "AegisSpec.MaxOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever max_operations s returns a result r_s and max_operations t returns a result r_t, r_t = r_s + k * z(s), where z(s) is the number of maximal contiguous blocks of '0' bytes in s.",
+    "preconditions": "s satisfies len(s) ≥ 1 and len(s) ≤ 100000, and every byte of s is '0' or '1'. k is an integer with k ≥ 1. t is the slice consisting of k copies of '1' followed by s. t satisfies len(t) ≤ 100000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxOperations.spec_11",
+    "negation": "AegisSpec.MaxOperations.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_operations s returns a result r, there exists a finite sequence of exactly r allowed operations that can be applied to s. Here an allowed operation on a current string x chooses i with i+1 < len(x), x[i] = '1', and x[i+1] = '0', and moves that '1' right across the following zero block until the end or the next '1'.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxOperations.spec_12",
+    "negation": "AegisSpec.MaxOperations.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever max_operations s returns a result r, there is no finite sequence of allowed operations applied to s whose length is greater than r. Here an allowed operation on a current string x chooses i with i+1 < len(x), x[i] = '1', and x[i+1] = '0', and moves that '1' right across the following zero block until the end or the next '1'.",
+    "preconditions": "len(s) ≥ 1 and len(s) ≤ 100000, and for every i with 0 ≤ i < len(s), s[i] is either '0' (byte 48) or '1' (byte 49)."
+  }
+]

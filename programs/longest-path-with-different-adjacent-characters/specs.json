@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LongestPath.spec_1",
+    "negation": "AegisSpec.LongestPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the maximum length (number of nodes) of a valid path in the tree. A valid path is a sequence of distinct nodes v_0, ..., v_{k-1} (k >= 1) such that for every i with 0 <= i < k-1, v_i and v_{i+1} are adjacent in the tree (i.e., v_i = parent[v_{i+1}] or v_{i+1} = parent[v_i]) and s[v_i] != s[v_{i+1}]. The length of such a path is k.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LongestPath.spec_2",
+    "negation": "AegisSpec.LongestPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, overflow, panic, or go out of bounds).",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LongestPath.spec_3",
+    "negation": "AegisSpec.LongestPath.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have 1 <= r <= n.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LongestPath.spec_4",
+    "negation": "AegisSpec.LongestPath.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every valid path (as defined in spec_1) of length k, we have k <= r.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LongestPath.spec_5",
+    "negation": "AegisSpec.LongestPath.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "There exist nodes u and v with 0 <= u < n and 0 <= v < n such that the unique simple path between u and v in the tree is a valid path (as defined in spec_1) and has exactly r nodes.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LongestPath.spec_6",
+    "negation": "AegisSpec.LongestPath.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If every edge in the tree connects nodes with different characters, then the function returns r equal to the maximum number of nodes on any simple path in the tree (i.e., the tree diameter in nodes). Equivalently, r = 1 + max_{u,v in [0,n)} dist(u,v), where dist(u,v) is the number of edges on the unique simple path between u and v.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122); and for every i with 1 <= i < n, s[i] != s[parent[i]]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LongestPath.spec_7",
+    "negation": "AegisSpec.LongestPath.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns ok r, r is the maximum, over all pairs (a, b) with 0 <= a <= b < n and, for every k with a <= k < b, s[k] != s[k+1], of the number of nodes b - a + 1 in that interval.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122); and for every i with 1 <= i < n, parent[i] = i-1 (so the tree is a path 0-1-2-...-(n-1))."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LongestPath.spec_8",
+    "negation": "AegisSpec.LongestPath.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the tree is a star with center 0, then: if there exist two distinct indices i, j with 1 <= i < n, 1 <= j < n, i != j, such that s[i] != s[0] and s[j] != s[0], then r = 3; else if there exists an index i with 1 <= i < n such that s[i] != s[0], then r = 2; else r = 1.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122); and for every i with 1 <= i < n, parent[i] = 0 (so the tree is a star with center 0)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LongestPath.spec_9",
+    "negation": "AegisSpec.LongestPath.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r = 1 if and only if for every i with 1 <= i < n, s[i] = s[parent[i]]. Equivalently, r >= 2 if and only if there exists an index i with 1 <= i < n such that s[i] != s[parent[i]].",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LongestPath.spec_10",
+    "negation": "AegisSpec.LongestPath.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r = n if and only if the underlying undirected tree is a path (i.e., every node has degree at most 2) and for every i with 1 <= i < n, s[i] != s[parent[i]].",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LongestPath.spec_11",
+    "negation": "AegisSpec.LongestPath.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns the same result when called with (parent, s) and with (parent', s'). That is, longest_path(parent, s) = longest_path(parent', s').",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122). Let parent' be an array of length n with parent'[0] = -1 and for every i with 1 <= i < n, 0 <= parent'[i] < n, such that parent' defines a tree rooted at 0. Let s' be an array of length n with lowercase English letters. Suppose there exists a bijection f: [0,n) -> [0,n) such that f(0) = 0, for every i with 1 <= i < n the unordered pair {f(i), f(parent[i])} is an edge in the tree defined by parent' (i.e., f(i) = parent'[f(parent[i])] or f(parent[i]) = parent'[f(i)]), and s[i] = s'[f(i)] for all i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LongestPath.spec_12",
+    "negation": "AegisSpec.LongestPath.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "longest_path(parent', s') = longest_path(parent, s).",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122). Let parent' be an array of length n+1 such that parent'[i] = parent[i] for 0 <= i < n, and parent'[n] = j for some j with 0 <= j < n. Let s' be an array of length n+1 such that s'[i] = s[i] for 0 <= i < n, and s'[n] = s[j]. Then parent' defines a tree rooted at 0 (with n+1 nodes) and s' consists of lowercase English letters."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LongestPath.spec_13",
+    "negation": "AegisSpec.LongestPath.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "longest_path(parent', s') is either longest_path(parent, s) or longest_path(parent, s) + 1.",
+    "preconditions": "n = len(parent) = len(s); n >= 1; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n and following parent pointers from i eventually reaches 0 (so parent defines a tree rooted at 0); for every i with 0 <= i < n, s[i] is a lowercase English letter (97 <= s[i] <= 122). Let parent' be an array of length n+1 such that parent'[i] = parent[i] for 0 <= i < n, and parent'[n] = j for some j with 0 <= j < n. Let s' be an array of length n+1 such that s'[i] = s[i] for 0 <= i < n, and s'[n] = c where c is a lowercase English letter and c != s[j]. Then parent' defines a tree rooted at 0 (with n+1 nodes) and s' consists of lowercase English letters."
+  }
+]

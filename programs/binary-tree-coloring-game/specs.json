@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_1",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r = true if and only if L > n/2 or R > n/2 or P > n/2, where L is the number of nodes in the left child subtree of the node with value x (0 if that node has no left child), R is the number of nodes in its right child subtree (0 if it has no right child), and P = n - 1 - L - R. Equivalently, since n is odd, r = true if and only if 2*L > n or 2*R > n or 2*P > n.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_2",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (a Bool) and does not fail for every input satisfying the preconditions.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_3",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns true, max(L, R, P) >= (n+1)/2, where L is the number of nodes in the left child subtree of the node with value x, R is the number of nodes in its right child subtree, and P = n - 1 - L - R.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_4",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns false, max(L, R, P) <= (n-1)/2, where L is the number of nodes in the left child subtree of the node with value x, R is the number of nodes in its right child subtree, and P = n - 1 - L - R.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_5",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns true, there exists a node y in root with value y != x such that y is adjacent to the node with value x and the connected component containing y after deleting the node with value x from the tree has size > n/2.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_6",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "If the node with value x has a neighbor y such that the connected component containing y after deleting the node with value x from the tree has size > n/2, then the function returns a result r and r = true.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_7",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let root' be the tree obtained from root by swapping the left and right child subtrees of the node with value x, leaving all other nodes and values unchanged. Then both calls btree_game_winning_move(root, n, x) and btree_game_winning_move(root', n, x) return results, and the returned Bools are equal.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_8",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let root' be the mirror image of root, defined by recursively swapping the left and right child of every node. Then both calls btree_game_winning_move(root, n, x) and btree_game_winning_move(root', n, x) return results, and the returned Bools are equal.",
+    "preconditions": "root is a binary tree with exactly n nodes; n is odd and 1 <= n <= 100; the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in root."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BtreeGameWinningMove.spec_9",
+    "negation": "AegisSpec.BtreeGameWinningMove.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the node with value x has left-subtree size L and right-subtree size R in both root1 and root2, then both calls btree_game_winning_move(root1, n, x) and btree_game_winning_move(root2, n, x) return results, and the returned Bools are equal.",
+    "preconditions": "root1 and root2 are binary trees, each with exactly n nodes; n is odd and 1 <= n <= 100; in each tree the node values are pairwise distinct and are exactly the integers 1,2,...,n; 1 <= x <= n, so the node whose value is x exists in each tree."
+  }
+]

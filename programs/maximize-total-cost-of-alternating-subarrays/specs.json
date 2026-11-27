@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_1",
+    "negation": "AegisSpec.MaximumTotalCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r is the maximum total cost over all valid splits of nums. A valid split is a sequence of nonempty contiguous subarrays [l_0,r_0],...,[l_{k-1},r_{k-1}] with k >= 1, l_0 = 0, r_{k-1} = len(nums)-1, and l_{j+1} = r_j + 1 for all j < k-1. The cost of a subarray [l,r] is cost(l,r) = sum_{j=l}^{r} (-1)^(j-l) * nums[j] = nums[l] - nums[l+1] + ... + (-1)^(r-l) * nums[r]. The total cost of the split is the sum of cost(l_j,r_j) over j = 0,...,k-1.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_2",
+    "negation": "AegisSpec.MaximumTotalCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every nums satisfying the preconditions, maximum_total_cost(nums) returns a result; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_3",
+    "negation": "AegisSpec.MaximumTotalCost.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r >= sum_{i=0}^{len(nums)-1} nums[i]. This lower bound is the total cost of the valid split into the len(nums) singleton subarrays [0,0],[1,1],...,[len(nums)-1,len(nums)-1].",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_4",
+    "negation": "AegisSpec.MaximumTotalCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r >= sum_{i=0}^{len(nums)-1} (-1)^i * nums[i], which is the cost of the single subarray [0,len(nums)-1].",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_5",
+    "negation": "AegisSpec.MaximumTotalCost.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r <= sum_{i=0}^{len(nums)-1} |nums[i]|, where |x| is the usual absolute value.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_6",
+    "negation": "AegisSpec.MaximumTotalCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r = nums[0] + |nums[1]|.",
+    "preconditions": "len(nums) = 2 and for every i with 0 <= i < 2, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_7",
+    "negation": "AegisSpec.MaximumTotalCost.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r = sum_{i=0}^{len(nums)-1} nums[i].",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_8",
+    "negation": "AegisSpec.MaximumTotalCost.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r = nums[0].",
+    "preconditions": "1 <= len(nums) <= 10^5, -10^9 <= nums[0] <= 10^9, and for every i with 1 <= i < len(nums), nums[i] = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_9",
+    "negation": "AegisSpec.MaximumTotalCost.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, the integer r - sum_{i=0}^{len(nums)-1} nums[i] is even; equivalently, r and sum_{i=0}^{len(nums)-1} nums[i] have the same parity.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_10",
+    "negation": "AegisSpec.MaximumTotalCost.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r and maximum_total_cost(nums') returns a result r', we have r' = r + c.",
+    "preconditions": "nums and nums' both satisfy 1 <= len <= 10^5 and all entries between -10^9 and 10^9. len(nums') = len(nums), nums'[0] = nums[0] + c for some integer c, and nums'[i] = nums[i] for every i with 1 <= i < len(nums)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_11",
+    "negation": "AegisSpec.MaximumTotalCost.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r and maximum_total_cost(B) returns a result r_B, we have r_B = c * r.",
+    "preconditions": "nums satisfies 1 <= len(nums) <= 10^5 and all entries between -10^9 and 10^9. Let B be the same-length array with B[i] = c * nums[i] for every i, where c is a nonnegative integer and every B[i] satisfies -10^9 <= B[i] <= 10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_12",
+    "negation": "AegisSpec.MaximumTotalCost.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r and maximum_total_cost(nums') returns a result r', we have r' = r.",
+    "preconditions": "nums satisfies 1 <= len(nums) <= 99999 and all entries between -10^9 and 10^9. Let nums' be the length len(nums)+1 array with nums'[i] = nums[i] for 0 <= i < len(nums) and nums'[len(nums)] = 0."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_13",
+    "negation": "AegisSpec.MaximumTotalCost.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, the following holds: if a >= 0 then r = len(nums) * a; if a < 0 and len(nums) is even then r = 0; if a < 0 and len(nums) is odd then r = a.",
+    "preconditions": "1 <= len(nums) <= 10^5, there is an integer a with nums[i] = a for every i with 0 <= i < len(nums), and -10^9 <= a <= 10^9."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_14",
+    "negation": "AegisSpec.MaximumTotalCost.spec_14_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r >= nums[0] + |nums[1]| + sum_{i=2}^{len(nums)-1} nums[i].",
+    "preconditions": "2 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_15",
+    "negation": "AegisSpec.MaximumTotalCost.spec_15_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, let n=len(nums), T=sum_{i=0}^{n-1} nums[i], and let M be the maximum of sum_{i in S} max(0, -nums[i]) over all finite sets S subset of {i | 1 <= i < n} that contain no two consecutive integers (the empty set is allowed). Then r = T + 2*M.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_16",
+    "negation": "AegisSpec.MaximumTotalCost.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, let n=len(nums). For 0 <= i < n let P_i be the maximum total cost over valid splits of the prefix nums[0..i] in which nums[i] has coefficient +1, and let Q_i be the analogous maximum in which nums[i] has coefficient -1 (Q_0 is undefined). Then P_0=nums[0] and, for 1 <= i < n, P_i = max(P_{i-1}, Q_{i-1}) + nums[i] and Q_i = P_{i-1} - nums[i] (ignoring an undefined value in the max); finally r = max(P_{n-1}, Q_{n-1}) (ignoring an undefined value).",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaximumTotalCost.spec_17",
+    "negation": "AegisSpec.MaximumTotalCost.spec_17_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever maximum_total_cost(nums) returns a result r, r <= nums[0] + sum_{i=1}^{len(nums)-1} |nums[i]|.",
+    "preconditions": "1 <= len(nums) <= 10^5 and for every i with 0 <= i < len(nums), -10^9 <= nums[i] <= 10^9."
+  }
+]

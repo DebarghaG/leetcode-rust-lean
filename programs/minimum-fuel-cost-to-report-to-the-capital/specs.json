@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_1",
+    "negation": "AegisSpec.MinimumFuelCost.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum number of liters of fuel needed for all representatives to reach city 0, equivalently r = sum_{k=0}^{len(roads)-1} ceil(c_k / seats), where c_k is the number of vertices u in {0,...,n-1} such that the unique simple path in G from u to 0 uses the undirected edge {roads[k][0], roads[k][1]}; this c_k is the size of the component of G with that edge removed that does not contain 0. For len(roads)=0 the sum is empty and equals 0.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 (so 0 <= len(roads) <= 99999) and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} for 0 <= k < len(roads) is a tree (connected and acyclic)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_2",
+    "negation": "AegisSpec.MinimumFuelCost.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, access roads out of bounds, or overflow in producing the returned result.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_3",
+    "negation": "AegisSpec.MinimumFuelCost.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= len(roads).",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_4",
+    "negation": "AegisSpec.MinimumFuelCost.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{u=0}^{n-1} dist_G(0,u), where dist_G(0,u) is the number of edges on the unique simple path in G from 0 to u, with dist_G(0,0)=0.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_5",
+    "negation": "AegisSpec.MinimumFuelCost.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "roads = [] and 1 <= seats <= 100000. Thus n = len(roads) + 1 = 1, and G is the single-vertex tree {0}."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_6",
+    "negation": "AegisSpec.MinimumFuelCost.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "len(roads) = 1, n = len(roads) + 1 = 2, and 1 <= seats <= 100000. The unique road has endpoints 0 and 1, in either order, so G is the two-vertex tree."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_7",
+    "negation": "AegisSpec.MinimumFuelCost.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = len(roads) if and only if for every k with 0 <= k < len(roads), c_k <= seats, where c_k is the size of the component of G with edge {roads[k][0], roads[k][1]} removed that does not contain 0.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_8",
+    "negation": "AegisSpec.MinimumFuelCost.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = sum_{u=0}^{n-1} dist_G(0,u), where dist_G(0,u) is the number of edges on the unique simple path in G from 0 to u, with dist_G(0,0)=0.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and seats = 1. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_9",
+    "negation": "AegisSpec.MinimumFuelCost.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If minimum_fuel_cost(roads, s1) returns r1 and minimum_fuel_cost(roads, s2) returns r2, then r1 >= r2.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree. Let s1 and s2 be integers with 1 <= s1 <= s2 <= 100000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_10",
+    "negation": "AegisSpec.MinimumFuelCost.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if len(roads) = 0.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_11",
+    "negation": "AegisSpec.MinimumFuelCost.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns a result r and r = len(roads).",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and 1 <= seats <= 100000. For every k with 0 <= k < len(roads), len(roads[k]) = 2, 0 <= roads[k][0] < n, 0 <= roads[k][1] < n, and roads[k][0] != roads[k][1]. The undirected graph G with vertices {0,...,n-1} and edges {roads[k][0], roads[k][1]} is a tree, and every road has 0 as one of its endpoints (so G is a star centered at 0)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_12",
+    "negation": "AegisSpec.MinimumFuelCost.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = n*(n-1)/2.",
+    "preconditions": "Let n = len(roads) + 1. The problem constraints hold: 1 <= n <= 100000 and seats = 1. The edges in roads are exactly the n-1 undirected pairs {i,i+1} for i = 0,...,n-2, each appearing once regardless of order or endpoint orientation, so G is the path 0-1-2-...-(n-1)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumFuelCost.spec_13",
+    "negation": "AegisSpec.MinimumFuelCost.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If minimum_fuel_cost(roads1, seats) returns r1 and minimum_fuel_cost(roads2, seats) returns r2, then r1 = r2.",
+    "preconditions": "roads1 and roads2 are two lists satisfying the valid-tree preconditions, with the same n = len(roads1) + 1 = len(roads2) + 1, and they define the same undirected edge set on vertices {0,...,n-1}. The constraints 1 <= n <= 100000 and 1 <= seats <= 100000 hold."
+  }
+]

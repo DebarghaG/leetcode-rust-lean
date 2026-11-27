@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_1",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is a vector of length n, and for every v with 0 <= v < n, r[v] = size(v), where size is defined as follows: define depth(0)=0 and for i>=1, depth(i)=depth(parent[i])+1; for nodes x,y, y is a strict ancestor of x iff y is on the parent chain from parent[x] to 0 (i.e., either parent[x]=y, or parent[x]!=-1 and y is a strict ancestor of parent[x]); for each x with 1<=x<n, let A(x) = { y : 0<=y<n, y is a strict ancestor of x, and s[y]=s[x] }; define newpar(x) as the unique y in A(x) with maximal depth if A(x) is nonempty, and as parent[x] if A(x) is empty; the final tree has nodes {0,...,n-1}, root 0, and for each x>=1 the parent of x is newpar(x); for nodes u,v, v is an ancestor of u in the final tree (including u=v) iff v=u, or (u!=0 and v is an ancestor of newpar(u) in the final tree); finally, size(v) is the number of u with 0<=u<n such that v is an ancestor of u in the final tree.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_2",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, or panic) for every input satisfying the preconditions.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_3",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, 1 <= r[v] <= n.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_4",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r[0] = n.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_5",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, r[v] = 1 + sum_{u : 1 <= u < n and newpar(u) = v} r[u], where newpar is defined as in the main specification: newpar(u) is the unique strict ancestor y of u with s[y]=s[u] and maximal depth if such a y exists, and newpar(u)=parent[u] otherwise.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_6",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, r[v] equals the number of u with 0 <= u < n such that either u=v, or (u!=0 and v appears in the sequence parent[u], parent[parent[u]], ..., 0).",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n. Additionally, for every x with 1 <= x < n and every y that appears in the sequence parent[x], parent[parent[x]], ..., 0, we have s[y] != s[x]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_7",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, r[v] <= the number of u with 0 <= u < n such that either u=v, or (u!=0 and v appears in the sequence parent[u], parent[parent[u]], ..., 0).",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_8",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every v with 0 <= v < n, if there is no u with 1 <= u < n and newpar(u) = v (where newpar is as defined in the main specification), then r[v] = 1.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindSubtreeSizes.spec_9",
+    "negation": "AegisSpec.FindSubtreeSizes.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every v with 1 <= v < n, 1 <= r[v] < n.",
+    "preconditions": "Let n = len(parent). The inputs satisfy: len(s) = n; 1 <= n <= 100000; parent[0] = -1; for every i with 1 <= i < n, 0 <= parent[i] < n; for every i with 1 <= i < n, repeatedly applying parent (i, parent[i], parent[parent[i]], ...) reaches 0 after finitely many steps (equivalently, parent describes a valid rooted tree at 0); and s consists only of lowercase English letters, i.e., 97 <= s[i] <= 122 for every i with 0 <= i < n."
+  }
+]

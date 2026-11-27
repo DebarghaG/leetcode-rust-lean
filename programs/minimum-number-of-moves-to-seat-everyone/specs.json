@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_1",
+    "negation": "AegisSpec.MinMovesToSeat.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r (viewed as an integer) equals the minimum, over all bijections sigma from {0,...,n-1} to {0,...,n-1}, of sum_{j=0}^{n-1} abs(students[j] - seats[sigma(j)]).",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_2",
+    "negation": "AegisSpec.MinMovesToSeat.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail by overflow, out-of-bounds access, or panic) for every pair of slices satisfying the preconditions.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_3",
+    "negation": "AegisSpec.MinMovesToSeat.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, let a be a list of length n obtained by rearranging the multiset {seats[0],...,seats[n-1]} in nondecreasing order, and let b be a list of length n obtained by rearranging the multiset {students[0],...,students[n-1]} in nondecreasing order. Then r = sum_{i=0}^{n-1} abs(b[i] - a[i]).",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_4",
+    "negation": "AegisSpec.MinMovesToSeat.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= abs((sum_{j=0}^{n-1} students[j]) - (sum_{i=0}^{n-1} seats[i])).",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_5",
+    "negation": "AegisSpec.MinMovesToSeat.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= sum_{j=0}^{n-1} abs(students[j] - seats[j]).",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_6",
+    "negation": "AegisSpec.MinMovesToSeat.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, r and (sum_{j=0}^{n-1} students[j] - sum_{i=0}^{n-1} seats[i]) have the same parity; equivalently, they are congruent modulo 2.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_7",
+    "negation": "AegisSpec.MinMovesToSeat.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For any bijections p and q from {0,...,n-1} to {0,...,n-1}, let seats' be the slice defined by seats'[i] = seats[p(i)] and students' be the slice defined by students'[j] = students[q(j)]. Whenever the function returns r on (seats, students) and returns r' on (seats', students'), we have r = r'.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_8",
+    "negation": "AegisSpec.MinMovesToSeat.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every integer c such that 1 <= seats[i]+c <= 100 for every 0 <= i < n and 1 <= students[j]+c <= 100 for every 0 <= j < n, let seats'[i] = seats[i]+c and students'[j] = students[j]+c. Whenever the function returns r on (seats, students) and returns r' on (seats', students'), we have r = r'.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_9",
+    "negation": "AegisSpec.MinMovesToSeat.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every positive integer k such that 1 <= k*seats[i] <= 100 for every 0 <= i < n and 1 <= k*students[j] <= 100 for every 0 <= j < n, let seats'[i] = k*seats[i] and students'[j] = k*students[j]. Whenever the function returns r on (seats, students) and returns r' on (seats', students'), we have r' = k*r.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinMovesToSeat.spec_10",
+    "negation": "AegisSpec.MinMovesToSeat.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a bijection sigma from {0,...,n-1} to {0,...,n-1} such that sum_{j=0}^{n-1} abs(students[j] - seats[sigma(j)]) = r.",
+    "preconditions": "n = len(seats) = len(students), 1 <= n <= 100, for every i with 0 <= i < n we have 1 <= seats[i] <= 100, and for every j with 0 <= j < n we have 1 <= students[j] <= 100."
+  }
+]

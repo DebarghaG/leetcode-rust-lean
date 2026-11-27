@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsValidSerialization.spec_1",
+    "negation": "AegisSpec.IsValidSerialization.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_valid_serialization returns a Boolean result r, r = true if and only if tokens(preorder) belongs to the least set V of token lists satisfying: (i) the one-element list ['#'] is in V; (ii) if v is an integer token, L is in V, and R is in V, then the concatenation [v] ++ L ++ R is in V. Equivalently, r = true iff tokens(preorder) is exactly the preorder serialization of some finite binary tree, where each null child is written '#', each non-null node is written as its integer token, and the children of a non-null node are serialized in preorder order left then right. If no such tree exists, r = false.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsValidSerialization.spec_2",
+    "negation": "AegisSpec.IsValidSerialization.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every preorder satisfying the precondition, is_valid_serialization returns a Boolean result r; it does not fail, panic, overflow, or access out of bounds.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsValidSerialization.spec_3",
+    "negation": "AegisSpec.IsValidSerialization.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = len(tokens(preorder)). If m is even, then whenever is_valid_serialization returns a Boolean result r, r = false. Hence a true result can occur only when the number of tokens is odd.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsValidSerialization.spec_4",
+    "negation": "AegisSpec.IsValidSerialization.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let h be the number of tokens equal to '#' in tokens(preorder), and let z be the number of tokens that are not '#' (integer tokens). If h != z + 1, then whenever is_valid_serialization returns a Boolean result r, r = false. Equivalently, if r = true then h = z + 1.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsValidSerialization.spec_5",
+    "negation": "AegisSpec.IsValidSerialization.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For any prefix P of the token list tokens(preorder), let int(P) be the number of non-'#' tokens in P and let len(P) be the number of tokens in P. If there exists such a prefix P with len(P) > 1 + 2*int(P), then whenever is_valid_serialization returns a Boolean result r, r = false.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsValidSerialization.spec_6",
+    "negation": "AegisSpec.IsValidSerialization.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For any proper prefix P of tokens(preorder), meaning 0 <= len(P) < len(tokens(preorder)), let int(P) be the number of non-'#' tokens in P and let len(P) be the number of tokens in P. If len(P) = 1 + 2*int(P) for some proper prefix P, then whenever is_valid_serialization returns a Boolean result r, r = false.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsValidSerialization.spec_7",
+    "negation": "AegisSpec.IsValidSerialization.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(tokens(preorder)) = 1, then whenever is_valid_serialization returns a Boolean result r, r = true if and only if the unique token is '#'. In particular, the input containing only '#' returns true, and a one-token integer input returns false.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsValidSerialization.spec_8",
+    "negation": "AegisSpec.IsValidSerialization.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the first token of tokens(preorder) is '#' and len(tokens(preorder)) > 1, then whenever is_valid_serialization returns a Boolean result r, r = false.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsValidSerialization.spec_9",
+    "negation": "AegisSpec.IsValidSerialization.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If the last token of tokens(preorder) is not '#', then whenever is_valid_serialization returns a Boolean result r, r = false. Equivalently, if r = true then the last token is '#'.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsValidSerialization.spec_10",
+    "negation": "AegisSpec.IsValidSerialization.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose tokens(preorder1) and tokens(preorder2) have the same length m, and for every i with 0 <= i < m, the i-th token of preorder1 is '#' if and only if the i-th token of preorder2 is '#'. Then whenever is_valid_serialization returns Boolean results r1 on preorder1 and r2 on preorder2, r1 = r2. Thus validity depends only on the pattern of null versus non-null tokens, not on the integer values.",
+    "preconditions": "preorder1 and preorder2 each satisfy the format precondition: each is an ASCII byte slice with 1 <= length <= 10^4; splitting its bytes at commas gives a nonempty token list with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsValidSerialization.spec_11",
+    "negation": "AegisSpec.IsValidSerialization.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The token list [v, '#'] ++ T is the preorder token list of some finite binary tree if and only if T is the preorder token list of some finite binary tree. Consequently, whenever is_valid_serialization returns Boolean results r on preorder and r2 on preorder2, r2 = r.",
+    "preconditions": "v is an integer token, meaning a nonempty decimal numeral denoting an integer in [0,100]; T is a nonempty token list obtainable from some byte string satisfying the format precondition; preorder and preorder2 are ASCII byte slices satisfying the format precondition with tokens(preorder) = T and tokens(preorder2) = [v, '#'] ++ T."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsValidSerialization.spec_12",
+    "negation": "AegisSpec.IsValidSerialization.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If is_valid_serialization returns true on preorder, then is_valid_serialization returns true on preorder2. Equivalently, if T is the preorder token list of some finite binary tree, then [v] ++ T ++ ['#'] is also the preorder token list of some finite binary tree.",
+    "preconditions": "v is an integer token, meaning a nonempty decimal numeral denoting an integer in [0,100]; T is a nonempty token list obtainable from some byte string satisfying the format precondition; preorder and preorder2 are ASCII byte slices satisfying the format precondition with tokens(preorder) = T and tokens(preorder2) = [v] ++ T ++ ['#']."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsValidSerialization.spec_13",
+    "negation": "AegisSpec.IsValidSerialization.spec_13_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever is_valid_serialization returns a Boolean result r, if r = true then there exists a finite binary tree T such that tokens(preorder) is exactly the preorder token list of T. Moreover, for any such T, if z is the number of non-'#' tokens in tokens(preorder), then T has exactly z non-null nodes and z+1 null child entries, and the non-'#' tokens of tokens(preorder), read in order, are exactly the values of those non-null nodes in preorder.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsValidSerialization.spec_14",
+    "negation": "AegisSpec.IsValidSerialization.spec_14_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let h(P) be the number of '#' tokens in a prefix P of tokens(preorder), and let z(P) be the number of non-'#' tokens in P. Then whenever is_valid_serialization returns a Boolean result r, r = true if and only if h(tokens(preorder)) = z(tokens(preorder)) + 1 and for every proper prefix P of tokens(preorder), h(P) <= z(P). Equivalently, the slot count starting at 1, decremented by 1 for every token and then incremented by 2 for every non-'#' token, is positive before each token and is 0 after the last token.",
+    "preconditions": "preorder is an ASCII byte slice with 1 <= len(preorder) <= 10^4; splitting its bytes at commas gives a nonempty token list tokens(preorder) with no empty tokens, and every token is either exactly '#' or a nonempty decimal numeral denoting an integer in [0,100]."
+  }
+]

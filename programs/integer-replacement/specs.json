@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IntegerReplacement.spec_1",
+    "negation": "AegisSpec.IntegerReplacement.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every integer n satisfying the precondition, integer_replacement(n) returns a result r, and r is the least nonnegative integer k for which there exists a valid operation sequence from n to 1 of length k. A valid operation sequence from n to 1 of length k is a finite list of positive integers a_0, ..., a_k such that a_0 = n, a_k = 1, a_i != 1 for every i < k, and for every i with 0 <= i < k: if a_i is even then a_{i+1} = a_i / 2, while if a_i is odd then a_{i+1} = a_i + 1 or a_{i+1} = a_i - 1. Equivalently, r is the minimum number of allowed operations needed to turn n into 1.",
+    "preconditions": "1 <= n <= 2^31 - 1 (i.e. 1 <= n <= 2147483647)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IntegerReplacement.spec_2",
+    "negation": "AegisSpec.IntegerReplacement.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every integer n satisfying the precondition, integer_replacement(n) returns a result r; it does not fail (no arithmetic overflow, out-of-bounds access, or panic).",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IntegerReplacement.spec_3",
+    "negation": "AegisSpec.IntegerReplacement.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, 0 <= r <= 62.",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IntegerReplacement.spec_4",
+    "negation": "AegisSpec.IntegerReplacement.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, r >= ceil_log2(n), where ceil_log2(n) is the least integer k >= 0 such that n <= 2^k.",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IntegerReplacement.spec_5",
+    "negation": "AegisSpec.IntegerReplacement.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, r <= 2 * ceil_log2(n), where ceil_log2(n) is the least integer k >= 0 such that n <= 2^k.",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IntegerReplacement.spec_6",
+    "negation": "AegisSpec.IntegerReplacement.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, r = 0 if and only if n = 1.",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IntegerReplacement.spec_7",
+    "negation": "AegisSpec.IntegerReplacement.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every such n and k, whenever integer_replacement(n) returns a result a and integer_replacement(2^k * n) returns a result b, b = a + k.",
+    "preconditions": "1 <= n <= 2^31 - 1, k >= 0, and 2^k * n <= 2^31 - 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IntegerReplacement.spec_8",
+    "negation": "AegisSpec.IntegerReplacement.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a, integer_replacement(n+1) returns b, and integer_replacement(2n+1) returns c, we have c = 2 + min(a, b).",
+    "preconditions": "1 <= n <= 2^30 - 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IntegerReplacement.spec_9",
+    "negation": "AegisSpec.IntegerReplacement.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, there exists a valid operation sequence from n to 1 of length r (with the same definition as in spec_1: a_0=n, a_r=1, positive entries, a_i != 1 for i < r, and each step follows the even/odd rules).",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IntegerReplacement.spec_10",
+    "negation": "AegisSpec.IntegerReplacement.spec_10_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every integer n satisfying the precondition, whenever integer_replacement(n) returns a result r, every valid operation sequence from n to 1 has length at least r.",
+    "preconditions": "1 <= n <= 2^31 - 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IntegerReplacement.spec_11",
+    "negation": "AegisSpec.IntegerReplacement.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever integer_replacement(2147483647) returns a result r, r = 32.",
+    "preconditions": "n = 2^31 - 1 = 2147483647."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IntegerReplacement.spec_12",
+    "negation": "AegisSpec.IntegerReplacement.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every such n, whenever integer_replacement(n-1) returns a, integer_replacement(n) returns b, and integer_replacement(n+1) returns c, we have b = 1 + min(a, c).",
+    "preconditions": "3 <= n <= 2^31 - 3 and n is odd."
+  }
+]

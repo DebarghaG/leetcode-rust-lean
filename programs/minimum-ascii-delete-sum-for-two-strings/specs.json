@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_1",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum, over all byte sequences t that are common subsequences of s1 and s2, of (sum_ascii(s1) + sum_ascii(s2) - 2 * sum_ascii(t)). Here sum_ascii(x) = Sigma_{i=0}^{len(x)-1} ascii(x[i]), ascii(b) is the byte value of b, and t is a common subsequence of s1 and s2 iff t can be obtained by deleting zero or more bytes from each of s1 and s2 while preserving order; the empty t is allowed and is always common. Equivalently, r is the lowest total ASCII value of deleted characters needed to make the two resulting strings equal.",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed, as in the supplied examples."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_2",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or access out of bounds on any input satisfying the preconditions.",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_3",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= the absolute value of (sum_ascii(s1) - sum_ascii(s2)).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_4",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = sum_ascii(s2) - sum_ascii(s1).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and s1 is a subsequence of s2: there exist indices 0 <= j_0 < ... < j_{len(s1)-1} < len(s2) such that s2[j_i] = s1[i] for every i with 0 <= i < len(s1). If len(s1) = 0, this index list is empty."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_5",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and r = sum_ascii(s1) - sum_ascii(s2).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and s2 is a subsequence of s1: there exist indices 0 <= i_0 < ... < i_{len(s2)-1} < len(s1) such that s1[i_j] = s2[j] for every j with 0 <= j < len(s2). If len(s2) = 0, this index list is empty."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_6",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for the ordered pair (s1, s2) and returns r' for the ordered pair (s2, s1), then r = r'.",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_7",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = sum_ascii(s1) + sum_ascii(s2).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and for every i with 0 <= i < len(s1) and every j with 0 <= j < len(s2), s1[i] != s2[j]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_8",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for (s1, s2) and returns r' for the slices (s1[1..len(s1)-1], s2[1..len(s2)-1]) obtained by removing the first byte from each string, then r = r'.",
+    "preconditions": "len(s1) > 0, len(s2) > 0, len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and s1[0] = s2[0]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_9",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r for (s1, s2) and returns r' for the slices (s1[0..len(s1)-2], s2[0..len(s2)-2]) obtained by removing the last byte from each string, then r = r'.",
+    "preconditions": "len(s1) > 0, len(s2) > 0, len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and s1[len(s1)-1] = s2[len(s2)-1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_10",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r mod 2 = (sum_ascii(s1) + sum_ascii(s2)) mod 2.",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_11",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every common subsequence t of s1 and s2, r <= sum_ascii(s1) + sum_ascii(s2) - 2 * sum_ascii(t).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_12",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a common subsequence t of s1 and s2 such that r = sum_ascii(s1) + sum_ascii(s2) - 2 * sum_ascii(t).",
+    "preconditions": "len(s1) <= 1000, len(s2) <= 1000, and every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122); empty slices are allowed."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumDeleteSum.spec_13",
+    "negation": "AegisSpec.MinimumDeleteSum.spec_13_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "If the function returns r for (s1, s2), returns r1 for (s1 with its first byte removed, s2), and returns r2 for (s1, s2 with its first byte removed), then r = min(ascii(s1[0]) + r1, ascii(s2[0]) + r2). Here ascii(b) is the byte value of b.",
+    "preconditions": "len(s1) > 0, len(s2) > 0, len(s1) <= 1000, len(s2) <= 1000, every byte of s1 and s2 is a lowercase English letter (97 <= byte <= 122), and s1[0] != s2[0]."
+  }
+]

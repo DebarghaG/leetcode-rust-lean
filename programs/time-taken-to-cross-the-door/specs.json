@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.TimeTaken.spec_1",
+    "negation": "AegisSpec.TimeTaken.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that len(r) = n and, for every i with 0 <= i < n, arrival[i] <= r[i]. For each integer t >= 0 define W_t = { i | 0 <= i < n, arrival[i] <= t, and r[i] >= t }. For each integer t >= 0 define d_t as follows: d_t = 1 if t = 0 or no i has r[i] = t-1; otherwise d_t = state[q] where q is the unique i with r[i] = t-1. For every integer t >= 0: (a) if W_t is empty, then no i has r[i] = t; (b) if W_t is nonempty, then exactly one i has r[i] = t, and if c is that person, then: if some j in W_t has state[j] = d_t, then state[c] = d_t and c <= j for every j in W_t with state[j] = d_t; if no j in W_t has state[j] = d_t, then c <= j for every j in W_t. These conditions determine r completely.",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing (arrival[i] <= arrival[i+1] for 0 <= i < n-1), 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n. Here state[i] = 0 means person i wants to enter and state[i] = 1 means person i wants to exit."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.TimeTaken.spec_2",
+    "negation": "AegisSpec.TimeTaken.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or perform an out-of-bounds access.",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.TimeTaken.spec_3",
+    "negation": "AegisSpec.TimeTaken.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = n = len(arrival) = len(state).",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.TimeTaken.spec_4",
+    "negation": "AegisSpec.TimeTaken.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] >= arrival[i].",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.TimeTaken.spec_5",
+    "negation": "AegisSpec.TimeTaken.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r[i] <= arrival[i] + (n - 1).",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.TimeTaken.spec_6",
+    "negation": "AegisSpec.TimeTaken.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for all i,j with 0 <= i < j < n, r[i] != r[j].",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.TimeTaken.spec_7",
+    "negation": "AegisSpec.TimeTaken.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, for every integer t >= 0, if there exists i with 0 <= i < n, arrival[i] <= t, and r[i] >= t, then there exists j with 0 <= j < n and r[j] = t.",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.TimeTaken.spec_8",
+    "negation": "AegisSpec.TimeTaken.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for all i,j with 0 <= i < j < n and state[i] = state[j], we have r[i] < r[j].",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.TimeTaken.spec_9",
+    "negation": "AegisSpec.TimeTaken.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t >= 1, if there is q with 0 <= q < n and r[q] = t-1, and if there is j with 0 <= j < n, arrival[j] <= t, r[j] >= t, and state[j] = state[q], then there is c with 0 <= c < n, r[c] = t, and state[c] = state[q].",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.TimeTaken.spec_10",
+    "negation": "AegisSpec.TimeTaken.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every integer t >= 0 such that t = 0 or no i has r[i] = t-1, if W_t = { i | 0 <= i < n, arrival[i] <= t, r[i] >= t } is nonempty, then there is a unique c with r[c] = t; moreover, if some j in W_t has state[j] = 1 then state[c] = 1, and if no j in W_t has state[j] = 1 then state[c] = 0.",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.TimeTaken.spec_11",
+    "negation": "AegisSpec.TimeTaken.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, for every integer t >= 0, if W_t = { i | 0 <= i < n, arrival[i] <= t, r[i] >= t } is nonempty and all members of W_t have the same state, then there is a unique c with r[c] = t, and c is the smallest-index member of W_t (that is, c is in W_t and c <= j for every j in W_t).",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.TimeTaken.spec_12",
+    "negation": "AegisSpec.TimeTaken.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t >= 1, if there is q with r[q] = t-1, and if no j satisfies arrival[j] <= t, r[j] >= t, and state[j] = state[q], and if W_t = { i | 0 <= i < n, arrival[i] <= t, r[i] >= t } is nonempty, then there is a unique c with r[c] = t; moreover state[c] != state[q] and c <= j for every j in W_t.",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.TimeTaken.spec_13",
+    "negation": "AegisSpec.TimeTaken.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer t >= 0 with t = 0 or no i having r[i] = t-1, for every i with state[i] = 0, arrival[i] <= t, r[i] >= t and every j with state[j] = 1, arrival[j] <= t, r[j] >= t, we have r[j] < r[i].",
+    "preconditions": "Let n = len(arrival). n is an integer with 1 <= n <= 100000, len(arrival) = len(state) = n, arrival is non-decreasing, 0 <= arrival[i] <= n for every 0 <= i < n, and state[i] is either 0 or 1 for every 0 <= i < n."
+  }
+]

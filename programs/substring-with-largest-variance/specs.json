@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LargestVariance.spec_1",
+    "negation": "AegisSpec.LargestVariance.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r is the maximum, over all integers l and h with 0 <= l < h <= len(s), of the variance of the non-empty substring s[l..h). For such a substring and a byte c, let cnt(c,l,h) be the number of indices i with l <= i < h and s[i] = c. The variance of s[l..h) is the maximum of cnt(c,l,h) - cnt(d,l,h) over all bytes c and d with 97 <= c,d <= 122, cnt(c,l,h) > 0, and cnt(d,l,h) > 0. Thus c and d must both occur in the substring, and they may be equal; if they are equal the difference is 0. The result r is exactly this largest possible difference over all non-empty contiguous substrings of s.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122 (so every byte is a lowercase ASCII letter)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LargestVariance.spec_2",
+    "negation": "AegisSpec.LargestVariance.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, go out of bounds, or panic) for every s satisfying the preconditions.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LargestVariance.spec_3",
+    "negation": "AegisSpec.LargestVariance.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LargestVariance.spec_4",
+    "negation": "AegisSpec.LargestVariance.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r and len(s) >= 2, r <= len(s) - 2.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LargestVariance.spec_5",
+    "negation": "AegisSpec.LargestVariance.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and len(s) = 1, r = 0.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LargestVariance.spec_6",
+    "negation": "AegisSpec.LargestVariance.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and all bytes of s are equal (s[i] = s[j] for every 0 <= i < len(s) and 0 <= j < len(s)), r = 0.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LargestVariance.spec_7",
+    "negation": "AegisSpec.LargestVariance.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r and no byte value occurs twice in s (s[i] != s[j] for every 0 <= i < j < len(s)), r = 0.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LargestVariance.spec_8",
+    "negation": "AegisSpec.LargestVariance.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if for every non-empty substring s[l..h) with 0 <= l < h <= len(s), all lowercase letters that occur in s[l..h) have the same occurrence count in that substring.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LargestVariance.spec_9",
+    "negation": "AegisSpec.LargestVariance.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exist integers l and h with 0 <= l < h <= len(s) such that the variance of the non-empty substring s[l..h), defined as the maximum over present lowercase bytes c and d in s[l..h) of (count of c in s[l..h) minus count of d in s[l..h)), is exactly r. Here the count of x in s[l..h) is the number of i with l <= i < h and s[i] = x.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.LargestVariance.spec_10",
+    "negation": "AegisSpec.LargestVariance.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r and r > 0, there exist integers l and h with 0 <= l < h <= len(s) and distinct lowercase bytes c and d (97 <= c,d <= 122, c != d) such that c and d both occur in s[l..h) and (the number of i with l <= i < h and s[i] = c) - (the number of i with l <= i < h and s[i] = d) = r.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.LargestVariance.spec_11",
+    "negation": "AegisSpec.LargestVariance.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every non-empty substring s[l..h) with 0 <= l < h <= len(s) and every two lowercase bytes c and d with 97 <= c,d <= 122 that both occur in s[l..h), (the number of i with l <= i < h and s[i] = c) - (the number of i with l <= i < h and s[i] = d) <= r.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.LargestVariance.spec_12",
+    "negation": "AegisSpec.LargestVariance.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r on input s and a result r' on input t, r = r'.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122. Let t be the slice of bytes with len(t) = len(s) and t[i] = s[len(s)-1-i] for every 0 <= i < len(s)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.LargestVariance.spec_13",
+    "negation": "AegisSpec.LargestVariance.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r_s on input s and a result r_t on input t, r_s <= r_t.",
+    "preconditions": "s and t are slices of bytes, each satisfying 1 <= len <= 10000 and all bytes in the range 97 to 122. Moreover, s occurs as a contiguous substring of t: there exists an integer k with 0 <= k and k + len(s) <= len(t) such that t[k+i] = s[i] for every 0 <= i < len(s)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.LargestVariance.spec_14",
+    "negation": "AegisSpec.LargestVariance.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r is the maximum, over all integers l and h with 0 <= l < h <= len(s) such that both a and b occur in s[l..h), of the absolute difference |cnt(a,l,h) - cnt(b,l,h)|, where cnt(x,l,h) is the number of i with l <= i < h and s[i] = x. Since a and b both occur in s, the full interval l=0, h=len(s) is among the intervals considered.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, every byte is in 97..122, and exactly two distinct byte values occur in s. Let a and b be these two distinct values, with 97 <= a < b <= 122."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.LargestVariance.spec_15",
+    "negation": "AegisSpec.LargestVariance.spec_15_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= M - 1, where M is the maximum over 97 <= c <= 122 of the number of indices i with 0 <= i < len(s) and s[i] = c.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.LargestVariance.spec_16",
+    "negation": "AegisSpec.LargestVariance.spec_16_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, if at least two distinct byte values occur in s, then r is the maximum over all distinct lowercase bytes c and d (97 <= c,d <= 122, c != d) that both occur in s, of the maximum over all integers l and h with 0 <= l < h <= len(s) such that both c and d occur in s[l..h), of (cnt(c,l,h) - cnt(d,l,h)), where cnt(x,l,h) is the number of i with l <= i < h and s[i] = x. If only one distinct byte value occurs in s, then r = 0.",
+    "preconditions": "s is a slice of bytes with 1 <= len(s) <= 10000, and for every i with 0 <= i < len(s), 97 <= s[i] <= 122."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.FindWinners.spec_1",
+    "negation": "AegisSpec.FindWinners.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and does not fail. It satisfies len(r) = 2. For every i64 value p, p occurs in r[0] if and only if p occurs in some match entry and p has no loss, i.e. (exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p)) and (there is no j with 0 <= j < len(matches) and matches[j][1] = p). For every i64 value p, p occurs in r[1] if and only if p occurs in some match entry and p has exactly one loss, i.e. (exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p)) and (there is exactly one j with 0 <= j < len(matches) and matches[j][1] = p). Finally, for each b in {0,1}, r[b] is strictly increasing: for all indices j,k with 0 <= j < k < len(r[b]), r[b][j] < r[b][k]. Here 'p occurs in r[b]' means there exists t with 0 <= t < len(r[b]) and r[b][t] = p.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.FindWinners.spec_2",
+    "negation": "AegisSpec.FindWinners.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, or overflow.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.FindWinners.spec_3",
+    "negation": "AegisSpec.FindWinners.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = 2.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.FindWinners.spec_4",
+    "negation": "AegisSpec.FindWinners.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every i64 value p, if p occurs in some match entry and has no loss (exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p), and no j with 0 <= j < len(matches) and matches[j][1] = p), then p occurs in r[0] (there exists t with 0 <= t < len(r[0]) and r[0][t] = p).",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.FindWinners.spec_5",
+    "negation": "AegisSpec.FindWinners.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every index t with 0 <= t < len(r[0]), letting p = r[0][t], p occurs in some match entry and has no loss: there exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p), and there is no j with 0 <= j < len(matches) and matches[j][1] = p.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.FindWinners.spec_6",
+    "negation": "AegisSpec.FindWinners.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every i64 value p, if p occurs in some match entry and has exactly one loss (exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p), and there is exactly one j with 0 <= j < len(matches) and matches[j][1] = p), then p occurs in r[1] (there exists t with 0 <= t < len(r[1]) and r[1][t] = p).",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.FindWinners.spec_7",
+    "negation": "AegisSpec.FindWinners.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every index t with 0 <= t < len(r[1]), letting p = r[1][t], p occurs in some match entry and has exactly one loss: there exists i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p), and there is exactly one j with 0 <= j < len(matches) and matches[j][1] = p.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.FindWinners.spec_8",
+    "negation": "AegisSpec.FindWinners.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with len(r) = 2, the list r[0] is strictly increasing: for all indices j,k with 0 <= j < k < len(r[0]), r[0][j] < r[0][k].",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.FindWinners.spec_9",
+    "negation": "AegisSpec.FindWinners.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r with len(r) = 2, the list r[1] is strictly increasing: for all indices j,k with 0 <= j < k < len(r[1]), r[1][j] < r[1][k].",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.FindWinners.spec_10",
+    "negation": "AegisSpec.FindWinners.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = 2, no i64 value occurs in both r[0] and r[1]: there do not exist indices t0,t1 and a value p with 0 <= t0 < len(r[0]), 0 <= t1 < len(r[1]), r[0][t0] = p, and r[1][t1] = p.",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.FindWinners.spec_11",
+    "negation": "AegisSpec.FindWinners.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every i64 value p, if p has at least two losses (there exist distinct indices j1,j2 with 0 <= j1 < len(matches), 0 <= j2 < len(matches), j1 != j2, matches[j1][1] = p, and matches[j2][1] = p), then p does not occur in r[0] and does not occur in r[1].",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.FindWinners.spec_12",
+    "negation": "AegisSpec.FindWinners.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r with len(r) = 2, for every i64 value p, if p does not occur in any match entry (there is no i with 0 <= i < len(matches) and (matches[i][0] = p or matches[i][1] = p)), then p occurs in neither r[0] nor r[1].",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.FindWinners.spec_13",
+    "negation": "AegisSpec.FindWinners.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with len(r) = 2, the two answer lists are not larger than the number of matches: len(r[0]) <= len(matches) and len(r[1]) <= len(matches).",
+    "preconditions": "1 <= len(matches) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1])."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.FindWinners.spec_14",
+    "negation": "AegisSpec.FindWinners.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for matches and a result r2 for matches2, the results are equal: r = r2.",
+    "preconditions": "1 <= len(matches) <= 100000; 1 <= len(matches2) <= 100000; for every i with 0 <= i < len(matches), len(matches[i]) = 2; for every i with 0 <= i < len(matches2), len(matches2[i]) = 2; for every i with 0 <= i < len(matches) and every j in {0,1}, 1 <= matches[i][j] <= 100000; for every i with 0 <= i < len(matches2) and every j in {0,1}, 1 <= matches2[i][j] <= 100000; for every i with 0 <= i < len(matches), matches[i][0] != matches[i][1]; for every i with 0 <= i < len(matches2), matches2[i][0] != matches2[i][1]; for every i1,i2 with 0 <= i1 < i2 < len(matches), not (matches[i1][0] = matches[i2][0] and matches[i1][1] = matches[i2][1]); for every i1,i2 with 0 <= i1 < i2 < len(matches2), not (matches2[i1][0] = matches2[i2][0] and matches2[i1][1] = matches2[i2][1]); there is a bijection f from {i | 0 <= i < len(matches)} to {i | 0 <= i < len(matches2)} such that for every i with 0 <= i < len(matches), matches2[f(i)][0] = matches[i][0] and matches2[f(i)][1] = matches[i][1]."
+  }
+]

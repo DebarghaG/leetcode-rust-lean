@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_1",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Use these definitions. Let S = sum_{0<=i<n} customers[i]. For an integer k >= 0 define the k-rotation process: a counter w starts at 0; for j = 0,1,...,k-1 do: w := w + (customers[j] if j < n else 0); then b_j := min(4, w); then w := w - b_j. Let B(k) = b_0 + b_1 + ... + b_{k-1} (so B(0) = 0) and let P(k) = boardingCost * B(k) - runningCost * k. P is eventually strictly decreasing (for all k >= K with K = min{k : B(k) = S} it equals boardingCost*S - runningCost*k), so M := max_{k>=0} P(k) is attained and M >= 0 since P(0) = 0. Whenever min_operations_max_profit returns a result r, it holds that: if M > 0 then r is the least integer k >= 0 with P(k) = M; and if M = 0 then r = -1.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_2",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "min_operations_max_profit returns a result (Result.ok r for some integer r); it never fails, overflows, indexes out of bounds, or panics.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_3",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever min_operations_max_profit returns a result r, either r = -1 or r >= 1. In particular r is never 0 and never <= -2.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_4",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let S = sum_{0<=i<n} customers[i], and let B(k) be the total boarded during the first k rotations (w=0; for j<k: w += customers[j] if j<n else 0; b_j = min(4,w); w -= b_j; B(k)=sum b_j). Let K = min{k >= 0 : B(k) = S}, the least number of rotations after which every customer has boarded. Whenever min_operations_max_profit returns r with r != -1, it holds that r <= K.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_5",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "With B(k) and P(k) = boardingCost*B(k) - runningCost*k as in the k-rotation process, whenever min_operations_max_profit returns r with r != -1, P(r) > 0. Thus the returned rotation count r is a witness that a strictly positive profit is achievable.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_6",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With B(k) and P(k) = boardingCost*B(k) - runningCost*k as in the k-rotation process, whenever min_operations_max_profit returns r with r != -1, it holds that for every integer k >= 0, P(k) <= P(r). That is, the profit realized at r is the global maximum over all rotation counts.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_7",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With B(k) and P(k) = boardingCost*B(k) - runningCost*k as in the k-rotation process, whenever min_operations_max_profit returns r with r != -1, it holds that for every integer k with 0 <= k < r, P(k) < P(r). That is, r is the earliest rotation count that attains its profit value.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_8",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With B(k) and P(k) = boardingCost*B(k) - runningCost*k as in the k-rotation process, whenever min_operations_max_profit returns r, it holds that r = -1 if and only if for every integer k >= 0, P(k) <= 0.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_9",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_operations_max_profit returns r, if 4 * boardingCost <= runningCost then r = -1.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_10",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With B(k) as in the k-rotation process, whenever min_operations_max_profit returns r with r != -1, B(r) - B(r-1) >= 1. That is, during the last performed rotation (rotation index r-1) at least one customer boards.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_11",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With B(k) as in the k-rotation process, whenever min_operations_max_profit returns r with r != -1, boardingCost * (B(r) - B(r-1)) - runningCost > 0. That is, the net profit change of the last performed rotation (rotation index r-1) is strictly positive.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_12",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let customers' be customers extended by m additional entries, each equal to 0. Then min_operations_max_profit(customers', boardingCost, runningCost) and min_operations_max_profit(customers, boardingCost, runningCost) agree: either both return -1, or both return the same integer r.",
+    "preconditions": "n = len(customers); 1 <= n <= 100000; for every i with 0 <= i < n, 0 <= customers[i] <= 50; 1 <= boardingCost <= 100; 1 <= runningCost <= 100; m is an integer with m >= 1 and n + m <= 100000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinOperationsMaxProfit.spec_13",
+    "negation": "AegisSpec.MinOperationsMaxProfit.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_operations_max_profit returns r: if boardingCost * customers[0] - runningCost > 0 then r = 1; otherwise (boardingCost * customers[0] - runningCost <= 0) r = -1.",
+    "preconditions": "n = len(customers) = 1 and 1 <= customers[0] <= 4; 1 <= boardingCost <= 100; 1 <= runningCost <= 100."
+  }
+]

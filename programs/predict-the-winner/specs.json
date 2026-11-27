@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.PredictTheWinner.spec_1",
+    "negation": "AegisSpec.PredictTheWinner.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let V be the minimax final score difference for this game: V([]) = 0, and for a nonempty sequence xs of length n, V(xs) = max(xs[0] - V(xs[1..n-1]), xs[n-1] - V(xs[0..n-2])), where xs[1..n-1] is xs with its first element removed and xs[0..n-2] is xs with its last element removed. This V(xs) is Player 1's total score minus Player 2's total score when both play optimally from position xs with Player 1 to move. Whenever predict_the_winner(nums) returns a result r, r = true if and only if V(nums) >= 0.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.PredictTheWinner.spec_2",
+    "negation": "AegisSpec.PredictTheWinner.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail by panicking, overflowing, or indexing out of bounds.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.PredictTheWinner.spec_3",
+    "negation": "AegisSpec.PredictTheWinner.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever predict_the_winner(nums) returns a result r, r = true.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, and len(nums) is even."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.PredictTheWinner.spec_4",
+    "negation": "AegisSpec.PredictTheWinner.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the sequence of length len(nums) defined by rev[i] = nums[len(nums)-1-i] for every i with 0 <= i < len(nums). Whenever predict_the_winner(nums) returns r and predict_the_winner(rev) returns r_rev, r = r_rev.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.PredictTheWinner.spec_5",
+    "negation": "AegisSpec.PredictTheWinner.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever predict_the_winner(nums) returns r and predict_the_winner(scaled) returns r_scaled, r = r_scaled.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, and c is an integer with c >= 1 such that 0 <= c * nums[i] <= 10^7 for every i. Let scaled be the sequence of length len(nums) with scaled[i] = c * nums[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.PredictTheWinner.spec_6",
+    "negation": "AegisSpec.PredictTheWinner.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever predict_the_winner(nums) returns r and predict_the_winner(shifted) returns r_shifted, r = r_shifted.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, len(nums) is even, and k is an integer such that 0 <= nums[i] + k <= 10^7 for every i. Let shifted be the sequence of length len(nums) with shifted[i] = nums[i] + k."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.PredictTheWinner.spec_7",
+    "negation": "AegisSpec.PredictTheWinner.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever predict_the_winner(nums) returns r, predict_the_winner(shifted) returns r_shifted, and r = true, we have r_shifted = true.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, and c is an integer with c >= 0 such that 0 <= nums[i] + c <= 10^7 for every i. Let shifted be the sequence of length len(nums) with shifted[i] = nums[i] + c."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.PredictTheWinner.spec_8",
+    "negation": "AegisSpec.PredictTheWinner.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If either nums[0] >= sum_{i=1}^{len(nums)-1} nums[i] or nums[len(nums)-1] >= sum_{i=0}^{len(nums)-2} nums[i], then whenever predict_the_winner(nums) returns a result r, r = true.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7. Empty sums are 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.PredictTheWinner.spec_9",
+    "negation": "AegisSpec.PredictTheWinner.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Using the minimax value V defined by V([]) = 0 and V(xs) = max(xs[0] - V(xs without first), xs[len(xs)-1] - V(xs without last)) for nonempty xs, whenever predict_the_winner(nums) returns r and r = true, there exists j in {0, len(nums)-1} such that nums[j] - V(nums with index j removed) >= 0.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.PredictTheWinner.spec_10",
+    "negation": "AegisSpec.PredictTheWinner.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever predict_the_winner(shifted) returns a result r, r = true.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, len(nums) is odd, and c is an integer with c >= sum_{i=0}^{len(nums)-1} nums[i] such that 0 <= nums[i] + c <= 10^7 for every i. Let shifted be the sequence of length len(nums) with shifted[i] = nums[i] + c."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.PredictTheWinner.spec_11",
+    "negation": "AegisSpec.PredictTheWinner.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever predict_the_winner(nums) returns a result r and r = false, Player 2 has a strategy such that, no matter how Player 1 plays, Player 2's final score is strictly greater than Player 1's final score.",
+    "preconditions": "1 <= len(nums) <= 20 and for every i with 0 <= i < len(nums), 0 <= nums[i] <= 10^7."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.PredictTheWinner.spec_12",
+    "negation": "AegisSpec.PredictTheWinner.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let V be as defined in spec_1. Then V(shifted) = V(nums) + c. Consequently, whenever predict_the_winner(shifted) returns a result r, r = true if and only if V(nums) + c >= 0.",
+    "preconditions": "1 <= len(nums) <= 20, for every i with 0 <= i < len(nums) we have 0 <= nums[i] <= 10^7, len(nums) is odd, and c is an integer such that 0 <= nums[i] + c <= 10^7 for every i. Let shifted be the sequence of length len(nums) with shifted[i] = nums[i] + c."
+  }
+]

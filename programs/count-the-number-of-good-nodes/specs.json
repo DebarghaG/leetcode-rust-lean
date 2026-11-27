@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountGoodNodes.spec_1",
+    "negation": "AegisSpec.CountGoodNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever count_good_nodes(edges) returns a result r, r equals the number of good nodes, defined as follows. Two vertices u,v are adjacent if some edge has endpoints u and v in either order. Because the graph is a tree rooted at 0, for each vertex v != 0 there is a unique neighbor parent(v) on the unique simple path from 0 to v; children(u) = {v : parent(v)=u}. For any vertex u, subtree(u) is the set of vertices w whose unique simple path from 0 to w contains u, and size(u) = card(subtree(u)). A vertex u is good iff for all c1,c2 in children(u), size(c1)=size(c2); equivalently, u has at most one child, or all its children have the same subtree size.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies: 2 <= n <= 100000; for every i with 0 <= i < len(edges), len(edges[i]) = 2; writing edges[i] = [a_i,b_i] as integers, 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; the undirected graph with vertex set {0,...,n-1} and edge set {{a_i,b_i} : 0 <= i < len(edges)} is a tree (connected and acyclic)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountGoodNodes.spec_2",
+    "negation": "AegisSpec.CountGoodNodes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "count_good_nodes(edges) returns a result r; that is, the Result is not a failure: no overflow, out-of-bounds access, or panic occurs.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies: 2 <= n <= 100000; for every i with 0 <= i < len(edges), len(edges[i]) = 2; writing edges[i] = [a_i,b_i] as integers, 0 <= a_i < n, 0 <= b_i < n, and a_i != b_i; the undirected graph with vertex set {0,...,n-1} and edge set {{a_i,b_i} : 0 <= i < len(edges)} is a tree (connected and acyclic)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountGoodNodes.spec_3",
+    "negation": "AegisSpec.CountGoodNodes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_good_nodes(edges) returns a result r, 0 <= r <= n, where n = len(edges)+1.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountGoodNodes.spec_4",
+    "negation": "AegisSpec.CountGoodNodes.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever count_good_nodes(edges) returns a result r, r >= M, where M is the number of vertices u with 0 <= u < n that have at most one child in the tree rooted at 0, with children defined via unique paths from 0 as in spec_1.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountGoodNodes.spec_5",
+    "negation": "AegisSpec.CountGoodNodes.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If there exists a vertex s with 0 <= s < n such that every other vertex v != s is adjacent to s in the underlying unrooted tree (i.e. the tree is a star, possibly with center s not equal to 0), then whenever count_good_nodes(edges) returns a result r, r = n.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountGoodNodes.spec_6",
+    "negation": "AegisSpec.CountGoodNodes.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If every vertex u with 0 <= u < n has at most one child in the tree rooted at 0, then whenever count_good_nodes(edges) returns a result r, r = n.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountGoodNodes.spec_7",
+    "negation": "AegisSpec.CountGoodNodes.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "If the tree rooted at 0 is perfect binary, meaning every vertex has either 0 or 2 children and all leaves have the same depth from root 0 (depth is the number of edges on the unique path from 0), then whenever count_good_nodes(edges) returns a result r, r = n.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountGoodNodes.spec_8",
+    "negation": "AegisSpec.CountGoodNodes.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_good_nodes(edges) returns r and count_good_nodes(edges') returns r', we have r = r'.",
+    "preconditions": "Let n = len(edges)+1. edges satisfies the same tree preconditions as spec_1. Let edges' be another list satisfying the same problem constraints for the same n and such that there is a bijection pi on {0,...,len(edges)-1} with edges'[i] = edges[pi(i)] for every i (the same ordered pairs, only reordered)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountGoodNodes.spec_9",
+    "negation": "AegisSpec.CountGoodNodes.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_good_nodes(edges) returns r, if M is the number of vertices u with 0 <= u < n that have at most one child in the tree rooted at 0, and r > M, then there exists a vertex u with at least two children such that all children of u have the same subtree size (so u is a good vertex with at least two children).",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountGoodNodes.spec_10",
+    "negation": "AegisSpec.CountGoodNodes.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever count_good_nodes(edges) returns r, if r < n then there exists a vertex u with at least two children c1 and c2 such that size(c1) != size(c2), where size is the subtree size in the tree rooted at 0 as defined in spec_1.",
+    "preconditions": "Let n = len(edges)+1. The input satisfies the same tree preconditions as spec_1."
+  }
+]

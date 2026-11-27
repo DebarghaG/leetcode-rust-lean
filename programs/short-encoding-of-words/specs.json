@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_1",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let a byte string w be a proper suffix of a byte string v when len(w) < len(v) and for every k with 0 <= k < len(w), w[k] = v[len(v)-len(w)+k]. Let U be the set of byte strings w such that (a) words[i] = w for some i with 0 <= i < n, and (b) w is not a proper suffix of words[j] for any j with 0 <= j < n. Then the function returns a result r and r = sum_{w in U} (len(w) + 1).",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_2",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, overflow, panic, or go out of bounds on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_3",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and there exist a byte string s and an array indices of length n such that: s is nonempty and s[len(s)-1] = '#'; and for every i with 0 <= i < n, 0 <= indices[i] < len(s), s[indices[i]] != '#', and there exists k such that indices[i] <= k < len(s), s[k] = '#', for every k' with indices[i] <= k' < k, s[k'] != '#', indices[i] + len(words[i]) = k, and for every t with 0 <= t < len(words[i]), s[indices[i]+t] = words[i][t]; and len(s) = r.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_4",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and for every byte string s and every array indices of length n satisfying the valid-encoding conditions (s ends with '#', and for every i with 0 <= i < n the substring of s starting at indices[i] and ending just before the next '#' equals words[i]), it holds that len(s) >= r.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_5",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= sum_{i=0}^{n-1} (len(words[i]) + 1).",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_6",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and for every i with 0 <= i < n, r >= len(words[i]) + 1.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_7",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. If for every i and j with 0 <= i < n, 0 <= j < n, and i != j, words[i] is not a suffix of words[j] (where a is a suffix of b if len(a) <= len(b) and for every k with 0 <= k < len(a), a[k] = b[len(b)-len(a)+k]), then r = sum_{i=0}^{n-1} (len(words[i]) + 1).",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_8",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and if len(words[i]) = 1 for every i with 0 <= i < n, then r = 2 * |{ b | b is a byte and there exists i with words[i][0] = b }|.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_9",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. If there exists j with 0 <= j < n such that for every i with 0 <= i < n, words[i] is a suffix of words[j] (where a is a suffix of b if len(a) <= len(b) and for every k with 0 <= k < len(a), a[k] = b[len(b)-len(a)+k]), then r = len(words[j]) + 1.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_10",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let words' be words with w appended at the end. If r = minimum_length_encoding(words) and r' = minimum_length_encoding(words'), then r' = r.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n < 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122). Let w be a byte string with 1 <= len(w) <= 7 and every byte of w an ASCII lowercase letter, and suppose there exists j with 0 <= j < n such that w is a suffix of words[j]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_11",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every array words2 of byte strings with len(words2) = n such that there exists a permutation π of {0,...,n-1} with words2[i] = words[π(i)] for every i with 0 <= i < n, if r = minimum_length_encoding(words) and r2 = minimum_length_encoding(words2), then r2 = r.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_12",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let words' be words with w appended at the end. If r = minimum_length_encoding(words) and r' = minimum_length_encoding(words'), then r' >= r.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n < 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122). Let w be a byte string with 1 <= len(w) <= 7 and every byte of w an ASCII lowercase letter."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_13",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 2 <= r <= 16000.",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinimumLengthEncoding.spec_14",
+    "negation": "AegisSpec.MinimumLengthEncoding.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r. If there exist i and j with 0 <= i < n, 0 <= j < n such that words[i] is a proper suffix of words[j] (len(words[i]) < len(words[j]) and for every k with 0 <= k < len(words[i]), words[i][k] = words[j][len(words[j])-len(words[i])+k]), then r < sum_{t=0}^{n-1} (len(words[t]) + 1).",
+    "preconditions": "Let n = len(words). Preconditions: 1 <= n <= 2000; for every i with 0 <= i < n, 1 <= len(words[i]) <= 7 and every byte of words[i] is an ASCII lowercase letter (byte value between 97 and 122)."
+  }
+]

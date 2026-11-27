@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsNumber.spec_1",
+    "negation": "AegisSpec.IsNumber.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = true if and only if s is a valid number, where a byte string u is a valid number exactly when there exists an index m with 0 ≤ m ≤ len(u) such that (a) the prefix u[0..m] (the bytes u[0], ..., u[m-1]) is a valid integer or a valid decimal, and (b) either m = len(u), or (m < len(u) and u[m] is 'e' (101) or 'E' (69) and the suffix u[m+1..len(u)] is a valid integer. Here, for a byte string v: a byte is a digit iff its code is between 48 and 57 inclusive; v is a nonempty digit string iff len(v) ≥ 1 and every byte of v is a digit; v is a valid integer iff either v is a nonempty digit string, or (len(v) ≥ 2 and v[0] is '+' (43) or '-' (45) and v[1..len(v)] is a nonempty digit string); v is a valid decimal iff, letting a = 1 when len(v) ≥ 1 and v[0] is '+' or '-' and a = 0 otherwise, there is an index k with a ≤ k < len(v) such that v[k] is '.' (46), every byte of v[a..k] is a digit, every byte of v[k+1..len(v)] is a digit, and at least one of the segments v[a..k] and v[k+1..len(v)] is nonempty (a segment of zero bytes vacuously satisfies 'every byte is a digit').",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte s[i] with 0 ≤ i < len(s) is an English letter 'A'-'Z' (65-90) or 'a'-'z' (97-122), a digit '0'-'9' (48-57), '+' (43), '-' (45), or '.' (46)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsNumber.spec_2",
+    "negation": "AegisSpec.IsNumber.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e. it does not fail: no panic, no out-of-bounds indexing, no arithmetic overflow); nothing further is claimed about r.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsNumber.spec_3",
+    "negation": "AegisSpec.IsNumber.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then there exists an index i with 0 ≤ i < len(s) such that s[i] is a digit (48 ≤ s[i] ≤ 57).",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsNumber.spec_4",
+    "negation": "AegisSpec.IsNumber.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then the number of indices i with 0 ≤ i < len(s) and s[i] in {'e' (101), 'E' (69)} is at most 1.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsNumber.spec_5",
+    "negation": "AegisSpec.IsNumber.spec_5_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then the number of indices i with 0 ≤ i < len(s) and s[i] = '.' (46) is at most 1.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsNumber.spec_6",
+    "negation": "AegisSpec.IsNumber.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then for every i with 0 ≤ i < len(s), s[i] is a digit (48-57) or s[i] is one of '+' (43), '-' (45), '.' (46), 'E' (69), 'e' (101); in other words, no letter other than 'e' or 'E' occurs in s.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsNumber.spec_7",
+    "negation": "AegisSpec.IsNumber.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then for every i with 0 ≤ i < len(s), if s[i] is '+' (43) or '-' (45) then i = 0 or s[i-1] is 'e' (101) or 'E' (69).",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsNumber.spec_8",
+    "negation": "AegisSpec.IsNumber.spec_8_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then for every i with 0 ≤ i < len(s) and s[i] in {'e' (101), 'E' (69)}, one has 0 < i and i < len(s) - 1.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsNumber.spec_9",
+    "negation": "AegisSpec.IsNumber.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, if r = true then s[0] is a digit (48-57), '+' (43), '-' (45), or '.' (46), and s[len(s)-1] is a digit (48-57) or '.' (46).",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsNumber.spec_10",
+    "negation": "AegisSpec.IsNumber.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if s contains no digit at all (for every i with 0 ≤ i < len(s), s[i] < 48 or s[i] > 57) then r = false.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsNumber.spec_11",
+    "negation": "AegisSpec.IsNumber.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r on s, and returns a result r' on the byte string u = s[1..len(s)] (so len(u) = len(s) - 1 and u[j] = s[j+1] for 0 ≤ j < len(s)-1), then r = true if and only if (r' = true and len(u) ≥ 1 and u[0] is neither '+' (43) nor '-' (45)).",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'; 2 ≤ len(s) and s[0] is '+' (43) or '-' (45)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.IsNumber.spec_12",
+    "negation": "AegisSpec.IsNumber.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every i with 0 ≤ i < len(s), either both s[i] and t[i] are digits (48-57), or s[i] = t[i] and s[i] is not a digit. Then whenever the function returns a result r on s and a result r' on t, r = r'.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'; t is a byte string with len(t) = len(s)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.IsNumber.spec_13",
+    "negation": "AegisSpec.IsNumber.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every i with 0 ≤ i < len(s), either t[i] = s[i], or (s[i] is '+' (43) or '-' (45)) and (t[i] is '+' (43) or '-' (45)). Then whenever the function returns a result r on s and a result r' on t, r = r'.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'; t is a byte string with len(t) = len(s)."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.IsNumber.spec_14",
+    "negation": "AegisSpec.IsNumber.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, if r = true then for every k and p with 0 ≤ k < len(s), 0 ≤ p < len(s), s[k] = '.' (46) and s[p] in {'e' (101), 'E' (69)}, one has k < p.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.IsNumber.spec_15",
+    "negation": "AegisSpec.IsNumber.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if r = true and s[len(s)-1] = '.' (46) then len(s) ≥ 2, s[len(s)-2] is a digit (48-57), and no byte of s equals 'e' (101) or 'E' (69).",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.IsNumber.spec_16",
+    "negation": "AegisSpec.IsNumber.spec_16_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Suppose that for every i with 0 ≤ i < len(s), either t[i] = s[i], or (s[i] is 'e' (101) or 'E' (69)) and (t[i] is 'e' (101) or 'E' (69)). Then whenever the function returns a result r on s and a result r' on t, r = r'.",
+    "preconditions": "1 ≤ len(s) ≤ 20; every byte of s is an English letter, a digit, '+', '-', or '.'; t is a byte string with len(t) = len(s)."
+  }
+]

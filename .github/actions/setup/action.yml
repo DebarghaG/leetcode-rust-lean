@@ -1,0 +1,25 @@
+name: Set up Lean, Mathlib and Aeneas
+description: elan, bubblewrap, and the shared packages in .lake/packages (cached)
+runs:
+  using: composite
+  steps:
+    - name: Install elan and bubblewrap
+      shell: bash
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        sudo apt-get update -qq && sudo apt-get install -y -qq bubblewrap
+        # lake comparator sandboxes with bwrap, which needs unprivileged user namespaces
+        sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+    - name: Restore the shared packages
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: .lake
+        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v1
+    - name: Fetch Mathlib and build Aeneas
+      if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        lake exe cache get
+        lake build Aeneas

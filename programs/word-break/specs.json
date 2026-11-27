@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.WordBreak.spec_1",
+    "negation": "AegisSpec.WordBreak.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever word_break(s, wordDict) returns Ok r, r = true if and only if there exist an integer k >= 1 and indices i_1, ..., i_k with 0 <= i_j < len(wordDict) such that s is the concatenation of the byte arrays wordDict[i_1], ..., wordDict[i_k] (indices may be repeated). Equivalently, there exist cut positions 0 = p_0 < p_1 < ... < p_k = len(s) such that for every j in [1,k], the block of bytes s[p_{j-1}], ..., s[p_j - 1] equals wordDict[i_j] for some i_j in [0,len(wordDict)).",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.WordBreak.spec_2",
+    "negation": "AegisSpec.WordBreak.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, word_break(s, wordDict) returns Ok r for some Bool r; it does not fail due to overflow, out-of-bounds access, or panic.",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.WordBreak.spec_3",
+    "negation": "AegisSpec.WordBreak.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever word_break(s, wordDict) returns Ok true, there exist an integer k with 1 <= k <= len(s), indices i_1, ..., i_k with 0 <= i_j < len(wordDict), and cut positions 0 = p_0 < p_1 < ... < p_k = len(s) such that for every j in [1,k], len(wordDict[i_j]) = p_j - p_{j-1} and for every t with 0 <= t < p_j - p_{j-1}, wordDict[i_j][t] = s[p_{j-1} + t].",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.WordBreak.spec_4",
+    "negation": "AegisSpec.WordBreak.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever word_break(s, wordDict) returns Ok true, for every position t with 0 <= t < len(s) there exist an index i with 0 <= i < len(wordDict) and a position u with 0 <= u < len(wordDict[i]) such that wordDict[i][u] = s[t].",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.WordBreak.spec_5",
+    "negation": "AegisSpec.WordBreak.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever word_break(s, wordDict) returns Ok r and word_break(s, wordDict') returns Ok r', we have r = r'.",
+    "preconditions": "The input (s, wordDict) satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct. Let wordDict' be any slice of Vec U8 satisfying the same dictionary constraints and suppose wordDict' is a permutation of wordDict: len(wordDict') = len(wordDict) and there is a bijection f from {0,...,len(wordDict)-1} to {0,...,len(wordDict')-1} such that wordDict[i] = wordDict'[f(i)] for every i."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.WordBreak.spec_6",
+    "negation": "AegisSpec.WordBreak.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever word_break(s, wordDict) returns Ok true, there exist an integer k >= 1 and indices i_1, ..., i_k with 0 <= i_j < len(wordDict) such that len(s) = len(wordDict[i_1]) + ... + len(wordDict[i_k]).",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.WordBreak.spec_7",
+    "negation": "AegisSpec.WordBreak.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever word_break(s, wordDict) returns Ok true, there exists an index i with 0 <= i < len(wordDict) such that wordDict[i] is a suffix of s, meaning len(wordDict[i]) <= len(s) and for every t with 0 <= t < len(wordDict[i]), wordDict[i][t] = s[len(s) - len(wordDict[i]) + t].",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.WordBreak.spec_8",
+    "negation": "AegisSpec.WordBreak.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "For every input satisfying the preconditions, word_break(s, wordDict) returns Ok true if and only if there exists an index i with 0 <= i < len(wordDict) such that wordDict[i] is a prefix of s (i.e., len(wordDict[i]) <= len(s) and for every t with 0 <= t < len(wordDict[i]), wordDict[i][t] = s[t]) and either len(wordDict[i]) = len(s) or (len(wordDict[i]) < len(s) and word_break(s[len(wordDict[i])..], wordDict) returns Ok true).",
+    "preconditions": "The input satisfies the problem constraints: 1 <= len(s) <= 300; 1 <= len(wordDict) <= 1000; every wordDict[i] has length between 1 and 20 and consists only of lowercase ASCII bytes 'a'..'z'; s consists only of lowercase ASCII bytes 'a'..'z'; and all words wordDict[0], ..., wordDict[len(wordDict)-1] are pairwise distinct."
+  }
+]

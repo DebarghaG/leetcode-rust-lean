@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_1",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Define indices b_0, b_1, ..., b_{n-1} recursively in increasing order of i: b_i is the least index j with 0 <= j < n such that baskets[j] >= fruits[i] and j is not equal to b_k for any k < i for which b_k is defined; if no such j exists, b_i is undefined. Let U = { i | 0 <= i < n and b_i is undefined }. Then the function returns a result r and r = |U|, the number of fruit types left unplaced.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_2",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_3",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and 0 <= r <= n.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_4",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. Let minFruit = min_{0 <= i < n} fruits[i] and maxBasket = max_{0 <= j < n} baskets[j]. Then r = n if and only if minFruit > maxBasket.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_5",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000, and additionally min_{0 <= j < n} baskets[j] >= max_{0 <= i < n} fruits[i]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_6",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0 if baskets[0] >= fruits[0], otherwise r = 1.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, n = 1, 1 <= fruits[0] <= 1000000000, and 1 <= baskets[0] <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_7",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Consider the leftmost-available placement process: fruits are processed in increasing index, and each fruit is assigned the least-index basket not already assigned to an earlier fruit whose capacity is at least the fruit quantity, if such a basket exists; otherwise it is unplaced. The function returns a result r, and exactly n - r fruits are assigned a basket, with pairwise distinct assigned basket indices.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_8",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls return results r and r2, and r2 <= r.",
+    "preconditions": "Let n = len(fruits). Assume 1 <= n <= 100000 and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000. Let baskets and baskets2 be two slices of length n such that 1 <= baskets[j] <= 1000000000 and 1 <= baskets2[j] <= 1000000000 for every j with 0 <= j < n, and baskets[j] <= baskets2[j] for every such j. Let r be the result of num_of_unplaced_fruits(fruits, baskets) and r2 the result of num_of_unplaced_fruits(fruits, baskets2)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_9",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Both calls return results r and r2, and r <= r2.",
+    "preconditions": "Let n = len(baskets). Assume 1 <= n <= 100000 and for every j with 0 <= j < n, 1 <= baskets[j] <= 1000000000. Let fruits and fruits2 be two slices of length n such that 1 <= fruits[i] <= 1000000000 and 1 <= fruits2[i] <= 1000000000 for every i with 0 <= i < n, and fruits[i] <= fruits2[i] for every such i. Let r be the result of num_of_unplaced_fruits(fruits, baskets) and r2 the result of num_of_unplaced_fruits(fruits2, baskets)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_10",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = n - c where c = |{ j | 0 <= j < n and baskets[j] >= x }|.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000, and there exists an integer x such that fruits[i] = x for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_11",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = |{ i | 0 <= i < n and fruits[i] > y }|.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000, and there exists an integer y such that baskets[j] = y for every j with 0 <= j < n."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.NumOfUnplacedFruits.spec_12",
+    "negation": "AegisSpec.NumOfUnplacedFruits.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Both calls return results r and r2, and r = r2.",
+    "preconditions": "Let n = len(fruits). Assume len(baskets) = n, 1 <= n <= 100000, and for every i with 0 <= i < n, 1 <= fruits[i] <= 1000000000 and 1 <= baskets[i] <= 1000000000. Let c be an integer. Let fruits2 and baskets2 be slices of length n such that fruits2[i] = fruits[i] + c and baskets2[j] = baskets[j] + c for every i,j with 0 <= i,j < n, and assume both input pairs satisfy the same 1 <= value <= 1000000000 constraints. Let r be the result for (fruits, baskets) and r2 the result for (fruits2, baskets2)."
+  }
+]

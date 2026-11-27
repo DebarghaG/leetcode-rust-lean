@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxRepeating.spec_1",
+    "negation": "AegisSpec.MaxRepeating.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (an i64) and r is the maximum k >= 0 such that the concatenation of k copies of word is a contiguous substring of sequence. Formally, let word^k denote the byte sequence obtained by concatenating k copies of word (with word^0 the empty sequence). Then: (1) word^r is a contiguous substring of sequence, meaning there exists an index i with 0 <= i and i + r*len(word) <= len(sequence) such that for every j with 0 <= j < r*len(word), sequence[i+j] = word[j mod len(word)]; and (2) for every integer k > r, word^k is not a contiguous substring of sequence. Equivalently, r = max{ k >= 0 : word^k is a contiguous substring of sequence }.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxRepeating.spec_2",
+    "negation": "AegisSpec.MaxRepeating.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= 0.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxRepeating.spec_3",
+    "negation": "AegisSpec.MaxRepeating.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r * len(word) <= len(sequence).",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxRepeating.spec_4",
+    "negation": "AegisSpec.MaxRepeating.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and the concatenation of r copies of word is a contiguous substring of sequence, i.e., there exists an index i with 0 <= i and i + r*len(word) <= len(sequence) such that for every j with 0 <= j < r*len(word), sequence[i+j] = word[j mod len(word)].",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxRepeating.spec_5",
+    "negation": "AegisSpec.MaxRepeating.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r and for every integer k with k > r, the concatenation of k copies of word is not a contiguous substring of sequence. That is, there is no index i with 0 <= i and i + k*len(word) <= len(sequence) such that for every j with 0 <= j < k*len(word), sequence[i+j] = word[j mod len(word)].",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxRepeating.spec_6",
+    "negation": "AegisSpec.MaxRepeating.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and (r >= 1) if and only if word is a contiguous substring of sequence, i.e., there exists an index i with 0 <= i and i + len(word) <= len(sequence) such that for every j with 0 <= j < len(word), sequence[i+j] = word[j].",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxRepeating.spec_7",
+    "negation": "AegisSpec.MaxRepeating.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 0.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters), and len(word) > len(sequence)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxRepeating.spec_8",
+    "negation": "AegisSpec.MaxRepeating.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1 if for every j with 0 <= j < len(sequence), sequence[j] = word[j]; otherwise r = 0.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters), and len(word) = len(sequence)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxRepeating.spec_9",
+    "negation": "AegisSpec.MaxRepeating.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = len(sequence) / len(word) (integer division).",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters), len(sequence) is a multiple of len(word), and for every j with 0 <= j < len(sequence), sequence[j] = word[j mod len(word)]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxRepeating.spec_10",
+    "negation": "AegisSpec.MaxRepeating.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r and for every integer k with 1 <= k <= r, the concatenation of k copies of word is a contiguous substring of sequence.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxRepeating.spec_11",
+    "negation": "AegisSpec.MaxRepeating.spec_11_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not panic, overflow, or fail to terminate) for every sequence and word satisfying the preconditions.",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, and every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxRepeating.spec_12",
+    "negation": "AegisSpec.MaxRepeating.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r is the length of the longest contiguous run of the byte word[0] in sequence. That is, r is the maximum integer L >= 0 such that there exists an index i with 0 <= i and i + L <= len(sequence) and for every j with 0 <= j < L, sequence[i+j] = word[0].",
+    "preconditions": "1 <= len(sequence) <= 100, 1 <= len(word) <= 100, every byte in sequence and word is between 97 and 122 (inclusive, i.e., lowercase English letters), and len(word) = 1."
+  }
+]

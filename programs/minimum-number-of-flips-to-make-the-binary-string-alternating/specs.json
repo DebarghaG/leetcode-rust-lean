@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinFlips.spec_1",
+    "negation": "AegisSpec.MinFlips.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For each m with 0 <= m < n and each i with 0 <= i < n, let R_m(i) = s[(i + m) mod n]. Let A0(i) = 48 if i is even and 49 if i is odd, and let A1(i) = 49 if i is even and 48 if i is odd. For each m, let d(m) be the minimum of the two counts: the number of i with 0 <= i < n and R_m(i) != A0(i), and the number of i with 0 <= i < n and R_m(i) != A1(i). The function returns a result r and r = min over m with 0 <= m < n of d(m).",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is 48 (ASCII '0') or 49 (ASCII '1')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinFlips.spec_2",
+    "negation": "AegisSpec.MinFlips.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, overflow, or go out of bounds.",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinFlips.spec_3",
+    "negation": "AegisSpec.MinFlips.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= 0.",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinFlips.spec_4",
+    "negation": "AegisSpec.MinFlips.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= floor(len(s)/2).",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinFlips.spec_5",
+    "negation": "AegisSpec.MinFlips.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let n = len(s). Whenever the function returns a result r, r = 0 if and only if there exists m with 0 <= m < n such that for every i with 0 <= i < n - 1, s[(i + m) mod n] != s[(i + 1 + m) mod n].",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinFlips.spec_6",
+    "negation": "AegisSpec.MinFlips.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = floor(len(s)/2).",
+    "preconditions": "len(s) >= 2; len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'; and for every i, j with 0 <= i < len(s) and 0 <= j < len(s), s[i] = s[j]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinFlips.spec_7",
+    "negation": "AegisSpec.MinFlips.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(s). Let A0(i) = 48 if i is even and 49 if i is odd, for 0 <= i < n. Let c0 be the number of i with 0 <= i < n and s[i] != A0(i). Whenever the function returns a result r, r <= min(c0, n - c0).",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinFlips.spec_8",
+    "negation": "AegisSpec.MinFlips.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let n = len(s), and define R_m(i) = s[(i + m) mod n] for 0 <= m < n and 0 <= i < n. Let A0(i) = 48 if i is even and 49 if i is odd, and let A1(i) = 49 if i is even and 48 if i is odd. Whenever the function returns a result r, there exist m with 0 <= m < n and T in {A0, A1} such that the number of i with 0 <= i < n and R_m(i) != T(i) is exactly r.",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinFlips.spec_9",
+    "negation": "AegisSpec.MinFlips.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let n = len(s), and define R_m(i) = s[(i + m) mod n] for 0 <= m < n and 0 <= i < n. Let A0(i) = 48 if i is even and 49 if i is odd, and let A1(i) = 49 if i is even and 48 if i is odd. Whenever the function returns a result r, for every m with 0 <= m < n and every T in {A0, A1}, the number of i with 0 <= i < n and R_m(i) != T(i) is at least r.",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; and for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinFlips.spec_10",
+    "negation": "AegisSpec.MinFlips.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever min_flips(s) returns a result r and min_flips(t) returns a result r_t, we have r_t = r.",
+    "preconditions": "len(s) >= 1; len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is ASCII '0' or ASCII '1'; and for some m with 0 <= m < len(s), t is a sequence of length len(s) satisfying t[i] = s[(i + m) mod len(s)] for every i with 0 <= i < len(s)."
+  }
+]

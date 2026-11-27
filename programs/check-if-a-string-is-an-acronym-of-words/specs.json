@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsAcronym.spec_1",
+    "negation": "AegisSpec.IsAcronym.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = true if and only if len(s) = len(words) and, for every i with 0 <= i < len(words), s[i] = words[i][0] (the first byte of words[i]).",
+    "preconditions": "1 <= len(words) <= 100; 1 <= len(s) <= 100; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 10; every byte of every words[i] and of s lies in the inclusive range 97..122 (ASCII lowercase letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsAcronym.spec_2",
+    "negation": "AegisSpec.IsAcronym.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, panic, overflow, or access memory out of bounds.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsAcronym.spec_3",
+    "negation": "AegisSpec.IsAcronym.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and if r = true then len(s) = len(words).",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsAcronym.spec_4",
+    "negation": "AegisSpec.IsAcronym.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and if r = true then, for every i with 0 <= i < len(words), s[i] = words[i][0].",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsAcronym.spec_5",
+    "negation": "AegisSpec.IsAcronym.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and if len(s) = len(words) and, for every i with 0 <= i < len(words), s[i] = words[i][0], then r = true.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsAcronym.spec_6",
+    "negation": "AegisSpec.IsAcronym.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and if len(s) != len(words) then r = false.",
+    "preconditions": "Same as spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsAcronym.spec_7",
+    "negation": "AegisSpec.IsAcronym.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every byte string s satisfying the preconditions, if for every i with 0 <= i < len(words), words[i] and words'[i] are nonempty and words[i][0] = words'[i][0], then is_acronym(words, s) and is_acronym(words', s) return the same Boolean value.",
+    "preconditions": "Same as spec_1, and additionally words' is a slice of Vec U8 also satisfying the preconditions with len(words') = len(words)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsAcronym.spec_8",
+    "negation": "AegisSpec.IsAcronym.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and if r = true, then the call is_acronym(words ++ [w], s ++ [w[0]]) returns true, where w[0] is the first byte of w and words ++ [w] extends the word list by one word.",
+    "preconditions": "Same as spec_1, and additionally w is a Vec U8 with 1 <= len(w) <= 10 whose bytes all lie in 97..122, and len(words) + 1 <= 100 and len(s) + 1 <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsAcronym.spec_9",
+    "negation": "AegisSpec.IsAcronym.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r, and if r = true, then the call is_acronym(words, s ++ [c]) returns false, where s ++ [c] is the byte string obtained by appending c to s.",
+    "preconditions": "Same as spec_1, and additionally c is a byte with 97 <= c <= 122 and len(s) + 1 <= 100."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsAcronym.spec_10",
+    "negation": "AegisSpec.IsAcronym.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call is_acronym(words ++ [w], t) returns true, then the call is_acronym(words, t[0:len(words)]) returns true, where t[0:len(words)] denotes the slice consisting of the first len(words) bytes of t (this slice is well-defined because a true result forces len(t) = len(words) + 1).",
+    "preconditions": "words and t satisfy the preconditions, w is a Vec U8 with 1 <= len(w) <= 10 whose bytes all lie in 97..122, and len(words) + 1 <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.IsAcronym.spec_11",
+    "negation": "AegisSpec.IsAcronym.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call is_acronym(words, s) returns true, then for every j with 1 <= j <= len(words), the call is_acronym(words[0:j], s[0:j]) returns true, where words[0:j] is the slice of the first j words and s[0:j] is the slice of the first j bytes of s.",
+    "preconditions": "Same as spec_1."
+  }
+]

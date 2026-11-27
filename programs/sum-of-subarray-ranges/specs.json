@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.SubArrayRanges.spec_1",
+    "negation": "AegisSpec.SubArrayRanges.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every pair of indices i,j with 0 <= i <= j < n, let max(i,j) be the maximum of the set {nums[k] : i <= k <= j}, let min(i,j) be the minimum of the same set, and let R(i,j) = max(i,j) - min(i,j). Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = sum over all 0 <= i <= j < n of R(i,j).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.SubArrayRanges.spec_2",
+    "negation": "AegisSpec.SubArrayRanges.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "sub_array_ranges(nums) returns a result r; it does not panic, go out of bounds, or overflow.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.SubArrayRanges.spec_3",
+    "negation": "AegisSpec.SubArrayRanges.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r >= 0.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.SubArrayRanges.spec_4",
+    "negation": "AegisSpec.SubArrayRanges.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max {nums[k] : 0 <= k < n} and m = min {nums[k] : 0 <= k < n}. Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r >= M - m.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.SubArrayRanges.spec_5",
+    "negation": "AegisSpec.SubArrayRanges.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let M = max {nums[k] : 0 <= k < n} and m = min {nums[k] : 0 <= k < n}. Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r <= (n*(n-1)/2) * (M - m).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.SubArrayRanges.spec_6",
+    "negation": "AegisSpec.SubArrayRanges.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = 0.",
+    "preconditions": "len(nums) = 1 and -10^9 <= nums[0] <= 10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.SubArrayRanges.spec_7",
+    "negation": "AegisSpec.SubArrayRanges.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = absolute_value(nums[0] - nums[1]).",
+    "preconditions": "len(nums) = 2 and -10^9 <= nums[0] <= 10^9 and -10^9 <= nums[1] <= 10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.SubArrayRanges.spec_8",
+    "negation": "AegisSpec.SubArrayRanges.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = 0 if and only if all elements of nums are equal, that is, for every i,j with 0 <= i < n and 0 <= j < n, nums[i] = nums[j].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.SubArrayRanges.spec_9",
+    "negation": "AegisSpec.SubArrayRanges.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = sum over all 0 <= i <= j < n of (nums[j] - nums[i]).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and nums is nondecreasing: for every i with 0 <= i < n-1, nums[i] <= nums[i+1]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.SubArrayRanges.spec_10",
+    "negation": "AegisSpec.SubArrayRanges.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r and sub_array_ranges(rev) returns a result r', both regarded as integers, r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let rev be the array of length n with rev[i] = nums[n-1-i] for 0 <= i < n; then rev also has all entries in {-10^9,...,10^9}."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.SubArrayRanges.spec_11",
+    "negation": "AegisSpec.SubArrayRanges.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r and sub_array_ranges(neg) returns a result r', both regarded as integers, r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let neg be the array of length n with neg[i] = -nums[i] for 0 <= i < n; then neg also has all entries in {-10^9,...,10^9}."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.SubArrayRanges.spec_12",
+    "negation": "AegisSpec.SubArrayRanges.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r and sub_array_ranges(shifted) returns a result r', both regarded as integers, r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let c be an integer such that for every i with 0 <= i < n, -10^9 <= nums[i] + c <= 10^9, and let shifted be the array with shifted[i] = nums[i] + c."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.SubArrayRanges.spec_13",
+    "negation": "AegisSpec.SubArrayRanges.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever sub_array_ranges(nums) returns a result r and sub_array_ranges(scaled) returns a result r', both regarded as integers, r' = k * r.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9. Let k be an integer with k >= 0 such that for every i with 0 <= i < n, -10^9 <= k*nums[i] <= 10^9, and let scaled be the array with scaled[i] = k*nums[i]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.SubArrayRanges.spec_14",
+    "negation": "AegisSpec.SubArrayRanges.spec_14_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every 0 <= i <= j < n, define max(i,j) as the maximum of {nums[k] : i <= k <= j} and min(i,j) as the minimum of the same set. Whenever sub_array_ranges(nums) returns a result r, regarded as an integer, r = (sum over all 0 <= i <= j < n of max(i,j)) - (sum over all 0 <= i <= j < n of min(i,j)).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000 and, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9."
+  }
+]

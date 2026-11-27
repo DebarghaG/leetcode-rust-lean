@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.LeastInterval.spec_1",
+    "negation": "AegisSpec.LeastInterval.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let m = len(tasks). For each label v, let freq(v) be the number of indices i with 0 <= i < m and tasks[i] = v. Let maxfreq = max{ freq(tasks[i]) | 0 <= i < m }. Let cnt_max = |{ v | freq(v) = maxfreq }|. The function returns a result r and r = max(m, (maxfreq - 1) * (n + 1) + cnt_max).",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.LeastInterval.spec_2",
+    "negation": "AegisSpec.LeastInterval.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail).",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.LeastInterval.spec_3",
+    "negation": "AegisSpec.LeastInterval.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = len(tasks). The function returns a result r and r >= m.",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.LeastInterval.spec_4",
+    "negation": "AegisSpec.LeastInterval.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let maxfreq be the maximum frequency of any label in tasks, and let cnt_max be the number of distinct labels achieving that maximum frequency. The function returns a result r and r >= (maxfreq - 1) * (n + 1) + cnt_max.",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.LeastInterval.spec_5",
+    "negation": "AegisSpec.LeastInterval.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let m = len(tasks). For a label v, let freq(v) be the number of indices i with 0 <= i < m and tasks[i] = v. A schedule of length L is a function s : {0,1,...,L-1} -> Option (Vec U8) such that: (a) for every label v, the number of indices p with s[p] = Some v equals freq(v); (b) for any p < q with s[p] = s[q] = Some v, we have q - p >= n + 1. The function returns a result r and there exists a valid schedule of length r.",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.LeastInterval.spec_6",
+    "negation": "AegisSpec.LeastInterval.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let m = len(tasks). Define a valid schedule of length L as in spec_5. The function returns a result r and for every integer L with 0 <= L < r, there does not exist a valid schedule of length L.",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.LeastInterval.spec_7",
+    "negation": "AegisSpec.LeastInterval.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let r1 and r2 be the results returned by the function for tasks1 and tasks2 respectively, with the same n. Then r1 = r2.",
+    "preconditions": "tasks1 and tasks2 are slices of Vec U8 such that 1 <= len(tasks1) = len(tasks2) <= 10000; for every i with 0 <= i < len(tasks1), len(tasks1[i]) = 1 and 65 <= tasks1[i][0] <= 90; similarly for tasks2; 0 <= n <= 100; and tasks2 is a permutation of tasks1 (i.e., for every label v, the number of occurrences of v in tasks1 equals the number of occurrences of v in tasks2)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.LeastInterval.spec_8",
+    "negation": "AegisSpec.LeastInterval.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m = len(tasks). Let maxfreq be the maximum frequency of any label in tasks, and let cnt_max be the number of distinct labels achieving that maximum frequency. The function returns a result r and r <= m + (maxfreq - 1) * n * cnt_max.",
+    "preconditions": "1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and 0 <= n <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.LeastInterval.spec_9",
+    "negation": "AegisSpec.LeastInterval.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 and r2 be the results returned by the function for tasks with cooling parameter n1 and n2 respectively. Then r1 <= r2.",
+    "preconditions": "tasks is a slice of Vec U8 with 1 <= len(tasks) <= 10000; for every i with 0 <= i < len(tasks), len(tasks[i]) = 1 and 65 <= tasks[i][0] <= 90; and n1, n2 are integers with 0 <= n1 <= n2 <= 100."
+  }
+]

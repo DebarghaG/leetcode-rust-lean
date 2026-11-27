@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_1",
+    "negation": "AegisSpec.BagOfTokensScore.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r equals M(tokens, power), where M(tokens, power) is the maximum final score over all valid play sequences defined as follows. A play sequence is a finite sequence of moves, each move selecting a not-yet-selected index i and a direction. Initially power_0 = power and score_0 = 0. A face-up move on i requires current power >= tokens[i] and changes the state to (power - tokens[i], score + 1). A face-down move on i requires current score >= 1 and changes the state to (power + tokens[i], score - 1). A token index may be selected at most once. The empty sequence is allowed. The final score is the score after the last move. M is the maximum of these final scores over all valid play sequences.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_2",
+    "negation": "AegisSpec.BagOfTokensScore.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r (it does not fail, panic, overflow, or access an out-of-bounds index).",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_3",
+    "negation": "AegisSpec.BagOfTokensScore.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= len(tokens).",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_4",
+    "negation": "AegisSpec.BagOfTokensScore.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a valid play sequence under the rules defined in spec_1 whose final score is exactly r.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_5",
+    "negation": "AegisSpec.BagOfTokensScore.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, every valid play sequence under the rules defined in spec_1 has final score at most r.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_6",
+    "negation": "AegisSpec.BagOfTokensScore.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; 0 <= power < 10000; len(tokens) > 0; and for every i with 0 <= i < len(tokens), tokens[i] > power."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_7",
+    "negation": "AegisSpec.BagOfTokensScore.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r with r >= 1.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; 0 <= power < 10000; and there exists i with 0 <= i < len(tokens) and tokens[i] <= power."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_8",
+    "negation": "AegisSpec.BagOfTokensScore.spec_8_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let S = sum_{i=0}^{len(tokens)-1} tokens[i]. The function returns r = len(tokens) if and only if S <= power.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_9",
+    "negation": "AegisSpec.BagOfTokensScore.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If r1 is the result returned for (tokens1, power) and r2 is the result returned for (tokens2, power), then r1 = r2.",
+    "preconditions": "tokens1 and tokens2 are slices satisfying 0 <= len(tokens1) = len(tokens2) <= 1000 and, for every i, 0 <= tokens1[i] < 10000 and 0 <= tokens2[i] < 10000; 0 <= power < 10000; and tokens2 is a permutation of tokens1, meaning there exists a permutation pi of {0,...,len(tokens1)-1} such that tokens2[i] = tokens1[pi(i)] for every i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_10",
+    "negation": "AegisSpec.BagOfTokensScore.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If r1 is the result returned for (tokens, p1) and r2 is the result returned for (tokens, p2), then r1 <= r2.",
+    "preconditions": "tokens satisfies 0 <= len(tokens) <= 1000 and, for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= p1 <= p2 < 10000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_11",
+    "negation": "AegisSpec.BagOfTokensScore.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let z be the number of indices i with 0 <= i < len(tokens) and tokens[i] = 0, and let tokens' be the slice obtained by deleting all entries equal to 0 from tokens. If r is the result returned for (tokens, power), then r >= z + M(tokens', power), where M is the maximum final score over all valid play sequences under the rules defined in spec_1.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_12",
+    "negation": "AegisSpec.BagOfTokensScore.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r > 0, there exists a valid play sequence under the rules defined in spec_1 with final score r whose last move is a face-up move.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_13",
+    "negation": "AegisSpec.BagOfTokensScore.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k with 0 <= k <= r there exists a finite valid play sequence under the rules defined in spec_1 whose final score is exactly k.",
+    "preconditions": "0 <= len(tokens) <= 1000; for every i with 0 <= i < len(tokens), 0 <= tokens[i] < 10000; and 0 <= power < 10000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.BagOfTokensScore.spec_14",
+    "negation": "AegisSpec.BagOfTokensScore.spec_14_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If r1 is the result returned for (tokens1, power) and r2 is the result returned for (tokens2, power), then r1 <= r2.",
+    "preconditions": "tokens1 and tokens2 are slices satisfying 0 <= len(tokens1) <= 1000, len(tokens2) = len(tokens1) + 1, all token values lie in [0,10000), and 0 <= power < 10000; tokens2 is obtained from tokens1 by inserting one additional token value v with 0 <= v < 10000."
+  }
+]

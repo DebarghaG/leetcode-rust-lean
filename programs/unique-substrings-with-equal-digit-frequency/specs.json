@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_1",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the number of elements of the set { x | x is a nonempty contiguous substring of s and x is balanced }. Here x is a nonempty contiguous substring of s when there exist i,j with 0 <= i <= j < len(s), len(x) = j - i + 1, and x[t] = s[i+t] for every 0 <= t < len(x); the set is taken with list equality, so identical byte sequences occurring at different positions count once.",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57. For a nonempty digit byte list x and d in {0,...,9}, let cnt(x,d) be the number of indices j with 0 <= j < len(x) and x[j] = 48 + d. Call x balanced when for all d,e in {0,...,9}, if cnt(x,d) > 0 and cnt(x,e) > 0 then cnt(x,d) = cnt(x,e)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_2",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input s satisfying the preconditions, the function returns a result r (it does not fail).",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_3",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r >= |D| + |P|, where D = { d in {0,...,9} | there exists i with 0 <= i < len(s) and s[i] = 48+d } and P = { (s[i], s[i+1]) | 0 <= i < len(s)-1 } (P is a set of ordered pairs of byte values).",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_4",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r and r <= len(s)*(len(s)+1)/2.",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_5",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 1.",
+    "preconditions": "len(s) = 1 and 48 <= s[0] <= 57."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_6",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = 2 when s[0] = s[1], and r = 3 when s[0] != s[1].",
+    "preconditions": "len(s) = 2 and 48 <= s[0] <= 57 and 48 <= s[1] <= 57."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_7",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n.",
+    "preconditions": "len(s) = n with 1 <= n <= 1000; there is a byte c with 48 <= c <= 57 such that s[i] = c for every 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_8",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = n*(n+1)/2.",
+    "preconditions": "len(s) = n with 1 <= n <= 1000; for every i with 0 <= i < n, 48 <= s[i] <= 57; and for all i,j with 0 <= i < j < n, s[i] != s[j]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_9",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev(s) be the byte list of length n = len(s) with rev(s)[i] = s[n-1-i] for 0 <= i < n. The function returns a result r on s and a result r_rev on rev(s), and r = r_rev.",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_10",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "The function returns a result r on s and a result r_perm on t, and r = r_perm.",
+    "preconditions": "len(s) >= 1 and len(s) <= 1000, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57. Let pi be any permutation of {0,...,9}, and define t by t[i] = 48 + pi(s[i]-48) for 0 <= i < len(s)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_11",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned on s and r' the result returned on t. Then r <= r'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 999, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57. Let c be a byte with 48 <= c <= 57, and let t be the byte list of length len(s)+1 with t[i]=s[i] for 0 <= i < len(s) and t[len(s)]=c."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_12",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result returned on s and r' the result returned on t. Then r' <= r + len(t).",
+    "preconditions": "len(s) >= 1 and len(s) <= 999, and for every i with 0 <= i < len(s), 48 <= s[i] <= 57. Let c be a byte with 48 <= c <= 57, and let t be the byte list of length len(s)+1 with t[i]=s[i] for 0 <= i < len(s) and t[len(s)]=c."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.EqualDigitFrequency.spec_13",
+    "negation": "AegisSpec.EqualDigitFrequency.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and: r = 3 if s[0] = s[1] = s[2]; r = 6 if s[0], s[1], s[2] are pairwise distinct; otherwise (exactly two of the three bytes are equal) r = 4.",
+    "preconditions": "len(s) = 3 and 48 <= s[0] <= 57 and 48 <= s[1] <= 57 and 48 <= s[2] <= 57."
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinOperations.spec_1",
+    "negation": "AegisSpec.MinOperations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and the following holds. If target > sum_{i=0}^{n-1} nums[i], then r = -1. Otherwise, r is the least integer k >= 0 for which there exist arrays A_0,...,A_k with A_0 = nums, each A_{t+1} obtained from A_t by choosing an index p with 0 <= p < len(A_t) and A_t[p] > 1, deleting A_t[p], and appending two copies of A_t[p]/2, and such that some subsequence of A_k has elements summing to target. A subsequence of an array A is a list of elements at indices i_1 < ... < i_m of A; its sum is A[i_1] + ... + A[i_m] (the empty subsequence has sum 0).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinOperations.spec_2",
+    "negation": "AegisSpec.MinOperations.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail, panic, or overflow on any input satisfying the preconditions.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinOperations.spec_3",
+    "negation": "AegisSpec.MinOperations.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and if target <= sum_{i=0}^{n-1} nums[i], then 0 <= r <= sum_{i=0}^{n-1} (nums[i] - 1).",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinOperations.spec_4",
+    "negation": "AegisSpec.MinOperations.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "The function returns a result r, and r = -1 if and only if target > sum_{i=0}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinOperations.spec_5",
+    "negation": "AegisSpec.MinOperations.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if there exists a subset I of {0,...,n-1} such that sum_{i in I} nums[i] = target.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinOperations.spec_6",
+    "negation": "AegisSpec.MinOperations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and: (a) if target > nums[0] then r = -1; (b) if target = nums[0] then r = 0; (c) if 1 <= target < nums[0] then r = k - v2(target), where v2(target) is the largest integer e >= 0 such that 2^e divides target.",
+    "preconditions": "Let n = len(nums). Assume n = 1, nums[0] = 2^k for some integer k with 0 <= k <= 30, and 1 <= target < 2^31."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinOperations.spec_7",
+    "negation": "AegisSpec.MinOperations.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = min_{0 <= i < n} j_i, where for each i, j_i is the unique integer with 0 <= j_i <= 30 and nums[i] = 2^{j_i}.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, target = 1, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinOperations.spec_8",
+    "negation": "AegisSpec.MinOperations.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, target = sum_{i=0}^{n-1} nums[i], and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinOperations.spec_9",
+    "negation": "AegisSpec.MinOperations.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the function returns r on input (nums, target) and r' on input (nums', target), then r = r'.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j. Let nums' be any permutation of nums."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinOperations.spec_10",
+    "negation": "AegisSpec.MinOperations.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the result of the function on (nums, target) and r' its result on (nums', target). If r != -1, then r' != -1 and r' <= r.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n < 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j. Let j0 be any integer with 0 <= j0 <= 30, and let nums' be the array obtained by appending the value 2^{j0} to nums."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinOperations.spec_11",
+    "negation": "AegisSpec.MinOperations.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists an array A obtainable from nums by exactly r operations, in the sense of the main specification, such that some subsequence of A has elements summing to target.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinOperations.spec_12",
+    "negation": "AegisSpec.MinOperations.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r with r >= 0, for every integer k with 0 <= k < r and every array A obtainable from nums by exactly k operations, no subsequence of A has elements summing to target.",
+    "preconditions": "Let n = len(nums). Assume 1 <= n <= 1000, 1 <= target < 2^31, and for every i with 0 <= i < n there is an integer j with 0 <= j <= 30 such that nums[i] = 2^j."
+  }
+]

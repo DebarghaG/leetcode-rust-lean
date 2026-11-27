@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.Insert.spec_1",
+    "negation": "AegisSpec.Insert.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(intervals), s = newInterval[0], e = newInterval[1], and let U = {x ∈ ℝ | (s ≤ x ≤ e) or (there exists i with 0 ≤ i < n and intervals[i][0] ≤ x ≤ intervals[i][1])}. The function returns a result r (it does not fail) such that, writing m = len(r) and r[j] = [a_j, b_j] for each 0 ≤ j < m, the following hold: m ≥ 1; every r[j] has length 2 and a_j ≤ b_j; for every 0 ≤ j < m-1, b_j < a_{j+1}; and for every real x, x ∈ U iff there exists j with 0 ≤ j < m and a_j ≤ x ≤ b_j. Thus r is exactly the sorted list of the connected components of U.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.Insert.spec_2",
+    "negation": "AegisSpec.Insert.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (i.e., it does not fail, overflow, panic, or go out of bounds) for every input satisfying the preconditions.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.Insert.spec_3",
+    "negation": "AegisSpec.Insert.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every element of r is a pair: for every j with 0 ≤ j < len(r), len(r[j]) = 2.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.Insert.spec_4",
+    "negation": "AegisSpec.Insert.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, every element of r denotes a nonempty closed interval: for every j with 0 ≤ j < len(r), writing r[j] = [a_j, b_j], we have a_j ≤ b_j.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.Insert.spec_5",
+    "negation": "AegisSpec.Insert.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, every endpoint of every output interval lies in the allowed numeric range: for every j with 0 ≤ j < len(r), writing r[j] = [a_j, b_j], we have 0 ≤ a_j ≤ b_j ≤ 100000.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.Insert.spec_6",
+    "negation": "AegisSpec.Insert.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the output intervals are strictly ordered and pairwise non-overlapping: for every j with 0 ≤ j < len(r)-1, writing r[j] = [a_j, b_j] and r[j+1] = [a_{j+1}, b_{j+1}], we have b_j < a_{j+1}. Consequently a_j < a_{j+1} for all such j.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.Insert.spec_7",
+    "negation": "AegisSpec.Insert.spec_7_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, no point of the input intervals or of newInterval is lost: for every real x, if (newInterval[0] ≤ x ≤ newInterval[1]) or (there exists i with 0 ≤ i < len(intervals) and intervals[i][0] ≤ x ≤ intervals[i][1]), then there exists j with 0 ≤ j < len(r) such that r[j][0] ≤ x ≤ r[j][1].",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.Insert.spec_8",
+    "negation": "AegisSpec.Insert.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r, the output covers no points other than those in the input intervals or newInterval: for every real x, if there exists j with 0 ≤ j < len(r) such that r[j][0] ≤ x ≤ r[j][1], then (newInterval[0] ≤ x ≤ newInterval[1]) or (there exists i with 0 ≤ i < len(intervals) and intervals[i][0] ≤ x ≤ intervals[i][1]).",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.Insert.spec_9",
+    "negation": "AegisSpec.Insert.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, every endpoint of every output interval is an original endpoint: for every j with 0 ≤ j < len(r) and every k ∈ {0,1}, the value r[j][k] is equal either to newInterval[0], to newInterval[1], or to intervals[i][q] for some i with 0 ≤ i < len(intervals) and q ∈ {0,1}.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.Insert.spec_10",
+    "negation": "AegisSpec.Insert.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, any input interval that does not intersect newInterval appears unchanged in r. More formally, for every i with 0 ≤ i < len(intervals), if intervals[i][1] < newInterval[0] or newInterval[1] < intervals[i][0], then there exists j with 0 ≤ j < len(r) such that r[j][0] = intervals[i][0] and r[j][1] = intervals[i][1].",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.Insert.spec_11",
+    "negation": "AegisSpec.Insert.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the whole newInterval is contained in exactly one output interval. That is, there exists j with 0 ≤ j < len(r) such that r[j][0] ≤ newInterval[0] and newInterval[1] ≤ r[j][1]; and for every k with 0 ≤ k < len(r) and k ≠ j, the interval r[k] does not intersect [newInterval[0], newInterval[1]] (i.e., r[k][1] < newInterval[0] or newInterval[1] < r[k][0]).",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.Insert.spec_12",
+    "negation": "AegisSpec.Insert.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, its length is len(intervals) - k + 1, where k is the number of input intervals that intersect newInterval as closed intervals: k = #{ i | 0 ≤ i < len(intervals) and intervals[i][0] ≤ newInterval[1] and newInterval[0] ≤ intervals[i][1] }.",
+    "preconditions": "len(intervals) <= 10000; len(newInterval) = 2; 0 <= newInterval[0] <= newInterval[1] <= 100000; for every i with 0 <= i < len(intervals), len(intervals[i]) = 2 and 0 <= intervals[i][0] <= intervals[i][1] <= 100000; and for every i with 0 <= i < len(intervals)-1, intervals[i][1] < intervals[i+1][0]."
+  }
+]

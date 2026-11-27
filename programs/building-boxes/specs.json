@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumBoxes.spec_1",
+    "negation": "AegisSpec.MinimumBoxes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let A be the largest integer a >= 1 such that a*(a+1)*(a+2)/6 <= n. Let R = n - A*(A+1)*(A+2)/6. Let F be the least integer f >= 0 such that f*(f+1)/2 >= R. The function returns a result r and r = A*(A+1)/2 + F.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumBoxes.spec_2",
+    "negation": "AegisSpec.MinimumBoxes.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail with overflow, out-of-bounds access, or panic.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumBoxes.spec_3",
+    "negation": "AegisSpec.MinimumBoxes.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and 1 <= r <= n.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumBoxes.spec_4",
+    "negation": "AegisSpec.MinimumBoxes.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Define C(0) = 0. For m >= 1, let a be the largest integer with a*(a+1)/2 <= m, let e = m - a*(a+1)/2, and define C(m) = a*(a+1)*(a+2)/6 + e*(e+1)/2. The function returns r and n <= C(r).",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumBoxes.spec_5",
+    "negation": "AegisSpec.MinimumBoxes.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Define C(0) = 0. For m >= 1, let a be the largest integer with a*(a+1)/2 <= m, let e = m - a*(a+1)/2, and define C(m) = a*(a+1)*(a+2)/6 + e*(e+1)/2. The function returns r and C(r-1) < n.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumBoxes.spec_6",
+    "negation": "AegisSpec.MinimumBoxes.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns r. Consider every valid placement P: a set of n integer triples (x,y,z) with 0 <= x,y,z < n such that for every (x,y,z) in P with z > 0, the triple (x,y,z-1) is in P, and for each (dx,dy) in {(1,0),(-1,0),(0,1),(0,-1)}, either (x+dx,y+dy,z-1) lies outside the room (x+dx < 0 or x+dx >= n or y+dy < 0 or y+dy >= n) or (x+dx,y+dy,z-1) is in P. For every such P, the number of triples in P with z=0 is at least r.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumBoxes.spec_7",
+    "negation": "AegisSpec.MinimumBoxes.spec_7_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns r. There exists a valid placement P, defined as a set of n integer triples (x,y,z) with 0 <= x,y,z < n such that for every (x,y,z) in P with z > 0, the triple (x,y,z-1) is in P, and for each (dx,dy) in {(1,0),(-1,0),(0,1),(0,-1)}, either (x+dx,y+dy,z-1) lies outside the room or (x+dx,y+dy,z-1) is in P, such that exactly r triples in P have z=0.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumBoxes.spec_8",
+    "negation": "AegisSpec.MinimumBoxes.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 = minimum_boxes(n1) and r2 = minimum_boxes(n2). Both calls return results and r1 <= r2.",
+    "preconditions": "n1 and n2 are integers with 1 <= n1 <= n2 <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumBoxes.spec_9",
+    "negation": "AegisSpec.MinimumBoxes.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r = minimum_boxes(n) and r' = minimum_boxes(n+1). Both calls return results and r <= r' <= r+1.",
+    "preconditions": "n is an integer with 1 <= n < 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumBoxes.spec_10",
+    "negation": "AegisSpec.MinimumBoxes.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r and r = 1 if and only if n = 1.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumBoxes.spec_11",
+    "negation": "AegisSpec.MinimumBoxes.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let A be the largest integer a >= 1 such that a*(a+1)*(a+2)/6 <= n. The function returns r and A*(A+1)/2 <= r <= (A+1)*(A+2)/2.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumBoxes.spec_12",
+    "negation": "AegisSpec.MinimumBoxes.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns r and r <= 1650467.",
+    "preconditions": "n is an integer with 1 <= n <= 1000000000."
+  }
+]

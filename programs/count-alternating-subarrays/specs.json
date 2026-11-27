@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_1",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r equals the number of integer pairs (l, u) with 0 <= l <= u < len(nums) such that the subarray nums[l..u] is alternating: for every k with l <= k < u, nums[k] != nums[k+1]. Here nums[l..u] is the nonempty contiguous subarray from index l through index u inclusive.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_2",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r; it does not fail because of panic, out-of-bounds indexing, or arithmetic overflow.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_3",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r >= len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_4",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r, and r <= len(nums)*(len(nums)+1)/2.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_5",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r. If nums[0] != nums[1], then r = 3; otherwise nums[0] = nums[1] and r = 2.",
+    "preconditions": "1 <= len(nums) <= 100000, len(nums) = 2, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_6",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(nums)*(len(nums)+1)/2.",
+    "preconditions": "1 <= len(nums) <= 100000, for every i with 0 <= i < len(nums), nums[i] is either 0 or 1, and for every k with 0 <= k < len(nums)-1, nums[k] != nums[k+1]."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_7",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = len(nums).",
+    "preconditions": "1 <= len(nums) <= 100000, for every i with 0 <= i < len(nums), nums[i] is either 0 or 1, and for every i with 0 <= i < len(nums), nums[i] = nums[0]."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_8",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length len(nums) with rev[i] = nums[len(nums)-1-i] for every i with 0 <= i < len(nums). The function returns a result r, and r equals the number of integer pairs (l, u) with 0 <= l <= u < len(nums) such that for every k with l <= k < u, rev[k] != rev[k+1].",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_9",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let comp be the array of length len(nums) with comp[i] = 1 - nums[i] for every i with 0 <= i < len(nums). The function returns a result r, and r equals the number of integer pairs (l, u) with 0 <= l <= u < len(nums) such that for every k with l <= k < u, comp[k] != comp[k+1].",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_10",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let the cut indices be exactly those k with 0 <= k < len(nums)-1 and nums[k] = nums[k+1]. These cuts partition the index range 0..len(nums)-1 into consecutive maximal intervals [a_1,b_1], ..., [a_m,b_m] with 0 = a_1, b_m = len(nums)-1, a_{j+1} = b_j+1, and with nums[k] != nums[k+1] for every j and every k with a_j <= k < b_j. The function returns a result r, and r = sum over j from 1 to m of (b_j - a_j + 1)*(b_j - a_j + 2)/2.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_11",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For each l with 0 <= l < len(nums), let f(l) be the largest integer m with 1 <= m <= len(nums)-l such that for every k with l <= k < l+m-1, nums[k] != nums[k+1]. The function returns a result r, and r = sum from l=0 to len(nums)-1 of f(l).",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_12",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_12_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r, and r > len(nums) if and only if there exists an index k with 0 <= k < len(nums)-1 and nums[k] != nums[k+1].",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountAlternatingSubarrays.spec_13",
+    "negation": "AegisSpec.CountAlternatingSubarrays.spec_13_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let t be the number of indices k with 0 <= k < len(nums)-1 and nums[k] != nums[k+1]. The function returns a result r, and r >= len(nums) + t.",
+    "preconditions": "1 <= len(nums) <= 100000, and for every i with 0 <= i < len(nums), nums[i] is either 0 or 1."
+  }
+]

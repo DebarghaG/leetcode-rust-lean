@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetRow.spec_1",
+    "negation": "AegisSpec.GetRow.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "get_row rowIndex returns Result.ok r (so it does not fail) for a vector r of length rowIndex + 1 such that, for every j with 0 <= j <= rowIndex, r[j] is the binomial coefficient C(rowIndex, j) = rowIndex! / (j! * (rowIndex - j)!), equivalently the number of j-element subsets of a rowIndex-element set. Thus r is exactly the 0-indexed rowIndex-th row of Pascal's triangle, with columns numbered from 0.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetRow.spec_2",
+    "negation": "AegisSpec.GetRow.spec_2_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_row rowIndex returns Result.ok r, len(r) = rowIndex + 1.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetRow.spec_3",
+    "negation": "AegisSpec.GetRow.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the first entry is 1: r[0] = 1.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetRow.spec_4",
+    "negation": "AegisSpec.GetRow.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the last entry is 1: r[rowIndex] = 1.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetRow.spec_5",
+    "negation": "AegisSpec.GetRow.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the row is symmetric: for every j with 0 <= j <= rowIndex, r[j] = r[rowIndex - j].",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetRow.spec_6",
+    "negation": "AegisSpec.GetRow.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the sum of its entries is 2^rowIndex: sum_{j=0}^{rowIndex} r[j] = 2^rowIndex, using mathematical integer sum and exponentiation.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetRow.spec_7",
+    "negation": "AegisSpec.GetRow.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, its alternating sum is sum_{j=0}^{rowIndex} (-1)^j * r[j] = (if rowIndex = 0 then 1 else 0).",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetRow.spec_8",
+    "negation": "AegisSpec.GetRow.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, every entry is positive: for every j with 0 <= j <= rowIndex, r[j] >= 1.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetRow.spec_9",
+    "negation": "AegisSpec.GetRow.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the center entry is a maximum: for every j with 0 <= j <= rowIndex, r[j] <= r[floor(rowIndex/2)], where floor is integer division.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetRow.spec_10",
+    "negation": "AegisSpec.GetRow.spec_10_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the row is nondecreasing up to its center: for every j with 0 <= j < rowIndex and 2*j + 1 <= rowIndex, r[j] <= r[j+1].",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GetRow.spec_11",
+    "negation": "AegisSpec.GetRow.spec_11_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, the row is nonincreasing after its center: for every j with 0 <= j < rowIndex and 2*j + 1 >= rowIndex, r[j] >= r[j+1].",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.GetRow.spec_12",
+    "negation": "AegisSpec.GetRow.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever get_row rowIndex returns Result.ok r with len(r) = rowIndex + 1, adjacent entries satisfy the Pascal ratio relation: for every j with 0 <= j < rowIndex, r[j] * (rowIndex - j) = r[j+1] * (j + 1).",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.GetRow.spec_13",
+    "negation": "AegisSpec.GetRow.spec_13_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every rowIndex satisfying 0 <= rowIndex <= 33, get_row rowIndex returns some Result.ok r; in particular it does not fail due to integer overflow, out-of-bounds access, or panic.",
+    "preconditions": "rowIndex is an integer satisfying 0 <= rowIndex <= 33."
+  }
+]

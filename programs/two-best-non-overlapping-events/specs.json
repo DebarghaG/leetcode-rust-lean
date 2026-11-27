@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_1",
+    "negation": "AegisSpec.MaxTwoEvents.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(events). For 0 <= i < n write start_i = events[i][0], end_i = events[i][1], value_i = events[i][2]. Call a set T of indices feasible when |T| <= 2 and, for every two distinct i,j in T, either end_i < start_j or end_j < start_i. Define S = { sum_{i in T} value_i | T is feasible }, with the empty sum equal to 0. Then the function returns a result r and r = max(S).",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_2",
+    "negation": "AegisSpec.MaxTwoEvents.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; it does not fail, overflow, panic, or access an out-of-bounds index.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_3",
+    "negation": "AegisSpec.MaxTwoEvents.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n we have r >= value_i.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_4",
+    "negation": "AegisSpec.MaxTwoEvents.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every pair of distinct indices i,j with 0 <= i < n and 0 <= j < n such that end_i < start_j or end_j < start_i, we have value_i + value_j <= r.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_5",
+    "negation": "AegisSpec.MaxTwoEvents.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let p be an index with 0 <= p < n and value_p = max_{0 <= i < n} value_i. Let q be an index with 0 <= q < n, q != p, and value_q = max_{0 <= i < n, i != p} value_i. Whenever the function returns a result r, r <= value_p + value_q.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_6",
+    "negation": "AegisSpec.MaxTwoEvents.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a set T of indices with |T| <= 2 and, for every two distinct i,j in T, either end_i < start_j or end_j < start_i, such that r = sum_{i in T} value_i.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_7",
+    "negation": "AegisSpec.MaxTwoEvents.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r > 0.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_8",
+    "negation": "AegisSpec.MaxTwoEvents.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = max_{0 <= i < n} value_i.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000. Additionally, for every pair of distinct indices i,j with 0 <= i < n and 0 <= j < n, neither end_i < start_j nor end_j < start_i."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_9",
+    "negation": "AegisSpec.MaxTwoEvents.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if there exist distinct indices i,j with 0 <= i < n and 0 <= j < n such that end_i < start_j or end_j < start_i, then r = 2*v; otherwise r = v.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000. Additionally, there exists v such that for every i with 0 <= i < n, value_i = v."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_10",
+    "negation": "AegisSpec.MaxTwoEvents.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation pi of {0,...,n-1}, let events_pi be the list with events_pi[i] = events[pi(i)] for 0 <= i < n. Whenever the function returns r on events and returns r' on events_pi, we have r = r'.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_11",
+    "negation": "AegisSpec.MaxTwoEvents.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let p be an index with 0 <= p < n and value_p = max_{0 <= i < n} value_i. Let q be an index with 0 <= q < n, q != p, and value_q = max_{0 <= i < n, i != p} value_i. Whenever the function returns a result r, r = value_p + value_q.",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000. Additionally, for every pair of distinct indices i,j with 0 <= i < n and 0 <= j < n, either end_i < start_j or end_j < start_i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxTwoEvents.spec_12",
+    "negation": "AegisSpec.MaxTwoEvents.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if end_0 < start_1 or end_1 < start_0 then r = value_0 + value_1; otherwise r = max(value_0, value_1).",
+    "preconditions": "events has length n with 2 <= n <= 100000. For every i with 0 <= i < n, events[i] has length 3; writing start_i = events[i][0], end_i = events[i][1], value_i = events[i][2], we have 1 <= start_i <= end_i <= 1000000000 and 1 <= value_i <= 1000000. Additionally, n = 2."
+  }
+]

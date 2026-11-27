@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumMoney.spec_1",
+    "negation": "AegisSpec.MinimumMoney.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r and r is the least nonnegative integer with the following property: for every permutation p of the transactions (a sequence of length n containing each index 0,1,...,n-1 exactly once), the order p succeeds from initial amount r, meaning that for every k with 0 <= k < n, r + Σ_{j=0}^{k-1} (cash_{p[j]} - cost_{p[j]}) >= cost_{p[k]}, where the sum for k = 0 is empty and equals 0. Equivalently, r >= 0, every permutation succeeds from r, and for every integer M with 0 <= M < r there exists a permutation p that does not succeed from M.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000. All stated arithmetic is mathematical integer arithmetic; under these assumptions the quantities mentioned are within signed 64-bit range."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumMoney.spec_2",
+    "negation": "AegisSpec.MinimumMoney.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function does not fail: it returns a result r (a Std.I64 value).",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumMoney.spec_3",
+    "negation": "AegisSpec.MinimumMoney.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every permutation p of the transactions (a sequence of length n containing each index exactly once), the order p succeeds from initial amount r; that is, for every k with 0 <= k < n, r + Σ_{j=0}^{k-1} (cash_{p[j]} - cost_{p[j]}) >= cost_{p[k]}, with empty sum 0 for k=0.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumMoney.spec_4",
+    "negation": "AegisSpec.MinimumMoney.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every integer M with 0 <= M < r there exists a permutation p of the transactions such that the order p does not succeed from M; explicitly, there is some k with 0 <= k < n for which M + Σ_{j=0}^{k-1} (cash_{p[j]} - cost_{p[j]}) < cost_{p[k]}.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumMoney.spec_5",
+    "negation": "AegisSpec.MinimumMoney.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r = (Σ_{i=0}^{n-1} max(0, cost_i - cash_i)) + max_{0 <= i < n} min(cost_i, cash_i).",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumMoney.spec_6",
+    "negation": "AegisSpec.MinimumMoney.spec_6_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a permutation p of the transactions such that need(p) = r, where need(p) = max_{0 <= k < n} ( cost_{p[k]} + Σ_{j=0}^{k-1} (cost_{p[j]} - cash_{p[j]}) ), with the empty sum for k=0 equal to 0.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumMoney.spec_7",
+    "negation": "AegisSpec.MinimumMoney.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every i with 0 <= i < n, r >= cost_i.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumMoney.spec_8",
+    "negation": "AegisSpec.MinimumMoney.spec_8_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= Σ_{i=0}^{n-1} cost_i.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumMoney.spec_9",
+    "negation": "AegisSpec.MinimumMoney.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let q be any permutation of the index set {0,1,...,n-1}, and let transactions2 be the slice of length n defined by transactions2[i] = transactions[q[i]] for 0 <= i < n. Whenever minimum_money(transactions) returns r and minimum_money(transactions2) returns r2, we have r = r2.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumMoney.spec_10",
+    "negation": "AegisSpec.MinimumMoney.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer M with M >= r and every permutation p of the transactions, the order p succeeds from M; that is, for every k with 0 <= k < n, M + Σ_{j=0}^{k-1} (cash_{p[j]} - cost_{p[j]}) >= cost_{p[k]}, with empty sum 0 for k=0.",
+    "preconditions": "Let n = len(transactions). Assume 1 <= n <= 100000. For every i with 0 <= i < n, len(transactions[i]) = 2, and if cost_i = transactions[i][0] and cash_i = transactions[i][1], then 0 <= cost_i <= 1000000000 and 0 <= cash_i <= 1000000000."
+  }
+]

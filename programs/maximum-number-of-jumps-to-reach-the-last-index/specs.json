@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumJumps.spec_1",
+    "negation": "AegisSpec.MaximumJumps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (it does not fail). A jump sequence is a sequence of indices i_0, i_1, ..., i_k such that i_0 = 0, i_k = n-1, 0 <= i_0 < i_1 < ... < i_k < n, and for every t with 0 <= t < k, -target <= nums[i_{t+1}] - nums[i_t] <= target. The integer r satisfies: if there exists at least one jump sequence, then r is the maximum k over all jump sequences (so r >= 0, there exists a jump sequence of length r, and no jump sequence has length greater than r); if no jump sequence exists, then r = -1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumJumps.spec_2",
+    "negation": "AegisSpec.MaximumJumps.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have -1 <= r <= n-1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumJumps.spec_3",
+    "negation": "AegisSpec.MaximumJumps.spec_3_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r with r >= 0, there exists a jump sequence from index 0 to index n-1 of length r. Here a jump sequence of length r is a sequence of indices i_0, i_1, ..., i_r such that i_0 = 0, i_r = n-1, 0 <= i_0 < i_1 < ... < i_r < n, and for every t with 0 <= t < r, -target <= nums[i_{t+1}] - nums[i_t] <= target.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumJumps.spec_4",
+    "negation": "AegisSpec.MaximumJumps.spec_4_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r with r >= 0, for every jump sequence from index 0 to index n-1 of length k (defined as in spec_3: i_0 = 0, i_k = n-1, 0 <= i_0 < ... < i_k < n, and for every t < k, -target <= nums[i_{t+1}] - nums[i_t] <= target), we have k <= r.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumJumps.spec_5",
+    "negation": "AegisSpec.MaximumJumps.spec_5_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Whenever the function returns -1, there does not exist any jump sequence from index 0 to index n-1 (defined as in spec_3: a sequence of indices i_0, ..., i_k with i_0 = 0, i_k = n-1, 0 <= i_0 < ... < i_k < n, and for every t < k, -target <= nums[i_{t+1}] - nums[i_t] <= target).",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumJumps.spec_6",
+    "negation": "AegisSpec.MaximumJumps.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r and there exists at least one jump sequence from index 0 to index n-1 (defined as in spec_3), we have r >= 1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumJumps.spec_7",
+    "negation": "AegisSpec.MaximumJumps.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r, and r = 1 if |nums[1] - nums[0]| <= target, and r = -1 otherwise.",
+    "preconditions": "len(nums) = n, n = 2, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumJumps.spec_8",
+    "negation": "AegisSpec.MaximumJumps.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let c be the number of indices i with 0 <= i < n and nums[i] = nums[0]. If nums[n-1] = nums[0], the function returns r = c - 1; otherwise it returns r = -1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and target = 0."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumJumps.spec_9",
+    "negation": "AegisSpec.MaximumJumps.spec_9_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "The function returns r = n - 1 if and only if for every i with 0 <= i < n-1, -target <= nums[i+1] - nums[i] <= target.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumJumps.spec_10",
+    "negation": "AegisSpec.MaximumJumps.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = n - 1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9. Let max_val = max_{0 <= i < n} nums[i] and min_val = min_{0 <= i < n} nums[i]. Assume target >= max_val - min_val."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumJumps.spec_11",
+    "negation": "AegisSpec.MaximumJumps.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r1 be the result of maximum_jumps(nums, t1) and r2 be the result of maximum_jumps(nums, t2). If r1 != -1, then r2 != -1 and r2 >= r1.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= t1 <= t2 <= 2*10^9."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumJumps.spec_12",
+    "negation": "AegisSpec.MaximumJumps.spec_12_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array of length n with nums'[i] = nums[i] + c for all i. Then maximum_jumps(nums, target) = maximum_jumps(nums', target).",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, 0 <= target <= 2*10^9, and c is an integer such that for all i, nums[i] + c is representable as i64 (i.e., -2^63 <= nums[i] + c <= 2^63 - 1)."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaximumJumps.spec_13",
+    "negation": "AegisSpec.MaximumJumps.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array of length n with nums'[i] = -nums[i] for all i. Then maximum_jumps(nums, target) = maximum_jumps(nums', target).",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaximumJumps.spec_14",
+    "negation": "AegisSpec.MaximumJumps.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the array of length n with rev[i] = nums[n-1-i] for all i. Then maximum_jumps(nums, target) = maximum_jumps(rev, target).",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaximumJumps.spec_15",
+    "negation": "AegisSpec.MaximumJumps.spec_15_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let nums' be the array of length n with nums'[i] = k * nums[i] for all i, and let target' = k * target. Then maximum_jumps(nums, target) = maximum_jumps(nums', target').",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9. Let k be an integer with k > 0. Assume: for every i, k * nums[i] is representable as i64; k * target is representable as i64; and for every i,j with 0 <= i,j < n, the integer k * (nums[j] - nums[i]) is representable as i64 and its absolute value is at most 2^63 - 1 (so subtraction and absolute value in the comparison cannot overflow)."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaximumJumps.spec_16",
+    "negation": "AegisSpec.MaximumJumps.spec_16_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r with r >= 1 (i.e., r is not -1).",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, 0 <= target <= 2*10^9, and |nums[n-1] - nums[0]| <= target."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaximumJumps.spec_17",
+    "negation": "AegisSpec.MaximumJumps.spec_17_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail due to integer overflow, out-of-bounds access, or any other panic) for every input satisfying the constraints.",
+    "preconditions": "len(nums) = n, 2 <= n <= 1000, for every i with 0 <= i < n, -10^9 <= nums[i] <= 10^9, and 0 <= target <= 2*10^9."
+  }
+]

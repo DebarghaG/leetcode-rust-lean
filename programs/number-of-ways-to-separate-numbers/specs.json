@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_1",
+    "negation": "AegisSpec.NumberOfCombinations.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n be the length of num. For every input satisfying the preconditions, the function returns Ok r, where r is the unique integer such that 0 <= r < 1000000007 and r is congruent modulo 1000000007 to C(num), defined as follows. An admissible partition of num consists of an integer k >= 1 and indices 0 = p_0 < p_1 < ... < p_k = n. For 0 <= j < k, block j is the substring num[p_j], num[p_j+1], ..., num[p_{j+1}-1]. The partition is admissible iff (1) for every j with 0 <= j < k, num[p_j] is not the ASCII byte '0' (so each block is a positive integer with no leading zero), and (2) for every j with 0 <= j < k-1, the decimal integer represented by block j is <= the decimal integer represented by block j+1. C(num) is the number of admissible partitions.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500, and for every i with 0 <= i < n, num[i] is an ASCII decimal digit (48 <= num[i] <= 57)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_2",
+    "negation": "AegisSpec.NumberOfCombinations.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r < 1000000007; equivalently, the returned count is reduced to its canonical residue modulo 1000000007.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500, and for every i with 0 <= i < n, num[i] is an ASCII decimal digit (48 <= num[i] <= 57)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_3",
+    "negation": "AegisSpec.NumberOfCombinations.spec_3_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r for every input satisfying the preconditions; it does not fail, panic, access memory out of bounds, or overflow 64-bit signed arithmetic.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500, and for every i with 0 <= i < n, num[i] is an ASCII decimal digit (48 <= num[i] <= 57)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_4",
+    "negation": "AegisSpec.NumberOfCombinations.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0. Equivalently, the exact number of admissible partitions is 0, so the modulo answer is 0.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; and num[0] is the ASCII byte '0' (48)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_5",
+    "negation": "AegisSpec.NumberOfCombinations.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1; the only admissible partition is the single block containing the one digit.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; n = 1; and 49 <= num[0] <= 57."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_6",
+    "negation": "AegisSpec.NumberOfCombinations.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1; the only admissible partition is the single block equal to the whole string num.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; n >= 2; 49 <= num[0] <= 57; and for every i with 1 <= i < n, num[i] is the ASCII byte '0' (48)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_7",
+    "negation": "AegisSpec.NumberOfCombinations.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let p(n) be the number of integer partitions of n, i.e. the number of nondecreasing sequences a_1 <= a_2 <= ... <= a_t of positive integers whose sum is n. The function returns r = p(n) mod 1000000007.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; and there exists d with 49 <= d <= 57 such that num[i] = d for every i with 0 <= i < n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_8",
+    "negation": "AegisSpec.NumberOfCombinations.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let a = num[0] - 48 and b = num[1] - 48. The function returns r = 2 if num[1] is not the ASCII byte '0' and a <= b; otherwise the function returns r = 1.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; n = 2; and num[0] is not the ASCII byte '0' (48)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumberOfCombinations.spec_9",
+    "negation": "AegisSpec.NumberOfCombinations.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The single-block partition with k = 1, p_0 = 0, and p_1 = n is admissible; hence the exact count C(num) of admissible partitions satisfies C(num) >= 1. Consequently, for the returned r, r is congruent modulo 1000000007 to a positive integer C(num), although r itself can be 0 if C(num) is a positive multiple of 1000000007.",
+    "preconditions": "num is a byte slice of length n with 1 <= n <= 3500; every num[i] is an ASCII decimal digit; and num[0] is not the ASCII byte '0' (48)."
+  }
+]

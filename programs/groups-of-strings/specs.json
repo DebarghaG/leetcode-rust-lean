@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GroupStrings.spec_1",
+    "negation": "AegisSpec.GroupStrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever the function returns a result r, r has length 2, and r[0] equals the number of connected components of G, and r[1] equals the maximum size of a connected component of G, where G is the undirected graph on {0,...,len(words)-1} defined as follows: for each i, let S_i = { c in {0,...,25} | byte 97+c occurs in words[i] }; for i != j, i and j are adjacent in G iff (|S_i| = |S_j| and |S_i Delta S_j| <= 2) or (| |S_i| - |S_j| | = 1 and |S_i Delta S_j| = 1). A connected component is a maximal set of vertices connected by paths in G.",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GroupStrings.spec_2",
+    "negation": "AegisSpec.GroupStrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GroupStrings.spec_3",
+    "negation": "AegisSpec.GroupStrings.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, len(r) = 2.",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GroupStrings.spec_4",
+    "negation": "AegisSpec.GroupStrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r[0] <= len(words).",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GroupStrings.spec_5",
+    "negation": "AegisSpec.GroupStrings.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 1 <= r[1] <= len(words).",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GroupStrings.spec_6",
+    "negation": "AegisSpec.GroupStrings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r[0] * r[1] >= len(words).",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GroupStrings.spec_7",
+    "negation": "AegisSpec.GroupStrings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[0] = len(words) and r[1] = 1.",
+    "preconditions": "words is a slice of vectors of bytes satisfying the problem constraints: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122). Additionally, for every i, j with 0 <= i < j < len(words), connected(i,j) does not hold, where S_i is the set of letters of words[i] and connected(i,j) means (|S_i| = |S_j| and |S_i Delta S_j| <= 2) or (| |S_i| - |S_j| | = 1 and |S_i Delta S_j| = 1)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GroupStrings.spec_8",
+    "negation": "AegisSpec.GroupStrings.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r[0] = 1 and r[1] = len(words).",
+    "preconditions": "words is a slice of vectors of bytes satisfying the problem constraints: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122). Additionally, for every i, j with 0 <= i < j < len(words), connected(i,j) holds, where S_i is the set of letters of words[i] and connected(i,j) means (|S_i| = |S_j| and |S_i Delta S_j| <= 2) or (| |S_i| - |S_j| | = 1 and |S_i Delta S_j| = 1)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GroupStrings.spec_9",
+    "negation": "AegisSpec.GroupStrings.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a connected component C of G such that |C| = r[1], where G is defined as in spec_1.",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GroupStrings.spec_10",
+    "negation": "AegisSpec.GroupStrings.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, for every connected component C of G, |C| <= r[1], where G is defined as in spec_1.",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.GroupStrings.spec_11",
+    "negation": "AegisSpec.GroupStrings.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let words' be any slice of the same length such that there exists a permutation pi of {0,...,len(words)-1} with words'[i] = words[pi(i)] for all i. Whenever group_strings(words) returns r and group_strings(words') returns r', we have r'[0] = r[0] and r'[1] = r[1].",
+    "preconditions": "words is a slice of vectors of bytes satisfying: 1 <= len(words) <= 20000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 26; each words[i] consists of distinct lowercase ASCII letters (bytes 97..122)."
+  }
+]

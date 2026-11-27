@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinBuildTime.spec_1",
+    "negation": "AegisSpec.MinBuildTime.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever min_build_time(blocks, split) returns a result r, r is the minimum, over all full binary trees T with exactly len(blocks) leaves labelled bijectively by the indices 0,...,len(blocks)-1, of max_{0 <= i < len(blocks)} (d_T(i) * split + blocks[i]), where d_T(i) is the number of internal nodes on the path from the root of T to the leaf labelled i; for len(blocks)=1 the tree is a single leaf and d_T(0)=0.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinBuildTime.spec_2",
+    "negation": "AegisSpec.MinBuildTime.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every blocks and split satisfying the preconditions, min_build_time(blocks, split) returns a result; it does not fail due to overflow, panic, out-of-bounds access, or nontermination.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinBuildTime.spec_3",
+    "negation": "AegisSpec.MinBuildTime.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r >= max_{0 <= i < len(blocks)} blocks[i].",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinBuildTime.spec_4",
+    "negation": "AegisSpec.MinBuildTime.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r <= h * split + max_{0 <= i < len(blocks)} blocks[i], where n = len(blocks) and h is the least nonnegative integer with n <= 2^h.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinBuildTime.spec_5",
+    "negation": "AegisSpec.MinBuildTime.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r = t + split * h, where n = len(blocks) and h is the least nonnegative integer with n <= 2^h.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; there exists an integer t such that blocks[i] = t for every i with 0 <= i < len(blocks)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinBuildTime.spec_6",
+    "negation": "AegisSpec.MinBuildTime.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_build_time(blocks, split) returns r and min_build_time(blocks', split) returns r', then r = r'.",
+    "preconditions": "blocks and blocks' are lists with the same length and entries in [1,100000]; len(blocks) is between 1 and 1000 inclusive; len(blocks') = len(blocks); for every integer v, the number of indices i with blocks[i] = v equals the number of indices j with blocks'[j] = v; 1 <= split <= 100."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinBuildTime.spec_7",
+    "negation": "AegisSpec.MinBuildTime.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_build_time(blocks, split1) returns r1 and min_build_time(blocks, split2) returns r2, then r1 <= r2.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; split1 and split2 are integers with 1 <= split1 <= split2 <= 100."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinBuildTime.spec_8",
+    "negation": "AegisSpec.MinBuildTime.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_build_time(blocks1, split) returns r1 and min_build_time(blocks2, split) returns r2, then r1 <= r2.",
+    "preconditions": "blocks1 and blocks2 are lists with the same length n, where 1 <= n <= 1000; for every i with 0 <= i < n, 1 <= blocks1[i] <= blocks2[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinBuildTime.spec_9",
+    "negation": "AegisSpec.MinBuildTime.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If min_build_time(sub, split) returns rS and min_build_time(blocks, split) returns r, then rS <= r.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; S is a nonempty subset of {0,...,len(blocks)-1}; sub is the list of values blocks[i] for i in S in increasing order of i."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinBuildTime.spec_10",
+    "negation": "AegisSpec.MinBuildTime.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r >= h * split + min_{0 <= i < len(blocks)} blocks[i], where n = len(blocks) and h is the least nonnegative integer with n <= 2^h.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinBuildTime.spec_11",
+    "negation": "AegisSpec.MinBuildTime.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r >= split + max_{0 <= i < len(blocks)} blocks[i].",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; len(blocks) >= 2."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinBuildTime.spec_12",
+    "negation": "AegisSpec.MinBuildTime.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever min_build_time(blocks, split) returns r, r = min_{i in {0,1,2}} max( split + blocks[i], 2*split + max_{j in {0,1,2}, j != i} blocks[j] ).",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; len(blocks) = 3."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinBuildTime.spec_13",
+    "negation": "AegisSpec.MinBuildTime.spec_13_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_build_time(blocks, split) returns r and min_build_time(blocks_plus_c, split) returns r', then r' = r + c.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; c is an integer with 0 <= c and, for every i, 1 <= blocks[i] + c <= 100000; blocks_plus_c is the list with (blocks_plus_c)[i] = blocks[i] + c."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MinBuildTime.spec_14",
+    "negation": "AegisSpec.MinBuildTime.spec_14_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If min_build_time(blocks, split) returns r and min_build_time(c_blocks, c * split) returns r', then r' = c * r.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100; c is an integer with c >= 1, 1 <= c * split <= 100, and for every i, 1 <= c * blocks[i] <= 100000; c_blocks is the list with (c_blocks)[i] = c * blocks[i]."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MinBuildTime.spec_15",
+    "negation": "AegisSpec.MinBuildTime.spec_15_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever min_build_time(blocks, split) returns r, there exists a full binary tree T with exactly len(blocks) leaves labelled bijectively by the indices 0,...,len(blocks)-1 and attaining r such that for all i,j, if blocks[i] > blocks[j] then d_T(i) <= d_T(j), where d_T(i) is the number of internal nodes on the root-to-leaf path to the leaf labelled i. Equivalently, there is an optimal schedule in which larger blocks are never assigned to deeper leaves than smaller blocks.",
+    "preconditions": "len(blocks) is between 1 and 1000 inclusive; for every i with 0 <= i < len(blocks), 1 <= blocks[i] <= 100000; 1 <= split <= 100."
+  }
+]

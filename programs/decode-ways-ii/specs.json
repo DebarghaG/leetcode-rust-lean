@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.NumDecodings.spec_1",
+    "negation": "AegisSpec.NumDecodings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever num_decodings(s) returns a result r, r is the canonical residue modulo M = 1000000007 of the number W(s) of valid decodings of s: 0 <= r < M and r ≡ W(s) (mod M). A valid decoding consists of a wildcard assignment replacing every '*' byte by a digit in {1,...,9}, keeping every literal digit byte unchanged, together with a partition of the index range 0..len(s)-1 into consecutive blocks of length 1 or 2 such that every length-1 block [i,i] has chosen digit in {1,...,9}, and every length-2 block [i,i+1] has chosen two-digit value 10*d_i+d_{i+1} in {10,...,26} (so the first digit is 1 or 2; a 0 can occur only as a literal second digit of 10 or 20). W(s) is the total number of such pairs of wildcard assignment and partition; this is exactly the number of decoded letter strings, since a block value 1..26 determines its letter A..Z.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.NumDecodings.spec_2",
+    "negation": "AegisSpec.NumDecodings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, num_decodings(s) returns a result (Result.ok r) and does not fail: there is no overflow, out-of-bounds access, or panic.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.NumDecodings.spec_3",
+    "negation": "AegisSpec.NumDecodings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever num_decodings(s) returns a result r, the returned integer satisfies 0 <= r < 1000000007.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.NumDecodings.spec_4",
+    "negation": "AegisSpec.NumDecodings.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'; len(s) = 1; s[0] is the ASCII code of a digit '1'..'9'."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.NumDecodings.spec_5",
+    "negation": "AegisSpec.NumDecodings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 9.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'; len(s) = 1; s[0] is the ASCII code of '*'."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.NumDecodings.spec_6",
+    "negation": "AegisSpec.NumDecodings.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 0.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'; len(s) >= 1; s[0] is the ASCII code of '0'."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.NumDecodings.spec_7",
+    "negation": "AegisSpec.NumDecodings.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1 if s[0] is the ASCII code of '1' or '2'; returns r = 2 if s[0] is the ASCII code of '*'; and returns r = 0 if s[0] is the ASCII code of '0' or of a digit '3'..'9'.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'; len(s) = 2; s[1] is the ASCII code of '0'."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.NumDecodings.spec_8",
+    "negation": "AegisSpec.NumDecodings.spec_8_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let E(s) be the set of digit strings obtained from s by replacing each '*' byte independently by one of the digits '1'..'9' and keeping all literal digits fixed. For a digit string t, let D(t) be the ordinary number of decodings of t: the number of partitions of t's indices into consecutive blocks of length 1 or 2 such that each length-1 block is a digit 1..9 and each length-2 block has value 10..26. Then whenever num_decodings(s) returns r, r is the canonical residue modulo 1000000007 of the sum over all t in E(s) of D(t).",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.NumDecodings.spec_9",
+    "negation": "AegisSpec.NumDecodings.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever num_decodings(s) returns r, r = F_{n+1} mod 1000000007, where F_1 = 1, F_2 = 1, and F_k = F_{k-1} + F_{k-2} for k >= 3, and the right side is the canonical residue in [0,1000000007).",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'; len(s) = n >= 1; for every i with 0 <= i < n, s[i] is the ASCII code of '1'."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.NumDecodings.spec_10",
+    "negation": "AegisSpec.NumDecodings.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever num_decodings(s) returns a result r with r != 0, there exists at least one valid decoding of s, equivalently W(s) > 0. In particular, if s has no valid decoding then r = 0.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of a digit '0'..'9' or of '*'."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.NumDecodings.spec_11",
+    "negation": "AegisSpec.NumDecodings.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let W_0 = 1 and W_1 = 9, and for k >= 2 let W_k = 9*W_{k-1} + 15*W_{k-2}. Whenever num_decodings(s) returns r, r = W_n mod 1000000007 in canonical form.",
+    "preconditions": "1 <= len(s) <= 100000; for every i with 0 <= i < len(s), s[i] is the ASCII code of '*'; len(s) = n >= 1."
+  }
+]

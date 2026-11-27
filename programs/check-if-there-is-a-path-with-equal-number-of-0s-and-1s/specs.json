@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.IsThereAPath.spec_1",
+    "negation": "AegisSpec.IsThereAPath.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever is_there_a_path(grid) returns a result r, we have r = true if and only if there exists a monotone path P from (0,0) to (m-1,n-1) such that ones(P) = zeros(P). Here a monotone path is a sequence of cells starting at (0,0), ending at (m-1,n-1), where each consecutive step is either (row+1,col) or (row,col+1); ones(P) is the number of visited cells with value 1, and zeros(P) is the number of visited cells with value 0.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.IsThereAPath.spec_2",
+    "negation": "AegisSpec.IsThereAPath.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every grid satisfying the preconditions, the call is_there_a_path(grid) returns a result r; it does not fail.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.IsThereAPath.spec_3",
+    "negation": "AegisSpec.IsThereAPath.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "If m+n is even, then whenever is_there_a_path(grid) returns a result r, r = false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.IsThereAPath.spec_4",
+    "negation": "AegisSpec.IsThereAPath.spec_4_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let comp be the m by n matrix defined by comp[i][j] = 1 - grid[i][j]. Whenever is_there_a_path(grid) returns r and is_there_a_path(comp) returns s, we have r = s.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.IsThereAPath.spec_5",
+    "negation": "AegisSpec.IsThereAPath.spec_5_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let T be the n by m matrix defined by T[j][i] = grid[i][j] for all 0 ≤ i < m and 0 ≤ j < n. Whenever is_there_a_path(grid) returns r and is_there_a_path(T) returns s, we have r = s.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.IsThereAPath.spec_6",
+    "negation": "AegisSpec.IsThereAPath.spec_6_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let R be the m by n matrix defined by R[i][j] = grid[m-1-i][n-1-j] for all 0 ≤ i < m and 0 ≤ j < n. Whenever is_there_a_path(grid) returns r and is_there_a_path(R) returns s, we have r = s.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.IsThereAPath.spec_7",
+    "negation": "AegisSpec.IsThereAPath.spec_7_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever is_there_a_path(grid) returns a result r, r = true if and only if n is odd and there exists an integer c with 0 ≤ c < n such that 2 * (sum_{j=0}^{c} grid[0][j] + sum_{j=c}^{n-1} grid[1][j]) = n+1.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1. Also assume m = 2."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.IsThereAPath.spec_8",
+    "negation": "AegisSpec.IsThereAPath.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For a monotone path P define ones(P) as the number of visited cells with value 1 and zeros(P) as the number with value 0. If there exist monotone paths P and Q from (0,0) to (m-1,n-1) such that ones(P) < zeros(P) and ones(Q) > zeros(Q), then whenever is_there_a_path(grid) returns a result r, r = true.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1. Also assume m+n is odd."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.IsThereAPath.spec_9",
+    "negation": "AegisSpec.IsThereAPath.spec_9_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For a monotone path P define ones(P) as the number of visited cells with value 1 and zeros(P) as the number with value 0. If either every monotone path P from (0,0) to (m-1,n-1) satisfies ones(P) > zeros(P), or every such P satisfies zeros(P) > ones(P), then whenever is_there_a_path(grid) returns a result r, r = false.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.IsThereAPath.spec_10",
+    "negation": "AegisSpec.IsThereAPath.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let U be the n by m matrix defined by U[r][c] = grid[m-1-c][n-1-r] for all 0 ≤ r < n and 0 ≤ c < m. Whenever is_there_a_path(grid) returns r and is_there_a_path(U) returns s, we have r = s.",
+    "preconditions": "Let m = len(grid) and n = len(grid[0]). Assume grid is an m by n binary matrix as in the constraints: all rows have length n, 2 ≤ m,n ≤ 100, and every entry grid[i][j] is 0 or 1."
+  }
+]

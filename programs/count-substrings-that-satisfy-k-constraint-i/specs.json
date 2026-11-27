@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_1",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the number of pairs of indices (a,b) with 0 <= a <= b < n such that, letting z(a,b) be the number of q with a <= q <= b and s[q] = 48, and o(a,b) be the number of q with a <= q <= b and s[q] = 49, we have z(a,b) <= k or o(a,b) <= k. Equivalently, r = sum over all pairs 0 <= a <= b < n of 1 if z(a,b) <= k or o(a,b) <= k, and 0 otherwise. The counted substrings are the non-empty contiguous substrings s[a..b], with indices inclusive.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_2",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input satisfying the preconditions, the function returns a result r; in particular, it does not panic, access out of bounds, or overflow during its computation.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_3",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have 0 <= r <= n*(n+1)/2, where n = len(s).",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_4",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= sum_{l=1}^{L} (n - l + 1), where n = len(s) and L = min(n, 2*k + 1).",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_5",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if either s[i] = 48 for every i with 0 <= i < n, or s[i] = 49 for every i with 0 <= i < n, then r = n*(n+1)/2.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_6",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, for every integer k' with 1 <= k' <= k, let N(s,k') be the number of pairs 0 <= a <= b < n such that s[a..b] contains at most k' occurrences of 48 or at most k' occurrences of 49. Then N(s,k') <= r.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_7",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for s and k, for every byte slice t with len(t) = n such that for every i with 0 <= i < n, t[i] = 48 exactly when s[i] = 49 and t[i] = 49 exactly when s[i] = 48, the number of pairs 0 <= a <= b < n for which t[a..b] contains at most k occurrences of 48 or at most k occurrences of 49 is also r.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_8",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns a result r for s and k, let t be any byte slice with len(t) = n and t[i] = s[n-1-i] for every i with 0 <= i < n. Then the number of pairs 0 <= a <= b < n for which t[a..b] contains at most k occurrences of 48 or at most k occurrences of 49 equals r.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_9",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, if r < n*(n+1)/2, where n = len(s), then there exists at least one pair of indices (a,b) with 0 <= a <= b < n such that the number of occurrences of 48 in s[a..b] is greater than k and the number of occurrences of 49 in s[a..b] is greater than k.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountKConstraintSubstrings.spec_10",
+    "negation": "AegisSpec.CountKConstraintSubstrings.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, if 2*k >= n - 1, where n = len(s), then r = n*(n+1)/2.",
+    "preconditions": "Let n = len(s). The preconditions are: 1 <= n <= 50; for every i with 0 <= i < n, s[i] is either 48 (ASCII '0') or 49 (ASCII '1'); and 1 <= k <= n."
+  }
+]

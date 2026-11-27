@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumLength.spec_1",
+    "negation": "AegisSpec.MinimumLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "For every s satisfying the preconditions, if minimum_length(s) returns a result r, then the integer value of r is exactly m(s), defined as follows. A one-step operation on a byte sequence x produces a byte sequence y when there exist integers p >= 1 and q >= 1 with p + q <= len(x) and a byte c such that y = x[p : len(x)-q], x[i] = c for every i with 0 <= i < p, and x[j] = c for every j with len(x)-q <= j < len(x); here x[p : len(x)-q] is the contiguous middle part after deleting the first p and last q bytes, and is empty when p + q = len(x). Let Reach(s) be the set of all byte sequences obtainable from s by zero or more one-step operations. Then m(s) = min { len(y) | y in Reach(s) }, and r = m(s).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumLength.spec_2",
+    "negation": "AegisSpec.MinimumLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every s satisfying the preconditions, minimum_length(s) returns a result r; in particular it does not fail because of overflow, panic, or an out-of-bounds access.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumLength.spec_3",
+    "negation": "AegisSpec.MinimumLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every s satisfying the preconditions, whenever minimum_length(s) returns a result r, the integer r satisfies 0 <= r and r <= len(s).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumLength.spec_4",
+    "negation": "AegisSpec.MinimumLength.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every s satisfying the preconditions, if len(s) = 1 or s[0] != s[len(s)-1], then whenever minimum_length(s) returns a result r, r = len(s).",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumLength.spec_5",
+    "negation": "AegisSpec.MinimumLength.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "For every s satisfying the preconditions, if len(s) >= 2 and all bytes of s are equal, that is, there exists c in {97,98,99} such that s[i] = c for every i with 0 <= i < len(s), then whenever minimum_length(s) returns a result r, r = 0.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumLength.spec_6",
+    "negation": "AegisSpec.MinimumLength.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "For every s satisfying the preconditions, if len(s) >= 2 and s[0] = s[len(s)-1], then whenever minimum_length(s) returns a result r, r <= len(s) - 2.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumLength.spec_7",
+    "negation": "AegisSpec.MinimumLength.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s satisfying the preconditions, suppose len(s) >= 2, s[0] = s[len(s)-1] = c for some byte c, and not every byte of s equals c. Let a be the largest integer such that 1 <= a <= len(s) and s[i] = c for every i with 0 <= i < a. Let b be the largest integer such that 1 <= b <= len(s) and s[j] = c for every j with len(s)-b <= j < len(s). If minimum_length(s) returns r and minimum_length(s[a : len(s)-b]) returns r_mid, then r = r_mid.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumLength.spec_8",
+    "negation": "AegisSpec.MinimumLength.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s satisfying the preconditions, let t be the reversal of s: len(t) = len(s) and t[i] = s[len(s)-1-i] for every i with 0 <= i < len(s). If minimum_length(s) returns r and minimum_length(t) returns r_rev, then r = r_rev.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumLength.spec_9",
+    "negation": "AegisSpec.MinimumLength.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every s satisfying the preconditions and every bijection f from the set {97,98,99} to itself, let t be the byte sequence with len(t)=len(s) and t[i]=f(s[i]) for every i with 0 <= i < len(s). If minimum_length(s) returns r and minimum_length(t) returns r', then r = r'.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumLength.spec_10",
+    "negation": "AegisSpec.MinimumLength.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every s satisfying the preconditions, if minimum_length(s) returns a result r and r = len(s), then len(s) = 1 or s[0] != s[len(s)-1].",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumLength.spec_11",
+    "negation": "AegisSpec.MinimumLength.spec_11_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "For every s satisfying the preconditions, whenever minimum_length(s) returns a result r, there exists a byte sequence t obtainable from s by zero or more operations of the following form: replace x by x[p : len(x)-q] for some p >= 1 and q >= 1 with p+q <= len(x) and some byte c such that the first p bytes of x and the last q bytes of x are all c. Moreover, len(t) = r, and if r > 0 then either len(t) = 1 or t[0] != t[len(t)-1].",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MinimumLength.spec_12",
+    "negation": "AegisSpec.MinimumLength.spec_12_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "For every s satisfying the preconditions, whenever minimum_length(s) returns a result r, there exist integers l and h with 0 <= l <= h <= len(s) such that the contiguous slice s[l : h] is obtainable from s by zero or more operations of deleting a non-empty equal-character prefix and a non-overlapping equal-character suffix of the same character, and the integer r equals h - l.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c')."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MinimumLength.spec_13",
+    "negation": "AegisSpec.MinimumLength.spec_13_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "For every s and y satisfying the preconditions, if minimum_length(s) returns a result r and minimum_length(y) returns a result r_y, then r <= r_y.",
+    "preconditions": "len(s) >= 1 and len(s) <= 100000, and for every i with 0 <= i < len(s), s[i] is one of the ASCII bytes 97 ('a'), 98 ('b'), or 99 ('c'). Also, y is a byte sequence obtainable from s by one or more one-step operations as defined in spec_1, and len(y) >= 1."
+  }
+]

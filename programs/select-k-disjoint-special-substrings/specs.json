@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_1",
+    "negation": "AegisSpec.MaxSubstringLength.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(s). For integers l,r with 0 <= l <= r < n, call the interval [l,r] special if (1) it is not the whole string, i.e. not (l = 0 and r = n-1), and (2) for every i with l <= i <= r and every j with 0 <= j < n and (j < l or j > r), s[j] != s[i]. Then max_substring_length(s,k) returns a Boolean result b, and b = true if and only if there exist k pairwise disjoint special intervals. More explicitly, b = true iff either k = 0, or there are integers l_1,...,l_k and r_1,...,r_k with 0 <= l_1 <= r_1 < l_2 <= r_2 < ... < l_k <= r_k < n such that every [l_t,r_t] is special. Pairwise disjoint means no index i belongs to two selected intervals.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_2",
+    "negation": "AegisSpec.MaxSubstringLength.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the call max_substring_length(s,k) returns some Boolean result (it does not fail, panic, overflow, or access an index out of bounds).",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_3",
+    "negation": "AegisSpec.MaxSubstringLength.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let d be the number of distinct byte values among s[0],...,s[n-1]. If k > d, then max_substring_length(s,k) returns false.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_4",
+    "negation": "AegisSpec.MaxSubstringLength.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If all bytes of s are equal (s[0] = s[1] = ... = s[n-1]), then max_substring_length(s,k) returns true if and only if k = 0.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_5",
+    "negation": "AegisSpec.MaxSubstringLength.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let U = { i | 0 <= i < n and for every j with 0 <= j < n and j != i, s[j] != s[i] }. If k <= |U|, then max_substring_length(s,k) returns true.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_6",
+    "negation": "AegisSpec.MaxSubstringLength.spec_6_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Suppose there exist an integer m >= 2, indices 0 = p_0 < p_1 < ... < p_m = n, and pairwise distinct bytes c_1,...,c_m such that for every t with 1 <= t <= m and every i with p_{t-1} <= i < p_t, s[i] = c_t. Then max_substring_length(s,k) returns true if and only if k <= m.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_7",
+    "negation": "AegisSpec.MaxSubstringLength.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "For every integer j with 0 <= j <= k, if max_substring_length(s,k) returns true, then max_substring_length(s,j) returns true.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_8",
+    "negation": "AegisSpec.MaxSubstringLength.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let rev be the byte array of length n with rev[i] = s[n-1-i] for every i with 0 <= i < n. Then max_substring_length(s,k) and max_substring_length(rev,k) return the same Boolean value.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_9",
+    "negation": "AegisSpec.MaxSubstringLength.spec_9_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "For every permutation f of the set {97,98,...,122}, let s_f be the byte array with s_f[i] = f(s[i]) for every i with 0 <= i < n. Then max_substring_length(s,k) and max_substring_length(s_f,k) return the same Boolean value.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_10",
+    "negation": "AegisSpec.MaxSubstringLength.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever max_substring_length(s,k) returns true and k > 0, there exist integers l_1,...,l_k and r_1,...,r_k with 0 <= l_1 <= r_1 < l_2 <= r_2 < ... < l_k <= r_k < n such that each [l_t,r_t] is special, and for any two distinct t,u, no byte value occurs at an index in [l_t,r_t] and also at an index in [l_u,r_u].",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_11",
+    "negation": "AegisSpec.MaxSubstringLength.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Suppose n >= 4 and there exist distinct bytes a,b such that for every i with 0 <= i < n, s[i] = a when i is even and s[i] = b when i is odd, or s[i] = b when i is even and s[i] = a when i is odd. Then for every k with 1 <= k <= 26, max_substring_length(s,k) returns false.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 0 <= k <= 26; and for every i with 0 <= i < n, 97 <= s[i] <= 122 (s is a byte array of lowercase ASCII letters)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxSubstringLength.spec_12",
+    "negation": "AegisSpec.MaxSubstringLength.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions, max_substring_length(s,k) returns false.",
+    "preconditions": "n = len(s); 2 <= n <= 50000; 1 <= k <= 26; for every i with 0 <= i < n, 97 <= s[i] <= 122; and there exist integers m,p with m >= 2, p >= 2, n = m*p, the bytes s[0],...,s[m-1] are pairwise distinct, and s[i] = s[i mod m] for every i with 0 <= i < n."
+  }
+]

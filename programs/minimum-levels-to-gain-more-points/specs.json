@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MinimumLevels.spec_1",
+    "negation": "AegisSpec.MinimumLevels.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Whenever minimum_levels returns a result r, r = -1 if and only if there is no integer k with 1 <= k <= n-1 and A(k) > B(k); and if such a k exists, then r is the least such k, so 1 <= r <= n-1, A(r) > B(r), and A(j) <= B(j) for every j with 1 <= j < r.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. For 0 <= a <= b <= n let W(a,b) = sum over i from a to b-1 of (1 if possible[i] = 1 else -1). For 1 <= k <= n-1 let A(k) = W(0,k) and B(k) = W(k,n). Let S = W(0,n)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MinimumLevels.spec_2",
+    "negation": "AegisSpec.MinimumLevels.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every possible satisfying the preconditions, minimum_levels returns a result r; it does not fail, overflow, or panic.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MinimumLevels.spec_3",
+    "negation": "AegisSpec.MinimumLevels.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_levels returns a result r, either r = -1 or 1 <= r <= n-1.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MinimumLevels.spec_4",
+    "negation": "AegisSpec.MinimumLevels.spec_4_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever minimum_levels returns a result r with r != -1, r is a winning split: 1 <= r <= n-1 and A(r) > B(r).",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. Define A(k) = sum over i from 0 to k-1 of (1 if possible[i] = 1 else -1), and B(k) = sum over i from k to n-1 of (1 if possible[i] = 1 else -1)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MinimumLevels.spec_5",
+    "negation": "AegisSpec.MinimumLevels.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_levels returns a result r with r != -1, no smaller valid split is winning: for every j with 1 <= j < r, A(j) <= B(j).",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. Define A(k) = sum over i from 0 to k-1 of (1 if possible[i] = 1 else -1), and B(k) = sum over i from k to n-1 of (1 if possible[i] = 1 else -1)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MinimumLevels.spec_6",
+    "negation": "AegisSpec.MinimumLevels.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_levels returns -1, no valid split is winning: for every k with 1 <= k <= n-1, A(k) <= B(k).",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. Define A(k) = sum over i from 0 to k-1 of (1 if possible[i] = 1 else -1), and B(k) = sum over i from k to n-1 of (1 if possible[i] = 1 else -1)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MinimumLevels.spec_7",
+    "negation": "AegisSpec.MinimumLevels.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever minimum_levels returns a result r with r != -1, 2*r > S.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. For 1 <= k <= n-1 let A(k) = sum over i from 0 to k-1 of (1 if possible[i] = 1 else -1), and let S = sum over i from 0 to n-1 of (1 if possible[i] = 1 else -1)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MinimumLevels.spec_8",
+    "negation": "AegisSpec.MinimumLevels.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_levels returns a result r, r = 1 if and only if A(1) > B(1).",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. Define A(1) = 1 if possible[0] = 1 else -1, and B(1) = sum over i from 1 to n-1 of (1 if possible[i] = 1 else -1)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MinimumLevels.spec_9",
+    "negation": "AegisSpec.MinimumLevels.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_levels returns a result r, r = -1 if n = 2, and r = floor(n/2)+1 if n >= 3.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and possible[i] = 1 for every i with 0 <= i < n."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MinimumLevels.spec_10",
+    "negation": "AegisSpec.MinimumLevels.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever minimum_levels returns a result r, r = -1 if n = 2, and r = 1 if n >= 3.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and possible[i] = 0 for every i with 0 <= i < n."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MinimumLevels.spec_11",
+    "negation": "AegisSpec.MinimumLevels.spec_11_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever minimum_levels returns a result r with r != -1, 2*A(r) > S.",
+    "preconditions": "Let n = len(possible). Assume 2 <= n <= 100000 and for every i with 0 <= i < n, possible[i] is either 0 or 1. For 1 <= k <= n-1 let A(k) = sum over i from 0 to k-1 of (1 if possible[i] = 1 else -1), and let S = sum over i from 0 to n-1 of (1 if possible[i] = 1 else -1)."
+  }
+]

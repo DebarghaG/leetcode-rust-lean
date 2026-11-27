@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_1",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r such that r = min { dist(password, t) | t is a byte array and strong(t) holds }, where: (1) strong(t) means 6 <= len(t) <= 20, t contains at least one ASCII lowercase letter, at least one ASCII uppercase letter, and at least one ASCII digit, and there is no index i with 0 <= i <= len(t)-3 such that t[i] = t[i+1] = t[i+2]; (2) dist(x, y) is the minimum number of single-character insertions, deletions, and substitutions needed to transform x into y.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_2",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, panic, or overflow).",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_3",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with 0 <= r <= 36.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_4",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r >= max(0, 6 - len(password)) + max(0, len(password) - 20).",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_5",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let m be the number of categories among {lowercase letter, uppercase letter, digit} that do not occur in password. The function returns a result r with r >= m.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_6",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let R be the sum over all maximal contiguous runs of identical bytes in password of length L >= 3 of floor(L/3). The function returns a result r with r >= R. (A maximal contiguous run is a non-empty interval [a,b) with 0 <= a < b <= len(password) such that password[j] = password[a] for all a <= j < b, and either a=0 or password[a-1] != password[a], and either b=len(password) or password[b] != password[a].)",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_7",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = 0 if and only if password is strong (as defined in spec_1).",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_8",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let r be the returned result. There exists a byte array t such that strong(t) holds (as defined in spec_1) and dist(password, t) = r, where dist is defined in spec_1.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_9",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let r be the returned result. For every byte array t, if strong(t) holds (as defined in spec_1), then r <= dist(password, t), where dist is defined in spec_1.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_10",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r <= max(0, 6 - len(password)) + max(0, len(password) - 20) + 6.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_11",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_11_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "The function returns a result r with r <= len(password) + 5.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, and every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33)."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_12",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m be the number of categories among {lowercase letter, uppercase letter, digit} that do not occur in password. The function returns a result r with r = max(6 - len(password), m).",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33); and len(password) < 6."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_13",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let m be the number of categories among {lowercase letter, uppercase letter, digit} that do not occur in password. The function returns a result r with r = m.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33); 6 <= len(password) <= 20; and password has no index i with 0 <= i <= len(password)-3 such that password[i]=password[i+1]=password[i+2]."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.StrongPasswordChecker.spec_14",
+    "negation": "AegisSpec.StrongPasswordChecker.spec_14_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r with r = len(password) - 20.",
+    "preconditions": "password is a byte slice with 1 <= len(password) <= 50, every byte is one of: an ASCII lowercase letter ('a'..'z'), an ASCII uppercase letter ('A'..'Z'), an ASCII digit ('0'..'9'), the byte '.' (46), or the byte '!' (33); len(password) > 20; password contains at least one lowercase letter, at least one uppercase letter, and at least one digit; and password has no index i with 0 <= i <= len(password)-3 such that password[i]=password[i+1]=password[i+2]."
+  }
+]

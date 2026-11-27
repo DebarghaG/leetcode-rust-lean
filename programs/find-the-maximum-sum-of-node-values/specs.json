@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaximumValueSum.spec_1",
+    "negation": "AegisSpec.MaximumValueSum.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(nums). For a subset T of {0,...,n-1}, let S(T) = Σ_{i=0}^{n-1} ((nums[i] XOR k) if i ∈ T else nums[i]). The function returns a result r such that r = max { S(T) : T ⊆ {0,...,n-1} and |T| is even }. The empty set T=∅ is allowed, so this is a nonempty finite maximum.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaximumValueSum.spec_2",
+    "negation": "AegisSpec.MaximumValueSum.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns a result r (it does not fail, overflow, go out of bounds, or panic).",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaximumValueSum.spec_3",
+    "negation": "AegisSpec.MaximumValueSum.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= Σ_{i=0}^{n-1} nums[i].",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaximumValueSum.spec_4",
+    "negation": "AegisSpec.MaximumValueSum.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= Σ_{i=0}^{n-1} max(nums[i], nums[i] XOR k).",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaximumValueSum.spec_5",
+    "negation": "AegisSpec.MaximumValueSum.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = Σ_{i=0}^{n-1} nums[i] + Σ_{i : g_i > 0} g_i.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree. Also let g_i = (nums[i] XOR k) - nums[i] for 0 <= i < n; the number of indices i with g_i > 0 is even."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaximumValueSum.spec_6",
+    "negation": "AegisSpec.MaximumValueSum.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, the following holds. Let P = { i : 0 <= i < n and g_i > 0 } and N = { i : 0 <= i < n and g_i <= 0 }. P is nonempty. Let m = min_{i∈P} g_i. If N is empty, then r = Σ_{i=0}^{n-1} nums[i] + Σ_{i∈P} g_i - m. If N is nonempty, let M = max_{i∈N} g_i; then r = Σ_{i=0}^{n-1} nums[i] + Σ_{i∈P} g_i + max(-m, M).",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree. Also let g_i = (nums[i] XOR k) - nums[i] for 0 <= i < n; the number of indices i with g_i > 0 is odd."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaximumValueSum.spec_7",
+    "negation": "AegisSpec.MaximumValueSum.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_value_sum nums k edges returns r and maximum_value_sum nums k e2 returns r2, we have r = r2.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree. Let e2 be any list of n-1 pairs [a,b] with 0 <= a,b < n such that the graph on vertices 0,...,n-1 with edges e2 is also a tree."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaximumValueSum.spec_8",
+    "negation": "AegisSpec.MaximumValueSum.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever maximum_value_sum nums k edges returns r and maximum_value_sum nums2 k e2 returns r2, we have r = r2.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree. Let nums2 be any array of length n whose entries are a permutation of the entries of nums, and let e2 be any list of n-1 pairs [a,b] with 0 <= a,b < n forming a tree on vertices 0,...,n-1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaximumValueSum.spec_9",
+    "negation": "AegisSpec.MaximumValueSum.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, there exists a subset T of {0,...,n-1} with |T| even such that r = Σ_{i∈T}(nums[i] XOR k) + Σ_{i∉T} nums[i], T contains at most one index i with (nums[i] XOR k) < nums[i], and T omits at most one index i with (nums[i] XOR k) > nums[i].",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaximumValueSum.spec_10",
+    "negation": "AegisSpec.MaximumValueSum.spec_10_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever the function returns a result r, r = Σ_{i=0}^{n-1} nums[i] if and only if for every subset T of {0,...,n-1} with |T| even, Σ_{i∈T} ((nums[i] XOR k) - nums[i]) <= 0.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaximumValueSum.spec_11",
+    "negation": "AegisSpec.MaximumValueSum.spec_11_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let g_i = (nums[i] XOR k) - nums[i] for 0 <= i < n, and let P = {i : 0 <= i < n and g_i > 0}. Whenever the function returns a result r, if |P| is even then r = Σ_{i=0}^{n-1} max(nums[i], nums[i] XOR k); if |P| is odd then r = Σ_{i=0}^{n-1} max(nums[i], nums[i] XOR k) - min_{0 <= i < n} |g_i|.",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaximumValueSum.spec_12",
+    "negation": "AegisSpec.MaximumValueSum.spec_12_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r >= Σ_{i=0}^{n-1} (nums[i] XOR k).",
+    "preconditions": "Let n = len(nums). The inputs satisfy: 2 <= n <= 20000; 1 <= k <= 1000000000; for every i with 0 <= i < n, 0 <= nums[i] <= 1000000000; len(edges) = n - 1; every entry of edges is a pair [a,b] with 0 <= a,b < n; and the undirected graph with vertices 0,...,n-1 and these edges is a tree. Also n is even."
+  }
+]

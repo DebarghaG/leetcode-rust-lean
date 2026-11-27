@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_1",
+    "negation": "AegisSpec.MaxTargetNodes.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns Ok r with len(r) = n. Define d1(u,v) as the number of edges on the unique simple path between u and v in the tree T1 given by edges1, and d2(u,v) similarly for T2 given by edges2. Define c1(v) = d1(0,v) mod 2 for 0 <= v < n, and c2(v) = d2(0,v) mod 2 for 0 <= v < m. Let A1 = number of v with 0 <= v < n and c1(v)=0, B1 = n - A1; A2 = number of v with 0 <= v < m and c2(v)=0, B2 = m - A2; M2 = max(A2,B2). For 0 <= i < n, let s1(i) = A1 if c1(i)=0 else B1. Then for every i with 0 <= i < n, r[i] = s1(i) + M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m <= 10^5; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_2",
+    "negation": "AegisSpec.MaxTargetNodes.spec_2_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, for every i with 0 <= i < n, 1 + M2 <= r[i] <= n - 1 + M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_3",
+    "negation": "AegisSpec.MaxTargetNodes.spec_3_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever the function returns a result r, the set { r[i] : 0 <= i < n } has at most two elements.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_4",
+    "negation": "AegisSpec.MaxTargetNodes.spec_4_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let c1(v) = (distance from 0 to v in the first tree) mod 2. Whenever the function returns a result r, for every i,j with 0 <= i,j < n, if c1(i) = c1(j) then r[i] = r[j].",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_5",
+    "negation": "AegisSpec.MaxTargetNodes.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, for every i,j with 0 <= i,j < n, if c1(i)=0 and c1(j)=1 then r[i] - r[j] = A1 - B1.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_6",
+    "negation": "AegisSpec.MaxTargetNodes.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, sum_{i=0}^{n-1} r[i] = A1*A1 + B1*B1 + n*M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_7",
+    "negation": "AegisSpec.MaxTargetNodes.spec_7_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, the maximum element of r is max(A1,B1) + M2, and the minimum element of r is min(A1,B1) + M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_8",
+    "negation": "AegisSpec.MaxTargetNodes.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let d1(u,v) be the distance in the first tree given by edges1, and d2(u,v) the distance in the second tree given by edges2. Whenever the function returns a result r, for every i with 0 <= i < n, there exist x with 0 <= x < n and y with 0 <= y < m such that (number of u with 0 <= u < n and d1(i,u) even) + (number of v with 0 <= v < m and d1(i,x) + 1 + d2(y,v) even) = r[i].",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_9",
+    "negation": "AegisSpec.MaxTargetNodes.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let d1(u,v) be the distance in the first tree given by edges1, and d2(u,v) the distance in the second tree given by edges2. Whenever the function returns a result r, for every i with 0 <= i < n, every x with 0 <= x < n, and every y with 0 <= y < m, (number of u with 0 <= u < n and d1(i,u) even) + (number of v with 0 <= v < m and d1(i,x) + 1 + d2(y,v) even) <= r[i].",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_10",
+    "negation": "AegisSpec.MaxTargetNodes.spec_10_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function returns Ok r (it does not fail) for every input satisfying the preconditions.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m <= 10^5; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_11",
+    "negation": "AegisSpec.MaxTargetNodes.spec_11_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, if n = 2 then r[0] = r[1] = 1 + M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_12",
+    "negation": "AegisSpec.MaxTargetNodes.spec_12_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, if m = 2 then for every i with 0 <= i < n, r[i] = s1(i) + 1.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_13",
+    "negation": "AegisSpec.MaxTargetNodes.spec_13_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, if A1 = B1 then for every i with 0 <= i < n, r[i] = A1 + M2.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxTargetNodes.spec_14",
+    "negation": "AegisSpec.MaxTargetNodes.spec_14_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "With the notation of spec_1: whenever the function returns a result r, for every integer t, the number of indices i with 0 <= i < n and r[i] = t is: A1 if t = A1 + M2 and A1 + M2 != B1 + M2; B1 if t = B1 + M2 and A1 + M2 != B1 + M2; n if t = A1 + M2 and A1 + M2 = B1 + M2; and 0 otherwise.",
+    "preconditions": "n = len(edges1)+1, m = len(edges2)+1; 2 <= n,m; each element of edges1 and edges2 has length 2; every edge of edges1 has both endpoints in [0,n) and every edge of edges2 has both endpoints in [0,m); edges1 describes a tree on nodes 0..n-1; edges2 describes a tree on nodes 0..m-1."
+  }
+]

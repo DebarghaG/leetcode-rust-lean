@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.GetMinSwaps.spec_1",
+    "negation": "AegisSpec.GetMinSwaps.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r, and r is the minimum length m of a sequence of adjacent swaps (each swap exchanges two neighboring entries i and i+1 of a digit string) whose successive application to num yields W_k, where W_k is the kth smallest digit string in increasing lexicographic order among all distinct length-n digit strings that are permutations of num and are strictly greater than num.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and there exist at least k distinct length-n digit strings p such that for every digit d in '0'..'9' the count of d in p equals the count of d in num and p > num lexicographically (equivalently numerically for equal-length digit strings). Thus the kth smallest such string W_k is defined."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.GetMinSwaps.spec_2",
+    "negation": "AegisSpec.GetMinSwaps.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Whenever the preconditions hold, the function returns a result r; it does not fail, overflow, go out of bounds, or panic.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and there exist at least k distinct length-n digit strings p such that for every digit d in '0'..'9' the count of d in p equals the count of d in num and p > num lexicographically. Thus W_k is defined."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.GetMinSwaps.spec_3",
+    "negation": "AegisSpec.GetMinSwaps.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, we have 1 <= r <= n * (n - 1) / 2.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and the kth smallest wonderful digit string W_k exists as described in spec_1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.GetMinSwaps.spec_4",
+    "negation": "AegisSpec.GetMinSwaps.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Under these preconditions the function returns r = 1.",
+    "preconditions": "Let n = len(num). Assume n = 2, every byte of num is an ASCII digit ('0' through '9'), 1 <= k <= 1000, and the kth smallest wonderful digit string exists."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.GetMinSwaps.spec_5",
+    "negation": "AegisSpec.GetMinSwaps.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns r = 1.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, k = 1, every byte of num is an ASCII digit ('0' through '9'), and num[0] < num[1] < ... < num[n-1] (strictly increasing digit values)."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.GetMinSwaps.spec_6",
+    "negation": "AegisSpec.GetMinSwaps.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let W = W_k. For each digit d, match the occurrences of d in num to the occurrences of d in W in their left-to-right order. This determines a bijection sigma on positions such that W[sigma(i)] = num[i]. Whenever the function returns r, r equals the number of pairs (i,j) with 0 <= i < j < n and sigma(i) > sigma(j).",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and the kth smallest wonderful digit string W_k exists as described in spec_1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.GetMinSwaps.spec_7",
+    "negation": "AegisSpec.GetMinSwaps.spec_7_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever the function returns r, r is also the minimum length of a sequence of adjacent swaps that transforms W_k into num.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and the kth smallest wonderful digit string W_k exists as described in spec_1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.GetMinSwaps.spec_8",
+    "negation": "AegisSpec.GetMinSwaps.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If get_min_swaps(num,k) returns r and get_min_swaps(num',k) returns r', then r = r'.",
+    "preconditions": "Let num and num' be two slices of ASCII digits with equal length n, and let the same k satisfy 1 <= k <= 1000. Assume both (num,k) and (num',k) satisfy the common existence precondition for W_k, and assume there is a strictly increasing function f on the digit values occurring in num such that num'[i] = f(num[i]) for every 0 <= i < n."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.GetMinSwaps.spec_9",
+    "negation": "AegisSpec.GetMinSwaps.spec_9_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns r, there exists a finite sequence of exactly r adjacent swaps whose successive application to num yields W_k.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and the kth smallest wonderful digit string W_k exists as described in spec_1."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.GetMinSwaps.spec_10",
+    "negation": "AegisSpec.GetMinSwaps.spec_10_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns r, no sequence of adjacent swaps of length strictly less than r transforms num into W_k.",
+    "preconditions": "Let n = len(num). Assume 2 <= n <= 1000, 1 <= k <= 1000, every byte of num is an ASCII digit ('0' through '9'), and the kth smallest wonderful digit string W_k exists as described in spec_1."
+  }
+]

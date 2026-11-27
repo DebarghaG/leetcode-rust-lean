@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_1",
+    "negation": "AegisSpec.DetectCapitalUse.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "The function returns a result r (so it does not fail), and r = true if and only if at least one of the following three conditions holds: (1) every byte word[i] with 0 <= i < len(word) is uppercase; (2) every byte word[i] with 0 <= i < len(word) is lowercase; (3) word[0] is uppercase and every byte word[i] with 1 <= i < len(word) is lowercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, and every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_2",
+    "negation": "AegisSpec.DetectCapitalUse.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "For every input word satisfying the preconditions, the function returns a result r; it does not panic, overflow, or index out of bounds.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, and every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_3",
+    "negation": "AegisSpec.DetectCapitalUse.spec_3_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122), and len(word) = 1."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_4",
+    "negation": "AegisSpec.DetectCapitalUse.spec_4_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "The function returns a result r and r = true if and only if it is not the case that word[0] is lowercase and word[1] is uppercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122), and len(word) = 2."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_5",
+    "negation": "AegisSpec.DetectCapitalUse.spec_5_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true if and only if every byte word[i] with 0 <= i < len(word) is lowercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122), and word[0] is lowercase."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_6",
+    "negation": "AegisSpec.DetectCapitalUse.spec_6_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true if and only if every byte word[i] with 0 <= i < len(word) is uppercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122), len(word) >= 2, and word[1] is uppercase."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_7",
+    "negation": "AegisSpec.DetectCapitalUse.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "The function returns a result r and r = true if and only if word[0] is uppercase and every byte word[i] with 1 <= i < len(word) is lowercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122), there exists an index i with 0 <= i < len(word) such that word[i] is uppercase, and there exists an index j with 0 <= j < len(word) such that word[j] is lowercase."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_8",
+    "negation": "AegisSpec.DetectCapitalUse.spec_8_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "The function returns a result r and r = false if and only if there exists an index i with 0 <= i < len(word) such that word[i] is lowercase, and there exists an index j with 1 <= j < len(word) such that word[j] is uppercase.",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, and every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_9",
+    "negation": "AegisSpec.DetectCapitalUse.spec_9_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let k be the number of indices i with 0 <= i < len(word) such that word[i] is uppercase. The function returns a result r and r = true if and only if k = len(word) or k = 0 or (k = 1 and word[0] is uppercase).",
+    "preconditions": "word is a slice of bytes with 1 <= len(word) <= 100, and every byte word[i] with 0 <= i < len(word) is an uppercase English letter (65 <= word[i] <= 90) or a lowercase English letter (97 <= word[i] <= 122)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.DetectCapitalUse.spec_10",
+    "negation": "AegisSpec.DetectCapitalUse.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever detect_capital_use(word) returns a result r_word and detect_capital_use(other) returns a result r_other, we have r_word = r_other.",
+    "preconditions": "word and other are slices of bytes with 1 <= len(word) <= 100, 1 <= len(other) <= 100, every byte of each is an uppercase English letter (65..90) or a lowercase English letter (97..122), len(word) = len(other), and for every i with 0 <= i < len(word), word[i] is uppercase if and only if other[i] is uppercase."
+  }
+]

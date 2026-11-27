@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CanFormArray.spec_1",
+    "negation": "AegisSpec.CanFormArray.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Under the preconditions, can_form_array arr pieces returns a result r (it does not fail). A permutation of pieces is a sequence p_0,...,p_{m-1} of indices with {p_0,...,p_{m-1}} = {0,...,m-1}. For such a sequence define s_0 = 0 and s_{t+1} = s_t + len(pieces[p_t]) for 0 <= t < m. Then r = true if and only if there exists a permutation p_0,...,p_{m-1} of pieces such that for every t with 0 <= t < m and every j with 0 <= j < len(pieces[p_t]), arr[s_t + j] = pieces[p_t][j]. Equivalently, r = true iff some ordering of all the pieces concatenates to exactly arr.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CanFormArray.spec_2",
+    "negation": "AegisSpec.CanFormArray.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, can_form_array arr pieces returns a result r; it does not fail (no panic, overflow, or out-of-bounds).",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CanFormArray.spec_3",
+    "negation": "AegisSpec.CanFormArray.spec_3_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_form_array arr pieces returns a result r with r = true, for every integer x the number of indices k with 0 <= k < n and arr[k] = x is equal to the sum over i = 0,...,m-1 of the number of indices j with 0 <= j < len(pieces[i]) and pieces[i][j] = x.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CanFormArray.spec_4",
+    "negation": "AegisSpec.CanFormArray.spec_4_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Whenever can_form_array arr pieces returns a result r with r = true, for every i with 0 <= i < m there exists an integer s_i such that 0 <= s_i, s_i + len(pieces[i]) <= n, and for every j with 0 <= j < len(pieces[i]), arr[s_i + j] = pieces[i][j]. Thus each piece occurs as a contiguous block of arr, in the same internal order.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CanFormArray.spec_5",
+    "negation": "AegisSpec.CanFormArray.spec_5_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever can_form_array arr pieces returns a result r with r = true, there exist integers s_i, one for each i with 0 <= i < m, such that for every i and every j with 0 <= j < len(pieces[i]), arr[s_i + j] = pieces[i][j]; the intervals [s_i, s_i + len(pieces[i]) - 1] are pairwise disjoint; and their union is exactly {0,1,...,n-1}. The s_i are the start positions of the pieces in a witnessing concatenation.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CanFormArray.spec_6",
+    "negation": "AegisSpec.CanFormArray.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever can_form_array arr pieces returns a result r with r = true, there is exactly one index i with 0 <= i < m such that pieces[i][0] = arr[0], and there is exactly one index k with 0 <= k < m such that pieces[k][len(pieces[k])-1] = arr[n-1].",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CanFormArray.spec_7",
+    "negation": "AegisSpec.CanFormArray.spec_7_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Whenever can_form_array arr pieces returns a result r with r = true, there is exactly one permutation p_0,...,p_{m-1} of {0,...,m-1} such that concatenating pieces[p_0],...,pieces[p_{m-1}] gives arr (using the concatenation condition from spec_1).",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CanFormArray.spec_8",
+    "negation": "AegisSpec.CanFormArray.spec_8_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever can_form_array arr pieces returns a result r and can_form_array arr pieces' returns a result r', we have r = r'. In other words, the truth value depends on the multiset of pieces, not on the top-level order in which they are listed.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume the preconditions on arr and pieces from spec_1. Let pieces' be any slice of vectors of length m for which there exists a bijection σ from {0,...,m-1} to itself such that pieces'[i] = pieces[σ(i)] for every i with 0 <= i < m (so pieces' is a top-level reordering of pieces and also satisfies the same constraints)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CanFormArray.spec_9",
+    "negation": "AegisSpec.CanFormArray.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Then can_form_array arr pieces returns a result r and r = true if and only if for every integer x, the number of indices k with 0 <= k < n and arr[k] = x equals the number of indices i with 0 <= i < m and pieces[i][0] = x.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values. Assume in addition that len(pieces[i]) = 1 for every i with 0 <= i < m."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CanFormArray.spec_10",
+    "negation": "AegisSpec.CanFormArray.spec_10_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Then can_form_array arr pieces returns a result r with r = true.",
+    "preconditions": "Let m = len(pieces) and n = len(arr). Assume 1 <= m <= n <= 100; for every i with 0 <= i < m, 1 <= len(pieces[i]) <= n; sum_{i=0}^{m-1} len(pieces[i]) = n; for every k with 0 <= k < n, 1 <= arr[k] <= 100; for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), 1 <= pieces[i][j] <= 100; the n values arr[0],...,arr[n-1] are pairwise distinct; and the flattened list of all pieces[i][j] has pairwise distinct values. Suppose that the pieces in their given order already concatenate to arr: define t_0 = 0 and t_{i+1} = t_i + len(pieces[i]) for 0 <= i < m, and assume that for every i with 0 <= i < m and every j with 0 <= j < len(pieces[i]), arr[t_i + j] = pieces[i][j]."
+  }
+]

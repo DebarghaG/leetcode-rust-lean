@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_1",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let cap(j) = min{ warehouse[i] | 0 <= i <= j } for each 0 <= j < len(warehouse). Whenever the function returns a result r, r is the maximum cardinality |K| over sets K subset {0, 1, ..., len(boxes)-1} for which there exists an injective map p from K to {0, 1, ..., len(warehouse)-1} satisfying boxes[b] <= cap(p(b)) for every b in K. Equivalently, r is the largest number of distinct boxes that can be placed simultaneously into distinct rooms, where a box b can use room j exactly when boxes[b] <= cap(j).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_2",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "Under the preconditions, the function returns a result r; it does not fail with overflow, panic, or out-of-bounds error.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_3",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, 0 <= r <= min(len(boxes), len(warehouse)).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_4",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Whenever the function returns a result r, r <= count{ b | 0 <= b < len(boxes) and boxes[b] <= warehouse[0] }.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_5",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_5_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 0 if and only if boxes[b] > warehouse[0] for every b with 0 <= b < len(boxes).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_6",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_6_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if boxes[0] <= warehouse[0], and r = 0 otherwise.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; len(boxes) = 1."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_7",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = 1 if there exists b with 0 <= b < len(boxes) and boxes[b] <= warehouse[0], and r = 0 otherwise.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; len(warehouse) = 1."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_8",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Let cap(j) = min{ warehouse[i] | 0 <= i <= j } for 0 <= j < len(warehouse). Whenever the function returns a result r, r = min(len(boxes), count{ j | 0 <= j < len(warehouse) and cap(j) >= h }).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; there is an integer h such that boxes[i] = h for every i with 0 <= i < len(boxes)."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_9",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(len(warehouse), count{ b | 0 <= b < len(boxes) and boxes[b] <= w }).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; there is an integer w such that warehouse[j] = w for every j with 0 <= j < len(warehouse)."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_10",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_10_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Let warehouse' be the slice of length len(warehouse) defined by warehouse'[j] = min{ warehouse[i] | 0 <= i <= j } for every 0 <= j < len(warehouse). If the call on (boxes, warehouse) returns r and the call on (boxes, warehouse') returns r', then r = r'.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_11",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "If the call on (boxes, warehouse) returns r and the call on (boxes', warehouse) returns r', then r = r'.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; boxes' is a slice with len(boxes') = len(boxes), every element of boxes' is in 1..1000000000, and there exists a bijection pi on {0, 1, ..., len(boxes)-1} such that boxes'[i] = boxes[pi(i)] for every i."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_12",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call on (boxes, warehouse1) returns r1 and the call on (boxes, warehouse2) returns r2, then r1 <= r2.",
+    "preconditions": "1 <= len(boxes) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; warehouse1 and warehouse2 are slices of the same length n with 1 <= n <= 100000; for every j with 0 <= j < n, 1 <= warehouse1[j] <= warehouse2[j] <= 1000000000."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_13",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "If the call on (boxes1, warehouse) returns r1 and the call on (boxes2, warehouse) returns r2, then r2 >= r1.",
+    "preconditions": "boxes1 and boxes2 are slices of the same length m with 1 <= m <= 100000; every element of boxes1 and boxes2 is in 1..1000000000; let b1_0 <= ... <= b1_(m-1) be the values of boxes1 sorted nondecreasing and b2_0 <= ... <= b2_(m-1) the values of boxes2 sorted nondecreasing; suppose b2_i <= b1_i for every 0 <= i < m; 1 <= len(warehouse) <= 100000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_14",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Let cap(j) = min{ warehouse[i] | 0 <= i <= j } for 0 <= j < len(warehouse). Whenever the function returns a result r, there exist r distinct indices b_0, ..., b_(r-1) with 0 <= b_t < len(boxes) and r distinct indices j_0, ..., j_(r-1) with 0 <= j_t < len(warehouse) such that boxes[b_t] <= cap(j_t) for every 0 <= t < r. For r = 0 this condition is vacuous.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_15",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_15_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "Whenever the function returns a result r, r = min(len(boxes), len(warehouse)).",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; max{ boxes[i] | 0 <= i < len(boxes) } <= min{ warehouse[j] | 0 <= j < len(warehouse) }."
+  },
+  {
+    "id": 16,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_16",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_16_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If the call on (boxes, warehouse) returns r and the call on (boxes', warehouse) returns r', then r <= r' <= r + 1.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; boxes' is a slice with len(boxes') = len(boxes) + 1, every element of boxes' is in 1..1000000000, and the multiset of boxes' is the multiset of boxes plus one additional element h with 1 <= h <= 1000000000."
+  },
+  {
+    "id": 17,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_17",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_17_neg",
+    "main": false,
+    "category": "functional",
+    "statement": "Let cap(j) = min{ warehouse[i] | 0 <= i <= j } for 0 <= j < len(warehouse). Let t_1 <= ... <= t_n be cap(0),...,cap(n-1) sorted nondecreasing, and s_1 <= ... <= s_m be boxes sorted nondecreasing. Whenever the function returns r, r is the largest integer k with 0 <= k <= min(m,n) such that s_i <= t_{n-k+i} for every 1 <= i <= k.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000."
+  },
+  {
+    "id": 18,
+    "theorem": "AegisSpec.MaxBoxesInWarehouse.spec_18",
+    "negation": "AegisSpec.MaxBoxesInWarehouse.spec_18_neg",
+    "main": false,
+    "category": "monotonicity",
+    "statement": "If the call on (boxes, warehouse) returns r and the call on (boxes, warehouse') returns r', then r <= r' <= r + 1.",
+    "preconditions": "1 <= len(boxes) <= 100000; 1 <= len(warehouse) <= 100000; for every i with 0 <= i < len(boxes), 1 <= boxes[i] <= 1000000000; for every j with 0 <= j < len(warehouse), 1 <= warehouse[j] <= 1000000000; warehouse' is a slice with len(warehouse') = len(warehouse) + 1, every element of warehouse' is in 1..1000000000, and warehouse'[j] = warehouse[j] for every 0 <= j < len(warehouse)."
+  }
+]

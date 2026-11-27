@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_1",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_1_neg",
+    "main": true,
+    "category": "functional",
+    "statement": "Let n = len(words). Define a pair (i,j) to be good iff 0 <= i < j < n and words[i] is both a prefix and a suffix of words[j], where a string a is a prefix of a string b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a), and a is a suffix of b iff len(a) <= len(b) and a[k] = b[len(b)-len(a)+k] for every 0 <= k < len(a). Whenever count_prefix_suffix_pairs(words) returns a result r, r equals the number of good pairs (i,j).",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 2,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_2",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_2_neg",
+    "main": false,
+    "category": "no_failure",
+    "statement": "The function count_prefix_suffix_pairs(words) returns a result r (it does not fail, panic, or overflow) for every input satisfying the preconditions.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 3,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_3",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_3_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let n = len(words). Whenever the function returns a result r, 0 <= r <= n*(n-1)/2.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 4,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_4",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_4_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let L = #{ (i,j) | 0 <= i < j < len(words) and len(words[i]) <= len(words[j]) }. Whenever the function returns a result r, r <= L.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 5,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_5",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_5_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let E = #{ (i,j) | 0 <= i < j < len(words) and words[i] = words[j] }. Whenever the function returns a result r, r >= E.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 6,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_6",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_6_neg",
+    "main": false,
+    "category": "bounds",
+    "statement": "Let P = #{ (i,j) | 0 <= i < j < len(words) and words[i] is a prefix of words[j] }, where a string a is a prefix of a string b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a). Whenever the function returns a result r, r <= P.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 7,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_7",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_7_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If words[i] = words[0] for every 0 <= i < len(words) (so all words are the same nonempty string), then whenever the function returns a result r, r = len(words)*(len(words)-1)/2.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 8,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_8",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_8_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(words[0]) > len(words[1]) > ... > len(words[len(words)-1]) (the lengths are strictly decreasing with index), then whenever the function returns a result r, r = 0.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 9,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_9",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_9_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If len(words[i]) = 1 for every 0 <= i < len(words), then whenever the function returns a result r, r = #{ (i,j) | 0 <= i < j < len(words) and words[i] = words[j] }.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 10,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_10",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_10_neg",
+    "main": false,
+    "category": "edge",
+    "statement": "If all words have equal length (len(words[i]) = len(words[0]) for every 0 <= i < len(words)) and words[i] != words[j] for every 0 <= i < j < len(words), then whenever the function returns a result r, r = 0.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 11,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_11",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_11_neg",
+    "main": false,
+    "category": "invariance",
+    "statement": "Whenever count_prefix_suffix_pairs(words) returns r and count_prefix_suffix_pairs(words') returns r', r = r'.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000. Additionally, words' is a slice of byte vectors with len(words') = len(words), and for every 0 <= i < len(words), len(words'[i]) = len(words[i]) and words'[i][k] = words[i][len(words[i])-1-k] for every 0 <= k < len(words[i])."
+  },
+  {
+    "id": 12,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_12",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_12_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let C = #{ i | 0 <= i < len(words) and words[i] is both a prefix and a suffix of w }, where a string a is a prefix of b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a), and a is a suffix of b iff len(a) <= len(b) and a[k] = b[len(b)-len(a)+k] for every 0 <= k < len(a). Whenever count_prefix_suffix_pairs(words) returns r and count_prefix_suffix_pairs(words') returns r', r' = r + C.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000. Additionally, w is a nonempty byte string of lowercase ASCII letters (bytes in 97..122); words' is a slice of byte vectors with len(words') = len(words)+1, words'[i] = words[i] for 0 <= i < len(words), words'[len(words)] = w, and words' also satisfies the problem constraints."
+  },
+  {
+    "id": 13,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_13",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_13_neg",
+    "main": false,
+    "category": "relational",
+    "statement": "Let C = #{ j | 0 <= j < len(words) and w is both a prefix and a suffix of words[j] }, where a string a is a prefix of b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a), and a is a suffix of b iff len(a) <= len(b) and a[k] = b[len(b)-len(a)+k] for every 0 <= k < len(a). Whenever count_prefix_suffix_pairs(words) returns r and count_prefix_suffix_pairs(words') returns r', r' = r + C.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000. Additionally, w is a nonempty byte string of lowercase ASCII letters (bytes in 97..122); words' is a slice of byte vectors with len(words') = len(words)+1, words'[0] = w, words'[i+1] = words[i] for 0 <= i < len(words), and words' also satisfies the problem constraints."
+  },
+  {
+    "id": 14,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_14",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_14_neg",
+    "main": false,
+    "category": "witness",
+    "statement": "Whenever the function returns a result r, r > 0 if and only if there exists an index pair (i,j) with 0 <= i < j < len(words) such that words[i] is both a prefix and a suffix of words[j], where a string a is a prefix of b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a), and a is a suffix of b iff len(a) <= len(b) and a[k] = b[len(b)-len(a)+k] for every 0 <= k < len(a).",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  },
+  {
+    "id": 15,
+    "theorem": "AegisSpec.CountPrefixSuffixPairs.spec_15",
+    "negation": "AegisSpec.CountPrefixSuffixPairs.spec_15_neg",
+    "main": false,
+    "category": "shape",
+    "statement": "Let n = len(words). For each j with 0 <= j < n, let c_j = #{ i | 0 <= i < j and words[i] is both a prefix and a suffix of words[j] }, where a string a is a prefix of b iff len(a) <= len(b) and a[k] = b[k] for every 0 <= k < len(a), and a is a suffix of b iff len(a) <= len(b) and a[k] = b[len(b)-len(a)+k] for every 0 <= k < len(a). Whenever the function returns a result r, r = sum_{j=0}^{n-1} c_j.",
+    "preconditions": "words is a slice of byte vectors satisfying the problem constraints: 1 <= len(words) <= 100000; for every i with 0 <= i < len(words), 1 <= len(words[i]) <= 100000 and every byte of words[i] is in 97..122; and sum_{i=0}^{len(words)-1} len(words[i]) <= 500000."
+  }
+]

@@ -126,6 +126,11 @@ def main():
     data["verified_orgs"] = orgs.get("organizations", {})
     data["credits"] = sorted(credits, key=lambda c: (c["date"], c["t"], c["id"]))     # one per resolved theorem
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    done = totals["proved"] + totals["refuted"]
+    (OUT / "badge.json").write_text(json.dumps(dict(schemaVersion=1, label="theorems resolved",
+                                                     message=f"{done:,} / {totals['theorems']:,}", color="2e9e5b")))
+    (OUT / "progress.json").write_text(json.dumps(dict(built=data["built"], commit=commit, **totals,
+                                                        main_resolved=len(mains), teams=len({c["org"] or c["by"] for c in credits})), indent=1))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))
     print(f"{len(index)} programs, {totals['theorems']} theorems, {totals['proved']} proved, {totals['refuted']} refuted")
 

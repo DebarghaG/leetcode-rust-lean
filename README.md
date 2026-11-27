@@ -1,5 +1,7 @@
 # LeetCode Rust-to-Lean: proofs
 
+[![theorems resolved](https://img.shields.io/endpoint?url=https%3A%2F%2Fdebarghag.github.io%2Fleetcode-rust-lean%2Fdata%2Fbadge.json)](https://debarghag.github.io/leetcode-rust-lean/)
+
 Theorem provers are now very good at competition mathematics, and the benchmarks for it are
 close to saturated. Proving that real code is correct is a different and much harder problem,
 and it is the one that matters for software.
@@ -62,7 +64,7 @@ python3 tools/check.py proof programs/sum-of-square-numbers/Proofs/spec_2.lean
 ```
 
 `new_proof.py` also links the shared packages into the program, so an editor opened on
-`programs/<task>` works without fetching anything. The last command prints `"ok": true` when
+`programs/<task>` works without fetching anything. New to this? [docs/first-proof.md](docs/first-proof.md) walks through one complete proof. The last command prints `"ok": true` when
 `lake comparator` accepts the proof. To refute a
 theorem, run `new_proof.py` with `--negation` and prove `spec_<n>_neg`. Then open a pull request;
 CI runs the same check. See [CONTRIBUTING.md](CONTRIBUTING.md) for specifications and programs.

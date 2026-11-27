@@ -634,7 +634,8 @@ async function renderContribute() {
 python3 tools/new_proof.py <task> <n> --name "Your Name" --org "Your Lab"   # copies Specs.lean to Proofs/spec_<n>.lean
 # replace the sorry of spec_<n> with a proof; add lemmas before it if you need them
 python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`, null, false)}
-    <p>To refute a theorem, use <code>--negation</code> and prove <code>spec_&lt;n&gt;_neg</code> instead. Then open a pull request; CI runs the same check.</p>
+    <p>New to this? <a href="${REPO}/blob/main/docs/first-proof.md">Your first proof</a> walks through one complete proof, from the open theorem to the merged pull request.
+    To refute a theorem, use <code>--negation</code> and prove <code>spec_&lt;n&gt;_neg</code> instead. Then open a pull request; CI runs the same check.</p>
     <h3>How a proof is checked</h3>
     <p>A proof may add any definitions and lemmas it needs, and imports from the same Lean, Mathlib and Aeneas versions. It may not change
     the statement. It must not use <code>sorry</code>, and it may only use the standard axioms <code>propext</code>, <code>Quot.sound</code> and

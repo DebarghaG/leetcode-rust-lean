@@ -186,6 +186,8 @@ function renderMap(q = new URLSearchParams()) {
   const byT = by(p => p.g.map(g => [g, resolvedOf(p), p.st.length]));
   const nu = nextUp();
   v.innerHTML = `
+  <div class="paperline">Unofficial reproduction of the methodology of <a href="${PAPER}"><i>Scaling Lean Theorem Proving for Real-World
+    Code Verification</i></a> (<a href="${PAPER}">arXiv 2610.38174</a>), made by the paper's first author. <a href="#/" data-cite>How to cite</a></div>
   <div class="hero">
     <div>
       <div class="big">${fmt(done)} <small>of ${fmt(T.theorems)} theorems resolved</small></div>
@@ -249,6 +251,7 @@ function renderMap(q = new URLSearchParams()) {
   $('mSplit').onchange = e => { mapState.split = e.target.value; setQ(); };
   $('mBy').onchange = e => { mapState.by = e.target.value; setQ(); };
   drawMaps();
+  v.querySelector('[data-cite]').onclick = e => { e.preventDefault(); $('cite').scrollIntoView({behavior: 'smooth', block: 'start'}); };
   if (mapState.tag) $('maps').scrollIntoView({block: 'start'});
 }
 

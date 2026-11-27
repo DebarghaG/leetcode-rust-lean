@@ -122,6 +122,8 @@ def main():
                     links[t] = ix[o + t]; break
     (OUT / "links.json").write_text(json.dumps(links, separators=(",", ":")))
     data["pins"] = PINS
+    orgs = json.loads((ROOT / "organizations.json").read_text()) if (ROOT / "organizations.json").exists() else {}
+    data["verified_orgs"] = orgs.get("organizations", {})
     data["credits"] = sorted(credits, key=lambda c: (c["date"], c["t"], c["id"]))     # one per resolved theorem
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))

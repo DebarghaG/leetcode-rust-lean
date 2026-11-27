@@ -577,6 +577,11 @@ function lbChart(rows, key) {                         // cumulative points over 
     ${series.map((v, i) => `<polyline fill="none" stroke="${COL[i]}" stroke-width="2" points="${v.map((y, j) => `${xs(dates[j])},${ys(y)}`).join(' ')}"/>
       <text x="${W - R + 6}" y="${ys(v[v.length - 1]) + 4}" class="tk" fill="${COL[i]}">${esc(top[i].length > 22 ? top[i].slice(0, 21) + '…' : top[i])}</text>`).join('')}</svg>`;
 }
+function orgMark(r, key) {                           // confirmed organizations get a check and a link
+  const v = (D.verified_orgs || {})[r.name];
+  if (key !== 'team' || ![...(D.credits || [])].some(c => c.org === r.name)) return '';
+  return v ? ` <a class="vmark" href="${esc(v.url || '#')}" title="Confirmed by a maintainer">✓</a>` : ' <small class="muted" title="Organization names are self-reported until confirmed">self-reported</small>';
+}
 function renderLeaderboard(q) {
   const v = $('view'); v.dataset.v = 'leaderboard';
   const key = BOARDS[q.get('by')] ? q.get('by') : 'team', rows = standings(key);
@@ -589,7 +594,7 @@ function renderLeaderboard(q) {
     <p class="hint">${BOARDS[key][2]}.</p>
     ${rows.length ? `<div class="tw"><table class="list lb"><thead><tr><th>#</th><th>${BOARDS[key][0].replace(/s$/, '')}</th><th>Points</th><th>Resolved</th>
       <th>Main theorems</th><th>Easy · Medium · Hard</th><th>First · latest</th><th style="width:22%">Share of points</th></tr></thead><tbody>
-      ${rows.map((r, i) => `<tr class="${i < 3 ? 'podium p' + (i + 1) : ''}"><td class="rk">${i + 1}</td><td><b>${esc(r.name)}</b>${i === 0 ? ' <span class="star" title="First place">★</span>' : ''}${key !== 'team' && r.orgs.size ? `<br><small class="muted">${esc([...r.orgs].join(', '))}</small>` : ''}</td>
+      ${rows.map((r, i) => `<tr class="${i < 3 ? 'podium p' + (i + 1) : ''}"><td class="rk">${i + 1}</td><td><b>${esc(r.name)}</b>${orgMark(r, key)}${i === 0 ? ' <span class="star" title="First place">★</span>' : ''}${key !== 'team' && r.orgs.size ? `<br><small class="muted">${esc([...r.orgs].join(', '))}</small>` : ''}</td>
         <td class="n"><b>${fmt(r.points)}</b></td><td class="n">${fmt(r.proved + r.refuted)}${r.refuted ? ` <small class="muted">(${r.refuted} refuted)</small>` : ''}</td>
         <td class="n">${fmt(r.main)}</td><td class="n">${r.E} · ${r.M} · ${r.H}</td><td class="n"><small>${esc(r.first)} · ${esc(r.last)}</small></td>
         <td><span class="rbar"><i style="width:${100 * r.points / total}%"></i></span></td></tr>`).join('')}
@@ -598,6 +603,9 @@ function renderLeaderboard(q) {
     <p>A resolved theorem is worth 1, 2 or 3 points for an Easy, Medium or Hard program, and three times as much if it is the program's
     main theorem, the full correctness statement. Proving a theorem and proving its negation count the same. Ties go to more main theorems,
     then to whoever got there first.</p>
+    <h3>Organizations</h3>
+    <p>Organization names in proof headers are self-reported. An organization a maintainer has confirmed gets a ✓ and a link: open an issue
+    from an account of the organization to be confirmed. The list is <a href="${REPO}/blob/main/organizations.json"><code>organizations.json</code></a>.</p>
     <h3>Get on the leaderboard</h3>
     ${pre(`python3 tools/new_proof.py <task> <n> --name "Your Name" --org "Your Lab" --system "YourProver v2"`, null, false)}
     <p>The header of the proof file carries the credit (<code>Contributor:</code>, and optionally <code>Organization:</code> and

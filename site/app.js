@@ -14,6 +14,23 @@ let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', 
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const fmt = n => n.toLocaleString('en-US');
+const PAPER = 'https://arxiv.org/abs/2610.38174';
+const BIBTEX = `@misc{ganguly2026scalingleantheoremproving,
+      title={Scaling Lean Theorem Proving for Real-World Code Verification},
+      author={Debargha Ganguly and Divya Raghunathan and Dejan Jovanović and Vikash Singh and Soonho Kong and Aaron Tomb and Aman Goel and Ferhat Erata and Sam Bayless},
+      year={2026},
+      eprint={2610.38174},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.38174},
+}`;
+function citeHtml() {
+  return `<h2 id="cite">Citation</h2>
+  <p class="hint">This is an unofficial reproduction of the methodology of
+  <a href="${PAPER}"><i>Scaling Lean Theorem Proving for Real-World Code Verification</i></a>, made by the paper's first
+  author. It is not an official release of the paper. If you use the dataset or the proofs, please cite the paper:</p>
+  <div style="max-width:90ch">${pre(BIBTEX, BIBTEX, false)}</div>`;
+}
 const SMALL = new Set('a an and as at by for from in into of on or the to with'.split(' '));
 const ROMAN = /^(i|ii|iii|iv|v|vi|vii|viii|ix|x)$/;
 const title = t => t.split('-').map((w, i) => !w ? w : ROMAN.test(w) && i ? w.toUpperCase() : i && SMALL.has(w) ? w : w[0].toUpperCase() + w.slice(1)).join(' ');
@@ -79,7 +96,7 @@ function hl(src, ctx) {
     return `<span class="ln" data-l="${i + 1}">${out}</span>`;
   }).join('\n');
 }
-const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code, ctx)}</pre></div>`;
+const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${ctx === false ? esc(code) : hl(code, ctx)}</pre></div>`;
 function toast(msg) { let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.append(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
 document.addEventListener('click', e => {
@@ -214,8 +231,9 @@ function renderMap(q = new URLSearchParams()) {
     <span>Split <select id="mSplit"><option value="">all</option><option value="te"${mapState.split === 'te' ? ' selected' : ''}>test</option><option value="tr"${mapState.split === 'tr' ? ' selected' : ''}>train</option></select></span>
   </div>
   <div id="maps"></div>
-  <h2>Topics</h2>
+  <h2>LeetCode tags <span class="h2n">a program has several; click one to show its programs on the map</span></h2>
   <div class="topics">${rows([...byT].sort((a, b) => b[1][1] - a[1][1]).map(([g, [d, n]]) => [g, d, n, `#/?tag=${encodeURIComponent(g)}`]))}</div>
+  ${citeHtml()}
   <h2>Reading the map</h2>
   <p class="hint">One square per theorem, one block per program. Programs are grouped by topic, each in the first topic (in the order
   shown) that one of its LeetCode tags belongs to, and within a topic ordered from Easy to Hard; the darker square of a

@@ -64,6 +64,9 @@ python3 tools/check.py proof programs/sum-of-square-numbers/Proofs/spec_2.lean
 `lake comparator` accepts the proof. To refute a
 theorem, run `new_proof.py` with `--negation` and prove `spec_<n>_neg`. Then open a pull request;
 CI runs the same check. See [CONTRIBUTING.md](CONTRIBUTING.md) for specifications and programs.
+Open theorems that make a good start are labelled
+[`good first proof`](https://github.com/DebarghaG/leetcode-rust-lean/labels/good%20first%20proof),
+and questions are welcome in the [call for contributions](https://github.com/DebarghaG/leetcode-rust-lean/issues/7).
 
 ## Credits
 

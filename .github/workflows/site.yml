@@ -24,8 +24,8 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: status
-          key: status-${{ github.run_id }}
-          restore-keys: status-
+          key: status-v2-${{ github.run_id }}
+          restore-keys: status-v2-
       - name: Check every proof without a current result
         run: python3 tools/verify_all.py --limit-minutes 240
       - name: Save the results
@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: status
-          key: status-${{ github.run_id }}
+          key: status-v2-${{ github.run_id }}
       - name: Build the site data
         run: python3 tools/build_site.py
       - uses: actions/upload-pages-artifact@v3

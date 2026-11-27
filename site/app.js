@@ -10,7 +10,7 @@ const CAT = {re: 'relational', ed: 'edge', bo: 'bounds', in: 'invariance', fu: '
              wi: 'witness', no: 'no_failure', sh: 'shape', mo: 'monotonicity'};
 const DIFF = {E: 'Easy', M: 'Medium', H: 'Hard'};
 const STATUS = {o: 'open', p: 'proved', r: 'refuted', x: 'conflict', s: 'superseded'};
-let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', q: ''};
+let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', q: '', by: 'topic'};
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const fmt = n => n.toLocaleString('en-US');
@@ -23,29 +23,80 @@ const cats = p => (p.c.match(/../g) || []).map(c => CAT[c]);
 async function json(url) { const r = await fetch(url); if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); }
 async function theorems() { return THMS || (THMS = await json('data/theorems.json')); }
 
-/* ---------- code highlighting (enough for Lean and Rust) ---------- */
+/* ---------- code: highlighting, and names linked to their definitions ---------- */
 const KW = new Set(('def theorem lemma by have show from fun let in if then else match with do return open namespace end section ' +
   'noncomputable structure inductive instance where abbrev private protected import sorry exact intro intros apply simp omega ' +
   'cases induction rfl calc obtain refine constructor unfold rw decide exists use at pub fn mut while for loop break continue ' +
-  'struct enum impl true false Some None mod as Type Prop').split(' '));
+  'struct enum impl true false Some None mod as Type Prop public').split(' '));
 const TY = new Set('Result Std I64 I32 U8 U32 U64 Usize Isize Bool Nat Int List Slice Vec alloc Option ok fail i64 usize u8 bool ℕ ℤ'.split(' '));
-const pre = (code, plain) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code)}</pre></div>`;
+const AENEAS_SRC = () => `https://github.com/AeneasVerif/aeneas/blob/${D.pins.aeneas}/backends/lean/`;
+const DOCS = 'https://leanprover-community.github.io/mathlib4_docs/find/?pattern=';
+let LINKS = null;
+async function links() { return LINKS || (LINKS = await json('data/links.json').catch(() => ({}))); }
+
+function localDefs(p) {                                // name -> [tab, line] for this program's own Lean
+  const m = new Map();
+  const scan = (text, tab) => (text || '').split('\n').forEach((l, i) => {
+    const d = l.match(/^\s*(?:@\[[^\]]*\]\s*)?(?:(?:private|protected|noncomputable|partial|public)\s+)*(?:def|theorem|lemma|abbrev|structure|inductive|class)\s+([^\s:(\[{]+)/);
+    if (d) { const n = d[1].split('.').pop(); if (!m.has(n)) m.set(n, [tab, i + 1]); }
+  });
+  scan(p.lean_funs, 'lean'); scan(p.lean_types, 'lean'); scan(p.lean_funs_external, 'lean'); scan(p.specs_file, 'specs');
+  return m;
+}
+function ident(w, ctx) {
+  const base = w.split('.').pop();
+  const cls = KW.has(w) ? 'kw' : TY.has(base) || TY.has(w) ? 'ty' : '';
+  if (!ctx || KW.has(w)) return cls ? `<span class="${cls}">${w}</span>` : w;
+  const loc = ctx.local && (ctx.local.get(w) || (w.includes('.') && ctx.local.get(base)));
+  if (loc) return `<a class="lk loc${cls ? ' ' + cls : ''}" href="#" data-go="${loc[0]}:${loc[1]}" title="Definition in this program">${w}</a>`;
+  const aen = LINKS && LINKS[w];
+  if (aen) return `<a class="lk aen${cls ? ' ' + cls : ''}" href="${AENEAS_SRC()}${aen}" target="_blank" rel="noopener" title="Defined in Aeneas: ${aen.replace('#L', ', line ')}">${w}</a>`;
+  if (w.includes('.') && /^[A-Z]/.test(w) && !/^Aeneas\b|^Aegis\b|^AegisSpec\b/.test(w))
+    return `<a class="lk ml${cls ? ' ' + cls : ''}" href="${DOCS}${encodeURIComponent(w)}" target="_blank" rel="noopener" title="Look up in the Mathlib documentation">${w}</a>`;
+  return cls ? `<span class="${cls}">${w}</span>` : w;
+}
+function hl(src, ctx) {
+  let depth = 0;                                       // inside /- ... -/ (they nest in Lean)
+  return String(src ?? '').split('\n').map((line, i) => {
+    let out = '', k = 0;
+    while (k < line.length) {
+      if (depth) {
+        const o = line.indexOf('/-', k), c = line.indexOf('-/', k);
+        if (c < 0 && o < 0) { out += `<span class="cm">${esc(line.slice(k))}</span>`; k = line.length; break; }
+        if (o >= 0 && (c < 0 || o < c)) { out += `<span class="cm">${esc(line.slice(k, o + 2))}</span>`; depth++; k = o + 2; }
+        else { out += `<span class="cm">${esc(line.slice(k, c + 2))}</span>`; depth--; k = c + 2; }
+        continue;
+      }
+      const rest = line.slice(k);
+      let m;
+      if (rest.startsWith('/-')) { out += '<span class="cm">/-</span>'; depth = 1; k += 2; }
+      else if (rest.startsWith('--') || rest.startsWith('//')) { out += `<span class="cm">${esc(rest)}</span>`; k = line.length; }
+      else if ((m = rest.match(/^"(?:[^"\\]|\\.)*"?/))) { out += `<span class="sr">${esc(m[0])}</span>`; k += m[0].length; }
+      else if ((m = rest.match(/^[A-Za-z_Ͱ-Ͽἀ-῿][\w'Ͱ-Ͽ.₀-₉]*/))) { const w = m[0].replace(/\.$/, ''); const defining = /\b(def|theorem|lemma|abbrev|structure|inductive|class|instance|fn|struct|enum)\s+$/.test(line.slice(0, k));
+        out += defining ? `<span class="dn">${esc(w)}</span>` : ident(w, ctx); k += w.length; }
+      else { out += esc(rest[0]); k += 1; }
+    }
+    return `<span class="ln" data-l="${i + 1}">${out}</span>`;
+  }).join('\n');
+}
+const pre = (code, plain, ctx) => `<div class="prewrap"><button class="cp" data-copy="${esc(plain ?? code)}">copy</button><pre>${hl(code, ctx)}</pre></div>`;
 function toast(msg) { let t = $('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.append(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
 document.addEventListener('click', e => {
+  const go = e.target.closest('[data-go]');
+  if (go) {                                           // a name defined in this program: show its definition
+    e.preventDefault(); const [tab, line] = go.dataset.go.split(':');
+    renderProgram(tab, 0);
+    const el = $('insp').querySelector(`.prewrap pre .ln[data-l="${line}"]`);
+    if (el) { const sd = $('side'); sd.scrollTop = Math.max(0, el.getBoundingClientRect().top - sd.getBoundingClientRect().top + sd.scrollTop - 80);
+      el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600); }
+    return;
+  }
   const b = e.target.closest('[data-copy]'); if (!b) return;
   e.preventDefault(); e.stopPropagation();
   navigator.clipboard.writeText(b.dataset.copy).then(() => { if (b.classList.contains('cp')) { b.textContent = 'copied'; b.classList.add('done');
     setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1400); } else toast('Link copied'); });
 });
-function hl(src) {
-  return esc(src).replace(/(--[^\n]*|\/\/[^\n]*)|(\/-[\s\S]*?-\/)|(&quot;[^\n]*?&quot;)|([A-Za-z_][\w'.]*)/g, (m, c1, c2, s, w) => {
-    if (c1 || c2) return `<span class="cm">${m}</span>`;
-    if (s) return `<span class="sr">${m}</span>`;
-    const base = w.split('.').pop();
-    return KW.has(w) ? `<span class="kw">${w}</span>` : TY.has(base) || TY.has(w) ? `<span class="ty">${w}</span>` : w;
-  });
-}
 
 /* ---------- routing ---------- */
 function route() {
@@ -60,6 +111,24 @@ function route() {
   if (view === 'theorems') renderTheorems(q); else if (view === 'contribute') renderContribute(); else renderMap(q);
 }
 
+/* ---------- topics: one per program, the first group (in this order) that one of its tags belongs to ---------- */
+const TOPICS = [
+  ['Dynamic programming', ['Dynamic Programming', 'Memoization']],
+  ['Trees and linked lists', ['Tree', 'Binary Tree', 'Binary Search Tree', 'Linked List', 'Trie', 'Segment Tree', 'Binary Indexed Tree']],
+  ['Graphs', ['Graph', 'Breadth-First Search', 'Depth-First Search', 'Union Find', 'Shortest Path', 'Topological Sort',
+              'Minimum Spanning Tree', 'Strongly Connected Component', 'Eulerian Circuit']],
+  ['Strings', ['String', 'String Matching', 'Rolling Hash', 'Hash Function', 'Suffix Array']],
+  ['Math', ['Math', 'Number Theory', 'Combinatorics', 'Geometry', 'Bit Manipulation', 'Game Theory', 'Brainteaser']],
+  ['Backtracking and enumeration', ['Backtracking', 'Recursion', 'Bitmask', 'Enumeration']],
+  ['Stacks and queues', ['Stack', 'Monotonic Stack', 'Queue', 'Monotonic Queue']],
+  ['Greedy', ['Greedy']],
+  ['Searching and sorting', ['Binary Search', 'Sorting', 'Two Pointers', 'Sliding Window', 'Heap (Priority Queue)', 'Merge Sort',
+    'Counting Sort', 'Quickselect', 'Bucket Sort', 'Radix Sort', 'Ordered Set', 'Line Sweep', 'Divide and Conquer']],
+  ['Arrays and simulation', ['Array', 'Matrix', 'Prefix Sum', 'Simulation', 'Counting', 'Hash Table']],
+];
+const topicOf = p => p._topic || (p._topic = (TOPICS.find(([, tags]) => p.g.some(g => tags.includes(g))) || ['Arrays and simulation'])[0]);
+const DORD = {E: 0, M: 1, H: 2};
+
 /* ---------- map ---------- */
 function resolvedOf(p) { return (p.st.match(/[pr]/g) || []).length; }
 function nextUp() {                                    // one open theorem to suggest, changing daily
@@ -67,6 +136,14 @@ function nextUp() {                                    // one open theorem to su
   for (const p of D.programs) if (p.d === 'E') (p.c.match(/../g) || []).forEach((c, i) => {
     if (p.st[i] === 'o' && (c === 'no' || c === 'bo')) pool.push([p, i + 1, CAT[c]]); });
   return pool.length ? pool[(day * 2654435761 % 4294967296) % pool.length] : null;
+}
+function pins() {
+  const P = D.pins || {};
+  return `Lean <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}">${P.lean}</a> ·
+    Mathlib <a href="https://github.com/leanprover-community/mathlib4/tree/${P.mathlib}"><code>${(P.mathlib || '').slice(0, 8)}</code></a> ·
+    Aeneas <a href="https://github.com/AeneasVerif/aeneas/tree/${P.aeneas}"><code>${(P.aeneas || '').slice(0, 8)}</code></a> ·
+    Charon <a href="https://github.com/AeneasVerif/charon/tree/${P.charon}"><code>${P.charon}</code></a> ·
+    checked with <a href="https://github.com/leanprover/lean4/releases/tag/${P.lean}"><code>lake comparator --paranoid</code></a>`;
 }
 function recentGroups() {                             // consecutive proofs of one program, as one line
   const out = [];
@@ -79,7 +156,7 @@ function rows(items, max) {                            // [label, done, total, h
 }
 function renderMap(q = new URLSearchParams()) {
   const v = $('view'); v.dataset.v = 'map';
-  mapState.tag = q.get('tag') || ''; mapState.split = q.get('split') || '';
+  mapState.tag = q.get('tag') || ''; mapState.split = q.get('split') || ''; mapState.by = q.get('by') || 'topic';
   const T = D.totals, done = T.proved + T.refuted, pct = 100 * done / T.theorems;
   const progs = D.programs.filter(p => p.st.length);
   const mainsDone = progs.filter(p => 'pr'.includes(p.st[p.m - 1])).length;
@@ -87,6 +164,7 @@ function renderMap(q = new URLSearchParams()) {
   const tags = [...new Set(D.programs.flatMap(p => p.g))].sort();
   const by = (keyOf) => { const m = new Map(); for (const p of progs) for (const [k, d, n] of keyOf(p)) { const a = m.get(k) || [0, 0]; a[0] += d; a[1] += n; m.set(k, a); } return m; };
   const byD = by(p => [[p.d, resolvedOf(p), p.st.length]]);
+  const byTp = by(p => [[topicOf(p), resolvedOf(p), p.st.length]]);
   const byC = by(p => (p.c.match(/../g) || []).map((c, i) => [c, 'pr'.includes(p.st[i]) ? 1 : 0, 1]));
   const byT = by(p => p.g.map(g => [g, resolvedOf(p), p.st.length]));
   const nu = nextUp();
@@ -96,10 +174,10 @@ function renderMap(q = new URLSearchParams()) {
       <div class="big">${fmt(done)} <small>of ${fmt(T.theorems)} theorems resolved</small></div>
       <div class="bar" title="${pct.toFixed(2)}% resolved"><i style="width:${100 * T.proved / T.theorems}%;background:var(--proved)"></i><i style="width:${100 * T.refuted / T.theorems}%;background:var(--refuted)"></i></div>
       <div class="figs">
-        <div class="fig"><b>${fmt(T.proved)}</b><span>proved</span></div>
-        <div class="fig"><b>${fmt(T.refuted)}</b><span>refuted</span></div>
-        <div class="fig"><b>${fmt(T.theorems - done)}</b><span>open</span></div>
-        <div class="fig"><b>${fmt(mainsDone)}</b><span>main theorems resolved</span></div>
+        <a class="fig" href="#/theorems?status=proved"><b>${fmt(T.proved)}</b><span>proved</span></a>
+        <a class="fig" href="#/theorems?status=refuted"><b>${fmt(T.refuted)}</b><span>refuted</span></a>
+        <a class="fig" href="#/theorems?status=open"><b>${fmt(T.theorems - done)}</b><span>open</span></a>
+        <a class="fig" href="#/theorems?status=proved&main=1"><b>${fmt(mainsDone)}</b><span>main theorems resolved</span></a>
         <div class="fig"><b>${fmt(full)}</b><span>programs fully resolved</span></div>
         <a class="fig" href="#/contribute"><b>${fmt(D.contributors.length)}</b><span>contributors</span></a>
       </div>
@@ -117,32 +195,41 @@ function renderMap(q = new URLSearchParams()) {
       <b>${esc(title(nu[0].t))}, spec_${nu[1]}</b>
       <span>A ${nu[2] === 'no_failure' ? 'no-failure' : 'bounds'} theorem about an Easy program, with no proof yet: a good first proof.</span>
       <span class="go">Open it →</span></a>` : ''}
-    <div class="card"><span class="kicker">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
+    <div class="card"><span class="kicker">By topic</span>${rows(TOPICS.map(([t]) => [t, ...(byTp.get(t) || [0, 0]), `#/theorems?topic=${encodeURIComponent(t)}`]))}
+      <span class="kicker" style="margin-top:10px">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
     <div class="card"><span class="kicker">By category</span>${rows([...byC].sort((a, b) => b[1][1] - a[1][1]).map(([c, [d, n]]) => [CAT[c], d, n, `#/theorems?category=${CAT[c]}`]))}</div>
     <div class="card"><span class="kicker">Recently proved</span>${recentGroups().slice(0, 7).map(g =>
       `<a class="row" href="#/p/${g.t}/${g.ids[0]}"><span class="nm">${esc(title(g.t))}</span><span class="num">${g.ids.length === 1 ? 'spec_' + g.ids[0] : g.ids.length + ' theorems'} · ${esc(g.by)}</span></a>`).join('') || '<p class="sub">No proofs yet.</p>'}
       <a class="more" href="#/theorems?status=proved">All resolved theorems →</a></div>
   </div>
+  ${(D.mains || []).length ? `<h2>Main theorems resolved <span class="h2n">the full correctness statement of a program, with a checked proof</span></h2>
+  <div class="mains">${D.mains.map(m => `<div class="mainc"><div class="hd"><a href="#/p/${m.t}/${m.id}"><b>${esc(title(m.t))}</b></a>
+    <span>${m.status} by ${esc(m.by)} · proof of ${fmt(m.lines)} lines</span></div><pre>${hl(m.stmt, {})}</pre></div>`).join('')}</div>` : ''}
   <div class="mapctl">
     <span class="legend" style="margin:0"><span><i style="background:var(--open)"></i>open</span><span><i style="background:var(--open-main)"></i>open main theorem</span>
-      <span><i style="background:var(--proved)"></i>proved</span><span><i style="background:var(--refuted)"></i>refuted</span></span>
-    <span style="margin-left:auto">Topic <select id="mTag"><option value="">all</option>${tags.map(t => `<option${t === mapState.tag ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></span>
+      <span><i style="background:var(--proved)"></i>proved</span><span><i style="background:var(--refuted)"></i>refuted</span>
+      <span title="The line under a block"><i class="dl" style="background:#2e9e5b"></i>Easy <i class="dl" style="background:#d99a2b"></i>Medium <i class="dl" style="background:#d23c3c"></i>Hard</span></span>
+    <span style="margin-left:auto">Group by <select id="mBy"><option value="topic"${mapState.by === 'topic' ? ' selected' : ''}>topic</option><option value="difficulty"${mapState.by === 'difficulty' ? ' selected' : ''}>difficulty</option></select></span>
+    <span>Tag <select id="mTag"><option value="">all</option>${tags.map(t => `<option${t === mapState.tag ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></span>
     <span>Split <select id="mSplit"><option value="">all</option><option value="te"${mapState.split === 'te' ? ' selected' : ''}>test</option><option value="tr"${mapState.split === 'tr' ? ' selected' : ''}>train</option></select></span>
   </div>
   <div id="maps"></div>
   <h2>Topics</h2>
   <div class="topics">${rows([...byT].sort((a, b) => b[1][1] - a[1][1]).map(([g, [d, n]]) => [g, d, n, `#/?tag=${encodeURIComponent(g)}`]))}</div>
   <h2>Reading the map</h2>
-  <p class="hint">One square per theorem, one block per program, grouped by difficulty; the darker square of a block is the program's
-  main theorem. Hover a block for its name and click it to open the program. <kbd>/</kbd> search · <kbd>m</kbd> map ·
+  <p class="hint">One square per theorem, one block per program. Programs are grouped by topic, each in the first topic (in the order
+  shown) that one of its LeetCode tags belongs to, and within a topic ordered from Easy to Hard; the darker square of a
+  block is the program's main theorem. Hover a block for its name and click it to open the program. <kbd>/</kbd> search · <kbd>m</kbd> map ·
   <kbd>t</kbd> theorems · <kbd>c</kbd> contribute · in a program, <kbd>j</kbd> <kbd>k</kbd> next and previous theorem,
   <kbd>[</kbd> <kbd>]</kbd> previous and next program · <kbd>Esc</kbd> close.</p>
-  <div class="foot">Built ${esc(D.built)} from commit <code>${esc(D.commit || '')}</code> ·
+  <div class="foot">${pins()}<br>Built ${esc(D.built)} from commit <code>${esc(D.commit || '')}</code> ·
     Data: <a href="${DATASET}">Hugging Face</a> · Paper: <a href="https://arxiv.org/abs/2610.38174">arXiv 2610.38174</a> (unofficial reproduction).</div>`;
   const setQ = () => { const n = new URLSearchParams(); if (mapState.tag) n.set('tag', mapState.tag); if (mapState.split) n.set('split', mapState.split);
+    if (mapState.by !== 'topic') n.set('by', mapState.by);
     history.replaceState(null, '', '#/' + (String(n) ? '?' + n : '')); drawMaps(); };
   $('mTag').onchange = e => { mapState.tag = e.target.value; setQ(); };
   $('mSplit').onchange = e => { mapState.split = e.target.value; setQ(); };
+  $('mBy').onchange = e => { mapState.by = e.target.value; setQ(); };
   drawMaps();
   if (mapState.tag) $('maps').scrollIntoView({block: 'start'});
 }
@@ -151,12 +238,16 @@ let maps = [];
 function drawMaps() {
   const box = $('maps'); if (!box) return;
   box.innerHTML = ''; maps = [];
-  for (const d of 'EMH') {
-    const ps = D.programs.filter(p => p.d === d && p.st.length);
-    const n = ps.reduce((a, p) => a + p.st.length, 0), dn = ps.reduce((a, p) => a + (p.st.match(/[pr]/g) || []).length, 0);
-    const h = document.createElement('h2'); h.textContent = `${DIFF[d]}  ·  ${fmt(ps.length)} programs  ·  ${fmt(dn)} of ${fmt(n)} resolved`;
+  const groups = mapState.by === 'difficulty'
+    ? 'EMH'.split('').map(d => [DIFF[d], D.programs.filter(p => p.d === d && p.st.length)])
+    : TOPICS.map(([t]) => [t, D.programs.filter(p => p.st.length && topicOf(p) === t).sort((a, b) => DORD[a.d] - DORD[b.d] || (a.t < b.t ? -1 : 1))]);
+  for (const [name, ps] of groups) {
+    if (!ps.length) continue;
+    const n = ps.reduce((a, p) => a + p.st.length, 0), dn = ps.reduce((a, p) => a + resolvedOf(p), 0);
+    const h = document.createElement('h2'); h.textContent = `${name}  ·  ${fmt(ps.length)} programs  ·  ${fmt(dn)} of ${fmt(n)} resolved`;
+    if (mapState.by === 'topic') h.title = 'Programs whose tags include: ' + TOPICS.find(x => x[0] === name)[1].join(', ') + ' (each program is in one topic: the first in this order that one of its tags belongs to)';
     const c = document.createElement('canvas'); c.className = 'map'; c.setAttribute('role', 'img');
-    c.setAttribute('aria-label', `Map of the ${DIFF[d]} programs: ${fmt(dn)} of ${fmt(n)} theorems resolved. The theorem list gives the same information as text.`);
+    c.setAttribute('aria-label', `Map of the ${name} programs: ${fmt(dn)} of ${fmt(n)} theorems resolved. The theorem list gives the same information as text.`);
     box.append(h, c); maps.push({c, ps}); layout(maps[maps.length - 1]);
   }
 }
@@ -184,15 +275,32 @@ function layout(m) {
       g.fillStyle = s === 'o' && i === r.p.m - 1 ? col.om : col[s];
       g.fillRect(r.x + (i % r.w) * (S + G), r.y + Math.floor(i / r.w) * (S + G), S, S);
     }
+    g.globalAlpha = matches(r.p) ? 0.75 : 0.15;                 // difficulty, as a line under the block
+    g.fillStyle = {E: '#2e9e5b', M: '#d99a2b', H: '#d23c3c'}[r.p.d]; g.fillRect(r.x, r.y + r.bh, r.bw - G, 1.5);
     if (cur && cur.task_id === r.p.t) { g.globalAlpha = 1; g.strokeStyle = css('--accent'); g.lineWidth = 2; g.strokeRect(r.x - 2, r.y - 2, r.bw + 3, r.bh + 3); }
   }
-  m.c.onmousemove = e => { const r = hit(m, e); const tip = $('tip');
-    if (!r) { tip.hidden = true; return; }
-    const n = r.p.st.length, dn = (r.p.st.match(/[pr]/g) || []).length;
-    tip.innerHTML = `<b>${esc(title(r.p.t))}</b><br><small>#${r.p.q} · ${dn} of ${n} resolved · main theorem ${STATUS[r.p.st[r.p.m - 1]]}</small>`;
+  m.c.onmousemove = e => { const r = hit(m, e); const tip = $('tip'), hb = hoverBox(m);
+    if (!r) { tip.hidden = true; hb.hidden = true; m.c.style.cursor = 'default'; return; }
+    m.c.style.cursor = 'pointer';
+    hb.hidden = false; hb.style.left = (r.x - 2) + 'px'; hb.style.top = (m.c.offsetTop + r.y - 2) + 'px';
+    hb.style.width = (r.bw + 3) + 'px'; hb.style.height = (r.bh + 3) + 'px';
+    const n = r.p.st.length, dn = resolvedOf(r.p), i = cellAt(m, r, e);
+    const cell = i >= 0 ? `<br>spec_${i + 1} · ${CAT[r.p.c.substr(2 * i, 2)]}${i === r.p.m - 1 ? ' · main' : ''} · ${STATUS[r.p.st[i]]}` : '';
+    tip.innerHTML = `<b>${esc(title(r.p.t))}</b><br><small>#${r.p.q} · ${dn} of ${n} resolved${cell}</small>`;
     tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - 370) + 'px'; tip.style.top = e.clientY + 14 + 'px'; };
-  m.c.onmouseleave = () => { $('tip').hidden = true; };
-  m.c.onclick = e => { const r = hit(m, e); if (r) location.hash = '#/p/' + r.p.t; };
+  m.c.onmouseleave = () => { $('tip').hidden = true; hoverBox(m).hidden = true; };
+  m.c.onclick = e => { const r = hit(m, e); if (!r) return; const i = cellAt(m, r, e); location.hash = '#/p/' + r.p.t + (i >= 0 ? '/' + (i + 1) : ''); };
+}
+const CELL = 7;                                        // square plus gap, as in layout()
+function cellAt(m, r, e) {
+  const b = m.c.getBoundingClientRect(), x = e.clientX - b.left - r.x, y = e.clientY - b.top - r.y;
+  if (x < 0 || y < 0) return -1;
+  const i = Math.floor(y / CELL) * r.w + Math.floor(x / CELL);
+  return Math.floor(x / CELL) < r.w && i < r.p.st.length ? i : -1;
+}
+function hoverBox(m) {
+  if (!m.hb) { m.hb = document.createElement('div'); m.hb.className = 'hoverbox'; m.hb.hidden = true; m.c.parentElement.append(m.hb); }
+  return m.hb;
 }
 function hit(m, e) {
   const b = m.c.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
@@ -200,13 +308,98 @@ function hit(m, e) {
 }
 window.addEventListener('resize', () => maps.forEach(layout));
 
+/* ---------- program structure: declarations and how they depend on each other ---------- */
+const DECL_RE = /^\s*(?:@\[[^\]]*\]\s*)?(?:(?:private|protected|noncomputable|partial|public)\s+)*(def|theorem|lemma|abbrev|structure|inductive|class|instance)\s+([^\s:(\[{]+)/;
+function structure(p) {                              // declarations of the program's Lean, with references
+  if (p._st) return p._st;
+  const decls = [];
+  const scan = (text, file, tab) => {
+    const lines = (text || '').split('\n'); let open = null;
+    lines.forEach((l, i) => {
+      const m = l.match(DECL_RE);
+      if (m && /^\s*(?:@|private|protected|noncomputable|partial|public|def|theorem|lemma|abbrev|structure|inductive|class|instance)/.test(l) && (l.length - l.trimStart().length) <= 2) {
+        if (open) open.end = i;
+        const name = m[2].replace(/^(Aegis|AegisSpec)\.[A-Za-z0-9_]+\./, '');
+        if (/_neg$/.test(name)) { open = null; return; }
+        open = {name, full: m[2], kind: m[1], file, tab, line: i + 1, end: lines.length};
+        decls.push(open);
+      } else if (open && /^\s*(?:namespace|end|section|open|set_option|\/-!)\b/.test(l) && !/^\s{4}/.test(l)) { open.end = i; open = null; }
+    });
+    decls.filter(d => d.file === file).forEach(d => {   // without the next declaration's docstring or attributes
+      d.text = lines.slice(d.line - 1, d.end).join('\n').replace(/(\n\s*(\/--(?:(?!-\/)[\s\S])*-\/|@\[[^\]]*\]|--[^\n]*)?)+\s*$/, ''); });
+  };
+  scan(p.lean_types, 'Types.lean', 'lean'); scan(p.lean_funs, 'Funs.lean', 'lean');
+  scan(p.lean_funs_external, 'FunsExternal.lean', 'lean'); scan(p.specs_file, 'Specs.lean', 'specs');
+  const byName = new Map(), last = {};
+  decls.forEach((d, i) => { byName.set(d.name, i); byName.set(d.full, i); const l = d.name.split('.').pop(); last[l] = last[l] === undefined ? i : -1; });
+  Object.entries(last).forEach(([l, i]) => { if (i >= 0 && !byName.has(l)) byName.set(l, i); });
+  const find = w => { const parts = w.split('.'); for (let k = 0; k < parts.length; k++) { const j = byName.get(parts.slice(k).join('.')); if (j !== undefined) return j; } };
+  decls.forEach((d, i) => {
+    d.role = d.file === 'Specs.lean' ? (/^spec_\d+$/.test(d.name) ? 'theorem' : 'helper') : d.file === 'FunsExternal.lean' ? 'external' : 'program';
+    if (d.role === 'theorem') d.thm = p.theorems.find(t => `spec_${t.id}` === d.name);
+    const body = d.text.replace(/--[^\n]*|\/-[\s\S]*?-\//g, '');
+    d.uses = [...new Set((body.match(/[A-Za-z_][\w'.]*[\w']/g) || []).map(find).filter(j => j !== undefined && j !== i))];
+  });
+  decls.forEach((d, i) => d.usedBy = decls.map((e, j) => e.uses.includes(i) ? j : -1).filter(j => j >= 0));
+  return (p._st = decls);
+}
+function closure(decls, i, key) {                    // everything reachable along `uses` or `usedBy`
+  const seen = new Set(), stack = [...decls[i][key]];
+  while (stack.length) { const j = stack.pop(); if (!seen.has(j) && j !== i) { seen.add(j); stack.push(...decls[j][key]); } }
+  return seen;
+}
+let stSel = -1, stTrans = true;
+const ROLE = {program: 'program code', external: 'library model', helper: 'helper definition', theorem: 'theorem'};
+function renderStructure(p) {
+  const ds = structure(p);
+  const lines = t => (t || '').split('\n').length;
+  const nTh = ds.filter(d => d.role === 'theorem').length, nHelp = ds.filter(d => d.role === 'helper').length;
+  const nFun = ds.filter(d => d.role === 'program' && d.file === 'Funs.lean').length;
+  const sel = stSel >= 0 && stSel < ds.length ? stSel : -1;
+  const dep1 = new Set(sel >= 0 ? ds[sel].uses : []), use1 = new Set(sel >= 0 ? ds[sel].usedBy : []);
+  const depT = sel >= 0 && stTrans ? closure(ds, sel, 'uses') : new Set(), useT = sel >= 0 && stTrans ? closure(ds, sel, 'usedBy') : new Set();
+  const rel = j => j === sel ? 'r-sel' : dep1.has(j) ? 'r-dep' : use1.has(j) ? 'r-use' : depT.has(j) ? 'r-dep2' : useT.has(j) ? 'r-use2' : '';
+  const dot = d => d.role === 'theorem' ? `k-${d.thm ? d.thm.status : 'open'}` : `k-${d.role}`;
+  let h = `<div class="stats">${[[lines(p.rust), 'lines of Rust'], [lines(p.lean_funs), 'lines of Lean'], [nFun, 'functions'],
+    [nHelp, 'helper definitions'], [nTh, 'theorems'], [p.num_test_cases, 'test cases']].map(([n, l]) => `<div><b>${fmt(n)}</b><span>${l}</span></div>`).join('')}</div>
+    <div class="slegend"><span><i class="k-program"></i>program code</span><span><i class="k-helper"></i>helper definition</span>
+      <span><i class="k-open"></i>theorem</span><span><i class="k-proved"></i>proved</span>${sel >= 0 ? `<span class="sep"></span>
+      <span><i class="r-dep"></i>it depends on</span><span><i class="r-dep2"></i>… indirectly</span><span><i class="r-use"></i>depends on it</span><span><i class="r-use2"></i>… indirectly</span>` : ''}
+      <label class="tr" title="Also shade what is reached through other declarations"><input type="checkbox" id="stTrans"${stTrans ? ' checked' : ''}> transitive</label></div>`;
+  if (sel >= 0) {
+    const d = ds[sel];
+    h += `<div class="ssel"><div class="hd"><span class="kdot ${dot(d)}"></span><b>${esc(d.full)}</b><span>${d.file}:${d.line} · ${ROLE[d.role]}${d.thm ? ' · ' + d.thm.status : ''}</span></div>
+      <div class="sub">depends on ${fmt(dep1.size)}${stTrans ? ` (${fmt(depT.size)} in all)` : ''} · used by ${fmt(use1.size)}${stTrans ? ` (${fmt(useT.size)} in all)` : ''}
+        ${d.thm ? ` · <a href="#/p/${p.task_id}/${d.thm.id}">open the theorem</a>` : ''}</div>
+      ${pre(d.text, null, {local: localDefs(p)})}</div>`;
+  } else h += `<p class="hint">Select a declaration to see what it depends on and what depends on it. A theorem depends on the functions
+    and definitions its statement mentions; a function on the functions it calls.</p>`;
+  let file = '';
+  h += '<div class="decls">';
+  ds.forEach((d, j) => {
+    if (d.file !== file) { file = d.file; h += `<div class="fhd">${file}</div>`; }
+    h += `<a href="#" class="drow ${rel(j)}" data-d="${j}"><span class="kdot ${dot(d)}"></span><span class="nm">${esc(d.name)}</span>
+      <span class="wh">${d.role === 'theorem' && d.thm ? esc(d.thm.category) + (d.thm.main ? ' · main' : '') : d.kind}</span><span class="num">${d.line}</span></a>`;
+  });
+  return h + '</div>';
+}
+function bindStructure() {
+  $('insp').querySelectorAll('.drow').forEach(a => a.onclick = e => { e.preventDefault(); const j = +a.dataset.d; stSel = stSel === j ? -1 : j; renderProgram('structure', 0); });
+  const t = $('stTrans'); if (t) t.onchange = () => { stTrans = t.checked; renderProgram('structure', 0); };
+}
+function usesLine(p, t) {                            // the declarations a theorem's statement mentions
+  const ds = structure(p), i = ds.findIndex(d => d.name === `spec_${t.id}`);
+  if (i < 0 || !ds[i].uses.length) return '';
+  return `<p class="uses">Uses ${ds[i].uses.map(j => `<a href="#" class="usechip" data-sd="${j}"><span class="kdot k-${ds[j].role}"></span>${esc(ds[j].name)}</a>`).join(' ')}</p>`;
+}
+
 /* ---------- program inspector ---------- */
 async function openProgram(task, n) {
   const side = $('side'); side.hidden = false; $('main').classList.add('split');
   if (!cur || cur.task_id !== task) {
     if (!BY[task]) { cur = null; $('insp').innerHTML = `<h1>No such program</h1><p class="sub"><code>${esc(task)}</code> is not one of the programs. Try the search box.</p>`; return; }
-    $('insp').innerHTML = '<p class="sub">Loading…</p>'; side.dataset.tab = 'theorems'; tfilt = 'all';
-    cur = await json(`data/p/${encodeURIComponent(task)}.json`); side.scrollTop = 0; }
+    $('insp').innerHTML = '<p class="sub">Loading…</p>'; side.dataset.tab = 'theorems'; tfilt = 'all'; stSel = -1;
+    [cur] = await Promise.all([json(`data/p/${encodeURIComponent(task)}.json`), links()]); side.scrollTop = 0; }
   document.title = `${title(task)} · LeetCode Rust-to-Lean`;
   maps.forEach(layout);
   const tab = n ? 'theorems' : (side.dataset.tab || 'theorems');
@@ -221,41 +414,46 @@ function neighbours(task) {
 function renderProgram(tab, sel) {
   const p = cur, side = $('side'); side.dataset.tab = tab; side.dataset.sel = sel || '';
   const done = p.theorems.filter(t => t.status === 'proved' || t.status === 'refuted').length;
-  const tabs = [['theorems', `Theorems (${p.theorems.length})`], ['problem', 'Problem'], ['rust', 'Rust'], ['lean', 'Lean'], ['specs', 'Specs.lean']];
+  const tabs = [['theorems', `Theorems (${p.theorems.length})`], ['structure', 'Structure'], ['problem', 'Problem'], ['rust', 'Rust'], ['lean', 'Lean'], ['specs', 'Specs.lean']];
   const [prv, nxt] = neighbours(p.task_id);
   let body = '';
+  const ctx = {local: localDefs(p)};
   if (tab === 'theorems') {
     const shown = p.theorems.filter(t => tfilt === 'all' || (tfilt === 'open' ? t.status === 'open' : t.status !== 'open'));
     body = !p.theorems.length ? '<p class="sub">This program has no theorems yet.</p>' :
       `<div class="tfilter">${[['all', 'All', p.theorems.length], ['open', 'Open', p.theorems.length - done], ['done', 'Resolved', done]]
         .map(([k, l, n]) => `<button data-f="${k}" class="${k === tfilt ? 'on' : ''}">${l} ${n}</button>`).join('')}</div>` +
-      (shown.map(t => thmCard(p, t, t.id === sel)).join('') || '<p class="sub">None.</p>');
+      (shown.map(t => thmCard(p, t, t.id === sel, ctx)).join('') || '<p class="sub">None.</p>');
   }
+  if (tab === 'structure') body = renderStructure(p);
   if (tab === 'problem') body = `<div class="desc">${esc(p.description)}</div><p class="sub">Signature: <code>${esc(p.rust_signature)}</code> · ${p.num_test_cases} test cases</p>`;
   if (tab === 'rust') body = pre(p.rust);
-  if (tab === 'lean') body = `<p class="sub">The Aeneas translation (<code>Funs.lean</code>).</p>${pre(p.lean_funs)}
-    <details><summary>Types.lean</summary>${pre(p.lean_types)}</details>` +
-    (p.lean_funs_external ? `<details><summary>FunsExternal.lean (trusted models of Rust library functions)</summary>${pre(p.lean_funs_external)}</details>` : '');
-  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>.</p>${pre(p.specs_file)}`;
+  if (tab === 'lean') body = `<p class="sub">The Aeneas translation (<code>Funs.lean</code>). Names link to their definitions:
+      <span class="lk loc">in this program</span>, <span class="lk aen">in Aeneas</span>, <span class="lk ml">in Mathlib and Lean</span>.</p>${pre(p.lean_funs, null, ctx)}
+    <details open><summary>Types.lean</summary>${pre(p.lean_types, null, ctx)}</details>` +
+    (p.lean_funs_external ? `<details open><summary>FunsExternal.lean (trusted models of Rust library functions)</summary>${pre(p.lean_funs_external, null, ctx)}</details>` : '');
+  if (tab === 'specs') body = `<p class="sub">The challenge file: every theorem and its negation, each with <code>sorry</code>.</p>${pre(p.specs_file, null, ctx)}`;
   $('insp').innerHTML = `
     <div class="pnav"><a href="#/p/${prv}" title="Previous program ( [ )">‹ previous</a><a href="#/p/${nxt}" title="Next program ( ] )">next ›</a></div>
     <h1>${esc(title(p.task_id))}</h1>
-    <div class="sub"><span class="chip ${p.difficulty[0]}">${p.difficulty}</span><span class="chip">#${p.question_id}</span><span class="chip">${p.split}</span>
+    <div class="sub"><a class="chip topic" href="#/theorems?topic=${encodeURIComponent(topicOf(BY[p.task_id]))}">${esc(topicOf(BY[p.task_id]))}</a><span class="chip ${p.difficulty[0]}">${p.difficulty}</span><span class="chip">#${p.question_id}</span><span class="chip">${p.split}</span>
       ${p.tags.map(t => `<a class="chip" href="#/?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}
       <br>${done} of ${p.theorems.length} theorems resolved · <a href="https://leetcode.com/problems/${p.task_id}/">LeetCode</a> · <code>programs/${esc(p.task_id)}</code></div>
     <div class="tabs">${tabs.map(([k, l]) => `<a href="#" data-tab="${k}" class="${k === tab ? 'on' : ''}">${l}</a>`).join('')}</div>
     ${body}`;
   $('insp').querySelectorAll('.tabs a').forEach(a => a.onclick = e => { e.preventDefault(); renderProgram(a.dataset.tab, 0); });
+  if (tab === 'structure') bindStructure();
+  $('insp').querySelectorAll('.usechip').forEach(a => a.onclick = e => { e.preventDefault(); stSel = +a.dataset.sd; renderProgram('structure', 0); });
   $('insp').querySelectorAll('.tfilter button').forEach(b => b.onclick = () => { tfilt = b.dataset.f; renderProgram('theorems', sel); });
   if (sel) { const el = document.getElementById('thm' + sel), sd = $('side');
     if (el) sd.scrollTop = Math.max(0, el.offsetTop - sd.clientHeight / 3); }
 }
-function thmCard(p, t, sel) {
+function thmCard(p, t, sel, ctx) {
   const task = p.task_id, f = `programs/${task}/Proofs/spec_${t.id}.lean`;
   const link = location.href.split('#')[0] + `#/p/${task}/${t.id}`;
   const cmds = `python3 tools/new_proof.py ${task} ${t.id}        # add --negation to refute it\n# prove spec_${t.id} in ${f}, then\npython3 tools/check.py proof ${f}`;
   const proof = t.proof ? `<p class="sub">${t.status === 'refuted' ? 'Refuted' : 'Proved'} by <b>${esc(t.proof.by)}</b>, checked by <code>lake comparator</code> on ${esc(t.proof.checked)}.</p>
-      <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text)}</details>` :
+      <details><summary>Show the proof (${t.proof.text.split('\n').length} lines)</summary>${pre(t.proof.text, null, ctx)}</details>` :
     `<details><summary>Work on this theorem</summary>${pre(cmds)}</details>`;
   const lean = (p.specs_file.match(new RegExp(`theorem spec_${t.id} [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
   const neg = (p.specs_file.match(new RegExp(`theorem spec_${t.id}_neg [\\s\\S]*?:= by\\s*\\n\\s*sorry`)) || [''])[0];
@@ -263,8 +461,9 @@ function thmCard(p, t, sel) {
     <div class="hd"><b>spec_${t.id}</b><span>${t.category}</span>${t.main ? '<span class="chip">main</span>' : ''}
       <button class="lnk" data-copy="${esc(link)}" title="Copy a link to this theorem">#</button><span class="st ${t.status}">${t.status}</span></div>
     <p>${esc(t.statement)}</p>${t.preconditions ? `<p class="pre">Preconditions: ${esc(t.preconditions)}</p>` : ''}
-    <details${sel ? ' open' : ''}><summary>Lean statement</summary>${pre(lean)}</details>
-    <details><summary>Negation</summary>${pre(neg)}</details>
+    ${usesLine(p, t)}
+    <details${sel ? ' open' : ''}><summary>Lean statement</summary>${pre(lean, null, ctx)}</details>
+    <details><summary>Negation</summary>${pre(neg, null, ctx)}</details>
     ${proof}</div>`;
 }
 $('close').onclick = () => closeSide();
@@ -289,14 +488,15 @@ async function renderTheorems(q) {
   const v = $('view'); v.dataset.v = 'theorems'; v.innerHTML = '<p class="sub">Loading…</p>';
   const rows = await theorems();
   const f = {st: q.get('status') || '', d: q.get('difficulty') || '', c: q.get('category') || '', main: q.get('main') || '',
-             s: q.get('split') || '', text: q.get('q') || '', page: +q.get('page') || 0};
+             s: q.get('split') || '', tp: q.get('topic') || '', text: q.get('q') || '', page: +q.get('page') || 0};
   const out = rows.filter(r => { const p = BY[r[0]];
     return (!f.st || STATUS[r[4]] === f.st) && (!f.d || p.d === f.d) && (!f.c || CAT[r[2]] === f.c) && (!f.main || r[3]) &&
-           (!f.s || p.s === f.s) && (!f.text || (r[0] + ' ' + r[5]).toLowerCase().includes(f.text.toLowerCase())); });
+           (!f.s || p.s === f.s) && (!f.tp || topicOf(p) === f.tp) && (!f.text || (r[0] + ' ' + r[5]).toLowerCase().includes(f.text.toLowerCase())); });
   const per = 100, pages = Math.max(1, Math.ceil(out.length / per)), pg = Math.min(f.page, pages - 1);
   const sel = (k, opts, val) => `<select data-k="${k}"><option value="">${k}: all</option>${opts.map(([a, b]) => `<option value="${a}"${a === val ? ' selected' : ''}>${b}</option>`).join('')}</select>`;
   v.innerHTML = `<div class="filters">
       ${sel('status', [['open', 'open'], ['proved', 'proved'], ['refuted', 'refuted']], f.st)}
+      ${sel('topic', TOPICS.map(([t]) => [t, t]), f.tp)}
       ${sel('difficulty', [['E', 'Easy'], ['M', 'Medium'], ['H', 'Hard']], f.d)}
       ${sel('category', Object.values(CAT).map(c => [c, c]), f.c)}
       ${sel('split', [['te', 'test'], ['tr', 'train']], f.s)}
@@ -344,8 +544,8 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`)}
     <h3>Good first theorems</h3>
     <div class="tw"><table class="list"><tbody>${first.map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td><a href="#/p/${r[0]}/${r[1]}">${esc(title(r[0]))}</a></td><td class="n">spec_${r[1]} · ${CAT[r[2]]}</td><td>${esc(r[5])}</td></tr>`).join('')}</tbody></table></div>
     <h3>Contributors</h3>
-    <table class="list"><thead><tr><th>Contributor</th><th>Proved</th><th>Refuted</th><th>Share of resolved theorems</th></tr></thead><tbody>
-    ${D.contributors.map(c => `<tr><td>${esc(c.name)}</td><td>${c.proved}</td><td>${c.refuted}</td><td style="width:40%"><span class="rbar"><i style="width:${100 * (c.proved + c.refuted) / Math.max(1, D.totals.proved + D.totals.refuted)}%"></i></span></td></tr>`).join('') || '<tr><td colspan="4">No proofs yet.</td></tr>'}</tbody></table>
+    <div class="tw"><table class="list"><thead><tr><th>Contributor</th><th>Proved</th><th>Refuted</th><th>Share of resolved theorems</th></tr></thead><tbody>
+    ${D.contributors.map(c => `<tr><td>${esc(c.name)}</td><td>${c.proved}</td><td>${c.refuted}</td><td style="width:40%"><span class="rbar"><i style="width:${100 * (c.proved + c.refuted) / Math.max(1, D.totals.proved + D.totals.refuted)}%"></i></span></td></tr>`).join('') || '<tr><td colspan="4">No proofs yet.</td></tr>'}</tbody></table></div>
   </div>`;
   v.querySelectorAll('tbody tr[data-t]').forEach(tr => tr.onclick = () => { location.hash = `#/p/${tr.dataset.t}/${tr.dataset.n}`; });
 }
@@ -378,7 +578,7 @@ $('theme').onclick = () => {
 };
 
 (async () => {
-  try { D = await json('data/index.json'); } catch (e) { $('view').innerHTML = `<p>Could not load the data: ${esc(e.message)}</p>`; return; }
+  try { D = await json('data/index.json'); await links(); } catch (e) { $('view').innerHTML = `<p>Could not load the data: ${esc(e.message)}</p>`; return; }
   D.programs.forEach(p => BY[p.t] = p);
   setupSearch(); window.addEventListener('hashchange', route); route();
 })();

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Check every proof that has no result for its current file and program in
 status/verified.json (new proofs, edited proofs, or proofs whose program changed), and record
-the results. Runs on the main branch, which is trusted; a failed proof is not re-checked until
-it or its program changes.
+the results. Runs on the main branch, which is trusted. Only passing results are reused.
 
     python3 tools/verify_all.py [--limit-minutes 240]
 """
@@ -20,7 +19,9 @@ def main():
     a = ap.parse_args(); t0 = time.time()
     st = json.loads(check.STATUS.read_text()) if check.STATUS.exists() else {}
     files = sorted(f.relative_to(ROOT).as_posix() for f in ROOT.glob("programs/*/Proofs/spec_*.lean"))
-    todo = [f for f in files if check.PROOF_RE.fullmatch(f) and not check.current(st.get(f), f)]
+    # only a passing result is reused; a failure is checked again on every run, so that a failure
+    # caused by the environment (not by the proof) does not stick
+    todo = [f for f in files if check.PROOF_RE.fullmatch(f) and not (st.get(f, {}).get("ok") and check.current(st.get(f), f))]
     print(len(files), "proofs,", len(todo), "to check", flush=True)
     bad = 0
     for f in todo:

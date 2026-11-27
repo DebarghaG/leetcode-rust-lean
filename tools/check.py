@@ -77,12 +77,25 @@ def workspace(task, ref=None):
     return ws
 
 
+def toolchain_bin(project):
+    """The bin directory of the project's Lean toolchain, resolved outside the sandbox. Inside it,
+    lake and lean are run directly, without elan, which would want to write its own files."""
+    out = subprocess.run(["elan", "which", "lake"], cwd=project, capture_output=True, text=True)
+    if out.returncode != 0:
+        raise RuntimeError("cannot find the toolchain with elan: " + out.stderr.strip())
+    return str(Path(out.stdout.strip()).resolve().parent)
+
+
 def sandboxed(ws, cmd, timeout=3600, packages_writable=False):
     """Run cmd in ws/p: read-only file system except ws, shared packages read-only, no network."""
+    tc = toolchain_bin(ws / "p")
+    if cmd and cmd[0] == "lake":
+        cmd = [str(Path(tc) / "lake"), *cmd[1:]]
     full = ["bwrap", "--die-with-parent", "--ro-bind", "/", "/", "--dev-bind", "/dev", "/dev", "--proc", "/proc",
             "--tmpfs", "/tmp", "--bind", str(ws), str(ws),
             "--bind" if packages_writable else "--ro-bind", str(PACKAGES), str(ws / "p" / ".lake" / "packages"),
-            "--unshare-net", "--setenv", "HOME", str(ws / "home"), "--setenv", "ELAN_HOME", str(ELAN_HOME),
+            "--unshare-net", "--setenv", "HOME", str(ws / "home"), "--setenv", "PATH", f"{tc}:/usr/local/bin:/usr/bin:/bin",
+            "--unsetenv", "ELAN_HOME", "--unsetenv", "ELAN_TOOLCHAIN",
             "--chdir", str(ws / "p"), "--", *cmd]
     try:
         p = subprocess.run(full, capture_output=True, text=True, timeout=timeout)

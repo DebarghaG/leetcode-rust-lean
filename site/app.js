@@ -10,7 +10,7 @@ const CAT = {re: 'relational', ed: 'edge', bo: 'bounds', in: 'invariance', fu: '
              wi: 'witness', no: 'no_failure', sh: 'shape', mo: 'monotonicity'};
 const DIFF = {E: 'Easy', M: 'Medium', H: 'Hard'};
 const STATUS = {o: 'open', p: 'proved', r: 'refuted', x: 'conflict', s: 'superseded'};
-let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', q: ''};
+let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', q: '', by: 'topic'};
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const fmt = n => n.toLocaleString('en-US');
@@ -111,6 +111,24 @@ function route() {
   if (view === 'theorems') renderTheorems(q); else if (view === 'contribute') renderContribute(); else renderMap(q);
 }
 
+/* ---------- topics: one per program, the first group (in this order) that one of its tags belongs to ---------- */
+const TOPICS = [
+  ['Dynamic programming', ['Dynamic Programming', 'Memoization']],
+  ['Trees and linked lists', ['Tree', 'Binary Tree', 'Binary Search Tree', 'Linked List', 'Trie', 'Segment Tree', 'Binary Indexed Tree']],
+  ['Graphs', ['Graph', 'Breadth-First Search', 'Depth-First Search', 'Union Find', 'Shortest Path', 'Topological Sort',
+              'Minimum Spanning Tree', 'Strongly Connected Component', 'Eulerian Circuit']],
+  ['Strings', ['String', 'String Matching', 'Rolling Hash', 'Hash Function', 'Suffix Array']],
+  ['Math', ['Math', 'Number Theory', 'Combinatorics', 'Geometry', 'Bit Manipulation', 'Game Theory', 'Brainteaser']],
+  ['Backtracking and enumeration', ['Backtracking', 'Recursion', 'Bitmask', 'Enumeration']],
+  ['Stacks and queues', ['Stack', 'Monotonic Stack', 'Queue', 'Monotonic Queue']],
+  ['Greedy', ['Greedy']],
+  ['Searching and sorting', ['Binary Search', 'Sorting', 'Two Pointers', 'Sliding Window', 'Heap (Priority Queue)', 'Merge Sort',
+    'Counting Sort', 'Quickselect', 'Bucket Sort', 'Radix Sort', 'Ordered Set', 'Line Sweep', 'Divide and Conquer']],
+  ['Arrays and simulation', ['Array', 'Matrix', 'Prefix Sum', 'Simulation', 'Counting', 'Hash Table']],
+];
+const topicOf = p => p._topic || (p._topic = (TOPICS.find(([, tags]) => p.g.some(g => tags.includes(g))) || ['Arrays and simulation'])[0]);
+const DORD = {E: 0, M: 1, H: 2};
+
 /* ---------- map ---------- */
 function resolvedOf(p) { return (p.st.match(/[pr]/g) || []).length; }
 function nextUp() {                                    // one open theorem to suggest, changing daily
@@ -138,7 +156,7 @@ function rows(items, max) {                            // [label, done, total, h
 }
 function renderMap(q = new URLSearchParams()) {
   const v = $('view'); v.dataset.v = 'map';
-  mapState.tag = q.get('tag') || ''; mapState.split = q.get('split') || '';
+  mapState.tag = q.get('tag') || ''; mapState.split = q.get('split') || ''; mapState.by = q.get('by') || 'topic';
   const T = D.totals, done = T.proved + T.refuted, pct = 100 * done / T.theorems;
   const progs = D.programs.filter(p => p.st.length);
   const mainsDone = progs.filter(p => 'pr'.includes(p.st[p.m - 1])).length;
@@ -146,6 +164,7 @@ function renderMap(q = new URLSearchParams()) {
   const tags = [...new Set(D.programs.flatMap(p => p.g))].sort();
   const by = (keyOf) => { const m = new Map(); for (const p of progs) for (const [k, d, n] of keyOf(p)) { const a = m.get(k) || [0, 0]; a[0] += d; a[1] += n; m.set(k, a); } return m; };
   const byD = by(p => [[p.d, resolvedOf(p), p.st.length]]);
+  const byTp = by(p => [[topicOf(p), resolvedOf(p), p.st.length]]);
   const byC = by(p => (p.c.match(/../g) || []).map((c, i) => [c, 'pr'.includes(p.st[i]) ? 1 : 0, 1]));
   const byT = by(p => p.g.map(g => [g, resolvedOf(p), p.st.length]));
   const nu = nextUp();
@@ -176,7 +195,8 @@ function renderMap(q = new URLSearchParams()) {
       <b>${esc(title(nu[0].t))}, spec_${nu[1]}</b>
       <span>A ${nu[2] === 'no_failure' ? 'no-failure' : 'bounds'} theorem about an Easy program, with no proof yet: a good first proof.</span>
       <span class="go">Open it →</span></a>` : ''}
-    <div class="card"><span class="kicker">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
+    <div class="card"><span class="kicker">By topic</span>${rows(TOPICS.map(([t]) => [t, ...(byTp.get(t) || [0, 0]), `#/theorems?topic=${encodeURIComponent(t)}`]))}
+      <span class="kicker" style="margin-top:10px">By difficulty</span>${rows('EMH'.split('').map(d => [DIFF[d], ...(byD.get(d) || [0, 0]), `#/theorems?difficulty=${d}`]))}</div>
     <div class="card"><span class="kicker">By category</span>${rows([...byC].sort((a, b) => b[1][1] - a[1][1]).map(([c, [d, n]]) => [CAT[c], d, n, `#/theorems?category=${CAT[c]}`]))}</div>
     <div class="card"><span class="kicker">Recently proved</span>${recentGroups().slice(0, 7).map(g =>
       `<a class="row" href="#/p/${g.t}/${g.ids[0]}"><span class="nm">${esc(title(g.t))}</span><span class="num">${g.ids.length === 1 ? 'spec_' + g.ids[0] : g.ids.length + ' theorems'} · ${esc(g.by)}</span></a>`).join('') || '<p class="sub">No proofs yet.</p>'}
@@ -187,24 +207,29 @@ function renderMap(q = new URLSearchParams()) {
     <span>${m.status} by ${esc(m.by)} · proof of ${fmt(m.lines)} lines</span></div><pre>${hl(m.stmt, {})}</pre></div>`).join('')}</div>` : ''}
   <div class="mapctl">
     <span class="legend" style="margin:0"><span><i style="background:var(--open)"></i>open</span><span><i style="background:var(--open-main)"></i>open main theorem</span>
-      <span><i style="background:var(--proved)"></i>proved</span><span><i style="background:var(--refuted)"></i>refuted</span></span>
-    <span style="margin-left:auto">Topic <select id="mTag"><option value="">all</option>${tags.map(t => `<option${t === mapState.tag ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></span>
+      <span><i style="background:var(--proved)"></i>proved</span><span><i style="background:var(--refuted)"></i>refuted</span>
+      <span title="The line under a block"><i class="dl" style="background:#2e9e5b"></i>Easy <i class="dl" style="background:#d99a2b"></i>Medium <i class="dl" style="background:#d23c3c"></i>Hard</span></span>
+    <span style="margin-left:auto">Group by <select id="mBy"><option value="topic"${mapState.by === 'topic' ? ' selected' : ''}>topic</option><option value="difficulty"${mapState.by === 'difficulty' ? ' selected' : ''}>difficulty</option></select></span>
+    <span>Tag <select id="mTag"><option value="">all</option>${tags.map(t => `<option${t === mapState.tag ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></span>
     <span>Split <select id="mSplit"><option value="">all</option><option value="te"${mapState.split === 'te' ? ' selected' : ''}>test</option><option value="tr"${mapState.split === 'tr' ? ' selected' : ''}>train</option></select></span>
   </div>
   <div id="maps"></div>
   <h2>Topics</h2>
   <div class="topics">${rows([...byT].sort((a, b) => b[1][1] - a[1][1]).map(([g, [d, n]]) => [g, d, n, `#/?tag=${encodeURIComponent(g)}`]))}</div>
   <h2>Reading the map</h2>
-  <p class="hint">One square per theorem, one block per program, grouped by difficulty; the darker square of a block is the program's
-  main theorem. Hover a block for its name and click it to open the program. <kbd>/</kbd> search · <kbd>m</kbd> map ·
+  <p class="hint">One square per theorem, one block per program. Programs are grouped by topic, each in the first topic (in the order
+  shown) that one of its LeetCode tags belongs to, and within a topic ordered from Easy to Hard; the darker square of a
+  block is the program's main theorem. Hover a block for its name and click it to open the program. <kbd>/</kbd> search · <kbd>m</kbd> map ·
   <kbd>t</kbd> theorems · <kbd>c</kbd> contribute · in a program, <kbd>j</kbd> <kbd>k</kbd> next and previous theorem,
   <kbd>[</kbd> <kbd>]</kbd> previous and next program · <kbd>Esc</kbd> close.</p>
   <div class="foot">${pins()}<br>Built ${esc(D.built)} from commit <code>${esc(D.commit || '')}</code> ·
     Data: <a href="${DATASET}">Hugging Face</a> · Paper: <a href="https://arxiv.org/abs/2610.38174">arXiv 2610.38174</a> (unofficial reproduction).</div>`;
   const setQ = () => { const n = new URLSearchParams(); if (mapState.tag) n.set('tag', mapState.tag); if (mapState.split) n.set('split', mapState.split);
+    if (mapState.by !== 'topic') n.set('by', mapState.by);
     history.replaceState(null, '', '#/' + (String(n) ? '?' + n : '')); drawMaps(); };
   $('mTag').onchange = e => { mapState.tag = e.target.value; setQ(); };
   $('mSplit').onchange = e => { mapState.split = e.target.value; setQ(); };
+  $('mBy').onchange = e => { mapState.by = e.target.value; setQ(); };
   drawMaps();
   if (mapState.tag) $('maps').scrollIntoView({block: 'start'});
 }
@@ -213,12 +238,16 @@ let maps = [];
 function drawMaps() {
   const box = $('maps'); if (!box) return;
   box.innerHTML = ''; maps = [];
-  for (const d of 'EMH') {
-    const ps = D.programs.filter(p => p.d === d && p.st.length);
-    const n = ps.reduce((a, p) => a + p.st.length, 0), dn = ps.reduce((a, p) => a + (p.st.match(/[pr]/g) || []).length, 0);
-    const h = document.createElement('h2'); h.textContent = `${DIFF[d]}  ·  ${fmt(ps.length)} programs  ·  ${fmt(dn)} of ${fmt(n)} resolved`;
+  const groups = mapState.by === 'difficulty'
+    ? 'EMH'.split('').map(d => [DIFF[d], D.programs.filter(p => p.d === d && p.st.length)])
+    : TOPICS.map(([t]) => [t, D.programs.filter(p => p.st.length && topicOf(p) === t).sort((a, b) => DORD[a.d] - DORD[b.d] || (a.t < b.t ? -1 : 1))]);
+  for (const [name, ps] of groups) {
+    if (!ps.length) continue;
+    const n = ps.reduce((a, p) => a + p.st.length, 0), dn = ps.reduce((a, p) => a + resolvedOf(p), 0);
+    const h = document.createElement('h2'); h.textContent = `${name}  ·  ${fmt(ps.length)} programs  ·  ${fmt(dn)} of ${fmt(n)} resolved`;
+    if (mapState.by === 'topic') h.title = 'Programs whose tags include: ' + TOPICS.find(x => x[0] === name)[1].join(', ') + ' (each program is in one topic: the first in this order that one of its tags belongs to)';
     const c = document.createElement('canvas'); c.className = 'map'; c.setAttribute('role', 'img');
-    c.setAttribute('aria-label', `Map of the ${DIFF[d]} programs: ${fmt(dn)} of ${fmt(n)} theorems resolved. The theorem list gives the same information as text.`);
+    c.setAttribute('aria-label', `Map of the ${name} programs: ${fmt(dn)} of ${fmt(n)} theorems resolved. The theorem list gives the same information as text.`);
     box.append(h, c); maps.push({c, ps}); layout(maps[maps.length - 1]);
   }
 }
@@ -246,6 +275,8 @@ function layout(m) {
       g.fillStyle = s === 'o' && i === r.p.m - 1 ? col.om : col[s];
       g.fillRect(r.x + (i % r.w) * (S + G), r.y + Math.floor(i / r.w) * (S + G), S, S);
     }
+    g.globalAlpha = matches(r.p) ? 0.75 : 0.15;                 // difficulty, as a line under the block
+    g.fillStyle = {E: '#2e9e5b', M: '#d99a2b', H: '#d23c3c'}[r.p.d]; g.fillRect(r.x, r.y + r.bh, r.bw - G, 1.5);
     if (cur && cur.task_id === r.p.t) { g.globalAlpha = 1; g.strokeStyle = css('--accent'); g.lineWidth = 2; g.strokeRect(r.x - 2, r.y - 2, r.bw + 3, r.bh + 3); }
   }
   m.c.onmousemove = e => { const r = hit(m, e); const tip = $('tip'), hb = hoverBox(m);
@@ -405,7 +436,7 @@ function renderProgram(tab, sel) {
   $('insp').innerHTML = `
     <div class="pnav"><a href="#/p/${prv}" title="Previous program ( [ )">‹ previous</a><a href="#/p/${nxt}" title="Next program ( ] )">next ›</a></div>
     <h1>${esc(title(p.task_id))}</h1>
-    <div class="sub"><span class="chip ${p.difficulty[0]}">${p.difficulty}</span><span class="chip">#${p.question_id}</span><span class="chip">${p.split}</span>
+    <div class="sub"><a class="chip topic" href="#/theorems?topic=${encodeURIComponent(topicOf(BY[p.task_id]))}">${esc(topicOf(BY[p.task_id]))}</a><span class="chip ${p.difficulty[0]}">${p.difficulty}</span><span class="chip">#${p.question_id}</span><span class="chip">${p.split}</span>
       ${p.tags.map(t => `<a class="chip" href="#/?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}
       <br>${done} of ${p.theorems.length} theorems resolved · <a href="https://leetcode.com/problems/${p.task_id}/">LeetCode</a> · <code>programs/${esc(p.task_id)}</code></div>
     <div class="tabs">${tabs.map(([k, l]) => `<a href="#" data-tab="${k}" class="${k === tab ? 'on' : ''}">${l}</a>`).join('')}</div>
@@ -457,14 +488,15 @@ async function renderTheorems(q) {
   const v = $('view'); v.dataset.v = 'theorems'; v.innerHTML = '<p class="sub">Loading…</p>';
   const rows = await theorems();
   const f = {st: q.get('status') || '', d: q.get('difficulty') || '', c: q.get('category') || '', main: q.get('main') || '',
-             s: q.get('split') || '', text: q.get('q') || '', page: +q.get('page') || 0};
+             s: q.get('split') || '', tp: q.get('topic') || '', text: q.get('q') || '', page: +q.get('page') || 0};
   const out = rows.filter(r => { const p = BY[r[0]];
     return (!f.st || STATUS[r[4]] === f.st) && (!f.d || p.d === f.d) && (!f.c || CAT[r[2]] === f.c) && (!f.main || r[3]) &&
-           (!f.s || p.s === f.s) && (!f.text || (r[0] + ' ' + r[5]).toLowerCase().includes(f.text.toLowerCase())); });
+           (!f.s || p.s === f.s) && (!f.tp || topicOf(p) === f.tp) && (!f.text || (r[0] + ' ' + r[5]).toLowerCase().includes(f.text.toLowerCase())); });
   const per = 100, pages = Math.max(1, Math.ceil(out.length / per)), pg = Math.min(f.page, pages - 1);
   const sel = (k, opts, val) => `<select data-k="${k}"><option value="">${k}: all</option>${opts.map(([a, b]) => `<option value="${a}"${a === val ? ' selected' : ''}>${b}</option>`).join('')}</select>`;
   v.innerHTML = `<div class="filters">
       ${sel('status', [['open', 'open'], ['proved', 'proved'], ['refuted', 'refuted']], f.st)}
+      ${sel('topic', TOPICS.map(([t]) => [t, t]), f.tp)}
       ${sel('difficulty', [['E', 'Easy'], ['M', 'Medium'], ['H', 'Hard']], f.d)}
       ${sel('category', Object.values(CAT).map(c => [c, c]), f.c)}
       ${sel('split', [['te', 'test'], ['tr', 'train']], f.s)}

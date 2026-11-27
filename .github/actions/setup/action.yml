@@ -23,7 +23,7 @@ runs:
       uses: actions/cache/restore@v4
       with:
         path: .lake
-        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v2
+        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v3
     - name: Fetch Mathlib and build Aeneas
       if: steps.restore.outputs.cache-hit != 'true'
       shell: bash
@@ -31,10 +31,13 @@ runs:
         lake exe cache get
         rm -rf ~/.cache/mathlib
         lake build Aeneas
+        # build one program against the packages while they are writable, so that later
+        # read-only checks find everything Lake wants in them
+        python3 tools/check.py warm
         df -h / | tail -1
     - name: Save the shared packages
       if: steps.restore.outputs.cache-hit != 'true' && inputs.save-cache == 'true'
       uses: actions/cache/save@v4
       with:
         path: .lake
-        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v2
+        key: lake-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-v3

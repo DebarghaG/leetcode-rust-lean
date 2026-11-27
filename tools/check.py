@@ -77,10 +77,11 @@ def workspace(task, ref=None):
     return ws
 
 
-def sandboxed(ws, cmd, timeout=3600):
+def sandboxed(ws, cmd, timeout=3600, packages_writable=False):
     """Run cmd in ws/p: read-only file system except ws, shared packages read-only, no network."""
     full = ["bwrap", "--die-with-parent", "--ro-bind", "/", "/", "--dev-bind", "/dev", "/dev", "--proc", "/proc",
-            "--tmpfs", "/tmp", "--bind", str(ws), str(ws), "--ro-bind", str(PACKAGES), str(ws / "p" / ".lake" / "packages"),
+            "--tmpfs", "/tmp", "--bind", str(ws), str(ws),
+            "--bind" if packages_writable else "--ro-bind", str(PACKAGES), str(ws / "p" / ".lake" / "packages"),
             "--unshare-net", "--setenv", "HOME", str(ws / "home"), "--setenv", "ELAN_HOME", str(ELAN_HOME),
             "--chdir", str(ws / "p"), "--", *cmd]
     try:
@@ -153,6 +154,18 @@ def current(rec, proof_file):
     """Is a status record valid for the proof file and its program as they are now?"""
     task = PROOF_RE.fullmatch(proof_file).group(1)
     return (rec and rec.get("proof_sha") == sha(ROOT / proof_file) and rec.get("tree_sha") == tree_sha(task))
+
+
+def warm(task="calculate-delayed-arrival-time"):
+    """Build one program against the shared packages while they are still writable, so that Lake
+    writes whatever it wants to write there once (CI runs this before saving its package cache).
+    Later checks mount the packages read-only."""
+    ws = workspace(task)
+    try:
+        rc, log = sandboxed(ws, ["lake", "build", "Specs"], packages_writable=True)
+        print(log[-1500:]); return rc == 0
+    finally:
+        shutil.rmtree(ws, ignore_errors=True)
 
 
 # ------------------------------------------------------------------ specifications
@@ -248,7 +261,7 @@ def changed(base, allow_other=False):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("what", choices=["proof", "specs", "changed"])
+    ap.add_argument("what", choices=["proof", "specs", "changed", "warm"])
     ap.add_argument("path", nargs="?")
     ap.add_argument("--base", default=None, help="for specs/changed: the commit to compare against")
     ap.add_argument("--trusted", default=None, help="for proof: take the program from this commit")
@@ -257,6 +270,8 @@ def main():
     a = ap.parse_args()
     if a.what == "proof":
         r = check_proof(a.path, a.trusted, a.record); print(json.dumps(r, indent=1)); sys.exit(0 if r["ok"] else 1)
+    if a.what == "warm":
+        sys.exit(0 if warm() else 1)
     if a.what == "specs":
         r = check_specs(a.path, a.base); print(json.dumps(r, indent=1)); sys.exit(0 if r["ok"] else 1)
     ok, results, problems = changed(a.base or "origin/main", a.allow_other)

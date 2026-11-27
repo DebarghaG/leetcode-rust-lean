@@ -35,6 +35,10 @@ def main():
     imports = "".join(re.findall(r"^import [^\n]+\n", src, re.M))
     body = re.sub(r"^import [^\n]+\n", "", src, flags=re.M).lstrip("\n")
     dst.parent.mkdir(exist_ok=True)
+    # so that an editor opened on the program finds the shared packages instead of fetching its own
+    link = prog / ".lake" / "packages"
+    if not link.exists() and not link.is_symlink():
+        link.parent.mkdir(exist_ok=True); link.symlink_to(os.path.relpath(ROOT / ".lake" / "packages", link.parent))
     dst.write_text(f"{imports}\n/-\nProof of `{name}` ({a.task}).\nContributor: {who}\n-/\n\n{body}")
     rel = dst.relative_to(ROOT)
     print(f"wrote {rel}\nprove `{name}` there, then run:\n  python3 tools/check.py proof {rel}")

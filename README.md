@@ -4,10 +4,10 @@ Theorem provers are now very good at competition mathematics, and the benchmarks
 close to saturated. Proving that real code is correct is a different and much harder problem,
 and it is the one that matters for software.
 
-This repository collects proofs of the 24,617 theorems in the
+This repository collects proofs of the theorems in the
 [LeetCode Rust-to-Lean](https://huggingface.co/datasets/Debargha/leetcode-rust-lean) dataset:
-theorems about 2,124 programs, each a Rust solution to a LeetCode problem that passes every test
-case, translated to Lean 4 by [Aeneas](https://github.com/AeneasVerif/aeneas). The Lean code is
+2,126 programs and 24,617 theorems about them. Each program is a Rust solution to a LeetCode
+problem that passes every test case, translated to Lean 4 by [Aeneas](https://github.com/AeneasVerif/aeneas). The Lean code is
 the program itself, with machine integers, overflow checks, loops and panics, not a clean
 mathematical model of it. Each theorem states one property of one program, in natural language
 and in Lean 4.
@@ -25,8 +25,8 @@ the standard axioms `propext`, `Quot.sound` and `Classical.choice`. This rules o
 `native_decide`, which adds an axiom of its own.
 
 The check is mechanical. Lean's built-in `lake comparator` compares the proof with the original
-statement, checks the axioms, and replays the proof in the Lean kernel. Nothing is graded by hand
-or by a model.
+statement, checks the axioms, and replays the proof in the Lean kernel and in every independent
+checker bundled with Lean (`--paranoid`). Nothing is graded by hand or by a model.
 
 ## Layout
 
@@ -39,8 +39,7 @@ programs/<task>/
   Specs.lean            every theorem spec_<n> and its negation spec_<n>_neg, all with `sorry`
   specs.json            the theorems in natural language
   Proofs/spec_<n>.lean  a proof of spec_<n> (or spec_<n>_neg.lean, a refutation)
-status/verified.json    the comparator result of every proof
-tools/                  new_proof.py, check.py, build_site.py
+tools/                  new_proof.py, check.py, verify_all.py, build_site.py
 site/                   the project site
 ```
 
@@ -49,17 +48,20 @@ fetched once at the repository root.
 
 ## Proving a theorem
 
-You need [elan](https://github.com/leanprover/elan), `python3` and `bwrap` (Bubblewrap), which
-`lake comparator` uses for its sandbox.
+You need Linux (`lake comparator` runs only there; on macOS or Windows use a Linux container or
+WSL 2), [elan](https://github.com/leanprover/elan), `python3` and `bwrap` (Bubblewrap). On
+Ubuntu 23.10 and later, bwrap needs `sudo sysctl kernel.apparmor_restrict_unprivileged_userns=0`.
 
 ```bash
-lake update && lake exe cache get                  # once: fetch Aeneas and Mathlib, and the Mathlib cache
+lake exe cache get && lake build Aeneas             # once: fetch Mathlib and Aeneas, build Aeneas
 python3 tools/new_proof.py sum-of-square-numbers 2  # copies Specs.lean to programs/<task>/Proofs/spec_2.lean
 # replace the sorry of spec_2 with a proof; add lemmas before it if you need them
 python3 tools/check.py proof programs/sum-of-square-numbers/Proofs/spec_2.lean
 ```
 
-The last command prints `"ok": true` when `lake comparator` accepts the proof. To refute a
+`new_proof.py` also links the shared packages into the program, so an editor opened on
+`programs/<task>` works without fetching anything. The last command prints `"ok": true` when
+`lake comparator` accepts the proof. To refute a
 theorem, run `new_proof.py` with `--negation` and prove `spec_<n>_neg`. Then open a pull request;
 CI runs the same check. See [CONTRIBUTING.md](CONTRIBUTING.md) for specifications and programs.
 

@@ -1,7 +1,9 @@
 # Contributing
 
 There are three kinds of contribution. Each comes in as a pull request, and CI checks it with
-`tools/check.py`, the same script you can run locally.
+`tools/check.py`, the same script you can run locally. CI runs the checker of the main branch,
+and checks a proof against the program as it is on the main branch, so a pull request cannot
+change what its proof is checked against.
 
 ## 1. Proofs
 
@@ -23,7 +25,9 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean
   not.
 - The header's `Contributor:` line is how you are credited on the site.
 
-A proof is accepted when `lake comparator` accepts it against the program's `Specs.lean`.
+A proof is accepted when `lake comparator --paranoid` accepts it against the program's
+`Specs.lean`. A pull request that adds proofs may only add files under `Proofs/`; changing or
+removing an existing proof needs a maintainer.
 
 ## 2. Specifications
 
@@ -41,9 +45,10 @@ Add a theorem to a program, or a better version of an existing one.
 python3 tools/check.py specs programs/<task> --base origin/main
 ```
 
-checks that the file builds, that every theorem has its docstring and its negation, that the only
-`sorry`s are theorem proofs, and that no released statement changed. A maintainer also reads the
-new statement against its natural-language text.
+checks that the file builds, that every theorem has its docstring and its negation, that every
+`sorry` is a theorem proof, and, with `lake comparator`, that every released theorem and negation
+still states exactly what it stated before. A maintainer also reads the new statement against its
+natural-language text. Send specifications and proofs in separate pull requests.
 
 ## 3. Programs
 
@@ -59,4 +64,14 @@ Add a program for a LeetCode problem that is not covered yet, or fix a translati
 
 ## Reviews
 
-Proofs are merged when CI passes. Specifications and programs also need a maintainer's review.
+Pull requests that only add proofs are merged when CI passes. Specification changes also need a
+maintainer's review. Anything else, such as program code, also needs the `maintainer-approved`
+label before CI accepts it.
+
+When a program changes, every proof about it is checked again.
+
+## Versions and license
+
+Everything is pinned to Lean 4.36.0, Mathlib `fc4f59e5`, Aeneas `0c19cd5b` and Charon `5a2a17bd`.
+A version change is a maintainer's decision, and every proof is checked again after it.
+Contributions are released under the MIT license, like the rest of the repository.

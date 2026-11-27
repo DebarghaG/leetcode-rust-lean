@@ -1,14 +1,31 @@
 name: check
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+permissions:
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 300
+    timeout-minutes: 240
     steps:
-      - uses: actions/checkout@v4
+      # The checker, its setup and every program a proof is checked against come from the base
+      # branch; the pull request's own files are only read as candidates.
+      - name: Check out the base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - name: Check out the pull request
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
+          path: pr
       - uses: ./.github/actions/setup
-      - name: Check the proofs, specifications and programs this pull request changes
-        run: python3 tools/check.py changed --base origin/${{ github.base_ref }}
+      - name: Check what the pull request changes
+        env:
+          CHECK_ROOT: ${{ github.workspace }}/pr
+          LEAN_PACKAGES: ${{ github.workspace }}/.lake/packages
+          ALLOW: ${{ contains(github.event.pull_request.labels.*.name, 'maintainer-approved') && '--allow-other' || '' }}
+        run: python3 tools/check.py changed --base ${{ github.event.pull_request.base.sha }} $ALLOW

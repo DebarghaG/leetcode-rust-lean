@@ -9,7 +9,7 @@ const DISCUSS = DATASET + '/discussions';
 const CAT = {re: 'relational', ed: 'edge', bo: 'bounds', in: 'invariance', fu: 'functional',
              wi: 'witness', no: 'no_failure', sh: 'shape', mo: 'monotonicity'};
 const DIFF = {E: 'Easy', M: 'Medium', H: 'Hard'};
-const STATUS = {o: 'open', p: 'proved', r: 'refuted', x: 'conflict'};
+const STATUS = {o: 'open', p: 'proved', r: 'refuted', x: 'conflict', s: 'superseded'};
 let D = null, THMS = null, BY = {}, cur = null, mapState = {tag: '', split: '', q: ''};
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -107,7 +107,7 @@ function renderMap(q = new URLSearchParams()) {
     <div class="lede">
       <p>Theorem provers are now very good at competition mathematics, and the benchmarks for it are close to saturated.
       Proving that real code is correct is a different and much harder problem, and it is the one that matters for software.</p>
-      <p>These are ${fmt(T.theorems)} theorems about ${fmt(progs.length)} programs: Rust solutions to LeetCode problems that pass
+      <p>These are ${fmt(D.programs.length)} programs and ${fmt(T.theorems)} theorems about them. Each program is a Rust solution to a LeetCode problem that passes
       every test case, translated to Lean 4 by <a href="https://github.com/AeneasVerif/aeneas">Aeneas</a>. Each theorem states one
       property of one program. A theorem is resolved when Lean's <code>lake comparator</code> accepts a proof of it, or of its negation.</p>
     </div>
@@ -155,7 +155,8 @@ function drawMaps() {
     const ps = D.programs.filter(p => p.d === d && p.st.length);
     const n = ps.reduce((a, p) => a + p.st.length, 0), dn = ps.reduce((a, p) => a + (p.st.match(/[pr]/g) || []).length, 0);
     const h = document.createElement('h2'); h.textContent = `${DIFF[d]}  ·  ${fmt(ps.length)} programs  ·  ${fmt(dn)} of ${fmt(n)} resolved`;
-    const c = document.createElement('canvas'); c.className = 'map';
+    const c = document.createElement('canvas'); c.className = 'map'; c.setAttribute('role', 'img');
+    c.setAttribute('aria-label', `Map of the ${DIFF[d]} programs: ${fmt(dn)} of ${fmt(n)} theorems resolved. The theorem list gives the same information as text.`);
     box.append(h, c); maps.push({c, ps}); layout(maps[maps.length - 1]);
   }
 }
@@ -302,11 +303,11 @@ async function renderTheorems(q) {
       <label><input type="checkbox" data-k="main"${f.main ? ' checked' : ''}> main theorems only</label>
       <input type="search" data-k="q" placeholder="filter text" value="${esc(f.text)}">
       <span style="color:var(--muted)">${fmt(out.length)} theorems</span></div>
-    <table class="list"><thead><tr><th>Program</th><th>Theorem</th><th>Statement</th><th>Status</th></tr></thead><tbody>
-    ${out.slice(pg * per, pg * per + per).map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td>${esc(title(r[0]))}<br><span class="chip ${BY[r[0]].d}">${DIFF[BY[r[0]].d]}</span></td>
+    <div class="tw"><table class="list"><thead><tr><th>Program</th><th>Theorem</th><th>Statement</th><th>Status</th></tr></thead><tbody>
+    ${out.slice(pg * per, pg * per + per).map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td><a href="#/p/${r[0]}/${r[1]}">${esc(title(r[0]))}</a><br><span class="chip ${BY[r[0]].d}">${DIFF[BY[r[0]].d]}</span></td>
       <td class="n">spec_${r[1]}<br><small style="color:var(--muted)">${CAT[r[2]]}${r[3] ? ' · main' : ''}</small></td>
       <td>${esc(r[5])}</td><td><span class="st ${STATUS[r[4]]}">${STATUS[r[4]]}</span>${r[6] ? `<br><small style="color:var(--muted)">${esc(r[6])}</small>` : ''}</td></tr>`).join('')}
-    </tbody></table>
+    </tbody></table></div>
     <div class="pager"><button id="prev"${pg ? '' : ' disabled'}>‹ prev</button> page ${pg + 1} of ${pages} <button id="next"${pg < pages - 1 ? '' : ' disabled'}>next ›</button></div>`;
   const go = (k, val) => { const n = new URLSearchParams(q); if (val) n.set(k, val); else n.delete(k); if (k !== 'page') n.delete('page'); location.hash = '#/theorems?' + n; };
   v.querySelectorAll('select').forEach(s => s.onchange = () => go(s.dataset.k, s.value));
@@ -319,9 +320,7 @@ async function renderTheorems(q) {
 /* ---------- contribute ---------- */
 async function renderContribute() {
   const v = $('view'); v.dataset.v = 'contribute';
-  const rows = await theorems();
-  const first = rows.filter(r => r[4] === 'o' && BY[r[0]].d === 'E' && ['no', 'bo', 'ed'].includes(r[2]))
-    .sort((a, b) => (a[0].length * 7 + a[1]) % 97 - (b[0].length * 7 + b[1]) % 97).slice(0, 12);
+  const first = D.first || [];
   v.innerHTML = `<div class="prose">
     <h1>Contribute</h1>
     <p>The repository is private for now. To contribute, ask for access on the <a href="${DISCUSS}">Hugging Face discussion page</a>.
@@ -343,7 +342,7 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`)}
     <code>Classical.choice</code>. This rules out <code>native_decide</code>, which adds an axiom of its own. Lean's built-in <code>lake comparator</code>
     compares the proof with the original statement, checks the axioms, and replays the proof in the Lean kernel. Nothing is graded by hand or by a model.</p>
     <h3>Good first theorems</h3>
-    <table class="list"><tbody>${first.map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td>${esc(title(r[0]))}</td><td class="n">spec_${r[1]} · ${CAT[r[2]]}</td><td>${esc(r[5])}</td></tr>`).join('')}</tbody></table>
+    <div class="tw"><table class="list"><tbody>${first.map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td><a href="#/p/${r[0]}/${r[1]}">${esc(title(r[0]))}</a></td><td class="n">spec_${r[1]} · ${CAT[r[2]]}</td><td>${esc(r[5])}</td></tr>`).join('')}</tbody></table></div>
     <h3>Contributors</h3>
     <table class="list"><thead><tr><th>Contributor</th><th>Proved</th><th>Refuted</th><th>Share of resolved theorems</th></tr></thead><tbody>
     ${D.contributors.map(c => `<tr><td>${esc(c.name)}</td><td>${c.proved}</td><td>${c.refuted}</td><td style="width:40%"><span class="rbar"><i style="width:${100 * (c.proved + c.refuted) / Math.max(1, D.totals.proved + D.totals.refuted)}%"></i></span></td></tr>`).join('') || '<tr><td colspan="4">No proofs yet.</td></tr>'}</tbody></table>
@@ -354,7 +353,7 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`)}
 /* ---------- search ---------- */
 function setupSearch() {
   const inp = $('search'), res = $('results'); let hits = [], k = 0;
-  const show = () => { res.hidden = !hits.length; res.innerHTML = hits.map((p, i) => `<a href="#/p/${p.t}" class="${i === k ? 'sel' : ''}">${esc(title(p.t))} <small>#${p.q} · ${DIFF[p.d]} · ${p.st.length} theorems</small></a>`).join(''); };
+  const show = () => { res.hidden = !hits.length; res.innerHTML = hits.map((p, i) => `<a href="#/p/${p.t}" class="${i === k ? 'sel' : ''}">${esc(title(p.t))} <small>#${p.q} · ${DIFF[p.d]} · ${p.st.length ? `${resolvedOf(p)} of ${p.st.length} resolved` : 'no theorems yet'}</small></a>`).join(''); };
   inp.oninput = () => { const q = inp.value.trim().toLowerCase(); k = 0;
     mapState.q = q.length > 1 ? q.replace(/\s+/g, '-') : ''; if ($('view').dataset.v === 'map') maps.forEach(layout);
     const qs = q.replace(/\s+/g, '-');

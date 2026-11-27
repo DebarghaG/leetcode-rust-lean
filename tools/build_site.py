@@ -4,14 +4,16 @@
     python3 tools/build_site.py
 
 A theorem counts as proved (or refuted) only if status/verified.json records a passing
-`lake comparator` check of its proof file, for the current proof file and the current
-Specs.lean (both by hash). Writes site/data/index.json (one entry per program) and
+`lake comparator` check of its proof file, for the current proof file and the current program
+(by hash of the proof, and of everything the proof is checked against). Writes site/data/index.json (one entry per program) and
 site/data/p/<task>.json (everything the program page shows).
 """
-import hashlib, json, re, subprocess, time
+import hashlib, json, re, subprocess, sys, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+import check
 OUT = ROOT / "site" / "data"
 
 
@@ -37,26 +39,25 @@ def main():
     for prog in sorted((ROOT / "programs").iterdir()):
         meta = json.loads((prog / "program.json").read_text())
         specs = json.loads((prog / "specs.json").read_text()) if (prog / "specs.json").exists() else []
-        specs_sha = sha(prog / "Specs.lean") if specs else None
         thms = []
         for s in specs:
-            st, proof = "open", None
+            st, proof = ("superseded" if s.get("superseded_by") else "open"), None
             for kind, suffix in (("proved", ""), ("refuted", "_neg")):
                 f = prog / "Proofs" / f"spec_{s['id']}{suffix}.lean"
                 rel = str(f.relative_to(ROOT))
                 v = verified.get(rel)
-                if f.exists() and v and v.get("ok") and v.get("proof_sha") == sha(f) and v.get("specs_sha") == specs_sha:
+                if f.exists() and v and v.get("ok") and check.current(v, rel):
                     who = contributor(f)
-                    st = "conflict" if st != "open" else kind
-                    proof = dict(file=rel, by=who, checked=v.get("checked"), text=f.read_text())
+                    st = "conflict" if st in ("proved", "refuted") else kind
+                    proof = dict(file=rel, by=who, checked=v.get("first_verified") or v.get("checked"), text=f.read_text())
                     c = contributors.setdefault(who, dict(name=who, proved=0, refuted=0))
                     c[kind] += 1
-                    recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=v.get("checked") or "",
+                    recent.append(dict(t=prog.name, id=s["id"], kind=kind, by=who, checked=v.get("first_verified") or v.get("checked") or "",
                                        lines=proof["text"].count("\n"), main=s["main"], cat=s["category"]))
             thms.append(dict(s, status=st, proof=proof))
             flat.append([prog.name, s["id"], s["category"][:2], int(s["main"]), st[0], s["statement"][:400],
                          proof["by"] if proof else ""])
-            totals["theorems"] += 1
+            totals["theorems"] += st != "superseded"
             if st in ("proved", "refuted"):
                 totals[st] += 1
         code = prog / "Aegis" / meta["lean_function"].split(".")[1] / "Code"
@@ -70,10 +71,13 @@ def main():
         index.append(dict(t=prog.name, q=meta["question_id"], d=meta["difficulty"][0], s=meta["split"][:2],
                           g=meta["tags"], m=next((x["id"] for x in specs if x["main"]), 0),
                           c="".join(x["category"][:2] for x in specs),
-                          st="".join({"open": "o", "proved": "p", "refuted": "r", "conflict": "x"}[x["status"]] for x in thms)))
+                          st="".join({"open": "o", "proved": "p", "refuted": "r", "conflict": "x", "superseded": "s"}[x["status"]] for x in thms)))
+    first = [r for r in flat if r[4] == "o" and r[2] in ("no", "bo", "ed")
+             and json.loads((ROOT / "programs" / r[0] / "program.json").read_text())["difficulty"] == "Easy"]
+    first = sorted(first, key=lambda r: hashlib.sha256(f"{r[0]}{r[1]}".encode()).hexdigest())[:12]
     recent.sort(key=lambda r: (r["checked"], r["t"], r["id"]), reverse=True)
     commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
-    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200],
+    data = dict(built=time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()), commit=commit, totals=totals, recent=recent[:200], first=first,
                 programs=index, contributors=sorted(contributors.values(), key=lambda c: -(c["proved"] + c["refuted"])))
     (OUT / "index.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     (OUT / "theorems.json").write_text(json.dumps(flat, ensure_ascii=False, separators=(",", ":")))

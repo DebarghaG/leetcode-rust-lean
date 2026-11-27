@@ -3,6 +3,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Weekly, so that the package cache and the results (which GitHub drops after 7 days unused)
+  # stay alive: then only new or changed proofs are ever checked.
+  schedule:
+    - cron: "17 6 * * 1"
 permissions:
   contents: read
 concurrency:

@@ -189,6 +189,10 @@ def warm(proof="programs/calculate-delayed-arrival-time/Proofs/spec_2.lean"):
             print(f"{pkg}: {sum(1 for _ in d.rglob('*.olean')) if d.exists() else 0} .olean files in {d}", flush=True)
         rc, log = sandboxed(ws, ["lake", "build", "--no-build", "Specs", f"Proofs.{Path(proof).stem}"])
         print("dry run:", rc, "\n" + "\n".join(log.splitlines()[-25:]), flush=True)
+        stale = sorted(set(re.findall(r"Building ([\w.']+)", log)) - set(re.findall(r"Building ((?:Aegis|Specs|Proofs)[\w.']*)", log)))
+        if stale:
+            print(f"{len(stale)} modules of the shared packages are out of date, e.g. {stale[:8]}; not rebuilding them here")
+            return False
         rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
         print(log[-4000:]); return rc == 0 and "Your solution is okay!" in log
     finally:

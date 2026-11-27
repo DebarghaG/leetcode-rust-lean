@@ -155,10 +155,10 @@ function renderMap(q = new URLSearchParams()) {
       <div class="big">${fmt(done)} <small>of ${fmt(T.theorems)} theorems resolved</small></div>
       <div class="bar" title="${pct.toFixed(2)}% resolved"><i style="width:${100 * T.proved / T.theorems}%;background:var(--proved)"></i><i style="width:${100 * T.refuted / T.theorems}%;background:var(--refuted)"></i></div>
       <div class="figs">
-        <div class="fig"><b>${fmt(T.proved)}</b><span>proved</span></div>
-        <div class="fig"><b>${fmt(T.refuted)}</b><span>refuted</span></div>
-        <div class="fig"><b>${fmt(T.theorems - done)}</b><span>open</span></div>
-        <div class="fig"><b>${fmt(mainsDone)}</b><span>main theorems resolved</span></div>
+        <a class="fig" href="#/theorems?status=proved"><b>${fmt(T.proved)}</b><span>proved</span></a>
+        <a class="fig" href="#/theorems?status=refuted"><b>${fmt(T.refuted)}</b><span>refuted</span></a>
+        <a class="fig" href="#/theorems?status=open"><b>${fmt(T.theorems - done)}</b><span>open</span></a>
+        <a class="fig" href="#/theorems?status=proved&main=1"><b>${fmt(mainsDone)}</b><span>main theorems resolved</span></a>
         <div class="fig"><b>${fmt(full)}</b><span>programs fully resolved</span></div>
         <a class="fig" href="#/contribute"><b>${fmt(D.contributors.length)}</b><span>contributors</span></a>
       </div>
@@ -420,8 +420,8 @@ python3 tools/check.py proof programs/<task>/Proofs/spec_<n>.lean`)}
     <h3>Good first theorems</h3>
     <div class="tw"><table class="list"><tbody>${first.map(r => `<tr data-t="${r[0]}" data-n="${r[1]}"><td><a href="#/p/${r[0]}/${r[1]}">${esc(title(r[0]))}</a></td><td class="n">spec_${r[1]} · ${CAT[r[2]]}</td><td>${esc(r[5])}</td></tr>`).join('')}</tbody></table></div>
     <h3>Contributors</h3>
-    <table class="list"><thead><tr><th>Contributor</th><th>Proved</th><th>Refuted</th><th>Share of resolved theorems</th></tr></thead><tbody>
-    ${D.contributors.map(c => `<tr><td>${esc(c.name)}</td><td>${c.proved}</td><td>${c.refuted}</td><td style="width:40%"><span class="rbar"><i style="width:${100 * (c.proved + c.refuted) / Math.max(1, D.totals.proved + D.totals.refuted)}%"></i></span></td></tr>`).join('') || '<tr><td colspan="4">No proofs yet.</td></tr>'}</tbody></table>
+    <div class="tw"><table class="list"><thead><tr><th>Contributor</th><th>Proved</th><th>Refuted</th><th>Share of resolved theorems</th></tr></thead><tbody>
+    ${D.contributors.map(c => `<tr><td>${esc(c.name)}</td><td>${c.proved}</td><td>${c.refuted}</td><td style="width:40%"><span class="rbar"><i style="width:${100 * (c.proved + c.refuted) / Math.max(1, D.totals.proved + D.totals.refuted)}%"></i></span></td></tr>`).join('') || '<tr><td colspan="4">No proofs yet.</td></tr>'}</tbody></table></div>
   </div>`;
   v.querySelectorAll('tbody tr[data-t]').forEach(tr => tr.onclick = () => { location.hash = `#/p/${tr.dataset.t}/${tr.dataset.n}`; });
 }

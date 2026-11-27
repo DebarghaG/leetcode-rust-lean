@@ -659,9 +659,7 @@ async function renderContribute() {
   v.innerHTML = `<div class="prose">
     <h1>Contribute</h1>
     <p>Fork <a href="${REPO}">the repository</a> and open a pull request. Every contribution is checked by the same script that runs in CI,
-    <code>tools/check.py</code>; a pull request that only adds proofs is merged once CI accepts them. Questions are welcome in the
-    <a href="${REPO}/issues/7">call for contributions</a>, and issues labelled
-    <a href="${REPO}/labels/good%20first%20proof"><code>good first proof</code></a> are a good place to start.</p>
+    <code>tools/check.py</code>; a pull request that only adds proofs is merged once CI accepts them.</p>
     <div class="tracks">
       <div class="track"><b>Proofs</b><p>Prove a theorem or its negation. A proof is accepted when <code>lake comparator</code> accepts it: the statement is unchanged, there is no <code>sorry</code>, and only the axioms <code>propext</code>, <code>Quot.sound</code> and <code>Classical.choice</code> are used.</p></div>
       <div class="track"><b>Specifications</b><p>Add a theorem to a program, in natural language and in Lean, or a better version of an existing one. Released statements are frozen: an improvement is added as a new theorem.</p></div>

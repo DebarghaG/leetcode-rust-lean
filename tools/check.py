@@ -91,9 +91,19 @@ def sandboxed(ws, cmd, timeout=3600, packages_writable=False):
     tc = toolchain_bin(ws / "p")
     if cmd and cmd[0] == "lake":
         cmd = [str(Path(tc) / "lake"), *cmd[1:]]
+    # Comparator expects a writable .lake. Mathlib is never rebuilt and stays shared and read-only;
+    # Lake may (re)build outputs of the Aeneas library (its compiled meta code, on first use), so
+    # each check gets its own writable copy of that package, thrown away afterwards.
+    writable = []
+    if not packages_writable:
+        own = ws / "aeneas"
+        if not own.exists():
+            shutil.copytree(PACKAGES / "aeneas", own, symlinks=True)
+        writable = ["--bind", str(own), str(ws / "p" / ".lake" / "packages" / "aeneas")]
     full = ["bwrap", "--die-with-parent", "--ro-bind", "/", "/", "--dev-bind", "/dev", "/dev", "--proc", "/proc",
             "--tmpfs", "/tmp", "--bind", str(ws), str(ws),
             "--bind" if packages_writable else "--ro-bind", str(PACKAGES), str(ws / "p" / ".lake" / "packages"),
+            *writable,
             "--unshare-net", "--setenv", "HOME", str(ws / "home"), "--setenv", "PATH", f"{tc}:/usr/local/bin:/usr/bin:/bin",
             "--unsetenv", "ELAN_HOME", "--unsetenv", "ELAN_TOOLCHAIN",
             # no hidden Lake artifact cache: every build output lives in the packages themselves
@@ -172,33 +182,32 @@ def current(rec, proof_file):
     return (rec and rec.get("proof_sha") == sha(ROOT / proof_file) and rec.get("tree_sha") == tree_sha(task))
 
 
-def warm(proof="programs/calculate-delayed-arrival-time/Proofs/spec_2.lean"):
-    """Run one full `lake comparator --paranoid` check of a known proof while the shared packages
-    are writable, so that Lake and Comparator write whatever they want there once (CI does this
-    before it saves or uses its package cache). Every later check mounts the packages read-only."""
-    task = PROOF_RE.fullmatch(proof).group(1)
-    ws = workspace(task)
-    try:
-        specs = (ws / "p" / "Specs.lean").read_text()
-        (ws / "p" / "Proofs" / Path(proof).name).write_bytes((ROOT / proof).read_bytes())
-        thm = f"{namespace_of(specs)}.{Path(proof).stem}"
-        cfg = ws / "comparator.json"
-        cfg.write_text(json.dumps(dict(challenge_module="Specs", solution_module=f"Proofs.{Path(proof).stem}",
-                                       theorem_names=[thm], permitted_axioms=AXIOMS)))
-        # what Lake thinks is out of date, before anything is built (a dry run)
-        for pkg in ("mathlib", "aeneas"):
-            d = PACKAGES / pkg / ".lake" / "build"
-            print(f"{pkg}: {sum(1 for _ in d.rglob('*.olean')) if d.exists() else 0} .olean files in {d}", flush=True)
-        rc, log = sandboxed(ws, ["lake", "build", "--no-build", "Specs", f"Proofs.{Path(proof).stem}"])
-        print("dry run:", rc, "\n" + "\n".join(log.splitlines()[-25:]), flush=True)
-        stale = sorted(set(re.findall(r"Building ([\w.']+)", log)) - set(re.findall(r"Building ((?:Aegis|Specs|Proofs)[\w.']*)", log)))
-        if stale:
-            print(f"{len(stale)} modules of the shared packages are out of date, e.g. {stale[:8]}; not rebuilding them here")
-            return False
-        rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
-        print(log[-4000:]); return rc == 0 and "Your solution is okay!" in log
-    finally:
-        shutil.rmtree(ws, ignore_errors=True)
+WARM = [("calculate-delayed-arrival-time", "spec_2", "programs/calculate-delayed-arrival-time/Proofs/spec_2.lean"),
+        ("add-two-integers", "spec_1", "tools/warm/add-two-integers.spec_1.lean")]
+
+
+def warm():
+    """Run full `lake comparator --paranoid` checks of known proofs while the shared packages are
+    writable, so that Lake writes the outputs it builds on first use (such as the compiled meta
+    code of the Aeneas library) into them once. CI does this before it caches the packages."""
+    ok = True
+    for task, name, proof in WARM:
+        ws = workspace(task)
+        try:
+            (ws / "p" / "Proofs" / f"{name}.lean").write_bytes((ROOT / proof).read_bytes())
+            thm = f"{namespace_of((ws / 'p' / 'Specs.lean').read_text())}.{name}"
+            cfg = ws / "comparator.json"
+            cfg.write_text(json.dumps(dict(challenge_module="Specs", solution_module=f"Proofs.{name}",
+                                           theorem_names=[thm], permitted_axioms=AXIOMS)))
+            t0 = time.time()
+            rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
+            good = rc == 0 and "Your solution is okay!" in log
+            print(f"warm {task} {name}: {'ok' if good else 'FAILED'} in {round(time.time() - t0)} s", flush=True)
+            if not good:
+                print(log[-3000:]); ok = False
+        finally:
+            shutil.rmtree(ws, ignore_errors=True)
+    return ok
 
 
 # ------------------------------------------------------------------ specifications

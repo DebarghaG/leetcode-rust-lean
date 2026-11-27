@@ -183,8 +183,14 @@ def warm(proof="programs/calculate-delayed-arrival-time/Proofs/spec_2.lean"):
         cfg = ws / "comparator.json"
         cfg.write_text(json.dumps(dict(challenge_module="Specs", solution_module=f"Proofs.{Path(proof).stem}",
                                        theorem_names=[thm], permitted_axioms=AXIOMS)))
+        # what Lake thinks is out of date, before anything is built (a dry run)
+        for pkg in ("mathlib", "aeneas"):
+            d = PACKAGES / pkg / ".lake" / "build"
+            print(f"{pkg}: {sum(1 for _ in d.rglob('*.olean')) if d.exists() else 0} .olean files in {d}", flush=True)
+        rc, log = sandboxed(ws, ["lake", "build", "--no-build", "Specs", f"Proofs.{Path(proof).stem}"])
+        print("dry run:", rc, "\n" + "\n".join(log.splitlines()[-25:]), flush=True)
         rc, log = sandboxed(ws, ["lake", "comparator", "--config", str(cfg), "--paranoid"], packages_writable=True)
-        print(log[-2000:]); return rc == 0 and "Your solution is okay!" in log
+        print(log[-4000:]); return rc == 0 and "Your solution is okay!" in log
     finally:
         shutil.rmtree(ws, ignore_errors=True)
 
